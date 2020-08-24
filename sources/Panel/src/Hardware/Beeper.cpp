@@ -15,16 +15,10 @@ void Beeper::Init()
 }
 
 
-static void Stop()
+static void Beep(uint)
 {
-    HAL_DAC2::StopDMA();
-}
-
-
-static void Beep(uint period)
-{
-    HAL_DAC2::StartDMA(period);
-    Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, 5000);
+    HAL_DAC2::Start();
+    Timer::SetAndStartOnce(Timer::Type::StopSound, HAL_DAC2::Stop, 50);
 }
 
 

@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "common/Interface_p.h"
 #include "Display/Display.h"
-#include "Hardware/Beeper.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
@@ -38,7 +37,5 @@ int main()
         Display::Update();
         PInterface::Update();
         SCPI::Update();
-
-        Beeper::Beep(Action::Down);
     }
 }

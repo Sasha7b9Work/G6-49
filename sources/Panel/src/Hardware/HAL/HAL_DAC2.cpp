@@ -6,116 +6,64 @@
 
 static DAC_HandleTypeDef handleDAC = { DAC };
 
+static TIM_HandleTypeDef hTIM;
+
+static bool isRunning = false;
+
 
 void HAL_DAC2::Init()
 {
-	__DMA1_CLK_ENABLE();
-	__TIM7_CLK_ENABLE();
-	__DAC_CLK_ENABLE();
+    __TIM7_CLK_ENABLE();
 
     GPIO_InitTypeDef structGPIO =
     {
         GPIO_PIN_5,
-        GPIO_MODE_ANALOG,
+        GPIO_MODE_OUTPUT_PP,
         GPIO_NOPULL,
         0, 0
     };
 
     HAL_GPIO_Init(GPIOA, &structGPIO);
 
-	DAC_ChannelConfTypeDef config =
-	{
-		DAC_TRIGGER_T7_TRGO,
-		DAC_OUTPUTBUFFER_ENABLE
-	};
+    HAL_NVIC_SetPriority(TIM7_IRQn, 5, 5);
 
-	HAL_DAC_DeInit(&handleDAC);
+    HAL_NVIC_EnableIRQ(TIM7_IRQn);
 
-	HAL_DAC_Init(&handleDAC);
-
-	HAL_DAC_ConfigChannel(&handleDAC, &config, DAC_CHANNEL_1);
+    hTIM.Instance = TIM7;
+    /*
+    * 100 - 5 êÃö
+    * 125 - 4 êÃö
+    * 200 - 2.5 êÃö
+    * 400 - 1.25 êÃö
+    */
+    hTIM.Init.Period = 100;
+    hTIM.Init.Prescaler = 90;
+    hTIM.Init.ClockDivision = 0;
+    hTIM.Init.CounterMode = TIM_COUNTERMODE_UP;
 }
 
 
-void HAL_DAC2::StartDMA(uint prescaler)
+void HAL_DAC2::Start()
 {
-	ConfigTIM7(prescaler);
+    HAL_TIM_Base_Init(&hTIM);
+    HAL_TIM_Base_Start_IT(&hTIM);
 
-	DAC_ChannelConfTypeDef config =
-	{
-		DAC_TRIGGER_T7_TRGO,
-		DAC_OUTPUTBUFFER_ENABLE
-	};
-
-	/*##-1- Initialize the DAC peripheral ######################################*/
-	if(HAL_DAC_Init(&handleDAC) != HAL_OK)
-	{
-		ERROR_HANDLER();
-	}
-
-	/*##-2- DAC channel2 Configuration #########################################*/
-	config.DAC_Trigger = DAC_TRIGGER_T7_TRGO;
-	config.DAC_OutputBuffer = DAC_OUTPUTBUFFER_ENABLE;
-
-	if(HAL_DAC_ConfigChannel(&handleDAC, &config, DAC_CHANNEL_2) != HAL_OK)
-	{
-		/* Channel configuration Error */
-		ERROR_HANDLER();
-	}
-
-	/*##-3- DAC channel2 Triangle Wave generation configuration ################*/
-	if(HAL_DACEx_TriangleWaveGenerate(&handleDAC, DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_4095) != HAL_OK)
-	{
-		/* Triangle wave generation Error */
-		ERROR_HANDLER();
-	}
-
-	/*##-4- Enable DAC Channel1 ################################################*/
-	if(HAL_DAC_Start(&handleDAC, DAC_CHANNEL_2) != HAL_OK)
-	{
-		/* Start Error */
-		ERROR_HANDLER();
-	}
-
-	/*##-5- Set DAC channel1 DHR12RD register ##################################*/
-	if(HAL_DAC_SetValue(&handleDAC, DAC_CHANNEL_2, DAC_ALIGN_12B_R, (1 << 12) - 1) != HAL_OK)
-	{
-		/* Setting value Error */
-		ERROR_HANDLER();
-	}
+    isRunning = true;
 }
 
 
-void HAL_DAC2::StopDMA()
+void HAL_DAC2::Stop()
 {
-	HAL_DAC_Stop_DMA(&handleDAC, DAC_CHANNEL_2);
+    HAL_TIM_Base_Stop_IT(&hTIM);
+    HAL_TIM_Base_DeInit(&hTIM);
+
+    isRunning = false;
 }
 
 
-void HAL_DAC2::ConfigTIM7(uint period)
+bool HAL_DAC2::IsRun()
 {
-	static TIM_HandleTypeDef htim;
-	TIM_MasterConfigTypeDef  sMasterConfig;
-
-	/*##-1- Configure the TIM peripheral #######################################*/
-	/* Time base configuration */
-	htim.Instance = TIM7;
-
-	htim.Init.Period = 0x1;
-	htim.Init.Prescaler = 0;
-	htim.Init.ClockDivision = 0;
-	htim.Init.CounterMode = TIM_COUNTERMODE_UP;
-	htim.Init.RepetitionCounter = 10;
-	HAL_TIM_Base_Init(&htim);
-
-	/* TIM6 TRGO selection */
-	sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
-	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-
-	HAL_TIMEx_MasterConfigSynchronization(&htim, &sMasterConfig);
-
-	/*##-2- Enable TIM peripheral counter ######################################*/
-	HAL_TIM_Base_Start(&htim);
+    return isRunning;
 }
 
 
@@ -124,9 +72,24 @@ extern "C" {
 #endif
 
 
-void DMA1_Stream5_IRQHandler()
+void TIM7_IRQHandler()
 {
-	HAL_DMA_IRQHandler(handleDAC.DMA_Handle1);
+    if ((TIM7->SR & TIM_SR_UIF) == TIM_SR_UIF)
+    {
+        if ((TIM7->DIER & TIM_DIER_UIE) == TIM_DIER_UIE)
+        {
+            TIM7->SR = ~TIM_DIER_UIE;
+
+            if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5) == GPIO_PIN_SET)
+            {
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+            }
+            else
+            {
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+            }
+        }
+    }
 }
 
 #ifdef __cplusplus
