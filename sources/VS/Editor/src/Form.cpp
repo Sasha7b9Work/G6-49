@@ -394,12 +394,12 @@ void Form::Draw()
         int x = Round<int>(scaleX * static_cast<float>(point.pos));
         int y = Round<int>(scaleY * static_cast<float>(Point::MAX - point.data));
 
-        TheCanvas->SetPoint(x, y, Point::SIZE);
+        TheCanvas->DrawPoint(x, y, Point::SIZE);
     }
 
     if (iCurPoint != static_cast<uint>(-1))
     {
-        TheCanvas->SetPoint(Round<int>(scaleX * static_cast<float>(points[iCurPoint].pos)), Round<int>(scaleY * static_cast<float>(Point::MAX - points[iCurPoint].data)), Point::SIZE * 3);
+        TheCanvas->DrawPoint(Round<int>(scaleX * static_cast<float>(points[iCurPoint].pos)), Round<int>(scaleY * static_cast<float>(Point::MAX - points[iCurPoint].data)), Point::SIZE * 3);
     }
 
     if (drawAdditionData)

@@ -69,14 +69,7 @@ void Canvas::EndScene()
 }
 
 
-void Canvas::SetPoint(int x, int y, const Color &color)
-{
-    SetColor(color);
-    memDC.DrawPoint({ x, y });
-}
-
-
-void Canvas::SetPoint(int x, int y, int size, const Color &color)
+void Canvas::DrawPoint(int x, int y, int size, const Color &color)
 {
     SetColor(color);
 

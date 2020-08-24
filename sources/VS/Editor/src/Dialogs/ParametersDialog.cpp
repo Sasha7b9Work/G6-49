@@ -47,14 +47,14 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
     wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Применить"), wxDefaultPosition, SMALL_BUTTON_SIZE);
     Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(ParametersDialog::OnButtonApply));
 
-    wxButton *btnCancel = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отменить"), wxDefaultPosition, SMALL_BUTTON_SIZE);
-    Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(ParametersDialog::OnButtonCancel));
+    wxButton *btnClose = new wxButton(this, ID_BUTTON_CANCEL, wxT("Закрыть"), wxDefaultPosition, SMALL_BUTTON_SIZE);
+    Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(ParametersDialog::OnButtonClose));
 
     wxBoxSizer *hBoxButtons = new wxBoxSizer(wxHORIZONTAL);
 
     hBoxButtons->Add(btnOk, 1, wxALIGN_CENTER);
     hBoxButtons->AddSpacer(20);
-    hBoxButtons->Add(btnCancel, 1, wxALIGN_CENTER);
+    hBoxButtons->Add(btnClose, 1, wxALIGN_CENTER);
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -82,11 +82,12 @@ void ParametersDialog::OnButtonApply(wxCommandEvent &)
     uint16 index = static_cast<uint16>(atoi(tcPosition->GetValue().c_str()));
     uint16 value = static_cast<uint16>(atoi(tcValue->GetValue().c_str()));
 
+    TheForm->RemovePoint();
     TheForm->SetPointInRealCoord(index, value);
 }
 
 
-void ParametersDialog::OnButtonCancel(wxCommandEvent &)
+void ParametersDialog::OnButtonClose(wxCommandEvent &)
 {
     Destroy();
 }
