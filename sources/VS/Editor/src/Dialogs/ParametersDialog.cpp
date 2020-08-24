@@ -8,15 +8,16 @@
 #define ADD_SPACER(hwd) hwd->AddSpacer(20);
 
 
-ParametersDialog::ParametersDialog() : wxDialog(nullptr, wxID_ANY, wxT("Параметры точки"))
+ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullptr, wxID_ANY, wxT("Параметры точки"))
 {
     wxPoint pos(50, 0);
     wxSize  size(50, 20);
+    char buffer[100];
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     wxStaticText *stPosition = new wxStaticText(this, wxID_ANY, wxT("Индекс"));
-    tcPosition = new wxTextCtrl(this, ID_TEXT_CONTROL_POSITION, wxEmptyString, pos, size);
+    tcPosition = new wxTextCtrl(this, ID_TEXT_CONTROL_POSITION, _itoa(index, buffer, 10), pos, size);
 
     wxBoxSizer *hBoxPosition = new wxBoxSizer(wxHORIZONTAL);
 
@@ -29,7 +30,7 @@ ParametersDialog::ParametersDialog() : wxDialog(nullptr, wxID_ANY, wxT("Параметр
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     wxStaticText *stValue = new wxStaticText(this, wxID_ANY, wxT("Значение"));
-    tcValue = new wxTextCtrl(this, ID_TEXT_CONTROL_VALUE, wxEmptyString, pos, size);
+    tcValue = new wxTextCtrl(this, ID_TEXT_CONTROL_VALUE, _itoa(value, buffer, 10), pos, size);
 
     wxBoxSizer *hBoxValue = new wxBoxSizer(wxHORIZONTAL);
 

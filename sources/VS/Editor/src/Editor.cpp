@@ -23,7 +23,8 @@
 extern void update();
 extern void init();
 
-static wxPoint positionMouseMenu;   // «десь сохран€етс€ позици€ мыши при всплывании меню
+static uint16 indexPoint = 0;
+static uint16 valuePoint = 0;
 
 
 enum //-V2521
@@ -239,9 +240,9 @@ void Frame::CreateMenu()
 }
 
 
-void Frame::ShowContextMenu(const wxPoint &pos, bool underPoint)
+void Frame::ShowContextMenu(const wxPoint &pos)
 {
-    positionMouseMenu = pos;
+    bool underPoint = TheForm->ExistPoint(pos.x, pos.y, false, &indexPoint, &valuePoint);
 
     static wxMenu menuPoint;
     static wxMenu menuContext;
@@ -269,15 +270,15 @@ void Frame::ShowContextMenu(const wxPoint &pos, bool underPoint)
 }
 
 
-void Frame::OnDeletePoint(wxCommandEvent &)
+void Frame::OnParametersPoint(wxCommandEvent &)
 {
-    TheForm->RemovePoint();
+    ParametersDialog(indexPoint, valuePoint).ShowModal();
 }
 
 
-void Frame::OnParametersPoint(wxCommandEvent &)
+void Frame::OnDeletePoint(wxCommandEvent &)
 {
-    ParametersDialog().ShowModal();
+    TheForm->RemovePoint();
 }
 
 

@@ -294,15 +294,15 @@ void Form::AlignPoint(Align::E align)
 }
 
 
-bool Form::ExistPoint(int mouseX, int mouseY, bool pressed)
+bool Form::ExistPoint(int mouseX, int mouseY, bool pressed, uint16 *index, uint16 *value)
 {
     float scaleX = Point::ScaleX();
     float scaleY = Point::ScaleY();
 
-    uint positionNearestPoint = static_cast<uint>(-1);
+    uint16 positionNearestPoint = static_cast<uint16>(-1);
     double nearestDistance = 1e10;
 
-    for(uint i = 0; i < points.size(); i++)
+    for(uint16 i = 0; i < points.size(); i++)
     {
         double distance = points[i].DistanceFromMouse(Round<int>(static_cast<float>(mouseX) / scaleX), Round<int>(static_cast<float>(mouseY) / scaleY));
 
@@ -319,6 +319,17 @@ bool Form::ExistPoint(int mouseX, int mouseY, bool pressed)
         {
             iCurPoint = positionNearestPoint;
         }
+
+        if (index)
+        {
+            *index = points[positionNearestPoint].pos;
+        }
+
+        if (value)
+        {
+            *value = points[positionNearestPoint].data;
+        }
+
         return true;
     }
 

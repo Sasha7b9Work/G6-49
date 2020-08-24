@@ -203,7 +203,7 @@ void Canvas::OnMouseRightDown(wxMouseEvent &event) //-V2009
 
     mouseIsDown = false;
 
-    (static_cast<Frame* >(parent))->ShowContextMenu({ mouseX, mouseY }, TheForm->ExistPoint(mouseX, mouseY, false));
+    (static_cast<Frame* >(parent))->ShowContextMenu({ mouseX, mouseY });
 
     SetMouseCursor();
 }

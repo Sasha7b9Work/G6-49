@@ -21,8 +21,8 @@ public:
     void OnTimer(wxTimerEvent &);
     void OnRepaint(wxPaintEvent &);
 
-    // Покзать контекстное меню в позиции pos. Его вид отличается в зависмости от того, вызывается оно над поставленной точкой или нет
-    void ShowContextMenu(const wxPoint &pos, bool underPoint);
+    // Покзать контекстное меню в позиции pos
+    void ShowContextMenu(const wxPoint &pos);
 
 private:
     wxTimer timer;

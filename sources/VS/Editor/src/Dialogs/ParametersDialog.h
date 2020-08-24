@@ -7,7 +7,7 @@
 class ParametersDialog : public wxDialog
 {
 public:
-    ParametersDialog();
+    ParametersDialog(uint16 index, uint16 value);
 private:
     
     wxTextCtrl *tcPosition;      // Здесь будем вводить индекс точки
