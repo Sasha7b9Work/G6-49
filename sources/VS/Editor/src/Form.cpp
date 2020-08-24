@@ -525,13 +525,6 @@ void Form::SaveToFile(wxTextFile &file)
     {
         file.AddLine(wxString::Format(wxT("%i %i"), point.pos, point.data));
     }
-    
-    file.AddLine(wxT("data"));
-
-    for(int i = 0; i < Point::NUM_POINTS; i++)
-    {
-        file.AddLine(wxString::Format(wxT("%i %i"), i, data[i]));
-    }
 }
 
 
@@ -549,13 +542,10 @@ void Form::LoadFromFile(wxTextFile &file)
         return ErrorMessage(file.GetCurrentLine());
     }
 
-    std::vector<Point> _points;
-    uint16 _data[Point::NUM_POINTS];
-
     while(true)
     {
         line = file.GetNextLine();
-        if(line.Cmp("data") == 0)
+        if(line.IsEmpty())
         {
             break;
         }
@@ -568,32 +558,8 @@ void Form::LoadFromFile(wxTextFile &file)
             return ErrorMessage(file.GetCurrentLine());
         }
 
-        _points.emplace_back(index, d);
+        SetPoint(index, d);
     }
-
-    for(int i = 0; i < Point::NUM_POINTS; i++)
-    {
-        line = file.GetNextLine();
-
-        uint16 index = 0;
-        uint16 d = 0;
-
-        if(!ConvertStringToTwoShort(line, &index, &d))
-        {
-            return ErrorMessage(file.GetCurrentLine());
-        }
-
-        _data[i] = d;
-    }
-
-    points.clear();
-
-    for(Point &point : _points)
-    {
-        points.push_back(point);
-    }
-
-    std::memcpy(data, _data, Point::NUM_POINTS * sizeof(uint16));
 }
 
 

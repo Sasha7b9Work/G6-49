@@ -117,21 +117,28 @@ public:
 
 private:
 
-	/// Данные, готовые для передачи в прибор
+	// Данные, готовые для передачи в прибор
 	uint16 data[Point::NUM_POINTS];
 
+	// Точки, поставленные мышью. Хранятся в системе координат прибора (pos = [0 ... Point::NUM_POINTS], data = [Point::MIN ... Point::MAX])
 	std::vector<Point> points;
-	/// Здесь хранится индекс точки, которой управляем в текущий момент
+
+	// Здесь хранится индекс точки, которой управляем в текущий момент
 	uint iCurPoint = 0;
-	/// Возвращает index точки в позиции pos. 0xFFFFFFFF, если точки в этой позиции нет
+
+	// Возвращает index точки в позиции pos. 0xFFFFFFFF, если точки в этой позиции нет
 	uint PointInPosition(uint16 pos);
-	/// Рассчитать соседние с point точки
+
+	// Рассчитать соседние с point точки
 	void CalculateNeighboringPoints(const Point& point);
-	/// Линейно интерполировать точки, расположенные между pos1 и pos2
+
+	// Линейно интерполировать точки, расположенные между pos1 и pos2
 	void LinearInterpolation(uint16 pos1, uint16 pos2);
-	/// Интерполировать точки слева от точки с индексом index из points
+
+	// Интерполировать точки слева от точки с индексом index из points
 	void LinearInterpolationLeft(uint index);
-	/// Интерполировать точки справа от точки с индексом index из points
+
+	// Интерполировать точки справа от точки с индексом index из points
 	void LinearInterpolationRight(uint index);
 };
 
