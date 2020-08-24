@@ -6,7 +6,7 @@
 #include <cmath>
 
 
-static void Stop();
+//static void Stop();
 
 
 void Beeper::Init()
