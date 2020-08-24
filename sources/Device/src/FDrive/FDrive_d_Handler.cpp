@@ -299,6 +299,12 @@ uint FileSystem::GetFileSize(const char *fullPath)
 }
 
 
+static float ConvertToFloat(int value)
+{
+    return -1.0F + static_cast<float>(value) / 4095.0F * 2.0F;
+}
+
+
 bool FileSystem::ReadFloats(float values[4096], const char *name)
 {
     bool result = false;
@@ -309,17 +315,28 @@ bool FileSystem::ReadFloats(float values[4096], const char *name)
     {
         char buffer[255];
         f_gets(buffer, 255, &fp);
+
         if (std::strcmp(buffer, "Data file G6-49\r\n") == 0)
         {
-            bool firstPoint = false;            // Установленное в true значение означает, что мы добрались до первой точки
+            f_gets(buffer, 255, &fp);
 
-            while (!firstPoint)
+            if (std::strcmp(buffer, "points\r\n") == 0)
             {
-                f_gets(buffer, 255, &fp);
+                int index = 0;
 
-                if (std::strcmp(buffer, "data\r\n") == 0)
+                while (index < 4096)
                 {
-                    firstPoint = true;
+                    f_gets(buffer, 255, &fp);
+
+                    int numberPoint = 0;
+                    int value = 0;
+
+                    std::sscanf(buffer, "%d %d", &numberPoint, &value);
+
+                    if (numberPoint == 0)
+                    {
+                        ConvertToFloat(value);
+                    }
                 }
             }
 
@@ -341,6 +358,8 @@ bool FileSystem::ReadFloats(float values[4096], const char *name)
 
             result = true;
         }
+
+
         f_close(&fp);
     }
 

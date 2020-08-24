@@ -24,13 +24,13 @@ static void Stop()
 static void Beep(uint period)
 {
     HAL_DAC2::StartDMA(period);
-    Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, 50);
+    Timer::SetAndStartOnce(Timer::Type::StopSound, Stop, 5000);
 }
 
 
 void Beeper::ButtonPress()
 {
-    ::Beep(0x2);
+    ::Beep(1);
 }
 
 

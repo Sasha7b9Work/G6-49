@@ -39,6 +39,6 @@ int main()
         PInterface::Update();
         SCPI::Update();
 
-        //Beeper::Beep(Action::Down);
+        Beeper::Beep(Action::Down);
     }
 }

@@ -101,10 +101,11 @@ void HAL_DAC2::ConfigTIM7(uint period)
 	/* Time base configuration */
 	htim.Instance = TIM7;
 
-	htim.Init.Period = period;
+	htim.Init.Period = 0x1;
 	htim.Init.Prescaler = 0;
 	htim.Init.ClockDivision = 0;
 	htim.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim.Init.RepetitionCounter = 10;
 	HAL_TIM_Base_Init(&htim);
 
 	/* TIM6 TRGO selection */
