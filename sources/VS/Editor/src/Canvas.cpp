@@ -190,7 +190,7 @@ void Canvas::OnMouseLeftDown(wxMouseEvent &event) //-V2009
     }
     else
     {
-        TheForm->SetPoint(mouseX, mouseY);
+        TheForm->SetPointInMouseCoord(mouseX, mouseY);
     }
 
     SetMouseCursor();

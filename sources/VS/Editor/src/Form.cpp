@@ -55,8 +55,8 @@ void Form::Clear()
 
     points.clear();
 
-    SetPoint(static_cast<uint16>(0), Point::AVE);
-    SetPoint(static_cast<uint16>(Point::NUM_POINTS - 1), Point::AVE);
+    SetPointInRealCoord(static_cast<uint16>(0), Point::AVE);
+    SetPointInRealCoord(static_cast<uint16>(Point::NUM_POINTS - 1), Point::AVE);
 }
 
 
@@ -95,7 +95,7 @@ void Form::SetPoint(Point point)
 }
 
 
-void Form::SetPoint(int mouseX, int mouseY)
+void Form::SetPointInMouseCoord(int mouseX, int mouseY)
 {
     SetPoint(Point(mouseX, mouseY));
 	History::Add(TheForm);
@@ -124,13 +124,13 @@ void Form::RedoHistory()
 }
 
 
-void Form::SetPoint(uint16 pos, uint16 dat)
+void Form::SetPointInRealCoord(uint16 pos, uint16 dat)
 {
     SetPoint(Point(pos, dat));
 }
 
 
-void Form::SetPoint(uint16 pos)
+void Form::SetPointInPosition(uint16 pos)
 {
     Point point(pos, data[pos]);
 
@@ -472,8 +472,8 @@ void Form::SetMainForm(const uint16 dat[Point::NUM_POINTS], const std::vector<Po
 
     points.clear();
 
-    SetPoint(static_cast<uint16>(0), dat[0]);
-    SetPoint(static_cast<uint16>(Point::NUM_POINTS - 1), dat[Point::NUM_POINTS - 1]);
+    SetPointInRealCoord(static_cast<uint16>(0), dat[0]);
+    SetPointInRealCoord(static_cast<uint16>(Point::NUM_POINTS - 1), dat[Point::NUM_POINTS - 1]);
 
     std::memcpy(data, dat, Point::NUM_POINTS * 2);
 
@@ -569,7 +569,7 @@ void Form::LoadFromFile(wxTextFile &file)
             return ErrorMessage(file.GetCurrentLine());
         }
 
-        SetPoint(index, d);
+        SetPointInRealCoord(index, d);
     }
 }
 

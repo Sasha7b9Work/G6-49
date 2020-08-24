@@ -54,7 +54,7 @@ void InsertPointsDialog::OnButtonOk(wxCommandEvent &)
 {
     for(uint16 i = 0; i < Point::NUM_POINTS; i += static_cast<uint16>(scDelta->GetValue()))
     {
-        TheForm->SetPoint(i);
+        TheForm->SetPointInPosition(i);
     }
 
     History::Add(TheForm);

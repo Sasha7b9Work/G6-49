@@ -84,16 +84,16 @@ public:
     void Clear();
 
 	// ƒобавить точку с координатами мыши
-    void SetPoint(int mouseX, int mouseY);
+    void SetPointInMouseCoord(int mouseX, int mouseY);
 
 	// ƒобавить точку с абсолютными значени€ми
-    void SetPoint(uint16 pos, uint16 data);
+    void SetPointInRealCoord(uint16 pos, uint16 data);
 
 	// «аносит точку куда следует
     void SetPoint(Point point);
 
 	// ¬ставить точку в позицию pos
-    void SetPoint(uint16 pos);
+    void SetPointInPosition(uint16 pos);
 
 	// ¬озвращает true, если курсор мыши находитс€ над поставленной точкой. Pressed - нажата ли кнопка мыши
 	bool ExistPoint(int mouseX, int mouseY, bool pressed, uint16 *index = nullptr, uint16 *value = nullptr);
