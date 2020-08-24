@@ -35,14 +35,14 @@ static void WriteToFile();
 static void CloseFile();
 
 // Трансформировать точки в пригодный для записи в ПЛИС вид
-static void TransformDataToCode(float dataIn[4096], uint8 codeOut[FPGA::NUM_POINTS * 2]);
+static void TransformDataToCode(float dataIn[FPGA::NUM_POINTS], uint8 codeOut[FPGA::NUM_POINTS * 2]);
 
 // Заполнить массив picture данными для отрисовки сигнала на экране
-static void FillPicture(uint8 *picture, uint size, float values[4096]);
-static void Normalize(float d[4096]);
-static void FindMinMax(const float d[4096], float *_min, float *_max);
+static void FillPicture(uint8 *picture, uint size, float values[FPGA::NUM_POINTS]);
+static void Normalize(float d[FPGA::NUM_POINTS]);
+static void FindMinMax(const float d[FPGA::NUM_POINTS], float *_min, float *_max);
 static float FindScale(float min, float max);
-static void ToScale(float d[4096], float scale);
+static void ToScale(float d[FPGA::NUM_POINTS], float scale);
 
 
 static void E()
@@ -59,7 +59,7 @@ struct FileSystem
     // Получить имя numFile-го файла из каталога fullPath
     static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut);
     // Читает значения отсчётов сигнала из файла name
-    static bool ReadFloats(float values[4096], const char *name);
+    static bool ReadFloats(float values[FPGA::NUM_POINTS], const char *name);
 };
 
 
@@ -163,7 +163,7 @@ static void GetPictureDDS()
 
     if (FileSystem::GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
     {
-        float values[4096];
+        float values[FPGA::NUM_POINTS];
         if (FileSystem::ReadFloats(values, &fullName[1]))
         {
             FillPicture(data, SIZE, values);
@@ -299,13 +299,27 @@ uint FileSystem::GetFileSize(const char *fullPath)
 }
 
 
+// Конвертировать считанное из файла значение в float [-1.0 ... 1.0]
 static float ConvertToFloat(int value)
 {
     return -1.0F + static_cast<float>(value) / 4095.0F * 2.0F;
 }
 
 
-bool FileSystem::ReadFloats(float values[4096], const char *name)
+// Интерполировать значения в массиве values между индексами iFilledLast и iReaded
+static void Interpolate(float values[FPGA::NUM_POINTS], int iFilledLast, int iReaded)
+{
+    int numSteps = iReaded - iFilledLast;
+    float stepY = (values[iReaded] - values[iFilledLast]) / static_cast<float>(numSteps);
+
+    for (int i = 1; i < numSteps; i++)
+    {
+        values[i + iFilledLast] = values[iFilledLast] + static_cast<float>(i) * stepY;
+    }
+}
+
+
+bool FileSystem::ReadFloats(float values[FPGA::NUM_POINTS], const char *name)
 {
     bool result = false;
 
@@ -322,38 +336,33 @@ bool FileSystem::ReadFloats(float values[4096], const char *name)
 
             if (std::strcmp(buffer, "points\r\n") == 0)
             {
-                int index = 0;
+                int indexFilled = 1;                        // Индекс последней рассчитанной и занесённой точки
 
-                while (index < 4096)
+                while (indexFilled < FPGA::NUM_POINTS)
                 {
                     f_gets(buffer, 255, &fp);
 
-                    int numberPoint = 0;
+                    int indexReaded = 0;                    // Индекс считанной точки
                     int value = 0;
 
-                    std::sscanf(buffer, "%d %d", &numberPoint, &value);
+                    std::sscanf(buffer, "%d %d", &indexReaded, &value);
 
-                    if (numberPoint == 0)
+                    if (indexReaded == 0)
                     {
-                        ConvertToFloat(value);
+                        indexFilled = 0;
+                        values[indexFilled] = ConvertToFloat(value);
+                    }
+                    else if(indexReaded == indexFilled + 1)
+                    {
+                        indexFilled = indexReaded;
+                        values[indexFilled] = ConvertToFloat(value);
+                    }
+                    else
+                    {
+                        Interpolate(values, indexFilled, indexReaded);
+                        indexFilled = indexReaded;
                     }
                 }
-            }
-
-            // В этой точке файловый указатель указывает на строку с точкой индексом 0
-
-            for (int i = 0; i < 4096; i++)
-            {
-                f_gets(buffer, 255, &fp);
-
-                int numberPoint = 0;
-                int value = 0;
-
-                std::sscanf(buffer, "%d %d", &numberPoint, &value);
-
-                values[i] = -1.0F + static_cast<float>(value) / 4095.0F * 2.0F;
-
-                f_gets(buffer, 255, &fp);
             }
 
             result = true;
@@ -367,13 +376,13 @@ bool FileSystem::ReadFloats(float values[4096], const char *name)
 }
 
 
-static void TransformDataToCode(float dataIn[4096], uint8 codeOut[FPGA::NUM_POINTS * 2])
+static void TransformDataToCode(float dataIn[FPGA::NUM_POINTS], uint8 codeOut[FPGA::NUM_POINTS * 2])
 {
     Normalize(dataIn);
 
     float max = static_cast<float>(0x1fff);
 
-    for (int i = 0; i < 4096; i++)
+    for (int i = 0; i < FPGA::NUM_POINTS; i++)
     {
         uint16 c = static_cast<uint16>(std::fabsf(dataIn[i]) * max);
 
@@ -382,16 +391,13 @@ static void TransformDataToCode(float dataIn[4096], uint8 codeOut[FPGA::NUM_POIN
             SetBit(c, 13);
         }
 
-        codeOut[i * 2]     = static_cast<uint8>(c);
-        codeOut[i * 2 + 1] = static_cast<uint8>(c);
-
-        codeOut[i * 2 + FPGA::NUM_POINTS]     = static_cast<uint8>(c >> 8);
-        codeOut[i * 2 + FPGA::NUM_POINTS + 1] = static_cast<uint8>(c >> 8);
+        codeOut[i]                    = static_cast<uint8>(c);
+        codeOut[i + FPGA::NUM_POINTS] = static_cast<uint8>(c >> 8);
     }
 }
 
 
-static void Normalize(float d[4096])
+static void Normalize(float d[FPGA::NUM_POINTS])
 {
     float min = 0.0F;
     float max = 0.0F;
@@ -404,12 +410,12 @@ static void Normalize(float d[4096])
 }
 
 
-static void FindMinMax(const float d[4096], float *_min, float *_max)
+static void FindMinMax(const float d[FPGA::NUM_POINTS], float *_min, float *_max)
 {
     float min = 0.0F;
     float max = 0.0F;
 
-    for (int i = 0; i < 4096; i++)
+    for (int i = 0; i < FPGA::NUM_POINTS; i++)
     {
         if (d[i] < min)
         {
@@ -439,22 +445,22 @@ static float FindScale(float min, float max)
 }
 
 
-static void ToScale(float d[4096], float scale)
+static void ToScale(float d[FPGA::NUM_POINTS], float scale)
 {
-    for (int i = 0; i < 4096; i++)
+    for (int i = 0; i < FPGA::NUM_POINTS; i++)
     {
         d[i] *= scale;
     }
 }
 
 
-static void FillPicture(uint8 *picture, uint size, float values[4096])
+static void FillPicture(uint8 *picture, uint size, float values[FPGA::NUM_POINTS])
 {
     Normalize(values);
 
     float aveValue = 127.0F;
 
-    float step = 4096.0F / static_cast<float>(size);
+    float step = static_cast<float>(FPGA::NUM_POINTS) / static_cast<float>(size);
 
     for (uint i = 0; i < size; i++)
     {

@@ -30,7 +30,7 @@ void Beeper::ButtonPress()
 
 void Beeper::ButtonRelease()
 {
-    ::Beep(0xf);
+    //::Beep(0xf);
 }
 
 
