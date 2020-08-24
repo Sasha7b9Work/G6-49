@@ -336,9 +336,9 @@ bool FileSystem::ReadFloats(float values[FPGA::NUM_POINTS], const char *name)
 
             if (std::strcmp(buffer, "points\r\n") == 0)
             {
-                int indexFilled = 1;                        // Индекс последней рассчитанной и занесённой точки
+                int indexFilled = -1;                        // Индекс последней рассчитанной и занесённой точки
 
-                while (indexFilled < FPGA::NUM_POINTS)
+                while (indexFilled < (FPGA::NUM_POINTS - 1))
                 {
                     f_gets(buffer, 255, &fp);
 
@@ -359,6 +359,7 @@ bool FileSystem::ReadFloats(float values[FPGA::NUM_POINTS], const char *name)
                     }
                     else
                     {
+                        values[indexReaded] = ConvertToFloat(value);
                         Interpolate(values, indexFilled, indexReaded);
                         indexFilled = indexReaded;
                     }

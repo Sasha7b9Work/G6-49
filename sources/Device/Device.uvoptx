@@ -157,50 +157,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>471</LineNumber>
+          <LineNumber>331</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134400832</Address>
+          <Address>134403872</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Projects\stm32\G6-49\sources\Panel\src\FDrive\FDrive_d_Handler.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\FDrive\FDrive_d_Handler.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\G6_49_D\src/FDrive/FDrive_d_Handler.cpp\471</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>144</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134401592</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Projects\stm32\G6-49\sources\Panel\src\Generator\Calibrator.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\G6_49_D\src/Generator/Calibrator.cpp\144</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>142</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134401578</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Projects\stm32\G6-49\sources\Panel\src\Generator\Calibrator.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\G6_49_D\src/Generator/Calibrator.cpp\142</Expression>
+          <Expression>\\G6_49_D\src/FDrive/FDrive_d_Handler.cpp\331</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -214,12 +182,17 @@
           <WinNumber>1</WinNumber>
           <ItemText>currentCAL</ItemText>
         </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>buffer[255]</ItemText>
+        </Ww>
       </WatchWindow1>
       <MemoryWindow1>
         <Mm>
           <WinNumber>1</WinNumber>
           <SubType>264</SubType>
-          <ItemText>fullName</ItemText>
+          <ItemText>buffer</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>
@@ -1805,7 +1778,7 @@
 
   <Group>
     <GroupName>FDrive</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

@@ -5,7 +5,7 @@
 
 struct FPGA
 {
-    static const uint NUM_POINTS = 1024 * 8;
+    static const int NUM_POINTS = 1024 * 8;
 
     static void Init();
 
