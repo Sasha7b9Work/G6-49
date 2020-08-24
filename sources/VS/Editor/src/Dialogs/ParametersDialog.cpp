@@ -2,6 +2,7 @@
 #include "Form.h"
 #include "Dialogs/ParametersDialog.h"
 #include "Dialogs/SpinControl.h"
+#include "Dialogs/TextControl.h"
 
 
 #define SMALL_BUTTON_SIZE wxSize(70, 20)
@@ -18,7 +19,7 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     wxStaticText *stPosition = new wxStaticText(this, wxID_ANY, wxT("Индекс"));
-    tcPosition = new wxTextCtrl(this, ID_TEXT_CONTROL_POSITION, _itoa(index, buffer, 10), pos, size);
+    tcPosition = new TextControl(this, ID_TEXT_CONTROL_POSITION, _itoa(index, buffer, 10), pos, size);
 
     wxBoxSizer *hBoxPosition = new wxBoxSizer(wxHORIZONTAL);
 
@@ -31,7 +32,7 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     wxStaticText *stValue = new wxStaticText(this, wxID_ANY, wxT("Значение"));
-    tcValue = new wxTextCtrl(this, ID_TEXT_CONTROL_VALUE, _itoa(value, buffer, 10), pos, size);
+    tcValue = new TextControl(this, ID_TEXT_CONTROL_VALUE, _itoa(value, buffer, 10), pos, size);
 
     wxBoxSizer *hBoxValue = new wxBoxSizer(wxHORIZONTAL);
 

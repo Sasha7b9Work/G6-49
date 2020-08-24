@@ -6,11 +6,8 @@ JLink*.*
 *.bak
 *.uvgui*.*
 archive.zip
-.suo
 *out.txt
 
-
-sources/.vs/*
 
 sources/generated/*
 
@@ -29,10 +26,6 @@ sources/Panel/Objects/*
 sources/PLoader/DebugConfig/*
 sources/PLoader/Listings/*
 sources/PLoader/Objects/*
-
-sources/VS/Panel/Debug/*
-sources/VS/Panel/x64/*
-sources/VS/Generator/x64/*
 
 sources/Device/*.bin
 sources/Panel/*.bin
