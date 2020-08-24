@@ -15,12 +15,15 @@
 #include "History.h"
 #include "Dialogs/ExponentDialog.h"
 #include "Dialogs/InsertPointsDialog.h"
+#include "Dialogs/ParametersDialog.h"
 #include "Dialogs/SinXDialog.h"
 #include "Dialogs/TrapezeDialog.h"
 #include "Dialogs/TriangleDialog.h"
 
 extern void update();
 extern void init();
+
+static wxPoint positionMouseMenu;   // Здесь сохраняется позиция мыши при всплывании меню
 
 
 enum //-V2521
@@ -238,6 +241,8 @@ void Frame::CreateMenu()
 
 void Frame::ShowContextMenu(const wxPoint &pos, bool underPoint)
 {
+    positionMouseMenu = pos;
+
     static wxMenu menuPoint;
     static wxMenu menuContext;
     static wxMenu *menuAlign = nullptr;
@@ -253,9 +258,9 @@ void Frame::ShowContextMenu(const wxPoint &pos, bool underPoint)
         menuAlign->Append(ALIGN_RIGHT_TOP, "Справа вверху");
         menuAlign->Append(ALIGN_RIGHT_DOWN, "Справа внизу");
 
-        menuPoint.Append(CONTEXT_MENU_DELETE, "Удалить");
-        //menuPoint.Append(CONTEXT_MENU_PARAMETERS, "Параметры");
+        menuPoint.Append(CONTEXT_MENU_PARAMETERS, "Изменить");
         menuPoint.AppendSubMenu(menuAlign, "Выровнять");
+        menuPoint.Append(CONTEXT_MENU_DELETE, "Удалить");
 
         menuContext.Append(FILE_NEW, "Очистить");
     }
@@ -272,7 +277,7 @@ void Frame::OnDeletePoint(wxCommandEvent &)
 
 void Frame::OnParametersPoint(wxCommandEvent &)
 {
-
+    ParametersDialog().ShowModal();
 }
 
 
