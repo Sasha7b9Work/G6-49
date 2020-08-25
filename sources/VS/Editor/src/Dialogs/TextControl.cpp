@@ -14,13 +14,33 @@ void TextControl::OnKeyDown(wxKeyEvent &event)
 
     if (code >= '0' && code <= '9')
     {
-        char buffer[50];
-        std::strcpy(buffer, GetValue().c_str());
-        buffer[std::strlen(buffer)] = static_cast<char>(code);
-        buffer[std::strlen(buffer) + 1] = static_cast<char>(code);
-        int value = atoi(buffer);
+        long start = 0;
+        long end = 0;
 
-        event.Skip(value >= min && value <= max);
+        GetSelection(&start, &end);
+
+        char buffer[50];
+
+        if (end - start != 0)
+        {
+            buffer[0] = static_cast<char>(code);
+            buffer[1] = 0;
+
+            SetValue("");
+            this->AppendText(buffer);
+
+            event.Skip(false);
+        }
+        else
+        {
+            std::strcpy(buffer, GetValue().c_str());
+            uint length = std::strlen(buffer);
+            buffer[length] = static_cast<char>(code);
+            buffer[length + 1] = 0;
+            int value = atoi(buffer);
+
+            event.Skip(value >= min && value <= max);
+        }
     }
     else if (code == WXK_RETURN || code == WXK_BACK || code == WXK_LEFT || code == WXK_RIGHT || code == WXK_TAB || code == WXK_DELETE || code == WXK_INSERT)
     {
