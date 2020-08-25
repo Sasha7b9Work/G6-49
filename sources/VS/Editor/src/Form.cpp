@@ -151,7 +151,7 @@ void Form::SetPointInPosition(uint16 pos)
 
 void Form::RemovePoint()
 {
-    if (iCurPoint != 0 && iCurPoint != points.size())
+    if (iCurPoint < points.size())
     {
         points.erase(points.begin() + static_cast<const int>(iCurPoint));
 

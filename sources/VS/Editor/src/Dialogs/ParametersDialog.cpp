@@ -84,6 +84,8 @@ void ParametersDialog::OnButtonApply(wxCommandEvent &)
 
     TheForm->RemovePoint();
     TheForm->SetPointInRealCoord(index, value);
+
+    Destroy();
 }
 
 
