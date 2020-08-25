@@ -36,7 +36,7 @@ void HAL_DAC2::Init()
     * 200 - 2.5 êÃö
     * 400 - 1.25 êÃö
     */
-    hTIM.Init.Period = 100;
+    hTIM.Init.Period = 125;
     hTIM.Init.Prescaler = 90;
     hTIM.Init.ClockDivision = 0;
     hTIM.Init.CounterMode = TIM_COUNTERMODE_UP;
