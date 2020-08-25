@@ -8,6 +8,9 @@
 class TextControl : public wxTextCtrl
 {
 public:
-    TextControl(wxDialog *dlg, wxWindowID id, const wxString &value, const wxPoint &position, const wxSize &size);
+    TextControl(int min, int max, wxDialog *dlg, wxWindowID id, const wxString &value, const wxPoint &position, const wxSize &size);
 private:
+    int min = 0;
+    int max = 0;
+    void OnKeyDown(wxKeyEvent &);
 };
