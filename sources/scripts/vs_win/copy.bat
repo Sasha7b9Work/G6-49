@@ -14,9 +14,11 @@ goto HINT
     goto EXIT
 
 :COPY_WX_DLLS
-    @echo %TIME%   Copying files *.dll wxWidgtes
-    xcopy ..\..\ThirdParty\wxWidgets\generated\lib\vc_dll\*.dll ..\..\generated\Win32\Panel\Debug /Y /Q
-    xcopy ..\..\ThirdParty\wxWidgets\generated\lib\vc_dll\*.dll ..\..\generated\Win32\Editor\Debug /Y /Q
+    @echo %TIME%   Copying dll-files wxWidgtes
+    xcopy ..\..\ThirdParty\wxWidgets\generated\lib\vc_dll\wxbase314ud_vc_custom.dll ..\..\generated\Win32\Panel\Debug
+    xcopy ..\..\ThirdParty\wxWidgets\generated\lib\vc_dll\wxmsw314ud_core_vc_custom.dll ..\..\generated\Win32\Panel\Debug
+    xcopy ..\..\ThirdParty\wxWidgets\generated\lib\vc_dll\wxbase314ud_vc_custom.dll ..\..\generated\Win32\Editor\Debug
+    xcopy ..\..\ThirdParty\wxWidgets\generated\lib\vc_dll\wxmsw314ud_core_vc_custom.dll ..\..\generated\Win32\Editor\Debug
     goto EXIT
 
 :HINT
