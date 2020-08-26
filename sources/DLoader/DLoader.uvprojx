@@ -429,11 +429,6 @@
           <GroupName>libs/HAL</GroupName>
           <Files>
             <File>
-              <FileName>stm32f4xx_hal_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\libs\HAL\stm32f4xx_hal_conf.h</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_hal.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h</FilePath>
@@ -1033,6 +1028,11 @@
               <FileName>HAL_TIM3.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_TIM3.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\stm32f4xx_hal_conf.h</FilePath>
             </File>
           </Files>
         </Group>
