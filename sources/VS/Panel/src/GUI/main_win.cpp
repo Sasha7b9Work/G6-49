@@ -8,6 +8,7 @@
 #include "SCPI/SCPI.h"
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
+#include "Tests/Tests.h"
 
 
 void init()
@@ -45,6 +46,10 @@ void update()
     if (TIME_MS - timeStart < 1000)
     {
         Display::DrawScreenSplash();
+    }
+    else if (TIME_MS - timeStart < 3000)
+    {
+        TestsHardware::Run();
     }
     else
     {

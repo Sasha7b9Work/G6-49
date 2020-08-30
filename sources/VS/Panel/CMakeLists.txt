@@ -119,6 +119,7 @@ file(GLOB MENU_PAGES_ADDITION    ../../Panel/src/Menu/Pages/Addition/*)
 file(GLOB MENU_PAGES_PAGEDEBUG   ../../Panel/src/Menu/Pages/PageDebug/*)
 file(GLOB SCPI                   ../../Panel/src/SCPI/*)
 file(GLOB SETTINGS               ../../Panel/src/Settings/*)
+file(GLOB TESTS                  ../../Panel/src/Tests/*)
 file(GLOB UTILS                  ../../Panel/src/Utils/*)
 
 source_group(common                 FILES ${COMMON})
@@ -142,11 +143,12 @@ source_group(Menu\\Pages\\Addition  FILES ${MENU_PAGES_ADDITION})
 source_group(Menu\\Pages\\PageDebug FILES ${MENU_PAGES_PAGEDEBUG})
 source_group(SCPI                   FILES ${SCPI})
 source_group(Settings               FILES ${SETTINGS})
+source_group(Tests                  FILES ${TESTS})
 source_group(Utils                  FILES ${UTILS})
 
 add_executable(G6-49 ${COMMON} ${COMMON_VS_HAL} ${SRC} ${DISPLAY} ${DISPLAY_FONT} ${FDRIVE} ${FREQMETER} ${GENERATOR}
                      ${GUI} ${HARDWARE} ${HARDWARE_HAL} ${INTERFACE} ${KEYBOARD} ${LIBS_CMSIS} ${LIBS_HAL} ${MENU} ${MENU_PAGES}
-                     ${MENU_PAGES_ADDITION} ${MENU_PAGES_PAGEDEBUG} ${SCPI} ${SETTINGS} ${UTILS})
+                     ${MENU_PAGES_ADDITION} ${MENU_PAGES_PAGEDEBUG} ${SCPI} ${TESTS} ${SETTINGS} ${UTILS})
 
 target_link_libraries(G6-49 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
 target_link_libraries(G6-49 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)

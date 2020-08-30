@@ -2335,6 +2335,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Tests</GroupName>
+          <Files>
+            <File>
+              <FileName>Tests.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Tests\Tests.h</FilePath>
+            </File>
+            <File>
+              <FileName>Tests.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Tests\Tests.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Utils</GroupName>
           <Files>
             <File>

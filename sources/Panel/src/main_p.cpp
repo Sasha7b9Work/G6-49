@@ -9,6 +9,7 @@
 #include "SCPI/SCPI.h"
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
+#include "Tests/Tests.h"
 
 
 int main()
@@ -20,6 +21,8 @@ int main()
     Display::DrawScreenSplash();
 
     HAL_TIM::Delay(1000);       // Задержка нельзя удалять не только ради стартового экрана, но и потому, что без неё не запускается генератор. Видимо, он инициализируется гораздо быстрее панели
+
+    TestsHardware::Run();
 
     setCal.Load();
     set.LoadDefault();

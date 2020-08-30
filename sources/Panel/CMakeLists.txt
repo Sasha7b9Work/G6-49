@@ -100,6 +100,7 @@ file(GLOB MENU_PAGES_ADDITION  src/Menu/Pages/Addition/*)
 file(GLOB MENU_PAGES_PAGEDEBUG src/Menu/Pages/PageDebug/*)
 file(GLOB SCPI                 src/SCPI/*)
 file(GLOB SETTINGS             src/Settings/*)
+file(GLOB TESTS                src/Tests/*)
 file(GLOB UTILS                src/Utils/*)
 
 set_source_files_properties(${LIBS_HAL} PROPERTIES HEADER_FILE_ONLY TRUE)
@@ -123,8 +124,9 @@ source_group(Menu\\Pages\\Addition  FILES ${MENU_PAGES_ADDITION})
 source_group(Menu\\Pages\\PageDebug FILES ${MENU_PAGES_PAGEDEBUG})
 source_group(SCPI                   FILES ${SCPI})
 source_group(Settings               FILES ${SETTINGS})
+source_group(Tests                  FILES ${TESTS})
 source_group(Utils                  FILES ${UTILS})
 
 add_library(Panel ${LIBS_HAL} ${HARDWARE} ${HARDWARE_CMSIS} ${HARDWARE_HAL} ${SRC} ${COMMON} ${DISPLAY} ${DISPLAY_FONT}
                   ${FDRIVE} ${FREQMETER} ${GENERATOR} ${INTERFACE} ${KEYBOARD} ${MENU} ${MENU_PAGES} ${MENU_PAGES_ADDITION}
-                  ${MENU_PAGES_PAGEDEBUG} ${SCPI} ${SETTINGS} ${UTILS})
+                  ${MENU_PAGES_PAGEDEBUG} ${SCPI} ${SETTINGS} ${TESTS} ${UTILS})

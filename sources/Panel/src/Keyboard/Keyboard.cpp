@@ -96,19 +96,19 @@ void Keyboard::Update()
 
             if (key != Key::None)
             {
-                if ((timePress[rl][sl] != 0) && (timePress[rl][sl] != MAX_UINT))         // Если клавиша находится в нажатом положении
+                if ((timePress[rl][sl] != 0) && (timePress[rl][sl] != MAX_UINT))    // Если клавиша находится в нажатом положении
                 {
                     uint delta = time - timePress[rl][sl];
-                    if(delta > 500)                                             // Если прошло более 500 мс с момента нажатия -
+                    if(delta > 500)                                                 // Если прошло более 500 мс с момента нажатия -
                     {
                         timePress[rl][sl] = MAX_UINT;
-                        AppendEvent(keys[rl][sl], Action::Long);   // это будет длинное нажатие
+                        AppendEvent(keys[rl][sl], Action::Long);                    // это будет длинное нажатие
                     }
-                    else if (delta > 100 &&                                     // Если прошло более 100 мс с момента нажатия
-                        !BUTTON_IS_PRESS(state))                                // и сейчас кнопка находится в отжатом состоянии
+                    else if (delta > 100 &&                                         // Если прошло более 100 мс с момента нажатия
+                        !BUTTON_IS_PRESS(state))                                    // и сейчас кнопка находится в отжатом состоянии
                     {
-                        timePress[rl][sl] = MAX_UINT;                           // То учитываем это в массиве
-                        AppendEvent(keys[rl][sl], Action::Up);     // И сохраняем отпускание кнопки в буфере команд
+                        timePress[rl][sl] = MAX_UINT;                               // То учитываем это в массиве
+                        AppendEvent(keys[rl][sl], Action::Up);                      // И сохраняем отпускание кнопки в буфере команд
                     }
                 }
                 else if (BUTTON_IS_PRESS(state) && timePress[rl][sl] != MAX_UINT)   // Если кнопка нажата
