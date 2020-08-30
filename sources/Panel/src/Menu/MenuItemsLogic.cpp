@@ -105,43 +105,6 @@ float Choice::Step()
 }
 
 
-Item *Choice::Press(const Control control) //-V801
-{   
-    if((control.Is(Key::Right) && control.IsRelease()) || control.Is(Key::RotateRight))
-    {
-        StartChange(-1);
-    }
-    else if((control.Is(Key::Left) && control.IsRelease()) || control.Is(Key::RotateLeft))
-    {
-        StartChange(1);
-    }
-    else if(control.Is(Key::Esc) && control.IsRelease())
-    {
-        Menu::ResetOpenedItem();
-    }
-    else if(Keeper()->GetItem(control.key))
-    {
-        if(control.IsUp())
-        {
-            StartChange(1);
-        }
-        else if(control.IsLong())
-        {
-            if(Menu::GetOpenedItem() == 0)
-            {
-                Menu::SetOpenedItem(this);
-            }
-            else
-            {
-                Menu::ResetOpenedItem();
-            }
-        }
-    }
-
-    return Menu::GetOpenedItem();
-}
-
-
 void Governor::Press(const Control control) //-V801
 {
     if(control.IsFunctional() && Keeper()->GetItem(control.key) == this)
@@ -376,7 +339,7 @@ void Item::Press(const Control control) //-V801
         }
         else if (type == TypeItem::ChoiceParameter)
         {
-            static_cast<ChoiceParameter *>(this)->Press(control.action);
+            static_cast<ChoiceParameter *>(this)->Press(control);
         }
         else if (type == TypeItem::SmallButton)
         {
@@ -450,18 +413,56 @@ int Item::PositionOnPage() const
 }
 
 
-Item *ChoiceParameter::Press(Action::E action)
+Item *ChoiceParameter::Press(const Control control)
 {
-    if (action == Action::Up)
+    if ((control.Is(Key::Right) && control.IsRelease()) || control.Is(Key::RotateRight))
     {
         form->SetNextParameter();
     }
-    else if (action == Action::Long)
+    else if ((control.Is(Key::Left) && control.IsRelease()) || control.Is(Key::RotateLeft))
     {
-        return this;
+        form->SetPrevParameter();
+    }
+    
+
+    return nullptr;
+}
+
+
+Item *Choice::Press(const Control control) //-V801
+{
+    if ((control.Is(Key::Right) && control.IsRelease()) || control.Is(Key::RotateRight))
+    {
+        StartChange(-1);
+    }
+    else if ((control.Is(Key::Left) && control.IsRelease()) || control.Is(Key::RotateLeft))
+    {
+        StartChange(1);
+    }
+    else if (control.Is(Key::Esc) && control.IsRelease())
+    {
+        Menu::ResetOpenedItem();
+    }
+    else if (Keeper()->GetItem(control.key))
+    {
+        if (control.IsUp())
+        {
+            StartChange(1);
+        }
+        else if (control.IsLong())
+        {
+            if (Menu::GetOpenedItem() == 0)
+            {
+                Menu::SetOpenedItem(this);
+            }
+            else
+            {
+                Menu::ResetOpenedItem();
+            }
+        }
     }
 
-    return 0;
+    return Menu::GetOpenedItem();
 }
 
 

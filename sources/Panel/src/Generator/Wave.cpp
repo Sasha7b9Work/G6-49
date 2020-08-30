@@ -184,6 +184,16 @@ void Form::SetNextParameter()
 }
 
 
+void Form::SetPrevParameter()
+{
+    currentParam--;
+    if (currentParam < 0)
+    {
+        currentParam = NumParameters() - 1;
+    }
+}
+
+
 void Form::TuneGenerator()
 {
     PGenerator::SetFormWave(GetWave());

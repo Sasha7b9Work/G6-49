@@ -406,7 +406,7 @@ public:
     Form  *form;
     
     // ќбрабатывает нажатие кнопки. ¬озвращает указатель на себ€, если находитс€ в открытом состо€нии и 0 в противном.
-    Item *Press(Action::E action);
+    Item *Press(const Control control);
 
     pString NameSubItem(int num) const;
 
