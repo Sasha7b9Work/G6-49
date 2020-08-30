@@ -37,6 +37,7 @@ public:
     static Color MENU_ITEM;
     static Color MENU_TITLE;
     static Color MENU_ITEM_DARK;
+    static Color MENU_ITEM_SHADE;
 
 
     static Color FILL;
@@ -98,6 +99,7 @@ private:
         COLOR_MENU_ITEM,
         COLOR_MENU_TITLE,
         COLOR_MENU_ITEM_DARK,
+        COLOR_MENU_ITEM_SHADE,
         COLOR_INVERSE
     };
 };
