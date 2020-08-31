@@ -446,7 +446,7 @@ void Frame::BlockCanvas()
 {
     isBlockingCanvas = true;
 
-    toolBar->EnableTool(INSERT_POINTS, !isBlockingCanvas);
+    toolBar->EnableTool(INSERT_POINTS, false);
 }
 
 
@@ -454,7 +454,7 @@ void Frame::UnBlockCanvas()
 {
     isBlockingCanvas = false;
 
-
+    toolBar->EnableTool(INSERT_POINTS, true);
 }
 
 

@@ -18,6 +18,8 @@ public:
 
     static const int WIDTH_PANEL = 220;
 
+    virtual void ShowModal() override;
+
 protected:
     // ѕослать форму дл€ ознакомительной отрисовки
     virtual void SendAdditionForm() = 0;
