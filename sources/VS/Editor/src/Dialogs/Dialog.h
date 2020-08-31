@@ -11,14 +11,12 @@ class SpinControl;
 class Dialog : public wxDialog
 {
 public:
-    Dialog(const wxString &title);
+    Dialog(const wxString &title, bool blockingCanvas);
     virtual ~Dialog();
 
     void OnControlEvent(wxCommandEvent &);
 
     static const int WIDTH_PANEL = 220;
-
-    virtual void ShowModal() override;
 
 protected:
     // ѕослать форму дл€ ознакомительной отрисовки
@@ -41,6 +39,8 @@ protected:
     wxPanel *CreatePanelLevels();
     SpinControl *scLevelUp = nullptr;
     SpinControl *scLevelDown = nullptr;
+
+    bool isBlockingCanvas = false;      // ≈сли true, то холст нужно блокировать
 
 private:
     wxBoxSizer *panelBox = nullptr;

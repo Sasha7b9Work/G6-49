@@ -24,11 +24,8 @@ public:
     // ѕокзать контекстное меню в позиции pos
     void ShowContextMenu(const wxPoint &pos);
 
-    // «аблокировать холст (после этого нельз€ ставить точки)
-    void BlockCanvas();
-
-    // –азблокировать холст
-    void UnBlockCanvas();
+    // «аблокировать/разблокировать холст (при заблокированном холсте нельз€ ставить точки мышкой)
+    void SetBlockingCanvas(bool blocking);
 
     // ¬озвращает true, если холст заблокирован (нельз€ ставить точки мышкой)
     bool IsBlockingCanvas() { return isBlockingCanvas; }

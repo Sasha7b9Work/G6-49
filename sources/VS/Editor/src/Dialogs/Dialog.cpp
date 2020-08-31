@@ -11,7 +11,7 @@ uint16 Dialog::data[Point::NUM_POINTS];
 std::vector<Point> Dialog::points;
 
 
-Dialog::Dialog(const wxString &title) : wxDialog(nullptr, wxID_ANY, title)
+Dialog::Dialog(const wxString &title, bool blockingCanvas) : wxDialog(nullptr, wxID_ANY, title), isBlockingCanvas(blockingCanvas)
 {
     Connect(wxEVT_MOVE, wxMoveEventHandler(Dialog::OnMove));
 
@@ -129,6 +129,8 @@ void Dialog::OnMove(wxMoveEvent &)
 
 void Dialog::OnButtonApply(wxCommandEvent &)
 {
+    TheFrame->SetBlockingCanvas(isBlockingCanvas);
+
     TheForm->SetMainForm(data, &points);
 
     Destroy();

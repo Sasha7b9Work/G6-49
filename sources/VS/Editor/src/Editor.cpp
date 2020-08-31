@@ -384,7 +384,7 @@ void Frame::OnSaveFile(wxCommandEvent &)
 
 void Frame::OnNewFile(wxCommandEvent &)
 {
-    TheFrame->UnBlockCanvas();
+    TheFrame->SetBlockingCanvas(false);
 
     TheForm->Clear();
 
@@ -393,7 +393,7 @@ void Frame::OnNewFile(wxCommandEvent &)
 
 void Frame::CreateSine(wxCommandEvent &)
 {
-    TheFrame->BlockCanvas();
+    TheFrame->SetBlockingCanvas(true);
 
     static uint16 data[Point::NUM_POINTS];
 
@@ -407,29 +407,21 @@ void Frame::CreateSine(wxCommandEvent &)
 
 void Frame::CreateTriangle(wxCommandEvent &)
 {
-    TheFrame->UnBlockCanvas();
-
     TriangleDialog().ShowModal();
 }
 
 void Frame::CreateTrapeze(wxCommandEvent &)
 {
-    TheFrame->UnBlockCanvas();
-
     TrapezeDialog().ShowModal();
 }
 
 void Frame::CreateExponent(wxCommandEvent &)
 {
-    TheFrame->BlockCanvas();
-
     ExponentDialog().ShowModal();
 }
 
 void Frame::CreateSinX(wxCommandEvent &)
 {
-    TheFrame->BlockCanvas();
-
     SinXDialog().ShowModal();
 }
 
@@ -442,19 +434,11 @@ void Frame::InsertPoints(wxCommandEvent &)
 }
 
 
-void Frame::BlockCanvas()
+void Frame::SetBlockingCanvas(bool blocking)
 {
-    isBlockingCanvas = true;
+    isBlockingCanvas = blocking;
 
-    toolBar->EnableTool(INSERT_POINTS, false);
-}
-
-
-void Frame::UnBlockCanvas()
-{
-    isBlockingCanvas = false;
-
-    toolBar->EnableTool(INSERT_POINTS, true);
+    toolBar->EnableTool(INSERT_POINTS, !isBlockingCanvas);
 }
 
 

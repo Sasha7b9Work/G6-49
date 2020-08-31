@@ -35,7 +35,7 @@ static wxPanel *CreatePanelOffsets(wxDialog *dlg)
 }
 
 
-TriangleDialog::TriangleDialog() : Dialog(wxT("Параметры треугольного сигнала"))
+TriangleDialog::TriangleDialog() : Dialog(wxT("Параметры треугольного сигнала"), false)
 {
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *hBoxPanels = new wxBoxSizer(wxHORIZONTAL);
