@@ -51,7 +51,6 @@ enum //-V2521
 	UNDO,
 	REDO,
 
-    CREATE_SINE,
     CREATE_TRIANGLE,
     CREATE_TRAPEZE,
     CREATE_EXPONENT,
@@ -115,7 +114,6 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_MENU,     &Frame::OnNewFile,         this, FILE_NEW);
     Bind(wxEVT_MENU,     &Frame::OnUndo,            this, UNDO);
     Bind(wxEVT_MENU,     &Frame::OnRedo,            this, REDO);
-    Bind(wxEVT_MENU,     &Frame::CreateSine,        this, CREATE_SINE);
     Bind(wxEVT_MENU,     &Frame::CreateTriangle,    this, CREATE_TRIANGLE);
     Bind(wxEVT_MENU,     &Frame::CreateTrapeze,     this, CREATE_TRAPEZE);
     Bind(wxEVT_MENU,     &Frame::CreateExponent,    this, CREATE_EXPONENT);
@@ -234,7 +232,6 @@ void Frame::CreateMenu()
     toolBar->AddTool(REDO, wxT("Восстановить"), imgRedo, wxT("Восстановить следующее действие"));
 
     toolBar->AddSeparator();
-    toolBar->AddTool(CREATE_SINE, wxT("Синусоида"), imgCreateSine, wxT("Создать новый сигнал в форме синусоиды"));
     toolBar->AddTool(CREATE_TRIANGLE, wxT("Треугольник"), imgCreateTriangle, wxT("Создать новый сигнал в форме треугольника"));
     toolBar->AddTool(CREATE_TRAPEZE, wxT("Трапеция"), imgCreateTrapeze, wxT("Создать новый сигнал в форме трапеции"));
     toolBar->AddTool(CREATE_EXPONENT, wxT("Експонента"), imgCreateExponent, wxT("Создать новый экспоненциальный сигнал"));
@@ -391,19 +388,19 @@ void Frame::OnNewFile(wxCommandEvent &)
     History::Add(TheForm);
 }
 
-void Frame::CreateSine(wxCommandEvent &)
-{
-    TheFrame->SetBlockingCanvas(true);
-
-    static uint16 data[Point::NUM_POINTS];
-
-    for (int i = 0; i < Point::NUM_POINTS; i++)
-    {
-        data[i] = static_cast<uint16>(Point::AVE + (std::sinf(static_cast<float>(i) / Point::NUM_POINTS * 2.0F * 3.14F) * Point::AVE));
-    }
-
-    TheForm->SetMainForm(data, nullptr);
-}
+//void Frame::CreateSine(wxCommandEvent &)
+//{
+//    TheFrame->SetBlockingCanvas(true);
+//
+//    static uint16 data[Point::NUM_POINTS];
+//
+//    for (int i = 0; i < Point::NUM_POINTS; i++)
+//    {
+//        data[i] = static_cast<uint16>(Point::AVE + (std::sinf(static_cast<float>(i) / Point::NUM_POINTS * 2.0F * 3.14F) * Point::AVE));
+//    }
+//
+//    TheForm->SetMainForm(data, nullptr);
+//}
 
 void Frame::CreateTriangle(wxCommandEvent &)
 {
