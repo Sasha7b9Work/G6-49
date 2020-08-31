@@ -14,6 +14,8 @@ using namespace Primitives;
 
 void Item::Draw(bool opened, int x, int y) const
 {
+    Font::ForceUpperCase(true);
+
     switch(type)
     {
     case TypeItem::Choice:          static_cast<const Choice *>(this)->Draw(opened, x, y);          break;
