@@ -40,11 +40,11 @@ static void TestKeyboard()
             if (keys[i])
             {
                 std::strcat(buffer, Key(static_cast<Key::E>(i)).Name());
-                std::strcat(buffer, ", 0");
+                std::strcat(buffer, ", ");
             }
         }
 
-        buffer[std::strlen(buffer) - 3] = '\0';
+        buffer[std::strlen(buffer) - 2] = '\0';
 
         Painter::BeginScene(Color::BACK);
 
