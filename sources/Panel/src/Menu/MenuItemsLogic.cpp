@@ -417,11 +417,33 @@ Item *ChoiceParameter::Press(const Control control)
 {
     if ((control.Is(Key::Right) && control.IsRelease()) || control.Is(Key::RotateRight))
     {
-        form->SetNextParameter();
+        form->SetPrevParameter();
     }
     else if ((control.Is(Key::Left) && control.IsRelease()) || control.Is(Key::RotateLeft))
     {
-        form->SetPrevParameter();
+        form->SetNextParameter();
+    }
+    else if (control.Is(Key::Esc) && control.IsRelease())
+    {
+        Menu::ResetOpenedItem();
+    }
+    else if (Keeper()->GetItem(control.key))
+    {
+        if (control.IsUp())
+        {
+            form->SetNextParameter();
+        }
+        else if (control.IsLong())
+        {
+            if (Menu::GetOpenedItem() == nullptr)
+            {
+                Menu::SetOpenedItem(this);
+            }
+            else
+            {
+                Menu::ResetOpenedItem();
+            }
+        }
     }
     
 
