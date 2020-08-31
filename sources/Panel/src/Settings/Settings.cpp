@@ -33,7 +33,8 @@ static const Settings defSet =
         MAKE_COLOR(0x80, 0x00, 0x00),   // RED_50
         MAKE_COLOR(0xc0, 0x00, 0x00),   // RED_75
         MAKE_COLOR(0x40, 0xFF, 0x40),   // CHAN_A
-        MAKE_COLOR(0xA0, 0xA0, 0xFF)    // CHAN_B
+        MAKE_COLOR(0xA0, 0xA0, 0xFF),   // CHAN_B
+        MAKE_COLOR(0, 0, 0)          // MENU_ITEM_SHADE
 #else
         MAKE_COLOR(0x00, 0x00, 0x00),   // BLACK
         MAKE_COLOR(0xff, 0xff, 0xff),   // WHITE
@@ -57,7 +58,8 @@ static const Settings defSet =
         MAKE_COLOR(0x80, 0x00, 0x00),   // RED_50
         MAKE_COLOR(0xc0, 0x00, 0x00),   // RED_75
         MAKE_COLOR(0x40, 0xFF, 0x40),   // CHAN_A
-        MAKE_COLOR(0x40, 0x40, 0xFF)    // CHAN_B
+        MAKE_COLOR(0x40, 0x40, 0xFF),   // CHAN_B
+        MAKE_COLOR(15, 15, 15)          // MENU_ITEM_SHADE
 #endif
     },
     static_cast<Page *>(PageMain::self), // menu_currentPage
