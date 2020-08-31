@@ -3,6 +3,7 @@
 #include "Utils.h"
 #include "Dialogs/ExponentDialog.h"
 #include "Controls/SpinControl.h"
+#include "Controls/TextControl.h"
 #pragma warning(push, 0)
 #include <wx/spinctrl.h>
 #include <wx/statline.h>
@@ -16,7 +17,7 @@ enum
 };
 
 
-//static TextControl *tcPower = nullptr;
+static TextControlFloat *tcPower = nullptr;
 
 
 static wxPanel *CreatePanelPower(wxDialog *dialog)
@@ -24,7 +25,7 @@ static wxPanel *CreatePanelPower(wxDialog *dialog)
     wxPanel *panel = new wxPanel(dialog);
 
     new wxStaticBox(panel, wxID_ANY, wxT("Степень"), wxDefaultPosition, wxSize(130, 75));
-    //tcPower = new TextControl()
+    tcPower = new TextControlFloat(0, 8 * 1024, panel, ID_TEXT_CONTROL_POWER, "1", { 20, 30 }, { 50, 20 });
 
     return panel;
 }
