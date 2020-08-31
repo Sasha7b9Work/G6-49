@@ -378,6 +378,8 @@ void Frame::OnSaveFile(wxCommandEvent &)
 
 void Frame::OnNewFile(wxCommandEvent &)
 {
+    TheCanvas->UnBlock();
+
     TheForm->Clear();
 
     History::Add(TheForm);
@@ -385,6 +387,8 @@ void Frame::OnNewFile(wxCommandEvent &)
 
 void Frame::CreateSine(wxCommandEvent &)
 {
+    TheCanvas->Block();
+
     static uint16 data[Point::NUM_POINTS];
 
     for (int i = 0; i < Point::NUM_POINTS; i++)
@@ -392,26 +396,34 @@ void Frame::CreateSine(wxCommandEvent &)
         data[i] = static_cast<uint16>(Point::AVE + (std::sinf(static_cast<float>(i) / Point::NUM_POINTS * 2.0F * 3.14F) * Point::AVE));
     }
 
-    TheForm->SetMainForm(data, nullptr, false);
+    TheForm->SetMainForm(data, nullptr);
 }
 
 void Frame::CreateTriangle(wxCommandEvent &)
 {
+    TheCanvas->UnBlock();
+
     TriangleDialog().ShowModal();
 }
 
 void Frame::CreateTrapeze(wxCommandEvent &)
 {
+    TheCanvas->UnBlock();
+
     TrapezeDialog().ShowModal();
 }
 
 void Frame::CreateExponent(wxCommandEvent &)
 {
+    TheCanvas->Block();
+
     ExponentDialog().ShowModal();
 }
 
 void Frame::CreateSinX(wxCommandEvent &)
 {
+    TheCanvas->Block();
+
     SinXDialog().ShowModal();
 }
 

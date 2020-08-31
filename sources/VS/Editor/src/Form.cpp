@@ -97,8 +97,11 @@ void Form::SetPoint(Point point)
 
 void Form::SetPointInMouseCoord(int mouseX, int mouseY)
 {
-    SetPoint(Point(mouseX, mouseY));
-	History::Add(TheForm);
+    if (!TheCanvas->IsBlocknig())
+    {
+        SetPoint(Point(mouseX, mouseY));
+        History::Add(TheForm);
+    }
 }
 
 
@@ -126,7 +129,10 @@ void Form::RedoHistory()
 
 void Form::SetPointInRealCoord(uint16 pos, uint16 dat)
 {
-    SetPoint(Point(pos, dat));
+    if (!TheCanvas->IsBlocknig())
+    {
+        SetPoint(Point(pos, dat));
+    }
 }
 
 
@@ -463,7 +469,7 @@ void Form::LinearInterpolationRight(uint index)
 }
 
 
-void Form::SetMainForm(const uint16 dat[Point::NUM_POINTS], const std::vector<Point> *p, bool appendBoundPoints)
+void Form::SetMainForm(const uint16 dat[Point::NUM_POINTS], const std::vector<Point> *p)
 {
     for (int i = 0; i < Point::NUM_POINTS; i++)
     {
@@ -472,11 +478,8 @@ void Form::SetMainForm(const uint16 dat[Point::NUM_POINTS], const std::vector<Po
 
     points.clear();
 
-    if (appendBoundPoints)
-    {
-        SetPointInRealCoord(static_cast<uint16>(0), dat[0]);
-        SetPointInRealCoord(static_cast<uint16>(Point::NUM_POINTS - 1), dat[Point::NUM_POINTS - 1]);
-    }
+    SetPointInRealCoord(static_cast<uint16>(0), dat[0]);
+    SetPointInRealCoord(static_cast<uint16>(Point::NUM_POINTS - 1), dat[Point::NUM_POINTS - 1]);
 
     std::memcpy(data, dat, Point::NUM_POINTS * 2);
 

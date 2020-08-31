@@ -50,7 +50,7 @@ static wxPanel *CreatePanelParameters(wxDialog *dlg)
 }
 
 
-ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигнала"), false)
+ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигнала"))
 {
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *hBoxPanels = new wxBoxSizer(wxHORIZONTAL);

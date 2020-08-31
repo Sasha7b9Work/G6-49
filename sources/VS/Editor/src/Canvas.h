@@ -16,12 +16,22 @@ public:
     void DrawLine(int x0, int y0, int x1, int y1, const Color &color = Color::NUMBER);
     void Redraw();
 
+    // Заблокировать холст (после этого нельзя ставить точки)
+    void Block() { isBlocking = true; }
+
+    // Разблокировать холст
+    void UnBlock() { isBlocking = false; };
+
+    // Возвращает true, если холст заблокирован (нельзя ставить точки мышкой)
+    bool IsBlocknig() { return isBlocking; };
+
 private:
     /// true, если ЛКМ находится в нажатом положении
     bool mouseIsDown = false;
     int mouseX = 0;
     int mouseY = 0;
     wxWindow *parent;
+    bool isBlocking = false;
 
     void BeginScene();
     void EndScene();

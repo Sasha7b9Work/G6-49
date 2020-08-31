@@ -17,7 +17,7 @@ wxPanel *SinXDialog::CreatePanelNumPeriods(wxDialog *dlg)
 }
 
 
-SinXDialog::SinXDialog() : Dialog(wxT("Параметры сигнала sin(x)/x"), false)
+SinXDialog::SinXDialog() : Dialog(wxT("Параметры сигнала sin(x)/x"))
 {
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
 
