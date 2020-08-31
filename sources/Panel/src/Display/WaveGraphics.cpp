@@ -10,9 +10,6 @@
 using namespace Primitives;
 
 
-static Parameter *GetParameterForDraw(Chan::E ch, int i);
-
-
 void WaveGraphics::Draw(Chan::E ch)
 {
     if((set.freq.measure != FreqMeasure::Disable) && (CURRENT_CHANNEL != ch))
@@ -96,7 +93,7 @@ void WaveGraphics::DrawParameters(Chan::E ch, int y)
 }
 
 
-static Parameter *GetParameterForDraw(Chan::E ch, int i)
+Parameter *WaveGraphics::GetParameterForDraw(Chan::E ch, int i)
 {
     Parameter *parameter = FORM(ch)->GetParameter(i);
 

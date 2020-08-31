@@ -252,6 +252,8 @@ public:
 
     virtual void OnPressButtonTune();
 
+    int GetHeightOpened() const;
+
 private:
 	ParameterChoiceType::E type;
     int choice;                     // Текущий выбор

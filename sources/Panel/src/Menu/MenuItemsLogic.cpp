@@ -573,6 +573,12 @@ int Choice::GetHeightOpened() const
 }
 
 
+int ChoiceParameter::GetHeightOpened() const
+{
+    return  form->NumParameters() * 10 + 2 + Item::Title::HEIGHT;
+}
+
+
 bool Page::Press(const Control control) //-V801
 {
     if(funcOnKey(control))

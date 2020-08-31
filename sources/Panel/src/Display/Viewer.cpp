@@ -48,6 +48,28 @@ void Viewer::Draw(int y, int xName, int xValue, int xUnits, Chan::E ch)
 }
 
 
+void Viewer::DrawName(int x, int y, int width, Chan::E ch)
+{
+    Color color = Color::FILL;
+
+    if ((ch == CURRENT_CHANNEL) &&
+        (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) &&
+        PageSignals::OnSubPageTuneChannels())
+    {
+        Rectangle(width - 2, 8).Fill(x + 1, y + 1, Color::GREEN_50);
+        HLine::Draw(y, x + 1, x - 1 + Item::WIDTH - 1, Color::GREEN_75);
+        VLine::Draw(x, y, y - 1 + 10);
+        HLine::Draw(y + 9, x, x + Item::WIDTH - 2, Color::GREEN_25);
+        VLine::Draw(x - 2 + Item::WIDTH, y, y + 9);
+        color = Color::BACK;
+    }
+
+    Font::ForceUpperCase(true);
+
+    String(param->Name()).Draw(x + 1, y, color);
+}
+
+
 void Viewer::DrawValue(int y, int xValue, int xUnits)
 {
     Font::ForceUpperCase(false);

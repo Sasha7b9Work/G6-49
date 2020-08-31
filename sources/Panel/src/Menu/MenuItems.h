@@ -413,6 +413,9 @@ public:
     String NameCurrentSubItem() const;
 
     void Draw(bool opened, int x, int y) const;
+
+    // Возвращает высоту раскрытого
+    int GetHeightOpened() const;
 };
 
 

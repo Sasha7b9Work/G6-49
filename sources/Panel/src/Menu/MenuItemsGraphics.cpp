@@ -4,6 +4,7 @@
 #include "Display/Font/Font.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
+#include "Display/WaveGraphics.h"
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
 
@@ -123,6 +124,36 @@ void ChoiceParameter::Draw(bool opened, int x, int y) const
 {
     if(opened)
     {
+        int width = Item::WIDTH;
+        int height = GetHeightOpened();
+
+        if (x == -1)
+        {
+            y = Page::Title::HEIGHT + PositionOnPage() % Menu::NUM_ITEMS_ON_DISPLAY * Item::HEIGHT;
+            if (y + GetHeightOpened() > Display::HEIGHT)
+            {
+                y = Display::HEIGHT - GetHeightOpened() - 2;
+            }
+            x = Display::WIDTH - Item::WIDTH - 20;
+        }
+
+        Rectangle(width, Item::Title::HEIGHT).Fill(x, y, Color::GRAY_50);
+        Rectangle(width, height - Item::Title::HEIGHT).Fill(x, y + Item::Title::HEIGHT, Color::BACK);
+        Rectangle(width, height).Draw(x, y, Color::FILL);
+
+
+        HLine::Draw(y + 12, x, x + width);
+        Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, Color::BACK);
+        DrawTitle(x, y);
+
+        y += 14;
+
+        for (int i = 0; i < form->NumParameters(); i++)
+        {
+            WaveGraphics::GetParameterForDraw(CURRENT_CHANNEL, i)->viewer.DrawName(x + 1, y - 1, Item::WIDTH - 2, CURRENT_CHANNEL);
+
+            y += 10;
+        }
     }
     else
     {

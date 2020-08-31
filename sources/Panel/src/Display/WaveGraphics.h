@@ -24,6 +24,9 @@ public:
     // Высота области отрисовки сигнала
     static int Height();
 
+
+    static Parameter *GetParameterForDraw(Chan::E ch, int i);
+
 private:
 
     static void DrawParameters(Chan::E chan, int y0);
