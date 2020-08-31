@@ -16,11 +16,15 @@ enum
 };
 
 
+//static TextControl *tcPower = nullptr;
+
+
 static wxPanel *CreatePanelPower(wxDialog *dialog)
 {
     wxPanel *panel = new wxPanel(dialog);
 
     new wxStaticBox(panel, wxID_ANY, wxT("Степень"), wxDefaultPosition, wxSize(130, 75));
+    //tcPower = new TextControl()
 
     return panel;
 }

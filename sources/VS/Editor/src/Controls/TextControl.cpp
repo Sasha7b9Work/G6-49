@@ -1,14 +1,14 @@
 #include "Controls/TextControl.h"
 
 
-TextControl::TextControl(int _min, int _max, wxDialog *dlg, wxWindowID id, const wxString &value, const wxPoint &position, const wxSize &size) : wxTextCtrl(dlg, id, value, position, size),
-    min(_min), max(_max)
+TextControlInt::TextControlInt(int _min, int _max, wxDialog *dlg, wxWindowID id, const wxString &value, const wxPoint &position, const wxSize &size) : 
+    wxTextCtrl(dlg, id, value, position, size), min(_min), max(_max)
 {
-    Bind(wxEVT_KEY_DOWN, &TextControl::OnKeyDown, this);
+    Bind(wxEVT_KEY_DOWN, &TextControlInt::OnKeyDown, this);
 }
 
 
-void TextControl::OnKeyDown(wxKeyEvent &event)
+void TextControlInt::OnKeyDown(wxKeyEvent &event)
 {
     int code = event.GetKeyCode();
 

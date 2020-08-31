@@ -19,7 +19,7 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     wxStaticText *stPosition = new wxStaticText(this, wxID_ANY, wxT("Индекс"));
-    tcPosition = new TextControl(0, 8 * 1024 - 1, this, ID_TEXT_CONTROL_POSITION, _itoa(index, buffer, 10), pos, size);
+    tcPosition = new TextControlInt(0, 8 * 1024 - 1, this, ID_TEXT_CONTROL_POSITION, _itoa(index, buffer, 10), pos, size);
 
     wxBoxSizer *hBoxPosition = new wxBoxSizer(wxHORIZONTAL);
 
@@ -32,7 +32,7 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     wxStaticText *stValue = new wxStaticText(this, wxID_ANY, wxT("Значение"));
-    tcValue = new TextControl(0, 4095, this, ID_TEXT_CONTROL_VALUE, _itoa(value, buffer, 10), pos, size);
+    tcValue = new TextControlInt(0, 4095, this, ID_TEXT_CONTROL_VALUE, _itoa(value, buffer, 10), pos, size);
 
     wxBoxSizer *hBoxValue = new wxBoxSizer(wxHORIZONTAL);
 

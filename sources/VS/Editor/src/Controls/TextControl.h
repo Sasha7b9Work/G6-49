@@ -5,10 +5,10 @@
 #pragma warning(pop)
 
 
-class TextControl : public wxTextCtrl
+class TextControlInt : public wxTextCtrl
 {
 public:
-    TextControl(int min, int max, wxDialog *dlg, wxWindowID id, const wxString &value, const wxPoint &position, const wxSize &size);
+    TextControlInt(int min, int max, wxDialog *dlg, wxWindowID id, const wxString &value, const wxPoint &position, const wxSize &size);
 private:
     int min = 0;
     int max = 0;
