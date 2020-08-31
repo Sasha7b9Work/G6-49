@@ -1,4 +1,5 @@
 #include "Controls/TextControl.h"
+#include "Dialogs/Dialog.h"
 
 
 TextControlInt::TextControlInt(int _min, int _max, wxDialog *dlg, wxWindowID id, const wxString &value, const wxPoint &position, const wxSize &size) : 
@@ -53,8 +54,8 @@ void TextControlInt::OnKeyDown(wxKeyEvent &event)
 }
 
 
-TextControlFloat::TextControlFloat(float _min, float _max, wxWindow *parent, wxWindowID id, const wxString &value, const wxPoint &position, const wxSize &size) :
-    wxTextCtrl(parent, id, value, position, size), min(_min), max(_max)
+TextControlFloat::TextControlFloat(Dialog *dlg, float _min, float _max, wxWindow *parent, wxWindowID id, const wxString &value, const wxPoint &position, const wxSize &size) :
+    wxTextCtrl(parent, id, value, position, size), min(_min), max(_max), dialog(dlg)
 {
     Bind(wxEVT_KEY_DOWN, &TextControlFloat::OnKeyDown, this);
 }
@@ -102,4 +103,6 @@ void TextControlFloat::OnKeyDown(wxKeyEvent &event)
     {
         event.Skip(false);
     }
+
+    dialog->SendAdditionForm();
 }

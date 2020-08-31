@@ -20,12 +20,12 @@ enum
 static TextControlFloat *tcPower = nullptr;
 
 
-static wxPanel *CreatePanelPower(wxDialog *dialog)
+static wxPanel *CreatePanelPower(Dialog *dialog)
 {
     wxPanel *panel = new wxPanel(dialog);
 
     new wxStaticBox(panel, wxID_ANY, wxT("Степень"), wxDefaultPosition, wxSize(130, 75));
-    tcPower = new TextControlFloat(0, 8 * 1024, panel, ID_TEXT_CONTROL_POWER, "1", { 20, 30 }, { 50, 20 });
+    tcPower = new TextControlFloat(dialog, 0, 8 * 1024, panel, ID_TEXT_CONTROL_POWER, "1", { 20, 30 }, { 50, 20 });
 
     return panel;
 }
