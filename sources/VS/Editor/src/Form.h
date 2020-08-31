@@ -117,7 +117,7 @@ public:
     void SetAdditionForm(const uint16 data[Point::NUM_POINTS]);
 
 	// Установить основную форму
-    void SetMainForm(const uint16 data[Point::NUM_POINTS], const std::vector<Point> *points);
+    void SetMainForm(const uint16 data[Point::NUM_POINTS], const std::vector<Point> *points, bool appendBoundPoints);
 
     bool IsEquals(const Form *form) const;
 

@@ -11,7 +11,7 @@ class SpinControl;
 class Dialog : public wxDialog
 {
 public:
-    Dialog(const wxString &title);
+    Dialog(const wxString &title, bool appendBoundedPoints);
     virtual ~Dialog();
 
     void OnControlEvent(wxCommandEvent &);
@@ -39,6 +39,8 @@ protected:
     wxPanel *CreatePanelLevels();
     SpinControl *scLevelUp = nullptr;
     SpinControl *scLevelDown = nullptr;
+
+    bool appendBoundedPoints = false;   // ≈сли true, то нужно добавл€ть маркеры в крайние точки
 
 private:
     wxBoxSizer *panelBox = nullptr;

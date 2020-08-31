@@ -38,7 +38,7 @@ static wxPanel *CreatePanelOffsets(wxDialog *dlg)
 }
 
 
-TrapezeDialog::TrapezeDialog() : Dialog(wxT("Параметры трапециевидного сигнала"))
+TrapezeDialog::TrapezeDialog() : Dialog(wxT("Параметры трапециевидного сигнала"), true)
 {
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *hBoxPanels = new wxBoxSizer(wxHORIZONTAL);

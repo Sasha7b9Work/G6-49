@@ -11,7 +11,7 @@ uint16 Dialog::data[Point::NUM_POINTS];
 std::vector<Point> Dialog::points;
 
 
-Dialog::Dialog(const wxString &title) : wxDialog(nullptr, wxID_ANY, title)
+Dialog::Dialog(const wxString &title, bool _appendBoundedPoints) : wxDialog(nullptr, wxID_ANY, title), appendBoundedPoints(_appendBoundedPoints)
 {
     Connect(wxEVT_MOVE, wxMoveEventHandler(Dialog::OnMove));
 
@@ -129,7 +129,7 @@ void Dialog::OnMove(wxMoveEvent &)
 
 void Dialog::OnButtonApply(wxCommandEvent &)
 {
-    TheForm->SetMainForm(data, &points);
+    TheForm->SetMainForm(data, &points, appendBoundedPoints);
 
     Destroy();
 }

@@ -463,7 +463,7 @@ void Form::LinearInterpolationRight(uint index)
 }
 
 
-void Form::SetMainForm(const uint16 dat[Point::NUM_POINTS], const std::vector<Point> *p)
+void Form::SetMainForm(const uint16 dat[Point::NUM_POINTS], const std::vector<Point> *p, bool appendBoundPoints)
 {
     for (int i = 0; i < Point::NUM_POINTS; i++)
     {
@@ -472,8 +472,11 @@ void Form::SetMainForm(const uint16 dat[Point::NUM_POINTS], const std::vector<Po
 
     points.clear();
 
-    SetPointInRealCoord(static_cast<uint16>(0), dat[0]);
-    SetPointInRealCoord(static_cast<uint16>(Point::NUM_POINTS - 1), dat[Point::NUM_POINTS - 1]);
+    if (appendBoundPoints)
+    {
+        SetPointInRealCoord(static_cast<uint16>(0), dat[0]);
+        SetPointInRealCoord(static_cast<uint16>(Point::NUM_POINTS - 1), dat[Point::NUM_POINTS - 1]);
+    }
 
     std::memcpy(data, dat, Point::NUM_POINTS * 2);
 

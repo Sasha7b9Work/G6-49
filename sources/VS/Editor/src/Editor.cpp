@@ -392,7 +392,7 @@ void Frame::CreateSine(wxCommandEvent &)
         data[i] = static_cast<uint16>(Point::AVE + (std::sinf(static_cast<float>(i) / Point::NUM_POINTS * 2.0F * 3.14F) * Point::AVE));
     }
 
-    TheForm->SetMainForm(data, nullptr);
+    TheForm->SetMainForm(data, nullptr, false);
 }
 
 void Frame::CreateTriangle(wxCommandEvent &)
