@@ -83,6 +83,11 @@ private:
 
     void CreateGaversine(wxCommandEvent &);
 
+    // —оздать сигнал по произвольно заданной формуле
+    void CreateFormula(wxCommandEvent &);
+
+    void CreateNoise(wxCommandEvent &);
+
     void InsertPoints(wxCommandEvent &);
 
     void OnKeyDown(wxKeyEvent &);

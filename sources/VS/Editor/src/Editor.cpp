@@ -58,6 +58,8 @@ enum //-V2521
     CREATE_GAUSS,
     CREATE_LORENCE,
     CREATE_GAVERSINE,
+    CREATE_NOISE,
+    CREATE_FORMULA,
 
     INSERT_POINTS
 };
@@ -125,6 +127,8 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_MENU,     &Frame::CreateGauss,       this, CREATE_GAUSS);
     Bind(wxEVT_MENU,     &Frame::CreateLorence,     this, CREATE_LORENCE);
     Bind(wxEVT_MENU,     &Frame::CreateGaversine,   this, CREATE_GAVERSINE);
+    Bind(wxEVT_MENU,     &Frame::CreateNoise,       this, CREATE_NOISE);
+    Bind(wxEVT_MENU,     &Frame::CreateFormula ,    this, CREATE_FORMULA);
     Bind(wxEVT_MENU,     &Frame::InsertPoints,      this, INSERT_POINTS);
     Bind(wxEVT_TIMER,    &Frame::OnTimer,           this, TIMER_ID);
     Bind(wxEVT_PAINT,    &Frame::OnRepaint,         this);
@@ -230,6 +234,8 @@ void Frame::CreateMenu()
     wxBitmap imgCreateGauss(wxImage(wxT("icons/gauss.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateLorence(wxImage(wxT("icons/lorence.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateGaversine(wxImage(wxT("icons/gaversine.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgCreateNoise(wxImage("icons/noise.bmp"), wxBITMAP_TYPE_BMP);
+    wxBitmap imgCreateFunction(wxImage("icons/f_x.bmp"), wxBITMAP_TYPE_BMP);
     wxBitmap imgInsertPoints(wxImage(wxT("icons/points.bmp"), wxBITMAP_TYPE_BMP));
 
     toolBar = CreateToolBar();
@@ -249,6 +255,8 @@ void Frame::CreateMenu()
     toolBar->AddTool(CREATE_GAUSS, wxT("Гауссова функция"), imgCreateGauss, wxT("Создать новый сигнал в виде гуссовой функции"));
     toolBar->AddTool(CREATE_LORENCE, wxT("Кривая Лоренца"), imgCreateLorence, wxT("Создать новый сигнал в виде кривой Лоренца"));
     toolBar->AddTool(CREATE_GAVERSINE, wxT("Гаверсинус"), imgCreateGaversine, wxT("Создать новый сигнал в форме гаверсинуса"));
+    toolBar->AddTool(CREATE_NOISE, wxT("Шум"), imgCreateNoise, wxT("Создать шумовой сигнал"));
+    toolBar->AddTool(CREATE_FORMULA, wxT("Формула"), imgCreateFunction, wxT("Создать сигнал по произвольной формуле"));
 
     toolBar->AddSeparator();
     toolBar->AddTool(INSERT_POINTS, wxT("Вставить точки"), imgInsertPoints, wxT("Вставить маркеры"));
@@ -448,6 +456,18 @@ void Frame::CreateLorence(wxCommandEvent &)
 
 
 void Frame::CreateGaversine(wxCommandEvent &)
+{
+
+}
+
+
+void Frame::CreateNoise(wxCommandEvent &)
+{
+
+}
+
+
+void Frame::CreateFormula(wxCommandEvent &)
 {
 
 }
