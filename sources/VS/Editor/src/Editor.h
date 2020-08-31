@@ -77,6 +77,12 @@ private:
 
     void CreateSinX(wxCommandEvent &);
 
+    void CreateGauss(wxCommandEvent &);
+
+    void CreateLorence(wxCommandEvent &);
+
+    void CreateGaversine(wxCommandEvent &);
+
     void InsertPoints(wxCommandEvent &);
 
     void OnKeyDown(wxKeyEvent &);
