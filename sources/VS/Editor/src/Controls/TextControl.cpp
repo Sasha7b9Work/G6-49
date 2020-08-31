@@ -65,7 +65,7 @@ void TextControlFloat::OnKeyDown(wxKeyEvent &event)
 {
     int code = event.GetKeyCode();
 
-    if (code >= '0' && code <= '9')
+    if (code >= '0' && code <= '9' || code == ',')
     {
         long start = 0;
         long end = 0;
@@ -90,7 +90,7 @@ void TextControlFloat::OnKeyDown(wxKeyEvent &event)
             uint length = std::strlen(buffer);
             buffer[length] = static_cast<char>(code);
             buffer[length + 1] = 0;
-            int value = atoi(buffer);
+            float value = static_cast<float>(std::atof(buffer));
 
             event.Skip(value >= min && value <= max);
         }
