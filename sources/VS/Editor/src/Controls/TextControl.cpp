@@ -1,4 +1,4 @@
-#include "Dialogs/TextControl.h"
+#include "Controls/TextControl.h"
 
 
 TextControl::TextControl(int _min, int _max, wxDialog *dlg, wxWindowID id, const wxString &value, const wxPoint &position, const wxSize &size) : wxTextCtrl(dlg, id, value, position, size),

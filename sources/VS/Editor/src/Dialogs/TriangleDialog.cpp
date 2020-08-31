@@ -1,8 +1,8 @@
 #include "defines.h"
 #include "Form.h"
 #include "History.h"
-#include "SpinControl.h"
-#include "TriangleDialog.h"
+#include "Controls/SpinControl.h"
+#include "Dialogs/TriangleDialog.h"
 #pragma warning(push, 0)
 #include <wx/spinctrl.h>
 #include <wx/statline.h>

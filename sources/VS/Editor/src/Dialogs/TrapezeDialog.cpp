@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Form.h"
-#include "Dialogs/SpinControl.h"
+#include "Controls/SpinControl.h"
 #include "Dialogs/TrapezeDialog.h"
 #pragma warning(push, 0)
 #include <wx/spinctrl.h>

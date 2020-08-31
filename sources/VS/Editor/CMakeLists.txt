@@ -50,13 +50,17 @@ add_compile_options(/wd5027)    # move assignment operator was implicitly define
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 
 
-file(GLOB SRC     src/*)
-file(GLOB DIALOGS src/Dialogs/*)
+file(GLOB DOC      doc/*)
+file(GLOB SRC      src/*)
+file(GLOB CONTROLS src/Controls/*)
+file(GLOB DIALOGS  src/Dialogs/*)
 
-source_group(src     FILES ${SRC})
-source_group(Dialogs FILES ${DIALOGS})
+source_group(src      FILES ${SRC})
+source_group(doc      FILES ${DOC})
+source_group(Controls FILES ${CONTROLS})
+source_group(Dialogs  FILES ${DIALOGS})
 
-add_executable(Editor ${SRC} ${DIALOGS})
+add_executable(Editor ${DOC} ${SRC} ${CONTROLS} ${DIALOGS})
 
 target_link_libraries(Editor ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
 target_link_libraries(Editor ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)

@@ -3,7 +3,7 @@
 #include "Editor.h"
 #include "Form.h"
 #include "Dialogs/Dialog.h"
-#include "Dialogs/SpinControl.h"
+#include "Controls/SpinControl.h"
 
 
 uint16 Dialog::data[Point::NUM_POINTS];

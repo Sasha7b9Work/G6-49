@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Form.h"
 #include "History.h"
-#include "Dialogs/SpinControl.h"
+#include "Controls/SpinControl.h"
 #include "Dialogs/InsertPointsDialog.h"
 #pragma warning(push, 0)
 #include <wx/spinctrl.h>

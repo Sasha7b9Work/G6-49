@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Dialogs/SinXDialog.h"
-#include "Dialogs/SpinControl.h"
+#include "Controls/SpinControl.h"
 
 
 wxPanel *SinXDialog::CreatePanelNumPeriods(wxDialog *dlg)

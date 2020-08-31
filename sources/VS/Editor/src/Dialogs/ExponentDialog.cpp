@@ -2,7 +2,7 @@
 #include "Form.h"
 #include "Utils.h"
 #include "Dialogs/ExponentDialog.h"
-#include "Dialogs/SpinControl.h"
+#include "Controls/SpinControl.h"
 #pragma warning(push, 0)
 #include <wx/spinctrl.h>
 #include <wx/statline.h>
