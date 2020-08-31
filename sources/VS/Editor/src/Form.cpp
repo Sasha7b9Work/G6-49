@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Canvas.h"
+#include "Editor.h"
 #include "Form.h"
 #include "History.h"
 #pragma warning(push, 0)
@@ -97,7 +98,7 @@ void Form::SetPoint(Point point)
 
 void Form::SetPointInMouseCoord(int mouseX, int mouseY)
 {
-    if (!TheCanvas->IsBlocknig())
+    if (!TheFrame->IsBlockingCanvas())
     {
         SetPoint(Point(mouseX, mouseY));
         History::Add(TheForm);
@@ -129,7 +130,7 @@ void Form::RedoHistory()
 
 void Form::SetPointInRealCoord(uint16 pos, uint16 dat)
 {
-    if (!TheCanvas->IsBlocknig())
+    if (!TheFrame->IsBlockingCanvas())
     {
         SetPoint(Point(pos, dat));
     }

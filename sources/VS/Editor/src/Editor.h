@@ -24,8 +24,21 @@ public:
     // Покзать контекстное меню в позиции pos
     void ShowContextMenu(const wxPoint &pos);
 
+    // Заблокировать холст (после этого нельзя ставить точки)
+    void BlockCanvas();
+
+    // Разблокировать холст
+    void UnBlockCanvas();
+
+    // Возвращает true, если холст заблокирован (нельзя ставить точки мышкой)
+    bool IsBlockingCanvas() { return isBlockingCanvas; }
+
 private:
     wxTimer timer;
+
+    wxToolBar *toolBar = nullptr;
+
+    bool isBlockingCanvas = false;  // Если true - нельзя ставить точки мышкой
 
     void SetSizeAndPosition();
 
@@ -73,3 +86,6 @@ private:
 
     void OnKeyDown(wxKeyEvent &);
 };
+
+
+extern Frame *TheFrame;

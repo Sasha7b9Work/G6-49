@@ -23,6 +23,10 @@
 extern void update();
 extern void init();
 
+
+Frame *TheFrame = nullptr;
+
+
 static uint16 indexPoint = 0;
 static uint16 valuePoint = 0;
 
@@ -124,6 +128,8 @@ Frame::Frame(const wxString &title)
     Show(true);
 
     timer.Start(0);
+
+    TheFrame = this;
 }
 
 
@@ -218,7 +224,7 @@ void Frame::CreateMenu()
     wxBitmap imgCreateSinX(wxImage(wxT("icons/sinx.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgInsertPoints(wxImage(wxT("icons/points.bmp"), wxBITMAP_TYPE_BMP));
 
-    wxToolBar* toolBar = CreateToolBar();
+    toolBar = CreateToolBar();
     toolBar->AddTool(FILE_OPEN, wxT("Открыть"), imgOpen, wxT("Загрузить ранее созданный сигнал из файла"));
     toolBar->AddTool(FILE_SAVE, wxT("Сохранить"), imgSave, wxT("Сохранить сигнал в файл"));
     toolBar->AddTool(FILE_NEW, wxT("Новый"), imgNew, wxT("Создать новый сигнал"));
@@ -378,7 +384,7 @@ void Frame::OnSaveFile(wxCommandEvent &)
 
 void Frame::OnNewFile(wxCommandEvent &)
 {
-    TheCanvas->UnBlock();
+    TheFrame->UnBlockCanvas();
 
     TheForm->Clear();
 
@@ -387,7 +393,7 @@ void Frame::OnNewFile(wxCommandEvent &)
 
 void Frame::CreateSine(wxCommandEvent &)
 {
-    TheCanvas->Block();
+    TheFrame->BlockCanvas();
 
     static uint16 data[Point::NUM_POINTS];
 
@@ -401,35 +407,54 @@ void Frame::CreateSine(wxCommandEvent &)
 
 void Frame::CreateTriangle(wxCommandEvent &)
 {
-    TheCanvas->UnBlock();
+    TheFrame->UnBlockCanvas();
 
     TriangleDialog().ShowModal();
 }
 
 void Frame::CreateTrapeze(wxCommandEvent &)
 {
-    TheCanvas->UnBlock();
+    TheFrame->UnBlockCanvas();
 
     TrapezeDialog().ShowModal();
 }
 
 void Frame::CreateExponent(wxCommandEvent &)
 {
-    TheCanvas->Block();
+    TheFrame->BlockCanvas();
 
     ExponentDialog().ShowModal();
 }
 
 void Frame::CreateSinX(wxCommandEvent &)
 {
-    TheCanvas->Block();
+    TheFrame->BlockCanvas();
 
     SinXDialog().ShowModal();
 }
 
 void Frame::InsertPoints(wxCommandEvent &)
 {
-    InsertPointsDialog().ShowModal();
+    if (!TheFrame->IsBlockingCanvas())
+    {
+        InsertPointsDialog().ShowModal();
+    }
+}
+
+
+void Frame::BlockCanvas()
+{
+    isBlockingCanvas = true;
+
+    toolBar->EnableTool(INSERT_POINTS, !isBlockingCanvas);
+}
+
+
+void Frame::UnBlockCanvas()
+{
+    isBlockingCanvas = false;
+
+
 }
 
 

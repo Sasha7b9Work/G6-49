@@ -82,6 +82,13 @@ void Display::DrawScreenSplash()
 
     String("Ã6-49").DrawInCenterRect(0, 50, 280, 100);
 
+    Font::Set(TypeFont::_GOSTB20);
+
+    Font::Spacing::Restore();
+    Font::Spacing::SetAndStore(3);
+
+    String("%s  %s", IDENTIFICATOR, VERSION).DrawInCenterRect(0, 150, 280, 100);
+
     Font::Spacing::Restore();
 
     Painter::EndScene();
