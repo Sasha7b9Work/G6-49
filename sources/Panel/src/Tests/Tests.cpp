@@ -35,16 +35,22 @@ static void TestKeyboard()
 
         char buffer[Key::Count * 10] = { 0 };
 
+        int counter = 0;
+
         for (int i = 0; i < Key::Count; i++)
         {
             if (keys[i])
             {
                 std::strcat(buffer, Key(static_cast<Key::E>(i)).Name());
                 std::strcat(buffer, ", ");
+                counter++;
             }
         }
 
-        buffer[std::strlen(buffer) - 2] = '\0';
+        if (counter > 1)
+        {
+            buffer[std::strlen(buffer) - 2] = '\0';
+        }
 
         Painter::BeginScene(Color::BACK);
 
