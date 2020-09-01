@@ -470,14 +470,14 @@ void Frame::CreateGaversine(wxCommandEvent &)
 
     TheForm->SetMainForm(data, nullptr);
 
-//    for (int i = 0; i < Point::NUM_POINTS; i++)
-//    {
-//        float sinx = std::sinf(static_cast<float>(i + Point::NUM_POINTS / 8 * 7) / Point::NUM_POINTS * 2.0F * 3.14F * 2.0F);
-//
-//        data[i] = static_cast<uint16>(Point::AVE + sinx * Point::AVE);
-//    }
-//
-//    TheForm->SetAdditionForm(data);
+    for (int i = 0; i < Point::NUM_POINTS; i++)
+    {
+        float sinx = std::sinf(static_cast<float>(i + Point::NUM_POINTS / 8 * 7) / Point::NUM_POINTS * 2.0F * 3.14F * 2.0F);
+
+        data[i] = static_cast<uint16>(Point::AVE + sinx * Point::AVE);
+    }
+
+    TheForm->SetAdditionForm(data);
 }
 
 

@@ -51,7 +51,7 @@ add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for me
 
 
 file(GLOB DOC      doc/*)
-file(GLOB SRC      src/*)
+file(GLOB SRC      src/*.h src/*.cpp)
 file(GLOB CONTROLS src/Controls/*)
 file(GLOB DIALOGS  src/Dialogs/*)
 
