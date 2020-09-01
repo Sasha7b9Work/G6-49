@@ -75,7 +75,15 @@ void ExponentDialog::SendAdditionForm()
         {
             value = 0.0;
         }
-        data[i] = Point::AVE + static_cast<uint16>(value * k);
+
+        if (rbPolarityDirect->GetValue())
+        {
+            data[i] = static_cast<uint16>(Point::AVE + static_cast<uint16>(value * k));
+        }
+        else
+        {
+            data[i] = static_cast<uint16>(Point::MAX - static_cast<uint16>(value * k));
+        }
     }
 
     TheForm->SetAdditionForm(data);
