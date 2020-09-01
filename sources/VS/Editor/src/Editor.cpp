@@ -483,7 +483,18 @@ void Frame::CreateGaversine(wxCommandEvent &)
 
 void Frame::CreateNoise(wxCommandEvent &)
 {
+    static uint16 data[Point::NUM_POINTS];
 
+    for (int i = 0; i < Point::NUM_POINTS; i++)
+    {
+        float x = (float)(std::rand()) / ((float)RAND_MAX);
+
+        data[i] = (uint16)(x * Point::MAX + 0.5F);
+    }
+
+    TheFrame->SetBlockingCanvas(true);
+
+    TheForm->SetMainForm(data, nullptr);
 }
 
 
