@@ -227,7 +227,7 @@ void Frame::CreateMenu()
     wxBitmap imgNew(wxImage(wxT("icons/new.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgUndo(wxImage(wxT("icons/undo.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgRedo(wxImage(wxT("icons/redo.bmp"), wxBITMAP_TYPE_BMP));
-     wxBitmap imgCreateTriangle(wxImage(wxT("icons/triangle.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgCreateTriangle(wxImage(wxT("icons/triangle.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateTrapeze(wxImage(wxT("icons/trapeze.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateExponent(wxImage(wxT("icons/exponent.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateSinX(wxImage(wxT("icons/sinx.bmp"), wxBITMAP_TYPE_BMP));
@@ -253,7 +253,7 @@ void Frame::CreateMenu()
     toolBar->AddTool(CREATE_EXPONENT, wxT("Експонента"), imgCreateExponent, wxT("Создать новый экспоненциальный сигнал"));
     toolBar->AddTool(CREATE_SINX, wxT("Sin(x)/x"), imgCreateSinX, wxT("Создать сигнал вида sin(x)/x"));
     toolBar->AddTool(CREATE_GAUSS, wxT("Гауссова функция"), imgCreateGauss, wxT("Создать новый сигнал в виде гуссовой функции"));
-    toolBar->AddTool(CREATE_LORENCE, wxT("Кривая Лоренца"), imgCreateLorence, wxT("Создать новый сигнал в виде кривой Лоренца"));
+    //toolBar->AddTool(CREATE_LORENCE, wxT("Кривая Лоренца"), imgCreateLorence, wxT("Создать новый сигнал в виде кривой Лоренца"));
     toolBar->AddTool(CREATE_GAVERSINE, wxT("Гаверсинус"), imgCreateGaversine, wxT("Создать новый сигнал в форме гаверсинуса"));
     toolBar->AddTool(CREATE_NOISE, wxT("Шум"), imgCreateNoise, wxT("Создать шумовой сигнал"));
     //toolBar->AddTool(CREATE_FORMULA, wxT("Формула"), imgCreateFunction, wxT("Создать сигнал по произвольной формуле"));
@@ -457,7 +457,28 @@ void Frame::CreateLorence(wxCommandEvent &)
 
 void Frame::CreateGaversine(wxCommandEvent &)
 {
+    static uint16 data[Point::NUM_POINTS];
 
+    for (int i = 0; i < Point::NUM_POINTS; i++)
+    {
+        float sinx = std::sinf(static_cast<float>(i) / Point::NUM_POINTS * 2.0F * 3.14F);
+
+        data[i] = static_cast<uint16>(sinx * sinx * Point::AVE * 2);
+    }
+
+    TheFrame->SetBlockingCanvas(true);
+
+    TheForm->SetMainForm(data, nullptr);
+
+
+    for (int i = 0; i < Point::NUM_POINTS; i++)
+    {
+        float sinx = std::sinf(static_cast<float>(i) / Point::NUM_POINTS * 2.0F * 3.14F);
+
+        data[i] = static_cast<uint16>(Point::AVE + sinx * Point::AVE);
+    }
+
+    TheForm->SetAdditionForm(data);
 }
 
 
