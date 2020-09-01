@@ -14,6 +14,7 @@
 #include "Form.h"
 #include "History.h"
 #include "Dialogs/ExponentDialog.h"
+#include "Dialogs/GaussDialog.h"
 #include "Dialogs/InsertPointsDialog.h"
 #include "Dialogs/ParametersDialog.h"
 #include "Dialogs/SinXDialog.h"
@@ -445,7 +446,7 @@ void Frame::CreateSinX(wxCommandEvent &)
 
 void Frame::CreateGauss(wxCommandEvent &)
 {
-
+    GaussDialog().ShowModal();
 }
 
 
