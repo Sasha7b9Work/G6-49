@@ -49,13 +49,32 @@ void ExponentDialog::SendAdditionForm()
 {
     wxString stringValue = tcPower->GetValue();
 
-    double power = std::atof(stringValue.c_str());
+    double power = std::atof(stringValue.c_str()); 
 
-    double k = Point::AVE / std::log(power * (Point::NUM_POINTS - 1));
+    int first = 0;
+
+    if (std::log(power * 1e-3) < 0.0)
+    {
+        while (std::log(power * first) < 0.0)
+        {
+            first++;
+
+            if (first > Point::NUM_POINTS)
+            {
+                return;
+            }
+        }
+    }
+
+    double k = Point::AVE / std::log(power * (Point::NUM_POINTS - 1 + first));
 
     for (int i = 0; i < Point::NUM_POINTS; i++)
     {
-        double value = std::log(power * i);
+        double value = std::log(power * (i + first));
+        if (value < 0.0)
+        {
+            value = 0.0;
+        }
         data[i] = Point::AVE + static_cast<uint16>(value * k);
     }
 

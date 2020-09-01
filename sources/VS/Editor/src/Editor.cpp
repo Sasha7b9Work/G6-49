@@ -256,7 +256,7 @@ void Frame::CreateMenu()
     toolBar->AddTool(CREATE_LORENCE, wxT("Кривая Лоренца"), imgCreateLorence, wxT("Создать новый сигнал в виде кривой Лоренца"));
     toolBar->AddTool(CREATE_GAVERSINE, wxT("Гаверсинус"), imgCreateGaversine, wxT("Создать новый сигнал в форме гаверсинуса"));
     toolBar->AddTool(CREATE_NOISE, wxT("Шум"), imgCreateNoise, wxT("Создать шумовой сигнал"));
-    toolBar->AddTool(CREATE_FORMULA, wxT("Формула"), imgCreateFunction, wxT("Создать сигнал по произвольной формуле"));
+    //toolBar->AddTool(CREATE_FORMULA, wxT("Формула"), imgCreateFunction, wxT("Создать сигнал по произвольной формуле"));
 
     toolBar->AddSeparator();
     toolBar->AddTool(INSERT_POINTS, wxT("Вставить точки"), imgInsertPoints, wxT("Вставить маркеры"));
