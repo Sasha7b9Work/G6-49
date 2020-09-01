@@ -2,7 +2,7 @@
 #include "Dialogs/Dialog.h"
 
 
-class TextControlFloat;
+class SpinControl;
 
 
 class GaussDialog : public Dialog
@@ -14,9 +14,7 @@ protected:
 
     virtual void SendAdditionForm() override;
 
-private:
+    SpinControl *scWidth = nullptr;
 
-    TextControlFloat *tcA = nullptr;
-    TextControlFloat *tcB = nullptr;
-    TextControlFloat *tcC = nullptr;
+    wxPanel *CreatePanelWidth(wxDialog *dlg);
 };

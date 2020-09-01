@@ -8,4 +8,6 @@ SpinControl::SpinControl(wxWindow *window, wxWindowID id, const wxString &text, 
 {
     dlg->Connect(id, wxEVT_COMMAND_SPINCTRL_UPDATED, handler);
     new wxStaticText(window, wxID_ANY, label, { position.x + 55, position.y + 2 }, wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
+
+    SetValue(initial);
 }

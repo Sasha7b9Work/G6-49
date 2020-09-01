@@ -1,39 +1,50 @@
 #include "defines.h"
-#include "Controls/TextControl.h"
+#include "Controls/SpinControl.h"
 #include "Dialogs/GaussDialog.h"
+#include <cmath>
+
+
+wxPanel *GaussDialog::CreatePanelWidth(wxDialog *dlg)
+{
+    wxPanel *panel = new wxPanel(dlg);
+
+    int x = 40;
+    int y = 20;
+
+    scWidth = new SpinControl(panel, ID_SPINCTRL_NUMBER_PERIODS, wxT("1"), wxPoint(x, y), wxSize(50, 20), 1, 1500, 500, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Шмирина"));
+
+    return panel;
+}
 
 
 GaussDialog::GaussDialog() : Dialog(wxT("Параметры гауссовой функции"), true)
 {
-    wxPoint pos(20, 30);
-    wxSize size(100, 20);
-
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
 
-    tcA = new TextControlFloat(this, -100.0F, 100.0F, this, wxID_ANY, wxT("0"), pos, size);
-    tcB = new TextControlFloat(this, -100.0F, 100.0F, this, wxID_ANY, wxT("0"), pos, size);
-    tcC = new TextControlFloat(this, -100.0F, 100.0F, this, wxID_ANY, wxT("0"), pos, size);
+    vBox->Add(CreatePanelWidth(this));
 
-    wxSizerFlags flags;
-    flags.Expand().Border(wxLEFT, 45);
-
-    vBox->AddSpacer(15);
-    vBox->Add(tcA, flags);
-    vBox->AddSpacer(15);
-    vBox->Add(tcB, flags);
-    vBox->AddSpacer(15);
-    vBox->Add(tcC, flags);
     vBox->AddSpacer(10);
 
-    SetBoxSizer(vBox, { 175, 120 });
-
-    new wxStaticText(this, wxID_ANY, wxT("A"), { 25, 18 });
-    new wxStaticText(this, wxID_ANY, wxT("B"), { 25, 52 });
-    new wxStaticText(this, wxID_ANY, wxT("C"), { 25, 88 });
+    SetBoxSizer(vBox, { 200, 55 });
 }
 
 
 void GaussDialog::SendAdditionForm()
 {
+    float c = static_cast<float>(scWidth->GetValue());
 
+    for (int i = 0; i < Point::NUM_POINTS / 2; i++)
+    {
+        float g = Point::AVE + Point::AVE * std::expf(-(i * i) / (2 * c * c));
+
+        if (g < Point::AVE)      { g = Point::AVE; }
+        else if (g > Point::MAX) { g = Point::MAX; }
+
+        data[Point::NUM_POINTS / 2 - i] = g;
+        data[Point::NUM_POINTS / 2 + i] = g;
+    }
+
+    data[0] = data[1];
+
+    TheForm->SetAdditionForm(data);
 }
