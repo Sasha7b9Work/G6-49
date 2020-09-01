@@ -539,9 +539,19 @@ void Form::SaveToFile(wxTextFile &file)
 
     file.AddLine(wxT("points"));
 
-    for(Point &point : points)
+    if (points.size() == 0)
     {
-        file.AddLine(wxString::Format(wxT("%i %i"), point.pos, point.data));
+        for (int i = 0; i < Point::NUM_POINTS; i++)
+        {
+            file.AddLine(wxString::Format(wxT("%i %i"), i, data[i]));
+        }
+    }
+    else
+    {
+        for (Point &point : points)
+        {
+            file.AddLine(wxString::Format(wxT("%i %i"), point.pos, point.data));
+        }
     }
 }
 
