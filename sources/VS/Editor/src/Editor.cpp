@@ -20,6 +20,7 @@
 #include "Dialogs/SinXDialog.h"
 #include "Dialogs/TrapezeDialog.h"
 #include "Dialogs/TriangleDialog.h"
+#include "Windows/CompositeSignalWindow.h"
 
 extern void update();
 extern void init();
@@ -57,10 +58,9 @@ enum //-V2521
     CREATE_EXPONENT,
     CREATE_SINX,
     CREATE_GAUSS,
-    CREATE_LORENCE,
     CREATE_GAVERSINE,
     CREATE_NOISE,
-    CREATE_FORMULA,
+    CREATE_COMPISITE,
 
     INSERT_POINTS
 };
@@ -126,10 +126,9 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_MENU,     &Frame::CreateExponent,    this, CREATE_EXPONENT);
     Bind(wxEVT_MENU,     &Frame::CreateSinX,        this, CREATE_SINX);
     Bind(wxEVT_MENU,     &Frame::CreateGauss,       this, CREATE_GAUSS);
-    Bind(wxEVT_MENU,     &Frame::CreateLorence,     this, CREATE_LORENCE);
     Bind(wxEVT_MENU,     &Frame::CreateGaversine,   this, CREATE_GAVERSINE);
     Bind(wxEVT_MENU,     &Frame::CreateNoise,       this, CREATE_NOISE);
-    Bind(wxEVT_MENU,     &Frame::CreateFormula ,    this, CREATE_FORMULA);
+    Bind(wxEVT_MENU,     &Frame::CreateComposite,   this, CREATE_COMPISITE);
     Bind(wxEVT_MENU,     &Frame::InsertPoints,      this, INSERT_POINTS);
     Bind(wxEVT_TIMER,    &Frame::OnTimer,           this, TIMER_ID);
     Bind(wxEVT_PAINT,    &Frame::OnRepaint,         this);
@@ -232,10 +231,9 @@ void Frame::CreateMenu()
     wxBitmap imgCreateExponent(wxImage(wxT("icons/exponent.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateSinX(wxImage(wxT("icons/sinx.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateGauss(wxImage(wxT("icons/gauss.bmp"), wxBITMAP_TYPE_BMP));
-    //wxBitmap imgCreateLorence(wxImage(wxT("icons/lorence.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateGaversine(wxImage(wxT("icons/gaversine.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgCreateNoise(wxImage("icons/noise.bmp"), wxBITMAP_TYPE_BMP);
-    //wxBitmap imgCreateFunction(wxImage("icons/f_x.bmp"), wxBITMAP_TYPE_BMP);
+    wxBitmap imgCreateNoise(wxImage(wxT("icons/noise.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgCreateComposite(wxImage(wxT("icons/composite.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgInsertPoints(wxImage(wxT("icons/points.bmp"), wxBITMAP_TYPE_BMP));
 
     toolBar = CreateToolBar();
@@ -253,10 +251,9 @@ void Frame::CreateMenu()
     toolBar->AddTool(CREATE_EXPONENT, wxT("Експонента"), imgCreateExponent, wxT("Создать новый экспоненциальный сигнал"));
     toolBar->AddTool(CREATE_SINX, wxT("Sin(x)/x"), imgCreateSinX, wxT("Создать сигнал вида sin(x)/x"));
     toolBar->AddTool(CREATE_GAUSS, wxT("Гауссова функция"), imgCreateGauss, wxT("Создать новый сигнал в виде гуссовой функции"));
-    //toolBar->AddTool(CREATE_LORENCE, wxT("Кривая Лоренца"), imgCreateLorence, wxT("Создать новый сигнал в виде кривой Лоренца"));
     toolBar->AddTool(CREATE_GAVERSINE, wxT("Гаверсинус"), imgCreateGaversine, wxT("Создать новый сигнал в форме гаверсинуса"));
     toolBar->AddTool(CREATE_NOISE, wxT("Шум"), imgCreateNoise, wxT("Создать шумовой сигнал"));
-    //toolBar->AddTool(CREATE_FORMULA, wxT("Формула"), imgCreateFunction, wxT("Создать сигнал по произвольной формуле"));
+    toolBar->AddTool(CREATE_COMPISITE, wxT("Сложный сигнал"), imgCreateComposite, wxT("Создать сложный сигнал из гармоник"));
 
     toolBar->AddSeparator();
     toolBar->AddTool(INSERT_POINTS, wxT("Вставить точки"), imgInsertPoints, wxT("Вставить маркеры"));
@@ -428,30 +425,28 @@ void Frame::CreateTriangle(wxCommandEvent &)
     TriangleDialog().ShowModal();
 }
 
+
 void Frame::CreateTrapeze(wxCommandEvent &)
 {
     TrapezeDialog().ShowModal();
 }
+
 
 void Frame::CreateExponent(wxCommandEvent &)
 {
     ExponentDialog().ShowModal();
 }
 
+
 void Frame::CreateSinX(wxCommandEvent &)
 {
     SinXDialog().ShowModal();
 }
 
+
 void Frame::CreateGauss(wxCommandEvent &)
 {
     GaussDialog().ShowModal();
-}
-
-
-void Frame::CreateLorence(wxCommandEvent &)
-{
-
 }
 
 
@@ -498,9 +493,12 @@ void Frame::CreateNoise(wxCommandEvent &)
 }
 
 
-void Frame::CreateFormula(wxCommandEvent &)
+void Frame::CreateComposite(wxCommandEvent &)
 {
-
+    CompositeSignalWindow window;
+    window.Create(this, wxID_ANY);
+    window.Show(true);
+    window.Enable(true);
 }
 
 

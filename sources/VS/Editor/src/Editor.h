@@ -79,14 +79,11 @@ private:
 
     void CreateGauss(wxCommandEvent &);
 
-    void CreateLorence(wxCommandEvent &);
-
     void CreateGaversine(wxCommandEvent &);
 
-    // —оздать сигнал по произвольно заданной формуле
-    void CreateFormula(wxCommandEvent &);
-
     void CreateNoise(wxCommandEvent &);
+
+    void CreateComposite(wxCommandEvent &);
 
     void InsertPoints(wxCommandEvent &);
 

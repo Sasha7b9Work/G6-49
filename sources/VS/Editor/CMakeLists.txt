@@ -54,13 +54,15 @@ file(GLOB DOC      doc/*)
 file(GLOB SRC      src/*.h src/*.cpp)
 file(GLOB CONTROLS src/Controls/*)
 file(GLOB DIALOGS  src/Dialogs/*)
+file(GLOB WINDOWS  src/Windows/*)
 
 source_group(src      FILES ${SRC})
 source_group(doc      FILES ${DOC})
 source_group(Controls FILES ${CONTROLS})
 source_group(Dialogs  FILES ${DIALOGS})
+source_group(Windows  FILES ${WINDOWS})
 
-add_executable(Editor ${DOC} ${SRC} ${CONTROLS} ${DIALOGS})
+add_executable(Editor ${DOC} ${SRC} ${CONTROLS} ${DIALOGS} ${WINDOWS})
 
 target_link_libraries(Editor ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
 target_link_libraries(Editor ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
