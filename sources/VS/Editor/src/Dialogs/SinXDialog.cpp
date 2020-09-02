@@ -30,7 +30,7 @@ SinXDialog::SinXDialog() : Dialog(wxT("Параметры сигнала sin(x)/x"), true)
 
 
 void SinXDialog::SendAdditionForm()
-{
+{ 
     float T = static_cast<float>(Point::NUM_POINTS / 2) / (static_cast<float>(scNumPeriods->GetValue()) + 0.25F);
 
     int i0 = Point::NUM_POINTS / 2;

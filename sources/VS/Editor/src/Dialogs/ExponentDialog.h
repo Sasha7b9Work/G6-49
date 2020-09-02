@@ -2,6 +2,9 @@
 #include "Dialogs/Dialog.h"
 
 
+class SpinControl;
+
+
 class ExponentDialog : public Dialog
 {
 public:
@@ -10,4 +13,8 @@ public:
 protected:
 
     virtual void SendAdditionForm() override;
+
+    wxPanel *CreatePanelPower();
+
+    SpinControl *scPower = nullptr;
 };

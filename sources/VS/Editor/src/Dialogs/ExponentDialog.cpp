@@ -3,7 +3,6 @@
 #include "Utils.h"
 #include "Dialogs/ExponentDialog.h"
 #include "Controls/SpinControl.h"
-#include "Controls/TextControl.h"
 #pragma warning(push, 0)
 #include <wx/spinctrl.h>
 #include <wx/statline.h>
@@ -17,15 +16,13 @@ enum
 };
 
 
-static TextControlFloat *tcPower = nullptr;
-
-
-static wxPanel *CreatePanelPower(Dialog *dialog)
+wxPanel *ExponentDialog::CreatePanelPower()
 {
-    wxPanel *panel = new wxPanel(dialog);
+    wxPanel *panel = new wxPanel(this);
 
-    new wxStaticBox(panel, wxID_ANY, wxT("Степень"), wxDefaultPosition, wxSize(130, 75));
-    tcPower = new TextControlFloat(dialog, 0, 1000000, panel, ID_TEXT_CONTROL_POWER, "1", { 20, 30 }, { 100, 20 });
+    new wxStaticBox(panel, wxID_ANY, wxT("Постоянная времени"), wxDefaultPosition, wxSize(130, 75));
+
+    scPower = new SpinControl(panel, wxID_ANY, wxT(""), { 20, 20 }, { 100, 20 }, 0, 8191, 2000, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT(""));
 
     return panel;
 }
@@ -38,7 +35,7 @@ ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигна
 
     hBoxPanels->Add(CreatePanelPolarity());
     hBoxPanels->AddStretchSpacer();
-    hBoxPanels->Add(CreatePanelPower(this));
+    hBoxPanels->Add(CreatePanelPower());
     vBox->Add(hBoxPanels);
 
     SetBoxSizer(vBox, { 221, 80 });
@@ -47,9 +44,7 @@ ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигна
 
 void ExponentDialog::SendAdditionForm()
 {
-    wxString stringValue = tcPower->GetValue();
-
-    double power = std::atof(stringValue.c_str()); 
+    double power = scPower->GetValue();
 
     int first = 0;
 
