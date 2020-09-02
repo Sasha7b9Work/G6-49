@@ -413,7 +413,7 @@ int Item::PositionOnPage() const
 }
 
 
-Item *ChoiceParameter::Press(const Control control)
+Item *ChoiceParameter::Press(const Control &control)
 {
     if ((control.Is(Key::Right) && control.IsRelease()) || control.Is(Key::RotateRight))
     {
