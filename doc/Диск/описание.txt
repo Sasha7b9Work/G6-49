@@ -1,0 +1,25 @@
+* Doc
+    Руководство по эксплуатации
+
+* Driver
+
+    VCP_V1.5.0_Setup.exe            Драйвер USB
+    readme.txt                      Инструкция по установке
+    
+* SignalBuilder                     Редактор сигналов
+    Editor.exe
+    wxbase314ud_vc_custom.dll
+    wxmsw314ud_core_vc_custom.dll
+    icons                           Каталог с изображениями
+
+* Signals                           Каталог с подготовленными сигналами
+    expfall
+    exprise
+    gauss
+    gaversinus
+    noise
+    sinx_x
+    trapeze
+    triangle
+
+* Sources                           Исходные коды редактора сигналов
