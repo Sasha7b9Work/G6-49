@@ -232,10 +232,10 @@ void Frame::CreateMenu()
     wxBitmap imgCreateExponent(wxImage(wxT("icons/exponent.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateSinX(wxImage(wxT("icons/sinx.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateGauss(wxImage(wxT("icons/gauss.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgCreateLorence(wxImage(wxT("icons/lorence.bmp"), wxBITMAP_TYPE_BMP));
+    //wxBitmap imgCreateLorence(wxImage(wxT("icons/lorence.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateGaversine(wxImage(wxT("icons/gaversine.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateNoise(wxImage("icons/noise.bmp"), wxBITMAP_TYPE_BMP);
-    wxBitmap imgCreateFunction(wxImage("icons/f_x.bmp"), wxBITMAP_TYPE_BMP);
+    //wxBitmap imgCreateFunction(wxImage("icons/f_x.bmp"), wxBITMAP_TYPE_BMP);
     wxBitmap imgInsertPoints(wxImage(wxT("icons/points.bmp"), wxBITMAP_TYPE_BMP));
 
     toolBar = CreateToolBar();
@@ -487,9 +487,9 @@ void Frame::CreateNoise(wxCommandEvent &)
 
     for (int i = 0; i < Point::NUM_POINTS; i++)
     {
-        float x = (float)(std::rand()) / ((float)RAND_MAX);
+        float x = static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX);
 
-        data[i] = (uint16)(x * Point::MAX + 0.5F);
+        data[i] = static_cast<uint16>(x * Point::MAX + 0.5F);
     }
 
     TheFrame->SetBlockingCanvas(true);

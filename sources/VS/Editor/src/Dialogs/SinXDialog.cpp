@@ -51,15 +51,8 @@ void SinXDialog::SendAdditionForm()
             value = 4095;
         }
 
-        if (curLess >= 0 && curLess < Point::NUM_POINTS)
-        {
-            data[curLess] = value;
-        }
-
-        if (curMore >= 0 && curMore < Point::NUM_POINTS)
-        {
-            data[curMore] = value;
-        }
+        data[curLess] = value;
+        data[curMore] = value;
     }
 
     data[0] = data[1];

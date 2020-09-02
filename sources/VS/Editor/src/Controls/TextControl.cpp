@@ -11,6 +11,8 @@ TextControlInt::TextControlInt(int _min, int _max, wxDialog *dlg, wxWindowID id,
 
 void TextControlInt::OnKeyDown(wxKeyEvent &event)
 {
+#define SIZE_BUFFER 50
+
     int code = event.GetKeyCode();
 
     if (code >= '0' && code <= '9')
@@ -20,7 +22,7 @@ void TextControlInt::OnKeyDown(wxKeyEvent &event)
 
         GetSelection(&start, &end);
 
-        char buffer[50];
+        char buffer[SIZE_BUFFER];
 
         if (end - start != 0)
         {
@@ -37,6 +39,7 @@ void TextControlInt::OnKeyDown(wxKeyEvent &event)
             std::strcpy(buffer, GetValue().c_str());
             uint length = std::strlen(buffer);
             buffer[length] = static_cast<char>(code);
+            if (length > SIZE_BUFFER - 2) { length = SIZE_BUFFER - 2; }
             buffer[length + 1] = 0;
             int value = atoi(buffer);
 
@@ -89,6 +92,7 @@ void TextControlFloat::OnKeyDown(wxKeyEvent &event)
             std::strcpy(buffer, GetValue().c_str());
             uint length = std::strlen(buffer);
             buffer[length] = static_cast<char>(code);
+            if (length > SIZE_BUFFER - 2) { length = SIZE_BUFFER - 2; }
             buffer[length + 1] = 0;
             float value = static_cast<float>(std::atof(buffer));
 
