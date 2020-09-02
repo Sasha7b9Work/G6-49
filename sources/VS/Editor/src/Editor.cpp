@@ -463,7 +463,7 @@ void Frame::CreateGaversine(wxCommandEvent &)
     {
         float sinx = std::sinf(static_cast<float>(i) / Point::NUM_POINTS * 2.0F * 3.14F);
 
-        data[i] = Point::AVE + static_cast<uint16>(sinx * sinx * Point::AVE);
+        data[i] = static_cast<uint16>(Point::AVE + static_cast<uint16>(sinx * sinx * Point::AVE));
     }
 
     TheFrame->SetBlockingCanvas(true);

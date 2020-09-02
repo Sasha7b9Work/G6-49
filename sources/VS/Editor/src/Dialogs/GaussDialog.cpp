@@ -35,13 +35,13 @@ void GaussDialog::SendAdditionForm()
 
     for (int i = 0; i < Point::NUM_POINTS / 2; i++)
     {
-        float g = Point::AVE + Point::AVE * std::expf(-(i * i) / (2 * c * c));
+        float g = static_cast<float>(Point::AVE + Point::AVE * std::expf(-static_cast<float>(i * i) / (2 * c * c)));
 
         if (g < Point::AVE)      { g = Point::AVE; }
         else if (g > Point::MAX) { g = Point::MAX; }
 
-        data[Point::NUM_POINTS / 2 - i] = g;
-        data[Point::NUM_POINTS / 2 + i] = g;
+        data[Point::NUM_POINTS / 2 - i] = static_cast<uint16>(g);
+        data[Point::NUM_POINTS / 2 + i] = static_cast<uint16>(g);
     }
 
     data[0] = data[1];
