@@ -7,7 +7,6 @@
 #include <wx/spinctrl.h>
 #include <wx/statline.h>
 #pragma warning(pop)
-#include <vector>
 
 
 enum
@@ -22,7 +21,7 @@ wxPanel *ExponentDialog::CreatePanelPower()
 
     new wxStaticBox(panel, wxID_ANY, wxT("Постоянная времени"), wxDefaultPosition, wxSize(130, 75));
 
-    scPower = new SpinControl(panel, wxID_ANY, wxT(""), { 20, 20 }, { 100, 20 }, 0, 8191, 2000, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT(""));
+    scPower = new SpinControl(panel, wxID_ANY, wxT(""), { 20, 20 }, { 100, 20 }, 0, std::numeric_limits<int>::max(), 2000, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT(""));
 
     return panel;
 }
@@ -39,63 +38,36 @@ ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигна
     vBox->Add(hBoxPanels);
 
     SetBoxSizer(vBox, { 221, 80 });
+
+    scPower->SetValue(1);
 }
 
 
 void ExponentDialog::SendAdditionForm()
 {
-    double power = scPower->GetValue();
+    double k = scPower->GetValue() / 1000000.0;
+
+    int end = static_cast<int>(std::log(Point::AVE) / k);
+
+    int start = end - static_cast<int>(Point::NUM_POINTS) + 1;
 
     for (int i = 0; i < Point::NUM_POINTS; i++)
     {
-        double value = std::exp(power * i);
+        double value = std::exp(k * (i + start));
 
-        value = Math::Limitation<double>(value, Point::MIN, Point::MAX);
-    }
-}
+        uint16 uValue = static_cast<uint16>(Point::AVE + value);
 
-/*
-void ExponentDialog::SendAdditionForm()
-{
-    double power = scPower->GetValue();
+        uValue = Math::Limitation<uint16>(uValue, Point::MIN, Point::MAX);
 
-    int first = 0;
-
-    if (std::log(power * 1e-3) < 0.0)
-    {
-        while (std::log(power * first) < 0.0)
+        if (i == Point::NUM_POINTS - 1 || i == Point::NUM_POINTS / 2)
         {
-            first++;
-
-            if (first > Point::NUM_POINTS)
-            {
-                return;
-            }
-        }
-    }
-
-    double k = Point::AVE / std::log(power * (Point::NUM_POINTS - 1 + first));
-
-    for (int i = 0; i < Point::NUM_POINTS; i++)
-    {
-        double value = std::log(power * (i + first));
-        if (value < 0.0)
-        {
-            value = 0.0;
+            uValue = uValue;
         }
 
-        if (rbPolarityDirect->GetValue())
-        {
-            data[i] = static_cast<uint16>(Point::AVE + static_cast<uint16>(value * k));
-        }
-        else
-        {
-            data[i] = static_cast<uint16>(Point::MAX - static_cast<uint16>(value * k));
-        }
+        data[i] = uValue;
     }
 
     TheForm->SetAdditionForm(data);
 
     points.clear();
 }
-*/

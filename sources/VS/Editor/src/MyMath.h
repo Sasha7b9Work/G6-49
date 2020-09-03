@@ -28,4 +28,11 @@ namespace Math
         else if (value > max) { return max; }
         return value;
     }
+
+    template<class T>
+    T LimitationBelow(T value, T min)
+    {
+        if (value < min) { return min; }
+        return value;
+    }
 }
