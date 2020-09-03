@@ -16,7 +16,7 @@
 #define DEBUG
 
 
-#define VERSION       "v1.3.8"
+#define VERSION       "v1.2.1"
 #define IDENTIFICATOR "G6-49"
 #define CRC32         "f37ce6af"
 
