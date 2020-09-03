@@ -45,7 +45,7 @@ ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигна
 
 void ExponentDialog::SendAdditionForm()
 {
-    double tau = scPower->GetValue();
+    double tau = Math::LimitationBelow<double>(scPower->GetValue() + 1, 2.0);
 
     double x0 = Point::NUM_POINTS - 1;
     double y0 = Point::AVE;
@@ -63,14 +63,7 @@ void ExponentDialog::SendAdditionForm()
 
         uint16 uValue = static_cast<uint16>(Point::AVE + value);
 
-        uValue = Math::Limitation<uint16>(uValue, Point::MIN, Point::MAX);
-
-        if (i == Point::NUM_POINTS - 1 || i == Point::NUM_POINTS / 2)
-        {
-            uValue = uValue;
-        }
-
-        data[i] = uValue;
+        data[i] = Math::Limitation<uint16>(uValue, Point::MIN, Point::MAX);
     }
 
     TheForm->SetAdditionForm(data);
