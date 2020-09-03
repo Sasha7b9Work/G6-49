@@ -16,5 +16,7 @@ protected:
 
     wxPanel *CreatePanelPower();
 
+    wxPanel *CreatePanelType();
+
     SpinControl *scPower = nullptr;
 };

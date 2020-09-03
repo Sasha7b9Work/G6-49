@@ -27,12 +27,30 @@ wxPanel *ExponentDialog::CreatePanelPower()
 }
 
 
+wxPanel *ExponentDialog::CreatePanelType()
+{
+    wxPanel *panel = new wxPanel(this);
+    new wxStaticBox(panel, wxID_ANY, wxT("Полярность"), wxDefaultPosition, wxSize(90, 75));
+
+    int y = 25, x = 5;
+
+    rbPolarityDirect = new wxRadioButton(panel, ID_RADIOBUTTON_DIRECT, wxT("Прямая"), wxPoint(x, y));
+    Connect(ID_RADIOBUTTON_DIRECT, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
+    rbPolarityDirect->SetValue(true);
+
+    rbPolarityBack = new wxRadioButton(panel, ID_RADIOBUTTON_BACK, wxT("Обратная"), wxPoint(x, y + 25));
+    Connect(ID_RADIOBUTTON_BACK, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
+
+    return panel;
+}
+
+
 ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигнала"), true)
 {
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *hBoxPanels = new wxBoxSizer(wxHORIZONTAL);
 
-    hBoxPanels->Add(CreatePanelPolarity());
+    hBoxPanels->Add(CreatePanelType());
     hBoxPanels->AddStretchSpacer();
     hBoxPanels->Add(CreatePanelPower());
     vBox->Add(hBoxPanels);
@@ -64,6 +82,14 @@ void ExponentDialog::SendAdditionForm()
         uint16 uValue = static_cast<uint16>(Point::AVE + value);
 
         data[i] = Math::Limitation<uint16>(uValue, Point::MIN, Point::MAX);
+    }
+
+    if (rbPolarityDirect->GetValue())
+    {
+        for (int i = 0; i < Point::NUM_POINTS / 2; i++)
+        {
+            Math::Swap<uint16>(&data[i], &data[Point::NUM_POINTS - 1 - i]);
+        }
     }
 
     TheForm->SetAdditionForm(data);
