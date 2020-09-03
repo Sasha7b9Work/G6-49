@@ -45,11 +45,11 @@ ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигна
 
 void ExponentDialog::SendAdditionForm()
 {
-    double k = scPower->GetValue() / 1000000.0;
+    double y1 = Point::AVE * (1.0 - 1.0 / scPower->GetValue());
 
-    int end = static_cast<int>(std::log(Point::AVE) / k);
+    double k = (std::log(Point::AVE) - std::log(y1)) / ((Point::NUM_POINTS - 1) - (Point::NUM_POINTS - 2));
 
-    int start = end - static_cast<int>(Point::NUM_POINTS) + 1;
+    int start = static_cast<int>(std::log(Point::AVE) / k - (Point::NUM_POINTS - 1));
 
     for (int i = 0; i < Point::NUM_POINTS; i++)
     {
