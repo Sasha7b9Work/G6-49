@@ -46,6 +46,19 @@ void ExponentDialog::SendAdditionForm()
 {
     double power = scPower->GetValue();
 
+    for (int i = 0; i < Point::NUM_POINTS; i++)
+    {
+        double value = std::exp(power * i);
+
+        value = Math::Limitation<double>(value, Point::MIN, Point::MAX);
+    }
+}
+
+/*
+void ExponentDialog::SendAdditionForm()
+{
+    double power = scPower->GetValue();
+
     int first = 0;
 
     if (std::log(power * 1e-3) < 0.0)
@@ -85,3 +98,4 @@ void ExponentDialog::SendAdditionForm()
 
     points.clear();
 }
+*/

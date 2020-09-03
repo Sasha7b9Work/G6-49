@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace MyMath
+namespace Math
 {
     /// Округляет до ближайшего целого
     template<class T>
@@ -19,5 +19,13 @@ namespace MyMath
     T Abs(T value)
     {
         return (value < static_cast<T>(0)) ? -value : value;
+    }
+
+    template<class T>
+    T Limitation(T value, T min, T max)
+    {
+        if (value < min)      { return min; }
+        else if (value > max) { return max; }
+        return value;
     }
 }

@@ -8,9 +8,6 @@
 #pragma warning(pop)
 
 
-using namespace MyMath;
-
-
 Form *TheForm = nullptr;
 
 
@@ -311,7 +308,7 @@ bool Form::ExistPoint(int mouseX, int mouseY, bool pressed, uint16 *index, uint1
 
     for(uint16 i = 0; i < points.size(); i++)
     {
-        double distance = points[i].DistanceFromMouse(Round<int>(static_cast<float>(mouseX) / scaleX), Round<int>(static_cast<float>(mouseY) / scaleY));
+        double distance = points[i].DistanceFromMouse(Math::Round<int>(static_cast<float>(mouseX) / scaleX), Math::Round<int>(static_cast<float>(mouseY) / scaleY));
 
         if(distance < nearestDistance)
         {
@@ -376,11 +373,11 @@ static void DrawForm(const uint16 data[Point::NUM_POINTS], Color color)
 
     for (int i = 1; i < Point::NUM_POINTS; i++)
     {
-        int x0 = Round<int>(scaleX * static_cast<float>(i - 1));
-        int y0 = Round<int>(scaleY * static_cast<float>(Point::MAX - data[i - 1]));
+        int x0 = Math::Round<int>(scaleX * static_cast<float>(i - 1));
+        int y0 = Math::Round<int>(scaleY * static_cast<float>(Point::MAX - data[i - 1]));
 
-        int x1 = Round<int>(scaleX * static_cast<float>(i));
-        int y1 = Round<int>(scaleY * static_cast<float>(Point::MAX - data[i]));
+        int x1 = Math::Round<int>(scaleX * static_cast<float>(i));
+        int y1 = Math::Round<int>(scaleY * static_cast<float>(Point::MAX - data[i]));
 
         TheCanvas->DrawLine(x0, y0, x1, y1);
     }
@@ -398,15 +395,15 @@ void Form::Draw()
 
     for (Point point : points)
     {
-        int x = Round<int>(scaleX * static_cast<float>(point.pos));
-        int y = Round<int>(scaleY * static_cast<float>(Point::MAX - point.data));
+        int x = Math::Round<int>(scaleX * static_cast<float>(point.pos));
+        int y = Math::Round<int>(scaleY * static_cast<float>(Point::MAX - point.data));
 
         TheCanvas->DrawPoint(x, y, Point::SIZE);
     }
 
     if (iCurPoint != static_cast<uint>(-1))
     {
-        TheCanvas->DrawPoint(Round<int>(scaleX * static_cast<float>(points[iCurPoint].pos)), Round<int>(scaleY * static_cast<float>(Point::MAX - points[iCurPoint].data)), Point::SIZE * 3);
+        TheCanvas->DrawPoint(Math::Round<int>(scaleX * static_cast<float>(points[iCurPoint].pos)), Math::Round<int>(scaleY * static_cast<float>(Point::MAX - points[iCurPoint].data)), Point::SIZE * 3);
     }
 
     if (drawAdditionData)
@@ -427,7 +424,7 @@ void Form::LinearInterpolation(uint16 pos1, uint16 pos2)
     
     for (int i = pos1 + 1; i < pos2; i++)
     {
-        data[i] = Round<uint16>(value);
+        data[i] = Math::Round<uint16>(value);
         value += delta;
     }
 }

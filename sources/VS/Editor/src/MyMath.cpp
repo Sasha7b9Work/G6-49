@@ -3,12 +3,12 @@
 #include <cmath>
 
 
-template int MyMath::Round(float);
-template uint16 MyMath::Round(float);
+template int Math::Round(float);
+template uint16 Math::Round(float);
 
 
 template <class T>
-T MyMath::Round(float value)
+T Math::Round(float value)
 {
     return static_cast<T>(std::round(value));
 }

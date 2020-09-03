@@ -38,13 +38,13 @@ struct Point
 
 	Point(int mouseX, int mouseY)
 	{
-		pos = MyMath::Round<uint16>(static_cast<float>(mouseX) / ScaleX());
-		data = static_cast<uint16>(Point::MAX - MyMath::Round<uint16>(static_cast<float>(mouseY) / ScaleY()));
+		pos = Math::Round<uint16>(static_cast<float>(mouseX) / ScaleX());
+		data = static_cast<uint16>(Point::MAX - Math::Round<uint16>(static_cast<float>(mouseY) / ScaleY()));
 	}
 	Point(uint16 p, uint16 d) : pos(p), data(d) {};
 	void SetY(int mouseY)
 	{
-		data = static_cast<uint16>(Point::MAX - MyMath::Round<uint16>(static_cast<float>(mouseY) / ScaleY()));
+		data = static_cast<uint16>(Point::MAX - Math::Round<uint16>(static_cast<float>(mouseY) / ScaleY()));
 	}
 
 	uint16 pos;
