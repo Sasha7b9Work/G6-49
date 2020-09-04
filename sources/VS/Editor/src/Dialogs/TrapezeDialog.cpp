@@ -22,17 +22,20 @@ static SpinControl *scVertex1 = nullptr;
 static SpinControl *scVertex2 = nullptr;
 
 
-static wxPanel *CreatePanelOffsets(wxDialog *dlg)
+wxPanel *TrapezeDialog::CreatePanelOffsets()
 {
-    wxPanel *panel = new wxPanel(dlg);
+    wxPanel *panel = new wxPanel(this);
 
     int y = 20, x = 10;
 
-    new wxStaticBox(panel, wxID_ANY, wxT("Смещения"), wxDefaultPosition, wxSize(Dialog::WIDTH_PANEL, 73 + 26));
+    new wxStaticBox(panel, wxID_ANY, wxT("Смещения"), wxDefaultPosition, { Dialog::WIDTH_PANEL, 73 + 26 });
 
-    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, { x, y }, { 50, 20 }, 0, Point::NUM_POINTS, wxT("0"), dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Задержка, точки"));
-    scVertex1 = new SpinControl(panel, ID_SPINCTRL_VERTEX_1, { x, y + 26 }, { 50, 20 }, -100, 100, wxT("-50"), dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Левая вершина, %"));
-    scVertex2 = new SpinControl(panel, ID_SPINCTRL_VERTEX_2, { x, y + 26 * 2 }, { 50, 20 }, -100, 100, wxT("50"), dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Правая вершина, %"));
+    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, { x, y }, { 50, 20 }, 0, Point::NUM_POINTS, wxT("0"),
+                                this, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Задержка, точки"));
+    scVertex1 = new SpinControl(panel, ID_SPINCTRL_VERTEX_1, { x, y + 26 }, { 50, 20 }, -100, 100, wxT("-50"),
+                                this, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Левая вершина, %"));
+    scVertex2 = new SpinControl(panel, ID_SPINCTRL_VERTEX_2, { x, y + 26 * 2 }, { 50, 20 }, -100, 100, wxT("50"),
+                                this, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Правая вершина, %"));
 
     return panel;
 }
@@ -47,7 +50,7 @@ TrapezeDialog::TrapezeDialog() : Dialog(wxT("Параметры трапециевидного сигнала")
     hBoxPanels->AddStretchSpacer();
     hBoxPanels->Add(CreatePanelLevels());
     vBox->Add(hBoxPanels);
-    vBox->Add(CreatePanelOffsets(this));
+    vBox->Add(CreatePanelOffsets());
 
     SetBoxSizer(vBox, { 221, 175 });
 }

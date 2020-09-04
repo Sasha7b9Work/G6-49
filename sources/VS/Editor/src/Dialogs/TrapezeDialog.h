@@ -9,4 +9,6 @@ public:
 
 protected:
     virtual void SendAdditionForm();
+
+    wxPanel *CreatePanelOffsets();
 };

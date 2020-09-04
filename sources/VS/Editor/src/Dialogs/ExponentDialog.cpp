@@ -19,13 +19,17 @@ enum
 };
 
 
+static SpinControl *scPower = nullptr;
+
+
 wxPanel *ExponentDialog::CreatePanelPower()
 {
     wxPanel *panel = new wxPanel(this);
 
-    new wxStaticBox(panel, wxID_ANY, wxT("Постоянная времени"), wxDefaultPosition, wxSize(130, 75));
+    new wxStaticBox(panel, wxID_ANY, wxT("Постоянная времени"), wxDefaultPosition, { 130, 75 });
 
-    scPower = new SpinControl(panel, ID_SPINCTRL_POWER, { 20, 20 }, { 100, 20 }, 0, std::numeric_limits<int>::max(), wxT("2000"), this, wxCommandEventHandler(Dialog::OnControlEvent), wxT(""));
+    scPower = new SpinControl(panel, ID_SPINCTRL_POWER, { 20, 20 }, { 100, 20 }, 0, std::numeric_limits<int>::max(), wxT("20"),
+                              this, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT(""));
 
     return panel;
 }
@@ -74,7 +78,7 @@ ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигна
 
 void ExponentDialog::InvertPoint(uint16 *point)
 {
-    *point = static_cast<uint16>(Point::MAX - *point) + Point::AVE;
+    *point = static_cast<uint16>(static_cast<uint16>(Point::MAX - *point) + Point::AVE);
 }
 
 
