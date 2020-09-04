@@ -30,9 +30,9 @@ static wxPanel *CreatePanelOffsets(wxDialog *dlg)
 
     new wxStaticBox(panel, wxID_ANY, wxT("Смещения"), wxDefaultPosition, wxSize(Dialog::WIDTH_PANEL, 73 + 26));
 
-    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, wxPoint(x, y), wxSize(50, 20), 0, Point::NUM_POINTS, wxT("0"), dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Задержка, точки"));
-    scVertex1 = new SpinControl(panel, ID_SPINCTRL_VERTEX_1, wxPoint(x, y + 26), wxSize(50, 20), -100, 100, wxT("-50"), dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Левая вершина, %"));
-    scVertex2 = new SpinControl(panel, ID_SPINCTRL_VERTEX_2, wxPoint(x, y + 26 * 2), wxSize(50, 20), -100, 100, wxT("50"), dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Правая вершина, %"));
+    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, { x, y }, { 50, 20 }, 0, Point::NUM_POINTS, wxT("0"), dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Задержка, точки"));
+    scVertex1 = new SpinControl(panel, ID_SPINCTRL_VERTEX_1, { x, y + 26 }, { 50, 20 }, -100, 100, wxT("-50"), dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Левая вершина, %"));
+    scVertex2 = new SpinControl(panel, ID_SPINCTRL_VERTEX_2, { x, y + 26 * 2 }, { 50, 20 }, -100, 100, wxT("50"), dlg, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Правая вершина, %"));
 
     return panel;
 }
