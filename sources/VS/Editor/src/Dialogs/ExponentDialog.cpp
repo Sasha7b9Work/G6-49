@@ -11,7 +11,11 @@
 
 enum
 {
-    ID_TEXTCTRL_POWER
+    ID_SPINCTRL_POWER,
+    ID_TYPE_1,
+    ID_TYPE_2,
+    ID_TYPE_3,
+    ID_TYPE_4
 };
 
 
@@ -21,7 +25,7 @@ wxPanel *ExponentDialog::CreatePanelPower()
 
     new wxStaticBox(panel, wxID_ANY, wxT("Постоянная времени"), wxDefaultPosition, wxSize(130, 75));
 
-    scPower = new SpinControl(panel, wxID_ANY, wxT(""), { 20, 20 }, { 100, 20 }, 0, std::numeric_limits<int>::max(), 2000, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT(""));
+    scPower = new SpinControl(panel, ID_SPINCTRL_POWER, { 20, 20 }, { 100, 20 }, 0, std::numeric_limits<int>::max(), wxT("2000"), this, wxCommandEventHandler(Dialog::OnControlEvent), wxT(""));
 
     return panel;
 }
@@ -30,16 +34,23 @@ wxPanel *ExponentDialog::CreatePanelPower()
 wxPanel *ExponentDialog::CreatePanelType()
 {
     wxPanel *panel = new wxPanel(this);
-    new wxStaticBox(panel, wxID_ANY, wxT("Полярность"), wxDefaultPosition, wxSize(90, 75));
+    new wxStaticBox(panel, wxID_ANY, wxT("Вид"), wxDefaultPosition, wxSize(90, 75));
 
-    int y = 25, x = 5;
+    int y = 25, x = 10, dY = 25, dX = 45;
 
-    rbPolarityDirect = new wxRadioButton(panel, ID_RADIOBUTTON_DIRECT, wxT("Прямая"), wxPoint(x, y));
-    Connect(ID_RADIOBUTTON_DIRECT, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
-    rbPolarityDirect->SetValue(true);
+    rbType1 = new wxRadioButton(panel, ID_TYPE_1, wxT("1"), { x, y });
+    Connect(ID_TYPE_1, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
 
-    rbPolarityBack = new wxRadioButton(panel, ID_RADIOBUTTON_BACK, wxT("Обратная"), wxPoint(x, y + 25));
-    Connect(ID_RADIOBUTTON_BACK, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
+    rbType2 = new wxRadioButton(panel, ID_TYPE_2, wxT("2"), { x, y + dY });
+    Connect(ID_TYPE_2, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
+
+    rbType3 = new wxRadioButton(panel, ID_TYPE_3, wxT("3"), { x + dX, y });
+    Connect(ID_TYPE_3, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
+
+    rbType4 = new wxRadioButton(panel, ID_TYPE_4, wxT("4"), { x + dX, y + dY });
+    Connect(ID_TYPE_4, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
+  
+    rbType1->SetValue(true);
 
     return panel;
 }
@@ -58,6 +69,12 @@ ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигна
     SetBoxSizer(vBox, { 221, 80 });
 
     scPower->SetValue(1);
+}
+
+
+void ExponentDialog::InvertPoint(uint16 *point)
+{
+    *point = static_cast<uint16>(Point::MAX - *point) + Point::AVE;
 }
 
 
@@ -84,11 +101,27 @@ void ExponentDialog::SendAdditionForm()
         data[i] = Math::Limitation<uint16>(uValue, Point::MIN, Point::MAX);
     }
 
-    if (rbPolarityDirect->GetValue())
+    if (rbType2->GetValue())
     {
         for (int i = 0; i < Point::NUM_POINTS / 2; i++)
         {
             Math::Swap<uint16>(&data[i], &data[Point::NUM_POINTS - 1 - i]);
+        }
+    }
+    else if (rbType3->GetValue())
+    {
+        for (int i = 0; i < Point::NUM_POINTS; i++)
+        {
+            InvertPoint(&data[i]);
+        }
+    }
+    else if (rbType4->GetValue())
+    {
+        for (int i = 0; i < Point::NUM_POINTS / 2; i++)
+        {
+            Math::Swap<uint16>(&data[i], &data[Point::NUM_POINTS - 1 - i]);
+            InvertPoint(&data[i]);
+            InvertPoint(&data[Point::NUM_POINTS - 1 - i]);
         }
     }
 

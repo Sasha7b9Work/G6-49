@@ -25,6 +25,6 @@ enum
 class SpinControl : public wxSpinCtrl
 {
 public:
-    SpinControl(wxWindow *window, wxWindowID id, const wxString &text, const wxPoint &position, const wxSize &size, int min, int max, int initial,
+    SpinControl(wxWindow *window, wxWindowID id, const wxPoint &position, const wxSize &size, int min, int max, const wxString &initial,
         wxDialog *dlg, wxEventFunction handler, const wxString &label);
 };

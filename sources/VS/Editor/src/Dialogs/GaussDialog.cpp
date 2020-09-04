@@ -11,7 +11,7 @@ wxPanel *GaussDialog::CreatePanelWidth(wxDialog *dlg)
     int x = 40;
     int y = 20;
 
-    scWidth = new SpinControl(panel, ID_SPINCTRL_NUMBER_PERIODS, wxT("1"), wxPoint(x, y), wxSize(50, 20), 1, 1500, 500, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Ўмирина"));
+    scWidth = new SpinControl(panel, ID_SPINCTRL_NUMBER_PERIODS, wxPoint(x, y), wxSize(50, 20), 1, 1500, wxT("500"), this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Ўмирина"));
 
     scWidth->SetValue(500);
 

@@ -55,8 +55,8 @@ wxPanel *Dialog::CreatePanelLevels()
 
     int y = 20, x = 10;
 
-    scLevelUp = new SpinControl(panel, ID_SPINCTRL_UP, wxT(""), wxPoint(x, y), wxSize(50, 20), -100, 100, 100, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Верхний, %"));
-    scLevelDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), -100, 100, -100, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Нижний, %"));
+    scLevelUp = new SpinControl(panel, ID_SPINCTRL_UP, wxPoint(x, y), wxSize(50, 20), -100, 100, wxT("100"), this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Верхний, %"));
+    scLevelDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxPoint(x, y + 26), wxSize(50, 20), -100, 100, wxT("-100"), this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Нижний, %"));
 
     return panel;
 }

@@ -26,7 +26,7 @@ InsertPointsDialog::InsertPointsDialog() : wxDialog(nullptr, -1, wxT("Вставить м
     wxButton *btnClose = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отмена"), wxDefaultPosition, BUTTON_SIZE);
     Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(InsertPointsDialog::OnButtonCancel));
 
-    scDelta = new SpinControl(this, ID_SPINCTRL_DELTA, wxT("512"), wxDefaultPosition, wxSize(50, 20), 1, Point::NUM_POINTS / 2, 512, this, wxCommandEventHandler(InsertPointsDialog::OnControlNumPoints), wxT("Расстояние между точками"));
+    scDelta = new SpinControl(this, ID_SPINCTRL_DELTA, wxDefaultPosition, wxSize(50, 20), 1, Point::NUM_POINTS / 2, wxT("512"), this, wxCommandEventHandler(InsertPointsDialog::OnControlNumPoints), wxT("Расстояние между точками"));
 
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *hBoxButtons = new wxBoxSizer(wxHORIZONTAL);
