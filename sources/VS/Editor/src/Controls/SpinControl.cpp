@@ -1,6 +1,6 @@
 #include "defines.h"
+#include "Controls/SpinControl.h"
 #include "Dialogs/Dialog.h"
-#include "SpinControl.h"
 #include <wx/event.h>
 
 
@@ -8,19 +8,16 @@ static char buffer[100];
 
 
 SpinControl::SpinControl(wxWindow *window, wxWindowID id, const wxPoint &position, const wxSize &size, int min, int max, const int initial,
-    wxDialog *dlg, wxEventFunction handler, const wxString &label) :
+    wxDialog *dlg, wxEventFunction handler, const wxString &label, Dialog *_dialog) :
     wxSpinCtrl(window, id, _itoa(initial, buffer, 10), position, size, wxSP_ARROW_KEYS, min, max),
-    dialog(dlg)
+    dialog(_dialog)
 {
     dlg->Connect(id, wxEVT_COMMAND_SPINCTRL_UPDATED, handler);
-    Bind(wxEVT_KEY_UP, &SpinControl::OnKeyDown, this);
+    
+    if (dialog)
+    {
+        Bind(wxEVT_KEY_UP, &Dialog::OnKeyUp, dialog);
+    }
+    
     new wxStaticText(window, wxID_ANY, label, { position.x + 55, position.y + 2 }, wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
-}
-
-
-void SpinControl::OnKeyDown(wxKeyEvent &event)
-{
-    event.Skip(true);
-
-    reinterpret_cast<Dialog *>(dialog)->SendAdditionForm();
 }

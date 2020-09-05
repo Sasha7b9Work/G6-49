@@ -19,6 +19,8 @@ public:
     // ѕослать форму дл€ ознакомительной отрисовки
     virtual void SendAdditionForm() = 0;
 
+    void OnKeyUp(wxKeyEvent &);
+
     static const int WIDTH_PANEL = 220;
 
 protected:
@@ -53,6 +55,4 @@ private:
     void OnButtonApply(wxCommandEvent &);
 
     void OnButtonCancel(wxCommandEvent &);
-
-    void OnKeyDown(wxKeyEvent &);
 };

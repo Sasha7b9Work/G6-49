@@ -20,11 +20,9 @@ Dialog::Dialog(const wxString &title, bool blockingCanvas) : wxDialog(nullptr, w
     wxButton *btnCancel = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отменить"), wxDefaultPosition, BUTTON_SIZE);
     Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonCancel));
 
-    Bind(wxEVT_KEY_DOWN, &Dialog::OnKeyDown, this);
-    Bind(wxEVT_KEY_UP, &Dialog::OnKeyDown, this);
+    Bind(wxEVT_KEY_UP, &Dialog::OnKeyUp, this);
 
-    Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(Dialog::OnKeyDown));
-    Connect(wxEVT_KEY_UP, wxKeyEventHandler(Dialog::OnKeyDown));
+    Connect(wxEVT_KEY_UP, wxKeyEventHandler(Dialog::OnKeyUp));
 
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     panelBox = new wxBoxSizer(wxVERTICAL);
@@ -55,8 +53,8 @@ wxPanel *Dialog::CreatePanelLevels(int levelUp, int levelDown)
 
     int y = 20, x = 10;
 
-    scLevelUp = new SpinControl(panel, ID_SPINCTRL_UP, wxPoint(x, y), wxSize(50, 20), -100, 100, levelUp, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Верхний, %"));
-    scLevelDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxPoint(x, y + 26), wxSize(50, 20), -100, 100, levelDown, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Нижний, %"));
+    scLevelUp = new SpinControl(panel, ID_SPINCTRL_UP, wxPoint(x, y), wxSize(50, 20), -100, 100, levelUp, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Верхний, %"), this);
+    scLevelDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxPoint(x, y + 26), wxSize(50, 20), -100, 100, levelDown, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Нижний, %"), this);
 
     return panel;
 }
@@ -154,6 +152,9 @@ void Dialog::OnControlEvent(wxCommandEvent &)
 }
 
 
-void Dialog::OnKeyDown(wxKeyEvent &)
+void Dialog::OnKeyUp(wxKeyEvent &event)
 {
+    event.Skip();
+
+    SendAdditionForm();
 }

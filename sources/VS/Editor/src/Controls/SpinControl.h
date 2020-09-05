@@ -7,6 +7,9 @@
 #pragma warning(pop)
 
 
+class Dialog;
+
+
 enum
 {
     ID_SPINCTRL_DONW,
@@ -26,9 +29,8 @@ class SpinControl : public wxSpinCtrl
 {
 public:
     SpinControl(wxWindow *window, wxWindowID id, const wxPoint &position, const wxSize &size, int min, int max, const int initial,
-        wxDialog *dlg, wxEventFunction handler, const wxString &label);
+        wxDialog *dlg, wxEventFunction handler, const wxString &label, Dialog *dialog);
 
 private:
-    void OnKeyDown(wxKeyEvent &);
-    wxDialog *dialog;
+    Dialog *dialog = nullptr;
 };

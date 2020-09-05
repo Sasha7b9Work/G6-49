@@ -33,8 +33,7 @@ wxPanel *ExponentDialog::CreatePanelPower()
     new wxStaticBox(panel, wxID_ANY, wxT("Постоянная времени"), wxDefaultPosition, { 130, 75 });
 
     scPower = new SpinControl(panel, ID_SPINCTRL_POWER, { 20, 20 }, { 100, 20 }, 0, std::numeric_limits<int>::max(), power,
-                              this, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT(""));
-
+                              this, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT(""), this);
     return panel;
 }
 
