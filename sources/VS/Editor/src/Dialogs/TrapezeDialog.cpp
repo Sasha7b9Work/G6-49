@@ -62,14 +62,14 @@ TrapezeDialog::TrapezeDialog() : Dialog(wxT("Параметры трапециевидного сигнала")
 
 void TrapezeDialog::SendAdditionForm()
 {
-    delay = scDelay->GetValue();
+    int start = scDelay->GetValue();
 
-    float center = static_cast<float>(delay) + static_cast<float>(Point::NUM_POINTS - delay) / 2.0F;
+    float center = static_cast<float>(start) + static_cast<float>(Point::NUM_POINTS - start) / 2.0F;
 
-    float pointsInTrapeze = static_cast<float>(Point::NUM_POINTS - delay);
+    float pointsInTrapeze = static_cast<float>(Point::NUM_POINTS - start);
 
-    vertex1 = static_cast<int>(center + pointsInTrapeze / 2.0F * static_cast<float>(scVertex1->GetValue()) / 100.0F);
-    vertex2 = static_cast<int>(center + pointsInTrapeze / 2.0F * static_cast<float>(scVertex2->GetValue()) / 100.0F);
+    int left = static_cast<int>(center + pointsInTrapeze / 2.0F * static_cast<float>(scVertex1->GetValue()) / 100.0F);
+    int right = static_cast<int>(center + pointsInTrapeze / 2.0F * static_cast<float>(scVertex2->GetValue()) / 100.0F);
 
     int levelHI = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * static_cast<float>(scLevelUp->GetValue()) / 100.0F); //-V2007
     int levelLOW = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * static_cast<float>(scLevelDown->GetValue()) / 100.0F); //-V2007
@@ -83,21 +83,21 @@ void TrapezeDialog::SendAdditionForm()
         max = levelLOW;
     }
 
-    DrawLine(0, min, delay, min);
+    DrawLine(0, min, start, min);
 
-    DrawLine(delay, min, vertex1, max);
+    DrawLine(start, min, left, max);
 
-    DrawLine(vertex1, max, vertex2, max);
+    DrawLine(left, max, right, max);
 
-    DrawLine(vertex2, max, Point::NUM_POINTS - 1, min);
+    DrawLine(right, max, Point::NUM_POINTS - 1, min);
 
     TheForm->SetAdditionForm(data);
 
     points.clear();
 
-    points.emplace_back(static_cast<uint16>(delay), static_cast<uint16>(min));
-    points.emplace_back(static_cast<uint16>(vertex1), static_cast<uint16>(max));
-    points.emplace_back(static_cast<uint16>(vertex2), static_cast<uint16>(max));
+    points.emplace_back(static_cast<uint16>(start), static_cast<uint16>(min));
+    points.emplace_back(static_cast<uint16>(left), static_cast<uint16>(max));
+    points.emplace_back(static_cast<uint16>(right), static_cast<uint16>(max));
 }
 
 

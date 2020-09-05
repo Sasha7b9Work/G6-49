@@ -61,6 +61,8 @@ void SinXDialog::SendAdditionForm()
     data[0] = data[1];
 
     TheForm->SetAdditionForm(data);
+
+    points.clear();
 }
 
 
