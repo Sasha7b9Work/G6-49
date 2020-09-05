@@ -108,6 +108,9 @@ void TrapezeDialog::SaveValues()
     vertex1 = scVertex1->GetValue();
     vertex2 = scVertex2->GetValue();
 
+    levelUp = scLevelUp->GetValue();
+    levelDown = scLevelDown->GetValue();
+
     polarityDirect = rbPolarityDirect->GetValue();
     polarityBack = rbPolarityBack->GetValue();
 }
