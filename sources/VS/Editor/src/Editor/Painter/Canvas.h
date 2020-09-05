@@ -17,7 +17,7 @@ public:
     void Redraw();
 
 private:
-    /// true, если ЛКМ находится в нажатом положении
+    // true, если ЛКМ находится в нажатом положении
     bool mouseIsDown = false;
     int mouseX = 0;
     int mouseY = 0;
@@ -32,7 +32,7 @@ private:
     void OnMouseLeftDown(wxMouseEvent &);
     void OnMouseRightDown(wxMouseEvent &);
     void OnMouseUp(wxMouseEvent &);
-    /// Установить необходимую форму курсора мыши
+    // Установить необходимую форму курсора мыши
     void SetMouseCursor();
 };
 

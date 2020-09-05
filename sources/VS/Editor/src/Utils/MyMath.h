@@ -3,7 +3,7 @@
 
 namespace Math
 {
-    /// Округляет до ближайшего целого
+    // Округляет до ближайшего целого
     template<class T>
     T Round(float value);
 
