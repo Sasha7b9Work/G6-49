@@ -317,7 +317,7 @@ bool Form::ExistMarker(int mouseX, int mouseY, bool pressed, uint16 *index, uint
         }
     }
 
-    if(nearestDistance < Point::SIZE * 5)
+    if(nearestDistance < Point::SIZE * 5.0)
     {
         if(iCurPoint == static_cast<uint>(-1) || !pressed)
         {

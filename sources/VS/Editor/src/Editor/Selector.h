@@ -11,8 +11,20 @@
 class Selector
 {
 public:
-    static void BeginSelect(int mouseX, int mouseY);
-    static void MoveSelect(int mouseX, int mouseY);
+    
+    static void BeginSelect(int mouseX);
+    
+    static void MoveSelect(int mouseX);
+    
     static void EndSelect(int mouseX, int mouseY);
+    
+    static void Draw();
+
+    // Возвращает true, если курсор находится над границей выделенного участка
+    static bool CursorOverBorder(int mouseX);
+
 private:
+
+    // Возвращает true, если курсор находится поверх точки с координатой x
+    static bool CursorOverPointX(int mouseX, int x);
 };

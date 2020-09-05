@@ -35,4 +35,10 @@ namespace Math
         if (value < min) { return min; }
         return value;
     }
+
+    template<class T>
+    bool InBoundaries(T value, T min, T max)
+    {
+        return (value >= min) && (value <= max);
+    }
 }

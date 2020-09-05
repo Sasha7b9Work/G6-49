@@ -72,6 +72,17 @@ struct Point
 	{
 		return static_cast<float>(TheCanvas->GetSize().y) / static_cast<float>(MAX);
 	}
+
+	// ѕреобразует координату мыши в точку [0 ... (Point::NUM_POINTS - 1)]
+	static int MouseToPointX(int mouseX)
+	{
+		return Math::Round<int>(static_cast<float>(mouseX) / ScaleX());
+	}
+
+	static int PointToMouseX(int x)
+	{
+		return Math::Round<int>(static_cast<float>(x) * ScaleX());
+	}
 };
 
 

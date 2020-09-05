@@ -106,6 +106,8 @@ void Canvas::Draw()
 
         TheForm->Draw();
 
+        Selector::Draw();
+
         EndScene();
 
         needRedraw = false;
@@ -182,7 +184,10 @@ void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
     case ModeButtonLeft::EditPoints:
         break;
     case ModeButtonLeft::SelectZone:
-        Selector::MoveSelect(mouseX, mouseY);
+        if (mouseIsDown)
+        {
+            Selector::MoveSelect(mouseX);
+        }
         SetMouseCursor();
         Redraw();
         break;
@@ -212,7 +217,8 @@ void Canvas::OnMouseLeftDown(wxMouseEvent &event) //-V2009
     case ModeButtonLeft::EditPoints:
         break;
     case ModeButtonLeft::SelectZone:
-        Selector::BeginSelect(mouseX, mouseY);
+        mouseIsDown = true;
+        Selector::BeginSelect(mouseX);
         SetMouseCursor();
         Redraw();
         break;
@@ -251,6 +257,8 @@ void Canvas::OnMouseLeftUp(wxMouseEvent &event)
 {
     event.GetPosition(&mouseX, &mouseY);
 
+    mouseIsDown = false;
+
     switch (ModeButtonLeft::Get())
     {
     case ModeButtonLeft::EditLines:
@@ -261,19 +269,37 @@ void Canvas::OnMouseLeftUp(wxMouseEvent &event)
 
     case ModeButtonLeft::SelectZone:
         Selector::EndSelect(mouseX, mouseY);
-        SetMouseCursor();
         Redraw();
         break;
     }
+
+    SetMouseCursor();
 }
 
 
 void Canvas::SetMouseCursor()
 {
-    if(TheForm->ExistMarker(mouseX, mouseY, mouseIsDown))
+    switch (ModeButtonLeft::Get())
     {
-        HCURSOR cursor = LoadCursor(NULL, IDC_HAND);
-        ::SetCursor(cursor);
-        ::ShowCursor(true);
+    case ModeButtonLeft::EditPoints:
+        break;
+
+    case ModeButtonLeft::EditLines:
+        if (TheForm->ExistMarker(mouseX, mouseY, mouseIsDown))
+        {
+            HCURSOR cursor = LoadCursor(NULL, IDC_HAND);
+            ::SetCursor(cursor);
+            ::ShowCursor(true);
+        }
+        break;
+
+    case ModeButtonLeft::SelectZone:
+        if (Selector::CursorOverBorder(mouseX))
+        {
+            HCURSOR cursor = LoadCursor(NULL, IDC_SIZEWE);
+            ::SetCursor(cursor);
+            ::ShowCursor(true);
+        }
+        break;
     }
 }
