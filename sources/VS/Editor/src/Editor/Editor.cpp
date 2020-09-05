@@ -1,4 +1,6 @@
-#include "Editor.h"
+#include "Editor/Editor.h"
+#include "Editor/Settings.h"
+
 #pragma warning(push, 0)
 #include <wx/wx.h>
 #include <wx/display.h>
@@ -61,6 +63,10 @@ enum //-V2521
     CREATE_GAVERSINE,
     CREATE_NOISE,
     CREATE_COMPISITE,
+
+    MBL_POINTS,
+    MBL_LINES,
+    MBL_SELECT,
 
     INSERT_POINTS
 };
@@ -129,6 +135,9 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_MENU,     &Frame::CreateGaversine,   this, CREATE_GAVERSINE);
     Bind(wxEVT_MENU,     &Frame::CreateNoise,       this, CREATE_NOISE);
     Bind(wxEVT_MENU,     &Frame::CreateComposite,   this, CREATE_COMPISITE);
+    Bind(wxEVT_MENU,     &Frame::SetPointsMBL,      this, MBL_POINTS);
+    Bind(wxEVT_MENU,     &Frame::SetLinesMBL,       this, MBL_LINES);
+    Bind(wxEVT_MENU,     &Frame::SetSelectMBL,      this, MBL_SELECT);
     Bind(wxEVT_MENU,     &Frame::InsertPoints,      this, INSERT_POINTS);
     Bind(wxEVT_TIMER,    &Frame::OnTimer,           this, TIMER_ID);
     Bind(wxEVT_PAINT,    &Frame::OnRepaint,         this);
@@ -139,6 +148,8 @@ Frame::Frame(const wxString &title)
     timer.Start(0);
 
     TheFrame = this;
+
+    ModeButtonLeft::Set(ModeButtonLeft::EditLines);
 }
 
 
@@ -235,28 +246,37 @@ void Frame::CreateMenu()
     wxBitmap imgCreateNoise(wxImage(wxT("icons/noise.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgCreateComposite(wxImage(wxT("icons/composite.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgInsertPoints(wxImage(wxT("icons/points.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgPointsMBL(wxImage(wxT("icons/MBL_points.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgLinesMBL(wxImage(wxT("icons/MBL_lines.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgSelectMBL(wxImage(wxT("icons/MBL_select.bmp"), wxBITMAP_TYPE_BMP));
 
     toolBar = CreateToolBar();
-    toolBar->AddTool(FILE_OPEN, wxT("Открыть"), imgOpen, wxT("Загрузить ранее созданный сигнал из файла"));
-    toolBar->AddTool(FILE_SAVE, wxT("Сохранить"), imgSave, wxT("Сохранить сигнал в файл"));
-    toolBar->AddTool(FILE_NEW, wxT("Новый"), imgNew, wxT("Создать новый сигнал"));
+    toolBar->AddTool(FILE_OPEN, wxT("Открыть"),   imgOpen, imgOpen, wxITEM_NORMAL, wxT("Загрузить ранее созданный сигнал из файла"), wxT("Загрузить ранее созданный сигнал из файла"));
+    toolBar->AddTool(FILE_SAVE, wxT("Сохранить"), imgSave, imgSave, wxITEM_NORMAL, wxT("Сохранить сигнал в файл"), wxT("Сохранить сигнал в файл"));
+    toolBar->AddTool(FILE_NEW,  wxT("Новый"),     imgNew,  imgNew,  wxITEM_NORMAL, wxT("Создать новый сигнал"), wxT("Создать новый сигнал"));
 
     toolBar->AddSeparator();
-    toolBar->AddTool(UNDO, wxT("Отменить"), imgUndo, wxT("Отменить предыдущее действие"));
-    toolBar->AddTool(REDO, wxT("Восстановить"), imgRedo, wxT("Восстановить следующее действие"));
+    toolBar->AddTool(UNDO, wxT("Отменить"),     imgUndo, imgUndo, wxITEM_NORMAL, wxT("Отменить предыдущее действие"), wxT("Отменить предыдущее действие"));
+    toolBar->AddTool(REDO, wxT("Восстановить"), imgRedo, imgRedo, wxITEM_NORMAL, wxT("Восстановить следующее действие"), wxT("Восстановить следующее действие"));
 
     toolBar->AddSeparator();
-    toolBar->AddTool(CREATE_TRIANGLE, wxT("Треугольник"), imgCreateTriangle, wxT("Создать новый сигнал в форме треугольника"));
-    toolBar->AddTool(CREATE_TRAPEZE, wxT("Трапеция"), imgCreateTrapeze, wxT("Создать новый сигнал в форме трапеции"));
-    toolBar->AddTool(CREATE_EXPONENT, wxT("Експонента"), imgCreateExponent, wxT("Создать новый экспоненциальный сигнал"));
-    toolBar->AddTool(CREATE_SINX, wxT("Sin(x)/x"), imgCreateSinX, wxT("Создать сигнал вида sin(x)/x"));
-    toolBar->AddTool(CREATE_GAUSS, wxT("Гауссова функция"), imgCreateGauss, wxT("Создать новый сигнал в виде гуссовой функции"));
-    toolBar->AddTool(CREATE_GAVERSINE, wxT("Гаверсинус"), imgCreateGaversine, wxT("Создать новый сигнал в форме гаверсинуса"));
-    toolBar->AddTool(CREATE_NOISE, wxT("Шум"), imgCreateNoise, wxT("Создать шумовой сигнал"));
-    toolBar->AddTool(CREATE_COMPISITE, wxT("Сложный сигнал"), imgCreateComposite, wxT("Создать сложный сигнал из гармоник"));
+    toolBar->AddTool(CREATE_TRIANGLE, wxT("Треугольник"),     imgCreateTriangle,  imgCreateTriangle,  wxITEM_NORMAL, wxT("Создать новый сигнал в форме треугольника"), wxT("Создать новый сигнал в форме треугольника"));
+    toolBar->AddTool(CREATE_TRAPEZE, wxT("Трапеция"),         imgCreateTrapeze,   imgCreateTrapeze,   wxITEM_NORMAL, wxT("Создать новый сигнал в форме трапеции"), wxT("Создать новый сигнал в форме трапеции"));
+    toolBar->AddTool(CREATE_EXPONENT, wxT("Експонента"),      imgCreateExponent,  imgCreateExponent,  wxITEM_NORMAL, wxT("Создать новый экспоненциальный сигнал"), wxT("Создать новый экспоненциальный сигнал"));
+    toolBar->AddTool(CREATE_SINX, wxT("Sin(x)/x"),            imgCreateSinX,      imgCreateSinX,      wxITEM_NORMAL, wxT("Создать сигнал вида sin(x)/x"), wxT("Создать сигнал вида sin(x)/x"));
+    toolBar->AddTool(CREATE_GAUSS, wxT("Гауссова функция"),   imgCreateGauss,     imgCreateGauss,     wxITEM_NORMAL, wxT("Создать новый сигнал в виде гуссовой функции"), wxT("Создать новый сигнал в виде гуссовой функции"));
+    toolBar->AddTool(CREATE_GAVERSINE, wxT("Гаверсинус"),     imgCreateGaversine, imgCreateGaversine, wxITEM_NORMAL, wxT("Создать новый сигнал в форме гаверсинуса"), wxT("Создать новый сигнал в форме гаверсинуса"));
+    toolBar->AddTool(CREATE_NOISE, wxT("Шум"),                imgCreateNoise,     imgCreateNoise,     wxITEM_NORMAL, wxT("Создать шумовой сигнал"), wxT("Создать шумовой сигнал"));
+    toolBar->AddTool(CREATE_COMPISITE, wxT("Сложный сигнал"), imgCreateComposite, imgCreateComposite, wxITEM_NORMAL, wxT("Создать сложный сигнал из гармоник"), wxT("Создать сложный сигнал из гармоник"));
 
     toolBar->AddSeparator();
-    toolBar->AddTool(INSERT_POINTS, wxT("Вставить точки"), imgInsertPoints, wxT("Вставить маркеры"));
+    toolBar->AddTool(INSERT_POINTS, wxT("Вставить точки"), imgInsertPoints, imgInsertPoints, wxITEM_NORMAL, wxT("Вставить маркеры"), wxT("Вставить маркеры"));
+
+    toolBar->AddSeparator();
+    toolBar->AddRadioTool(MBL_POINTS, wxT("Режим редактирования точек"),                   imgPointsMBL, imgPointsMBL, wxT("Режим редактирования точек"), wxT("Режим редактирования точек"));
+    toolBar->AddRadioTool(MBL_LINES, wxT("Режим редактирования интерполирующими прямыми"), imgLinesMBL,  imgLinesMBL,  wxT("Режим редактирования интерполирующими прямыми"));
+    toolBar->AddRadioTool(MBL_SELECT, wxT("Режим выделения"),                              imgSelectMBL, imgSelectMBL, wxT("Режим выделения"), wxT("Режим выделения"));
+
     toolBar->Realize();
 }
 
@@ -406,20 +426,6 @@ void Frame::OnNewFile(wxCommandEvent &)
     History::Add(TheForm);
 }
 
-//void Frame::CreateSine(wxCommandEvent &)
-//{
-//    TheFrame->SetBlockingCanvas(true);
-//
-//    static uint16 data[Point::NUM_POINTS];
-//
-//    for (int i = 0; i < Point::NUM_POINTS; i++)
-//    {
-//        data[i] = static_cast<uint16>(Point::AVE + (std::sinf(static_cast<float>(i) / Point::NUM_POINTS * 2.0F * 3.14F) * Point::AVE));
-//    }
-//
-//    TheForm->SetMainForm(data, nullptr);
-//}
-
 void Frame::CreateTriangle(wxCommandEvent &)
 {
     TriangleDialog().ShowModal();
@@ -510,13 +516,39 @@ void Frame::SetBlockingCanvas(bool blocking)
 }
 
 
+void Frame::SetPointsMBL(wxCommandEvent &)
+{
+    ModeButtonLeft::Set(ModeButtonLeft::EditPoints);
+    SetModeMBL();
+}
+
+
+void Frame::SetLinesMBL(wxCommandEvent &)
+{
+    ModeButtonLeft::Set(ModeButtonLeft::EditLines);
+    SetModeMBL();
+}
+
+
+void Frame::SetSelectMBL(wxCommandEvent &)
+{
+    ModeButtonLeft::Set(ModeButtonLeft::SelectZone);
+    SetModeMBL();
+}
+
+
+void Frame::SetModeMBL()
+{
+    switch (ModeButtonLeft::Get())
+    {
+    case ModeButtonLeft::EditPoints:   toolBar->ToggleTool(MBL_POINTS, true);   break;
+    case ModeButtonLeft::EditLines:    toolBar->ToggleTool(MBL_LINES, true);    break;
+    case ModeButtonLeft::SelectZone:   toolBar->ToggleTool(MBL_SELECT, true);   break;
+    }
+}
+
+
 void Frame::OnKeyDown(wxKeyEvent &)
 {
-//    if(event.GetKeyCode() == 'x' || event.GetKeyCode() == 'X')
-//    {
-//        if(event.ControlDown())
-//        {
-//            Close(true);
-//        }
-//    }
+
 }

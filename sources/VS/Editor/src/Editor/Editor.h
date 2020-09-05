@@ -30,6 +30,8 @@ public:
     // Возвращает true, если холст заблокирован (нельзя ставить точки мышкой)
     bool IsBlockingCanvas() { return isBlockingCanvas; }
 
+    void SetModeMBL();
+
 private:
     wxTimer timer;
 
@@ -88,6 +90,12 @@ private:
     void InsertPoints(wxCommandEvent &);
 
     void OnKeyDown(wxKeyEvent &);
+
+    void SetPointsMBL(wxCommandEvent &);
+
+    void SetLinesMBL(wxCommandEvent &);
+
+    void SetSelectMBL(wxCommandEvent &);
 };
 
 
