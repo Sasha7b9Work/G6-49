@@ -14,10 +14,29 @@ SpinControl::SpinControl(wxWindow *window, wxWindowID id, const wxPoint &positio
 {
     dlg->Connect(id, wxEVT_COMMAND_SPINCTRL_UPDATED, handler);
     
+//    Bind(wxEVT_KEY_UP, &SpinControl::OnKeyUp, this);
+   
+    new wxStaticText(window, wxID_ANY, label, { position.x + 55, position.y + 2 }, wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
+
+    prevValue = GetValue();
+}
+
+
+void SpinControl::OnKeyUp(wxKeyEvent &event)
+{
     if (dialog)
     {
-        Bind(wxEVT_KEY_UP, &Dialog::OnKeyUp, dialog);
+        int value = GetValue();
+
+        if (value < GetMin() || value > GetMax())
+        {
+            SetValue(prevValue);
+            event.Skip(false);
+        }
+        else
+        {
+            prevValue = value;
+            dialog->OnKeyUp(event);
+        }
     }
-    
-    new wxStaticText(window, wxID_ANY, label, { position.x + 55, position.y + 2 }, wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
 }

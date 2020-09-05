@@ -6,7 +6,7 @@
 
 void init()
 {
-    FreeConsole();
+    //FreeConsole();
 
     Frame *frame = new Frame("Редактор сигналов Г6-49");
 

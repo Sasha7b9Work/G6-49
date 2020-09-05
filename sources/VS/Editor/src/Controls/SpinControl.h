@@ -33,4 +33,8 @@ public:
 
 private:
     Dialog *dialog = nullptr;
+
+    int prevValue = 0;
+
+    void OnKeyUp(wxKeyEvent &);
 };

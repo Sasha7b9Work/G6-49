@@ -68,6 +68,8 @@ void TriangleDialog::SendAdditionForm()
     int min = levelLOW;
     int max = levelHI;
 
+    std::cout << scDelay->GetValue() << " " << scCenter->GetValue() << " " << scLevelUp->GetValue() << " " << scLevelDown->GetValue() << std::endl;
+
     if (rbPolarityBack->GetValue())
     {
         min = levelHI;

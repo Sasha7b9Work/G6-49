@@ -6,11 +6,6 @@
 #include "Controls/SpinControl.h"
 
 
-uint16 Dialog::data[Point::NUM_POINTS];
-
-std::vector<Point> Dialog::points;
-
-
 Dialog::Dialog(const wxString &title, bool blockingCanvas) : wxDialog(nullptr, wxID_ANY, title), isBlockingCanvas(blockingCanvas)
 {
     Connect(wxEVT_MOVE, wxMoveEventHandler(Dialog::OnMove));
@@ -154,7 +149,7 @@ void Dialog::OnControlEvent(wxCommandEvent &)
 
 void Dialog::OnKeyUp(wxKeyEvent &event)
 {
-    event.Skip();
-
     SendAdditionForm();
+
+    event.Skip();
 }

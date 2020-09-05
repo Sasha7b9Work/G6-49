@@ -31,9 +31,9 @@ protected:
 
     void DrawLine(int x1, int y1, int x2, int y2);
     // Сигнал для засылки в TheForm
-    static uint16 data[Point::NUM_POINTS];
+    uint16 data[Point::NUM_POINTS];
     // Дополнительные точки для засылки в TheForm
-    static std::vector<Point> points;
+    std::vector<Point> points;
 
     // Создаёт панель полярности сигнала
     wxPanel *CreatePanelPolarity(bool polarityDirect, bool polarityBack);
