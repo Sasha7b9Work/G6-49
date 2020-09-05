@@ -2,6 +2,9 @@
 #include "Dialogs/Dialog.h"
 
 
+class SpinControl;
+
+
 class TriangleDialog : public Dialog
 {
 public:
@@ -9,5 +12,12 @@ public:
 
 protected:
 
-    virtual void SendAdditionForm();
+    virtual void SendAdditionForm() override;
+
+    virtual void SaveValues() override;
+
+    wxPanel *CreatePanelOffsets();
+
+    SpinControl *scCenter = nullptr;
+    SpinControl *scDelay = nullptr;
 };

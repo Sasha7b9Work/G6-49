@@ -4,6 +4,9 @@
 #include <cmath>
 
 
+static int width = 500;
+
+
 wxPanel *GaussDialog::CreatePanelWidth(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
@@ -11,9 +14,7 @@ wxPanel *GaussDialog::CreatePanelWidth(wxDialog *dlg)
     int x = 40;
     int y = 20;
 
-    scWidth = new SpinControl(panel, ID_SPINCTRL_NUMBER_PERIODS, wxPoint(x, y), wxSize(50, 20), 1, 1500, wxT("500"), this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Ўмирина"));
-
-    scWidth->SetValue(500);
+    scWidth = new SpinControl(panel, ID_SPINCTRL_NUMBER_PERIODS, wxPoint(x, y), wxSize(50, 20), 1, 1500, width, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Ўмирина"));
 
     return panel;
 }
@@ -49,4 +50,10 @@ void GaussDialog::SendAdditionForm()
     data[0] = data[1];
 
     TheForm->SetAdditionForm(data);
+}
+
+
+void GaussDialog::SaveValues()
+{
+    width = scWidth->GetValue();
 }

@@ -23,6 +23,8 @@ public:
 
 protected:
 
+    virtual void SaveValues() = 0;
+
     void SetBoxSizer(wxBoxSizer *sizer, wxSize size);
 
     void DrawLine(int x1, int y1, int x2, int y2);
@@ -32,12 +34,12 @@ protected:
     static std::vector<Point> points;
 
     // —оздаЄт панель пол€рности сигнала
-    wxPanel *CreatePanelPolarity();
+    wxPanel *CreatePanelPolarity(bool polarityDirect, bool polarityBack);
     wxRadioButton *rbPolarityDirect = nullptr;
     wxRadioButton *rbPolarityBack = nullptr;
 
     // —оздаЄт панель уровней сигнала
-    wxPanel *CreatePanelLevels();
+    wxPanel *CreatePanelLevels(int levelUp, int levelDown);
     SpinControl *scLevelUp = nullptr;
     SpinControl *scLevelDown = nullptr;
 

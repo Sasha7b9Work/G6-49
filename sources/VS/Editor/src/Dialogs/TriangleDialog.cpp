@@ -16,20 +16,24 @@ enum
 };
 
 
-static SpinControl *scCenter = nullptr;
-static SpinControl *scDelay = nullptr;
+static int center = 0;
+static int delay = 0;
+static bool polarityDirect = true;
+static bool polarityBack = false;
+static int levelUp = 100;
+static int levelDown = -100;
 
 
-static wxPanel *CreatePanelOffsets(wxDialog *dlg)
+wxPanel *TriangleDialog::CreatePanelOffsets()
 {
-    wxPanel *panel = new wxPanel(dlg);
+    wxPanel *panel = new wxPanel(this);
 
     int y = 20, x = 10;
 
     new wxStaticBox(panel, wxID_ANY, wxT("Смещения"), wxDefaultPosition, wxSize(Dialog::WIDTH_PANEL, 75));
 
-    scCenter = new SpinControl(panel, ID_SPINCTRL_CENTER, wxPoint(x, y), wxSize(50, 20), -100, 100, wxT("0"), dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Центр, %"));
-    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, wxPoint(x, y + 26), wxSize(50, 20), 0, Point::NUM_POINTS, wxT("0"), dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Задержка, точки"));
+    scCenter = new SpinControl(panel, ID_SPINCTRL_CENTER, wxPoint(x, y), wxSize(50, 20), -100, 100, center, this, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Центр, %"));
+    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, wxPoint(x, y + 26), wxSize(50, 20), 0, Point::NUM_POINTS, delay, this, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Задержка, точки"));
 
     return panel;
 }
@@ -40,11 +44,11 @@ TriangleDialog::TriangleDialog() : Dialog(wxT("Параметры треугольного сигнала"),
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *hBoxPanels = new wxBoxSizer(wxHORIZONTAL);
 
-    hBoxPanels->Add(CreatePanelPolarity());
+    hBoxPanels->Add(CreatePanelPolarity(polarityDirect, polarityBack));
     hBoxPanels->AddStretchSpacer();
-    hBoxPanels->Add(CreatePanelLevels());
+    hBoxPanels->Add(CreatePanelLevels(levelUp, levelDown));
     vBox->Add(hBoxPanels);
-    vBox->Add(CreatePanelOffsets(this));
+    vBox->Add(CreatePanelOffsets());
     
     SetBoxSizer(vBox, { 221, 150 });
 }
@@ -82,4 +86,15 @@ void TriangleDialog::SendAdditionForm()
 
     points.emplace_back(static_cast<uint16>(start), static_cast<uint16>(min));
     points.emplace_back(static_cast<uint16>(top), static_cast<uint16>(max));
+}
+
+
+void TriangleDialog::SaveValues()
+{
+    center = scCenter->GetValue();
+    delay = scDelay->GetValue();
+    polarityDirect = rbPolarityDirect->GetValue();
+    polarityBack = rbPolarityBack->GetValue();
+    levelUp = scLevelUp->GetValue();
+    levelDown = scLevelDown->GetValue();
 }

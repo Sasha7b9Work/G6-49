@@ -19,7 +19,11 @@ enum
 };
 
 
-static SpinControl *scPower = nullptr;
+static int power = 2000;
+static bool type1 = true;
+static bool type2 = false;
+static bool type3 = false;
+static bool type4 = false;
 
 
 wxPanel *ExponentDialog::CreatePanelPower()
@@ -28,7 +32,7 @@ wxPanel *ExponentDialog::CreatePanelPower()
 
     new wxStaticBox(panel, wxID_ANY, wxT("Постоянная времени"), wxDefaultPosition, { 130, 75 });
 
-    scPower = new SpinControl(panel, ID_SPINCTRL_POWER, { 20, 20 }, { 100, 20 }, 0, std::numeric_limits<int>::max(), wxT("2000"),
+    scPower = new SpinControl(panel, ID_SPINCTRL_POWER, { 20, 20 }, { 100, 20 }, 0, std::numeric_limits<int>::max(), power,
                               this, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT(""));
 
     return panel;
@@ -54,7 +58,10 @@ wxPanel *ExponentDialog::CreatePanelType()
     rbType4 = new wxRadioButton(panel, ID_TYPE_4, wxT("4"), { x + dX, y + dY });
     Connect(ID_TYPE_4, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
   
-    rbType1->SetValue(true);
+    rbType1->SetValue(type1);
+    rbType2->SetValue(type2);
+    rbType3->SetValue(type3);
+    rbType4->SetValue(type4);
 
     return panel;
 }
@@ -156,4 +163,15 @@ void ExponentDialog::SendAdditionForm()
     TheForm->SetAdditionForm(data);
 
     points.clear();
+}
+
+
+void ExponentDialog::SaveValues()
+{
+    power = scPower->GetValue();
+
+    type1 = rbType1->GetValue();
+    type2 = rbType2->GetValue();
+    type3 = rbType3->GetValue();
+    type4 = rbType4->GetValue();
 }

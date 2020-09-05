@@ -3,6 +3,9 @@
 #include "Controls/SpinControl.h"
 
 
+static int numPeriods = 1;
+
+
 wxPanel *SinXDialog::CreatePanelNumPeriods(wxDialog *dlg)
 {
     wxPanel *panel = new wxPanel(dlg);
@@ -10,7 +13,7 @@ wxPanel *SinXDialog::CreatePanelNumPeriods(wxDialog *dlg)
     int x = 40;
     int y = 20;
 
-    scNumPeriods = new SpinControl(panel, ID_SPINCTRL_NUMBER_PERIODS, wxPoint(x, y), wxSize(50, 20), 1, 100, wxT("1"), this, wxCommandEventHandler(Dialog::OnControlEvent),
+    scNumPeriods = new SpinControl(panel, ID_SPINCTRL_NUMBER_PERIODS, wxPoint(x, y), wxSize(50, 20), 1, 100, numPeriods, this, wxCommandEventHandler(Dialog::OnControlEvent),
         wxT("Число периодов"));
 
     return panel;
@@ -58,4 +61,10 @@ void SinXDialog::SendAdditionForm()
     data[0] = data[1];
 
     TheForm->SetAdditionForm(data);
+}
+
+
+void SinXDialog::SaveValues()
+{
+    numPeriods = scNumPeriods->GetValue();
 }

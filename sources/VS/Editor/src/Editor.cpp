@@ -28,7 +28,6 @@ extern void init();
 
 Frame *TheFrame = nullptr;
 
-
 static uint16 indexPoint = 0;
 static uint16 valuePoint = 0;
 

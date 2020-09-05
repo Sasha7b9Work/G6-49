@@ -14,6 +14,8 @@ protected:
 
     virtual void SendAdditionForm() override;
 
+    virtual void SaveValues() override;
+
     SpinControl *scWidth = nullptr;
 
     wxPanel *CreatePanelWidth(wxDialog *dlg);

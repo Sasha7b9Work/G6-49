@@ -17,9 +17,13 @@ enum
 };
 
 
-static SpinControl *scDelay = nullptr;
-static SpinControl *scVertex1 = nullptr;
-static SpinControl *scVertex2 = nullptr;
+static int delay = 0;
+static int vertex1 = -50;
+static int vertex2 = 50;
+static bool polarityDirect = true;
+static bool polarityBack = false;
+static int levelUp = 100;
+static int levelDown = -100;
 
 
 wxPanel *TrapezeDialog::CreatePanelOffsets()
@@ -30,11 +34,11 @@ wxPanel *TrapezeDialog::CreatePanelOffsets()
 
     new wxStaticBox(panel, wxID_ANY, wxT("Смещения"), wxDefaultPosition, { Dialog::WIDTH_PANEL, 73 + 26 });
 
-    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, { x, y }, { 50, 20 }, 0, Point::NUM_POINTS, wxT("0"),
+    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, { x, y }, { 50, 20 }, 0, Point::NUM_POINTS, delay,
                                 this, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Задержка, точки"));
-    scVertex1 = new SpinControl(panel, ID_SPINCTRL_VERTEX_1, { x, y + 26 }, { 50, 20 }, -100, 100, wxT("-50"),
+    scVertex1 = new SpinControl(panel, ID_SPINCTRL_VERTEX_1, { x, y + 26 }, { 50, 20 }, -100, 100, vertex1,
                                 this, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Левая вершина, %"));
-    scVertex2 = new SpinControl(panel, ID_SPINCTRL_VERTEX_2, { x, y + 26 * 2 }, { 50, 20 }, -100, 100, wxT("50"),
+    scVertex2 = new SpinControl(panel, ID_SPINCTRL_VERTEX_2, { x, y + 26 * 2 }, { 50, 20 }, -100, 100, vertex2,
                                 this, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Правая вершина, %"));
 
     return panel;
@@ -46,9 +50,9 @@ TrapezeDialog::TrapezeDialog() : Dialog(wxT("Параметры трапециевидного сигнала")
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *hBoxPanels = new wxBoxSizer(wxHORIZONTAL);
 
-    hBoxPanels->Add(CreatePanelPolarity());
+    hBoxPanels->Add(CreatePanelPolarity(polarityDirect, polarityBack));
     hBoxPanels->AddStretchSpacer();
-    hBoxPanels->Add(CreatePanelLevels());
+    hBoxPanels->Add(CreatePanelLevels(levelUp, levelDown));
     vBox->Add(hBoxPanels);
     vBox->Add(CreatePanelOffsets());
 
@@ -58,14 +62,14 @@ TrapezeDialog::TrapezeDialog() : Dialog(wxT("Параметры трапециевидного сигнала")
 
 void TrapezeDialog::SendAdditionForm()
 {
-    int delay = scDelay->GetValue();
+    delay = scDelay->GetValue();
 
     float center = static_cast<float>(delay) + static_cast<float>(Point::NUM_POINTS - delay) / 2.0F;
 
     float pointsInTrapeze = static_cast<float>(Point::NUM_POINTS - delay);
 
-    int vertex1 = static_cast<int>(center + pointsInTrapeze / 2.0F * static_cast<float>(scVertex1->GetValue()) / 100.0F);
-    int vertex2 = static_cast<int>(center + pointsInTrapeze / 2.0F * static_cast<float>(scVertex2->GetValue()) / 100.0F);
+    vertex1 = static_cast<int>(center + pointsInTrapeze / 2.0F * static_cast<float>(scVertex1->GetValue()) / 100.0F);
+    vertex2 = static_cast<int>(center + pointsInTrapeze / 2.0F * static_cast<float>(scVertex2->GetValue()) / 100.0F);
 
     int levelHI = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * static_cast<float>(scLevelUp->GetValue()) / 100.0F); //-V2007
     int levelLOW = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * static_cast<float>(scLevelDown->GetValue()) / 100.0F); //-V2007
@@ -94,4 +98,16 @@ void TrapezeDialog::SendAdditionForm()
     points.emplace_back(static_cast<uint16>(delay), static_cast<uint16>(min));
     points.emplace_back(static_cast<uint16>(vertex1), static_cast<uint16>(max));
     points.emplace_back(static_cast<uint16>(vertex2), static_cast<uint16>(max));
+}
+
+
+void TrapezeDialog::SaveValues()
+{
+    delay = scDelay->GetValue();
+
+    vertex1 = scVertex1->GetValue();
+    vertex2 = scVertex2->GetValue();
+
+    polarityDirect = rbPolarityDirect->GetValue();
+    polarityBack = rbPolarityBack->GetValue();
 }

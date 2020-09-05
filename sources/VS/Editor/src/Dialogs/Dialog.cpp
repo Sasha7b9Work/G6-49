@@ -47,7 +47,7 @@ Dialog::~Dialog()
 }
 
 
-wxPanel *Dialog::CreatePanelLevels()
+wxPanel *Dialog::CreatePanelLevels(int levelUp, int levelDown)
 {
     wxPanel *panel = new wxPanel(this);
 
@@ -55,14 +55,14 @@ wxPanel *Dialog::CreatePanelLevels()
 
     int y = 20, x = 10;
 
-    scLevelUp = new SpinControl(panel, ID_SPINCTRL_UP, wxPoint(x, y), wxSize(50, 20), -100, 100, wxT("100"), this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Верхний, %"));
-    scLevelDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxPoint(x, y + 26), wxSize(50, 20), -100, 100, wxT("-100"), this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Нижний, %"));
+    scLevelUp = new SpinControl(panel, ID_SPINCTRL_UP, wxPoint(x, y), wxSize(50, 20), -100, 100, levelUp, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Верхний, %"));
+    scLevelDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxPoint(x, y + 26), wxSize(50, 20), -100, 100, levelDown, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Нижний, %"));
 
     return panel;
 }
 
 
-wxPanel *Dialog::CreatePanelPolarity() 
+wxPanel *Dialog::CreatePanelPolarity(bool polarityDirect, bool polarityBack)
 {
     wxPanel *panel = new wxPanel(this);
     new wxStaticBox(panel, wxID_ANY, wxT("Полярность"), wxDefaultPosition, wxSize(90, 75));
@@ -75,6 +75,9 @@ wxPanel *Dialog::CreatePanelPolarity()
 
     rbPolarityBack = new wxRadioButton(panel, ID_RADIOBUTTON_BACK, wxT("Обратная"), wxPoint(x, y + 25));
     Connect(ID_RADIOBUTTON_BACK, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
+
+    rbPolarityDirect->SetValue(polarityDirect);
+    rbPolarityBack->SetValue(polarityBack);
 
     return panel;
 }
@@ -132,6 +135,8 @@ void Dialog::OnButtonApply(wxCommandEvent &)
     TheFrame->SetBlockingCanvas(isBlockingCanvas);
 
     TheForm->SetMainForm(data, &points);
+
+    SaveValues();
 
     Destroy();
 }

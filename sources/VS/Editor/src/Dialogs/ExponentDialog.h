@@ -14,6 +14,8 @@ protected:
 
     virtual void SendAdditionForm() override;
 
+    virtual void SaveValues() override;
+
     wxPanel *CreatePanelPower();
 
     wxPanel *CreatePanelType();
@@ -23,6 +25,7 @@ protected:
     // Сместить точки вверх до упора
     void ShiftToUp();
 
+    SpinControl *scPower = nullptr;
     wxRadioButton *rbType1 = nullptr;
     wxRadioButton *rbType2 = nullptr;
     wxRadioButton *rbType3 = nullptr;
