@@ -1,7 +1,7 @@
 #pragma once
 #include "defines.h"
-#include "Canvas.h"
-#include "MyMath.h"
+#include "Editor/Painter/Canvas.h"
+#include "Utils/MyMath.h"
 #include <vector>
 #pragma warning(push, 0)
 #include <wx/textfile.h>

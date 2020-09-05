@@ -1,9 +1,9 @@
 #include "defines.h"
-#include "Canvas.h"
-#include "Editor.h"
 #include "Form.h"
-#include "Dialogs/Dialog.h"
 #include "Controls/SpinControl.h"
+#include "Dialogs/Dialog.h"
+#include "Editor/Editor.h"
+#include "Editor/Painter/Canvas.h"
 
 
 Dialog::Dialog(const wxString &title, bool blockingCanvas) : wxDialog(nullptr, wxID_ANY, title), isBlockingCanvas(blockingCanvas)

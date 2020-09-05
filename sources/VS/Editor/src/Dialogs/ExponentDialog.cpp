@@ -1,8 +1,9 @@
 #include "defines.h"
 #include "Form.h"
-#include "Utils.h"
-#include "Dialogs/ExponentDialog.h"
 #include "Controls/SpinControl.h"
+#include "Dialogs/ExponentDialog.h"
+#include "Utils/Utils.h"
+
 #pragma warning(push, 0)
 #include <wx/spinctrl.h>
 #include <wx/statline.h>

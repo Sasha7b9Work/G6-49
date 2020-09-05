@@ -10,9 +10,7 @@
 
 
 #include "defines.h"
-#include "Canvas.h"
 #include "Form.h"
-#include "History.h"
 #include "Dialogs/ExponentDialog.h"
 #include "Dialogs/GaussDialog.h"
 #include "Dialogs/InsertPointsDialog.h"
@@ -21,6 +19,9 @@
 #include "Dialogs/TrapezeDialog.h"
 #include "Dialogs/TriangleDialog.h"
 #include "Windows/CompositeSignalWindow.h"
+#include "Editor/History.h"
+#include "Editor/Painter/Canvas.h"
+
 
 extern void update();
 extern void init();

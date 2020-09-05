@@ -1,8 +1,8 @@
 #include "defines.h"
-#include "Canvas.h"
-#include "Editor.h"
 #include "Form.h"
-#include "History.h"
+#include "Editor/Editor.h"
+#include "Editor/History.h"
+#include "Editor/Painter/Canvas.h"
 #include <ctime>
 #pragma warning(push, 0)
 #include <wx/msw/private.h>

@@ -1,7 +1,7 @@
-#include "Editor.h"
-#include "Canvas.h"
+#include "Editor/Editor.h"
+#include "Editor/Painter/Canvas.h"
 #include "Form.h"
-#include "History.h"
+#include "Editor/History.h"
 
 
 void init()
