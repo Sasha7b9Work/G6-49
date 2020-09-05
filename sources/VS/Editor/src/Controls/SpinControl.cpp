@@ -14,7 +14,7 @@ SpinControl::SpinControl(wxWindow *window, wxWindowID id, const wxPoint &positio
 {
     dlg->Connect(id, wxEVT_COMMAND_SPINCTRL_UPDATED, handler);
     
-//    Bind(wxEVT_KEY_UP, &SpinControl::OnKeyUp, this);
+    Bind(wxEVT_KEY_UP, &SpinControl::OnKeyUp, this);
    
     new wxStaticText(window, wxID_ANY, label, { position.x + 55, position.y + 2 }, wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
 
