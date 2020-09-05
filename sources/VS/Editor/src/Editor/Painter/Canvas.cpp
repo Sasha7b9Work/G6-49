@@ -188,6 +188,8 @@ void Canvas::OnMouseLeftDown(wxMouseEvent &event) //-V2009
     }
 
     SetMouseCursor();
+
+    event.Skip();
 }
 
 
