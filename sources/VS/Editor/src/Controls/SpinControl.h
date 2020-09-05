@@ -27,4 +27,8 @@ class SpinControl : public wxSpinCtrl
 public:
     SpinControl(wxWindow *window, wxWindowID id, const wxPoint &position, const wxSize &size, int min, int max, const int initial,
         wxDialog *dlg, wxEventFunction handler, const wxString &label);
+
+private:
+    void OnKeyDown(wxKeyEvent &);
+    wxDialog *dialog;
 };
