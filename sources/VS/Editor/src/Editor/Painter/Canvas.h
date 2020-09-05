@@ -46,7 +46,9 @@ private:
 
     void OnMouseRightDown(wxMouseEvent &);
 
-    void OnMouseUp(wxMouseEvent &);
+    void OnMouseLeftUp(wxMouseEvent &);
+
+    void OnMouseRightUp(wxMouseEvent &);
 
     // Установить необходимую форму курсора мыши
     void SetMouseCursor();

@@ -2,9 +2,9 @@
 #include <vector>
 
 
-/// Предыдущие элементы
+// Предыдущие элементы
 static std::vector<Form> pred;
-/// Слеюдующие элементы
+// Слеюдующие элементы
 static std::vector<Form> next;
 
 

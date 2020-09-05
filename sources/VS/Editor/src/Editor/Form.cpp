@@ -17,11 +17,11 @@ static bool drawAdditionData = false;
 #define LABEL_FILE  wxT("Data file G6-49")
 
 
-/// Преобразует строку в два целых числа и возвращает true в качестве успеха
+// Преобразует строку в два целых числа и возвращает true в качестве успеха
 static bool ConvertStringToTwoShort(const wxString &line, uint16 *val1, uint16 *val2);
-/// Преобразует подстроку в целое число. Возвращает false в случае неудачи
+// Преобразует подстроку в целое число. Возвращает false в случае неудачи
 static bool ConvertSubStringToShort(const wxString &line, uint startPos, uint endPos, uint16 *value, unsigned long max);
-/// Вывод сообщения об ошибке
+// Вывод сообщения об ошибке
 static void ErrorMessage(const wxString &text);
 static void ErrorMessage(uint numString);
 

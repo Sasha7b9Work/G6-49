@@ -2,6 +2,8 @@
 #include "Editor/Editor.h"
 #include "Editor/Form.h"
 #include "Editor/History.h"
+#include "Editor/Selector.h"
+#include "Editor/Settings.h"
 #include "Editor/Painter/Canvas.h"
 
 #include <ctime>
@@ -13,9 +15,9 @@
 Canvas *TheCanvas = nullptr;
 
 static bool needRedraw = true;
-/// Здесь рисуем
+// Здесь рисуем
 static wxBitmap *bitmapButton = nullptr;
-/// Контекст рисования
+// Контекст рисования
 static wxMemoryDC memDC;
 
 
@@ -28,8 +30,8 @@ Canvas::Canvas(wxWindow *p) : wxPanel(p, wxID_ANY), parent(p)
     Bind(wxEVT_MOTION,     &Canvas::OnMouseMove,      this);
     Bind(wxEVT_LEFT_DOWN,  &Canvas::OnMouseLeftDown,  this);
     Bind(wxEVT_RIGHT_DOWN, &Canvas::OnMouseRightDown, this);
-    Bind(wxEVT_LEFT_UP,    &Canvas::OnMouseUp,        this);
-    Bind(wxEVT_RIGHT_UP,   &Canvas::OnMouseUp,        this);
+    Bind(wxEVT_LEFT_UP,    &Canvas::OnMouseLeftUp,    this);
+    Bind(wxEVT_RIGHT_UP,   &Canvas::OnMouseRightUp,   this);
 }
 
 
@@ -162,15 +164,29 @@ void Canvas::Redraw()
 void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
 {
     event.GetPosition(&mouseX, &mouseY);
-    
-    if(mouseIsDown)
+
+    switch (ModeButtonLeft::Get())
     {
-        TheForm->MovePoint(mouseX, mouseY);
+    case ModeButtonLeft::EditLines:
+        {
+            if (mouseIsDown)
+            {
+                TheForm->MovePoint(mouseX, mouseY);
+            }
+    
+            SetMouseCursor();
+    
+            Redraw();
+        }
+        break;
+    case ModeButtonLeft::EditPoints:
+        break;
+    case ModeButtonLeft::SelectZone:
+        Selector::MoveSelect(mouseX, mouseY);
+        SetMouseCursor();
+        Redraw();
+        break;
     }
-
-    SetMouseCursor();
-
-    Redraw();
 }
 
 
@@ -178,16 +194,31 @@ void Canvas::OnMouseLeftDown(wxMouseEvent &event) //-V2009
 {
     event.GetPosition(&mouseX, &mouseY);
 
-    if(TheForm->ExistMarker(mouseX, mouseY, false))         // Если в позиции мыши нахдится маркер
+    switch (ModeButtonLeft::Get())
     {
-        mouseIsDown = true;
+    case ModeButtonLeft::EditLines:
+        {
+            if (TheForm->ExistMarker(mouseX, mouseY, false))         // Если в позиции мыши нахдится маркер
+            {
+                mouseIsDown = true;
+            }
+            else
+            {
+                TheForm->SetMarkerInMouseCoord(mouseX, mouseY);     // Если маркера нет - устанавливаем его
+            }
+            SetMouseCursor();
+        }
+        break;
+    case ModeButtonLeft::EditPoints:
+        break;
+    case ModeButtonLeft::SelectZone:
+        Selector::BeginSelect(mouseX, mouseY);
+        SetMouseCursor();
+        Redraw();
+        break;
+    default:
+        break;
     }
-    else
-    {
-        TheForm->SetMarkerInMouseCoord(mouseX, mouseY);     // Если маркера нет - устанавливаем его
-    }
-
-    SetMouseCursor();
 
     event.Skip();
 }
@@ -205,7 +236,7 @@ void Canvas::OnMouseRightDown(wxMouseEvent &event) //-V2009
 }
 
 
-void Canvas::OnMouseUp(wxMouseEvent &event) //-V2009
+void Canvas::OnMouseRightUp(wxMouseEvent &event) //-V2009
 {
     event.GetPosition(&mouseX, &mouseY);
 
@@ -213,6 +244,27 @@ void Canvas::OnMouseUp(wxMouseEvent &event) //-V2009
     History::Add(TheForm);
 
     SetMouseCursor();
+}
+
+
+void Canvas::OnMouseLeftUp(wxMouseEvent &event)
+{
+    event.GetPosition(&mouseX, &mouseY);
+
+    switch (ModeButtonLeft::Get())
+    {
+    case ModeButtonLeft::EditLines:
+        break;
+
+    case ModeButtonLeft::EditPoints:
+        break;
+
+    case ModeButtonLeft::SelectZone:
+        Selector::EndSelect(mouseX, mouseY);
+        SetMouseCursor();
+        Redraw();
+        break;
+    }
 }
 
 

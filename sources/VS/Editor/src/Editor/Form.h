@@ -53,7 +53,7 @@ struct Point
 	{
 		return (pos < point.pos);
 	}
-	/// Возвращает true, если курсор мыши находится над этой точкой
+	// Возвращает true, если курсор мыши находится над этой точкой
 	double DistanceFromMouse(int mouseX, int mouseY)
 	{
         int dX = mouseX - static_cast<int>(pos);
@@ -62,12 +62,12 @@ struct Point
 
         return std::sqrt(dX * dX + dY * dY);
 	}
-	/// Масштаб по горизонтали
+	// Масштаб по горизонтали
 	static float ScaleX()
 	{
 		return static_cast<float>(TheCanvas->GetSize().x) / static_cast<float>(NUM_POINTS);
 	}
-	/// Масштаб по вертикали
+	// Масштаб по вертикали
 	static float ScaleY()
 	{
 		return static_cast<float>(TheCanvas->GetSize().y) / static_cast<float>(MAX);

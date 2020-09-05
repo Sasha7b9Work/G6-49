@@ -23,7 +23,7 @@ struct Chan
     Chan::E GetInverse() { return (value == A) ? Chan::B : Chan::A; }
 };
 
-/// Сопротивление входа частотомера
+// Сопротивление входа частотомера
 struct FreqResist
 {
     enum E
@@ -37,7 +37,7 @@ struct FreqResist
     operator uint() const { return static_cast<uint>(value); };
 };
 
-/// Открытый/закрытый вход частотомера
+// Открытый/закрытый вход частотомера
 struct FreqCouple
 {
     enum E
@@ -51,7 +51,7 @@ struct FreqCouple
     operator uint() const { return static_cast<uint>(value); };
 };
 
-/// ФНЧ частотомера
+// ФНЧ частотомера
 struct FreqFiltr
 {
     enum E
@@ -65,7 +65,7 @@ struct FreqFiltr
     operator uint() const { return static_cast<uint>(value); };
 };
 
-/// Режим запуска
+// Режим запуска
 struct StartMode
 {
     enum E
