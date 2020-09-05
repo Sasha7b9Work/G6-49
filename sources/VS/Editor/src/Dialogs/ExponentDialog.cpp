@@ -28,7 +28,7 @@ wxPanel *ExponentDialog::CreatePanelPower()
 
     new wxStaticBox(panel, wxID_ANY, wxT("Постоянная времени"), wxDefaultPosition, { 130, 75 });
 
-    scPower = new SpinControl(panel, ID_SPINCTRL_POWER, { 20, 20 }, { 100, 20 }, 0, std::numeric_limits<int>::max(), wxT("20"),
+    scPower = new SpinControl(panel, ID_SPINCTRL_POWER, { 20, 20 }, { 100, 20 }, 0, std::numeric_limits<int>::max(), wxT("2000"),
                               this, wxCommandEventHandler(ExponentDialog::OnControlEvent), wxT(""));
 
     return panel;
@@ -71,8 +71,6 @@ ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигна
     vBox->Add(hBoxPanels);
 
     SetBoxSizer(vBox, { 221, 80 });
-
-    scPower->SetValue(1);
 }
 
 
@@ -82,9 +80,33 @@ void ExponentDialog::InvertPoint(uint16 *point)
 }
 
 
+void ExponentDialog::ShiftToUp()
+{
+    uint16 max = 0;
+
+    for (int i = 0; i < Point::NUM_POINTS; i++)
+    {
+        if (data[i] > max)
+        {
+            max = data[i];
+        }
+    }
+
+    if (max != 4095)
+    {
+        uint16 delta = 4095U - max;
+
+        for (int i = 0; i < Point::NUM_POINTS; i++)
+        {
+            data[i] += delta;
+        }
+    }
+}
+
+
 void ExponentDialog::SendAdditionForm()
 {
-    double tau = Math::LimitationBelow<double>(scPower->GetValue() + 1, 2.0);
+    double tau = Math::LimitationBelow<double>(scPower->GetValue() + 1.0, 2.0);
 
     double x0 = Point::NUM_POINTS - 1;
     double y0 = Point::AVE;
@@ -98,7 +120,7 @@ void ExponentDialog::SendAdditionForm()
 
     for (int i = 0; i < Point::NUM_POINTS; i++)
     {
-        double value = std::exp(k * (i + start));
+        double value = std::exp(k * (static_cast<double>(i) + start));
 
         uint16 uValue = static_cast<uint16>(Point::AVE + value);
 
@@ -128,6 +150,8 @@ void ExponentDialog::SendAdditionForm()
             InvertPoint(&data[Point::NUM_POINTS - 1 - i]);
         }
     }
+
+    ShiftToUp();
 
     TheForm->SetAdditionForm(data);
 
