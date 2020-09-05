@@ -1,12 +1,12 @@
 #include "Editor/Editor.h"
+#include "Editor/Form.h"
 #include "Editor/Painter/Canvas.h"
-#include "Form.h"
 #include "Editor/History.h"
 
 
 void init()
 {
-    //FreeConsole();
+    FreeConsole();
 
     Frame *frame = new Frame("Редактор сигналов Г6-49");
 

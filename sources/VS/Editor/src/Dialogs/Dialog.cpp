@@ -1,8 +1,8 @@
 #include "defines.h"
-#include "Form.h"
 #include "Controls/SpinControl.h"
 #include "Dialogs/Dialog.h"
 #include "Editor/Editor.h"
+#include "Editor/Form.h"
 #include "Editor/Painter/Canvas.h"
 
 

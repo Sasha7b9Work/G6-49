@@ -1,8 +1,8 @@
 #include "defines.h"
-#include "Form.h"
-#include "Dialogs/ParametersDialog.h"
 #include "Controls/SpinControl.h"
 #include "Controls/TextControl.h"
+#include "Dialogs/ParametersDialog.h"
+#include "Editor/Form.h"
 
 
 #define SMALL_BUTTON_SIZE wxSize(70, 20)

@@ -1,7 +1,7 @@
 #include "defines.h"
-#include "Form.h"
 #include "Controls/SpinControl.h"
 #include "Dialogs/InsertPointsDialog.h"
+#include "Editor/Form.h"
 #include "Editor/History.h"
 
 #pragma warning(push, 0)
