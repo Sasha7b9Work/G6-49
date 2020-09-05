@@ -263,7 +263,7 @@ void Frame::CreateMenu()
 
 void Frame::ShowContextMenu(const wxPoint &pos)
 {
-    bool underPoint = TheForm->ExistPoint(pos.x, pos.y, false, &indexPoint, &valuePoint);
+    bool underPoint = TheForm->ExistMarker(pos.x, pos.y, false, &indexPoint, &valuePoint);
 
     static wxMenu menuPoint;
     static wxMenu menuContext;

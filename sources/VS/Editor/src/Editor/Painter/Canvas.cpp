@@ -178,13 +178,13 @@ void Canvas::OnMouseLeftDown(wxMouseEvent &event) //-V2009
 {
     event.GetPosition(&mouseX, &mouseY);
 
-    if(TheForm->ExistPoint(mouseX, mouseY, false))
+    if(TheForm->ExistMarker(mouseX, mouseY, false))         // Если в позиции мыши нахдится маркер
     {
         mouseIsDown = true;
     }
     else
     {
-        TheForm->SetPointInMouseCoord(mouseX, mouseY);
+        TheForm->SetMarkerInMouseCoord(mouseX, mouseY);     // Если маркера нет - устанавливаем его
     }
 
     SetMouseCursor();
@@ -218,7 +218,7 @@ void Canvas::OnMouseUp(wxMouseEvent &event) //-V2009
 
 void Canvas::SetMouseCursor()
 {
-    if(TheForm->ExistPoint(mouseX, mouseY, mouseIsDown))
+    if(TheForm->ExistMarker(mouseX, mouseY, mouseIsDown))
     {
         HCURSOR cursor = LoadCursor(NULL, IDC_HAND);
         ::SetCursor(cursor);

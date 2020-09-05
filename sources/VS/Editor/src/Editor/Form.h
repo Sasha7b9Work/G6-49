@@ -83,8 +83,8 @@ public:
     // Очистить сигнал
     void Clear();
 
-	// Добавить точку с координатами мыши
-    void SetPointInMouseCoord(int mouseX, int mouseY);
+	// Добавить маркер с координатами мыши
+    void SetMarkerInMouseCoord(int mouseX, int mouseY);
 
 	// Добавить точку с абсолютными значениями
     void SetPointInRealCoord(uint16 pos, uint16 data);
@@ -96,7 +96,7 @@ public:
     void SetPointInPosition(uint16 pos);
 
 	// Возвращает true, если курсор мыши находится над поставленной точкой. Pressed - нажата ли кнопка мыши
-	bool ExistPoint(int mouseX, int mouseY, bool pressed, uint16 *index = nullptr, uint16 *value = nullptr);
+	bool ExistMarker(int mouseX, int mouseY, bool pressed, uint16 *index = nullptr, uint16 *value = nullptr);
 
 	// Удалить точку в позиции мыши
     void RemovePoint();

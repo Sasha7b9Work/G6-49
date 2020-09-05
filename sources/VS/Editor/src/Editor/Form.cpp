@@ -93,7 +93,7 @@ void Form::SetPoint(Point point)
 }
 
 
-void Form::SetPointInMouseCoord(int mouseX, int mouseY)
+void Form::SetMarkerInMouseCoord(int mouseX, int mouseY)
 {
     if (!TheFrame->IsBlockingCanvas())
     {
@@ -298,7 +298,7 @@ void Form::AlignPoint(Align::E align)
 }
 
 
-bool Form::ExistPoint(int mouseX, int mouseY, bool pressed, uint16 *index, uint16 *value)
+bool Form::ExistMarker(int mouseX, int mouseY, bool pressed, uint16 *index, uint16 *value)
 {
     float scaleX = Point::ScaleX();
     float scaleY = Point::ScaleY();
