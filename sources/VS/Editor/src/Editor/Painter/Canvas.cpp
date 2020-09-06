@@ -13,15 +13,12 @@
 
 
 Canvas *TheCanvas = nullptr;
-
 static bool needRedraw = true;
-// Здесь рисуем
-static wxBitmap *bitmapButton = nullptr;
-// Контекст рисования
-static wxMemoryDC memDC;
+static wxBitmap *bitmapButton = nullptr;    // Здесь рисуем
+static wxMemoryDC memDC;                    // Контекст рисования
 
 
-Canvas::Canvas(wxWindow *p) : wxPanel(p, wxID_ANY), parent(p)
+Canvas::Canvas(wxWindow *p) : wxPanel(p, wxID_ANY), parent(p), currentColor(Color::NUMBER.value)
 {
     bitmapButton = new wxBitmap(parent->GetClientSize());
     SetDoubleBuffered(true);
@@ -75,9 +72,7 @@ void Canvas::EndScene()
 
 void Canvas::FillRegion(int x, int y, int width, int height, const Color &color)
 {
-    wxBrush brush(MakeColour(color), wxBRUSHSTYLE_SOLID);
-
-    memDC.SetBrush(brush);
+    SetSolidBrush(color);
 
     SetColor(color);
 
@@ -89,10 +84,28 @@ void Canvas::SetColor(const Color &color)
 {
     if (color != Color::NUMBER)
     {
+        currentColor = color;
+
         wxColour colorDraw = MakeColour(color);
 
         memDC.SetPen(wxPen(colorDraw));
     }
+}
+
+
+void Canvas::SetSolidBrush(const Color &color)
+{
+    if (color != Color::NUMBER)
+    {
+        wxBrush brush(MakeColour(color), wxBRUSHSTYLE_SOLID);
+        memDC.SetBrush(brush);
+    }
+    else
+    {
+        wxBrush brush(MakeColour(currentColor), wxBRUSHSTYLE_SOLID);
+        memDC.SetBrush(brush);
+    }
+    
 }
 
 
@@ -110,6 +123,8 @@ wxColour Canvas::MakeColour(const Color &color)
 
 void Canvas::DrawPoint(int x, int y, int size, const Color &color)
 {
+    SetSolidBrush(color);
+
     SetColor(color);
 
     x -= size / 2;
@@ -166,14 +181,14 @@ void Canvas::DrawGrid()
 
     for (int i = 0; i < 19; i++)
     {
-        DrawLine(static_cast<int>(x + 0.5F), 0, static_cast<int>(x + 0.5F), height, Color::DARK_GREEN_1F);
+        DrawLine(static_cast<int>(x + 0.5F), 0, static_cast<int>(x + 0.5F), height, Color::GRAY_2F);
         DrawLine(0, static_cast<int>(y + 0.5F), width, static_cast<int>(y + 0.5F));
 
         x += stepX;
         y += stepY;
     }
 
-    DrawLine(width / 2, 0, width / 2, height, Color::DARK_GREEN_3F);
+    DrawLine(width / 2, 0, width / 2, height, Color::GRAY_4F);
     DrawLine(0, height / 2, width, height / 2);
 }
 

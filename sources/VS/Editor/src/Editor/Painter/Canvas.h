@@ -31,6 +31,7 @@ private:
     int mouseX = 0;
     int mouseY = 0;
     wxWindow *parent;
+    Color currentColor;
 
     void BeginScene();
 
@@ -56,6 +57,8 @@ private:
     void SetMouseCursor();
 
     wxColour MakeColour(const Color &color);
+
+    void SetSolidBrush(const Color &color);
 };
 
 

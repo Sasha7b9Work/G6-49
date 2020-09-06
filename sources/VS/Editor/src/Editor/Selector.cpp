@@ -83,7 +83,7 @@ void Selector::DrawRegion()
         Math::Swap(&x1, &x2);
     }
 
-    TheCanvas->FillRegion(x1, 0, x2 - x1, TheCanvas->GetSize().y, Color::BLUE);
+    TheCanvas->FillRegion(x1, 0, x2 - x1, TheCanvas->GetSize().y, Color::GREEN_1F);
 }
 
 
