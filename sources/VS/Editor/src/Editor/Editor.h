@@ -45,6 +45,10 @@ private:
 
     void CreateMenu();
 
+    void AddTool(int id, const wxString &label, const wxBitmap &img);
+
+    void AddRadioTool(int id, const wxString &label, const wxBitmap &img);
+
     void OnAlignLeft(wxCommandEvent &);
 
     void OnAlignRight(wxCommandEvent &);
@@ -96,6 +100,12 @@ private:
     void SetLinesMBL(wxCommandEvent &);
 
     void SetSelectMBL(wxCommandEvent &);
+
+    void OnScaleMore(wxCommandEvent &);
+
+    void OnScaleLess(wxCommandEvent &);
+
+    void OnScaleRegion(wxCommandEvent &);
 };
 
 

@@ -68,6 +68,10 @@ enum //-V2521
     MBL_LINES,
     MBL_SELECT,
 
+    SCALE_MORE,
+    SCALE_LESS,
+    SCALE_REGION,
+
     INSERT_POINTS
 };
 
@@ -138,6 +142,9 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_MENU,     &Frame::SetPointsMBL,      this, MBL_POINTS);
     Bind(wxEVT_MENU,     &Frame::SetLinesMBL,       this, MBL_LINES);
     Bind(wxEVT_MENU,     &Frame::SetSelectMBL,      this, MBL_SELECT);
+    Bind(wxEVT_MENU,     &Frame::OnScaleMore,       this, SCALE_MORE);
+    Bind(wxEVT_MENU,     &Frame::OnScaleLess,       this, SCALE_LESS);
+    Bind(wxEVT_MENU,     &Frame::OnScaleRegion,     this, SCALE_REGION);
     Bind(wxEVT_MENU,     &Frame::InsertPoints,      this, INSERT_POINTS);
     Bind(wxEVT_TIMER,    &Frame::OnTimer,           this, TIMER_ID);
     Bind(wxEVT_PAINT,    &Frame::OnRepaint,         this);
@@ -249,35 +256,55 @@ void Frame::CreateMenu()
     wxBitmap imgPointsMBL(wxImage(wxT("icons/MBL_points.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgLinesMBL(wxImage(wxT("icons/MBL_lines.bmp"), wxBITMAP_TYPE_BMP));
     wxBitmap imgSelectMBL(wxImage(wxT("icons/MBL_select.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgScaleMore(wxImage(wxT("icons/scale_more.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgScaleLess(wxImage(wxT("icons/scale_less.bmp"), wxBITMAP_TYPE_BMP));
+    wxBitmap imgScaleRegion(wxImage(wxT("icons/scale_region.bmp"), wxBITMAP_TYPE_BMP));
 
     toolBar = CreateToolBar();
-    toolBar->AddTool(FILE_OPEN, wxT("Открыть"),   imgOpen, imgOpen, wxITEM_NORMAL, wxT("Загрузить ранее созданный сигнал из файла"), wxT("Загрузить ранее созданный сигнал из файла"));
-    toolBar->AddTool(FILE_SAVE, wxT("Сохранить"), imgSave, imgSave, wxITEM_NORMAL, wxT("Сохранить сигнал в файл"), wxT("Сохранить сигнал в файл"));
-    toolBar->AddTool(FILE_NEW,  wxT("Новый"),     imgNew,  imgNew,  wxITEM_NORMAL, wxT("Создать новый сигнал"), wxT("Создать новый сигнал"));
+    AddTool(FILE_OPEN, wxT("Загрузить ранее созданный сигнал из файла"), imgOpen);
+    AddTool(FILE_SAVE, wxT("Сохранить сигнал в файл"), imgSave);
+    AddTool(FILE_NEW, wxT("Создать новый сигнал"), imgNew);
 
     toolBar->AddSeparator();
-    toolBar->AddTool(UNDO, wxT("Отменить"),     imgUndo, imgUndo, wxITEM_NORMAL, wxT("Отменить предыдущее действие"), wxT("Отменить предыдущее действие"));
-    toolBar->AddTool(REDO, wxT("Восстановить"), imgRedo, imgRedo, wxITEM_NORMAL, wxT("Восстановить следующее действие"), wxT("Восстановить следующее действие"));
+    AddTool(UNDO, wxT("Отменить предыдущее действие"), imgUndo);
+    AddTool(REDO, wxT("Восстановить следующее действие"), imgRedo);
 
     toolBar->AddSeparator();
-    toolBar->AddTool(CREATE_TRIANGLE, wxT("Треугольник"),     imgCreateTriangle,  imgCreateTriangle,  wxITEM_NORMAL, wxT("Создать новый сигнал в форме треугольника"), wxT("Создать новый сигнал в форме треугольника"));
-    toolBar->AddTool(CREATE_TRAPEZE, wxT("Трапеция"),         imgCreateTrapeze,   imgCreateTrapeze,   wxITEM_NORMAL, wxT("Создать новый сигнал в форме трапеции"), wxT("Создать новый сигнал в форме трапеции"));
-    toolBar->AddTool(CREATE_EXPONENT, wxT("Експонента"),      imgCreateExponent,  imgCreateExponent,  wxITEM_NORMAL, wxT("Создать новый экспоненциальный сигнал"), wxT("Создать новый экспоненциальный сигнал"));
-    toolBar->AddTool(CREATE_SINX, wxT("Sin(x)/x"),            imgCreateSinX,      imgCreateSinX,      wxITEM_NORMAL, wxT("Создать сигнал вида sin(x)/x"), wxT("Создать сигнал вида sin(x)/x"));
-    toolBar->AddTool(CREATE_GAUSS, wxT("Гауссова функция"),   imgCreateGauss,     imgCreateGauss,     wxITEM_NORMAL, wxT("Создать новый сигнал в виде гуссовой функции"), wxT("Создать новый сигнал в виде гуссовой функции"));
-    toolBar->AddTool(CREATE_GAVERSINE, wxT("Гаверсинус"),     imgCreateGaversine, imgCreateGaversine, wxITEM_NORMAL, wxT("Создать новый сигнал в форме гаверсинуса"), wxT("Создать новый сигнал в форме гаверсинуса"));
-    toolBar->AddTool(CREATE_NOISE, wxT("Шум"),                imgCreateNoise,     imgCreateNoise,     wxITEM_NORMAL, wxT("Создать шумовой сигнал"), wxT("Создать шумовой сигнал"));
-    toolBar->AddTool(CREATE_COMPISITE, wxT("Сложный сигнал"), imgCreateComposite, imgCreateComposite, wxITEM_NORMAL, wxT("Создать сложный сигнал из гармоник"), wxT("Создать сложный сигнал из гармоник"));
+    AddTool(CREATE_TRIANGLE, wxT("Создать новый сигнал в форме треугольника"), imgCreateTriangle);
+    AddTool(CREATE_TRAPEZE, wxT("Создать новый сигнал в форме трапеции"), imgCreateTrapeze);
+    AddTool(CREATE_EXPONENT, wxT("Создать новый экспоненциальный сигнал"), imgCreateExponent);
+    AddTool(CREATE_SINX, wxT("Создать сигнал вида sin(x)/x"), imgCreateSinX);
+    AddTool(CREATE_GAUSS, wxT("Создать новый сигнал в виде гуссовой функции"), imgCreateGauss);
+    AddTool(CREATE_GAVERSINE, wxT("Создать новый сигнал в форме гаверсинуса"), imgCreateGaversine);
+    AddTool(CREATE_NOISE, wxT("Создать шумовой сигнал"), imgCreateNoise);
+    AddTool(CREATE_COMPISITE, wxT("Создать сложный сигнал из гармоник"), imgCreateComposite);
 
     toolBar->AddSeparator();
-    toolBar->AddTool(INSERT_POINTS, wxT("Вставить точки"), imgInsertPoints, imgInsertPoints, wxITEM_NORMAL, wxT("Вставить маркеры"), wxT("Вставить маркеры"));
+    AddTool(INSERT_POINTS, wxT("Вставить маркеры"), imgInsertPoints);
 
     toolBar->AddSeparator();
-    toolBar->AddRadioTool(MBL_POINTS, wxT("Режим редактирования точек"),                   imgPointsMBL, imgPointsMBL, wxT("Режим редактирования точек"), wxT("Режим редактирования точек"));
-    toolBar->AddRadioTool(MBL_LINES, wxT("Режим редактирования интерполирующими прямыми"), imgLinesMBL,  imgLinesMBL,  wxT("Режим редактирования интерполирующими прямыми"));
-    toolBar->AddRadioTool(MBL_SELECT, wxT("Режим выделения"),                              imgSelectMBL, imgSelectMBL, wxT("Режим выделения"), wxT("Режим выделения"));
+    AddRadioTool(MBL_POINTS, wxT("Режим редактирования точек"), imgPointsMBL);   
+    AddRadioTool(MBL_LINES, wxT("Режим редактирования интерполирующими прямыми"), imgLinesMBL);
+    AddRadioTool(MBL_SELECT, wxT("Режим выделения"), imgSelectMBL);
+
+    toolBar->AddSeparator();
+    AddTool(SCALE_MORE, wxT("Увеличить масштаб"), imgScaleMore);
+    AddTool(SCALE_LESS, wxT("Уменьшить масштаб"), imgScaleLess);
+    AddTool(SCALE_REGION, wxT("Показать выделенную область"), imgScaleRegion);
 
     toolBar->Realize();
+}
+
+
+void Frame::AddTool(int id, const wxString &label, const wxBitmap &img)
+{
+    toolBar->AddTool(id, label, img, img, wxITEM_NORMAL, label, label);
+}
+
+
+void Frame::AddRadioTool(int id, const wxString &label, const wxBitmap &img)
+{
+    toolBar->AddRadioTool(id, label, img, img, label, label);
 }
 
 
@@ -549,6 +576,24 @@ void Frame::SetModeMBL()
 
 
 void Frame::OnKeyDown(wxKeyEvent &)
+{
+
+}
+
+
+void Frame::OnScaleMore(wxCommandEvent &)
+{
+
+}
+
+
+void Frame::OnScaleLess(wxCommandEvent &)
+{
+
+}
+
+
+void Frame::OnScaleRegion(wxCommandEvent &)
 {
 
 }
