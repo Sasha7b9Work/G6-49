@@ -66,7 +66,14 @@ void Selector::EndGrab()
 }
 
 
-void Selector::Draw()
+void Selector::DrawCursors()
+{
+    cursor1.Draw();
+    cursor2.Draw();
+}
+
+
+void Selector::DrawRegion()
 {
     int x1 = cursor1.GetMouseX();
     int x2 = cursor2.GetMouseX();
@@ -77,9 +84,6 @@ void Selector::Draw()
     }
 
     TheCanvas->FillRegion(x1, 0, x2 - x1, TheCanvas->GetSize().y, Color::BLUE);
-
-    cursor1.Draw();
-    cursor2.Draw();
 }
 
 

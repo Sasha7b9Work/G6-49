@@ -62,6 +62,7 @@ void Canvas::BeginScene()
     wxBrush brush(*wxBLACK, wxBRUSHSTYLE_SOLID);
     memDC.SetBackground(brush);
     memDC.Clear();
+    Selector::DrawRegion();
     DrawGrid();
 }
 
@@ -74,6 +75,10 @@ void Canvas::EndScene()
 
 void Canvas::FillRegion(int x, int y, int width, int height, const Color &color)
 {
+    wxBrush brush(MakeColour(color), wxBRUSHSTYLE_SOLID);
+
+    memDC.SetBrush(brush);
+
     SetColor(color);
 
     memDC.DrawRectangle(x, y, width, height);
@@ -137,7 +142,7 @@ void Canvas::Draw()
 
         TheForm->Draw();
 
-        Selector::Draw();
+        Selector::DrawCursors();
 
         EndScene();
 

@@ -18,7 +18,9 @@ public:
     
     static void EndGrab();
     
-    static void Draw();
+    static void DrawRegion();
+
+    static void DrawCursors();
 
     // Возвращает true, если курсор находится над границей выделенного участка
     static bool CursorOverBorder(int mouseX);
