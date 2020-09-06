@@ -52,7 +52,7 @@ public:
     // Возвращает true, если находится под мыщью
     static bool UnderMouse(int mouseX, int mouseY);
 
-    static void MoveWindow(int mouseX);
+    static bool MoveWindow(int mouseX);
 
     // Захватить мышью
     static bool Grab(int mouseX, int mouseY);

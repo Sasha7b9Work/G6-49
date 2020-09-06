@@ -27,7 +27,7 @@ struct Window
     static bool UnderMouse(int mouseX, int mouseY);
 
     // ѕереместить в mouseX
-    static void MoveTo(int mouseX);
+    static bool MoveTo(int mouseX);
 
     // —только точек помещаетс€ в одном пикселе окна
     static double PointsInPixel();
@@ -50,15 +50,18 @@ struct Grabber
     static bool IsGrabbing() { return isGrabbing; }
     static void Grab(int mouseX, int mouseY);
     static bool UnGrab();
-    static int CoordX() { return grabX; }
+    static int CoordX()          { return grabX; }
+    static int IndexFirstPoint() { return indexFirstPoint; }
 private:
     static bool isGrabbing;     // true, если окно захвачено мышью
     static int grabX;           //  оордината X курсора мыши в момент захвата
+    static int indexFirstPoint;
 };
 
 
 bool Grabber::isGrabbing = false;
 int Grabber::grabX = -1;
+int Grabber::indexFirstPoint = -1;
 
 
 bool Grabber::UnGrab()
@@ -170,7 +173,7 @@ int Window::X()
 }
 
 
-void Window::MoveTo(int mouseX)
+bool Window::MoveTo(int mouseX)
 {
     if (Grabber::IsGrabbing())
     {
@@ -178,12 +181,16 @@ void Window::MoveTo(int mouseX)
 
         int deltaPoints = static_cast<int>(PointsInPixel() * deltaPixels);
 
-        Zoomer::indexFirstPoint = Math::Limitation<int>(Zoomer::indexFirstPoint + deltaPoints, 0, static_cast<int>(Point::AMOUNT - Zoomer::numberDrawingPoints));
+        Zoomer::indexFirstPoint = Math::Limitation<int>(Grabber::IndexFirstPoint() + deltaPoints, 0, static_cast<int>(Point::AMOUNT - Zoomer::numberDrawingPoints));
 
-        Zoomer::indexMiddlePoint += Zoomer::numberDrawingPoints / 2;
+        Zoomer::indexMiddlePoint = Zoomer::indexFirstPoint + Zoomer::numberDrawingPoints / 2;
 
         TheCanvas->Redraw();
+
+        return true;
     }
+
+    return false;
 }
 
 
@@ -307,9 +314,9 @@ bool Zoomer::UnGrab()
 }
 
 
-void Zoomer::MoveWindow(int mouseX)
+bool Zoomer::MoveWindow(int mouseX)
 {
-    Window::MoveTo(mouseX);
+    return Window::MoveTo(mouseX);
 }
 
 
@@ -328,6 +335,7 @@ void Grabber::Grab(int mouseX, int mouseY)
 
     grabX = mouseX;
     isGrabbing = true;
+    indexFirstPoint = Zoomer::IndexFirsPoint();
 }
 
 

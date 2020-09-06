@@ -109,8 +109,11 @@ void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
 
     if (mouseIsDown)
     {
-        Zoomer::MoveWindow(mouseX);
-        return;
+        if (Zoomer::MoveWindow(mouseX))
+        {
+            SetMouseCursor();
+            return;
+        }
     }
 
     if (Zoomer::UnderMouse(mouseX, mouseY))
@@ -153,6 +156,7 @@ void Canvas::OnMouseLeftDown(wxMouseEvent &event) //-V2009
 
     if (Zoomer::Grab(mouseX, mouseY))
     {
+        mouseIsDown = true;
         SetMouseCursor();
         return;
     }
