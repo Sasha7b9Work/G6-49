@@ -112,8 +112,8 @@ public:
 	// Удалить точку в позиции мыши
     void RemoveCurrentMarker();
 
-	// Переместить точку в новую позицию
-    void MovePoint(int mouseX, int mouseY);
+	// Переместить маркер в новую позицию
+    void MoveMarker(int mouseX, int mouseY);
 
 	// Выровнять точку
     void AlignPoint(Align::E align);

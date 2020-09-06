@@ -168,7 +168,7 @@ void Form::RemoveCurrentMarker()
 }
 
 
-void Form::MovePoint(int mouseX, int mouseY)
+void Form::MoveMarker(int mouseX, int mouseY)
 {
     if (iCurMarker == 0)
     {

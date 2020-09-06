@@ -113,7 +113,7 @@ void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
         {
             if (mouseIsDown)
             {
-                TheForm->MovePoint(mouseX, mouseY);
+                TheForm->MoveMarker(mouseX, mouseY);
             }
     
             SetMouseCursor();
