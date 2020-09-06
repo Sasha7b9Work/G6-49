@@ -153,6 +153,7 @@ void Canvas::OnMouseLeftDown(wxMouseEvent &event) //-V2009
 
     if (Zoomer::Grab(mouseX, mouseY))
     {
+        SetMouseCursor();
         return;
     }
 

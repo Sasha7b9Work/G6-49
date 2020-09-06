@@ -42,14 +42,16 @@ private:
 struct Grabber
 {
     static bool IsGrabbing() { return isGrabbing; }
-    static void Grab();
+    static void Grab(int mouseX, int mouseY);
     static bool UnGrab();
 private:
-    static bool isGrabbing;             // true, если окно захвачено мышью
+    static bool isGrabbing;     // true, если окно захвачено мышью
+    static int grabX;           // Координата X курсора мыши в момент захвата
 };
 
 
 bool Grabber::isGrabbing = false;
+int Grabber::grabX = -1;
 
 
 bool Grabber::UnGrab()
@@ -269,7 +271,7 @@ bool Zoomer::Grab(int mouseX, int mouseY)
         return false;
     }
 
-
+    Grabber::Grab(mouseX, mouseY);
 
     return true;
 }
@@ -290,4 +292,16 @@ void Zoomer::MoveMouse(int /*mouseX*/)
 bool Window::UnderMouse(int mouseX, int mouseY)
 {
     return (mouseX > X()) && (mouseX < Right()) && (mouseY > Y()) && (mouseY < Bottom());
+}
+
+
+void Grabber::Grab(int mouseX, int mouseY)
+{
+    if (!Window::UnderMouse(mouseX, mouseY))
+    {
+        return;
+    }
+
+    grabX = mouseX;
+    isGrabbing = true;
 }
