@@ -23,6 +23,7 @@
 #include "Windows/CompositeSignalWindow.h"
 #include "Editor/History.h"
 #include "Editor/Painter/Canvas.h"
+#include "Editor/Painter/Zoomer.h"
 
 
 extern void update();
@@ -583,17 +584,17 @@ void Frame::OnKeyDown(wxKeyEvent &)
 
 void Frame::OnScaleMore(wxCommandEvent &)
 {
-
+    Zoomer::Increase();
 }
 
 
 void Frame::OnScaleLess(wxCommandEvent &)
 {
-
+    Zoomer::Decrease();
 }
 
 
 void Frame::OnScaleRegion(wxCommandEvent &)
 {
-
+    Zoomer::SetOnRegion();
 }

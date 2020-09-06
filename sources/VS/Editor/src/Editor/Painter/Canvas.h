@@ -32,6 +32,7 @@ private:
     int mouseY = 0;
     wxWindow *parent;
     Color currentColor;
+    double zoom = 100.0;
 
     void BeginScene();
 
