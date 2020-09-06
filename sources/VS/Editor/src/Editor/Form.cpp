@@ -97,6 +97,11 @@ void Form::SetPoint(Point point)
 
 void Form::SetMarkerInMouseCoord(int mouseX, int mouseY)
 {
+    if (mouseY < Grid::Y())
+    {
+        return;
+    }
+
     if (!TheFrame->IsBlockingCanvas())
     {
         SetPoint(Point(mouseX, mouseY));
@@ -298,6 +303,11 @@ void Form::AlignPoint(Align::E align)
 
 bool Form::ExistMarker(int mouseX, int mouseY, bool pressed, uint16 *index, uint16 *value)
 {
+    if (mouseY < Grid::Y())
+    {
+        return false;
+    }
+
     uint16 positionNearestPoint = static_cast<uint16>(-1);
     double nearestDistance = 1e10;
 
