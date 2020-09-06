@@ -6,6 +6,16 @@
 #pragma warning(pop)
 
 
+struct Grid
+{
+    static int X();
+    static int Y();
+    static int Width();
+    static int Height();
+    static void Draw();
+};
+
+
 class Canvas : public wxPanel
 {
 public:
@@ -28,8 +38,6 @@ private:
     void BeginScene();
 
     void EndScene();
-
-    void DrawGrid();
 
     void OnPaint(wxPaintEvent &);
 

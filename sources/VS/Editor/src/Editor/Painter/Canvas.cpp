@@ -58,7 +58,7 @@ void Canvas::BeginScene()
 {
     Painter::BegineScene();
     Selector::DrawRegion();
-    DrawGrid();
+    Grid::Draw();
 }
 
 void Canvas::EndScene()
@@ -94,31 +94,6 @@ void Canvas::Draw()
 
         time = clock();
     }
-}
-
-
-void Canvas::DrawGrid()
-{
-    int width = GetSize().x;
-    int height = GetSize().y;
-
-    float stepX = static_cast<float>(width) / 20.0F;
-    float stepY = static_cast<float>(height) / 20.0F;
-
-    float x = stepX;
-    float y = stepY;
-
-    for (int i = 0; i < 19; i++)
-    {
-        Painter::DrawLine(static_cast<int>(x + 0.5F), 0, static_cast<int>(x + 0.5F), height, Color::GRAY_2F);
-        Painter::DrawLine(0, static_cast<int>(y + 0.5F), width, static_cast<int>(y + 0.5F));
-
-        x += stepX;
-        y += stepY;
-    }
-
-    Painter::DrawLine(width / 2, 0, width / 2, height, Color::GRAY_4F);
-    Painter::DrawLine(0, height / 2, width, height / 2);
 }
 
 
@@ -267,4 +242,53 @@ void Canvas::SetMouseCursor()
         }
         break;
     }
+}
+
+
+int Grid::X()
+{
+    return 0;
+}
+
+
+int Grid::Y()
+{
+    return Zoomer::NoScaling() ? 0 : Zoomer::Height();
+}
+
+
+int Grid::Width()
+{
+    return TheCanvas->GetSize().x;
+}
+
+
+int Grid::Height()
+{
+    return Zoomer::NoScaling() ? TheCanvas->GetSize().y : (TheCanvas->GetSize().y - Zoomer::Height());
+}
+
+
+void Grid::Draw()
+{
+    int width = Width();
+    int height = Height();
+
+    float stepX = static_cast<float>(width) / 20.0F;
+    float stepY = static_cast<float>(height) / 20.0F;
+
+    float x = stepX;
+    float y = Y() + stepY;
+
+    for (int i = 0; i < 19; i++)
+    {
+        Painter::DrawLine(static_cast<int>(x + 0.5F), Y(), static_cast<int>(x + 0.5F), height + Y(), Color::GRAY_2F);
+        Painter::DrawLine(0, static_cast<int>(y + 0.5F), width, static_cast<int>(y + 0.5F));
+
+        x += stepX;
+        y += stepY;
+    }
+
+    Painter::DrawLine(width / 2, Y(), width / 2, height + Y(), Color::GRAY_4F);
+    Painter::DrawLine(0, height / 2 + Y(), width, height / 2 + Y());
 }

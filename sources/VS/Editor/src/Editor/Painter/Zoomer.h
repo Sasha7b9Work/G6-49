@@ -25,15 +25,19 @@ public:
 
     static void Draw();
 
+    // Координата x отрисовки полосы просмотра
+    static int X();
+
+    // Координата y отрисовки полосы просмотра
+    static int Y();
+
+    // Ширина полосы просмотра
+    static int Width();
+
+    // Высота полосы просмотра
+    static int Height();
+
 private:
 
     static int scale;
-
-    static int X();
-    
-    static int Y();
-
-    static int Width();
-
-    static int Height();
 };

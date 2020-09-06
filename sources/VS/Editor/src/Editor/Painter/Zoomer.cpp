@@ -86,7 +86,7 @@ int Zoomer::Y()
 
 int Zoomer::Width()
 {
-    return TheCanvas->GetSize().x / 2;
+    return Grid::Width();
 }
 
 
