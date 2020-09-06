@@ -142,7 +142,7 @@ private:
 	uint16 data[Point::NUM_POINTS];
 
 	// “очки, поставленные мышью. ’ран€тс€ в системе координат прибора (pos = [0 ... Point::NUM_POINTS], data = [Point::MIN ... Point::MAX])
-	std::vector<Point> points;
+	std::vector<Point> markers;
 
 	// «десь хранитс€ индекс точки, которой управл€ем в текущий момент
 	uint iCurPoint = 0;

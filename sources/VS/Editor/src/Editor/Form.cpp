@@ -42,7 +42,7 @@ Form::Form()
 
 Form::~Form()
 {
-    points.clear();
+    markers.clear();
 }
 
 
@@ -53,7 +53,7 @@ void Form::Clear()
         data[i] = Point::AVE;
     }
 
-    points.clear();
+    markers.clear();
 
     SetPointInRealCoord(static_cast<uint16>(0), Point::AVE);
     SetPointInRealCoord(static_cast<uint16>(Point::NUM_POINTS - 1), Point::AVE);
@@ -62,9 +62,9 @@ void Form::Clear()
 
 uint Form::PointInPosition(uint16 pos)
 {
-    for (uint i = 0; i < points.size(); i++)
+    for (uint i = 0; i < markers.size(); i++)
     {
-        if (points[i].pos == pos)
+        if (markers[i].pos == pos)
         {
             return i;
         }
@@ -82,13 +82,13 @@ void Form::SetPoint(Point point)
 
     if (index == static_cast<uint>(-1))
     {
-        points.push_back(point);
+        markers.push_back(point);
 
-        std::sort(points.begin(), points.end());
+        std::sort(markers.begin(), markers.end());
     }
     else
     {
-        points[index] = point;
+        markers[index] = point;
     }
 
     CalculateNeighboringPoints(point);
@@ -144,22 +144,22 @@ void Form::SetPointInPosition(uint16 pos)
 
     if(index != static_cast<uint>(-1))
     {
-        points[index] = point;
+        markers[index] = point;
     }
     else
     {
-        points.push_back(point);
+        markers.push_back(point);
 
-        std::sort(points.begin(), points.end());
+        std::sort(markers.begin(), markers.end());
     }
 }
 
 
 void Form::RemovePoint()
 {
-    if (iCurPoint < points.size())
+    if (iCurPoint < markers.size())
     {
-        points.erase(points.begin() + static_cast<const int>(iCurPoint));
+        markers.erase(markers.begin() + static_cast<const int>(iCurPoint));
 
         LinearInterpolationLeft(iCurPoint);
 
@@ -172,23 +172,23 @@ void Form::MovePoint(int mouseX, int mouseY)
 {
     if (iCurPoint == 0)
     {
-        points[0].SetY(mouseY);
-        data[0] = points[0].data;
+        markers[0].SetY(mouseY);
+        data[0] = markers[0].data;
         LinearInterpolationRight(0);
     }
-    else if (iCurPoint == points.size() - 1)
+    else if (iCurPoint == markers.size() - 1)
     {
-        points[iCurPoint].SetY(mouseY);
-        data[Point::NUM_POINTS - 1] = points[iCurPoint].data;
+        markers[iCurPoint].SetY(mouseY);
+        data[Point::NUM_POINTS - 1] = markers[iCurPoint].data;
         LinearInterpolationLeft(iCurPoint);
     }
     else
     {
         Point point(mouseX, mouseY);
 
-        Point left = points[iCurPoint - 1];
+        Point left = markers[iCurPoint - 1];
 
-        Point right = points[iCurPoint + 1];
+        Point right = markers[iCurPoint + 1];
 
         if (point.pos <= left.pos)
         {
@@ -235,7 +235,7 @@ void Form::AlignPoint(Align::E align)
 {
     uint index = static_cast<uint>(-1);
 
-    Point point = points[iCurPoint];
+    Point point = markers[iCurPoint];
 
     if (align == Align::Left || align == Align::LeftTop || align == Align::LeftDown)
     {
@@ -251,9 +251,9 @@ void Form::AlignPoint(Align::E align)
 
                 pFuncCompare func = (align == Align::LeftDown) ? CompareLess : CompareMore;
 
-                while (i < points.size())
+                while (i < markers.size())
                 {
-                    if(func(points[i], point))
+                    if(func(markers[i], point))
                     {
                         index = i;
                         break;
@@ -265,7 +265,7 @@ void Form::AlignPoint(Align::E align)
     }
     else
     {
-        if (iCurPoint < points.size() - 1)
+        if (iCurPoint < markers.size() - 1)
         {
             if (align == Align::Right)
             {
@@ -277,9 +277,9 @@ void Form::AlignPoint(Align::E align)
 
                 pFuncCompare func = (align == Align::RightDown) ? CompareMore : CompareLess;
 
-                while (i < points.size() - 1)
+                while (i < markers.size() - 1)
                 {
-                    if (func(point, points[i]))
+                    if (func(point, markers[i]))
                     {
                         index = i;
                         break;
@@ -292,8 +292,8 @@ void Form::AlignPoint(Align::E align)
 
     if (index != static_cast<uint>(-1))
     {
-        points[iCurPoint].data = points[index].data;
-        SetPoint(points[iCurPoint]);
+        markers[iCurPoint].data = markers[index].data;
+        SetPoint(markers[iCurPoint]);
     }
 
     History::Add(TheForm);
@@ -302,18 +302,15 @@ void Form::AlignPoint(Align::E align)
 
 bool Form::ExistMarker(int mouseX, int mouseY, bool pressed, uint16 *index, uint16 *value)
 {
-    float scaleX = Point::ScaleX();
-    float scaleY = Point::ScaleY();
-
     uint16 positionNearestPoint = static_cast<uint16>(-1);
     double nearestDistance = 1e10;
 
-    for(uint16 i = 0; i < points.size(); i++)
+    for(uint16 i = 0; i < markers.size(); i++)
     {
-        int x = Math::Round<int>(static_cast<float>(mouseX) / scaleX);
-        int y = Math::Round<int>(static_cast<float>(mouseY) / scaleY);
+        int x = Math::Round<int>(static_cast<float>(mouseX) / Point::ScaleX());
+        int y = Math::Round<int>(static_cast<float>(mouseY - Grid::Y()) / Point::ScaleY());
 
-        double distance = points[i].DistanceFromMouse(x, y);
+        double distance = markers[i].DistanceFromMouse(x, y);
 
         if(distance < nearestDistance)
         {
@@ -331,12 +328,12 @@ bool Form::ExistMarker(int mouseX, int mouseY, bool pressed, uint16 *index, uint
 
         if (index)
         {
-            *index = points[positionNearestPoint].pos;
+            *index = markers[positionNearestPoint].pos;
         }
 
         if (value)
         {
-            *value = points[positionNearestPoint].data;
+            *value = markers[positionNearestPoint].data;
         }
 
         return true;
@@ -355,9 +352,9 @@ void Form::CalculateNeighboringPoints(const Point &point)
 {
     uint index = 0;                     // Здесь будет индекс point в векторе points
 
-    for (; index < points.size(); index++)
+    for (; index < markers.size(); index++)
     {
-        if (point == points[index])
+        if (point == markers[index])
         {
             break;
         }
@@ -398,7 +395,7 @@ void Form::Draw()
 
     Painter::SetColor(Color::GREEN);
 
-    for (Point point : points)
+    for (Point point : markers)
     {
         int x = Math::Round<int>(scaleX * static_cast<float>(point.pos));
         int y = Grid::Y() + Math::Round<int>(scaleY * static_cast<float>(Point::MAX - point.data));
@@ -409,8 +406,8 @@ void Form::Draw()
     if (iCurPoint != static_cast<uint>(-1))
     {
         Painter::DrawPoint(
-            Math::Round<int>(scaleX * static_cast<float>(points[iCurPoint].pos)),
-            Grid::Y() + Math::Round<int>(scaleY * static_cast<float>(Point::MAX - points[iCurPoint].data)),
+            Math::Round<int>(scaleX * static_cast<float>(markers[iCurPoint].pos)),
+            Grid::Y() + Math::Round<int>(scaleY * static_cast<float>(Point::MAX - markers[iCurPoint].data)),
             Point::SIZE * 3);
     }
 
@@ -440,7 +437,7 @@ void Form::LinearInterpolation(uint16 pos1, uint16 pos2)
 
 void Form::LinearInterpolationLeft(uint index)
 {
-    Point point = points[index];
+    Point point = markers[index];
 
     if (index == 0)                     // Если точка самая первая
     {
@@ -451,7 +448,7 @@ void Form::LinearInterpolationLeft(uint index)
     }
     else
     {
-        LinearInterpolation(points[index - 1].pos, point.pos);
+        LinearInterpolation(markers[index - 1].pos, point.pos);
     }
 
 }
@@ -459,9 +456,9 @@ void Form::LinearInterpolationLeft(uint index)
 
 void Form::LinearInterpolationRight(uint index)
 {
-    Point point = points[index];
+    Point point = markers[index];
 
-    if (index == points.size() - 1)
+    if (index == markers.size() - 1)
     {
         if (point.pos < Point::NUM_POINTS - 1)
         {
@@ -470,7 +467,7 @@ void Form::LinearInterpolationRight(uint index)
     }
     else
     {
-        LinearInterpolation(point.pos, points[index + 1].pos);
+        LinearInterpolation(point.pos, markers[index + 1].pos);
     }
 }
 
@@ -482,7 +479,7 @@ void Form::SetMainForm(const uint16 dat[Point::NUM_POINTS], const std::vector<Po
         data[i] = Point::AVE;
     }
 
-    points.clear();
+    markers.clear();
 
     SetPointInRealCoord(static_cast<uint16>(0), dat[0]);
     SetPointInRealCoord(static_cast<uint16>(Point::NUM_POINTS - 1), dat[Point::NUM_POINTS - 1]);
@@ -519,7 +516,7 @@ void Form::SetAdditionForm(const uint16 d[Point::NUM_POINTS])
 
 bool Form::IsEquals(const Form *form) const
 {
-    if(points != form->points)
+    if(markers != form->markers)
     {
         return false;
     }
@@ -544,7 +541,7 @@ void Form::SaveToFile(wxTextFile &file)
 
     file.AddLine(wxT("points"));
 
-    if (points.size() == 0)
+    if (markers.size() == 0)
     {
         for (int i = 0; i < Point::NUM_POINTS; i++)
         {
@@ -553,7 +550,7 @@ void Form::SaveToFile(wxTextFile &file)
     }
     else
     {
-        for (Point &point : points)
+        for (Point &point : markers)
         {
             file.AddLine(wxString::Format(wxT("%i %i"), point.pos, point.data));
         }
