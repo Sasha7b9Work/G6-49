@@ -34,6 +34,8 @@ struct Painter
 
     static void DrawTextInZone(int x, int y, int widht, const wxString &text, const Color &color = Color::NUMBER);
 
+    static int GetLengthText(const wxString &text);
+
 private:
 
     static void SetSolidBrush(const Color &color);

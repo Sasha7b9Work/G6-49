@@ -161,7 +161,13 @@ void Painter::DrawTextInZone(int x, int y, int widht, const wxString &text, cons
 
     memDC.SetTextForeground(MakeColour(currentColor));
 
-    wxSize size = memDC.GetTextExtent(text);
+    int size = GetLengthText(text);
 
-    memDC.DrawText(text, x + widht / 2 - size.x / 2, y);
+    memDC.DrawText(text, x + widht / 2 - size / 2, y);
+}
+
+
+int Painter::GetLengthText(const wxString &text)
+{
+    return memDC.GetTextExtent(text).x;
 }
