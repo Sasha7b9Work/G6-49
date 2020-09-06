@@ -61,7 +61,7 @@ private:
 
     void OnAlignRightDown(wxCommandEvent &);
 
-    void OnDeletePoint(wxCommandEvent &);
+    void OnDeleteMarker(wxCommandEvent &);
 
     void OnParametersPoint(wxCommandEvent &);
 

@@ -82,7 +82,7 @@ void ParametersDialog::OnButtonApply(wxCommandEvent &)
     uint16 index = static_cast<uint16>(atoi(tcPosition->GetValue().c_str()));
     uint16 value = static_cast<uint16>(atoi(tcValue->GetValue().c_str()));
 
-    TheForm->RemovePoint();
+    TheForm->RemoveCurrentMarker();
     TheForm->SetPointInRealCoord(index, value);
 
     Destroy();

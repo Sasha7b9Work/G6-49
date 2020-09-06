@@ -119,7 +119,7 @@ Frame::Frame(const wxString &title)
     SetSizeAndPosition();
 
     Bind(wxEVT_MENU,     &Frame::OnQuit,            this, MENU_FILE_QUIT);
-    Bind(wxEVT_MENU,     &Frame::OnDeletePoint,     this, CONTEXT_MENU_DELETE);
+    Bind(wxEVT_MENU,     &Frame::OnDeleteMarker,    this, CONTEXT_MENU_DELETE);
     Bind(wxEVT_MENU,     &Frame::OnParametersPoint, this, CONTEXT_MENU_PARAMETERS);
     Bind(wxEVT_MENU,     &Frame::OnAlignLeft,       this, ALIGN_LEFT);
     Bind(wxEVT_MENU,     &Frame::OnAlignRight,      this, ALIGN_RIGHT);
@@ -345,9 +345,9 @@ void Frame::OnParametersPoint(wxCommandEvent &)
 }
 
 
-void Frame::OnDeletePoint(wxCommandEvent &)
+void Frame::OnDeleteMarker(wxCommandEvent &)
 {
-    TheForm->RemovePoint();
+    TheForm->RemoveCurrentMarker();
 }
 
 

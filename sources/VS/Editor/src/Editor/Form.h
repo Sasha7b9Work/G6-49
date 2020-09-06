@@ -110,7 +110,7 @@ public:
 	bool ExistMarker(int mouseX, int mouseY, bool pressed, uint16 *index = nullptr, uint16 *value = nullptr);
 
 	// ”далить точку в позиции мыши
-    void RemovePoint();
+    void RemoveCurrentMarker();
 
 	// ѕереместить точку в новую позицию
     void MovePoint(int mouseX, int mouseY);
@@ -145,7 +145,7 @@ private:
 	std::vector<Point> markers;
 
 	// «десь хранитс€ индекс точки, которой управл€ем в текущий момент
-	uint iCurPoint = 0;
+	uint iCurMarker = 0;
 
 	// ¬озвращает index точки в позиции pos. 0xFFFFFFFF, если точки в этой позиции нет
 	uint PointInPosition(uint16 pos);

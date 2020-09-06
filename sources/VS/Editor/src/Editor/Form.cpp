@@ -155,40 +155,40 @@ void Form::SetPointInPosition(uint16 pos)
 }
 
 
-void Form::RemovePoint()
+void Form::RemoveCurrentMarker()
 {
-    if (iCurPoint < markers.size())
+    if (iCurMarker < markers.size())
     {
-        markers.erase(markers.begin() + static_cast<const int>(iCurPoint));
+        markers.erase(markers.begin() + static_cast<const int>(iCurMarker));
 
-        LinearInterpolationLeft(iCurPoint);
+        LinearInterpolationLeft(iCurMarker);
 
-        iCurPoint = static_cast<uint>(-1);
+        iCurMarker = static_cast<uint>(-1);
     }
 }
 
 
 void Form::MovePoint(int mouseX, int mouseY)
 {
-    if (iCurPoint == 0)
+    if (iCurMarker == 0)
     {
         markers[0].SetY(mouseY);
         data[0] = markers[0].data;
         LinearInterpolationRight(0);
     }
-    else if (iCurPoint == markers.size() - 1)
+    else if (iCurMarker == markers.size() - 1)
     {
-        markers[iCurPoint].SetY(mouseY);
-        data[Point::NUM_POINTS - 1] = markers[iCurPoint].data;
-        LinearInterpolationLeft(iCurPoint);
+        markers[iCurMarker].SetY(mouseY);
+        data[Point::NUM_POINTS - 1] = markers[iCurMarker].data;
+        LinearInterpolationLeft(iCurMarker);
     }
     else
     {
         Point point(mouseX, mouseY);
 
-        Point left = markers[iCurPoint - 1];
+        Point left = markers[iCurMarker - 1];
 
-        Point right = markers[iCurPoint + 1];
+        Point right = markers[iCurMarker + 1];
 
         if (point.pos <= left.pos)
         {
@@ -198,16 +198,12 @@ void Form::MovePoint(int mouseX, int mouseY)
         {
             point.pos = static_cast<uint16>(right.pos - 1);
         }
-        else
-        {
-            // здесь ничего
-        }
 
-        uint tempIndex = iCurPoint;
+        uint tempIndex = iCurMarker;
 
-        RemovePoint();
+        RemoveCurrentMarker();
 
-        iCurPoint = tempIndex;
+        iCurMarker = tempIndex;
 
         SetPoint(point);
     }
@@ -235,19 +231,19 @@ void Form::AlignPoint(Align::E align)
 {
     uint index = static_cast<uint>(-1);
 
-    Point point = markers[iCurPoint];
+    Point point = markers[iCurMarker];
 
     if (align == Align::Left || align == Align::LeftTop || align == Align::LeftDown)
     {
-        if (iCurPoint > 0)
+        if (iCurMarker > 0)
         {
             if(align == Align::Left)
             {
-                index = iCurPoint - 1;
+                index = iCurMarker - 1;
             }
             else
             {
-                uint i = iCurPoint - 1;
+                uint i = iCurMarker - 1;
 
                 pFuncCompare func = (align == Align::LeftDown) ? CompareLess : CompareMore;
 
@@ -265,15 +261,15 @@ void Form::AlignPoint(Align::E align)
     }
     else
     {
-        if (iCurPoint < markers.size() - 1)
+        if (iCurMarker < markers.size() - 1)
         {
             if (align == Align::Right)
             {
-                index = iCurPoint + 1;
+                index = iCurMarker + 1;
             }
             else
             {
-                uint i = iCurPoint + 1;
+                uint i = iCurMarker + 1;
 
                 pFuncCompare func = (align == Align::RightDown) ? CompareMore : CompareLess;
 
@@ -292,8 +288,8 @@ void Form::AlignPoint(Align::E align)
 
     if (index != static_cast<uint>(-1))
     {
-        markers[iCurPoint].data = markers[index].data;
-        SetPoint(markers[iCurPoint]);
+        markers[iCurMarker].data = markers[index].data;
+        SetPoint(markers[iCurMarker]);
     }
 
     History::Add(TheForm);
@@ -321,9 +317,9 @@ bool Form::ExistMarker(int mouseX, int mouseY, bool pressed, uint16 *index, uint
 
     if(nearestDistance < Point::SIZE * 5.0)
     {
-        if(iCurPoint == static_cast<uint>(-1) || !pressed)
+        if(iCurMarker == static_cast<uint>(-1) || !pressed)
         {
-            iCurPoint = positionNearestPoint;
+            iCurMarker = positionNearestPoint;
         }
 
         if (index)
@@ -341,7 +337,7 @@ bool Form::ExistMarker(int mouseX, int mouseY, bool pressed, uint16 *index, uint
 
     if (!pressed)
     {
-        iCurPoint = static_cast<uint>(-1);
+        iCurMarker = static_cast<uint>(-1);
     }
 
     return false;
@@ -403,11 +399,11 @@ void Form::Draw()
         Painter::DrawPoint(x, y, Point::SIZE);
     }
 
-    if (iCurPoint != static_cast<uint>(-1))
+    if (iCurMarker != static_cast<uint>(-1))
     {
         Painter::DrawPoint(
-            Math::Round<int>(scaleX * static_cast<float>(markers[iCurPoint].pos)),
-            Grid::Y() + Math::Round<int>(scaleY * static_cast<float>(Point::MAX - markers[iCurPoint].data)),
+            Math::Round<int>(scaleX * static_cast<float>(markers[iCurMarker].pos)),
+            Grid::Y() + Math::Round<int>(scaleY * static_cast<float>(Point::MAX - markers[iCurMarker].data)),
             Point::SIZE * 3);
     }
 
