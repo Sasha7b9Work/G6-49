@@ -23,10 +23,45 @@ struct Window
 {
     static void Draw();
 
+    // Возвращает true, если мышь находится под окном
+    static bool UnderMouse(int mouseX, int mouseY);
+
+    static int X();
+    static int Y() { return Zoomer::Y(); }
+    static int Width();
+    static int Height();
+    static int Right();
+    static int Bottom();
+
 private:
 
     static void DrawText(int x, int y, int width);
 };
+
+
+struct Grabber
+{
+    static bool IsGrabbing() { return isGrabbing; }
+    static void Grab();
+    static bool UnGrab();
+private:
+    static bool isGrabbing;             // true, если окно захвачено мышью
+};
+
+
+bool Grabber::isGrabbing = false;
+
+
+bool Grabber::UnGrab()
+{
+    if (isGrabbing)
+    {
+        isGrabbing = false;
+        return true;
+    }
+
+    return false;
+}
 
 
 void Zoomer::Increase(int /*mouseX*/)
@@ -106,18 +141,49 @@ void Zoomer::Draw()
 
 void Window::Draw()
 {
+    int x = X();
+    int y = Y();
+    int width = Width();
+    int height = Height();
+
+    Painter::FillRegion(x, y, width, height, Color::GRAY_3F);
+    Painter::DrawRectangle(x, y, width, height, Color::WHITE);
+
+    DrawText(x, y + 1, width);
+}
+
+
+int Window::X()
+{
     float dX = static_cast<float>(Zoomer::IndexFirsPoint()) / Point::AMOUNT * static_cast<float>(Grid::Width());
 
+    return Zoomer::X() + static_cast<int>(dX + 0.5F);
+}
+
+
+int Window::Right()
+{
+    return X() + Width();
+}
+
+
+int Window::Width()
+{
     float width = static_cast<float>(Zoomer::NumberDrawingPoints()) / Point::AMOUNT * static_cast<float>(Grid::Width());
 
-    int x = Zoomer::X() + static_cast<int>(dX + 0.5F);
+    return static_cast<int>(width + 0.5F);
+}
 
-    int y = Zoomer::Y();
 
-    Painter::FillRegion(x, y, static_cast<int>(width + 0.5F), Zoomer::Height(), Color::GRAY_3F);
-    Painter::DrawRectangle(x, y, static_cast<int>(width + 0.5F), Zoomer::Height(), Color::WHITE);
+int Window::Bottom()
+{
+    return Y() + Height();
+}
 
-    DrawText(x, y + 1, static_cast<int>(width + 0.5F));
+
+int Window::Height()
+{
+    return Zoomer::Height();
 }
 
 
@@ -193,4 +259,35 @@ int Zoomer::NumberDrawingPoints()
 bool Zoomer::UnderMouse(int mouseX, int mouseY)
 {
     return (mouseX >= X()) && (mouseX <= Right()) && (mouseY >= Y()) && (mouseY <= Bottom());
+}
+
+
+bool Zoomer::Grab(int mouseX, int mouseY)
+{
+    if (!UnderMouse(mouseX, mouseY))
+    {
+        return false;
+    }
+
+
+
+    return true;
+}
+
+
+bool Zoomer::UnGrab()
+{
+    return Grabber::UnGrab();
+}
+
+
+void Zoomer::MoveMouse(int /*mouseX*/)
+{
+
+}
+
+
+bool Window::UnderMouse(int mouseX, int mouseY)
+{
+    return (mouseX > X()) && (mouseX < Right()) && (mouseY > Y()) && (mouseY < Bottom());
 }

@@ -50,15 +50,20 @@ public:
     // Возвращает true, если находится под мыщью
     static bool UnderMouse(int mouseX, int mouseY);
 
+    static void MoveMouse(int mouseX);
+
+    // Захватить мышью
+    static bool Grab(int mouseX, int mouseY);
+
+    // Отвязать от мыши
+    static bool UnGrab();
+
 private:
 
     static int scale;
-
-    static int indexFirstPoint;
-
-    static int indexMiddlePoint;
-
-    static int numberDrawingPoints;
+    static int indexFirstPoint;         // Индекс первой выводимой точки
+    static int indexMiddlePoint;        // Индекс средней выводимой точки
+    static int numberDrawingPoints;     // Количество выводимых точек
 
     // Перерасчёт индексов ключевых точек
     static void CalculateIndexesPoints();

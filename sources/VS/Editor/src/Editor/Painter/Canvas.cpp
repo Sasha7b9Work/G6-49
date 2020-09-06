@@ -107,6 +107,12 @@ void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
 {
     event.GetPosition(&mouseX, &mouseY);
 
+    if (mouseIsDown)
+    {
+        Zoomer::MoveMouse(mouseX);
+        return;
+    }
+
     if (Zoomer::UnderMouse(mouseX, mouseY))
     {
         SetMouseCursor();
@@ -144,6 +150,11 @@ void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
 void Canvas::OnMouseLeftDown(wxMouseEvent &event) //-V2009
 {
     event.GetPosition(&mouseX, &mouseY);
+
+    if (Zoomer::Grab(mouseX, mouseY))
+    {
+        return;
+    }
 
     switch (ModeButtonLeft::Get())
     {
@@ -204,6 +215,11 @@ void Canvas::OnMouseLeftUp(wxMouseEvent &event)
     event.GetPosition(&mouseX, &mouseY);
 
     mouseIsDown = false;
+
+    if (Zoomer::UnGrab())
+    {
+        return;
+    }
 
     switch (ModeButtonLeft::Get())
     {
