@@ -1,8 +1,9 @@
 #pragma once
+#include "Colors.h"
+
 #pragma warning(push, 0)
 #include <wx/wx.h>
 #pragma warning(pop)
-#include "Colors.h"
 
 
 class Canvas : public wxPanel
@@ -15,14 +16,6 @@ public:
 
     void Draw();
 
-    void SetColor(const Color &color = Color::NUMBER);
-
-    void DrawPoint(int x, int y, int size, const Color &color = Color::NUMBER);
-
-    void DrawLine(int x0, int y0, int x1, int y1, const Color &color = Color::NUMBER);
-
-    void FillRegion(int x, int y, int width, int height, const Color &color = Color::NUMBER);
-
     void Redraw();
 
 private:
@@ -31,8 +24,6 @@ private:
     int mouseX = 0;
     int mouseY = 0;
     wxWindow *parent;
-    Color currentColor;
-    double zoom = 100.0;
 
     void BeginScene();
 
@@ -56,10 +47,6 @@ private:
 
     // Установить необходимую форму курсора мыши
     void SetMouseCursor();
-
-    wxColour MakeColour(const Color &color);
-
-    void SetSolidBrush(const Color &color);
 };
 
 

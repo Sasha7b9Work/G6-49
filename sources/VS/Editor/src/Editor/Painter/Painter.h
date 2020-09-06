@@ -1,0 +1,26 @@
+#pragma once
+#include "Editor/Painter/Colors.h"
+
+#pragma warning(push, 0)
+#include <wx/wx.h>
+#pragma warning(pop)
+
+
+struct Painter
+{
+    static void SetColor(const Color &color = Color::NUMBER);
+
+    static void DrawPoint(int x, int y, int size, const Color &color = Color::NUMBER);
+
+    static void DrawLine(int x0, int y0, int x1, int y1, const Color &color = Color::NUMBER);
+
+    static void FillRegion(int x, int y, int width, int height, const Color &color = Color::NUMBER);
+
+private:
+
+    static void SetSolidBrush(const Color &color);
+
+    static wxColour MakeColour(const Color &color);
+
+    static Color currentColor;
+};

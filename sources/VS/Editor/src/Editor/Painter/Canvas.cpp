@@ -5,6 +5,7 @@
 #include "Editor/Selector.h"
 #include "Editor/Settings.h"
 #include "Editor/Painter/Canvas.h"
+#include "Editor/Painter/Painter.h"
 #include "Editor/Painter/Zoomer.h"
 
 #include <ctime>
@@ -16,10 +17,10 @@
 Canvas *TheCanvas = nullptr;
 static bool needRedraw = true;
 static wxBitmap *bitmapButton = nullptr;    // Здесь рисуем
-static wxMemoryDC memDC;                    // Контекст рисования
+wxMemoryDC memDC;                    // Контекст рисования
 
 
-Canvas::Canvas(wxWindow *p) : wxPanel(p, wxID_ANY), parent(p), currentColor(Color::NUMBER.value)
+Canvas::Canvas(wxWindow *p) : wxPanel(p, wxID_ANY), parent(p)
 {
     bitmapButton = new wxBitmap(parent->GetClientSize());
     SetDoubleBuffered(true);
@@ -71,78 +72,6 @@ void Canvas::EndScene()
 }
 
 
-void Canvas::FillRegion(int x, int y, int width, int height, const Color &color)
-{
-    SetSolidBrush(color);
-
-    SetColor(color);
-
-    memDC.DrawRectangle(x, y, width, height);
-}
-
-
-void Canvas::SetColor(const Color &color)
-{
-    if (color != Color::NUMBER)
-    {
-        currentColor = color;
-
-        wxColour colorDraw = MakeColour(color);
-
-        memDC.SetPen(wxPen(colorDraw));
-    }
-}
-
-
-void Canvas::SetSolidBrush(const Color &color)
-{
-    if (color != Color::NUMBER)
-    {
-        wxBrush brush(MakeColour(color), wxBRUSHSTYLE_SOLID);
-        memDC.SetBrush(brush);
-    }
-    else
-    {
-        wxBrush brush(MakeColour(currentColor), wxBRUSHSTYLE_SOLID);
-        memDC.SetBrush(brush);
-    }
-    
-}
-
-
-wxColour Canvas::MakeColour(const Color &color)
-{
-    uint value = COLOR(color.value);
-
-    uint8 b = static_cast<uint8>(value);
-    uint8 g = static_cast<uint8>(value >> 8);
-    uint8 r = static_cast<uint8>(value >> 16);
-
-    return wxColour(r, g, b);
-}
-
-
-void Canvas::DrawPoint(int x, int y, int size, const Color &color)
-{
-    SetSolidBrush(color);
-
-    SetColor(color);
-
-    x -= size / 2;
-    y -= size / 2;
-
-    memDC.DrawRectangle({ x, y, size, size });
-}
-
-
-void Canvas::DrawLine(int x0, int y0, int x1, int y1, const Color &color)
-{
-    SetColor(color);
-
-    memDC.DrawLine(x0, y0, x1, y1);
-}
-
-
 void Canvas::Draw()
 {
     static clock_t time = 0;
@@ -184,15 +113,15 @@ void Canvas::DrawGrid()
 
     for (int i = 0; i < 19; i++)
     {
-        DrawLine(static_cast<int>(x + 0.5F), 0, static_cast<int>(x + 0.5F), height, Color::GRAY_2F);
-        DrawLine(0, static_cast<int>(y + 0.5F), width, static_cast<int>(y + 0.5F));
+        Painter::DrawLine(static_cast<int>(x + 0.5F), 0, static_cast<int>(x + 0.5F), height, Color::GRAY_2F);
+        Painter::DrawLine(0, static_cast<int>(y + 0.5F), width, static_cast<int>(y + 0.5F));
 
         x += stepX;
         y += stepY;
     }
 
-    DrawLine(width / 2, 0, width / 2, height, Color::GRAY_4F);
-    DrawLine(0, height / 2, width, height / 2);
+    Painter::DrawLine(width / 2, 0, width / 2, height, Color::GRAY_4F);
+    Painter::DrawLine(0, height / 2, width, height / 2);
 }
 
 

@@ -3,6 +3,8 @@
 #include "Editor/Editor.h"
 #include "Editor/History.h"
 #include "Editor/Painter/Canvas.h"
+#include "Editor/Painter/Painter.h"
+
 #pragma warning(push, 0)
 #include <wx/msgdlg.h>
 #pragma warning(pop)
@@ -369,7 +371,7 @@ static void DrawForm(const uint16 data[Point::NUM_POINTS], Color color)
     float scaleX = Point::ScaleX();
     float scaleY = Point::ScaleY();
 
-    TheCanvas->SetColor(color);
+    Painter::SetColor(color);
 
     for (int i = 1; i < Point::NUM_POINTS; i++)
     {
@@ -379,7 +381,7 @@ static void DrawForm(const uint16 data[Point::NUM_POINTS], Color color)
         int x1 = Math::Round<int>(scaleX * static_cast<float>(i));
         int y1 = Math::Round<int>(scaleY * static_cast<float>(Point::MAX - data[i]));
 
-        TheCanvas->DrawLine(x0, y0, x1, y1);
+        Painter::DrawLine(x0, y0, x1, y1);
     }
 }
 
@@ -391,19 +393,19 @@ void Form::Draw()
 
     DrawForm(data, Color::WHITE);
 
-    TheCanvas->SetColor(Color::GREEN);
+    Painter::SetColor(Color::GREEN);
 
     for (Point point : points)
     {
         int x = Math::Round<int>(scaleX * static_cast<float>(point.pos));
         int y = Math::Round<int>(scaleY * static_cast<float>(Point::MAX - point.data));
 
-        TheCanvas->DrawPoint(x, y, Point::SIZE);
+        Painter::DrawPoint(x, y, Point::SIZE);
     }
 
     if (iCurPoint != static_cast<uint>(-1))
     {
-        TheCanvas->DrawPoint(Math::Round<int>(scaleX * static_cast<float>(points[iCurPoint].pos)), Math::Round<int>(scaleY * static_cast<float>(Point::MAX - points[iCurPoint].data)), Point::SIZE * 3);
+        Painter::DrawPoint(Math::Round<int>(scaleX * static_cast<float>(points[iCurPoint].pos)), Math::Round<int>(scaleY * static_cast<float>(Point::MAX - points[iCurPoint].data)), Point::SIZE * 3);
     }
 
     if (drawAdditionData)
