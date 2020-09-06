@@ -22,7 +22,7 @@ const uint colors[255]
     0x0000ff00,     // GREEN
     0x000000ff,     // BLUE
     0x00001f00,     // DARK_GREEN_1F
-    0x00003f00,     // DARK_GREEN_2F
+    0x00003f00,     // DARK_GREEN_3F
     0x00808080      // GRAY_50
 };
 

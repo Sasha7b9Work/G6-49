@@ -21,6 +21,8 @@ public:
 
     void DrawLine(int x0, int y0, int x1, int y1, const Color &color = Color::NUMBER);
 
+    void FillRegion(int x, int y, int width, int height, const Color &color = Color::NUMBER);
+
     void Redraw();
 
 private:
@@ -52,6 +54,8 @@ private:
 
     // Установить необходимую форму курсора мыши
     void SetMouseCursor();
+
+    wxColour MakeColour(const Color &color);
 };
 
 

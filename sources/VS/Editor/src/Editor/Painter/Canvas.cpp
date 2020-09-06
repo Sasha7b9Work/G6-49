@@ -72,6 +72,37 @@ void Canvas::EndScene()
 }
 
 
+void Canvas::FillRegion(int x, int y, int width, int height, const Color &color)
+{
+    SetColor(color);
+
+    memDC.DrawRectangle(x, y, width, height);
+}
+
+
+void Canvas::SetColor(const Color &color)
+{
+    if (color != Color::NUMBER)
+    {
+        wxColour colorDraw = MakeColour(color);
+
+        memDC.SetPen(wxPen(colorDraw));
+    }
+}
+
+
+wxColour Canvas::MakeColour(const Color &color)
+{
+    uint value = COLOR(color.value);
+
+    uint8 b = static_cast<uint8>(value);
+    uint8 g = static_cast<uint8>(value >> 8);
+    uint8 r = static_cast<uint8>(value >> 16);
+
+    return wxColour(r, g, b);
+}
+
+
 void Canvas::DrawPoint(int x, int y, int size, const Color &color)
 {
     SetColor(color);
@@ -113,21 +144,6 @@ void Canvas::Draw()
         needRedraw = false;
 
         time = clock();
-    }
-}
-
-void Canvas::SetColor(const Color &color)
-{
-    if (color != Color::NUMBER)
-    {
-        uint value = COLOR(color.value);
-        uint8 b = static_cast<uint8>(value);
-        uint8 g = static_cast<uint8>(value >> 8);
-        uint8 r = static_cast<uint8>(value >> 16);
-
-        wxColour colorDraw = wxColour(r, g, b);
-
-        memDC.SetPen(wxPen(colorDraw));
     }
 }
 
@@ -187,9 +203,9 @@ void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
         if (mouseIsDown)
         {
             Selector::MoveBorder(mouseX);
+            Redraw();
         }
         SetMouseCursor();
-        Redraw();
         break;
     }
 }

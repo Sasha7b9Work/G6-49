@@ -14,8 +14,9 @@ struct Cursor
     bool IsEnabled() { return x >= 0; }
     bool OverMouseX(int mouseX);            // Возвращает true, если курсор находится поверх точки с координатой x
     void Draw();
-    bool IsGrabbing()  { return grabbing == this; }
+    bool IsGrabbing()         { return grabbing == this; }
     static void EndGrabbing() { grabbing = nullptr; }
+    int GetMouseX()           { return Point::PointToMouseX(x); }
 };
 
 int Cursor::delta = 5;
@@ -67,6 +68,16 @@ void Selector::EndGrab()
 
 void Selector::Draw()
 {
+    int x1 = cursor1.GetMouseX();
+    int x2 = cursor2.GetMouseX();
+
+    if (x2 < x1)
+    {
+        Math::Swap(&x1, &x2);
+    }
+
+    TheCanvas->FillRegion(x1, 0, x2 - x1, TheCanvas->GetSize().y, Color::BLUE);
+
     cursor1.Draw();
     cursor2.Draw();
 }
