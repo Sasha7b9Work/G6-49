@@ -8,6 +8,18 @@
 
 struct Painter
 {
+    static void Init(wxWindow *parent);
+
+    static void DeInit();
+
+    static wxBitmap *GetBitmap();
+
+    static void OnResizeEvent(wxSizeEvent &event);
+
+    static void BegineScene();
+
+    static void EndScene();
+
     static void SetColor(const Color &color = Color::NUMBER);
 
     static void DrawPoint(int x, int y, int size, const Color &color = Color::NUMBER);
@@ -23,4 +35,6 @@ private:
     static wxColour MakeColour(const Color &color);
 
     static Color currentColor;
+
+    static wxWindow *parent;
 };
