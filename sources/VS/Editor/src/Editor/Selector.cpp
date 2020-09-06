@@ -38,17 +38,10 @@ void Selector::BeginSelect(int mouseX)
     {
         cursor1.Set(mouseX);
     }
-    else
+    else if(!cursor1.IsEnabled())
     {
-        if (cursor1.IsEnabled())
-        {
-            cursor2.Set(mouseX);
-        }
-        else
-        {
-            cursor1.Set(mouseX);
-            cursor2.Set(mouseX);
-        }
+        cursor1.Set(mouseX);
+        cursor2.Set(mouseX);
     }
 }
 
