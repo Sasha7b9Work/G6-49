@@ -113,11 +113,7 @@ void Window::Draw()
     Painter::FillRegion(x, y, static_cast<int>(width + 0.5F), Zoomer::Height(), Color::GRAY_3F);
     Painter::DrawRectangle(x, y, static_cast<int>(width + 0.5F), Zoomer::Height(), Color::WHITE);
 
-    char buffer[100];
-
-    std::sprintf(buffer, "%d%%", Zoomer::Scale());
-
-    Painter::DrawTextInZone(x + 3, y + 1, static_cast<int>(width + 0.5F), buffer);
+    Painter::DrawTextInZone(x + 3, y + 1, static_cast<int>(width + 0.5F), wxString::Format(wxT("%d%%"), Zoomer::Scale()));
 }
 
 

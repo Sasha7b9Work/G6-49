@@ -155,7 +155,7 @@ void Painter::DrawText(int x, int y, char *text, const Color &color)
 }
 
 
-void Painter::DrawTextInZone(int x, int y, int widht, char *text, const Color &color)
+void Painter::DrawTextInZone(int x, int y, int widht, const wxString &text, const Color &color)
 {
     SetColor(color);
 

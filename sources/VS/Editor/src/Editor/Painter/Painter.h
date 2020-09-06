@@ -32,7 +32,7 @@ struct Painter
 
     static void DrawText(int x, int y, char *text, const Color &color = Color::NUMBER);
 
-    static void DrawTextInZone(int x, int y, int widht, char *text, const Color &color = Color::NUMBER);
+    static void DrawTextInZone(int x, int y, int widht, const wxString &text, const Color &color = Color::NUMBER);
 
 private:
 
