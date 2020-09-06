@@ -22,6 +22,10 @@ static const std::vector<int> scales { SCALE_MIN, 150, 225, 350, 500, 800, 1100,
 struct Window
 {
     static void Draw();
+
+private:
+
+    static void DrawText(int x, int y, int width);
 };
 
 
@@ -113,9 +117,15 @@ void Window::Draw()
     Painter::FillRegion(x, y, static_cast<int>(width + 0.5F), Zoomer::Height(), Color::GRAY_3F);
     Painter::DrawRectangle(x, y, static_cast<int>(width + 0.5F), Zoomer::Height(), Color::WHITE);
 
+    DrawText(x, y, static_cast<int>(width + 0.5F));
+}
+
+
+void Window::DrawText(int x, int y, int width)
+{
     wxString text = wxString::Format(wxT("%d%%"), Zoomer::Scale());
 
-    Painter::DrawTextInZone(x + 3, y + 1, static_cast<int>(width + 0.5F), text);
+    Painter::DrawTextInZone(x + 3, y + 1, width, text);
 }
 
 
