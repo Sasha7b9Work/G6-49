@@ -18,6 +18,13 @@ static const int SCALE_MAX = 13000;
 static const std::vector<int> scales { SCALE_MIN, 150, 225, 350, 500, 800, 1100, 1700, 2600, 3800, 5800, 8600, SCALE_MAX };
 
 
+// Точки, отображаемые в сетке
+struct Window
+{
+    static void Draw();
+};
+
+
 void Zoomer::Increase(int /*mouseX*/)
 {
     for (uint i = 0; i < scales.size() - 1; i++)
@@ -54,7 +61,7 @@ void Zoomer::Decrease(int /*mouseX*/)
 
 void Zoomer::CalculateIndexesPoints()
 {
-    numberDrawingPoints = 100.0F / scale * Point::AMOUNT;
+    numberDrawingPoints = static_cast<int>(100.0F / static_cast<float>(scale) * Point::AMOUNT);
 
     indexFirstPoint = indexMiddlePoint - numberDrawingPoints / 2;
 
@@ -89,33 +96,40 @@ void Zoomer::Draw()
 
     Painter::DrawRectangle(X(), Y(), Width(), Height(), Color::WHITE);
 
-    DrawWindow();
+    Window::Draw();
 }
 
 
-void Zoomer::DrawWindow()
+void Window::Draw()
 {
-    float dX = static_cast<float>(IndexFirsPoint()) / Point::AMOUNT * static_cast<float>(Grid::Width());
+    float dX = static_cast<float>(Zoomer::IndexFirsPoint()) / Point::AMOUNT * static_cast<float>(Grid::Width());
 
-    float width = static_cast<float>(NumberDrawingPoints()) / Point::AMOUNT * static_cast<float>(Grid::Width());
+    float width = static_cast<float>(Zoomer::NumberDrawingPoints()) / Point::AMOUNT * static_cast<float>(Grid::Width());
 
-    int x = X() + static_cast<int>(dX + 0.5F);
+    int x = Zoomer::X() + static_cast<int>(dX + 0.5F);
 
-    int y = Y();
+    int y = Zoomer::Y();
 
-    Painter::DrawRectangle(x, y, static_cast<int>(width + 0.5F), Height(), Color::WHITE);
+    Painter::FillRegion(x, y, static_cast<int>(width + 0.5F), Zoomer::Height(), Color::GRAY_3F);
+    Painter::DrawRectangle(x, y, static_cast<int>(width + 0.5F), Zoomer::Height(), Color::WHITE);
 
     char buffer[100];
 
-    std::sprintf(buffer, "%d%%", scale);
+    std::sprintf(buffer, "%d%%", Zoomer::Scale());
 
-    Painter::DrawTextInZone(x + 3, y + 1, width, buffer);
+    Painter::DrawTextInZone(x + 3, y + 1, static_cast<int>(width + 0.5F), buffer);
 }
 
 
 int Zoomer::X()
 {
     return 0;
+}
+
+
+int Zoomer::Right()
+{
+    return X() + Width();
 }
 
 
@@ -137,6 +151,12 @@ int Zoomer::Height()
 }
 
 
+int Zoomer::Bottom()
+{
+    return Y() + Height();
+}
+
+
 int Zoomer::IndexFirsPoint()
 {
     return indexFirstPoint;
@@ -146,4 +166,10 @@ int Zoomer::IndexFirsPoint()
 int Zoomer::NumberDrawingPoints()
 {
     return numberDrawingPoints;
+}
+
+
+bool Zoomer::UnderMouse(int mouseX, int mouseY)
+{
+    return (mouseX >= X()) && (mouseX <= Right()) && (mouseY >= Y()) && (mouseY <= Bottom());
 }

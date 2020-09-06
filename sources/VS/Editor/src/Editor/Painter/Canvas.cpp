@@ -107,6 +107,12 @@ void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
 {
     event.GetPosition(&mouseX, &mouseY);
 
+    if (Zoomer::UnderMouse(mouseX, mouseY))
+    {
+        SetMouseCursor();
+        return;
+    }
+
     switch (ModeButtonLeft::Get())
     {
     case ModeButtonLeft::EditLines:
@@ -219,6 +225,14 @@ void Canvas::OnMouseLeftUp(wxMouseEvent &event)
 
 void Canvas::SetMouseCursor()
 {
+    if (Zoomer::UnderMouse(mouseX, mouseY))
+    {
+        HCURSOR cursor = LoadCursor(NULL, IDC_HAND);
+        ::SetCursor(cursor);
+        ::ShowCursor(true);
+        return;
+    }
+
     switch (ModeButtonLeft::Get())
     {
     case ModeButtonLeft::EditPoints:
