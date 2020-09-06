@@ -117,7 +117,7 @@ void Window::Draw()
     Painter::FillRegion(x, y, static_cast<int>(width + 0.5F), Zoomer::Height(), Color::GRAY_3F);
     Painter::DrawRectangle(x, y, static_cast<int>(width + 0.5F), Zoomer::Height(), Color::WHITE);
 
-    DrawText(x, y, static_cast<int>(width + 0.5F));
+    DrawText(x, y + 1, static_cast<int>(width + 0.5F));
 }
 
 
@@ -125,7 +125,16 @@ void Window::DrawText(int x, int y, int width)
 {
     wxString text = wxString::Format(wxT("%d%%"), Zoomer::Scale());
 
-    Painter::DrawTextInZone(x + 3, y + 1, width, text);
+    int length = Painter::GetLengthText(text);
+
+    if (length < width)
+    {
+        Painter::DrawTextInZone(x, y, width, text);
+    }
+    else if(width + length < Grid::Bottom())
+    {
+        Painter::DrawText(x + width + 5, y, text);
+    }
 }
 
 

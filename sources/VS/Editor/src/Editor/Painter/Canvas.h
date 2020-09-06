@@ -13,6 +13,7 @@ struct Grid
     static int Width();
     static int Height();
     static int Bottom();
+    static int Right();
     static void Draw();
 };
 

@@ -289,6 +289,12 @@ int Grid::Bottom()
 }
 
 
+int Grid::Right()
+{
+    return X() + Width();
+}
+
+
 void Grid::Draw()
 {
     int width = Width();

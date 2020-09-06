@@ -146,7 +146,7 @@ void Painter::DrawLine(int x0, int y0, int x1, int y1, const Color &color)
 }
 
 
-void Painter::DrawText(int x, int y, char *text, const Color &color)
+void Painter::DrawText(int x, int y, const wxString &text, const Color &color)
 {
     SetColor(color);
 
