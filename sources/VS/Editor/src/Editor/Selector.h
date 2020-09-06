@@ -22,9 +22,4 @@ public:
 
     // Возвращает true, если курсор находится над границей выделенного участка
     static bool CursorOverBorder(int mouseX);
-
-private:
-
-    // Возвращает true, если курсор находится поверх точки с координатой x
-    static bool CursorOverPointX(int mouseX, int x);
 };

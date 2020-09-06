@@ -4,32 +4,50 @@
 #include "Editor/Painter/Canvas.h"
 
 
-static int startPoint = -1;     // Первая точка выделенного участка
-static int endPoint = -1;       // Последняя точка выделенного участка
-static const int delta = 5;     // Дельта для расчёта пересечения с курсором
+struct Cursor
+{
+    static int delta;                       // Дельта для расчёта пересечения с курсором
+    static Cursor *grabbing;                // Указатель на "заграбленный" курсор
+    int x = -1;                             // Координата x курсора
+    void Set(int mouseX);                   // Установить курсор в позицию мыши mouseX
+    void Disable()   { x = -1; }            // Выключить курсор
+    bool IsEnabled() { return x >= 0; }
+    bool OverMouseX(int mouseX);            // Возвращает true, если курсор находится поверх точки с координатой x
+    void Draw();
+    bool IsGrubbing()  { return grabbing == this; }
+    static void EndGrabbing() { grabbing = nullptr; }
+};
+
+int Cursor::delta = 5;
+Cursor *Cursor::grabbing = nullptr;
+
+
+static Cursor cursors[2];
+
+#define cursor1 cursors[0]
+#define cursor2 cursors[1]
 
 
 void Selector::BeginSelect(int mouseX)
 {
-    int x = Point::MouseToPointX(mouseX);
-
-    if (CursorOverPointX(mouseX, endPoint))
+    if (cursor2.OverMouseX(mouseX))
     {
-        endPoint = x;
+        cursor2.Set(mouseX);
     }
-    else if (CursorOverPointX(mouseX, startPoint))
+    else if (cursor1.OverMouseX(mouseX))
     {
-        startPoint = x;
+        cursor1.Set(mouseX);
     }
     else
     {
-        if (startPoint >= 0)
+        if (cursor1.IsEnabled())
         {
-            endPoint = x;
+            cursor2.Set(mouseX);
         }
         else
         {
-            startPoint = endPoint = x;
+            cursor1.Set(mouseX);
+            cursor2.Set(mouseX);
         }
     }
 }
@@ -37,54 +55,50 @@ void Selector::BeginSelect(int mouseX)
 
 void Selector::MoveSelect(int mouseX)
 {
-    int x = Point::MouseToPointX(mouseX);
-
-    if (CursorOverPointX(mouseX, endPoint))
+    if (cursor1.IsGrubbing())
     {
-        endPoint = x;
+        cursor1.Set(mouseX);
     }
-    else if (CursorOverPointX(mouseX, startPoint))
+    else if (cursor2.IsGrubbing())
     {
-        startPoint = x;
-    }
-    else
-    {
-        endPoint = x;
+        cursor2.Set(mouseX);
     }
 }
 
 
 void Selector::EndSelect(int /*mouseX*/, int /*mouseY*/)
 {
-
+    Cursor::EndGrabbing();
 }
 
 
 void Selector::Draw()
 {
-    if (startPoint == -1)
-    {
-        return;
-    }
-
-    int start = Point::PointToMouseX(startPoint);
-    int end = Point::PointToMouseX(endPoint);
-
-
-    TheCanvas->DrawLine(start, 0, start, TheCanvas->GetSize().y, Color::GREEN);
-    TheCanvas->DrawLine(end, 0, end, TheCanvas->GetSize().y);
+    cursor1.Draw();
+    cursor2.Draw();
 }
 
 
 bool Selector::CursorOverBorder(int mouseX)
 {
-    return CursorOverPointX(mouseX, startPoint) || CursorOverPointX(mouseX, endPoint);
+    return cursor1.OverMouseX(mouseX) || cursor2.OverMouseX(mouseX);
 }
 
 
-bool Selector::CursorOverPointX(int mouseX, int x)
+void Cursor::Draw()
 {
-    if (x < 0)
+    if (IsEnabled())
+    {
+        int coord = Point::PointToMouseX(x);
+
+        TheCanvas->DrawLine(coord, 0, coord, TheCanvas->GetSize().y, Color::GREEN);
+    }
+}
+
+
+bool Cursor::OverMouseX(int mouseX)
+{
+    if (!IsEnabled())
     {
         return false;
     }
@@ -92,4 +106,11 @@ bool Selector::CursorOverPointX(int mouseX, int x)
     int point = Point::PointToMouseX(x);
 
     return Math::InBoundaries(point, mouseX - delta, mouseX + delta);
+}
+
+
+void Cursor::Set(int mouseX)
+{
+    x = Point::MouseToPointX(mouseX);
+    grabbing = this;
 }
