@@ -8,6 +8,8 @@
 
 class Zoomer
 {
+    friend struct Window;
+
 public:
 
     // Увеличить масштаб
@@ -50,7 +52,7 @@ public:
     // Возвращает true, если находится под мыщью
     static bool UnderMouse(int mouseX, int mouseY);
 
-    static void MoveMouse(int mouseX);
+    static void MoveWindow(int mouseX);
 
     // Захватить мышью
     static bool Grab(int mouseX, int mouseY);

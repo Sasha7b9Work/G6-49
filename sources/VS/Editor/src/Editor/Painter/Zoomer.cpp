@@ -26,6 +26,12 @@ struct Window
     // ¬озвращает true, если мышь находитс€ под окном
     static bool UnderMouse(int mouseX, int mouseY);
 
+    // ѕереместить в mouseX
+    static void MoveTo(int mouseX);
+
+    // —только точек помещаетс€ в одном пикселе окна
+    static double PointsInPixel();
+
     static int X();
     static int Y() { return Zoomer::Y(); }
     static int Width();
@@ -44,6 +50,7 @@ struct Grabber
     static bool IsGrabbing() { return isGrabbing; }
     static void Grab(int mouseX, int mouseY);
     static bool UnGrab();
+    static int CoordX() { return grabX; }
 private:
     static bool isGrabbing;     // true, если окно захвачено мышью
     static int grabX;           //  оордината X курсора мыши в момент захвата
@@ -160,6 +167,23 @@ int Window::X()
     float dX = static_cast<float>(Zoomer::IndexFirsPoint()) / Point::AMOUNT * static_cast<float>(Grid::Width());
 
     return Zoomer::X() + static_cast<int>(dX + 0.5F);
+}
+
+
+void Window::MoveTo(int mouseX)
+{
+    if (Grabber::IsGrabbing())
+    {
+        int deltaPixels = mouseX - Grabber::CoordX();
+
+        int deltaPoints = static_cast<int>(PointsInPixel() * deltaPixels);
+
+        Zoomer::indexFirstPoint = Math::Limitation<int>(Zoomer::indexFirstPoint + deltaPoints, 0, static_cast<int>(Point::AMOUNT - Zoomer::numberDrawingPoints));
+
+        Zoomer::indexMiddlePoint += Zoomer::numberDrawingPoints / 2;
+
+        TheCanvas->Redraw();
+    }
 }
 
 
@@ -283,9 +307,9 @@ bool Zoomer::UnGrab()
 }
 
 
-void Zoomer::MoveMouse(int /*mouseX*/)
+void Zoomer::MoveWindow(int mouseX)
 {
-
+    Window::MoveTo(mouseX);
 }
 
 
@@ -304,4 +328,10 @@ void Grabber::Grab(int mouseX, int mouseY)
 
     grabX = mouseX;
     isGrabbing = true;
+}
+
+
+double Window::PointsInPixel()
+{
+    return static_cast<double>(Point::AMOUNT) / Zoomer::Width();
 }

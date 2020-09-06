@@ -109,7 +109,7 @@ void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
 
     if (mouseIsDown)
     {
-        Zoomer::MoveMouse(mouseX);
+        Zoomer::MoveWindow(mouseX);
         return;
     }
 
