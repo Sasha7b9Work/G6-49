@@ -12,11 +12,11 @@ class Selector
 {
 public:
     
-    static void BeginSelect(int mouseX);
+    static void BeginGrab(int mouseX);
     
-    static void MoveSelect(int mouseX);
+    static void MoveBorder(int mouseX);
     
-    static void EndSelect(int mouseX, int mouseY);
+    static void EndGrab();
     
     static void Draw();
 

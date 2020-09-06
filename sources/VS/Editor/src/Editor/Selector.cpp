@@ -14,7 +14,7 @@ struct Cursor
     bool IsEnabled() { return x >= 0; }
     bool OverMouseX(int mouseX);            // Возвращает true, если курсор находится поверх точки с координатой x
     void Draw();
-    bool IsGrubbing()  { return grabbing == this; }
+    bool IsGrabbing()  { return grabbing == this; }
     static void EndGrabbing() { grabbing = nullptr; }
 };
 
@@ -28,7 +28,7 @@ static Cursor cursors[2];
 #define cursor2 cursors[1]
 
 
-void Selector::BeginSelect(int mouseX)
+void Selector::BeginGrab(int mouseX)
 {
     if (cursor2.OverMouseX(mouseX))
     {
@@ -46,21 +46,21 @@ void Selector::BeginSelect(int mouseX)
 }
 
 
-void Selector::MoveSelect(int mouseX)
+void Selector::MoveBorder(int mouseX)
 {
-    if (cursor1.IsGrubbing())
+    if (cursor1.IsGrabbing())
     {
         cursor1.Set(mouseX);
     }
-    else if (cursor2.IsGrubbing())
+    else if (cursor2.IsGrabbing())
     {
         cursor2.Set(mouseX);
     }
 }
 
 
-void Selector::EndSelect(int /*mouseX*/, int /*mouseY*/)
-{
+void Selector::EndGrab()
+{ 
     Cursor::EndGrabbing();
 }
 

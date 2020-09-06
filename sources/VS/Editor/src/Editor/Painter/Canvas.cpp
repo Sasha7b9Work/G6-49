@@ -186,7 +186,7 @@ void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
     case ModeButtonLeft::SelectZone:
         if (mouseIsDown)
         {
-            Selector::MoveSelect(mouseX);
+            Selector::MoveBorder(mouseX);
         }
         SetMouseCursor();
         Redraw();
@@ -218,7 +218,7 @@ void Canvas::OnMouseLeftDown(wxMouseEvent &event) //-V2009
         break;
     case ModeButtonLeft::SelectZone:
         mouseIsDown = true;
-        Selector::BeginSelect(mouseX);
+        Selector::BeginGrab(mouseX);
         SetMouseCursor();
         Redraw();
         break;
@@ -268,7 +268,7 @@ void Canvas::OnMouseLeftUp(wxMouseEvent &event)
         break;
 
     case ModeButtonLeft::SelectZone:
-        Selector::EndSelect(mouseX, mouseY);
+        Selector::EndGrab();
         Redraw();
         break;
     }
