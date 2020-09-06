@@ -34,7 +34,7 @@ struct Point
 	static const uint16 MAX = static_cast<uint16>((1 << 12) - 1);
 	static const uint16 AVE = static_cast<uint16>((MAX) / 2);
 
-	static const uint NUM_POINTS = 8192;
+	static const uint AMOUNT = 8192;
 
 	Point(int mouseX, int mouseY)
 	{
@@ -65,7 +65,7 @@ struct Point
 	// Масштаб по горизонтали
 	static float ScaleX()
 	{
-		return static_cast<float>(Grid::Width()) / static_cast<float>(NUM_POINTS);
+		return static_cast<float>(Grid::Width()) / static_cast<float>(AMOUNT);
 	}
 	// Масштаб по вертикали
 	static float ScaleY()
@@ -73,7 +73,7 @@ struct Point
 		return static_cast<float>(Grid::Height()) / static_cast<float>(MAX);
 	}
 
-	// Преобразует координату мыши в точку [0 ... (Point::NUM_POINTS - 1)]
+	// Преобразует координату мыши в точку [0 ... (Point::AMOUNT - 1)]
 	static int MouseToPointX(int mouseX)
 	{
 		return Math::Round<int>(static_cast<float>(mouseX) / ScaleX());
@@ -125,10 +125,10 @@ public:
 	void RedoHistory();
 
 	// Установить дополнительную форму, которая будет рисоваться поверх основной. 
-    void SetAdditionForm(const uint16 data[Point::NUM_POINTS]);
+    void SetAdditionForm(const uint16 data[Point::AMOUNT]);
 
 	// Установить основную форму
-    void SetMainForm(const uint16 data[Point::NUM_POINTS], const std::vector<Point> *points);
+    void SetMainForm(const uint16 data[Point::AMOUNT], const std::vector<Point> *points);
 
     bool IsEquals(const Form *form) const;
 
@@ -139,9 +139,9 @@ public:
 private:
 
 	// Данные, готовые для передачи в прибор
-	uint16 data[Point::NUM_POINTS];
+	uint16 data[Point::AMOUNT];
 
-	// Точки, поставленные мышью. Хранятся в системе координат прибора (pos = [0 ... Point::NUM_POINTS], data = [Point::MIN ... Point::MAX])
+	// Точки, поставленные мышью. Хранятся в системе координат прибора (pos = [0 ... Point::AMOUNT], data = [Point::MIN ... Point::MAX])
 	std::vector<Point> markers;
 
 	// Здесь хранится индекс точки, которой управляем в текущий момент

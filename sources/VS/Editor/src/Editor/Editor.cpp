@@ -486,11 +486,11 @@ void Frame::CreateGauss(wxCommandEvent &)
 
 void Frame::CreateGaversine(wxCommandEvent &)
 {
-    static uint16 data[Point::NUM_POINTS];
+    static uint16 data[Point::AMOUNT];
 
-    for (int i = 0; i < Point::NUM_POINTS; i++)
+    for (int i = 0; i < Point::AMOUNT; i++)
     {
-        float sinx = std::sinf(static_cast<float>(i) / Point::NUM_POINTS * 2.0F * 3.14F);
+        float sinx = std::sinf(static_cast<float>(i) / Point::AMOUNT * 2.0F * 3.14F);
 
         data[i] = static_cast<uint16>(Point::AVE + static_cast<uint16>(sinx * sinx * Point::AVE));
     }
@@ -503,9 +503,9 @@ void Frame::CreateGaversine(wxCommandEvent &)
 
 void Frame::CreateNoise(wxCommandEvent &)
 {
-    static uint16 data[Point::NUM_POINTS];
+    static uint16 data[Point::AMOUNT];
 
-    for (int i = 0; i < Point::NUM_POINTS; i++)
+    for (int i = 0; i < Point::AMOUNT; i++)
     {
         float x = static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX);
 

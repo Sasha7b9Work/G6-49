@@ -13,7 +13,7 @@
 Form *TheForm = nullptr;
 
 
-static uint16 addData[Point::NUM_POINTS];
+static uint16 addData[Point::AMOUNT];
 static bool drawAdditionData = false;
 
 #define LABEL_FILE  wxT("Data file G6-49")
@@ -48,7 +48,7 @@ Form::~Form()
 
 void Form::Clear()
 {
-    for (int i = 0; i < Point::NUM_POINTS; i++)
+    for (int i = 0; i < Point::AMOUNT; i++)
     {
         data[i] = Point::AVE;
     }
@@ -56,7 +56,7 @@ void Form::Clear()
     markers.clear();
 
     SetPointInRealCoord(static_cast<uint16>(0), Point::AVE);
-    SetPointInRealCoord(static_cast<uint16>(Point::NUM_POINTS - 1), Point::AVE);
+    SetPointInRealCoord(static_cast<uint16>(Point::AMOUNT - 1), Point::AVE);
 }
 
 
@@ -179,7 +179,7 @@ void Form::MoveMarker(int mouseX, int mouseY)
     else if (iCurMarker == markers.size() - 1)
     {
         markers[iCurMarker].SetY(mouseY);
-        data[Point::NUM_POINTS - 1] = markers[iCurMarker].data;
+        data[Point::AMOUNT - 1] = markers[iCurMarker].data;
         LinearInterpolationLeft(iCurMarker);
     }
     else
@@ -362,14 +362,14 @@ void Form::CalculateNeighboringPoints(const Point &point)
 }
 
 
-static void DrawForm(const uint16 data[Point::NUM_POINTS], Color color)
+static void DrawForm(const uint16 data[Point::AMOUNT], Color color)
 {
     float scaleX = Point::ScaleX();
     float scaleY = Point::ScaleY();
 
     Painter::SetColor(color);
 
-    for (int i = 1; i < Point::NUM_POINTS; i++)
+    for (int i = 1; i < Point::AMOUNT; i++)
     {
         int x0 = Math::Round<int>(scaleX * static_cast<float>(i - 1));
         int y0 = Grid::Y() + Math::Round<int>(scaleY * static_cast<float>(Point::MAX - data[i - 1]));
@@ -456,9 +456,9 @@ void Form::LinearInterpolationRight(uint index)
 
     if (index == markers.size() - 1)
     {
-        if (point.pos < Point::NUM_POINTS - 1)
+        if (point.pos < Point::AMOUNT - 1)
         {
-            LinearInterpolation(point.pos, Point::NUM_POINTS - 1);
+            LinearInterpolation(point.pos, Point::AMOUNT - 1);
         }
     }
     else
@@ -468,9 +468,9 @@ void Form::LinearInterpolationRight(uint index)
 }
 
 
-void Form::SetMainForm(const uint16 dat[Point::NUM_POINTS], const std::vector<Point> *p)
+void Form::SetMainForm(const uint16 dat[Point::AMOUNT], const std::vector<Point> *p)
 {
-    for (int i = 0; i < Point::NUM_POINTS; i++)
+    for (int i = 0; i < Point::AMOUNT; i++)
     {
         data[i] = Point::AVE;
     }
@@ -478,9 +478,9 @@ void Form::SetMainForm(const uint16 dat[Point::NUM_POINTS], const std::vector<Po
     markers.clear();
 
     SetPointInRealCoord(static_cast<uint16>(0), dat[0]);
-    SetPointInRealCoord(static_cast<uint16>(Point::NUM_POINTS - 1), dat[Point::NUM_POINTS - 1]);
+    SetPointInRealCoord(static_cast<uint16>(Point::AMOUNT - 1), dat[Point::AMOUNT - 1]);
 
-    std::memcpy(data, dat, Point::NUM_POINTS * 2);
+    std::memcpy(data, dat, Point::AMOUNT * 2);
 
     if(p)
     {
@@ -494,11 +494,11 @@ void Form::SetMainForm(const uint16 dat[Point::NUM_POINTS], const std::vector<Po
 }
 
 
-void Form::SetAdditionForm(const uint16 d[Point::NUM_POINTS])
+void Form::SetAdditionForm(const uint16 d[Point::AMOUNT])
 {
     if (d)
     {
-        std::memcpy(addData, d, Point::NUM_POINTS * 2);
+        std::memcpy(addData, d, Point::AMOUNT * 2);
         drawAdditionData = true;
     }
     else
@@ -517,7 +517,7 @@ bool Form::IsEquals(const Form *form) const
         return false;
     }
 
-    for(int i = 0; i < Point::NUM_POINTS; i++)
+    for(int i = 0; i < Point::AMOUNT; i++)
     {
         if(data[i] != form->data[i])
         {
@@ -539,7 +539,7 @@ void Form::SaveToFile(wxTextFile &file)
 
     if (markers.size() == 0)
     {
-        for (int i = 0; i < Point::NUM_POINTS; i++)
+        for (int i = 0; i < Point::AMOUNT; i++)
         {
             file.AddLine(wxString::Format(wxT("%i %i"), i, data[i]));
         }
@@ -610,7 +610,7 @@ static bool ConvertStringToTwoShort(const wxString &line, uint16 *val1, uint16 *
         return false;
     }
 
-    if(!ConvertSubStringToShort(line, 0, static_cast<uint>(pos - 1), val1, Point::NUM_POINTS))
+    if(!ConvertSubStringToShort(line, 0, static_cast<uint>(pos - 1), val1, Point::AMOUNT))
     {
         return false;
     }

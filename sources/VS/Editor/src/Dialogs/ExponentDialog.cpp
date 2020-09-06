@@ -91,7 +91,7 @@ void ExponentDialog::ShiftToUp()
 {
     uint16 max = 0;
 
-    for (int i = 0; i < Point::NUM_POINTS; i++)
+    for (int i = 0; i < Point::AMOUNT; i++)
     {
         if (data[i] > max)
         {
@@ -103,7 +103,7 @@ void ExponentDialog::ShiftToUp()
     {
         uint16 delta = 4095U - max;
 
-        for (int i = 0; i < Point::NUM_POINTS; i++)
+        for (int i = 0; i < Point::AMOUNT; i++)
         {
             data[i] += delta;
         }
@@ -115,7 +115,7 @@ void ExponentDialog::SendAdditionForm()
 {
     double tau = Math::LimitationBelow<double>(scPower->GetValue() + 1.0, 2.0);
 
-    double x0 = Point::NUM_POINTS - 1;
+    double x0 = Point::AMOUNT - 1;
     double y0 = Point::AVE;
 
     double x1 = x0 - 1.0;
@@ -125,7 +125,7 @@ void ExponentDialog::SendAdditionForm()
 
     int start = static_cast<int>(std::log(y0) / k - x0);
 
-    for (int i = 0; i < Point::NUM_POINTS; i++)
+    for (int i = 0; i < Point::AMOUNT; i++)
     {
         double value = std::exp(k * (static_cast<double>(i) + start));
 
@@ -136,25 +136,25 @@ void ExponentDialog::SendAdditionForm()
 
     if (rbType2->GetValue())
     {
-        for (int i = 0; i < Point::NUM_POINTS / 2; i++)
+        for (int i = 0; i < Point::AMOUNT / 2; i++)
         {
-            Math::Swap<uint16>(&data[i], &data[Point::NUM_POINTS - 1 - i]);
+            Math::Swap<uint16>(&data[i], &data[Point::AMOUNT - 1 - i]);
         }
     }
     else if (rbType3->GetValue())
     {
-        for (int i = 0; i < Point::NUM_POINTS; i++)
+        for (int i = 0; i < Point::AMOUNT; i++)
         {
             InvertPoint(&data[i]);
         }
     }
     else if (rbType4->GetValue())
     {
-        for (int i = 0; i < Point::NUM_POINTS / 2; i++)
+        for (int i = 0; i < Point::AMOUNT / 2; i++)
         {
-            Math::Swap<uint16>(&data[i], &data[Point::NUM_POINTS - 1 - i]);
+            Math::Swap<uint16>(&data[i], &data[Point::AMOUNT - 1 - i]);
             InvertPoint(&data[i]);
-            InvertPoint(&data[Point::NUM_POINTS - 1 - i]);
+            InvertPoint(&data[Point::AMOUNT - 1 - i]);
         }
     }
 

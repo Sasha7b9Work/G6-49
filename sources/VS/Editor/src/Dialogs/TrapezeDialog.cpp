@@ -35,7 +35,7 @@ wxPanel *TrapezeDialog::CreatePanelOffsets()
 
     new wxStaticBox(panel, wxID_ANY, wxT("Смещения"), wxDefaultPosition, { Dialog::WIDTH_PANEL, 73 + 26 });
 
-    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, { x, y }, { 50, 20 }, 0, Point::NUM_POINTS, delay,
+    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, { x, y }, { 50, 20 }, 0, Point::AMOUNT, delay,
                                 this, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Задержка, точки"), this);
     scVertex1 = new SpinControl(panel, ID_SPINCTRL_VERTEX_1, { x, y + 26 }, { 50, 20 }, -100, 100, vertex1,
                                 this, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Левая вершина, %"), this);
@@ -65,9 +65,9 @@ void TrapezeDialog::SendAdditionForm()
 {
     int start = scDelay->GetValue();
 
-    float center = static_cast<float>(start) + static_cast<float>(Point::NUM_POINTS - start) / 2.0F;
+    float center = static_cast<float>(start) + static_cast<float>(Point::AMOUNT - start) / 2.0F;
 
-    float pointsInTrapeze = static_cast<float>(Point::NUM_POINTS - start);
+    float pointsInTrapeze = static_cast<float>(Point::AMOUNT - start);
 
     int left = static_cast<int>(center + pointsInTrapeze / 2.0F * static_cast<float>(scVertex1->GetValue()) / 100.0F);
     int right = static_cast<int>(center + pointsInTrapeze / 2.0F * static_cast<float>(scVertex2->GetValue()) / 100.0F);
@@ -90,7 +90,7 @@ void TrapezeDialog::SendAdditionForm()
 
     DrawLine(left, max, right, max);
 
-    DrawLine(right, max, Point::NUM_POINTS - 1, min);
+    DrawLine(right, max, Point::AMOUNT - 1, min);
 
     TheForm->SetAdditionForm(data);
 

@@ -34,7 +34,7 @@ wxPanel *TriangleDialog::CreatePanelOffsets()
     new wxStaticBox(panel, wxID_ANY, wxT("Смещения"), wxDefaultPosition, wxSize(Dialog::WIDTH_PANEL, 75));
 
     scCenter = new SpinControl(panel, ID_SPINCTRL_CENTER, wxPoint(x, y), wxSize(50, 20), -100, 100, center, this, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Центр, %"), this);
-    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, wxPoint(x, y + 26), wxSize(50, 20), 0, Point::NUM_POINTS, delay, this, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Задержка, точки"), this);
+    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, wxPoint(x, y + 26), wxSize(50, 20), 0, Point::AMOUNT, delay, this, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Задержка, точки"), this);
 
     return panel;
 }
@@ -59,7 +59,7 @@ void TriangleDialog::SendAdditionForm()
 {
     int start = scDelay->GetValue();
 
-    float pointsInTriangle = static_cast<float>(Point::NUM_POINTS - start);
+    float pointsInTriangle = static_cast<float>(Point::AMOUNT - start);
 
     int top = static_cast<int>(static_cast<float>(start) + pointsInTriangle / 2 + pointsInTriangle / 2.0F * static_cast<float>(scCenter->GetValue()) / 100.0F);
 
@@ -81,7 +81,7 @@ void TriangleDialog::SendAdditionForm()
 
     DrawLine(start, min, top, max);
 
-    DrawLine(top, max, Point::NUM_POINTS - 1, min);
+    DrawLine(top, max, Point::AMOUNT - 1, min);
 
     TheForm->SetAdditionForm(data);
 

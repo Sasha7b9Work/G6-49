@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Editor/Form.h"
 #include "Editor/Painter/Canvas.h"
 #include "Editor/Painter/Painter.h"
 #include "Editor/Painter/Zoomer.h"
@@ -6,6 +7,9 @@
 
 
 int Zoomer::scale = 100;
+int Zoomer::indexMiddlePoint = Point::AMOUNT / 2;
+int Zoomer::indexFirstPoint = 0;
+int Zoomer::numberDrawingPoints = Point::AMOUNT;
 
 
 static const int SCALE_MIN = 100;
@@ -25,6 +29,8 @@ void Zoomer::Increase(int /*mouseX*/)
         }
     }
 
+    CalculateIndexesPoints();
+
     TheCanvas->Redraw();
 }
 
@@ -40,8 +46,21 @@ void Zoomer::Decrease(int /*mouseX*/)
         }
     }
 
+    CalculateIndexesPoints();
+
     TheCanvas->Redraw();
 }
+
+
+void Zoomer::CalculateIndexesPoints()
+{
+    numberDrawingPoints = 100.0F / scale * Point::AMOUNT;
+
+    indexFirstPoint = indexMiddlePoint - numberDrawingPoints / 2;
+
+    indexFirstPoint = Math::LimitationBelow(indexFirstPoint, 0);
+}
+
 
 void Zoomer::SetOnRegion()
 {
@@ -69,6 +88,18 @@ void Zoomer::Draw()
     }
 
     Painter::DrawRectangle(X(), Y(), Width(), Height(), Color::WHITE);
+
+    DrawWindow();
+}
+
+
+void Zoomer::DrawWindow()
+{
+    float dX = static_cast<float>(IndexFirsPoint()) / Point::AMOUNT * static_cast<float>(Grid::Width());
+
+    float width = static_cast<float>(NumberDrawingPoints()) / Point::AMOUNT * static_cast<float>(Grid::Width());
+
+    Painter::DrawRectangle(X() + static_cast<int>(dX + 0.5F), Y(), static_cast<int>(width + 0.5F), Height(), Color::WHITE);
 }
 
 
@@ -93,4 +124,16 @@ int Zoomer::Width()
 int Zoomer::Height()
 {
     return 20;
+}
+
+
+int Zoomer::IndexFirsPoint()
+{
+    return indexFirstPoint;
+}
+
+
+int Zoomer::NumberDrawingPoints()
+{
+    return numberDrawingPoints;
 }

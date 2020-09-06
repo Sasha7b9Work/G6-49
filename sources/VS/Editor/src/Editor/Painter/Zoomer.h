@@ -37,7 +37,25 @@ public:
     // Высота полосы просмотра
     static int Height();
 
+    // Индекс первой выводимой точки
+    static int IndexFirsPoint();
+
+    // Количество выводимых точек
+    static int NumberDrawingPoints();
+
 private:
 
     static int scale;
+
+    static int indexFirstPoint;
+
+    static int indexMiddlePoint;
+
+    static int numberDrawingPoints;
+
+    // Нарисовать окно содержимого, отображаемого на экране
+    static void DrawWindow();
+
+    // Перерасчёт индексов ключевых точек
+    static void CalculateIndexesPoints();
 };
