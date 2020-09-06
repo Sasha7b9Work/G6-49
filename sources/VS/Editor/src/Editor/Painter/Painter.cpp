@@ -2,43 +2,42 @@
 #include "Editor/Painter/Painter.h"
 
 
-static wxBitmap *bitmapButton = nullptr;    // Здесь рисуем
-static wxMemoryDC memDC;                    // Контекст рисования
-
-wxWindow *Painter::parent = nullptr;;
 Color Painter::currentColor(Color::NUMBER.value);
+wxWindow *Painter::parent = nullptr;;
+wxBitmap *Painter::bitmap = nullptr;
+wxMemoryDC Painter::memDC;
 
 
 void Painter::Init(wxWindow *_parent)
 {
     parent = _parent;
 
-    bitmapButton = new wxBitmap(parent->GetClientSize());
+    bitmap = new wxBitmap(parent->GetClientSize());
 }
 
 
 void Painter::DeInit()
 {
-    delete bitmapButton;
+    delete bitmap;
 }
 
 
 wxBitmap *Painter::GetBitmap()
 {
-    return bitmapButton;
+    return bitmap;
 }
 
 
 void Painter::OnResizeEvent(wxSizeEvent &event)
 {
-    delete bitmapButton;
-    bitmapButton = new wxBitmap(event.GetSize());
+    delete bitmap;
+    bitmap = new wxBitmap(event.GetSize());
 }
 
 
 void Painter::BegineScene()
 {
-    memDC.SelectObject(*bitmapButton);
+    memDC.SelectObject(*bitmap);
     wxBrush brush(*wxBLACK, wxBRUSHSTYLE_SOLID);
     memDC.SetBackground(brush);
     memDC.Clear();

@@ -35,6 +35,7 @@ private:
     static wxColour MakeColour(const Color &color);
 
     static Color currentColor;
-
     static wxWindow *parent;
+    static wxBitmap *bitmap;        // Здесь рисуем
+    static wxMemoryDC memDC;        // Контекст рисования
 };
