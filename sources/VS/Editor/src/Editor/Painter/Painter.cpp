@@ -13,6 +13,14 @@ void Painter::Init(wxWindow *_parent)
     parent = _parent;
 
     bitmap = new wxBitmap(parent->GetClientSize());
+
+#pragma warning(push, 0)
+
+    wxFont font(10, wxFONTFAMILY_SWISS, wxNORMAL, wxNORMAL);
+
+#pragma warning(pop)
+
+    memDC.SetFont(font);
 }
 
 
@@ -135,4 +143,25 @@ void Painter::DrawLine(int x0, int y0, int x1, int y1, const Color &color)
     SetColor(color);
 
     memDC.DrawLine(x0, y0, x1, y1);
+}
+
+
+void Painter::DrawText(int x, int y, char *text, const Color &color)
+{
+    SetColor(color);
+
+    memDC.SetTextForeground(MakeColour(currentColor));
+    memDC.DrawText(text, x, y);
+}
+
+
+void Painter::DrawTextInZone(int x, int y, int widht, char *text, const Color &color)
+{
+    SetColor(color);
+
+    memDC.SetTextForeground(MakeColour(currentColor));
+
+    wxSize size = memDC.GetTextExtent(text);
+
+    memDC.DrawText(text, x + widht / 2 - size.x / 2, y);
 }

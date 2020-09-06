@@ -99,7 +99,17 @@ void Zoomer::DrawWindow()
 
     float width = static_cast<float>(NumberDrawingPoints()) / Point::AMOUNT * static_cast<float>(Grid::Width());
 
-    Painter::DrawRectangle(X() + static_cast<int>(dX + 0.5F), Y(), static_cast<int>(width + 0.5F), Height(), Color::WHITE);
+    int x = X() + static_cast<int>(dX + 0.5F);
+
+    int y = Y();
+
+    Painter::DrawRectangle(x, y, static_cast<int>(width + 0.5F), Height(), Color::WHITE);
+
+    char buffer[100];
+
+    std::sprintf(buffer, "%d%%", scale);
+
+    Painter::DrawTextInZone(x + 3, y + 1, width, buffer);
 }
 
 
@@ -123,7 +133,7 @@ int Zoomer::Width()
 
 int Zoomer::Height()
 {
-    return 20;
+    return 18;
 }
 
 

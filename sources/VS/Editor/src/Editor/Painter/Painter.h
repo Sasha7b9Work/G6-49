@@ -30,6 +30,10 @@ struct Painter
 
     static void DrawRectangle(int x, int y, int width, int height, const Color &color = Color::NUMBER);
 
+    static void DrawText(int x, int y, char *text, const Color &color = Color::NUMBER);
+
+    static void DrawTextInZone(int x, int y, int widht, char *text, const Color &color = Color::NUMBER);
+
 private:
 
     static void SetSolidBrush(const Color &color);
