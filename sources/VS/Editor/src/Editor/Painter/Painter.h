@@ -28,9 +28,13 @@ struct Painter
 
     static void FillRegion(int x, int y, int width, int height, const Color &color = Color::NUMBER);
 
+    static void DrawRectangle(int x, int y, int width, int height, const Color &color = Color::NUMBER);
+
 private:
 
     static void SetSolidBrush(const Color &color);
+
+    static void SetTransparentBrush();
 
     static wxColour MakeColour(const Color &color);
 

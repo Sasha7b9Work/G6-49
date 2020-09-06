@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Editor/Painter/Canvas.h"
+#include "Editor/Painter/Painter.h"
 #include "Editor/Painter/Zoomer.h"
 #include <vector>
 
@@ -66,4 +67,30 @@ void Zoomer::Draw()
     {
         return;
     }
+
+    Painter::DrawRectangle(X(), Y(), Width(), Height(), Color::WHITE);
+}
+
+
+int Zoomer::X()
+{
+    return 0;
+}
+
+
+int Zoomer::Y()
+{
+    return 0;
+}
+
+
+int Zoomer::Width()
+{
+    return TheCanvas->GetSize().x / 2;
+}
+
+
+int Zoomer::Height()
+{
+    return 20;
 }

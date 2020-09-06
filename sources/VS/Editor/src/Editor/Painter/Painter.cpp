@@ -73,6 +73,16 @@ void Painter::FillRegion(int x, int y, int width, int height, const Color &color
 }
 
 
+void Painter::DrawRectangle(int x, int y, int width, int height, const Color &color)
+{
+    SetTransparentBrush();
+
+    SetColor(color);
+
+    memDC.DrawRectangle(x, y, width, height);
+}
+
+
 void Painter::SetColor(const Color &color)
 {
     if (color != Color::NUMBER)
@@ -98,7 +108,13 @@ void Painter::SetSolidBrush(const Color &color)
         wxBrush brush(MakeColour(currentColor), wxBRUSHSTYLE_SOLID);
         memDC.SetBrush(brush);
     }
+}
 
+
+void Painter::SetTransparentBrush()
+{
+    wxBrush brush(*wxBLACK, wxBRUSHSTYLE_TRANSPARENT);
+    memDC.SetBrush(brush);
 }
 
 

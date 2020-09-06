@@ -28,4 +28,12 @@ public:
 private:
 
     static int scale;
+
+    static int X();
+    
+    static int Y();
+
+    static int Width();
+
+    static int Height();
 };

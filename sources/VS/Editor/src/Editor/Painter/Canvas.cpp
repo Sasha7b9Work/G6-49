@@ -82,11 +82,11 @@ void Canvas::Draw()
     {
         BeginScene();
 
+        Zoomer::Draw();
+
         TheForm->Draw();
 
         Selector::DrawCursors();
-
-        Zoomer::Draw();
 
         EndScene();
 
