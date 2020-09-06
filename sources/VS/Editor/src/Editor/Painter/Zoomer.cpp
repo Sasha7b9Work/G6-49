@@ -135,6 +135,10 @@ void Window::DrawText(int x, int y, int width)
     {
         Painter::DrawText(x + width + 5, y, text);
     }
+    else
+    {
+        Painter::DrawText(x - length - 5, y, text);
+    }
 }
 
 
