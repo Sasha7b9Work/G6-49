@@ -58,3 +58,12 @@ int Zoomer::Scale()
 {
     return scale;
 }
+
+
+void Zoomer::Draw()
+{
+    if (NoScaling())
+    {
+        return;
+    }
+}

@@ -1,6 +1,11 @@
 #pragma once
 
 
+/*
+*   ”правление масштабом и отрисовка окна пам€ти
+*/
+
+
 class Zoomer
 {
 public:
@@ -17,6 +22,8 @@ public:
     static bool NoScaling();
 
     static int Scale();
+
+    static void Draw();
 
 private:
 

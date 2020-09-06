@@ -5,6 +5,7 @@
 #include "Editor/Selector.h"
 #include "Editor/Settings.h"
 #include "Editor/Painter/Canvas.h"
+#include "Editor/Painter/Zoomer.h"
 
 #include <ctime>
 #pragma warning(push, 0)
@@ -158,6 +159,8 @@ void Canvas::Draw()
         TheForm->Draw();
 
         Selector::DrawCursors();
+
+        Zoomer::Draw();
 
         EndScene();
 
