@@ -84,7 +84,7 @@ void Selector::DrawRegion()
         Math::Swap(&x1, &x2);
     }
 
-    Painter::FillRegion(x1, 0, x2 - x1, TheCanvas->GetSize().y, Color::GREEN_1F);
+    Painter::FillRegion(x1, Grid::Y(), x2 - x1, Grid::Bottom(), Color::GREEN_1F);
 }
 
 
@@ -100,7 +100,7 @@ void Cursor::Draw()
     {
         int coord = Point::PointToMouseX(x);
 
-        Painter::DrawLine(coord, 0, coord, TheCanvas->GetSize().y, Color::GREEN);
+        Painter::DrawLine(coord, Grid::Y(), coord, Grid::Bottom(), Color::GREEN);
     }
 }
 

@@ -310,7 +310,10 @@ bool Form::ExistMarker(int mouseX, int mouseY, bool pressed, uint16 *index, uint
 
     for(uint16 i = 0; i < points.size(); i++)
     {
-        double distance = points[i].DistanceFromMouse(Math::Round<int>(static_cast<float>(mouseX) / scaleX), Math::Round<int>(static_cast<float>(mouseY) / scaleY));
+        int x = Math::Round<int>(static_cast<float>(mouseX) / scaleX);
+        int y = Math::Round<int>(static_cast<float>(mouseY) / scaleY);
+
+        double distance = points[i].DistanceFromMouse(x, y);
 
         if(distance < nearestDistance)
         {
@@ -376,10 +379,10 @@ static void DrawForm(const uint16 data[Point::NUM_POINTS], Color color)
     for (int i = 1; i < Point::NUM_POINTS; i++)
     {
         int x0 = Math::Round<int>(scaleX * static_cast<float>(i - 1));
-        int y0 = Math::Round<int>(scaleY * static_cast<float>(Point::MAX - data[i - 1]));
+        int y0 = Grid::Y() + Math::Round<int>(scaleY * static_cast<float>(Point::MAX - data[i - 1]));
 
         int x1 = Math::Round<int>(scaleX * static_cast<float>(i));
-        int y1 = Math::Round<int>(scaleY * static_cast<float>(Point::MAX - data[i]));
+        int y1 = Grid::Y() + Math::Round<int>(scaleY * static_cast<float>(Point::MAX - data[i]));
 
         Painter::DrawLine(x0, y0, x1, y1);
     }
@@ -398,14 +401,17 @@ void Form::Draw()
     for (Point point : points)
     {
         int x = Math::Round<int>(scaleX * static_cast<float>(point.pos));
-        int y = Math::Round<int>(scaleY * static_cast<float>(Point::MAX - point.data));
+        int y = Grid::Y() + Math::Round<int>(scaleY * static_cast<float>(Point::MAX - point.data));
 
         Painter::DrawPoint(x, y, Point::SIZE);
     }
 
     if (iCurPoint != static_cast<uint>(-1))
     {
-        Painter::DrawPoint(Math::Round<int>(scaleX * static_cast<float>(points[iCurPoint].pos)), Math::Round<int>(scaleY * static_cast<float>(Point::MAX - points[iCurPoint].data)), Point::SIZE * 3);
+        Painter::DrawPoint(
+            Math::Round<int>(scaleX * static_cast<float>(points[iCurPoint].pos)),
+            Grid::Y() + Math::Round<int>(scaleY * static_cast<float>(Point::MAX - points[iCurPoint].data)),
+            Point::SIZE * 3);
     }
 
     if (drawAdditionData)

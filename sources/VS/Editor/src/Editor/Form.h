@@ -39,7 +39,7 @@ struct Point
 	Point(int mouseX, int mouseY)
 	{
 		pos = Math::Round<uint16>(static_cast<float>(mouseX) / ScaleX());
-		data = static_cast<uint16>(Point::MAX - Math::Round<uint16>(static_cast<float>(mouseY) / ScaleY()));
+		data = static_cast<uint16>(Point::MAX - Math::Round<uint16>(static_cast<float>(mouseY - Grid::Y()) / ScaleY()));
 	}
 	Point(uint16 p, uint16 d) : pos(p), data(d) {};
 	void SetY(int mouseY)
@@ -65,12 +65,12 @@ struct Point
 	// Масштаб по горизонтали
 	static float ScaleX()
 	{
-		return static_cast<float>(TheCanvas->GetSize().x) / static_cast<float>(NUM_POINTS);
+		return static_cast<float>(Grid::Width()) / static_cast<float>(NUM_POINTS);
 	}
 	// Масштаб по вертикали
 	static float ScaleY()
 	{
-		return static_cast<float>(TheCanvas->GetSize().y) / static_cast<float>(MAX);
+		return static_cast<float>(Grid::Height()) / static_cast<float>(MAX);
 	}
 
 	// Преобразует координату мыши в точку [0 ... (Point::NUM_POINTS - 1)]

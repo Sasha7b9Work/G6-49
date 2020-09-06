@@ -12,6 +12,7 @@ struct Grid
     static int Y();
     static int Width();
     static int Height();
+    static int Bottom();
     static void Draw();
 };
 

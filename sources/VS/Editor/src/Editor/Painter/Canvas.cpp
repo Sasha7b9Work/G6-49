@@ -269,6 +269,12 @@ int Grid::Height()
 }
 
 
+int Grid::Bottom()
+{
+    return Y() + Width();
+}
+
+
 void Grid::Draw()
 {
     int width = Width();
@@ -278,7 +284,7 @@ void Grid::Draw()
     float stepY = static_cast<float>(height) / 20.0F;
 
     float x = stepX;
-    float y = Y() + stepY;
+    float y = static_cast<float>(Y()) + stepY;
 
     for (int i = 0; i < 19; i++)
     {
