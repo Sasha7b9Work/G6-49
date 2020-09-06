@@ -4,6 +4,7 @@
 class Zoomer
 {
 public:
+
     // Увеличить масштаб
     static void Increase(int mouseX = -1);
 
@@ -12,5 +13,12 @@ public:
 
     // Отмасштабировать по размеру выделенного региона
     static void SetOnRegion();
+
+    static bool NoScaling();
+
+    static int Scale();
+
 private:
+
+    static int scale;
 };
