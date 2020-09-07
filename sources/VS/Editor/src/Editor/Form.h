@@ -38,7 +38,7 @@ struct Point
 
 	Point(int canvasX, int canvasY)
 	{
-		pos = Math::Round<uint16>(static_cast<float>(canvasX) / ScaleX());
+		pos = Math::Round<uint16>(static_cast<float>(canvasX) / PixelsInPointX());
 		SetCanvasY(canvasY);
 	}
 	Point(uint16 p, uint16 d) : pos(p), data(d) {};
@@ -62,8 +62,8 @@ struct Point
 
         return std::sqrt(dX * dX + dY * dY);
 	}
-	// Масштаб по горизонтали
-	static float ScaleX()
+	// Масштаб по горизонтали - пикселей в точке
+	static float PixelsInPointX()
 	{
 		return static_cast<float>(Grid::Width()) / static_cast<float>(AMOUNT);
 	}
@@ -76,12 +76,12 @@ struct Point
 	// Преобразует координату мыши в точку [0 ... (Point::AMOUNT - 1)]
 	static int MouseToPointX(int mouseX)
 	{
-		return Math::Round<int>(static_cast<float>(mouseX) / ScaleX());
+		return Math::Round<int>(static_cast<float>(mouseX) / PixelsInPointX());
 	}
 
 	static int PointToMouseX(int x)
 	{
-		return Math::Round<int>(static_cast<float>(x) * ScaleX());
+		return Math::Round<int>(static_cast<float>(x) * PixelsInPointX());
 	}
 
 	// Нарисовать параметры точки

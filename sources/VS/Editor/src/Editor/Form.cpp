@@ -301,9 +301,21 @@ void Form::AlignPoint(Align::E align)
 }
 
 
-bool Form::ExistMarker(int mouseX, int mouseY, bool pressed, uint16 *index, uint16 *value)
+int Point::CanvasX()
 {
-    if (mouseY < Grid::Y())
+    return Math::Round<int>(PixelsInPointX() * static_cast<float>(pos));
+}
+
+
+int Point::CanvasY()
+{
+    return Grid::Y() + Math::Round<int>(ScaleY() * static_cast<float>(Point::MAX - data));
+}
+
+
+bool Form::ExistMarker(int canvasX, int canvasY, bool pressed, uint16 *index, uint16 *value)
+{
+    if (canvasY < Grid::Y())
     {
         return false;
     }
@@ -311,10 +323,12 @@ bool Form::ExistMarker(int mouseX, int mouseY, bool pressed, uint16 *index, uint
     uint16 positionNearestPoint = static_cast<uint16>(-1);
     double nearestDistance = 1e10;
 
+    Point point(canvasX, canvasY);
+
     for(uint16 i = 0; i < markers.size(); i++)
     {
-        int x = Math::Round<int>(static_cast<float>(mouseX) / Point::ScaleX());
-        int y = Math::Round<int>(static_cast<float>(mouseY - Grid::Y()) / Point::ScaleY());
+        int x = Math::Round<int>(static_cast<float>(canvasX) / Point::PixelsInPointX());
+        int y = Math::Round<int>(static_cast<float>(canvasY - Grid::Y()) / Point::ScaleY());
 
         double distance = markers[i].DistanceFromMouse(x, y);
 
@@ -386,21 +400,9 @@ static void DrawForm(const uint16 data[Point::AMOUNT], Color color)
 }
 
 
-int Point::CanvasX()
-{
-    return Math::Round<int>(ScaleX() * static_cast<float>(pos));
-}
-
-
-int Point::CanvasY()
-{
-    return Grid::Y() + Math::Round<int>(ScaleY() * static_cast<float>(Point::MAX - data));
-}
-
-
 void Form::Draw()
 {
-    float scaleX = Point::ScaleX();
+    float scaleX = Point::PixelsInPointX();
     float scaleY = Point::ScaleY();
 
     DrawForm(data, Color::WHITE);
