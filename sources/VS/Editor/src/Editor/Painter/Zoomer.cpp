@@ -283,6 +283,12 @@ int Zoomer::IndexFirsPoint()
 }
 
 
+int Zoomer::IndexLastPoint()
+{
+    return indexFirstPoint + numberDrawingPoints;
+}
+
+
 int Zoomer::NumberDrawingPoints()
 {
     return numberDrawingPoints;

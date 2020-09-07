@@ -46,6 +46,9 @@ public:
     // Индекс первой выводимой точки
     static int IndexFirsPoint();
 
+    // Индекс точки, следующей за последней выводимой
+    static int IndexLastPoint();
+
     // Количество выводимых точек
     static int NumberDrawingPoints();
 

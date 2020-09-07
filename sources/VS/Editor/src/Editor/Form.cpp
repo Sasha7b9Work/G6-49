@@ -4,6 +4,7 @@
 #include "Editor/History.h"
 #include "Editor/Painter/Canvas.h"
 #include "Editor/Painter/Painter.h"
+#include "Editor/Painter/Zoomer.h"
 
 #pragma warning(push, 0)
 #include <wx/msgdlg.h>
@@ -381,11 +382,11 @@ void Form::CalculateNeighboringPoints(const Point &point)
 }
 
 
-static void DrawForm(const uint16 data[Point::AMOUNT], Color color)
+static void DrawData(const uint16 data[Point::AMOUNT], Color color)
 {
     Painter::SetColor(color);
 
-    for (int i = 1; i < Point::AMOUNT; i++)
+    for (int i = Zoomer::IndexFirsPoint() + 1; i < Zoomer::IndexLastPoint(); i++)
     {
         Point p0(static_cast<uint16>(i - 1), data[i - 1]);
         Point p1(static_cast<uint16>(i), data[i]);
@@ -397,7 +398,7 @@ static void DrawForm(const uint16 data[Point::AMOUNT], Color color)
 
 void Form::Draw()
 {
-    DrawForm(data, Color::WHITE);
+    DrawData(data, Color::WHITE);
 
     Painter::SetColor(Color::GREEN);
 
@@ -415,7 +416,7 @@ void Form::Draw()
 
     if (drawAdditionData)
     {
-        DrawForm(addData, Color::BLUE);
+        DrawData(addData, Color::BLUE);
     }
 }
 
