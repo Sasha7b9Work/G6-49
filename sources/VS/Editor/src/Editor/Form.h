@@ -47,7 +47,7 @@ struct Point
 
 	Point(int canvasX, int canvasY)
 	{
-		pos = Math::Round<uint16>(static_cast<float>(canvasX) / PixelsInPointX());
+		pos = Math::Round<uint16>(static_cast<float>(static_cast<float>(canvasX) + static_cast<float>(Zoomer::IndexFirsPoint()) * PixelsInPointX()) / PixelsInPointX());
 		SetCanvasY(canvasY);
 	}
 	Point(uint16 p, uint16 d) : pos(p), data(d) {};
