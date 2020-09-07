@@ -374,21 +374,33 @@ void Form::CalculateNeighboringPoints(const Point &point)
 
 static void DrawForm(const uint16 data[Point::AMOUNT], Color color)
 {
-    float scaleX = Point::ScaleX();
-    float scaleY = Point::ScaleY();
-
     Painter::SetColor(color);
 
     for (int i = 1; i < Point::AMOUNT; i++)
     {
-        int x0 = Math::Round<int>(scaleX * static_cast<float>(i - 1));
-        int y0 = Grid::Y() + Math::Round<int>(scaleY * static_cast<float>(Point::MAX - data[i - 1]));
+        Point point0(static_cast<uint16>(i - 1), data[i - 1]);
+        Point point1(static_cast<uint16>(i), data[i]);
 
-        int x1 = Math::Round<int>(scaleX * static_cast<float>(i));
-        int y1 = Grid::Y() + Math::Round<int>(scaleY * static_cast<float>(Point::MAX - data[i]));
+        int x0 = point0.GetMouseX();
+        int y0 = point0.GetMouseY();
+
+        int x1 = point1.GetMouseX();
+        int y1 = point1.GetMouseY();
 
         Painter::DrawLine(x0, y0, x1, y1);
     }
+}
+
+
+int Point::GetMouseX()
+{
+    return Math::Round<int>(ScaleX() * static_cast<float>(pos));
+}
+
+
+int Point::GetMouseY()
+{
+    return Grid::Y() + Math::Round<int>(ScaleY() * static_cast<float>(Point::MAX - data));
 }
 
 
