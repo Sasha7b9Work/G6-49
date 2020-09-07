@@ -84,10 +84,16 @@ struct Point
 		return Math::Round<int>(static_cast<float>(x) * ScaleX());
 	}
 
+	// Нарисовать параметры точки
 	void DrawParameters();
 
+	// Рассчитать координаты для вывода параметров
+	wxPoint CalculateCoordParameters();
+
+	// Координата X точки на холсте
 	int CanvasX();
 
+	// Координата Y точки на холсте
 	int CanvasY();
 };
 

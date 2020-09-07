@@ -661,5 +661,43 @@ static bool ConvertSubStringToShort(const wxString &line, uint startPos, uint en
 
 void Point::DrawParameters()
 {
-    
+    wxPoint coord = CalculateCoordParameters();
+
+    int x = coord.x;
+    int y = coord.y;
+
+    Painter::DrawFilledRectangle(x, y, 60, 35, Color::BLACK, Color::WHITE);
+
+    Painter::DrawText(x + 3, y + 2, wxString::Format(wxT("x : %d"), pos));
+
+    Painter::DrawText(x + 3, y + 16, wxString::Format(wxT("y : %d"), data));
+}
+
+
+wxPoint Point::CalculateCoordParameters()
+{
+    bool smallX = false;
+
+    int x = CanvasX() - 69;
+
+    if (x < Grid::X() + 3)
+    {
+        x = Grid::X() + 3;
+        smallX = true;
+    }
+
+    int y = CanvasY() - 44;
+
+    if (y < Grid::Y() + 3)
+    {
+        y = Grid::Y() + 3;
+
+        if (smallX)
+        {
+            x = CanvasX() + 15;
+            y = CanvasY() + 15;
+        }
+    }
+
+    return { x, y };
 }
