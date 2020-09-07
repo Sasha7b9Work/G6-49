@@ -54,11 +54,11 @@ struct Point
 		return (pos < point.pos);
 	}
 	// Возвращает true, если курсор мыши находится над этой точкой
-	double DistanceFromMouse(int mouseX, int mouseY)
+	double DistanceFromCanvas(int canvasX, int canvasY)
 	{
-        int dX = mouseX - static_cast<int>(pos);
+        int dX = canvasX - CanvasX();
 
-        int dY = mouseY - static_cast<int>(Point::MAX - data);
+        int dY = canvasY - CanvasY();
 
         return std::sqrt(dX * dX + dY * dY);
 	}

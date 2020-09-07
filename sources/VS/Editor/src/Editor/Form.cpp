@@ -323,14 +323,9 @@ bool Form::ExistMarker(int canvasX, int canvasY, bool pressed, uint16 *index, ui
     uint16 positionNearestPoint = static_cast<uint16>(-1);
     double nearestDistance = 1e10;
 
-    Point point(canvasX, canvasY);
-
     for(uint16 i = 0; i < markers.size(); i++)
     {
-        int x = Math::Round<int>(static_cast<float>(canvasX) / Point::PixelsInPointX());
-        int y = Math::Round<int>(static_cast<float>(canvasY - Grid::Y()) / Point::PixelsInDiscretY());
-
-        double distance = markers[i].DistanceFromMouse(x, y);
+        double distance = markers[i].DistanceFromCanvas(canvasX, canvasY);
 
         if(distance < nearestDistance)
         {
@@ -339,7 +334,7 @@ bool Form::ExistMarker(int canvasX, int canvasY, bool pressed, uint16 *index, ui
         }
     }
 
-    if(nearestDistance < Point::SIZE * 5.0)
+    if(nearestDistance < Point::SIZE * 2.5)
     {
         if(iCurMarker == static_cast<uint>(-1) || !pressed)
         {
