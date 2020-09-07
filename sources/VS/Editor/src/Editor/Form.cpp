@@ -397,29 +397,20 @@ static void DrawForm(const uint16 data[Point::AMOUNT], Color color)
 
 void Form::Draw()
 {
-    float scaleX = Point::PixelsInPointX();
-    float scaleY = Point::PixelsInDiscretY();
-
     DrawForm(data, Color::WHITE);
 
     Painter::SetColor(Color::GREEN);
 
     for (Point point : markers)
     {
-        int x = Math::Round<int>(scaleX * static_cast<float>(point.pos));
-        int y = Grid::Y() + Math::Round<int>(scaleY * static_cast<float>(Point::MAX - point.data));
-
-        Painter::DrawPoint(x, y, Point::SIZE);
+        Painter::DrawPoint(point.CanvasX(), point.CanvasY(), Point::SIZE);
     }
 
     if (iCurMarker != static_cast<uint>(-1))
     {
-        Painter::DrawPoint(
-            Math::Round<int>(scaleX * static_cast<float>(markers[iCurMarker].pos)),
-            Grid::Y() + Math::Round<int>(scaleY * static_cast<float>(Point::MAX - markers[iCurMarker].data)),
-            Point::SIZE * 3);
-
-        markers[iCurMarker].DrawParameters();
+        Point &point = markers[iCurMarker];
+        Painter::DrawPoint(point.CanvasX(), point.CanvasY(), Point::SIZE * 3);
+        point.DrawParameters();
     }
 
     if (drawAdditionData)
