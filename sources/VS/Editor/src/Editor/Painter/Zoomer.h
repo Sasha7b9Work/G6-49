@@ -25,6 +25,8 @@ public:
 
     static int Scale();
 
+    static float ScaleF();
+
     static void Draw();
 
     //  оордината x отрисовки полосы просмотра

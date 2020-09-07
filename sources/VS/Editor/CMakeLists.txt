@@ -49,6 +49,8 @@ add_compile_options(/wd5026)    # move constructor was implicitly defined as del
 add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 
+add_compile_options(/wd5219)    # Лоджное срабатываение на 16.7.2
+
 
 file(GLOB DOC            doc/*)
 file(GLOB SRC            src/*.h src/*.cpp)

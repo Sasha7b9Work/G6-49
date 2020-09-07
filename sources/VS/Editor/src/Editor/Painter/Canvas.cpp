@@ -321,21 +321,34 @@ void Grid::Draw()
     int width = Width();
     int height = Height();
 
-    float stepX = static_cast<float>(width) / 20.0F;
+    float stepX = static_cast<float>(width) / 20.0F * Zoomer::ScaleF();
     float stepY = static_cast<float>(height) / 20.0F;
 
-    float x = stepX;
+    float x0 = static_cast<float>(-Zoomer::IndexFirsPoint()) * Point::PixelsInPointX();
     float y = static_cast<float>(Y()) + stepY;
 
-    for (int i = 0; i < 19; i++)
+    Painter::SetColor(Color::GRAY_2F);
+
+    for (int i = 0; i < 20; i++)
     {
-        Painter::DrawLine(static_cast<int>(x + 0.5F), Y(), static_cast<int>(x + 0.5F), height + Y(), Color::GRAY_2F);
+        int x = static_cast<int>(x0 + stepX * i + 0.5F);
+
+        if (i == 10)
+        {
+            Painter::SetColor(Color::GRAY_4F);
+        }
+
+        Painter::DrawLine(x, Y(), x, height + Y());
+
+        if (i == 10)
+        {
+            Painter::SetColor(Color::GRAY_2F);
+        }
+
         Painter::DrawLine(0, static_cast<int>(y + 0.5F), width, static_cast<int>(y + 0.5F));
 
-        x += stepX;
         y += stepY;
     }
-
-    Painter::DrawLine(width / 2, Y(), width / 2, height + Y(), Color::GRAY_4F);
+    
     Painter::DrawLine(0, height / 2 + Y(), width, height / 2 + Y());
 }

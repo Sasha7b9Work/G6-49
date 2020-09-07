@@ -138,6 +138,12 @@ int Zoomer::Scale()
 }
 
 
+float Zoomer::ScaleF()
+{
+    return static_cast<float>(scale) / 100.0F;
+}
+
+
 void Zoomer::Draw()
 {
     if (NoScaling())
