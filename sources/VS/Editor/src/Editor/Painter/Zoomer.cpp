@@ -291,6 +291,11 @@ int Zoomer::NumberDrawingPoints()
 
 bool Zoomer::UnderMouse(int mouseX, int mouseY)
 {
+    if (NoScaling())
+    {
+        return false;
+    }
+
     return (mouseX >= X()) && (mouseX <= Right()) && (mouseY >= Y()) && (mouseY <= Bottom());
 }
 
@@ -322,6 +327,11 @@ bool Zoomer::MoveWindow(int mouseX)
 
 bool Window::UnderMouse(int mouseX, int mouseY)
 {
+    if (Zoomer::NoScaling())
+    {
+        return false;
+    }
+
     return (mouseX > X()) && (mouseX < Right()) && (mouseY > Y()) && (mouseY < Bottom());
 }
 
