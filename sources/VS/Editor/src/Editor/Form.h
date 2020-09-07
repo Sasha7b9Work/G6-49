@@ -44,7 +44,7 @@ struct Point
 	Point(uint16 p, uint16 d) : pos(p), data(d) {};
 	void SetCanvasY(int canvasY)
 	{
-		data = static_cast<uint16>(Point::MAX - Math::Round<uint16>(static_cast<float>(canvasY - Grid::Y()) / ScaleY()));
+		data = static_cast<uint16>(Point::MAX - Math::Round<uint16>(static_cast<float>(canvasY - Grid::Y()) / PixelsInDiscretY()));
 	}
 
 	uint16 pos;
@@ -62,13 +62,13 @@ struct Point
 
         return std::sqrt(dX * dX + dY * dY);
 	}
-	// Масштаб по горизонтали - пикселей в точке
+	// Масштаб по горизонтали - пикселей на точку
 	static float PixelsInPointX()
 	{
 		return static_cast<float>(Grid::Width()) / static_cast<float>(AMOUNT);
 	}
-	// Масштаб по вертикали
-	static float ScaleY()
+	// Масштаб по вертикали - пикселей на дискрет
+	static float PixelsInDiscretY()
 	{
 		return static_cast<float>(Grid::Height()) / static_cast<float>(MAX);
 	}

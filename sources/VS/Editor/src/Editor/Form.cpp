@@ -309,7 +309,7 @@ int Point::CanvasX()
 
 int Point::CanvasY()
 {
-    return Grid::Y() + Math::Round<int>(ScaleY() * static_cast<float>(Point::MAX - data));
+    return Grid::Y() + Math::Round<int>(PixelsInDiscretY() * static_cast<float>(Point::MAX - data));
 }
 
 
@@ -328,7 +328,7 @@ bool Form::ExistMarker(int canvasX, int canvasY, bool pressed, uint16 *index, ui
     for(uint16 i = 0; i < markers.size(); i++)
     {
         int x = Math::Round<int>(static_cast<float>(canvasX) / Point::PixelsInPointX());
-        int y = Math::Round<int>(static_cast<float>(canvasY - Grid::Y()) / Point::ScaleY());
+        int y = Math::Round<int>(static_cast<float>(canvasY - Grid::Y()) / Point::PixelsInDiscretY());
 
         double distance = markers[i].DistanceFromMouse(x, y);
 
@@ -403,7 +403,7 @@ static void DrawForm(const uint16 data[Point::AMOUNT], Color color)
 void Form::Draw()
 {
     float scaleX = Point::PixelsInPointX();
-    float scaleY = Point::ScaleY();
+    float scaleY = Point::PixelsInDiscretY();
 
     DrawForm(data, Color::WHITE);
 
