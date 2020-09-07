@@ -304,7 +304,7 @@ void Form::AlignPoint(Align::E align)
 
 int Point::CanvasX()
 {
-    return Math::Round<int>(PixelsInPointX() * static_cast<float>(pos));
+    return Math::Round<int>(PixelsInPointX() * static_cast<float>(pos - Zoomer::IndexFirsPoint()));
 }
 
 
