@@ -83,6 +83,8 @@ struct Point
 	{
 		return Math::Round<int>(static_cast<float>(x) * ScaleX());
 	}
+
+	void DrawParameters();
 };
 
 

@@ -91,6 +91,14 @@ void Painter::DrawRectangle(int x, int y, int width, int height, const Color &co
 }
 
 
+void Painter::DrawFilledRectangle(int x, int y, int width, int height, const Color &colorFill, const Color &colorBorder)
+{
+    FillRegion(x + 1, y + 1, width - 2, height - 2, colorFill);
+
+    DrawRectangle(x, y, width, height, colorBorder);
+}
+
+
 void Painter::SetColor(const Color &color)
 {
     if (color != Color::NUMBER)

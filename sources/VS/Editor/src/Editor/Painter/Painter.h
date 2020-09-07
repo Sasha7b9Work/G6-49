@@ -30,6 +30,8 @@ struct Painter
 
     static void DrawRectangle(int x, int y, int width, int height, const Color &color = Color::NUMBER);
 
+    static void DrawFilledRectangle(int x, int y, int width, int height, const Color &colorFill, const Color &colorBorder = Color::NUMBER);
+
     static void DrawText(int x, int y, const wxString &text, const Color &color = Color::NUMBER);
 
     static void DrawTextInZone(int x, int y, int widht, const wxString &text, const Color &color = Color::NUMBER);

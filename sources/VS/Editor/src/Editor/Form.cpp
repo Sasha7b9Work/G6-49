@@ -415,6 +415,8 @@ void Form::Draw()
             Math::Round<int>(scaleX * static_cast<float>(markers[iCurMarker].pos)),
             Grid::Y() + Math::Round<int>(scaleY * static_cast<float>(Point::MAX - markers[iCurMarker].data)),
             Point::SIZE * 3);
+
+        markers[iCurMarker].DrawParameters();
     }
 
     if (drawAdditionData)
@@ -648,4 +650,10 @@ static bool ConvertSubStringToShort(const wxString &line, uint startPos, uint en
     *value = static_cast<uint16>(val);
 
     return true;
+}
+
+
+void Point::DrawParameters()
+{
+    
 }
