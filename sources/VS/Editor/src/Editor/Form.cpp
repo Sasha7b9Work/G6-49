@@ -381,27 +381,38 @@ void Form::CalculateNeighboringPoints(const Point &point)
 }
 
 
-static void DrawData(const uint16 data[Point::AMOUNT], Color color)
+static void DrawData(const uint16 data[Point::AMOUNT], const Color &colorBright, const Color &colorDark)
 {
-    Painter::SetColor(color);
-
-
-
-    for (int i = Zoomer::IndexFirsPoint() + 1; i < Zoomer::IndexLastPoint(); i++)
+    if (Point::PixelsInPointX() > 3.0F)
     {
-        Point p0(static_cast<uint16>(i - 1), data[i - 1]);
-        Point p1(static_cast<uint16>(i), data[i]);
+        for (int i = Zoomer::IndexFirsPoint() + 1; i < Zoomer::IndexLastPoint(); i++)
+        {
+            Point p0(static_cast<uint16>(i - 1), data[i - 1]);
+            Point p1(static_cast<uint16>(i), data[i]);
 
-        Painter::DrawLine(p0.CanvasX(), p0.CanvasY(), p1.CanvasX(), p1.CanvasY());
+            Painter::DrawLine(p0.CanvasX(), p0.CanvasY(), p1.CanvasX(), p1.CanvasY(), colorDark);
 
-        Painter::DrawPoint(p1.CanvasX(), p1.CanvasY(), Point::SIZE);
+            Painter::DrawPoint(p1.CanvasX(), p1.CanvasY(), Point::SIZE, colorBright);
+        }
+    }
+    else
+    {
+        Painter::SetColor(colorBright);
+
+        for (int i = Zoomer::IndexFirsPoint() + 1; i < Zoomer::IndexLastPoint(); i++)
+        {
+            Point p0(static_cast<uint16>(i - 1), data[i - 1]);
+            Point p1(static_cast<uint16>(i), data[i]);
+
+            Painter::DrawLine(p0.CanvasX(), p0.CanvasY(), p1.CanvasX(), p1.CanvasY());
+        }
     }
 }
 
 
 void Form::Draw()
 {
-    DrawData(data, Color::WHITE);
+    DrawData(data, Color::WHITE, Color::GRAY_50);
 
     Painter::SetColor(Color::GREEN);
 
@@ -419,7 +430,7 @@ void Form::Draw()
 
     if (drawAdditionData)
     {
-        DrawData(addData, Color::BLUE);
+        DrawData(addData, Color::BLUE, Color::BLUE_50);
     }
 }
 

@@ -10,6 +10,7 @@ struct Color
     static Color RED;
     static Color GREEN;
     static Color BLUE;
+    static Color BLUE_50;
     static Color GREEN_1F;
     static Color GREEN_3F;
     static Color GRAY_50;
