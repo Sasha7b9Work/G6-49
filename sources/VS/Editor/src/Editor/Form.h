@@ -36,15 +36,15 @@ struct Point
 
 	static const uint AMOUNT = 8192;
 
-	Point(int mouseX, int mouseY)
+	Point(int canvasX, int canvasY)
 	{
-		pos = Math::Round<uint16>(static_cast<float>(mouseX) / ScaleX());
-		data = static_cast<uint16>(Point::MAX - Math::Round<uint16>(static_cast<float>(mouseY - Grid::Y()) / ScaleY()));
+		pos = Math::Round<uint16>(static_cast<float>(canvasX) / ScaleX());
+		SetCanvasY(canvasY);
 	}
 	Point(uint16 p, uint16 d) : pos(p), data(d) {};
-	void SetY(int mouseY)
+	void SetCanvasY(int canvasY)
 	{
-		data = static_cast<uint16>(Point::MAX - Math::Round<uint16>(static_cast<float>(mouseY) / ScaleY()));
+		data = static_cast<uint16>(Point::MAX - Math::Round<uint16>(static_cast<float>(canvasY - Grid::Y()) / ScaleY()));
 	}
 
 	uint16 pos;
@@ -119,7 +119,7 @@ public:
     void RemoveCurrentMarker();
 
 	// Переместить маркер в новую позицию
-    void MoveMarker(int mouseX, int mouseY);
+    void MoveMarker(int canvasX, int canvasY);
 
 	// Выровнять точку
     void AlignPoint(Align::E align);

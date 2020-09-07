@@ -173,23 +173,23 @@ void Form::RemoveCurrentMarker()
 }
 
 
-void Form::MoveMarker(int mouseX, int mouseY)
+void Form::MoveMarker(int canvasX, int canvasY)
 {
     if (iCurMarker == 0)
     {
-        markers[0].SetY(mouseY);
+        markers[0].SetCanvasY(canvasY);
         data[0] = markers[0].data;
         LinearInterpolationRight(0);
     }
     else if (iCurMarker == markers.size() - 1)
     {
-        markers[iCurMarker].SetY(mouseY);
+        markers[iCurMarker].SetCanvasY(canvasY);
         data[Point::AMOUNT - 1] = markers[iCurMarker].data;
         LinearInterpolationLeft(iCurMarker);
     }
     else
     {
-        Point point(mouseX, mouseY);
+        Point point(canvasX, canvasY);
 
         Point left = markers[iCurMarker - 1];
 
