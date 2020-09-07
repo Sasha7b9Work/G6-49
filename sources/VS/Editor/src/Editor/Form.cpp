@@ -663,14 +663,11 @@ void Point::DrawParameters()
 {
     wxPoint coord = CalculateCoordParameters();
 
-    int x = coord.x;
-    int y = coord.y;
+    Painter::DrawFilledRectangle(coord.x, coord.y, 60, 35, Color::BLACK, Color::WHITE);
 
-    Painter::DrawFilledRectangle(x, y, 60, 35, Color::BLACK, Color::WHITE);
+    Painter::DrawText(coord.x + 3, coord.y + 2, wxString::Format(wxT("x : %d"), pos));
 
-    Painter::DrawText(x + 3, y + 2, wxString::Format(wxT("x : %d"), pos));
-
-    Painter::DrawText(x + 3, y + 16, wxString::Format(wxT("y : %d"), data));
+    Painter::DrawText(coord.x + 3, coord.y + 16, wxString::Format(wxT("y : %d"), data));
 }
 
 
