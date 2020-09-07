@@ -385,12 +385,16 @@ static void DrawData(const uint16 data[Point::AMOUNT], Color color)
 {
     Painter::SetColor(color);
 
+
+
     for (int i = Zoomer::IndexFirsPoint() + 1; i < Zoomer::IndexLastPoint(); i++)
     {
         Point p0(static_cast<uint16>(i - 1), data[i - 1]);
         Point p1(static_cast<uint16>(i), data[i]);
 
         Painter::DrawLine(p0.CanvasX(), p0.CanvasY(), p1.CanvasX(), p1.CanvasY());
+
+        Painter::DrawPoint(p1.CanvasX(), p1.CanvasY(), Point::SIZE);
     }
 }
 

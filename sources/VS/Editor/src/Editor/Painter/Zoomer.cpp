@@ -285,7 +285,7 @@ int Zoomer::IndexFirsPoint()
 
 int Zoomer::IndexLastPoint()
 {
-    return indexFirstPoint + numberDrawingPoints;
+    return indexFirstPoint + numberDrawingPoints + 1;
 }
 
 

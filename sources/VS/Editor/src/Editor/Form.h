@@ -37,6 +37,8 @@ struct Marker
 
 struct Point
 {
+	static const int SIZE = 3;
+
     static const uint16 MIN = static_cast<uint16>(0);
 	static const uint16 MAX = static_cast<uint16>((1 << 12) - 1);
 	static const uint16 AVE = static_cast<uint16>((MAX) / 2);
