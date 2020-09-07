@@ -378,27 +378,21 @@ static void DrawForm(const uint16 data[Point::AMOUNT], Color color)
 
     for (int i = 1; i < Point::AMOUNT; i++)
     {
-        Point point0(static_cast<uint16>(i - 1), data[i - 1]);
-        Point point1(static_cast<uint16>(i), data[i]);
+        Point p0(static_cast<uint16>(i - 1), data[i - 1]);
+        Point p1(static_cast<uint16>(i), data[i]);
 
-        int x0 = point0.GetMouseX();
-        int y0 = point0.GetMouseY();
-
-        int x1 = point1.GetMouseX();
-        int y1 = point1.GetMouseY();
-
-        Painter::DrawLine(x0, y0, x1, y1);
+        Painter::DrawLine(p0.CanvasX(), p0.CanvasY(), p1.CanvasX(), p1.CanvasY());
     }
 }
 
 
-int Point::GetMouseX()
+int Point::CanvasX()
 {
     return Math::Round<int>(ScaleX() * static_cast<float>(pos));
 }
 
 
-int Point::GetMouseY()
+int Point::CanvasY()
 {
     return Grid::Y() + Math::Round<int>(ScaleY() * static_cast<float>(Point::MAX - data));
 }

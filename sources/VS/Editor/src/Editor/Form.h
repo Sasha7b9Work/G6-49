@@ -86,9 +86,9 @@ struct Point
 
 	void DrawParameters();
 
-	int GetMouseX();
+	int CanvasX();
 
-	int GetMouseY();
+	int CanvasY();
 };
 
 
