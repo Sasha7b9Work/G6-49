@@ -1,8 +1,11 @@
 #pragma once
 #include "defines.h"
 #include "Editor/Painter/Canvas.h"
+#include "Editor/Painter/Zoomer.h"
 #include "Utils/MyMath.h"
+
 #include <vector>
+
 #pragma warning(push, 0)
 #include <wx/textfile.h>
 #pragma warning(pop)
@@ -26,15 +29,19 @@ struct Align
 };
 
 
+struct Marker
+{
+	static const int SIZE = 5;
+};
+
+
 struct Point
 {
-	static const uint SIZE = 5;
-
     static const uint16 MIN = static_cast<uint16>(0);
 	static const uint16 MAX = static_cast<uint16>((1 << 12) - 1);
 	static const uint16 AVE = static_cast<uint16>((MAX) / 2);
 
-	static const uint AMOUNT = 8192;
+	static const int AMOUNT = 8192;
 
 	Point(int canvasX, int canvasY)
 	{
@@ -65,7 +72,7 @@ struct Point
 	// Масштаб по горизонтали - пикселей на точку
 	static float PixelsInPointX()
 	{
-		return static_cast<float>(Grid::Width()) / static_cast<float>(AMOUNT);
+		return static_cast<float>(Grid::Width()) / static_cast<float>(Zoomer::NumberDrawingPoints());
 	}
 	// Масштаб по вертикали - пикселей на дискрет
 	static float PixelsInDiscretY()

@@ -4,7 +4,6 @@
 #include "Editor/History.h"
 #include "Editor/Painter/Canvas.h"
 #include "Editor/Painter/Painter.h"
-#include "Editor/Painter/Zoomer.h"
 
 #pragma warning(push, 0)
 #include <wx/msgdlg.h>
@@ -335,7 +334,7 @@ bool Form::ExistMarker(int canvasX, int canvasY, bool pressed, uint16 *index, ui
         }
     }
 
-    if(nearestDistance < Point::SIZE * 2.5)
+    if(nearestDistance < Marker::SIZE * 2.5)
     {
         if(iCurMarker == static_cast<uint>(-1) || !pressed)
         {
@@ -404,13 +403,13 @@ void Form::Draw()
 
     for (Point point : markers)
     {
-        Painter::DrawPoint(point.CanvasX(), point.CanvasY(), Point::SIZE);
+        Painter::DrawPoint(point.CanvasX(), point.CanvasY(), Marker::SIZE);
     }
 
     if (iCurMarker != static_cast<uint>(-1))
     {
         Point &point = markers[iCurMarker];
-        Painter::DrawPoint(point.CanvasX(), point.CanvasY(), Point::SIZE * 3);
+        Painter::DrawPoint(point.CanvasX(), point.CanvasY(), Marker::SIZE * 3);
         point.DrawParameters();
     }
 
