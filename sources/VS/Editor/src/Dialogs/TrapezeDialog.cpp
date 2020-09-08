@@ -96,9 +96,9 @@ void TrapezeDialog::SendAdditionForm()
 
     points.clear();
 
-    points.emplace_back(static_cast<uint16>(start), static_cast<uint16>(min));
-    points.emplace_back(static_cast<uint16>(left), static_cast<uint16>(max));
-    points.emplace_back(static_cast<uint16>(right), static_cast<uint16>(max));
+    points.push_back(Point::FromData(static_cast<uint16>(start), static_cast<uint16>(min)));
+    points.push_back(Point::FromData(static_cast<uint16>(left),  static_cast<uint16>(max)));
+    points.push_back(Point::FromData(static_cast<uint16>(right), static_cast<uint16>(max)));
 }
 
 

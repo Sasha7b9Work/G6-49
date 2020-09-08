@@ -45,12 +45,28 @@ struct Point
 
 	static const int AMOUNT = 8192;
 
+	static Point FromData(uint16 p, uint16 d)
+	{
+		return Point(p, d);
+	}
+
+	static Point FromCanvas(int canvasX, int canvasY)
+	{
+		return Point(canvasX, canvasY);
+	}
+
+private:
+
 	Point(int canvasX, int canvasY)
 	{
 		pos = Math::Round<uint16>(static_cast<float>(static_cast<float>(canvasX) + static_cast<float>(Zoomer::IndexFirsPoint()) * PixelsInPointX()) / PixelsInPointX());
 		SetCanvasY(canvasY);
 	}
+
 	Point(uint16 p, uint16 d) : pos(p), data(d) {};
+
+public:
+	
 	void SetCanvasY(int canvasY)
 	{
 		data = static_cast<uint16>(Point::MAX - Math::Round<uint16>(static_cast<float>(canvasY - Grid::Y()) / PixelsInDiscretY()));

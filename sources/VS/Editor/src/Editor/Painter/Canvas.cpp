@@ -318,6 +318,15 @@ int Grid::Right()
 
 void Grid::Draw()
 {
+    //std::vector<Point> points;
+    //
+    //float stepX = Width() / 20.0F;
+    //
+    //for (int i = 0; i < 20; i++)
+    //{
+    //    points.push_back(Point()
+    //}
+
     int width = Width();
     int height = Height();
 

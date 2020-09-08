@@ -104,7 +104,7 @@ void Form::SetMarkerInMouseCoord(int mouseX, int mouseY)
 
     if (!TheFrame->IsBlockingCanvas())
     {
-        SetPoint(Point(mouseX, mouseY));
+        SetPoint(Point::FromCanvas(mouseX, mouseY));
         History::Add(TheForm);
     }
 }
@@ -136,14 +136,14 @@ void Form::SetPointInRealCoord(uint16 pos, uint16 dat)
 {
     if (!TheFrame->IsBlockingCanvas())
     {
-        SetPoint(Point(pos, dat));
+        SetPoint(Point::FromData(pos, dat));
     }
 }
 
 
 void Form::SetPointInPosition(uint16 pos)
 {
-    Point point(pos, data[pos]);
+    Point point = Point::FromData(pos, data[pos]);
 
     uint index = PointInPosition(point.pos);
 
@@ -189,7 +189,7 @@ void Form::MoveMarker(int canvasX, int canvasY)
     }
     else
     {
-        Point point(canvasX, canvasY);
+        Point point = Point::FromCanvas(canvasX, canvasY);
 
         Point left = markers[iCurMarker - 1];
 
@@ -387,8 +387,8 @@ static void DrawData(const uint16 data[Point::AMOUNT], const Color &colorBright,
     {
         for (int i = Zoomer::IndexFirsPoint() + 1; i < Zoomer::IndexLastPoint(); i++)
         {
-            Point p0(static_cast<uint16>(i - 1), data[i - 1]);
-            Point p1(static_cast<uint16>(i), data[i]);
+            Point p0 = Point::FromData(static_cast<uint16>(i - 1), data[i - 1]);
+            Point p1 = Point::FromData(static_cast<uint16>(i), data[i]);
 
             Painter::DrawLine(p0.CanvasX(), p0.CanvasY(), p1.CanvasX(), p1.CanvasY(), colorDark);
 
@@ -401,8 +401,8 @@ static void DrawData(const uint16 data[Point::AMOUNT], const Color &colorBright,
 
         for (int i = Zoomer::IndexFirsPoint() + 1; i < Zoomer::IndexLastPoint(); i++)
         {
-            Point p0(static_cast<uint16>(i - 1), data[i - 1]);
-            Point p1(static_cast<uint16>(i), data[i]);
+            Point p0 = Point::FromData(static_cast<uint16>(i - 1), data[i - 1]);
+            Point p1 = Point::FromData(static_cast<uint16>(i), data[i]);
 
             Painter::DrawLine(p0.CanvasX(), p0.CanvasY(), p1.CanvasX(), p1.CanvasY());
         }
