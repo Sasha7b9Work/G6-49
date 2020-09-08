@@ -73,6 +73,8 @@ enum //-V2521
     SCALE_LESS,
     SCALE_REGION,
 
+    CHANGE_TYPE_GRID,
+
     INSERT_POINTS
 };
 
@@ -146,6 +148,7 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_MENU,     &Frame::OnScaleMore,       this, SCALE_MORE);
     Bind(wxEVT_MENU,     &Frame::OnScaleLess,       this, SCALE_LESS);
     Bind(wxEVT_MENU,     &Frame::OnScaleRegion,     this, SCALE_REGION);
+    Bind(wxEVT_MENU,     &Frame::OnChangeTypeGrid,  this, CHANGE_TYPE_GRID);
     Bind(wxEVT_MENU,     &Frame::InsertPoints,      this, INSERT_POINTS);
     Bind(wxEVT_TIMER,    &Frame::OnTimer,           this, TIMER_ID);
     Bind(wxEVT_PAINT,    &Frame::OnRepaint,         this);
@@ -240,72 +243,58 @@ void Frame::CreateMenu()
 
     SetMenuBar(menuBar);
 
-    wxBitmap imgOpen(wxImage(wxT("icons/open.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgSave(wxImage(wxT("icons/save.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgNew(wxImage(wxT("icons/new.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgUndo(wxImage(wxT("icons/undo.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgRedo(wxImage(wxT("icons/redo.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgCreateTriangle(wxImage(wxT("icons/triangle.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgCreateTrapeze(wxImage(wxT("icons/trapeze.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgCreateExponent(wxImage(wxT("icons/exponent.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgCreateSinX(wxImage(wxT("icons/sinx.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgCreateGauss(wxImage(wxT("icons/gauss.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgCreateGaversine(wxImage(wxT("icons/gaversine.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgCreateNoise(wxImage(wxT("icons/noise.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgCreateComposite(wxImage(wxT("icons/composite.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgInsertPoints(wxImage(wxT("icons/points.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgPointsMBL(wxImage(wxT("icons/MBL_points.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgLinesMBL(wxImage(wxT("icons/MBL_lines.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgSelectMBL(wxImage(wxT("icons/MBL_select.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgScaleMore(wxImage(wxT("icons/scale_more.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgScaleLess(wxImage(wxT("icons/scale_less.bmp"), wxBITMAP_TYPE_BMP));
-    wxBitmap imgScaleRegion(wxImage(wxT("icons/scale_region.bmp"), wxBITMAP_TYPE_BMP));
-
     toolBar = CreateToolBar();
-    AddTool(FILE_OPEN, wxT("Загрузить ранее созданный сигнал из файла"), imgOpen);
-    AddTool(FILE_SAVE, wxT("Сохранить сигнал в файл"), imgSave);
-    AddTool(FILE_NEW, wxT("Создать новый сигнал"), imgNew);
+    AddTool(FILE_OPEN, wxT("Загрузить ранее созданный сигнал из файла"), "open.bmp");
+    AddTool(FILE_SAVE, wxT("Сохранить сигнал в файл"), "save.bmp");
+    AddTool(FILE_NEW, wxT("Создать новый сигнал"), "new.bmp");
 
     toolBar->AddSeparator();
-    AddTool(UNDO, wxT("Отменить предыдущее действие"), imgUndo);
-    AddTool(REDO, wxT("Восстановить следующее действие"), imgRedo);
+    AddTool(UNDO, wxT("Отменить предыдущее действие"), "undo.bmp");
+    AddTool(REDO, wxT("Восстановить следующее действие"), "redo.bmp");
 
     toolBar->AddSeparator();
-    AddTool(CREATE_TRIANGLE, wxT("Создать новый сигнал в форме треугольника"), imgCreateTriangle);
-    AddTool(CREATE_TRAPEZE, wxT("Создать новый сигнал в форме трапеции"), imgCreateTrapeze);
-    AddTool(CREATE_EXPONENT, wxT("Создать новый экспоненциальный сигнал"), imgCreateExponent);
-    AddTool(CREATE_SINX, wxT("Создать сигнал вида sin(x)/x"), imgCreateSinX);
-    AddTool(CREATE_GAUSS, wxT("Создать новый сигнал в виде гуссовой функции"), imgCreateGauss);
-    AddTool(CREATE_GAVERSINE, wxT("Создать новый сигнал в форме гаверсинуса"), imgCreateGaversine);
-    AddTool(CREATE_NOISE, wxT("Создать шумовой сигнал"), imgCreateNoise);
-    AddTool(CREATE_COMPISITE, wxT("Создать сложный сигнал из гармоник"), imgCreateComposite);
+    AddTool(CREATE_TRIANGLE, wxT("Создать новый сигнал в форме треугольника"), "triangle.bmp");
+    AddTool(CREATE_TRAPEZE, wxT("Создать новый сигнал в форме трапеции"), "trapeze.bmp");
+    AddTool(CREATE_EXPONENT, wxT("Создать новый экспоненциальный сигнал"), "exponent.bmp");
+    AddTool(CREATE_SINX, wxT("Создать сигнал вида sin(x)/x"), "sinx.bmp");
+    AddTool(CREATE_GAUSS, wxT("Создать новый сигнал в виде гуссовой функции"), "gauss.bmp");
+    AddTool(CREATE_GAVERSINE, wxT("Создать новый сигнал в форме гаверсинуса"), "gaversine.bmp");
+    AddTool(CREATE_NOISE, wxT("Создать шумовой сигнал"), "noise.bmp");
+    AddTool(CREATE_COMPISITE, wxT("Создать сложный сигнал из гармоник"), "composite.bmp");
 
     toolBar->AddSeparator();
-    AddTool(INSERT_POINTS, wxT("Вставить маркеры"), imgInsertPoints);
+    AddTool(INSERT_POINTS, wxT("Вставить маркеры"), "points.bmp");
 
     toolBar->AddSeparator();
-    AddRadioTool(MBL_POINTS, wxT("Режим редактирования точек"), imgPointsMBL);   
-    AddRadioTool(MBL_LINES, wxT("Режим редактирования интерполирующими прямыми"), imgLinesMBL);
-    AddRadioTool(MBL_SELECT, wxT("Режим выделения"), imgSelectMBL);
+    AddRadioTool(MBL_POINTS, wxT("Режим редактирования точек"), "MBL_points.bmp");
+    AddRadioTool(MBL_LINES, wxT("Режим редактирования интерполирующими прямыми"), "MBL_lines.bmp");
+    AddRadioTool(MBL_SELECT, wxT("Режим выделения"), "MBL_select.bmp");
 
     toolBar->AddSeparator();
-    AddTool(SCALE_MORE, wxT("Увеличить масштаб"), imgScaleMore);
-    AddTool(SCALE_LESS, wxT("Уменьшить масштаб"), imgScaleLess);
-    AddTool(SCALE_REGION, wxT("Показать выделенную область"), imgScaleRegion);
+    AddTool(SCALE_MORE, wxT("Увеличить масштаб"), "scale_more.bmp");
+    AddTool(SCALE_LESS, wxT("Уменьшить масштаб"), "scale_less.bmp");
+    AddTool(SCALE_REGION, wxT("Показать выделенную область"), "scale_region.bmp");
+
+    toolBar->AddSeparator();
+    AddTool(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - проценты"), "grid_percents.bmp");
 
     toolBar->Realize();
 }
 
 
-void Frame::AddTool(int id, const wxString &label, const wxBitmap &img)
+void Frame::AddTool(int id, const wxString &label, const char *file)
 {
-    toolBar->AddTool(id, label, img, img, wxITEM_NORMAL, label, label);
+    wxBitmap bitmap(wxImage(wxString("icons/") + wxString(file), wxBITMAP_TYPE_BMP));
+
+    toolBar->AddTool(id, label, bitmap, bitmap, wxITEM_NORMAL, label, label);
 }
 
 
-void Frame::AddRadioTool(int id, const wxString &label, const wxBitmap &img)
+void Frame::AddRadioTool(int id, const wxString &label, const char *file)
 {
-    toolBar->AddRadioTool(id, label, img, img, label, label);
+    wxBitmap bitmap(wxImage(wxString("icons/") + wxString(file), wxBITMAP_TYPE_BMP));
+
+    toolBar->AddRadioTool(id, label, bitmap, bitmap, label, label);
 }
 
 
@@ -597,4 +586,23 @@ void Frame::OnScaleLess(wxCommandEvent &)
 void Frame::OnScaleRegion(wxCommandEvent &)
 {
     Zoomer::SetOnRegion();
+}
+
+
+void Frame::OnChangeTypeGrid(wxCommandEvent &)
+{
+    Grid::ChangeTypeGrid();
+
+    if (Grid::TypeIsPercents())
+    {
+        toolBar->SetToolNormalBitmap(CHANGE_TYPE_GRID, wxBitmap(wxT("icons/grid_percents.bmp"), wxBITMAP_TYPE_BMP));
+        toolBar->SetToolLongHelp(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - проценты"));
+        toolBar->SetToolShortHelp(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - проценты"));
+    }
+    else
+    {
+        toolBar->SetToolNormalBitmap(CHANGE_TYPE_GRID, wxBitmap(wxT("icons/grid_points.bmp"), wxBITMAP_TYPE_BMP));
+        toolBar->SetToolLongHelp(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - точки"));
+        toolBar->SetToolShortHelp(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - точки"));
+    }
 }

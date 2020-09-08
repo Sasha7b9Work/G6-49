@@ -45,9 +45,9 @@ private:
 
     void CreateMenu();
 
-    void AddTool(int id, const wxString &label, const wxBitmap &img);
+    void AddTool(int id, const wxString &label, const char *file);
 
-    void AddRadioTool(int id, const wxString &label, const wxBitmap &img);
+    void AddRadioTool(int id, const wxString &label, const char *file);
 
     void OnAlignLeft(wxCommandEvent &);
 
@@ -106,6 +106,8 @@ private:
     void OnScaleLess(wxCommandEvent &);
 
     void OnScaleRegion(wxCommandEvent &);
+
+    void OnChangeTypeGrid(wxCommandEvent &);
 };
 
 

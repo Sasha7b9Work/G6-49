@@ -15,6 +15,12 @@ struct Grid
     static int Bottom();
     static int Right();
     static void Draw();
+    static void ChangeTypeGrid() { typeIsPercents = !typeIsPercents; }
+    // Возвращает true, если линии сетки выводятся в процентах
+    static bool TypeIsPercents() { return typeIsPercents; }
+
+private:
+    static bool typeIsPercents;
 };
 
 

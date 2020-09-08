@@ -14,6 +14,9 @@
 #pragma warning(pop)
 
 
+bool Grid::typeIsPercents = true;
+
+
 Canvas *TheCanvas = nullptr;
 static bool needRedraw = true;
 
