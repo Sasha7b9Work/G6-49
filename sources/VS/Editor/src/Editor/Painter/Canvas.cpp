@@ -318,53 +318,12 @@ int Grid::Right()
 
 void Grid::Draw()
 {
-//    std::vector<Point> points;
-//    
-//    float stepX = Width() / 20.0F;
-//    
-//    for (int i = 1; i < 19; i++)
-//    {
-//        points.push_back(Point::FromData(Math::Round<float>(stepX * i), 0));
-//    }
-//
-//    for (Point &point : points)
-//    {
-//        Painter::DrawVLine(point.CanvasX(), Grid::Y(), Grid::Bottom(), Color::GRAY_2F);
-//    }
+    float stepX = Point::AMOUNT / 20.0F;
+    float stepY = Height() / 20.0F;
 
-    /*
-    int width = Width();
-    int height = Height();
-
-    float stepX = static_cast<float>(width) / 20.0F * Zoomer::ScaleF();
-    float stepY = static_cast<float>(height) / 20.0F;
-
-    float x0 = static_cast<float>(-Zoomer::IndexFirsPoint()) * Point::PixelsInPointX();
-    float y = static_cast<float>(Y()) + stepY;
-
-    Painter::SetColor(Color::GRAY_2F);
-
-    for (int i = 0; i < 20; i++)
+    for (int i = 1; i < 20; i++)
     {
-        int x = static_cast<int>(x0 + stepX * i + 0.5F);
-
-        if (i == 10)
-        {
-            Painter::SetColor(Color::GRAY_4F);
-        }
-
-        Painter::DrawLine(x, Y(), x, height + Y());
-
-        if (i == 10)
-        {
-            Painter::SetColor(Color::GRAY_2F);
-        }
-
-        Painter::DrawLine(0, static_cast<int>(y + 0.5F), width, static_cast<int>(y + 0.5F));
-
-        y += stepY;
+        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), (i == 10) ? Color::GRAY_4F : Color::GRAY_2F);
+        Painter::DrawHLine(X(), static_cast<int>(i * stepY + 0.5F), Right(), (i == 10) ? Color::GRAY_4F : Color::GRAY_2F);
     }
-    
-    Painter::DrawLine(0, height / 2 + Y(), width, height / 2 + Y());
-    */
 }

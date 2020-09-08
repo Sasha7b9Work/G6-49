@@ -123,10 +123,10 @@ public:
 	wxPoint CalculateCoordParameters();
 
 	// Координата X точки на холсте
-	int CanvasX();
+	int CanvasX() const;
 
 	// Координата Y точки на холсте
-	int CanvasY();
+	int CanvasY() const;
 };
 
 

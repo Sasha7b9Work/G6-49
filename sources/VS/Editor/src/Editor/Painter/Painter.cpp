@@ -156,17 +156,13 @@ void Painter::DrawLine(int x0, int y0, int x1, int y1, const Color &color)
 
 void Painter::DrawVLine(int x, int top, int bottom, const Color &color)
 {
-    SetColor(color);
-
-    memDC.DrawLine(x, top, x, bottom);
+    DrawLine(x, top, x, bottom, color);
 }
 
 
-void Painter::DrawHLine(int y, int left, int right, const Color &color)
+void Painter::DrawHLine(int left, int y, int right, const Color &color)
 {
-    SetColor(color);
-
-    memDC.DrawLine(left, y, right, y);
+    DrawLine(left, y, right, y, color);
 }
 
 

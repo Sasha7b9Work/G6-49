@@ -301,13 +301,13 @@ void Form::AlignPoint(Align::E align)
 }
 
 
-int Point::CanvasX()
+int Point::CanvasX() const
 {
     return Math::Round<int>(PixelsInPointX() * static_cast<float>(pos - Zoomer::IndexFirsPoint()));
 }
 
 
-int Point::CanvasY()
+int Point::CanvasY() const
 {
     return Grid::Y() + Math::Round<int>(PixelsInDiscretY() * static_cast<float>(Point::MAX - data));
 }
