@@ -45,6 +45,8 @@ struct Point
 
 	static const int AMOUNT = 8192;
 
+	Point() : Point(static_cast<uint16>(0), static_cast<uint16>(0)) { };
+
 	static Point FromData(uint16 p, uint16 d)
 	{
 		return Point(p, d);
@@ -61,11 +63,16 @@ private:
 	{
 		pos = Math::Round<uint16>(static_cast<float>(static_cast<float>(canvasX) + static_cast<float>(Zoomer::IndexFirsPoint()) * PixelsInPointX()) / PixelsInPointX());
 		SetCanvasY(canvasY);
-	}
+	}	
 
 	Point(uint16 p, uint16 d) : pos(p), data(d) {};
 
 public:
+
+	void SetData(uint16 p, uint16 d)
+	{
+		*this = Point(p, d);
+	};
 	
 	void SetCanvasY(int canvasY)
 	{
@@ -99,12 +106,12 @@ public:
 	}
 
 	// ѕреобразует координату мыши в точку [0 ... (Point::AMOUNT - 1)]
-	static int MouseToPointX(int mouseX)
+	static int CanvasToPointX(int mouseX)
 	{
 		return Math::Round<int>(static_cast<float>(mouseX) / PixelsInPointX());
 	}
 
-	static int PointToMouseX(int x)
+	static int PointToCanvasX(int x)
 	{
 		return Math::Round<int>(static_cast<float>(x) * PixelsInPointX());
 	}

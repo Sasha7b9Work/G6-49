@@ -318,15 +318,21 @@ int Grid::Right()
 
 void Grid::Draw()
 {
-    //std::vector<Point> points;
-    //
-    //float stepX = Width() / 20.0F;
-    //
-    //for (int i = 0; i < 20; i++)
-    //{
-    //    points.push_back(Point()
-    //}
+//    std::vector<Point> points;
+//    
+//    float stepX = Width() / 20.0F;
+//    
+//    for (int i = 1; i < 19; i++)
+//    {
+//        points.push_back(Point::FromData(Math::Round<float>(stepX * i), 0));
+//    }
+//
+//    for (Point &point : points)
+//    {
+//        Painter::DrawVLine(point.CanvasX(), Grid::Y(), Grid::Bottom(), Color::GRAY_2F);
+//    }
 
+    /*
     int width = Width();
     int height = Height();
 
@@ -360,4 +366,5 @@ void Grid::Draw()
     }
     
     Painter::DrawLine(0, height / 2 + Y(), width, height / 2 + Y());
+    */
 }

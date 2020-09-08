@@ -25,6 +25,8 @@ struct Painter
     static void DrawPoint(int x, int y, int size, const Color &color = Color::NUMBER);
 
     static void DrawLine(int x0, int y0, int x1, int y1, const Color &color = Color::NUMBER);
+    static void DrawVLine(int x, int top, int bottom, const Color &color = Color::NUMBER);
+    static void DrawHLine(int y, int left, int right, const Color &color = Color::NUMBER);
 
     static void FillRegion(int x, int y, int width, int height, const Color &color = Color::NUMBER);
 

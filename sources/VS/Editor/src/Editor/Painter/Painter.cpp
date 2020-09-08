@@ -101,7 +101,7 @@ void Painter::DrawFilledRectangle(int x, int y, int width, int height, const Col
 
 void Painter::SetColor(const Color &color)
 {
-    if (color != Color::NUMBER)
+    if (color != Color::NUMBER && color != currentColor)
     {
         currentColor = color;
 
@@ -151,6 +151,22 @@ void Painter::DrawLine(int x0, int y0, int x1, int y1, const Color &color)
     SetColor(color);
 
     memDC.DrawLine(x0, y0, x1, y1);
+}
+
+
+void Painter::DrawVLine(int x, int top, int bottom, const Color &color)
+{
+    SetColor(color);
+
+    memDC.DrawLine(x, top, x, bottom);
+}
+
+
+void Painter::DrawHLine(int y, int left, int right, const Color &color)
+{
+    SetColor(color);
+
+    memDC.DrawLine(left, y, right, y);
 }
 
 

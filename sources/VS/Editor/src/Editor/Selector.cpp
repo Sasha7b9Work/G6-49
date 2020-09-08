@@ -17,7 +17,7 @@ struct Cursor
     void Draw();
     bool IsGrabbing()         { return grabbing == this; }
     static void EndGrabbing() { grabbing = nullptr; }
-    int GetMouseX()           { return Point::PointToMouseX(x); }
+    int GetMouseX()           { return Point::PointToCanvasX(x); }
 };
 
 int Cursor::delta = 5;
@@ -98,7 +98,7 @@ void Cursor::Draw()
 {
     if (IsEnabled())
     {
-        int coord = Point::PointToMouseX(x);
+        int coord = Point::PointToCanvasX(x);
 
         Painter::DrawLine(coord, Grid::Y(), coord, Grid::Bottom(), Color::GREEN);
     }
@@ -112,7 +112,7 @@ bool Cursor::OverMouseX(int mouseX)
         return false;
     }
 
-    int point = Point::PointToMouseX(x);
+    int point = Point::PointToCanvasX(x);
 
     return Math::InBoundaries(point, mouseX - delta, mouseX + delta);
 }
@@ -120,6 +120,6 @@ bool Cursor::OverMouseX(int mouseX)
 
 void Cursor::Set(int mouseX)
 {
-    x = Point::MouseToPointX(mouseX);
+    x = Point::CanvasToPointX(mouseX);
     grabbing = this;
 }
