@@ -21,6 +21,8 @@ struct Grid
 
 private:
     static bool typeIsPercents;
+    static void DrawTypePercents();
+    static void DrawTypePoints();
 };
 
 

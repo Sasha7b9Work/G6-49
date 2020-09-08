@@ -321,6 +321,12 @@ int Grid::Right()
 
 void Grid::Draw()
 {
+    TypeIsPercents() ? DrawTypePercents() : DrawTypePoints();
+}
+
+
+void Grid::DrawTypePercents()
+{
     float stepX = Point::AMOUNT / 20.0F;
     float stepY = Height() / 20.0F;
 
@@ -329,4 +335,10 @@ void Grid::Draw()
         Painter::DrawVLine(Point::FromData(Math::Round<uint16>(stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), (i == 10) ? Color::GRAY_4F : Color::GRAY_2F);
         Painter::DrawHLine(X(), static_cast<int>(i * stepY + 0.5F), Right(), (i == 10) ? Color::GRAY_4F : Color::GRAY_2F);
     }
+}
+
+
+void Grid::DrawTypePoints()
+{
+
 }
