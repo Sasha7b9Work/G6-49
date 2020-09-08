@@ -56,8 +56,8 @@ struct FreqFiltr
 {
     enum E
     {
-        Enable,
-        Disable
+        Disable,
+        Enable
     } value;
     FreqFiltr(E v) : value(v) {};
     FreqFiltr(uint v) : value(static_cast<E>(v)) {};
