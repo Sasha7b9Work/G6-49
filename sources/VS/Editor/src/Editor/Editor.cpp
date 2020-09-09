@@ -273,7 +273,7 @@ void Frame::CreateMenu()
     AddTool(CREATE_COMPISITE, wxT("Создать сложный сигнал из гармоник"), "composite.bmp");
 
     toolBar->AddSeparator();
-    AddTool(INSERT_POINTS, wxT("Вставить маркеры"), "points.bmp");
+    AddTool(INSERT_POINTS, wxT("Вставить маркеры"), "points.bmp", "points_disable.bmp");
 
     toolBar->AddSeparator();
     AddRadioTool(MBL_POINTS, wxT("Режим редактирования точек"), "MBL_points.bmp");
@@ -294,11 +294,13 @@ void Frame::CreateMenu()
 }
 
 
-void Frame::AddTool(int id, const wxString &label, const char *file)
+void Frame::AddTool(int id, const wxString &label, const char *file, const char *fileDisabld)
 {
     wxBitmap bitmap(wxImage(wxString("icons/") + wxString(file), wxBITMAP_TYPE_BMP));
 
-    toolBar->AddTool(id, label, bitmap, bitmap, wxITEM_NORMAL, label, label);
+    wxBitmap bitmapDisabled = (fileDisabld == nullptr) ? bitmap : wxBitmap(wxImage(wxString("icons/") + wxString(fileDisabld), wxBITMAP_TYPE_BMP));
+
+    toolBar->AddTool(id, label, bitmap, bitmapDisabled, wxITEM_NORMAL, label, label);
 }
 
 

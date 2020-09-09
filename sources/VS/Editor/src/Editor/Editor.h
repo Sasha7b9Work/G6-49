@@ -47,7 +47,7 @@ private:
 
     void CreateMenu();
 
-    void AddTool(int id, const wxString &label, const char *file);
+    void AddTool(int id, const wxString &label, const char *file, const char *fileDisabled = nullptr);
 
     void AddRadioTool(int id, const wxString &label, const char *file);
 
