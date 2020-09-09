@@ -9,6 +9,7 @@
 #include "Editor/Painter/Zoomer.h"
 
 #include <ctime>
+#include <mutex>
 #pragma warning(push, 0)
 #include <wx/msw/private.h>
 #pragma warning(pop)
@@ -256,15 +257,16 @@ void Canvas::OnMouseLeftUp(wxMouseEvent &event)
 
 void Canvas::SetMouseCursor()
 {
+    static std::mutex mutex;
+    mutex.lock();
+
     if (Zoomer::UnderMouse(mouseX, mouseY))
     {
         HCURSOR cursor = LoadCursor(NULL, IDC_HAND);
         ::SetCursor(cursor);
         ::ShowCursor(true);
-        return;
     }
-
-    if (Selector::IsEnabled())
+    else if (Selector::IsEnabled())
     {
         if (Selector::CursorOverBorder(mouseX))
         {
@@ -286,6 +288,8 @@ void Canvas::SetMouseCursor()
             ::ShowCursor(true);
         }
     }
+
+    mutex.unlock();
 }
 
 
