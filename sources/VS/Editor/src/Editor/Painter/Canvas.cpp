@@ -101,6 +101,8 @@ void Canvas::Draw()
         needRedraw = false;
 
         time = clock();
+
+        SetFocus();
     }
 }
 
