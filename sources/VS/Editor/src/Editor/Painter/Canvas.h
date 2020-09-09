@@ -16,14 +16,25 @@ struct Grid
     static int Right();
     static void Draw();
     static void ChangeTypeGrid() { typeIsPercents = !typeIsPercents; }
+    
     // Возвращает true, если линии сетки выводятся в процентах
     static bool TypeIsPercents() { return typeIsPercents; }
+    
+    // Возвращает расстояние между вертикальными линиями в точках или процентах
+    static wxString GetScale();
 
 private:
     static bool typeIsPercents;
+    static wxString sScale;
     static void DrawTypePercents();
     static void DrawTypePoints();
     static void DrawHorizontalLines();
+
+    // Возвращает дльту сетки в точках
+    static int GetDeltaPoints();
+
+    // Возвращает дельту сетки в процентах. Каждая единица - одна тысячная процента. 1% == 1000
+    static int GetDeltaPercents();
 };
 
 

@@ -15,6 +15,7 @@
 
 
 bool Grid::typeIsPercents = true;
+wxString Grid::sScale;
 
 
 Canvas *TheCanvas = nullptr;
@@ -85,9 +86,9 @@ void Canvas::Draw()
     {
         BeginScene();
 
-        Zoomer::Draw();
-
         TheForm->Draw();
+
+        Zoomer::Draw();
 
         Selector::DrawCursors();
 
@@ -342,25 +343,29 @@ void Grid::DrawHorizontalLines()
 
 void Grid::DrawTypePercents()
 {
+    int k = 1000;
 
+    float delta = static_cast<float>(GetDeltaPercents());
+
+    float stepX = Point::AMOUNT / static_cast<float>((100.0F / (delta / k)));
+
+    float canvasX = 0.0F;
+
+    for (int i = 0; i < Point::AMOUNT / 2; i++)
+    {
+        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 + stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), ((i % 10) == 0) ? Color::GRAY_4F : Color::GRAY_2F);
+        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 - stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), ((i % 10) == 0) ? Color::GRAY_4F : Color::GRAY_2F);
+    }
+    
+    sScale = wxString::Format(wxT("%f%%"), delta / 1000.0F);
 }
 
 
 void Grid::DrawTypePoints()
 {
-    int div = 16;
+    int div = GetDeltaPoints();
 
-    int scale = Zoomer::Scale();
-
-    if (scale < 200)        { }
-    else if (scale < 300)   { div = 32;   }
-    else if (scale < 500)   { div = 64;   }
-    else if (scale < 1000)  { div = 128;  }
-    else if (scale < 2000)  { div = 256;  }
-    else if (scale < 3000)  { div = 512;  }
-    else if (scale < 5000)  { div = 512;  }
-    else if (scale < 10000) { div = 1024; }
-    else                    { div = 2048; }
+    sScale = wxString::Format(wxT("%d ò/div"), Point::AMOUNT / div);
 
     float stepX = Point::AMOUNT / static_cast<float>(div);
 
@@ -369,4 +374,35 @@ void Grid::DrawTypePoints()
         Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 + stepX * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_4F : Color::GRAY_2F);
         Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 - stepX * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_4F : Color::GRAY_2F);
     }
+}
+
+
+int Grid::GetDeltaPoints()
+{
+    int scale = Zoomer::Scale();
+
+    if (scale < 200)        { return 16;   }
+    else if (scale < 300)   { return 32;   }
+    else if (scale < 500)   { return 64;   }
+    else if (scale < 1000)  { return 128;  }
+    else if (scale < 2000)  { return 256;  }
+    else if (scale < 3000)  { return 512;  }
+    else if (scale < 5000)  { return 512;  }
+    else if (scale < 10000) { return 1024; }
+
+    return 2048;
+}
+
+
+int Grid::GetDeltaPercents()
+{
+    int proportion = GetDeltaPoints() / 16;
+
+    return 5 * 1000 / proportion;
+}
+
+
+wxString Grid::GetScale()
+{
+    return sScale;
 }

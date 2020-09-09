@@ -228,7 +228,7 @@ int Window::Height()
 
 void Window::DrawText(int x, int y, int width)
 {
-    wxString text = wxString::Format(wxT("%d%%"), Zoomer::Scale());
+    wxString text = wxString::Format(wxT("%s - %d%%"), Grid::GetScale().c_str(),  Zoomer::Scale());
 
     int length = Painter::GetLengthText(text);
 
