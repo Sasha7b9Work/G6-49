@@ -15,6 +15,8 @@
 
 
 bool Grid::typeIsPercents = true;
+int Grid::deltaPoints = 1024;
+int Grid::deltaPercents = 5000;
 wxString Grid::sScale;
 
 
@@ -327,7 +329,6 @@ void Grid::Draw()
 {
     TypeIsPercents() ? DrawTypePercents() : DrawTypePoints();
     DrawHorizontalLines();
-    TheFrame->UpdateStatusBar();
 }
 
 
@@ -346,27 +347,21 @@ void Grid::DrawTypePercents()
 {
     int k = 1000;
 
-    float delta = static_cast<float>(GetDeltaPercents());
+    float delta = static_cast<float>(deltaPercents);
 
     float stepX = Point::AMOUNT / static_cast<float>((100.0F / (delta / k)));
-
-    float canvasX = 0.0F;
 
     for (int i = 0; i < Point::AMOUNT / 2; i++)
     {
         Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 + stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), ((i % 10) == 0) ? Color::GRAY_4F : Color::GRAY_2F);
         Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 - stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), ((i % 10) == 0) ? Color::GRAY_4F : Color::GRAY_2F);
     }
-    
-    sScale = wxString::Format(wxT("%.2f%%"), delta / 1000.0F);
 }
 
 
 void Grid::DrawTypePoints()
 {
-    int div = GetDeltaPoints();
-
-    sScale = wxString::Format(wxT("%d ò/div"), Point::AMOUNT / div);
+    int div = deltaPoints;
 
     float stepX = Point::AMOUNT / static_cast<float>(div);
 
@@ -378,41 +373,62 @@ void Grid::DrawTypePoints()
 }
 
 
-int Grid::GetDeltaPoints()
+void Grid::CalculateDeltaPoints()
 {
     int scale = Zoomer::Scale();
 
-    if (scale < 200)        { return 16;   }
-    else if (scale < 300)   { return 32;   }
-    else if (scale < 500)   { return 64;   }
-    else if (scale < 1000)  { return 128;  }
-    else if (scale < 2000)  { return 256;  }
-    else if (scale < 3000)  { return 512;  }
-    else if (scale < 5000)  { return 512;  }
-    else if (scale < 10000) { return 1024; }
-
-    return 2048;
+    if (scale < 200)        { deltaPoints = 16;   }
+    else if (scale < 300)   { deltaPoints = 32;   }
+    else if (scale < 500)   { deltaPoints = 64;   }
+    else if (scale < 1000)  { deltaPoints = 128;  }
+    else if (scale < 2000)  { deltaPoints = 256;  }
+    else if (scale < 3000)  { deltaPoints = 512;  }
+    else if (scale < 5000)  { deltaPoints = 512;  }
+    else if (scale < 10000) { deltaPoints = 1024; }
+    else                    { deltaPoints = 2048; }
 }
 
 
-int Grid::GetDeltaPercents()
+void Grid::CalculateDeltaPercents()
 {
     int scale = Zoomer::Scale();
 
-    if (scale < 200)        { return 5000; }
-    else if (scale < 300)   { return 2500; }
-    else if (scale < 500)   { return 1250; }
-    else if (scale < 1000)  { return 500;  }
-    else if (scale < 2000)  { return 250;  }
-    else if (scale < 3000)  { return 250;  }
-    else if (scale < 5000)  { return 250;  }
-    else if (scale < 10000) { return 250;  }
+    if (scale < 200)        { deltaPercents = 5000; }
+    else if (scale < 300)   { deltaPercents = 2500; }
+    else if (scale < 500)   { deltaPercents = 1250; }
+    else if (scale < 1000)  { deltaPercents = 500;  }
+    else if (scale < 2000)  { deltaPercents = 250;  }
+    else if (scale < 3000)  { deltaPercents = 250;  }
+    else if (scale < 5000)  { deltaPercents = 250;  }
+    else if (scale < 10000) { deltaPercents = 250;  }
+    else                    { deltaPercents = 250;  }
+}
 
-    return 250;
+
+void Grid::CalculateScale()
+{
+    if (TypeIsPercents())
+    {
+        CalculateDeltaPercents();
+        sScale = wxString::Format(wxT("%.2f%%"), deltaPercents / 1000.0F);
+    }
+    else
+    {
+        CalculateDeltaPoints();
+        sScale = wxString::Format(wxT("%d ò/div"), deltaPoints);
+    }
 }
 
 
 wxString Grid::GetScale()
 {
+    CalculateScale();
     return sScale;
+}
+
+
+void Grid::ChangeTypeGrid()
+{
+    typeIsPercents = !typeIsPercents;
+    TheFrame->UpdateStatusBar();
 }

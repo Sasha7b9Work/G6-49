@@ -163,6 +163,14 @@ Frame::Frame(const wxString &title)
     TheFrame = this;
 
     ModeButtonLeft::Set(ModeButtonLeft::EditLines);
+
+    GetStatusBar()->SetFieldsCount(3);
+
+    int widths[3] = { -1, 100, 95 };
+
+    GetStatusBar()->SetStatusWidths(3, widths);
+
+    UpdateStatusBar();
 }
 
 
@@ -560,7 +568,6 @@ void Frame::SetLinesMBL(wxCommandEvent &)
 void Frame::SetModeSelect(wxCommandEvent &)
 {
     toolBar->GetToolState(MODE_SELECT) ? Selector::Enable() : Selector::Disable();
-    UpdateStatusBar();
 }
 
 
@@ -583,12 +590,14 @@ void Frame::OnKeyDown(wxKeyEvent &)
 void Frame::OnScaleMore(wxCommandEvent &)
 {
     Zoomer::Increase();
+    UpdateStatusBar();
 }
 
 
 void Frame::OnScaleLess(wxCommandEvent &)
 {
     Zoomer::Decrease();
+    UpdateStatusBar();
 }
 
 
@@ -621,5 +630,9 @@ void Frame::OnChangeTypeGrid(wxCommandEvent &)
 
 void Frame::UpdateStatusBar()
 {
+    GetStatusBar()->PushStatusText(wxString::Format(wxT("Сетка: %s"), Grid::GetScale()), 1);
+
+    GetStatusBar()->PushStatusText(wxString::Format(wxT("Масштаб:  %d%%"), Zoomer::Scale()), 2);
+
     GetStatusBar()->Refresh();
 }

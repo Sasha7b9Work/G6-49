@@ -1,5 +1,6 @@
 #pragma once
-#include "Colors.h"
+#include "Editor/Painter/Canvas.h"
+#include "Editor/Painter/Colors.h"
 
 #pragma warning(push, 0)
 #include <wx/wx.h>
@@ -15,7 +16,7 @@ struct Grid
     static int Bottom();
     static int Right();
     static void Draw();
-    static void ChangeTypeGrid() { typeIsPercents = !typeIsPercents; }
+    static void ChangeTypeGrid();
     
     // Возвращает true, если линии сетки выводятся в процентах
     static bool TypeIsPercents() { return typeIsPercents; }
@@ -26,15 +27,20 @@ struct Grid
 private:
     static bool typeIsPercents;
     static wxString sScale;
+    static int deltaPoints;
+    static int deltaPercents;
     static void DrawTypePercents();
     static void DrawTypePoints();
     static void DrawHorizontalLines();
 
-    // Возвращает дльту сетки в точках
-    static int GetDeltaPoints();
+    // Рассчитывает дельту сетки в точках
+    static void CalculateDeltaPoints();
 
-    // Возвращает дельту сетки в процентах. Каждая единица - одна тысячная процента. 1% == 1000
-    static int GetDeltaPercents();
+    // Рассчитывает дельту сетки в процентах. Каждая единица - одна тысячная процента. 1% == 1000
+    static void CalculateDeltaPercents();
+
+    // 
+    static void CalculateScale();
 };
 
 
