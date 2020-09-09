@@ -325,23 +325,58 @@ int Grid::Right()
 void Grid::Draw()
 {
     TypeIsPercents() ? DrawTypePercents() : DrawTypePoints();
+    DrawHorizontalLines();
+}
+
+
+void Grid::DrawHorizontalLines()
+{
+    float stepY = Height() / 20.0F;
+
+    for (int i = 1; i < 20; i++)
+    {
+        Painter::DrawHLine(X(), static_cast<int>(Y() + i * stepY + 0.5F), Right(), (i == 0) ? Color::GRAY_4F : Color::GRAY_2F);
+    }
 }
 
 
 void Grid::DrawTypePercents()
 {
-    float stepX = Point::AMOUNT / 20.0F;
-    float stepY = Height() / 20.0F;
+    int index = 0;
 
-    for (int i = 1; i < 20; i++)
+    int div = 20;
+
+    int scale = Zoomer::Scale();
+
+    if(scale < 200)        {  }
+    else if(scale < 300)   { div *= 2; }
+    else if(scale < 500)   { div *= 4; }
+    else if(scale < 1000)  { div *= 8; }
+    else if(scale < 2000)  { div *= 16; }
+    else if(scale < 3000)  { div *= 32; }
+    else if(scale < 5000)  { div *= 64; }
+    else if(scale < 10000) { div *= 128; }
+    else                   { div = 2048; }
+
+    float stepX = Point::AMOUNT / static_cast<float>(div);
+
+    for (int i = 1; i < div; i++)
     {
-        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), (i == 10) ? Color::GRAY_4F : Color::GRAY_2F);
-        Painter::DrawHLine(X(), static_cast<int>(i * stepY + 0.5F), Right(), (i == 10) ? Color::GRAY_4F : Color::GRAY_2F);
+        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(stepX * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_4F : Color::GRAY_2F);
     }
 }
 
 
 void Grid::DrawTypePoints()
 {
+    uint16 stepX = 512;
 
+    uint16 x = 0;
+
+    while (x < Point::AMOUNT)
+    {
+        Painter::DrawVLine(Point::FromData(x, 0).CanvasX(), Y(), Bottom(), (x == Point::AMOUNT / 2) ? Color::GRAY_4F : Color::GRAY_2F);
+
+        x += stepX;
+    }
 }

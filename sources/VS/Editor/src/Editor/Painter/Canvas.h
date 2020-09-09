@@ -23,6 +23,7 @@ private:
     static bool typeIsPercents;
     static void DrawTypePercents();
     static void DrawTypePoints();
+    static void DrawHorizontalLines();
 };
 
 
