@@ -141,14 +141,16 @@ void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
         break;
     case ModeButtonLeft::EditPoints:
         break;
-    case ModeButtonLeft::SelectZone:
+    }
+
+    if (Selector::IsEnabled())
+    {
         if (mouseIsDown)
         {
             Selector::MoveBorder(mouseX);
             Redraw();
         }
         SetMouseCursor();
-        break;
     }
 }
 
@@ -164,31 +166,33 @@ void Canvas::OnMouseLeftDown(wxMouseEvent &event) //-V2009
         return;
     }
 
-    switch (ModeButtonLeft::Get())
+    if (Selector::IsEnabled())
     {
-    case ModeButtonLeft::EditLines:
-        {
-            if (TheForm->ExistMarker(mouseX, mouseY, false))         // Если в позиции мыши нахдится маркер
-            {
-                mouseIsDown = true;
-            }
-            else
-            {
-                TheForm->SetMarkerInMouseCoord(mouseX, mouseY);     // Если маркера нет - устанавливаем его
-            }
-            SetMouseCursor();
-        }
-        break;
-    case ModeButtonLeft::EditPoints:
-        break;
-    case ModeButtonLeft::SelectZone:
         mouseIsDown = true;
         Selector::BeginGrab(mouseX);
         SetMouseCursor();
         Redraw();
-        break;
-    default:
-        break;
+    }
+    else
+    {
+        switch (ModeButtonLeft::Get())
+        {
+        case ModeButtonLeft::EditLines:
+            {
+                if (TheForm->ExistMarker(mouseX, mouseY, false))         // Если в позиции мыши нахдится маркер
+                {
+                    mouseIsDown = true;
+                }
+                else
+                {
+                    TheForm->SetMarkerInMouseCoord(mouseX, mouseY);     // Если маркера нет - устанавливаем его
+                }
+                SetMouseCursor();
+            }
+            break;
+        case ModeButtonLeft::EditPoints:
+            break;
+        }
     }
 
     event.Skip();
@@ -229,18 +233,18 @@ void Canvas::OnMouseLeftUp(wxMouseEvent &event)
         return;
     }
 
-    switch (ModeButtonLeft::Get())
+    if (Selector::IsEnabled())
     {
-    case ModeButtonLeft::EditLines:
-        break;
-
-    case ModeButtonLeft::EditPoints:
-        break;
-
-    case ModeButtonLeft::SelectZone:
         Selector::EndGrab();
         Redraw();
-        break;
+    }
+    else if(ModeButtonLeft::Get() == ModeButtonLeft::EditLines)
+    {
+
+    }
+    else if (ModeButtonLeft::Get() == ModeButtonLeft::EditPoints)
+    {
+
     }
 
     SetMouseCursor();
@@ -257,28 +261,27 @@ void Canvas::SetMouseCursor()
         return;
     }
 
-    switch (ModeButtonLeft::Get())
+    if (Selector::IsEnabled())
     {
-    case ModeButtonLeft::EditPoints:
-        break;
-
-    case ModeButtonLeft::EditLines:
-        if (TheForm->ExistMarker(mouseX, mouseY, mouseIsDown))
-        {
-            HCURSOR cursor = LoadCursor(NULL, IDC_HAND);
-            ::SetCursor(cursor);
-            ::ShowCursor(true);
-        }
-        break;
-
-    case ModeButtonLeft::SelectZone:
         if (Selector::CursorOverBorder(mouseX))
         {
             HCURSOR cursor = LoadCursor(NULL, IDC_SIZEWE);
             ::SetCursor(cursor);
             ::ShowCursor(true);
         }
-        break;
+    }
+    else if (ModeButtonLeft::Get() == ModeButtonLeft::EditPoints)
+    {
+
+    }
+    else if (ModeButtonLeft::Get() == ModeButtonLeft::EditLines)
+    {
+        if (TheForm->ExistMarker(mouseX, mouseY, mouseIsDown))
+        {
+            HCURSOR cursor = LoadCursor(NULL, IDC_HAND);
+            ::SetCursor(cursor);
+            ::ShowCursor(true);
+        }
     }
 }
 

@@ -22,6 +22,7 @@ struct Cursor
 
 int Cursor::delta = 5;
 Cursor *Cursor::grabbing = nullptr;
+bool Selector::isEnabled = false;
 
 
 static Cursor cursors[2];
@@ -122,4 +123,22 @@ void Cursor::Set(int mouseX)
 {
     x = Point::CanvasToPointX(mouseX);
     grabbing = this;
+}
+
+
+bool Selector::IsEnabled()
+{
+    return isEnabled;
+}
+
+
+void Selector::Enable()
+{
+    isEnabled = true;
+}
+
+
+void Selector::Disable()
+{
+    isEnabled = false;
 }

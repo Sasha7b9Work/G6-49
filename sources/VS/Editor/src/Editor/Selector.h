@@ -24,4 +24,14 @@ public:
 
     // Возвращает true, если курсор находится над границей выделенного участка
     static bool CursorOverBorder(int mouseX);
+
+    static bool IsEnabled();
+
+    static void Enable();
+
+    static void Disable();
+
+private:
+
+    static bool isEnabled;
 };

@@ -49,6 +49,8 @@ private:
 
     void AddRadioTool(int id, const wxString &label, const char *file);
 
+    void AddCheckTool(int id, const wxString &label, const char *file);
+
     void OnAlignLeft(wxCommandEvent &);
 
     void OnAlignRight(wxCommandEvent &);
@@ -95,11 +97,14 @@ private:
 
     void OnKeyDown(wxKeyEvent &);
 
+    // Установить режим выделения точек ЛКМ
     void SetPointsMBL(wxCommandEvent &);
 
+    // Установить режим выделения линий ЛКМ
     void SetLinesMBL(wxCommandEvent &);
 
-    void SetSelectMBL(wxCommandEvent &);
+    // Включить/выключить режим выделения
+    void SetModeSelect(wxCommandEvent &);
 
     void OnScaleMore(wxCommandEvent &);
 

@@ -6,8 +6,7 @@ struct ModeButtonLeft
     enum E
     {
         EditPoints,     // Режим редактирования отдельных точек
-        EditLines,      // Режим редактирования интерполирующими прямыми
-        SelectZone      // Режим выделения зоны
+        EditLines       // Режим редактирования интерполирующими прямыми
     };
 
     static E Get();

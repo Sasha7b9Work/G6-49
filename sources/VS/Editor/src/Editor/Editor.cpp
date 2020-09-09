@@ -20,10 +20,11 @@
 #include "Dialogs/SinXDialog.h"
 #include "Dialogs/TrapezeDialog.h"
 #include "Dialogs/TriangleDialog.h"
-#include "Windows/CompositeSignalWindow.h"
 #include "Editor/History.h"
+#include "Editor/Selector.h"
 #include "Editor/Painter/Canvas.h"
 #include "Editor/Painter/Zoomer.h"
+#include "Windows/CompositeSignalWindow.h"
 
 
 extern void update();
@@ -67,7 +68,8 @@ enum //-V2521
 
     MBL_POINTS,
     MBL_LINES,
-    MBL_SELECT,
+
+    MODE_SELECT,
 
     SCALE_MORE,
     SCALE_LESS,
@@ -144,7 +146,7 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_MENU,     &Frame::CreateComposite,   this, CREATE_COMPISITE);
     Bind(wxEVT_MENU,     &Frame::SetPointsMBL,      this, MBL_POINTS);
     Bind(wxEVT_MENU,     &Frame::SetLinesMBL,       this, MBL_LINES);
-    Bind(wxEVT_MENU,     &Frame::SetSelectMBL,      this, MBL_SELECT);
+    Bind(wxEVT_MENU,     &Frame::SetModeSelect,     this, MODE_SELECT);
     Bind(wxEVT_MENU,     &Frame::OnScaleMore,       this, SCALE_MORE);
     Bind(wxEVT_MENU,     &Frame::OnScaleLess,       this, SCALE_LESS);
     Bind(wxEVT_MENU,     &Frame::OnScaleRegion,     this, SCALE_REGION);
@@ -268,7 +270,9 @@ void Frame::CreateMenu()
     toolBar->AddSeparator();
     AddRadioTool(MBL_POINTS, wxT("Режим редактирования точек"), "MBL_points.bmp");
     AddRadioTool(MBL_LINES, wxT("Режим редактирования интерполирующими прямыми"), "MBL_lines.bmp");
-    AddRadioTool(MBL_SELECT, wxT("Режим выделения"), "MBL_select.bmp");
+
+    toolBar->AddSeparator();
+    AddCheckTool(MODE_SELECT, wxT("Режим выделения"), "MBL_select.bmp");
 
     toolBar->AddSeparator();
     AddTool(SCALE_MORE, wxT("Увеличить масштаб"), "scale_more.bmp");
@@ -295,6 +299,14 @@ void Frame::AddRadioTool(int id, const wxString &label, const char *file)
     wxBitmap bitmap(wxImage(wxString("icons/") + wxString(file), wxBITMAP_TYPE_BMP));
 
     toolBar->AddRadioTool(id, label, bitmap, bitmap, label, label);
+}
+
+
+void Frame::AddCheckTool(int id, const wxString &label, const char *file)
+{
+    wxBitmap bitmap(wxImage(wxString("icons/") + wxString(file), wxBITMAP_TYPE_BMP));
+
+    toolBar->AddCheckTool(id, label, bitmap, bitmap, label, label);
 }
 
 
@@ -536,21 +548,20 @@ void Frame::SetBlockingCanvas(bool blocking)
 void Frame::SetPointsMBL(wxCommandEvent &)
 {
     ModeButtonLeft::Set(ModeButtonLeft::EditPoints);
-    SetModeMBL();
+    //SetModeMBL();
 }
 
 
 void Frame::SetLinesMBL(wxCommandEvent &)
 {
     ModeButtonLeft::Set(ModeButtonLeft::EditLines);
-    SetModeMBL();
+    //SetModeMBL();
 }
 
 
-void Frame::SetSelectMBL(wxCommandEvent &)
+void Frame::SetModeSelect(wxCommandEvent &)
 {
-    ModeButtonLeft::Set(ModeButtonLeft::SelectZone);
-    SetModeMBL();
+    toolBar->GetToolState(MODE_SELECT) ? Selector::Enable() : Selector::Disable();
 }
 
 
@@ -560,7 +571,6 @@ void Frame::SetModeMBL()
     {
     case ModeButtonLeft::EditPoints:   toolBar->ToggleTool(MBL_POINTS, true);   break;
     case ModeButtonLeft::EditLines:    toolBar->ToggleTool(MBL_LINES, true);    break;
-    case ModeButtonLeft::SelectZone:   toolBar->ToggleTool(MBL_SELECT, true);   break;
     }
 }
 
