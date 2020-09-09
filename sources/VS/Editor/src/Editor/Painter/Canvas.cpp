@@ -117,6 +117,11 @@ void Canvas::Redraw()
 
 void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
 {
+    if (mouseIsDown)
+    {
+        mouseIsDown = mouseInWindow;
+    }
+
     event.GetPosition(&mouseX, &mouseY);
 
     if (mouseIsDown)
@@ -131,28 +136,8 @@ void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
     if (Zoomer::UnderMouse(mouseX, mouseY))
     {
         SetMouseCursor();
-        return;
     }
-
-    switch (ModeButtonLeft::Get())
-    {
-    case ModeButtonLeft::EditLines:
-        {
-            if (mouseIsDown)
-            {
-                TheForm->MoveMarker(mouseX, mouseY);
-            }
-    
-            SetMouseCursor();
-    
-            Redraw();
-        }
-        break;
-    case ModeButtonLeft::EditPoints:
-        break;
-    }
-
-    if (Selector::IsEnabled())
+    else if (Selector::IsEnabled())
     {
         if (mouseIsDown)
         {
@@ -160,6 +145,21 @@ void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
             Redraw();
         }
         SetMouseCursor();
+    }
+    else if (ModeButtonLeft::Get() == ModeButtonLeft::EditLines)
+    {
+        if (mouseIsDown)
+        {
+            TheForm->MoveMarker(mouseX, mouseY);
+        }
+
+        SetMouseCursor();
+
+        Redraw();
+    }
+    else if (ModeButtonLeft::Get() == ModeButtonLeft::EditPoints)
+    {
+
     }
 }
 
