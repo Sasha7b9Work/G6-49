@@ -347,9 +347,7 @@ void Grid::DrawTypePercents()
 {
     int k = 1000;
 
-    float delta = static_cast<float>(deltaPercents);
-
-    float stepX = Point::AMOUNT / static_cast<float>((100.0F / (delta / k)));
+    float stepX = Point::AMOUNT / static_cast<float>((100.0F / (static_cast<float>(deltaPercents) / k)));
 
     for (int i = 0; i < Point::AMOUNT / 2; i++)
     {
@@ -363,7 +361,7 @@ void Grid::DrawTypePoints()
 {
     int div = deltaPoints;
 
-    float stepX = Point::AMOUNT / static_cast<float>(div);
+    float stepX = static_cast<float>(deltaPoints);
 
     for (int i = 0; i < div / 2; i++)
     {
@@ -377,15 +375,15 @@ void Grid::CalculateDeltaPoints()
 {
     int scale = Zoomer::Scale();
 
-    if (scale < 200)        { deltaPoints = 16;   }
-    else if (scale < 300)   { deltaPoints = 32;   }
-    else if (scale < 500)   { deltaPoints = 64;   }
+    if (scale < 200)        { deltaPoints = 512;   }
+    else if (scale < 300)   { deltaPoints = 512;   }
+    else if (scale < 500)   { deltaPoints = 256;   }
     else if (scale < 1000)  { deltaPoints = 128;  }
-    else if (scale < 2000)  { deltaPoints = 256;  }
-    else if (scale < 3000)  { deltaPoints = 512;  }
-    else if (scale < 5000)  { deltaPoints = 512;  }
-    else if (scale < 10000) { deltaPoints = 1024; }
-    else                    { deltaPoints = 2048; }
+    else if (scale < 2000)  { deltaPoints = 64;  }
+    else if (scale < 3000)  { deltaPoints = 32;  }
+    else if (scale < 5000)  { deltaPoints = 32;  }
+    else if (scale < 10000) { deltaPoints = 16; }
+    else                    { deltaPoints = 8; }
 }
 
 
