@@ -345,9 +345,7 @@ void Grid::DrawHorizontalLines()
 
 void Grid::DrawTypePercents()
 {
-    int k = 1000;
-
-    float stepX = Point::AMOUNT / static_cast<float>((100.0F / (static_cast<float>(deltaPercents) / k)));
+    float stepX = Point::AMOUNT / static_cast<float>((100.0F / (static_cast<float>(deltaPercents) / 1000)));
 
     for (int i = 0; i < Point::AMOUNT / 2; i++)
     {
@@ -359,14 +357,10 @@ void Grid::DrawTypePercents()
 
 void Grid::DrawTypePoints()
 {
-    int div = deltaPoints;
-
-    float stepX = static_cast<float>(deltaPoints);
-
-    for (int i = 0; i < div / 2; i++)
+    for (int i = 0; i < Point::AMOUNT / 2 / deltaPoints; i++)
     {
-        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 + stepX * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F);
-        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 - stepX * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F);
+        Painter::DrawVLine(Point::FromData(static_cast<uint16>(Point::AMOUNT / 2 + deltaPoints * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F);
+        Painter::DrawVLine(Point::FromData(static_cast<uint16>(Point::AMOUNT / 2 - deltaPoints * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F);
     }
 }
 
@@ -375,15 +369,15 @@ void Grid::CalculateDeltaPoints()
 {
     int scale = Zoomer::Scale();
 
-    if (scale < 200)        { deltaPoints = 512;   }
-    else if (scale < 300)   { deltaPoints = 512;   }
-    else if (scale < 500)   { deltaPoints = 256;   }
-    else if (scale < 1000)  { deltaPoints = 128;  }
+    if (scale < 200)        { deltaPoints = 512; }
+    else if (scale < 300)   { deltaPoints = 512; }
+    else if (scale < 500)   { deltaPoints = 256; }
+    else if (scale < 1000)  { deltaPoints = 128; }
     else if (scale < 2000)  { deltaPoints = 64;  }
     else if (scale < 3000)  { deltaPoints = 32;  }
     else if (scale < 5000)  { deltaPoints = 32;  }
-    else if (scale < 10000) { deltaPoints = 16; }
-    else                    { deltaPoints = 8; }
+    else if (scale < 10000) { deltaPoints = 16;  }
+    else                    { deltaPoints = 8;   }
 }
 
 
