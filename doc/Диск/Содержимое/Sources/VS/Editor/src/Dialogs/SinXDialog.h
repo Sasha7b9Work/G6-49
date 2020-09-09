@@ -14,6 +14,8 @@ protected:
 
     virtual void SendAdditionForm() override;
 
+    virtual void SaveValues() override;
+
     // Здесь будем задавать количество периодов sin(x) на периоде сигнала
     SpinControl *scNumPeriods = nullptr;
 

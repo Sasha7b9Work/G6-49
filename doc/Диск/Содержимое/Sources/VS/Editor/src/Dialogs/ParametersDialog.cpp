@@ -1,8 +1,8 @@
 #include "defines.h"
-#include "Form.h"
-#include "Dialogs/ParametersDialog.h"
 #include "Controls/SpinControl.h"
 #include "Controls/TextControl.h"
+#include "Dialogs/ParametersDialog.h"
+#include "Editor/Form.h"
 
 
 #define SMALL_BUTTON_SIZE wxSize(70, 20)
@@ -82,7 +82,7 @@ void ParametersDialog::OnButtonApply(wxCommandEvent &)
     uint16 index = static_cast<uint16>(atoi(tcPosition->GetValue().c_str()));
     uint16 value = static_cast<uint16>(atoi(tcValue->GetValue().c_str()));
 
-    TheForm->RemovePoint();
+    TheForm->RemoveCurrentMarker();
     TheForm->SetPointInRealCoord(index, value);
 
     Destroy();

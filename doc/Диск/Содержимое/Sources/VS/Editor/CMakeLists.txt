@@ -49,20 +49,28 @@ add_compile_options(/wd5026)    # move constructor was implicitly defined as del
 add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 
+add_compile_options(/wd5219)    # Лоджное срабатываение на 16.7.2
 
-file(GLOB DOC      doc/*)
-file(GLOB SRC      src/*.h src/*.cpp)
-file(GLOB CONTROLS src/Controls/*)
-file(GLOB DIALOGS  src/Dialogs/*)
-file(GLOB WINDOWS  src/Windows/*)
 
-source_group(src      FILES ${SRC})
-source_group(doc      FILES ${DOC})
-source_group(Controls FILES ${CONTROLS})
-source_group(Dialogs  FILES ${DIALOGS})
-source_group(Windows  FILES ${WINDOWS})
+file(GLOB DOC            doc/*)
+file(GLOB SRC            src/*.h src/*.cpp)
+file(GLOB CONTROLS       src/Controls/*)
+file(GLOB DIALOGS        src/Dialogs/*)
+file(GLOB EDITOR         src/Editor/*.h src/Editor/*.cpp)
+file(GLOB EDITOR_PAINTER src/Editor/Painter/*)
+file(GLOB UTILS          src/Utils/*)
+file(GLOB WINDOWS        src/Windows/*)
 
-add_executable(Editor ${DOC} ${SRC} ${CONTROLS} ${DIALOGS} ${WINDOWS})
+source_group(src             FILES ${SRC})
+source_group(doc             FILES ${DOC})
+source_group(Controls        FILES ${CONTROLS})
+source_group(Dialogs         FILES ${DIALOGS})
+source_group(Editor          FILES ${EDITOR})
+source_group(Editor\\Painter FILES ${EDITOR_PAINTER})
+source_group(Utils           FILES ${UTILS})
+source_group(Windows         FILES ${WINDOWS})
+
+add_executable(Editor ${DOC} ${SRC} ${CONTROLS} ${DIALOGS} ${EDITOR} ${EDITOR_PAINTER} ${UTILS} ${WINDOWS})
 
 target_link_libraries(Editor ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
 target_link_libraries(Editor ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)

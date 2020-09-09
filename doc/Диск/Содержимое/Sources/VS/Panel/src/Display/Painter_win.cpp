@@ -39,27 +39,27 @@
 #include "Settings/Settings.h"
 
 
-/// Здесь будем рисовать
+// Здесь будем рисовать
 static wxBitmap bitmap(320, 240);
-/// Контекст рисования
+// Контекст рисования
 static wxMemoryDC memDC;
 
 static wxButton *buttons[Key::Count];
 
 static GovernorGUI *governor = nullptr;
 
-/// Цвета
+// Цвета
 static uint colors[256];
 
-/// Создаёт окно приложения. Возвращает хэндл виджета для отрисовки
+// Создаёт окно приложения. Возвращает хэндл виджета для отрисовки
 static void CreateFrame();
-/// Установить оптимальную позицию для окна приложения
+// Установить оптимальную позицию для окна приложения
 static void SetSizeAndPosition(Frame *frame);
-/// Получить разрешение максимального имеющегося в системе монитора
+// Получить разрешение максимального имеющегося в системе монитора
 static wxRect GetMaxDisplay();
-/// Создаёт все кнопки
+// Создаёт все кнопки
 static void CreateButtons(Frame *frame);
-/// Создаёт одну кнопку
+// Создаёт одну кнопку
 static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxSize &size);
 
 

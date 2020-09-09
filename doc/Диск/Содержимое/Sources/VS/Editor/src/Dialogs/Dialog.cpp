@@ -1,14 +1,9 @@
 #include "defines.h"
-#include "Canvas.h"
-#include "Editor.h"
-#include "Form.h"
-#include "Dialogs/Dialog.h"
 #include "Controls/SpinControl.h"
-
-
-uint16 Dialog::data[Point::NUM_POINTS];
-
-std::vector<Point> Dialog::points;
+#include "Dialogs/Dialog.h"
+#include "Editor/Editor.h"
+#include "Editor/Form.h"
+#include "Editor/Painter/Canvas.h"
 
 
 Dialog::Dialog(const wxString &title, bool blockingCanvas) : wxDialog(nullptr, wxID_ANY, title), isBlockingCanvas(blockingCanvas)
@@ -20,11 +15,9 @@ Dialog::Dialog(const wxString &title, bool blockingCanvas) : wxDialog(nullptr, w
     wxButton *btnCancel = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отменить"), wxDefaultPosition, BUTTON_SIZE);
     Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonCancel));
 
-    Bind(wxEVT_KEY_DOWN, &Dialog::OnKeyDown, this);
-    Bind(wxEVT_KEY_UP, &Dialog::OnKeyDown, this);
+    Bind(wxEVT_KEY_UP, &Dialog::OnKeyUp, this);
 
-    Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(Dialog::OnKeyDown));
-    Connect(wxEVT_KEY_UP, wxKeyEventHandler(Dialog::OnKeyDown));
+    Connect(wxEVT_KEY_UP, wxKeyEventHandler(Dialog::OnKeyUp));
 
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     panelBox = new wxBoxSizer(wxVERTICAL);
@@ -47,7 +40,7 @@ Dialog::~Dialog()
 }
 
 
-wxPanel *Dialog::CreatePanelLevels()
+wxPanel *Dialog::CreatePanelLevels(int levelUp, int levelDown)
 {
     wxPanel *panel = new wxPanel(this);
 
@@ -55,14 +48,14 @@ wxPanel *Dialog::CreatePanelLevels()
 
     int y = 20, x = 10;
 
-    scLevelUp = new SpinControl(panel, ID_SPINCTRL_UP, wxT(""), wxPoint(x, y), wxSize(50, 20), -100, 100, 100, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Верхний, %"));
-    scLevelDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxT("-100"), wxPoint(x, y + 26), wxSize(50, 20), -100, 100, -100, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Нижний, %"));
+    scLevelUp = new SpinControl(panel, ID_SPINCTRL_UP, wxPoint(x, y), wxSize(50, 20), -100, 100, levelUp, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Верхний, %"), this);
+    scLevelDown = new SpinControl(panel, ID_SPINCTRL_DONW, wxPoint(x, y + 26), wxSize(50, 20), -100, 100, levelDown, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Нижний, %"), this);
 
     return panel;
 }
 
 
-wxPanel *Dialog::CreatePanelPolarity() 
+wxPanel *Dialog::CreatePanelPolarity(bool polarityDirect, bool polarityBack)
 {
     wxPanel *panel = new wxPanel(this);
     new wxStaticBox(panel, wxID_ANY, wxT("Полярность"), wxDefaultPosition, wxSize(90, 75));
@@ -75,6 +68,9 @@ wxPanel *Dialog::CreatePanelPolarity()
 
     rbPolarityBack = new wxRadioButton(panel, ID_RADIOBUTTON_BACK, wxT("Обратная"), wxPoint(x, y + 25));
     Connect(ID_RADIOBUTTON_BACK, wxEVT_RADIOBUTTON, wxCommandEventHandler(Dialog::OnControlEvent));
+
+    rbPolarityDirect->SetValue(polarityDirect);
+    rbPolarityBack->SetValue(polarityBack);
 
     return panel;
 }
@@ -133,6 +129,8 @@ void Dialog::OnButtonApply(wxCommandEvent &)
 
     TheForm->SetMainForm(data, &points);
 
+    SaveValues();
+
     Destroy();
 }
 
@@ -149,6 +147,9 @@ void Dialog::OnControlEvent(wxCommandEvent &)
 }
 
 
-void Dialog::OnKeyDown(wxKeyEvent &)
+void Dialog::OnKeyUp(wxKeyEvent &event)
 {
+    SendAdditionForm();
+
+    event.Skip();
 }

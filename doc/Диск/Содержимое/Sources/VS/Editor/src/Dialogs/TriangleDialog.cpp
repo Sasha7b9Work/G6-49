@@ -1,8 +1,9 @@
 #include "defines.h"
-#include "Form.h"
-#include "History.h"
 #include "Controls/SpinControl.h"
 #include "Dialogs/TriangleDialog.h"
+#include "Editor/Form.h"
+#include "Editor/History.h"
+
 #pragma warning(push, 0)
 #include <wx/spinctrl.h>
 #include <wx/statline.h>
@@ -16,20 +17,24 @@ enum
 };
 
 
-static SpinControl *scCenter = nullptr;
-static SpinControl *scDelay = nullptr;
+static int center = 0;
+static int delay = 0;
+static bool polarityDirect = true;
+static bool polarityBack = false;
+static int levelUp = 100;
+static int levelDown = -100;
 
 
-static wxPanel *CreatePanelOffsets(wxDialog *dlg)
+wxPanel *TriangleDialog::CreatePanelOffsets()
 {
-    wxPanel *panel = new wxPanel(dlg);
+    wxPanel *panel = new wxPanel(this);
 
     int y = 20, x = 10;
 
     new wxStaticBox(panel, wxID_ANY, wxT("Смещения"), wxDefaultPosition, wxSize(Dialog::WIDTH_PANEL, 75));
 
-    scCenter = new SpinControl(panel, ID_SPINCTRL_CENTER, wxT("0"), wxPoint(x, y), wxSize(50, 20), -100, 100, 0, dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Центр, %"));
-    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, wxT("0"), wxPoint(x, y + 26), wxSize(50, 20), 0, Point::NUM_POINTS, 0, dlg, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Задержка, точки"));
+    scCenter = new SpinControl(panel, ID_SPINCTRL_CENTER, wxPoint(x, y), wxSize(50, 20), -100, 100, center, this, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Центр, %"), this);
+    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, wxPoint(x, y + 26), wxSize(50, 20), 0, Point::AMOUNT, delay, this, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Задержка, точки"), this);
 
     return panel;
 }
@@ -40,11 +45,11 @@ TriangleDialog::TriangleDialog() : Dialog(wxT("Параметры треугольного сигнала"),
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *hBoxPanels = new wxBoxSizer(wxHORIZONTAL);
 
-    hBoxPanels->Add(CreatePanelPolarity());
+    hBoxPanels->Add(CreatePanelPolarity(polarityDirect, polarityBack));
     hBoxPanels->AddStretchSpacer();
-    hBoxPanels->Add(CreatePanelLevels());
+    hBoxPanels->Add(CreatePanelLevels(levelUp, levelDown));
     vBox->Add(hBoxPanels);
-    vBox->Add(CreatePanelOffsets(this));
+    vBox->Add(CreatePanelOffsets());
     
     SetBoxSizer(vBox, { 221, 150 });
 }
@@ -54,7 +59,7 @@ void TriangleDialog::SendAdditionForm()
 {
     int start = scDelay->GetValue();
 
-    float pointsInTriangle = static_cast<float>(Point::NUM_POINTS - start);
+    float pointsInTriangle = static_cast<float>(Point::AMOUNT - start);
 
     int top = static_cast<int>(static_cast<float>(start) + pointsInTriangle / 2 + pointsInTriangle / 2.0F * static_cast<float>(scCenter->GetValue()) / 100.0F);
 
@@ -74,12 +79,23 @@ void TriangleDialog::SendAdditionForm()
 
     DrawLine(start, min, top, max);
 
-    DrawLine(top, max, Point::NUM_POINTS - 1, min);
+    DrawLine(top, max, Point::AMOUNT - 1, min);
 
     TheForm->SetAdditionForm(data);
 
     points.clear();
 
-    points.emplace_back(static_cast<uint16>(start), static_cast<uint16>(min));
-    points.emplace_back(static_cast<uint16>(top), static_cast<uint16>(max));
+    points.push_back(Point::FromData(static_cast<uint16>(start), static_cast<uint16>(min)));
+    points.push_back(Point::FromData(static_cast<uint16>(top), static_cast<uint16>(max)));
+}
+
+
+void TriangleDialog::SaveValues()
+{
+    center = scCenter->GetValue();
+    delay = scDelay->GetValue();
+    polarityDirect = rbPolarityDirect->GetValue();
+    polarityBack = rbPolarityBack->GetValue();
+    levelUp = scLevelUp->GetValue();
+    levelDown = scLevelDown->GetValue();
 }

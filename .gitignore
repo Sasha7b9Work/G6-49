@@ -7,6 +7,8 @@ JLink*.*
 *.uvgui*.*
 archive.zip
 *out.txt
+*.exe
+*.dll
 
 
 sources/generated/*

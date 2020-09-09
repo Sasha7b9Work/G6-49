@@ -1,8 +1,9 @@
 #include "defines.h"
-#include "Form.h"
-#include "History.h"
 #include "Controls/SpinControl.h"
 #include "Dialogs/InsertPointsDialog.h"
+#include "Editor/Form.h"
+#include "Editor/History.h"
+
 #pragma warning(push, 0)
 #include <wx/spinctrl.h>
 #include <wx/statline.h>
@@ -26,7 +27,8 @@ InsertPointsDialog::InsertPointsDialog() : wxDialog(nullptr, -1, wxT("Вставить м
     wxButton *btnClose = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отмена"), wxDefaultPosition, BUTTON_SIZE);
     Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(InsertPointsDialog::OnButtonCancel));
 
-    scDelta = new SpinControl(this, ID_SPINCTRL_DELTA, wxT("512"), wxDefaultPosition, wxSize(50, 20), 1, Point::NUM_POINTS / 2, 512, this, wxCommandEventHandler(InsertPointsDialog::OnControlNumPoints), wxT("Расстояние между точками"));
+    scDelta = new SpinControl(this, ID_SPINCTRL_DELTA, wxDefaultPosition, wxSize(50, 20), 1, Point::AMOUNT / 2, 512,
+        this, wxCommandEventHandler(InsertPointsDialog::OnControlNumPoints), wxT("Расстояние между точками"), nullptr);
 
     wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *hBoxButtons = new wxBoxSizer(wxHORIZONTAL);
@@ -52,7 +54,7 @@ void InsertPointsDialog::OnControlNumPoints(wxCommandEvent &)
 
 void InsertPointsDialog::OnButtonOk(wxCommandEvent &)
 {
-    for(uint16 i = 0; i < Point::NUM_POINTS; i += static_cast<uint16>(scDelta->GetValue()))
+    for(uint16 i = 0; i < Point::AMOUNT; i += static_cast<uint16>(scDelta->GetValue()))
     {
         TheForm->SetPointInPosition(i);
     }
