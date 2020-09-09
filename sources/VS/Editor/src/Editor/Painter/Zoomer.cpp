@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Editor/Editor.h"
 #include "Editor/Form.h"
 #include "Editor/Painter/Canvas.h"
 #include "Editor/Painter/Painter.h"
@@ -86,6 +87,8 @@ void Zoomer::Increase(int /*mouseX*/)
     CalculateIndexesPoints();
 
     TheCanvas->Redraw();
+
+    TheFrame->UpdateStatusBar();
 }
 
 
@@ -103,6 +106,8 @@ void Zoomer::Decrease(int /*mouseX*/)
     CalculateIndexesPoints();
 
     TheCanvas->Redraw();
+
+    TheFrame->UpdateStatusBar();
 }
 
 

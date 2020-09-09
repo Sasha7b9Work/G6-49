@@ -592,14 +592,12 @@ void Frame::OnKeyDown(wxKeyEvent &)
 void Frame::OnScaleMore(wxCommandEvent &)
 {
     Zoomer::Increase();
-    UpdateStatusBar();
 }
 
 
 void Frame::OnScaleLess(wxCommandEvent &)
 {
     Zoomer::Decrease();
-    UpdateStatusBar();
 }
 
 

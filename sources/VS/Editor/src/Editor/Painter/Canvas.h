@@ -71,6 +71,8 @@ private:
 
     void OnResize(wxSizeEvent &);
 
+    void OnMouseWheel(wxMouseEvent &);
+
     void OnMouseMove(wxMouseEvent &);
 
     void OnMouseLeftDown(wxMouseEvent &);

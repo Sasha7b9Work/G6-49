@@ -37,6 +37,7 @@ Canvas::Canvas(wxWindow *p) : wxPanel(p, wxID_ANY), parent(p)
     Bind(wxEVT_RIGHT_DOWN, &Canvas::OnMouseRightDown, this);
     Bind(wxEVT_LEFT_UP,    &Canvas::OnMouseLeftUp,    this);
     Bind(wxEVT_RIGHT_UP,   &Canvas::OnMouseRightUp,   this);
+    Bind(wxEVT_MOUSEWHEEL, &Canvas::OnMouseWheel,     this);
 }
 
 
@@ -223,6 +224,19 @@ void Canvas::OnMouseRightUp(wxMouseEvent &event) //-V2009
     History::Add(TheForm);
 
     SetMouseCursor();
+}
+
+
+void Canvas::OnMouseWheel(wxMouseEvent &event)
+{
+    if (event.m_wheelRotation > 0)
+    {
+        Zoomer::Increase();
+    }
+    else
+    {
+        Zoomer::Decrease();
+    }
 }
 
 
