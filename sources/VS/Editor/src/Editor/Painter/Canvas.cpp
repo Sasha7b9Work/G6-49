@@ -338,7 +338,7 @@ void Grid::DrawHorizontalLines()
 
     for (int i = 1; i < 20; i++)
     {
-        Painter::DrawHLine(X(), static_cast<int>(Y() + i * stepY + 0.5F), Right(), (i == 0) ? Color::GRAY_4F : Color::GRAY_2F);
+        Painter::DrawHLine(X(), static_cast<int>(Y() + i * stepY + 0.5F), Right(), (i == 10) ? Color::GRAY_5F : Color::GRAY_2F);
     }
 }
 
@@ -351,8 +351,8 @@ void Grid::DrawTypePercents()
 
     for (int i = 0; i < Point::AMOUNT / 2; i++)
     {
-        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 + stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), ((i % 10) == 0) ? Color::GRAY_4F : Color::GRAY_2F);
-        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 - stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), ((i % 10) == 0) ? Color::GRAY_4F : Color::GRAY_2F);
+        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 + stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F);
+        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 - stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F);
     }
 }
 
@@ -365,8 +365,8 @@ void Grid::DrawTypePoints()
 
     for (int i = 0; i < div / 2; i++)
     {
-        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 + stepX * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_4F : Color::GRAY_2F);
-        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 - stepX * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_4F : Color::GRAY_2F);
+        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 + stepX * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F);
+        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 - stepX * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F);
     }
 }
 
