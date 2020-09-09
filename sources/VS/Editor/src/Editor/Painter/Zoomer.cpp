@@ -38,10 +38,6 @@ struct Window
     static int Height();
     static int Right();
     static int Bottom();
-
-private:
-
-    static void DrawText(int x, int y, int width);
 };
 
 
@@ -166,8 +162,6 @@ void Window::Draw()
 
     Painter::FillRegion(x, y, width, height, Color::GRAY_3F);
     Painter::DrawRectangle(x, y, width, height, Color::WHITE);
-
-    DrawText(x, y + 1, width);
 }
 
 
@@ -223,27 +217,6 @@ int Window::Bottom()
 int Window::Height()
 {
     return Zoomer::Height();
-}
-
-
-void Window::DrawText(int x, int y, int width)
-{
-    wxString text = wxString::Format(wxT("%s - %d%%"), Grid::GetScale().c_str(),  Zoomer::Scale());
-
-    int length = Painter::GetLengthText(text);
-
-    if (length < width)
-    {
-        Painter::DrawTextInZone(x, y, width, text);
-    }
-    else if(width + length < Grid::Bottom())
-    {
-        Painter::DrawText(x + width + 5, y, text);
-    }
-    else
-    {
-        Painter::DrawText(x - length - 5, y, text);
-    }
 }
 
 
