@@ -357,7 +357,7 @@ void Grid::DrawTypePercents()
         Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 - stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), ((i % 10) == 0) ? Color::GRAY_4F : Color::GRAY_2F);
     }
     
-    sScale = wxString::Format(wxT("%f%%"), delta / 1000.0F);
+    sScale = wxString::Format(wxT("%.2f%%"), delta / 1000.0F);
 }
 
 
@@ -396,9 +396,18 @@ int Grid::GetDeltaPoints()
 
 int Grid::GetDeltaPercents()
 {
-    int proportion = GetDeltaPoints() / 16;
+    int scale = Zoomer::Scale();
 
-    return 5 * 1000 / proportion;
+    if (scale < 200)        { return 5000; }
+    else if (scale < 300)   { return 2500; }
+    else if (scale < 500)   { return 1250; }
+    else if (scale < 1000)  { return 500;  }
+    else if (scale < 2000)  { return 250;  }
+    else if (scale < 3000)  { return 250;  }
+    else if (scale < 5000)  { return 250;  }
+    else if (scale < 10000) { return 250;  }
+
+    return 250;
 }
 
 
