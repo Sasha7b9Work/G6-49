@@ -312,7 +312,7 @@ int Grid::Height()
 
 int Grid::Bottom()
 {
-    return Y() + Width();
+    return Y() + Height();
 }
 
 
@@ -342,41 +342,31 @@ void Grid::DrawHorizontalLines()
 
 void Grid::DrawTypePercents()
 {
-    int index = 0;
 
-    int div = 20;
-
-    int scale = Zoomer::Scale();
-
-    if(scale < 200)        {  }
-    else if(scale < 300)   { div *= 2; }
-    else if(scale < 500)   { div *= 4; }
-    else if(scale < 1000)  { div *= 8; }
-    else if(scale < 2000)  { div *= 16; }
-    else if(scale < 3000)  { div *= 32; }
-    else if(scale < 5000)  { div *= 64; }
-    else if(scale < 10000) { div *= 128; }
-    else                   { div = 2048; }
-
-    float stepX = Point::AMOUNT / static_cast<float>(div);
-
-    for (int i = 1; i < div; i++)
-    {
-        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(stepX * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_4F : Color::GRAY_2F);
-    }
 }
 
 
 void Grid::DrawTypePoints()
 {
-    uint16 stepX = 512;
+    int div = 16;
 
-    uint16 x = 0;
+    int scale = Zoomer::Scale();
 
-    while (x < Point::AMOUNT)
+    if (scale < 200)        { }
+    else if (scale < 300)   { div = 32;   }
+    else if (scale < 500)   { div = 64;   }
+    else if (scale < 1000)  { div = 128;  }
+    else if (scale < 2000)  { div = 256;  }
+    else if (scale < 3000)  { div = 512;  }
+    else if (scale < 5000)  { div = 512;  }
+    else if (scale < 10000) { div = 1024; }
+    else                    { div = 2048; }
+
+    float stepX = Point::AMOUNT / static_cast<float>(div);
+
+    for (int i = 0; i < div / 2; i++)
     {
-        Painter::DrawVLine(Point::FromData(x, 0).CanvasX(), Y(), Bottom(), (x == Point::AMOUNT / 2) ? Color::GRAY_4F : Color::GRAY_2F);
-
-        x += stepX;
+        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 + stepX * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_4F : Color::GRAY_2F);
+        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 - stepX * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_4F : Color::GRAY_2F);
     }
 }
