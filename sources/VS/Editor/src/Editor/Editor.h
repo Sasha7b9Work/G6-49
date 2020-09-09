@@ -32,6 +32,8 @@ public:
 
     void SetModeMBL();
 
+    void UpdateStatusBar();
+
 private:
     wxTimer timer;
 

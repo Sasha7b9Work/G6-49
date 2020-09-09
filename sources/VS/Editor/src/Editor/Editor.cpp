@@ -548,20 +548,19 @@ void Frame::SetBlockingCanvas(bool blocking)
 void Frame::SetPointsMBL(wxCommandEvent &)
 {
     ModeButtonLeft::Set(ModeButtonLeft::EditPoints);
-    //SetModeMBL();
 }
 
 
 void Frame::SetLinesMBL(wxCommandEvent &)
 {
     ModeButtonLeft::Set(ModeButtonLeft::EditLines);
-    //SetModeMBL();
 }
 
 
 void Frame::SetModeSelect(wxCommandEvent &)
 {
     toolBar->GetToolState(MODE_SELECT) ? Selector::Enable() : Selector::Disable();
+    UpdateStatusBar();
 }
 
 
@@ -615,4 +614,12 @@ void Frame::OnChangeTypeGrid(wxCommandEvent &)
         toolBar->SetToolLongHelp(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - точки"));
         toolBar->SetToolShortHelp(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - точки"));
     }
+
+    UpdateStatusBar();
+}
+
+
+void Frame::UpdateStatusBar()
+{
+    GetStatusBar()->Refresh();
 }

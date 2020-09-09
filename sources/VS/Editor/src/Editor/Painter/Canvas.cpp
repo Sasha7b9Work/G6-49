@@ -327,6 +327,7 @@ void Grid::Draw()
 {
     TypeIsPercents() ? DrawTypePercents() : DrawTypePoints();
     DrawHorizontalLines();
+    TheFrame->UpdateStatusBar();
 }
 
 
