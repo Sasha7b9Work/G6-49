@@ -30,14 +30,16 @@ Canvas::Canvas(wxWindow *p) : wxPanel(p, wxID_ANY), parent(p)
     Painter::Init(p);
 
     SetDoubleBuffered(true);
-    Bind(wxEVT_PAINT,      &Canvas::OnPaint,          this);
-    Bind(wxEVT_SIZE,       &Canvas::OnResize,         this);
-    Bind(wxEVT_MOTION,     &Canvas::OnMouseMove,      this);
-    Bind(wxEVT_LEFT_DOWN,  &Canvas::OnMouseLeftDown,  this);
-    Bind(wxEVT_RIGHT_DOWN, &Canvas::OnMouseRightDown, this);
-    Bind(wxEVT_LEFT_UP,    &Canvas::OnMouseLeftUp,    this);
-    Bind(wxEVT_RIGHT_UP,   &Canvas::OnMouseRightUp,   this);
-    Bind(wxEVT_MOUSEWHEEL, &Canvas::OnMouseWheel,     this);
+    Bind(wxEVT_PAINT,        &Canvas::OnPaint,          this);
+    Bind(wxEVT_SIZE,         &Canvas::OnResize,         this);
+    Bind(wxEVT_MOTION,       &Canvas::OnMouseMove,      this);
+    Bind(wxEVT_LEFT_DOWN,    &Canvas::OnMouseLeftDown,  this);
+    Bind(wxEVT_RIGHT_DOWN,   &Canvas::OnMouseRightDown, this);
+    Bind(wxEVT_LEFT_UP,      &Canvas::OnMouseLeftUp,    this);
+    Bind(wxEVT_RIGHT_UP,     &Canvas::OnMouseRightUp,   this);
+    Bind(wxEVT_MOUSEWHEEL,   &Canvas::OnMouseWheel,     this);
+    Bind(wxEVT_ENTER_WINDOW, &Canvas::OnMouseEnter,     this);
+    Bind(wxEVT_LEAVE_WINDOW, &Canvas::OnMouseLeave,     this);
 }
 
 
@@ -231,14 +233,22 @@ void Canvas::OnMouseRightUp(wxMouseEvent &event) //-V2009
 
 void Canvas::OnMouseWheel(wxMouseEvent &event)
 {
-    if (event.m_wheelRotation > 0)
+    if (mouseInWindow)
     {
-        Zoomer::Increase();
+        (event.m_wheelRotation > 0) ? Zoomer::Increase() : Zoomer::Decrease();
     }
-    else
-    {
-        Zoomer::Decrease();
-    }
+}
+
+
+void Canvas::OnMouseEnter(wxMouseEvent &)
+{
+    mouseInWindow = true;
+}
+
+
+void Canvas::OnMouseLeave(wxMouseEvent &)
+{
+    mouseInWindow = false;
 }
 
 

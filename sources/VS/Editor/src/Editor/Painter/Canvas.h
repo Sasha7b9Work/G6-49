@@ -83,8 +83,14 @@ private:
 
     void OnMouseRightUp(wxMouseEvent &);
 
+    void OnMouseEnter(wxMouseEvent &);
+
+    void OnMouseLeave(wxMouseEvent &);
+
     // Установить необходимую форму курсора мыши
     void SetMouseCursor();
+
+    bool mouseInWindow = false;
 };
 
 
