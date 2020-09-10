@@ -1,10 +1,227 @@
 #include "defines.h"
+#include "Menu/Pages/Pages.h"
 #include "SCPI/SCPI.h"
 #include "SCPI/FreqMeterSCPI.h"
+#include "Settings/Settings.h"
 
+
+// :MEASURE
+static pCHAR FuncMeasure(pCHAR);
+static void HintMeasure(String *);
+
+// :LEVEL
+static pCHAR FuncLevel(pCHAR);
+static void HintLevel(String *);
+
+// :TIMECOUNTING
+static pCHAR FuncTimeCounting(pCHAR);
+static void HintTimeCounting(String *);
+
+// :TIMELABELS
+static pCHAR FuncTimeLabels(pCHAR);
+static void HintTimeLabels(String *);
+
+// :NUMBERPERIODS
+static pCHAR FuncNumberPeriods(pCHAR);
+static void HintNumberPeriods(String *);
+
+// :RESISTANCE
+static pCHAR FuncResistance(pCHAR);
+static void HintResistance(String *);
+
+// :COUPLING
+static pCHAR FuncCoupling(pCHAR);
+static void HintCoupling(String *);
+
+// :LPF
+static pCHAR FuncLPF(pCHAR);
+static void HintLPF(String *);
+
+// :TEST
+static pCHAR FuncTest(pCHAR);
+static void HintTest(String *);
+
+// :VALUE
+static pCHAR FuncValue(pCHAR);
+static void HintValue(String *);
 
 
 const StructSCPI SCPI::freqmeter[] =
 {
+    SCPI_LEAF(":MEASURE",       FuncMeasure,       "", HintMeasure),
+    SCPI_LEAF(":LEVEL",         FuncLevel,         "", HintLevel),
+    SCPI_LEAF(":TIMECOUNTING",  FuncTimeCounting,  "", HintTimeCounting),
+    SCPI_LEAF(":TIMELABELS",    FuncTimeLabels,    "", HintTimeLabels),
+    SCPI_LEAF(":NUMBERPERIODS", FuncNumberPeriods, "", HintNumberPeriods),
+    SCPI_LEAF(":RESISTANCE",    FuncResistance,    "", HintResistance),
+    SCPI_LEAF(":COUPLING",      FuncCoupling,      "", HintCoupling),
+    SCPI_LEAF(":LPF",           FuncLPF,           "", HintLPF),
+    SCPI_LEAF(":TEST",          FuncTest,          "", HintTest),
+    SCPI_LEAF(":VALUE?",        FuncValue,         "", HintValue),
     SCPI_EMPTY()
 };
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static pCHAR const measureNames[] =
+{
+    " OFF",
+    " FREQUENCY",
+    " PERIOD",
+    ""
+};
+
+
+static pCHAR FuncMeasure(pCHAR buffer)
+{
+    const char *end = SCPI::BeginWith(buffer, "?");
+
+    if (end)
+    {
+        SCPI_PROLOG(end)
+
+            SCPI::SendAnswer(measureNames[set.freq.measure]);
+
+        SCPI_EPILOG(end)
+    }
+
+    for (int i = 0; i < 3; i++)
+    {
+        end = SCPI::BeginWith(buffer, measureNames[i]);
+        if (end)
+        {
+            SCPI_PROLOG(end)
+
+                set.freq.measure = static_cast<FreqMeasure::E>(i);
+            PageFrequencyCounter::OnPress_Measure(true);
+
+            SCPI_EPILOG(end)
+        }
+    }
+
+    return nullptr;
+}
+
+
+static void HintMeasure(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static pCHAR FuncLevel(pCHAR)
+{
+    return nullptr;
+}
+
+
+static void HintLevel(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static pCHAR FuncValue(pCHAR)
+{
+    return nullptr;
+}
+
+
+static void HintValue(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static pCHAR FuncTimeCounting(pCHAR)
+{
+    return nullptr;
+}
+
+
+static void HintTimeCounting(String *)
+{
+
+}
+
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static pCHAR FuncLPF(pCHAR)
+{
+    return nullptr;
+}
+
+
+static void HintLPF(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static pCHAR FuncCoupling(pCHAR)
+{
+    return nullptr;
+}
+
+
+static void HintCoupling(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static pCHAR FuncResistance(pCHAR)
+{
+    return nullptr;
+}
+
+
+static void HintResistance(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static pCHAR FuncTest(pCHAR)
+{
+    return nullptr;
+}
+
+
+static void HintTest(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static pCHAR FuncTimeLabels(pCHAR)
+{
+    return nullptr;
+}
+
+
+static void HintTimeLabels(String *)
+{
+
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static pCHAR FuncNumberPeriods(pCHAR)
+{
+    return nullptr;
+}
+
+
+static void HintNumberPeriods(String *)
+{
+
+}

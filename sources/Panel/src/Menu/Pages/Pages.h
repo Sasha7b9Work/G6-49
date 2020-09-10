@@ -38,6 +38,8 @@ public:
     // —формировать содержимое регистра управлени€ частотомером в соответствии с настройками
     static void WriteRegisterRG9();
 
+    static void OnPress_Measure(bool);
+
     static Page *self;
 };
 

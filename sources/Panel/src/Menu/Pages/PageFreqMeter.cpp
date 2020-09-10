@@ -19,7 +19,7 @@ static void OnPress_TimeStamps(bool);
 static void OnPress_AvePeriod(bool);
 
 
-static void OnPress_Measure(bool)
+void PageFrequencyCounter::OnPress_Measure(bool)
 {
     Tune_Page();
     PageFrequencyCounter::WriteRegisterRG9();
@@ -31,7 +31,7 @@ DEF_CHOICE_3( cMeasure,                                                         
     "Отключено", "Off",       "Измерения отключены", "Measurements off",
     "Частота",   "Frequency", "Измерение частоты",   "Frequency measurement",
     "Период",    "Period",    "Измерение периода",   "Period measurement",
-    set.freq.measure, pFrequencyCounter, Item::FuncActive, OnPress_Measure, FuncDraw
+    set.freq.measure, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_Measure, FuncDraw
 )
 
 
