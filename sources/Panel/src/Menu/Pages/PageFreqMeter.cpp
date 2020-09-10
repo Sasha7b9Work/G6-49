@@ -14,7 +14,6 @@ static void OnPress_Resist(bool);
 static void OnPress_Couple(bool);
 static void OnPress_Filtr(bool);
 static void OnPress_Test(bool);
-static void OnPress_TimeStamps(bool);
 static void OnPress_AvePeriod(bool);
 
 
@@ -116,10 +115,10 @@ DEF_CHOICE_5(cAvePeriod,                                                        
     "100",   "100",   "»змерени€ производить по ста периодам",            "Measurements over a hundred periods",
     "1000",  "1000",  "»змерени€ производить по тыс€че периодов",         "Measure over a thousand periods",
     "10000", "10000", "»змерени€ производить по дес€ти тыс€чам периодов", "Measure over ten thousand periods",
-    set.freq.avePeriod, pFrequencyCounter, Item::FuncActive, OnPress_AvePeriod, FuncDraw
+    set.freq.avePeriod, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_AvePeriod, FuncDraw
 )
 
-static void OnPress_AvePeriod(bool)
+void PageFrequencyCounter::OnPress_AvePeriod(bool)
 {
     PageFrequencyCounter::WriteRegisterRG9();
 }
@@ -133,10 +132,10 @@ DEF_CHOICE_5(cTimeStamps,                                                       
     "10-5 с", "10-5 s",  "", "",
     "10-6 с", "10-6 s",  "", "",
     "10-7 с", "10-7 s",  "", "",
-    set.freq.timeStamps, pFrequencyCounter, Item::FuncActive, OnPress_TimeStamps, FuncDraw
+    set.freq.timeStamps, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_TimeStamps, FuncDraw
 )
 
-static void OnPress_TimeStamps(bool)
+void PageFrequencyCounter::OnPress_TimeStamps(bool)
 {
     PageFrequencyCounter::WriteRegisterRG9();
 }

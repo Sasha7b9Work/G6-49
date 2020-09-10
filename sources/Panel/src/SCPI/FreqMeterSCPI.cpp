@@ -160,7 +160,7 @@ static pCHAR FuncTimeCounting(pCHAR buffer)
         SCPI_EPILOG(end)
     }
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 5; i++)
     {
         end = SCPI::BeginWith(buffer, countingNames[i]);
         if (end)
@@ -238,8 +238,44 @@ static void HintTest(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncTimeLabels(pCHAR)
+static pCHAR const lablelsgNames[] =
 {
+    " 10E-3",
+    " 10E-4",
+    " 10E-5",
+    " 10E-6",
+    " 10E-7",
+    ""
+};
+
+
+static pCHAR FuncTimeLabels(pCHAR buffer)
+{
+    const char *end = SCPI::BeginWith(buffer, "?");
+
+    if (end)
+    {
+        SCPI_PROLOG(end)
+
+        SCPI::SendAnswer(lablelsgNames[set.freq.timeStamps]);
+
+        SCPI_EPILOG(end)
+    }
+
+    for (int i = 0; i < 5; i++)
+    {
+        end = SCPI::BeginWith(buffer, lablelsgNames[i]);
+        if (end)
+        {
+            SCPI_PROLOG(end)
+
+            set.freq.timeStamps.value = static_cast<FreqTimeStamps::E>(i);
+            PageFrequencyCounter::OnPress_TimeStamps(true);
+
+            SCPI_EPILOG(end)
+        }
+    }
+
     return nullptr;
 }
 
@@ -251,8 +287,44 @@ static void HintTimeLabels(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncNumberPeriods(pCHAR)
+static pCHAR const numberPeriodsNames[] =
 {
+    " 10000",
+    " 1000",
+    " 100",
+    " 10",
+    " 1",
+    ""
+};
+
+
+static pCHAR FuncNumberPeriods(pCHAR buffer)
+{
+    const char *end = SCPI::BeginWith(buffer, "?");
+
+    if (end)
+    {
+        SCPI_PROLOG(end)
+
+        SCPI::SendAnswer(numberPeriodsNames[4 - set.freq.avePeriod]);
+
+        SCPI_EPILOG(end)
+    }
+
+    for (int i = 0; i < 5; i++)
+    {
+        end = SCPI::BeginWith(buffer, numberPeriodsNames[i]);
+        if (end)
+        {
+            SCPI_PROLOG(end)
+
+            set.freq.avePeriod.value = static_cast<PFreqMeter::AvePeriod::E>(4 - i);
+            PageFrequencyCounter::OnPress_AvePeriod(true);
+
+            SCPI_EPILOG(end)
+        }
+    }
+
     return nullptr;
 }
 
