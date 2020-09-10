@@ -56,11 +56,16 @@ public:
 
     void Redraw();
 
+    bool mouseIsDown = false;       // true, если ЛКМ находится в нажатом положении
+
+    bool mouseInWindow = false;
+
+    int mouseX = 0;
+
+    int mouseY = 0;
+
 private:
     
-    bool mouseIsDown = false;       // true, если ЛКМ находится в нажатом положении
-    int mouseX = 0;
-    int mouseY = 0;
     wxWindow *parent;
 
     void BeginScene();
@@ -72,8 +77,6 @@ private:
     void OnResize(wxSizeEvent &);
 
     void OnMouseWheel(wxMouseEvent &);
-
-    void OnMouseMove(wxMouseEvent &);
 
     void OnMouseLeftDown(wxMouseEvent &);
 
@@ -89,8 +92,6 @@ private:
 
     // Установить необходимую форму курсора мыши
     void SetMouseCursor();
-
-    bool mouseInWindow = false;
 };
 
 
