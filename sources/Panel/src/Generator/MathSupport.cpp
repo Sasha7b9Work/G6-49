@@ -87,7 +87,7 @@ static pString ZeroValue(const ParameterDouble *param)
         return "+00.0000";
     }
 
-    return "";
+    return "0.0";
 }
 
 

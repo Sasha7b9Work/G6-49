@@ -392,6 +392,11 @@ static Order::E CalculateOrder(const ParameterDouble *param)
 
 String ParameterDouble::ToString(String &units) const
 {
+    if (GetType() == ParameterDoubleType::Phase)
+    {
+        int i = 0;
+    }
+
     String result(MathDouble::GetIndicatedValue(this));
 
     units.Set(TypeConversionString::None, GetUnits(CalculateOrder(this)));

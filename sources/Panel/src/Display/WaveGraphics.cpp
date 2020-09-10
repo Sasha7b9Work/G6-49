@@ -95,6 +95,11 @@ void WaveGraphics::DrawParameters(Chan::E ch, int y)
 
 Parameter *WaveGraphics::GetParameterForDraw(Chan::E ch, int i)
 {
+    if (ch == Chan::B && i == 3)
+    {
+        i = i;
+    }
+
     Parameter *parameter = FORM(ch)->GetParameter(i);
 
     if (ch != CURRENT_CHANNEL && FORM(Chan::A)->IsDDS() && FORM(Chan::B)->IsDDS())        // Если установлены произвольные сигналы на обоих каналах и выводим нетекущий канал,
