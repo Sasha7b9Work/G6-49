@@ -207,6 +207,8 @@ public:
 
     bool SetAndLoadValue(Value val);
 
+    bool SetAndLoadValue(int val);
+
     bool InRange(Value v) const;
 
 private:

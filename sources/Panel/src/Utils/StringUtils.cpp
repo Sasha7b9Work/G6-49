@@ -467,7 +467,7 @@ bool SU::String2Float(const char *buffer, float *value, char **end)
 {
     Buffer string(std::strlen(buffer) + 1);
 
-    std::strcpy(reinterpret_cast<char *>(string.Data()), buffer);
+    std::strcpy(string.DataChar(), buffer);
 
     for(uint i = 0; i < string.Size(); i++)
     {
@@ -477,15 +477,36 @@ bool SU::String2Float(const char *buffer, float *value, char **end)
         }
     }
 
-    *value = std::strtof(reinterpret_cast<char *>(string.Data()), end);
+    *value = std::strtof(string.DataChar(), end);
 
-    if(*end == reinterpret_cast<char *>(string.Data()))
+    if(*end == string.DataChar())
     {
         *end = const_cast<char *>(buffer);
     }
     else
     {
-        *end = const_cast<char *>(buffer) + (*end - reinterpret_cast<char *>(string.Data()));
+        *end = const_cast<char *>(buffer) + (*end - string.DataChar());
+    }
+
+    return (*end != const_cast<char *>(buffer));
+}
+
+
+bool SU::String2Int(const char *buffer, int *value, char **end)
+{
+    Buffer string(std::strlen(buffer) + 1);
+
+    std::strcpy(string.DataChar(), buffer);
+
+    *value = std::strtol(string.DataChar(), end, 10);
+
+    if (*end == string.DataChar())
+    {
+        *end = const_cast<char *>(buffer);
+    }
+    else
+    {
+        *end = const_cast<char *>(buffer) + (*end - string.DataChar());
     }
 
     return (*end != const_cast<char *>(buffer));

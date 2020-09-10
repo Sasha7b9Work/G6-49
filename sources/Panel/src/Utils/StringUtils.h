@@ -34,6 +34,8 @@ struct SU
 
     static bool String2Float(const char *buffer, float *value, char **end);
 
+    static bool String2Int(const char *buffer, int *value, char **end);
+
     static String Int2String(int value, bool alwaysSign, int numMinFields);
     
     // @brief Преобразует value в текстовую строку

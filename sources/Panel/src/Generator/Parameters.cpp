@@ -227,6 +227,20 @@ bool ParameterInteger::SetAndLoadValue(Value val)
     return true;
 }
 
+bool ParameterInteger::SetAndLoadValue(int val)
+{
+    if (!InRange(Value(val)))
+    {
+        return false;
+    }
+
+    value.FromINT(val);
+
+    PGenerator::SetParameter(this);
+
+    return true;
+}
+
 
 bool ParameterDouble::IsVoltage() const
 {

@@ -255,12 +255,12 @@ pCHAR SCPI::ProcessParameterDouble(pCHAR buffer, ParameterDoubleType::E value)
 {
     ParameterDouble *param = CURRENT_FORM->FindParameter(value);
 
-    SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
-
     if (param == nullptr)
     {
         return nullptr;
     }
+
+    SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
 
     buffer++;
 
@@ -291,6 +291,20 @@ pCHAR SCPI::ProcessParameterInteger(pCHAR buffer, ParameterIntegerType::E type)
         return nullptr;
     }
 
+    buffer++;
+
+    int paramValue = 0;
+
+    char *end_str = nullptr;
+
+    if (SU::String2Int(buffer, &paramValue, &end_str))
+    {
+        if (param->SetAndLoadValue(paramValue))
+        {
+            return end_str + 1;
+        }
+    }
+
     return nullptr;
 }
 
@@ -315,7 +329,7 @@ void SCPI::ProcessRequestParameterValue(const ParameterDouble *param)
 {
     if(param == nullptr)
     {
-        SCPI_SEND_PARAMETER_DOES_NOT_EXIST;
+        SCPI_SEND_PARAMETER_DOES_NOT_EXIST();
     }
     else
     {
@@ -338,7 +352,7 @@ void SCPI::ProcessRequestParameterValue(const ParameterInteger *param)
 {
     if (param == nullptr)
     {
-        SCPI_SEND_PARAMETER_DOES_NOT_EXIST;
+        SCPI_SEND_PARAMETER_DOES_NOT_EXIST();
     }
     else
     {

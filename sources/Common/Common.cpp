@@ -32,6 +32,12 @@ Value::Value(double v)
 }
 
 
+Value::Value(int v)
+{
+    FromINT(v);
+}
+
+
 void Value::FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign)
 {
     value = static_cast<uint>(units);
@@ -189,6 +195,12 @@ void Value::FromDouble(double v)
     {
         SetSign(-1);
     }
+}
+
+
+void Value::FromINT(int v)
+{
+    FromUnits(v < 0 ? -v : v, 0, 0, 0, v < 0);
 }
 
 

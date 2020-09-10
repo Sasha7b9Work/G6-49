@@ -48,6 +48,7 @@ struct Order
 struct Value
 {
     explicit Value(double v);
+    explicit Value(int v);
 
     // Берёт значение из строкового представления. При этом первым символом может идти знак ("+" или "-"), дробная часть отделяется от целой точкой ("."),
     // а order указыват, на сколько нужно умножжить итоговое число (3 - умножить на 1000, -3 - разделить на 1000)
@@ -56,6 +57,7 @@ struct Value
     void FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign);
     void FromDouble(double v);
     void FromUINT64(uint64 v) { value = v; }
+    void FromINT(int v);
     void FromString(const char * const buffer, int pow10);
 
     double ToDouble() const;

@@ -6,3 +6,9 @@ void Beeper::Beep(Action::E)
 {
 
 }
+
+
+void Beeper::Init()
+{
+
+}
