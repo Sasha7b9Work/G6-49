@@ -228,6 +228,8 @@ struct ParameterChoiceType
         ManipulationEnabled,  // Включен или выключен режим манипуляции
         Count
     };
+
+    static const char *Name(ParameterChoiceType::E type);
 };
 
 

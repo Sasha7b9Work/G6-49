@@ -63,6 +63,8 @@ namespace SCPI
 
     void ProcessRequestParameterValue(const ParameterDouble *param);
 
+    void ProcessRequestParameterValue(const ParameterInteger *param);
+
     pCHAR ProcessParameterDouble(pCHAR buffer, ParameterDoubleType::E value);
 
     pCHAR ProcessParameterInteger(pCHAR buffer, ParameterIntegerType::E value);

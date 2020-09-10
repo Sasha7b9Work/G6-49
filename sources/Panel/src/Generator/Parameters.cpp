@@ -493,3 +493,16 @@ Value ParameterOffset::GetMin() const
 
     return result;
 }
+
+
+const char *ParameterChoiceType::Name(ParameterChoiceType::E type)
+{
+    static const char * const names[ParameterChoiceType::Count] =
+    {
+        "Polarity",
+        "Mode start",
+        "Enabled manipulation"
+    };
+
+    return names[type];
+}

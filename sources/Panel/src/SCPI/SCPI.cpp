@@ -257,7 +257,7 @@ pCHAR SCPI::ProcessParameterDouble(pCHAR buffer, ParameterDoubleType::E value)
 
     SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
 
-    if(param == nullptr)
+    if (param == nullptr)
     {
         return nullptr;
     }
@@ -280,8 +280,17 @@ pCHAR SCPI::ProcessParameterDouble(pCHAR buffer, ParameterDoubleType::E value)
 }
 
 
-pCHAR SCPI::ProcessParameterInteger(pCHAR, ParameterIntegerType::E)
+pCHAR SCPI::ProcessParameterInteger(pCHAR buffer, ParameterIntegerType::E type)
 {
+    ParameterInteger *param = CURRENT_FORM->FindParameter(type);
+
+    SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
+
+    if (param == nullptr)
+    {
+        return nullptr;
+    }
+
     return nullptr;
 }
 
@@ -292,6 +301,7 @@ pCHAR SCPI::ProcessParameterChoice(pCHAR buffer, ParameterChoiceType::E choice, 
 
     if(param == nullptr)
     {
+        String answer("%s parameter not found for the current signal", ParameterChoiceType::Name(choice));
         return nullptr;
     }
 
@@ -316,6 +326,27 @@ void SCPI::ProcessRequestParameterValue(const ParameterDouble *param)
         String answer = param->ToString(units);
         answer.Append(" ");
         answer.Append(units.c_str());
+
+        SCPI::SendAnswer(answer.c_str());
+
+        LANGUAGE = lang;
+    }
+}
+
+
+void SCPI::ProcessRequestParameterValue(const ParameterInteger *param)
+{
+    if (param == nullptr)
+    {
+        SCPI_SEND_PARAMETER_DOES_NOT_EXIST;
+    }
+    else
+    {
+        uint8 lang = LANGUAGE;
+        LANGUAGE = 1;
+
+        String units;
+        String answer = param->ToString(units);
 
         SCPI::SendAnswer(answer.c_str());
 
