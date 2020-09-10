@@ -109,6 +109,7 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF(":PERIOD",        FuncPeriod,        "Set period of wave",               HintPeriod),
     SCPI_LEAF(":PHASE",         FuncPhase,         "Set phase of wave",                HintPhase),
     SCPI_LEAF(":POLARITY",      FuncPolarity,      "Set polarity of wave",             HintPolarity),
+    SCPI_LEAF(":REG",           SCPI::FuncReg,     "Control regulator",                SCPI::HintReg),
     SCPI_LEAF(":SOUND",         FuncSound,         "Set volume sound",                 HintSound),
     SCPI_NODE(":FREQMETER",     SCPI::freqmeter),
     SCPI_NODE(":KEY",           SCPI::key),

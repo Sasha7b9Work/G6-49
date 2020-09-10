@@ -35,9 +35,6 @@ static pCHAR const keyNames[Key::Count + 1] =
     " RIGHT",      // Right
     " ON1",        // On1
     " ON2",        // On2
-    " REG_LEF",    // RegLeft
-    " REG_RIGHT",  // RegRight
-    " REG_BUTTON", // RegButton
     ""
 };
 
@@ -93,4 +90,39 @@ static pCHAR FuncKeyLong(pCHAR buffer)
     }
 
     return nullptr;
+}
+
+
+static pCHAR const regNames[Key::Count + 1] =
+{
+    " LEFT",   // Поворот вправо
+    " RIGHT",  // Поворот влево
+    " PRESS",  // Нажатие
+    ""
+};
+
+
+pCHAR SCPI::FuncReg(pCHAR buffer)
+{
+    for (int i = 0; i < Key::Count; i++)
+    {
+        const char *end = SCPI::BeginWith(buffer, regNames[i]);
+        if (end)
+        {
+            SCPI_PROLOG(end)
+
+                Keyboard::AppendEvent(static_cast<Key::E>(i + Key::RotateLeft), Action::Down);
+                Keyboard::AppendEvent(static_cast<Key::E>(i + Key::RotateLeft), Action::Up);
+
+            SCPI_EPILOG(end)
+        }
+    }
+
+    return nullptr;
+}
+
+
+void SCPI::HintReg(String *)
+{
+
 }
