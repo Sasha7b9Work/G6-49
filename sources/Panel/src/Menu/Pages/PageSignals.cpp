@@ -1,3 +1,4 @@
+#include "Display/Painter.h"
 #include "Generator/Signals.h"
 #include "Generator/Generator_p.h"
 #include "Menu/Menu.h"
@@ -55,14 +56,45 @@ DEF_CHOICE_7( cFormB,                                                           
 
 static void OnPress_TuneParameter()
 {
+    if (CURRENT_PARAM->IsDouble())
+    {
+        ParameterDouble *param = reinterpret_cast<ParameterDouble *>(CURRENT_PARAM);
+
+        if (param->GetType() == ParameterDoubleType::ManipulationDuration || param->GetType() == ParameterDoubleType::ManipulationPeriod)
+        {
+            return;
+        }
+    }
+
     CURRENT_PARAM->OnPressButtonTune();
 }
+
+
+static void OnDraw_TuneParameter(int x, int y);
+
 
 DEF_BUTTON( bTuneParameter,                                                                                                        //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---
     "Изменить", "Change",
     "Открывает окно ввода параметра", "Opens the parameter input window",
-    *PageSignals::self, Item::FuncActive, OnPress_TuneParameter, FuncDraw
+    *PageSignals::self, Item::FuncActive, OnPress_TuneParameter, OnDraw_TuneParameter
 )
+
+static void OnDraw_TuneParameter(int x, int y)
+{
+    if (CURRENT_PARAM->IsDouble())
+    {
+        ParameterDouble *param = reinterpret_cast<ParameterDouble *>(CURRENT_PARAM);
+
+        if (param->GetType() == ParameterDoubleType::ManipulationDuration || param->GetType() == ParameterDoubleType::ManipulationPeriod)
+        {
+            const Item *item = reinterpret_cast<const Item *>(&bTuneParameter);
+
+            bool isShade = item->IsShade();
+
+            Primitives::Rectangle(Item::WIDTH - 5, Item::HEIGHT - 4).Fill(x + 2, y + 2, isShade ? Color::MENU_ITEM_SHADE : Color::GREEN_10);
+        }
+    }
+}
 
 DEF_CHOICE_PARAMETER( cParameters,                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Параметр ---
     "ПАРАМЕТР", "PARAMETER",
