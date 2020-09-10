@@ -1,9 +1,10 @@
-#include "Settings/Settings.h"
-#include "Menu/MenuItems.h"
-#include "Menu/Pages/Pages.h"
 #include "Generator/Signals.h"
 #include "Generator/Generator_p.h"
 #include "Menu/Menu.h"
+#include "Menu/MenuItems.h"
+#include "Menu/Pages/Pages.h"
+#include "SCPI/SCPI.h"
+#include "Settings/Settings.h"
 
 
 extern ChoiceParameterBase cParameters;
@@ -111,6 +112,7 @@ void PageSignals::SCPI_SetForm(TypeForm::E form)
 {
     if(form == TypeForm::PacketImpuls && CURRENT_CHANNEL_IS_B)
     {
+        SCPI::SendAnswer("Can not set form \"packet\" on channel B");
         return;
     }
    
