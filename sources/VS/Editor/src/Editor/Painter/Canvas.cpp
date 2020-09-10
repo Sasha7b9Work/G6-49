@@ -115,6 +115,55 @@ void Canvas::Redraw()
 }
 
 
+void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
+{
+    if (mouseIsDown)
+    {
+        mouseIsDown = mouseInWindow;
+    }
+
+    event.GetPosition(&mouseX, &mouseY);
+
+    if (mouseIsDown)
+    {
+        if (Zoomer::MoveWindow(mouseX))
+        {
+            SetMouseCursor();
+            return;
+        }
+    }
+
+    if (Zoomer::UnderMouse(mouseX, mouseY))
+    {
+        SetMouseCursor();
+    }
+    else if (Selector::IsEnabled())
+    {
+        if (mouseIsDown)
+        {
+            Selector::MoveBorder(mouseX);
+            Redraw();
+        }
+        SetMouseCursor();
+    }
+    else if (ModeButtonLeft::Get() == ModeButtonLeft::EditLines)
+    {
+        if (mouseIsDown)
+        {
+            TheForm->MoveMarker(mouseX, mouseY);
+        }
+
+        SetMouseCursor();
+
+        Redraw();
+    }
+    else if (ModeButtonLeft::Get() == ModeButtonLeft::EditPoints)
+    {
+
+    }
+}
+
+
 void Canvas::OnMouseLeftDown(wxMouseEvent &event) //-V2009
 {
     event.GetPosition(&mouseX, &mouseY);
@@ -191,7 +240,7 @@ void Canvas::OnMouseWheel(wxMouseEvent &event)
 }
 
 
-void Canvas::OnMouseEnter(wxMouseEvent &)
+void Canvas::OnMouseEnter(wxMouseEvent &event)
 {
     mouseInWindow = true;
 }
@@ -200,6 +249,7 @@ void Canvas::OnMouseEnter(wxMouseEvent &)
 void Canvas::OnMouseLeave(wxMouseEvent &)
 {
     mouseInWindow = false;
+    mouseIsDown = false;
 }
 
 

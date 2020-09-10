@@ -107,14 +107,14 @@ void PageSignals::OnChanged_Form(bool)
 }
 
 
-void PageSignals::SetForm(TypeForm::E form)
+void PageSignals::SCPI_SetForm(TypeForm::E form)
 {
-    if(form == TypeForm::Free && (CURRENT_CHANNEL == Chan::B))
+    if(form == TypeForm::PacketImpuls && CURRENT_CHANNEL_IS_B)
     {
         return;
     }
-
-    numForm = form;
+   
+    numForm = (form == TypeForm::Free && CURRENT_CHANNEL_IS_B) ? (form - 1) : form;
     OnChanged_Form();
 }
 

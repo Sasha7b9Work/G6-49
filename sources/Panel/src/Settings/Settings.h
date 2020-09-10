@@ -13,6 +13,7 @@
 #define MENU_POS_ACT_ITEM(x)        (set.menu_posActItem[x])
 #define MENU_CURRENT_SUBPAGE(x)     (set.menu_currentSubPage[x])
 #define CURRENT_CHANNEL             (set.current)
+#define CURRENT_CHANNEL_IS_B        (CURRENT_CHANNEL == Chan::B)
 #define ENABLED_CH(ch)              (set.enabled[ch])
 
 

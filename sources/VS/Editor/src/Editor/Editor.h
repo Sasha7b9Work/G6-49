@@ -115,8 +115,6 @@ private:
     void OnScaleRegion(wxCommandEvent &);
 
     void OnChangeTypeGrid(wxCommandEvent &);
-
-    void OnMouseMove(wxMouseEvent &);
 };
 
 
