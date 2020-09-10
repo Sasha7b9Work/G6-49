@@ -80,7 +80,7 @@ static pCHAR FuncMeasure(pCHAR buffer)
     {
         SCPI_PROLOG(end)
 
-            SCPI::SendAnswer(measureNames[set.freq.measure]);
+        SCPI::SendAnswer(measureNames[set.freq.measure]);
 
         SCPI_EPILOG(end)
     }
@@ -92,7 +92,7 @@ static pCHAR FuncMeasure(pCHAR buffer)
         {
             SCPI_PROLOG(end)
 
-                set.freq.measure = static_cast<FreqMeasure::E>(i);
+            set.freq.measure = static_cast<FreqMeasure::E>(i);
             PageFrequencyCounter::OnPress_Measure(true);
 
             SCPI_EPILOG(end)
@@ -136,8 +136,44 @@ static void HintValue(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncTimeCounting(pCHAR)
+static pCHAR const countingNames[] =
 {
+    " 1MS",
+    " 10MS",
+    " 100MS",
+    " 1000MS",
+    " 10000MS",
+    ""
+};
+
+
+static pCHAR FuncTimeCounting(pCHAR buffer)
+{
+    const char *end = SCPI::BeginWith(buffer, "?");
+
+    if (end)
+    {
+        SCPI_PROLOG(end)
+
+        SCPI::SendAnswer(countingNames[set.freq.billingTime]);
+
+        SCPI_EPILOG(end)
+    }
+
+    for (int i = 0; i < 3; i++)
+    {
+        end = SCPI::BeginWith(buffer, countingNames[i]);
+        if (end)
+        {
+            SCPI_PROLOG(end)
+
+            set.freq.billingTime.value = static_cast<PFreqMeter::BillingTime::E>(i);
+            PageFrequencyCounter::OnPress_BillingTime(true);
+
+            SCPI_EPILOG(end)
+        }
+    }
+
     return nullptr;
 }
 

@@ -40,6 +40,8 @@ public:
 
     static void OnPress_Measure(bool);
 
+    static void OnPress_BillingTime(bool);
+
     static Page *self;
 };
 

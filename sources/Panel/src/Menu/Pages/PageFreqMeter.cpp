@@ -10,7 +10,6 @@ Page *PageFrequencyCounter::self = reinterpret_cast<Page *>(const_cast<PageBase 
 // Ќастроить вид страницы в соответствии с режимом измерени€
 static void Tune_Page();
 static void OnPress_Interval(bool);
-static void OnPress_BillingTime(bool);
 static void OnPress_Resist(bool);
 static void OnPress_Couple(bool);
 static void OnPress_Filtr(bool);
@@ -59,10 +58,10 @@ DEF_CHOICE_5( cBillingTime,                                                     
     "100 мс",   "100 ms",   "ƒлительность измерени€ 100 миллисекунд",   "Measurement duration 100 milliseconds",
     "1000 мс",  "1000 ms",  "ƒлительность измерени€ 1000 миллисекунд",  "Measurement duration 1000 milliseconds",
     "10000 мс", "10000 ms", "ƒлительность измерени€ 10000 миллисекунд", "Measurement duration 10000 milliseconds",
-    set.freq.billingTime, pFrequencyCounter, Item::FuncActive, OnPress_BillingTime, FuncDraw
+    set.freq.billingTime, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_BillingTime, FuncDraw
 )
 
-static void OnPress_BillingTime(bool)
+void PageFrequencyCounter::OnPress_BillingTime(bool)
 {
     PageFrequencyCounter::WriteRegisterRG9();
 }
