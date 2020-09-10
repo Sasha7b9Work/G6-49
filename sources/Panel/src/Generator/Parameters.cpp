@@ -146,21 +146,21 @@ pString ParameterDouble::GetMainUnits() const
 {
     static const pString units[ParameterDoubleType::Count][2] =
     {
-        {"Ãö", "Hz"},   // Frequency
-        {"ñ",  "s"},    // Period
-        {"Â",  "V"},    // Amplitude
-        {"Â",  "V"},    // Offset
-        {"ñ",  "s"},    // Duration
-        {"",   ""},     // DutyRatio
-        {"",   ""},     // Phase
-        {"ñ",  "s"},    // Delay
-        {"ñ",  "s"},    // DurationRise
-        {"ñ",  "s"},    // DurationFall
-        {"ñ",  "s"},    // DurationStady
-        {"",   ""},     // DutyFactor
-        {"ñ",  "s"},    // ManipulationDuration
-        {"ñ",  "s"},    // ManipulationPeriod
-        {"ñ",  "s"}     // PacketPeriod
+        {"Ãö",   "Hz"},   // Frequency
+        {"ñ",    "s"},    // Period
+        {"Â",    "V"},    // Amplitude
+        {"Â",    "V"},    // Offset
+        {"ñ",    "s"},    // Duration
+        {"",     ""},     // DutyRatio
+        {"\x7b", "\x7b"}, // Phase
+        {"ñ",    "s"},    // Delay
+        {"ñ",    "s"},    // DurationRise
+        {"ñ",    "s"},    // DurationFall
+        {"ñ",    "s"},    // DurationStady
+        {"",     ""},     // DutyFactor
+        {"ñ",    "s"},    // ManipulationDuration
+        {"ñ",    "s"},    // ManipulationPeriod
+        {"ñ",    "s"}     // PacketPeriod
     };
 
     return units[GetType()][LANGUAGE];
@@ -392,11 +392,6 @@ static Order::E CalculateOrder(const ParameterDouble *param)
 
 String ParameterDouble::ToString(String &units) const
 {
-    if (GetType() == ParameterDoubleType::Phase)
-    {
-        int i = 0;
-    }
-
     String result(MathDouble::GetIndicatedValue(this));
 
     units.Set(TypeConversionString::None, GetUnits(CalculateOrder(this)));

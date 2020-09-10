@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "common/Messages.h"
+#include "Display/Symbols.h"
 #include "Hardware/VCP_p.h"
 #include "Generator/Signals.h"
 #include "SCPI/HeadSCPI.h"
@@ -339,7 +340,7 @@ void SCPI::ProcessRequestParameterValue(const ParameterDouble *param)
         String units;
         String answer = param->ToString(units);
         answer.Append(" ");
-        answer.Append(units.c_str());
+        answer.Append((units[0] == Ideograph::_8::Degree) ? "degrees" : units.c_str());
 
         SCPI::SendAnswer(answer.c_str());
 
