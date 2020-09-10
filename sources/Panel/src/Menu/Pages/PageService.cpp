@@ -1,18 +1,19 @@
 #include "Display/Colors.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"
+#include "Display/Symbols.h"
 #include "Display/Text.h"
 #include "Generator/Generator_p.h"
+#include "Hardware/Beeper.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "Settings/Settings.h"
-#include "Settings/CalibrationSettings.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Pages.h"
+#include "Settings/Settings.h"
+#include "Settings/CalibrationSettings.h"
 #include "Utils/StringUtils.h"
 #include "Utils/NumberBuffer.h"
 #include "Utils/Math.h"
-#include "Display/Symbols.h"
 
 
 extern const PageBase pUSB;
@@ -47,6 +48,24 @@ DEF_CHOICE_2(cLanguage,
 )
 
 
+static void OnChange_Volume(bool)
+{
+    Beeper::Init();
+    setCal.Save();
+}
+
+
+DEF_CHOICE_4(cVolume,
+    "Громкость", "Sound",
+    "Установка уровня громкости", "Setting the volume level",
+    "Откл",  "Off",    "", "",
+    "Мин",   "Min",    "", "",
+    "Cредн", "Middle", "", "",
+    "Макс",  "Max",    "", "",
+    setCal.soundVolume, pService, Item::FuncActive, OnChange_Volume, FuncDraw
+)
+
+
 extern const PageBase pDebug;
 
 
@@ -54,7 +73,7 @@ DEF_PAGE_4_VAR(pService,                                                        
     "СЕРВИС", "SERVICE",    //-V641
     "Сервисные функции", "Service functions",
     &cLanguage,
-    &Item::emptyLight,
+    &cVolume,
     &Item::emptyLight,
     &Item::emptyLight,
     //PageDebug::self,

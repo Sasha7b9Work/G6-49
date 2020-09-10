@@ -26,4 +26,4 @@
 
 #define SCPI_APPEND_STRING(string) SCPI::AppendNewData(string.c_str(), std::strlen(string.c_str())); SCPI::Update()
 
-#define SCPI_SEND_PARAMETER_DOES_NOT_EXIST SCPI::SendAnswer("The parameter does not exist for the current signal")
+#define SCPI_SEND_PARAMETER_DOES_NOT_EXIST() SCPI::SendAnswer("The parameter does not exist for the current signal")

@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
+#include "Settings/CalibrationSettings.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -36,8 +37,18 @@ void HAL_DAC2::Init()
     * 200 - 2.5 êÃö
     * 400 - 1.25 êÃö
     */
-    hTIM.Init.Period = 125;
-    hTIM.Init.Prescaler = 90;
+    switch (setCal.soundVolume)
+    {
+        case 1: hTIM.Init.Period = 165;
+                hTIM.Init.Prescaler = 90;   break;
+
+        case 2: hTIM.Init.Period = 140;
+                hTIM.Init.Prescaler = 90;   break;
+
+        default: hTIM.Init.Period = 100;
+                 hTIM.Init.Prescaler = 90;  break;
+    }
+
     hTIM.Init.ClockDivision = 0;
     hTIM.Init.CounterMode = TIM_COUNTERMODE_UP;
 }
@@ -45,8 +56,11 @@ void HAL_DAC2::Init()
 
 void HAL_DAC2::Start()
 {
-    HAL_TIM_Base_Init(&hTIM);
-    HAL_TIM_Base_Start_IT(&hTIM);
+    if(setCal.soundVolume != 0)
+    {
+        HAL_TIM_Base_Init(&hTIM);
+        HAL_TIM_Base_Start_IT(&hTIM);
+    }
 
     isRunning = true;
 }
