@@ -11,6 +11,13 @@ struct Word
 };
 
 
+struct Locale
+{
+    static void FindSeparator();
+    static uint8 separator;
+};
+
+
 struct SU
 {
     // Возвращает указатель на завершающий (нулевой) символ строки

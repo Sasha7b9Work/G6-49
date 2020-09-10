@@ -10,6 +10,7 @@
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
 #include "Tests/Tests.h"
+#include "Utils/StringUtils.h"
 
 
 int main()
@@ -17,6 +18,8 @@ int main()
     CPU::Init();
     Timer::Init();
     Display::Init();
+    
+    Locale::FindSeparator();
 
     Display::DrawScreenSplash();
 

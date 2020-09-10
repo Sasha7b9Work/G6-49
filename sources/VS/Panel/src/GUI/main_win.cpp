@@ -9,6 +9,7 @@
 #include "Settings/CalibrationSettings.h"
 #include "Settings/Settings.h"
 #include "Tests/Tests.h"
+#include "Utils/StringUtils.h"
 
 
 void init()
@@ -26,6 +27,8 @@ void init()
     set.LoadToDevice();
 
     Menu::Init();
+
+    Locale::FindSeparator();
 }
 
 

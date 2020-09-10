@@ -20,6 +20,10 @@
 #endif
 
 
+
+uint8 Locale::separator = '.';
+
+
 char *SU::Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[20])
 {
     if (Math::IsEquals(value, ERROR_VALUE_FLOAT))
@@ -467,9 +471,9 @@ bool SU::String2Float(const char *buffer, float *value, char **end)
 
     for(uint i = 0; i < string.Size(); i++)
     {
-        if(string.Data()[i] == '.')
+        if(string.Data()[i] == '.' || string.Data()[i] == ',')
         {
-            string.Data()[i] = ',';
+            string.Data()[i] = Locale::separator;
         }
     }
 
@@ -564,4 +568,16 @@ char *SU::FindEnd(char *buffer)
     }
 
     return buffer;
+}
+
+
+void Locale::FindSeparator()
+{
+    const char * const str = "1.5";
+
+    char *end = nullptr;
+
+    std::strtof(str, &end);
+
+    separator = static_cast<uint8>((end == (str + 1) ? ',' : '.'));
 }
