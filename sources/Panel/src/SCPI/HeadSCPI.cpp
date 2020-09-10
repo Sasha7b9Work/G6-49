@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Generator/Signals.h"
+#include "Generator/Wave.h"
 #include "Menu/Pages/Pages.h"
 #include "SCPI/FreqMeterSCPI.h"
 #include "SCPI/KeySCPI.h"
@@ -7,7 +8,7 @@
 #include "SCPI/ManipulationSCPI.h"
 #include "Settings/Settings.h"
 #include "Utils/StringUtils.h"
-#include "Generator/Wave.h"
+#include "Settings/CalibrationSettings.h"
 #include <cstdio>
 
 
@@ -79,6 +80,10 @@ static void HintPolarity(String *);
 static pCHAR FuncOutput(pCHAR);
 static void HintOutput(String *);
 
+// :SOUND
+static pCHAR FuncSound(pCHAR);
+static void HintSound(String *);
+
 
 // Рекурсивная функция формирования сообщения подсказки
 static void ProcessHelp(const StructSCPI strct[], String message); //-V2504
@@ -104,6 +109,7 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF(":PERIOD",        FuncPeriod,        "Set period of wave",               HintPeriod),
     SCPI_LEAF(":PHASE",         FuncPhase,         "Set phase of wave",                HintPhase),
     SCPI_LEAF(":POLARITY",      FuncPolarity,      "Set polarity of wave",             HintPolarity),
+    SCPI_LEAF(":SOUND",         FuncSound,         "Set volume sound",                 HintSound),
     SCPI_NODE(":FREQMETER",     SCPI::freqmeter),
     SCPI_NODE(":KEY",           SCPI::key),
     SCPI_NODE(":MANIPULATION",  SCPI::manipulation),
@@ -320,6 +326,7 @@ static pCHAR const langNames[] =
     ""
 };
 
+
 static pCHAR FuncLanguage(pCHAR buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
@@ -353,6 +360,53 @@ static pCHAR FuncLanguage(pCHAR buffer)
 static void HintLanguage(String *)
 {
     SCPI::SendAnswer(":LANGUAGE {RU|EN}");
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static pCHAR const soundNames[] =
+{
+    " OFF",
+    " LOW",
+    " MIDDLE",
+    " HIGH",
+    ""
+};
+
+static pCHAR FuncSound(pCHAR buffer)
+{
+    const char *end = SCPI::BeginWith(buffer, "?");
+
+    if (end)
+    {
+        SCPI_PROLOG(end)
+
+        SCPI::SendAnswer(soundNames[setCal.soundVolume]);
+
+        SCPI_EPILOG(end)
+    }
+
+    for (int i = 0; i < 4; i++)
+    {
+        end = SCPI::BeginWith(buffer, soundNames[i]);
+        if (end)
+        {
+            SCPI_PROLOG(end)
+
+            setCal.soundVolume = static_cast<uint8>(i);
+            PageService::OnChange_Volume(true);
+
+            SCPI_EPILOG(end)
+        }
+    }
+
+    return nullptr;
+}
+
+
+static void HintSound(String *)
+{
+    SCPI::SendAnswer(":SOUND {OFF|LOW|MIDDLE|HIGH}");
 }
 
 

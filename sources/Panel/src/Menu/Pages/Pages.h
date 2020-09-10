@@ -48,6 +48,8 @@ public:
 
     static void OnPress_Reset();
 
+    static void OnChange_Volume(bool);
+
     static Page *self;
 };
 

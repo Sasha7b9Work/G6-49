@@ -48,7 +48,7 @@ DEF_CHOICE_2(cLanguage,
 )
 
 
-static void OnChange_Volume(bool)
+void PageService::OnChange_Volume(bool)
 {
     Beeper::Init();
     setCal.Save();
@@ -62,7 +62,7 @@ DEF_CHOICE_4(cVolume,
     "Мин",   "Min",    "", "",
     "Cредн", "Middle", "", "",
     "Макс",  "Max",    "", "",
-    setCal.soundVolume, pService, Item::FuncActive, OnChange_Volume, FuncDraw
+    setCal.soundVolume, pService, Item::FuncActive, PageService::OnChange_Volume, FuncDraw
 )
 
 
