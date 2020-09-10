@@ -43,6 +43,10 @@ static void HintForm(String *);
 static pCHAR FuncFrequency(pCHAR);
 static void HintFrequency(String *);
 
+// :LANGUAGE
+static pCHAR FuncLanguage(pCHAR);
+static void HintLanguage(String *);
+
 // :MODESTART
 static pCHAR FuncModeStart(pCHAR);
 static void HintModeStart(String *);
@@ -91,6 +95,7 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF(":DURATION",      FuncDuration,      "Set duraction of impulse",         HintDuration),
     SCPI_LEAF(":FORM",          FuncForm,          "Set form wave on output",          HintForm),
     SCPI_LEAF(":FREQUENCY",     FuncFrequency,     "Set frequency of wave",            HintFrequency),
+    SCPI_LEAF(":LANGUAGE",      FuncLanguage,      "Change language",                  HintLanguage),
     SCPI_LEAF(":MODESTART",     FuncModeStart,     "Set mode start of wave",           HintModeStart),
     SCPI_LEAF(":NUMBERIMPULSE", FuncNumberImpulse, "Set number of impulses in packet", HintNumberImpulse),
     SCPI_LEAF(":OFFSET",        FuncOffset,        "Set offset of wave",               HintOffset),
@@ -304,6 +309,50 @@ static pCHAR FuncFrequency(pCHAR buffer)
 static void HintFrequency(String *)
 {
     SCPI::SendAnswer(":FREQUENCY [300e-6...10e6]");
+}
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+static pCHAR const langNames[] =
+{
+    " RU",
+    " EN",
+    ""
+};
+
+static pCHAR FuncLanguage(pCHAR buffer)
+{
+    const char *end = SCPI::BeginWith(buffer, "?");
+
+    if (end)
+    {
+        SCPI_PROLOG(end)
+
+        SCPI::SendAnswer(langNames[LANGUAGE]);
+
+        SCPI_EPILOG(end)
+    }
+
+    for (int i = 0; i < 2; i++)
+    {
+        end = SCPI::BeginWith(buffer, langNames[i]);
+        if (end)
+        {
+            SCPI_PROLOG(end)
+
+            LANGUAGE = static_cast<uint8>(i);
+
+            SCPI_EPILOG(end)
+        }
+    }
+
+    return nullptr;
+}
+
+
+static void HintLanguage(String *)
+{
+    SCPI::SendAnswer(":LANGUAGE {RU|EN}");
 }
 
 
