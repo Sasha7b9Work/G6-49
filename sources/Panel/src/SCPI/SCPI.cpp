@@ -310,7 +310,7 @@ void SCPI::ProcessRequestParameterValue(const ParameterDouble *param)
     else
     {
         uint8 lang = LANGUAGE;
-        lang = 1; //-V519
+        LANGUAGE = 1; //-V519
 
         String units;
         String answer = param->ToString(units);
