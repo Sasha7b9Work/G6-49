@@ -242,9 +242,15 @@ bool ParameterInteger::SetAndLoadValue(int val)
 }
 
 
-bool ParameterDouble::IsVoltage() const
+bool ParameterDouble::IsNotOrdered() const
 {
-    return (type == ParameterDoubleType::Amplitude) || (type == ParameterDoubleType::Offset);
+    return (type == ParameterDoubleType::Amplitude) || (type == ParameterDoubleType::Offset) || (type == ParameterDoubleType::Phase);
+}
+
+
+bool ParameterDouble::IsPhase() const
+{
+    return (type == ParameterDoubleType::Phase);
 }
 
 
@@ -392,7 +398,7 @@ void ParameterDouble::Reset()
 
 static Order::E CalculateOrder(const ParameterDouble *param)
 {
-    return param->IsVoltage() ? Order::One : param->GetValue().GetOrder();
+    return param->IsNotOrdered() ? Order::One : param->GetValue().GetOrder();
 }
 
 

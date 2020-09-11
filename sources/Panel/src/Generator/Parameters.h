@@ -131,8 +131,10 @@ public:
     // ¬озвращает true, если параметр имеет знак
     bool IsSigned() const { return (type == ParameterDoubleType::Offset); }
 
-    // ¬озвращает true, если параметр имеет размерность "вольт"
-    bool IsVoltage() const;
+    // ¬озвращает true, если параметр не может измен€ть размерность
+    bool IsNotOrdered() const;
+
+    bool IsPhase() const;
 
     // ¬озвращает true, если параметр имеетр размерность "секунда"
     bool IsTime() const;

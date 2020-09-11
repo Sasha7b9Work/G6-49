@@ -70,7 +70,7 @@ static void RepayEmptySymbols(char *buffer)
 
 static Order::E CalculateOrder(const ParameterDouble *param)
 {
-    return param->IsVoltage() ? Order::One : Order::Count;
+    return param->IsNotOrdered() ? Order::One : Order::Count;
 }
 
 
@@ -146,7 +146,12 @@ pString MathDouble::GetIndicatedValue(const ParameterDouble *param)
 
 int MathDouble::GetPositionFirstDigit(const ParameterDouble *param, Order::E order)
 {
-    return param->IsVoltage() ? 1 : GetPositionFirstDigit(param->GetValue(), order);
+    if (param->IsPhase())
+    {
+        return 2;
+    }
+
+    return param->IsNotOrdered() ? 1 : GetPositionFirstDigit(param->GetValue(), order);
 }
 
 
@@ -241,23 +246,21 @@ int MathDouble::GetDigit(const Value &val, int position, Order::E order)
 
 int MathParameterDouble::GetNumberDigitsBeforeComma(Order::E order)
 {
-    if (param->IsVoltage())
+    if (param->IsNotOrdered())
     {
-        return 2;
+        return param->IsPhase() ? 3 : 2;
     }
 
     return MathDouble::GetPositionFirstDigit(param->GetMax(), order) + 1;
 }
 
 
-int MathParameterDouble::GetNumberDigitsAfterComma(Order::E /*order*/)
+int MathParameterDouble::GetNumberDigitsAfterComma(Order::E)
 {
-    if (param->IsVoltage())
+    if (param->IsNotOrdered())
     {
         return 3;
     }
-
-    //order = (order == Order::Count) ? param->GetValue().GetOrder() : order;
 
     return -Order::GetPow10(param->GetMin().GetOrder()) + Order::GetPow10(param->GetValue().GetOrder());
 }

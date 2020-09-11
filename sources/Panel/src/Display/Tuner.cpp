@@ -138,7 +138,7 @@ int Indicator::Draw(int x, int y, int width, const pString units) const
 
 int Indicator::DrawDouble(int x, int y, int width, const pString units) const
 {
-    if (Tuner::Current()->ParameterIsVoltage())
+    if (Tuner::Current()->ParameterIsNotOrdered())
     {
         return DrawDouble(x + 90, y, units, false);
     }
@@ -963,7 +963,7 @@ Order::E DisplayCorrection::CalculateOrderForIndication()
     {
         ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
 
-        return param->IsVoltage() ? Order::One : param->GetValue().GetOrder();
+        return param->IsNotOrdered() ? Order::One : param->GetValue().GetOrder();
     }
 
     return Order::One;
@@ -1145,11 +1145,11 @@ bool Tuner::ParameterIsOffset()
 }
 
 
-bool Tuner::ParameterIsVoltage()
+bool Tuner::ParameterIsNotOrdered()
 {
     ParameterDouble *voltage = ReinterpretToDouble();
 
-    return (voltage == nullptr) ? false : voltage->IsVoltage();
+    return (voltage == nullptr) ? false : voltage->IsNotOrdered();
 }
 
 

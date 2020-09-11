@@ -195,7 +195,7 @@ Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(
 
 void PageTuneParameter::SetModeEntering()
 {
-    if (Tuner::Current()->ParameterIsVoltage() || Tuner::Current()->GetParameter()->IsInteger())
+    if (Tuner::Current()->ParameterIsNotOrdered() || Tuner::Current()->GetParameter()->IsInteger())
     {
 
     }

@@ -305,7 +305,7 @@ public:
     bool ParameterIsOffset();
 
     // Возвращает true, если настраиваемый параметр имеет единицы измерения "Вольт"
-    bool ParameterIsVoltage();
+    bool ParameterIsNotOrdered();
 
     static bool ParameterIsDouble() { return Current()->ReinterpretToDouble() != nullptr; };
 
