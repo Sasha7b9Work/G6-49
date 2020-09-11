@@ -33,8 +33,8 @@ static pCHAR const keyNames[Key::Count + 1] =
     " ESC",        // Esc
     " LEFT",       // Left
     " RIGHT",      // Right
-    " ON1",        // On1
-    " ON2",        // On2
+    " CHANNELA",   // On1
+    " CHANNELB",   // On2
     ""
 };
 
