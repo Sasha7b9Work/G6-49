@@ -50,6 +50,10 @@ public:
 
     static void OnPress_Couple(bool);
 
+    static void OnPress_Filtr(bool);
+
+    static void OnPress_Test(bool);
+
     static Page *self;
 };
 

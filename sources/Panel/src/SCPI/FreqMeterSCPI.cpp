@@ -186,8 +186,40 @@ static void HintTimeCounting(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncLPF(pCHAR)
+static pCHAR const lpfNames[] =
 {
+    " OFF",
+    " ON",
+    ""
+};
+
+static pCHAR FuncLPF(pCHAR buffer)
+{
+    const char *end = SCPI::BeginWith(buffer, "?");
+
+    if (end)
+    {
+        SCPI_PROLOG(end)
+
+            SCPI::SendAnswer(lpfNames[set.freq.filtr]);
+
+        SCPI_EPILOG(end)
+    }
+
+    for (int i = 0; i < 5; i++)
+    {
+        end = SCPI::BeginWith(buffer, lpfNames[i]);
+        if (end)
+        {
+            SCPI_PROLOG(end)
+
+            set.freq.filtr = static_cast<FreqFiltr::E>(i);
+            PageFrequencyCounter::OnPress_Filtr(true);
+
+            SCPI_EPILOG(end)
+        }
+    }
+
     return nullptr;
 }
 
@@ -290,8 +322,41 @@ static void HintResistance(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncTest(pCHAR)
+static pCHAR const testNames[] =
 {
+    " OFF",
+    " ON",
+    ""
+};
+
+
+static pCHAR FuncTest(pCHAR buffer)
+{
+    const char *end = SCPI::BeginWith(buffer, "?");
+
+    if (end)
+    {
+        SCPI_PROLOG(end)
+
+        SCPI::SendAnswer(testNames[set.freq.test]);
+
+        SCPI_EPILOG(end)
+    }
+
+    for (int i = 0; i < 5; i++)
+    {
+        end = SCPI::BeginWith(buffer, testNames[i]);
+        if (end)
+        {
+            SCPI_PROLOG(end)
+
+            set.freq.test = static_cast<FreqTest::E>(i);
+            PageFrequencyCounter::OnPress_Test(true);
+
+            SCPI_EPILOG(end)
+        }
+    }
+
     return nullptr;
 }
 

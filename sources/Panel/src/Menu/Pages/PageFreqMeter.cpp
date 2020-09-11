@@ -10,8 +10,6 @@ Page *PageFrequencyCounter::self = reinterpret_cast<Page *>(const_cast<PageBase 
 // Настроить вид страницы в соответствии с режимом измерения
 static void Tune_Page();
 static void OnPress_Interval(bool);
-static void OnPress_Filtr(bool);
-static void OnPress_Test(bool);
 
 
 void PageFrequencyCounter::OnPress_Measure(bool)
@@ -96,10 +94,10 @@ DEF_CHOICE_2(cFiltr,                                                            
     "Включает/отключает фильтр нижних частот на входе частотомера", "Enables / disables the low-pass filter at the input of the frequency meter",
     DISABLED_RU, DISABLED_EN, "ФНЧ на входе частотомера отключен",  "LPF at the input of the frequency meter is disabled",
     ENABLED_RU,  ENABLED_EN,  "ФНЧ на входе частотомера водключен", "Low-pass filter at the input of the frequency meter",
-    set.freq.filtr, pFrequencyCounter, Item::FuncActive, OnPress_Filtr, FuncDraw
+    set.freq.filtr, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_Filtr, FuncDraw
 )
 
-static void OnPress_Filtr(bool)
+void PageFrequencyCounter::OnPress_Filtr(bool)
 {
     PGenerator::LoadRegister(Register::FreqMeter_Filtr, static_cast<uint>(set.freq.filtr));
 }
@@ -143,10 +141,10 @@ DEF_CHOICE_2(cTest,                                                             
     "Включение/отключение тестового режима", "Enable / disable test mode",
     DISABLED_RU, DISABLED_EN, "", "",
     ENABLED_RU,  ENABLED_EN,  "", "",
-    set.freq.test, pFrequencyCounter, Item::FuncActive, OnPress_Test, FuncDraw
+    set.freq.test, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_Test, FuncDraw
 )
 
-static void OnPress_Test(bool)
+void PageFrequencyCounter::OnPress_Test(bool)
 {
     PageFrequencyCounter::WriteRegisterRG9();
 }
