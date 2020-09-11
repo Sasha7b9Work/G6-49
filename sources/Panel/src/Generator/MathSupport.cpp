@@ -278,5 +278,5 @@ int MathParameterInteger::GetMaxNumberDigits(const ParameterInteger *parameter)
         max.Div(10);
     }
 
-    return result;
+    return result - 1;
 }
