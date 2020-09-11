@@ -9,7 +9,7 @@
 #define FREQUENCY_SINE_MIN  Value("300", Order::Micro)
 #define FREQUENCY_SINE_MAX  Value("20",  Order::Mega)
 
-#define FREQUENCY_DDS_MIN   Value("100", Order::Micro)
+#define FREQUENCY_DDS_MIN   Value(99.9999e-6)
 #define FREQUENCY_DDS_MAX   Value("10",  Order::Mega)
 
 

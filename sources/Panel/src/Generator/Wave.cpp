@@ -25,14 +25,14 @@ pString Form::Name(uint lang) const
 
     static const pString names[TypeForm::Count][2] =
     {
-        {"Синус",        "Sinus"},
-        {"Пила+",        "Saw+"},
-        {"Пила-",        "Saw-"},
-        {"Треуг",  "Triangle"},
-        {"Меандр",       "Meander"},
-        {"Импульс",      "Impulse"},
-        {"Пакет",        "Packet"},
-        {"Произв", "Free"}
+        {"Синус",   "Sinus"},
+        {"Пила+",   "Saw+"},
+        {"Пила-",   "Saw-"},
+        {"Треуг",   "Triangle"},
+        {"Меандр",  "Meander"},
+        {"Импульс", "Impulse"},
+        {"Пакет",   "Packet"},
+        {"Произв",  "Free"}
     };
 
     return names[value][lang];
