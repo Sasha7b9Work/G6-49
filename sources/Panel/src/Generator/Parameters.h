@@ -122,7 +122,7 @@ public:
 
     ParameterDouble(ParameterDoubleType::E t, const char *nameRU, const char *nameEN, const Value &_min, const Value &_max, const Value &_value);
 
-    void Reset();
+    virtual void Reset() override;
 
     // Установить значение параметра и загрузить его в прибор
     bool SetAndLoadValue(double val);
@@ -266,7 +266,7 @@ public:
 
     int GetHeightOpened() const;
 
-    virtual void Reset() override { choice = 0; };
+    virtual void Reset() override { SetAndLoadChoice(choice); };
 
 private:
 	ParameterChoiceType::E type;

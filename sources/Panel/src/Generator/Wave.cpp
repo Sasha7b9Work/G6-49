@@ -141,7 +141,6 @@ Form::Form(TypeForm::E v, Parameter **parameters, Wave *w) : value(v), wave(w), 
 void Form::Reset()
 {
     currentParam = 0;
-    numParams = 0;
 
     for (int i = 0; i < NumParameters(); i++)
     {
