@@ -71,10 +71,10 @@ DEF_CHOICE_2(cResist,                                                           
     "Управление сопротивлением входа частотомера", "Frequency counter input resistance control",
     "1 МОм", "1 MOhm", "Сопротивление входа 1 МОм", "Input impedance 1 MOhm",
     "50 Ом", "50 Ohm", "Сопротивление входа 50 Ом", "50 ohm input impedance",
-    set.freq.resist, pFrequencyCounter, Item::FuncActive, OnPress_Resist, FuncDraw
+    set.freq.resist, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_Resist, FuncDraw
 )
 
-static void OnPress_Resist(bool)
+void PageFrequencyCounter::OnPress_Resist(bool)
 {
     PGenerator::LoadRegister(Register::FreqMeter_Resist, static_cast<uint>(set.freq.resist));
 }

@@ -212,8 +212,41 @@ static void HintCoupling(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncResistance(pCHAR)
+static pCHAR const resistanceNames[] =
 {
+    " 1MOHM",
+    " 50OHM",
+    ""
+};
+
+
+static pCHAR FuncResistance(pCHAR buffer)
+{
+    const char *end = SCPI::BeginWith(buffer, "?");
+
+    if (end)
+    {
+        SCPI_PROLOG(end)
+
+        SCPI::SendAnswer(resistanceNames[set.freq.resist]);
+
+        SCPI_EPILOG(end)
+    }
+
+    for (int i = 0; i < 5; i++)
+    {
+        end = SCPI::BeginWith(buffer, resistanceNames[i]);
+        if (end)
+        {
+            SCPI_PROLOG(end)
+
+            set.freq.resist = static_cast<FreqResist::E>(i);
+            PageFrequencyCounter::OnPress_Resist(true);
+
+            SCPI_EPILOG(end)
+        }
+    }
+
     return nullptr;
 }
 

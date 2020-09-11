@@ -42,6 +42,8 @@ public:
 
     static void OnPress_BillingTime(bool);
 
+    static void OnPress_Resist(bool);
+
     static void OnPress_TimeStamps(bool);
 
     static void OnPress_AvePeriod(bool);
