@@ -20,6 +20,9 @@ struct PFreqMeter
     // Заслать в ПЛИС значение гистерезиса
     static void LoadHysteresis();
 
+    // Послать одно измерение в SCPI
+    static void SendMeasureToSCPI();
+
     struct BillingTime
     {
         enum E
@@ -46,4 +49,7 @@ struct PFreqMeter
         } value;
         operator uint8() const { return static_cast<uint8>(value); };
     };
+
+private:
+    static bool sendToSCPI;
 };

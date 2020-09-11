@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "FreqMeter/FreqMeter_p.h"
 #include "Menu/Pages/Pages.h"
 #include "SCPI/SCPI.h"
 #include "SCPI/FreqMeterSCPI.h"
@@ -123,9 +124,20 @@ static void HintLevel(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncValue(pCHAR)
+static pCHAR FuncValue(pCHAR buffer)
 {
-    return nullptr;
+    const char *end = SCPI::BeginWith(buffer, "");
+
+    if (end)
+    {
+        SCPI_PROLOG(end)
+        
+        PFreqMeter::SendMeasureToSCPI();
+
+        SCPI_EPILOG(end)
+    }
+    
+    return end;
 }
 
 

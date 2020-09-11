@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Display/Text.h"
 #include "Display/Painter.h"
+#include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Math.h"
@@ -10,6 +11,8 @@
 
 static uint valueFreq = 0;
 static bool inactive = true;
+
+bool PFreqMeter::sendToSCPI = false;
 
 
 
@@ -60,6 +63,12 @@ void PFreqMeter::Draw()
     }
 
     BigText(text, 3).Draw(24, SIGNAL_HEIGHT + Page::Title::HEIGHT + 10);
+
+    if (sendToSCPI)
+    {
+        SCPI::SendAnswer(text);
+        sendToSCPI = false;
+    }
 
     Font::ForceUpperCase(true);
 }
@@ -120,4 +129,10 @@ void PFreqMeter::LoadSettings()
 {
     LoadLevel();
     LoadHysteresis();
+}
+
+
+void PFreqMeter::SendMeasureToSCPI()
+{
+    sendToSCPI = true;
 }
