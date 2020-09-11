@@ -279,4 +279,10 @@ void PGenerator::Reset()
 
     WAVE(Chan::A).Reset();
     WAVE(Chan::B).Reset();
+
+    PageSignals::SetCurrentChanenl(Chan::B);
+    PageSignals::SCPI_SetForm(TypeForm::Sine);
+
+    PageSignals::SetCurrentChanenl(Chan::A);
+    PageSignals::SCPI_SetForm(TypeForm::Sine);
 }

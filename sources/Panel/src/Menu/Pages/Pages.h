@@ -28,6 +28,8 @@ struct PageSignals
     // Эта функция должна вызываться после выбора формы сигнала - по её нажатию происходит загрузка формы в прибор
     static void OnChanged_Form(bool = true);
 
+    static void ResetForms();
+
     static void SCPI_SetForm(TypeForm::E form);
 };
 

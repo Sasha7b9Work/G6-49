@@ -122,7 +122,7 @@ public:
 
     ParameterDouble(ParameterDoubleType::E t, const char *nameRU, const char *nameEN, const Value &_min, const Value &_max, const Value &_value);
 
-    virtual void Reset() override;
+    virtual void Reset();
 
     // Установить значение параметра и загрузить его в прибор
     bool SetAndLoadValue(double val);
@@ -196,7 +196,7 @@ public:
 
     ParameterInteger(ParameterIntegerType::E t, const char *nameRU, const char *nameEN, const Value &min, const Value &max, const Value &value);
 
-    virtual void Reset() override { SetAndLoadValue(resetValue); }
+    virtual void Reset() { SetAndLoadValue(resetValue); }
 
     virtual String ToString(String &units) const;
 
@@ -268,7 +268,7 @@ public:
 
     int GetHeightOpened() const;
 
-    virtual void Reset() override { SetAndLoadChoice(choice); };
+    virtual void Reset() { SetAndLoadChoice(choice); };
 
 private:
 	ParameterChoiceType::E type;
@@ -299,7 +299,7 @@ public:
 
     virtual void SetForm(Form *form);
 
-    virtual void Reset() override { }
+    virtual void Reset() { }
 
     int NumParameters() const;
     Parameter **Parameters() { return params; }
@@ -334,7 +334,7 @@ public:
 
     virtual void OnPressButtonTune() { func(); };
 
-    virtual void Reset() override {}
+    virtual void Reset() {}
 
 private:
 
