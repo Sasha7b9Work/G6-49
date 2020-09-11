@@ -6,7 +6,7 @@
 #include "Settings/SettingsTypes.h"
 
 
-#define DEFAULT_AMPLITUDE Value("1")
+#define DEFAULT_AMPLITUDE Value("1", Order::One)
 
 #define IMPULSE_PERIOD_MIN   Value("20", Order::Nano)
 #define IMPULSE_DURATION_MIN Value("10", Order::Nano)
@@ -69,11 +69,11 @@ public:
 
     Viewer viewer;
 
-    virtual Value GetMax() const { return Value("1"); }
+    virtual Value GetMax() const { return Value("1", Order::One); }
 
-    virtual Value GetMin() const { return Value("0"); }
+    virtual Value GetMin() const { return Value("0", Order::One); }
 
-    virtual Value GetValue() const { return Value("1"); } //-V524
+    virtual Value GetValue() const { return Value("1", Order::One); } //-V524
 
     virtual String ToString(String &) const { return String(""); };
 
@@ -354,7 +354,7 @@ public:
 class ParameterAmplitude : public ParameterVoltage
 {
 public:
-    ParameterAmplitude(const Value &min = Value("0"), const Value &max = Value("10"), const Value &value = DEFAULT_AMPLITUDE) :
+    ParameterAmplitude(const Value &min = Value("0", Order::One), const Value &max = Value("10", Order::One), const Value &value = DEFAULT_AMPLITUDE) :
         ParameterVoltage(ParameterDoubleType::Amplitude, "Размах", "Amplitude", min, max, value) { }
 
     virtual Value GetMax() const;
@@ -364,7 +364,7 @@ public:
 class ParameterOffset : public ParameterVoltage
 {
 public:
-    ParameterOffset(const Value &min = Value("-5"), const Value &max = Value("5"), const Value &value = Value("0")) :
+    ParameterOffset(const Value &min = Value("-5", Order::One), const Value &max = Value("5", Order::One), const Value &value = Value("0", Order::One)) :
         ParameterVoltage(ParameterDoubleType::Offset, "Смещение", "Offset", min, max, value) { }
 
     virtual Value GetMax() const;
@@ -391,7 +391,7 @@ public:
 class ParameterPhase : public ParameterDouble
 {
 public:
-    ParameterPhase() : ParameterDouble(ParameterDoubleType::Phase, "Фаза", "Phase", Value("0"), Value("360"), Value("0")) { }
+    ParameterPhase() : ParameterDouble(ParameterDoubleType::Phase, "Фаза", "Phase", Value("0", Order::One), Value("360", Order::One), Value("0", Order::One)) { }
 };
 
 

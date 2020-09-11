@@ -52,7 +52,7 @@ struct Value
 
     // Берёт значение из строкового представления. При этом первым символом может идти знак ("+" или "-"), дробная часть отделяется от целой точкой ("."),
     // а order указыват, на сколько нужно умножжить итоговое число (3 - умножить на 1000, -3 - разделить на 1000)
-    explicit Value(const char *const buffer, Order::E order = Order::One);
+    explicit Value(const char *const buffer, Order::E order);
 
     void FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign);
     void FromDouble(double v);

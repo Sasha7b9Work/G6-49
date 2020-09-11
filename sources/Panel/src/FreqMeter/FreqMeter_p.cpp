@@ -103,7 +103,7 @@ void PFreqMeter::LoadLevel()
 
     Math::Limitation(&value, 0, max - 1);
 
-    Value lValue("1.0");
+    Value lValue("1.0", Order::One);
     lValue.FromUnits(value, 0, 0, 0, 1);
 
     PGenerator::LoadRegister(Register::FreqMeterLevel, lValue.ToUINT64());
@@ -120,7 +120,7 @@ void PFreqMeter::LoadHysteresis()
 
     Math::Limitation(&value, 0, max - 1);
 
-    Value lValue("0.0");
+    Value lValue("0.0", Order::One);
     lValue.FromUnits(value, 0, 0, 0, 1);
 
     PGenerator::LoadRegister(Register::FreqMeterHYS, lValue.ToUINT64());

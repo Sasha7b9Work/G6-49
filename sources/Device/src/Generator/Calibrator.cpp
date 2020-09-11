@@ -71,7 +71,7 @@ void Calibrator::SetAmplitude(Chan::E ch, bool zeroAmplitude)
 {
     if (zeroAmplitude)
     {
-        DGenerator::SetAmplitude(ch, Value("0"));
+        DGenerator::SetAmplitude(ch, Value("0", Order::One));
     }
     else
     {

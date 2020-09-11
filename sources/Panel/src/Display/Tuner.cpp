@@ -661,7 +661,7 @@ Value Indicator::StepPosition(int pos) const
         posAboutComma++;
     }
 
-    Value step("1.0");
+    Value step("1.0", Order::One);
 
     Order::E order = DisplayCorrection::CalculateOrderForIndication();
 
@@ -991,7 +991,7 @@ void DisplayCorrection::FillDigitsIntegerPartForDouble()
 
     if (param->IsSigned())
     {
-        indicator.digits[0].Set((value < Value("0.0")) ? '-' : '+');
+        indicator.digits[0].Set((value < Value("0.0", Order::One)) ? '-' : '+');
     }
 
     for (int i = 0; i < before; i++)
