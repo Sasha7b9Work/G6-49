@@ -882,7 +882,16 @@ void DisplayEntering::DrawUnits(int x, int y, int width)
 
         Font::ForceUpperCase(false);
 
-        String(units).DrawInArea(x, y, width);
+        if (Tuner::Current()->GetParameter()->IsDouble() && Tuner::Current()->ReinterpretToDouble()->IsPhase())
+        {
+            Font::StoreAndSet(TypeFont::_8);
+            Char(Ideograph::_8::BigDegree).Draw4InRect(x + 130, y);
+            Font::Restore();
+        }
+        else
+        {
+            String(units).DrawInArea(x, y, width);
+        }
     }
 }
 
