@@ -379,8 +379,14 @@ int ParameterChoice::NumChoices() const
 
 
 ParameterDouble::ParameterDouble(ParameterDoubleType::E t, const char *nameRU, const char *nameEN, const Value &_min, const Value &_max, const Value &_value) :
-    Parameter(ParameterKind::Double, nameRU, nameEN), tuner(this), type(t), min(_min), value(_value), max(_max)
+    Parameter(ParameterKind::Double, nameRU, nameEN), tuner(this), type(t), min(_min), value(_value), resetValue(_value), max(_max)
 {
+}
+
+
+void ParameterDouble::Reset()
+{
+    SetAndLoadValue(resetValue);
 }
 
 
@@ -417,7 +423,7 @@ String ParameterInteger::ToString(Value val) const
 
 
 ParameterInteger::ParameterInteger(ParameterIntegerType::E t, const char *nameRU, const char *nameEN, const Value &_min, const Value &_max, const Value &_value) :
-    Parameter(ParameterKind::Integer, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value)
+    Parameter(ParameterKind::Integer, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value), resetValue(_value)
 {
 }
 

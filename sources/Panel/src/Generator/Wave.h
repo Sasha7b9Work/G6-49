@@ -101,6 +101,8 @@ public:
     // Закрывает открытый параметр, если таковой имеется и возвращает true в этом случае
     bool CloseCompositeParameter();
 
+    void Reset();
+
 private:
     
     // Wave, к которому относится данный Form
@@ -166,6 +168,8 @@ public:
     
     // Возвращает true, если установлен ручной режим запуска
     bool StartModeIsSingle();
+
+    void Reset();
 
 private:
     

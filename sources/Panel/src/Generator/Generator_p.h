@@ -48,6 +48,8 @@ struct PGenerator
     // Загружает изображение произвольного сигнала, хранящееся в ППЗУ
     static void LoadPictureDDSfromStorage(Chan::E ch);
 
+    static void Reset();
+
 private:
 
     // Загружает форму произвольного сигнала

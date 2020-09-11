@@ -139,6 +139,8 @@ static void HintIDN(String *message) //-V2009 //-V2558
 static pCHAR FuncReset(pCHAR buffer)
 {
     SCPI_PROLOG(buffer)
+
+    PGenerator::Reset();
         
     SCPI_EPILOG(buffer)
 }

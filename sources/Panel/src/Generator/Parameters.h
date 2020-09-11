@@ -58,6 +58,8 @@ public:
     bool IsComposite() const;
     bool IsChoice() const;
 
+    virtual void Reset() = 0;
+
     // Возвращает true, если параметр сложный и открыт
     bool IsOpened() const;
 
@@ -120,6 +122,8 @@ public:
 
     ParameterDouble(ParameterDoubleType::E t, const char *nameRU, const char *nameEN, const Value &_min, const Value &_max, const Value &_value);
 
+    void Reset();
+
     // Установить значение параметра и загрузить его в прибор
     bool SetAndLoadValue(double val);
     bool SetAndLoadValue(Value val);
@@ -163,6 +167,7 @@ private:
     ParameterDoubleType::E type;
     Value min;
     Value value;
+    Value resetValue;
 
     // Возвращает true, если параметр может принимать значение v
     bool InRange(double v) const;
@@ -188,6 +193,8 @@ class ParameterInteger : public Parameter
 public:
 
     ParameterInteger(ParameterIntegerType::E t, const char *nameRU, const char *nameEN, const Value &min, const Value &max, const Value &value);
+
+    virtual void Reset() override { SetAndLoadValue(resetValue); }
 
     virtual String ToString(String &units) const;
 
@@ -218,6 +225,7 @@ private:
     Value min;
     Value max;
     Value value;
+    Value resetValue;
 };
 
 
@@ -258,6 +266,8 @@ public:
 
     int GetHeightOpened() const;
 
+    virtual void Reset() override { choice = 0; };
+
 private:
 	ParameterChoiceType::E type;
     int choice;                     // Текущий выбор
@@ -286,6 +296,8 @@ public:
         Parameter(ParameterKind::Composite, nameRU, nameEN), params(parameters), type(v) { }
 
     virtual void SetForm(Form *form);
+
+    virtual void Reset() override { }
 
     int NumParameters() const;
     Parameter **Parameters() { return params; }
@@ -319,6 +331,8 @@ public:
     virtual String ToString(Value) const { return String(""); };
 
     virtual void OnPressButtonTune() { func(); };
+
+    virtual void Reset() override {}
 
 private:
 
@@ -431,6 +445,7 @@ class ParameterManipulationEnabled : public ParameterChoice
 public:
     ParameterManipulationEnabled(const char **names) : 
         ParameterChoice(ParameterChoiceType::ManipulationEnabled, "Манипу", "Manip", names) { }
+
 };
 
 

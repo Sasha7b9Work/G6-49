@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Generator_p.h"
 #include "Interface/Messages_p.h"
+#include "Menu/Menu.h"
 #include "Menu/MenuItems.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
@@ -12,6 +13,7 @@
 #include "structs.h"
 #include "Signals.h"
 #include "Display/Console.h"
+#include "Settings/CalibrationSettings.h"
 #include "Utils/Math.h"
 #include <cmath>
 #include <string.h>
@@ -261,4 +263,20 @@ void PGenerator::SetParameter(Parameter *parameter)
 void PGenerator::LoadPictureDDSfromStorage(Chan::E ch)
 {
     Message::Storage::RequestPictureDDS(static_cast<uint8>(ch)).Transmit();
+}
+
+
+void PGenerator::Reset()
+{
+    setCal.Load();
+    set.LoadDefault();
+    set.LoadToDevice();
+
+    Menu::Init();
+
+    PGenerator::LoadPictureDDSfromStorage(Chan::A);
+    PGenerator::LoadPictureDDSfromStorage(Chan::B);
+
+    WAVE(Chan::A).Reset();
+    WAVE(Chan::B).Reset();
 }

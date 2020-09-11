@@ -101,6 +101,17 @@ Wave::Wave(Chan::E ch, Form **f) : channel(ch), indexCurrentForm(0), forms(f)
 }
 
 
+void Wave::Reset()
+{
+    indexCurrentForm = 0;
+
+    for (int i = 0; i < NumberOfForms(); i++)
+    {
+        GetForm(i)->Reset();
+    }
+}
+
+
 Form::Form(TypeForm::E v, Parameter **parameters, Wave *w) : value(v), wave(w), params(parameters), currentParam(0)
 {
     numParams = 0;
@@ -123,6 +134,18 @@ Form::Form(TypeForm::E v, Parameter **parameters, Wave *w) : value(v), wave(w), 
     if (v == TypeForm::Free)
     {
         std::memset(&formFlash[0][0], 127, SIZE_BUFFER * 2);
+    }
+}
+
+
+void Form::Reset()
+{
+    currentParam = 0;
+    numParams = 0;
+
+    for (int i = 0; i < NumParameters(); i++)
+    {
+        GetParameter(i)->Reset();
     }
 }
 
