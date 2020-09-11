@@ -15,6 +15,8 @@ static bool inactive = true;
 bool PFreqMeter::sendToSCPI = false;
 
 
+static String FormValue(uint8 lang);
+
 
 void PFreqMeter::Draw()
 {
@@ -25,6 +27,23 @@ void PFreqMeter::Draw()
 
     Font::ForceUpperCase(false);
 
+    String text = FormValue(LANGUAGE);
+
+    BigText(text.c_str(), 3).Draw(24, SIGNAL_HEIGHT + Page::Title::HEIGHT + 10);
+
+    Font::ForceUpperCase(true);
+
+    if (sendToSCPI)
+    {
+        SCPI::SendAnswer(FormValue(1).c_str());
+
+        sendToSCPI = false;
+    }
+}
+
+
+static String FormValue(uint8 lang)
+{
     if(inactive)
     {
         Color::BLUE_50.SetAsCurrent();
@@ -39,38 +58,30 @@ void PFreqMeter::Draw()
 
     if(set.freq.measure == FreqMeasure::Freq)
     {
-        std::sprintf(text, (LANG_IS_RU ? "%sк√ц" : "%skHz"), SU::UInt2StringThisPoint(valueFreq, buffer, 8, static_cast<int>(set.freq.billingTime)));
+        std::sprintf(text, ((lang == 0) ? "%sк√ц" : "%skHz"), SU::UInt2StringThisPoint(valueFreq, buffer, 8, static_cast<int>(set.freq.billingTime)));
     }
     else
     {
         static const struct StrOut
         {
             int forFract;
-            const char * suffix;
+            const char * suffix[2];
         }
         strs[5][5] =
         {
-            {{0, "мс"}, {1, "мс"}, {2, "мс"}, {0, "мкс"}, {1, "мкс"}},
-            {{1, "мс"}, {2, "мс"}, {3, "мс"}, {1, "мкс"}, {2, "мкс"}},
-            {{2, "мс"}, {3, "мс"}, {4, "мс"}, {2, "мкс"}, {3, "мкс"}},
-            {{3, "мс"}, {4, "мс"}, {5, "мс"}, {3, "мкс"}, {4, "мкс"}},
-            {{4, "мс"}, {5, "мс"}, {6, "мс"}, {4, "мкс"}, {5, "мкс"}}
+            {{0, {"мс", "ms"}}, {1, {"мс", "ms"}}, {2, {"мс", "ms"}}, {0, {"мкс", "us"}}, {1, {"мкс", "us"}}},
+            {{1, {"мс", "ms"}}, {2, {"мс", "ms"}}, {3, {"мс", "ms"}}, {1, {"мкс", "us"}}, {2, {"мкс", "us"}}},
+            {{2, {"мс", "ms"}}, {3, {"мс", "ms"}}, {4, {"мс", "ms"}}, {2, {"мкс", "us"}}, {3, {"мкс", "us"}}},
+            {{3, {"мс", "ms"}}, {4, {"мс", "ms"}}, {5, {"мс", "ms"}}, {3, {"мкс", "us"}}, {4, {"мкс", "us"}}},
+            {{4, {"мс", "ms"}}, {5, {"мс", "ms"}}, {6, {"мс", "ms"}}, {4, {"мкс", "us"}}, {5, {"мкс", "us"}}}
         };
 
         StrOut str = strs[set.freq.avePeriod][set.freq.timeStamps];
 
-        std::sprintf(text, "%s%s", SU::UInt2StringThisPoint(valueFreq, buffer, 9, str.forFract), str.suffix);
+        std::sprintf(text, "%s%s", SU::UInt2StringThisPoint(valueFreq, buffer, 9, str.forFract), str.suffix[lang]);
     }
 
-    BigText(text, 3).Draw(24, SIGNAL_HEIGHT + Page::Title::HEIGHT + 10);
-
-    if (sendToSCPI)
-    {
-        SCPI::SendAnswer(text);
-        sendToSCPI = false;
-    }
-
-    Font::ForceUpperCase(true);
+    return String(text);
 }
 
 
