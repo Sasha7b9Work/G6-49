@@ -10,11 +10,8 @@ Page *PageFrequencyCounter::self = reinterpret_cast<Page *>(const_cast<PageBase 
 // Настроить вид страницы в соответствии с режимом измерения
 static void Tune_Page();
 static void OnPress_Interval(bool);
-static void OnPress_Resist(bool);
-static void OnPress_Couple(bool);
 static void OnPress_Filtr(bool);
 static void OnPress_Test(bool);
-static void OnPress_AvePeriod(bool);
 
 
 void PageFrequencyCounter::OnPress_Measure(bool)
@@ -85,10 +82,10 @@ DEF_CHOICE_2(cCouple,                                                           
     "Пропускает/запрещает постоянную составляющую", "Skips / Disables DC",
     "Перем", "Alternate", "Постоянная составляющая поступает на вход частотомера",    "The constant component is fed to the input of the frequency counter",
     "Пост",  "Direct",    "Постоянная составляющая не поступает на вход частотомера", "The constant component does not go to the input of the frequency meter",
-    set.freq.couple, pFrequencyCounter, Item::FuncActive, OnPress_Couple, FuncDraw
+    set.freq.couple, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_Couple, FuncDraw
 )
 
-static void OnPress_Couple(bool)
+void PageFrequencyCounter::OnPress_Couple(bool)
 {
     PGenerator::LoadRegister(Register::FreqMeter_Couple, static_cast<uint>(set.freq.couple));
 }

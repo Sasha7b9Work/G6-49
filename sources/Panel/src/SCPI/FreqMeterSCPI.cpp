@@ -199,8 +199,40 @@ static void HintLPF(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncCoupling(pCHAR)
+static pCHAR const couplingNames[] =
 {
+    " AC",
+    " DC",
+    ""
+};
+
+static pCHAR FuncCoupling(pCHAR buffer)
+{
+    const char *end = SCPI::BeginWith(buffer, "?");
+
+    if (end)
+    {
+        SCPI_PROLOG(end)
+
+        SCPI::SendAnswer(couplingNames[set.freq.couple]);
+
+        SCPI_EPILOG(end)
+    }
+
+    for (int i = 0; i < 5; i++)
+    {
+        end = SCPI::BeginWith(buffer, couplingNames[i]);
+        if (end)
+        {
+            SCPI_PROLOG(end)
+
+            set.freq.couple = static_cast<FreqCouple::E>(i);
+            PageFrequencyCounter::OnPress_Couple(true);
+
+            SCPI_EPILOG(end)
+        }
+    }
+
     return nullptr;
 }
 

@@ -48,6 +48,8 @@ public:
 
     static void OnPress_AvePeriod(bool);
 
+    static void OnPress_Couple(bool);
+
     static Page *self;
 };
 
