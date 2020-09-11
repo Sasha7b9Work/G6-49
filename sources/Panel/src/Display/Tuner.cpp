@@ -182,7 +182,16 @@ int Indicator::DrawDouble(int x, int y, const pString units, bool test) const
 
     Font::ForceUpperCase(false);
 
-    x = String(units).Draw(x + 5, y, test ? Color::BACK : Color::FILL);
+    if (units[0] == Ideograph::_8::Degree)
+    {
+        Font::StoreAndSet(TypeFont::_8);
+        Char(Ideograph::_8::BigDegree).Draw4InRect(x + 5, y - 1, test ? Color::BACK : Color::FILL);
+        Font::Restore();
+    }
+    else
+    {
+        x = String(units).Draw(x + 5, y, test ? Color::BACK : Color::FILL);
+    }
 
     Font::ForceUpperCase(true);
 

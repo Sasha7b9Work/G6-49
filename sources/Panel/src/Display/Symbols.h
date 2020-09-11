@@ -38,6 +38,7 @@ struct Ideograph
             Up          = '\x7c',
             Down        = '\x7e',
             PolarityPos = '\x84',
+            BigDegree   = '\x8e',
             PolarityNeg = '\x94',
             BigPlus     = '\x9c',
             BigMinus    = '\x9d',
