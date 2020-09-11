@@ -29,7 +29,7 @@ void PFreqMeter::Draw()
 
     String text = FormValue(LANGUAGE);
 
-    BigText(text.c_str(), 3).Draw(24, SIGNAL_HEIGHT + Page::Title::HEIGHT + 10);
+    BigText(text.c_str(), 3).Draw(24, SIGNAL_HEIGHT + Page::Title::HEIGHT + 10, inactive ? Color::GRAY_10 : Color::FILL);
 
     Font::ForceUpperCase(true);
 
@@ -44,15 +44,6 @@ void PFreqMeter::Draw()
 
 static String FormValue(uint8 lang)
 {
-    if(inactive)
-    {
-        Color::BLUE_50.SetAsCurrent();
-    }
-    else
-    {
-        Color::FILL.SetAsCurrent();
-    }
-
     char buffer[20];
     char text[50];
 
