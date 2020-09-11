@@ -151,7 +151,7 @@ void PageFrequencyCounter::OnPress_Test(bool)
 
 
 
-static void OnChange_FreqLevel()
+void PageFrequencyCounter::OnChange_FreqLevel()
 {
     PFreqMeter::LoadLevel();
 }
@@ -159,7 +159,7 @@ static void OnChange_FreqLevel()
 DEF_GOVERNOR( gLevel,                                                                                                                                          //--- ЧАСТОТОМЕР - Уровень ---
     "Уровень", "Level",
     "Подстройка уровня синхронизации", "Sync level adjustment",
-    set.freq.level, -100, 100, pFrequencyCounter, Item::FuncActive, OnChange_FreqLevel, EmptyFuncVV, 0
+    set.freq.level, -100, 100, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnChange_FreqLevel, EmptyFuncVV, 0
 )
 
 

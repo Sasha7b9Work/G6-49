@@ -4,6 +4,8 @@
 #include "SCPI/SCPI.h"
 #include "SCPI/FreqMeterSCPI.h"
 #include "Settings/Settings.h"
+#include "Utils/StringUtils.h"
+#include <cstdio>
 
 
 // :MEASURE
@@ -111,8 +113,37 @@ static void HintMeasure(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncLevel(pCHAR)
+static pCHAR FuncLevel(pCHAR buffer)
 {
+    const char *end = SCPI::BeginWith(buffer, "?");
+
+    if (end)
+    {
+        SCPI_PROLOG(end)
+
+        char buf[100];
+        std::snprintf(buf, 99, "%d", set.freq.level);
+        SCPI::SendAnswer(buf);
+
+        SCPI_EPILOG(end)
+    }
+
+    buffer++;
+
+    int paramValue = 0;
+
+    char *end_str = nullptr;
+
+    if (SU::String2Int(buffer, &paramValue, &end_str))
+    {
+        if (paramValue >= -100 && paramValue <= 100)
+        {
+            set.freq.level = static_cast<int16>(paramValue);
+            PageFrequencyCounter::OnChange_FreqLevel();
+            return end_str +1;
+        }
+    }
+
     return nullptr;
 }
 

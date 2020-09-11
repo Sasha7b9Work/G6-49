@@ -54,6 +54,8 @@ public:
 
     static void OnPress_Test(bool);
 
+    static void OnChange_FreqLevel();
+
     static Page *self;
 };
 
