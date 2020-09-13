@@ -167,4 +167,5 @@ void PageSignals::OnPress_Channel(bool)
 void PageSignals::SetCurrentChanenl(Chan::E ch)
 {
     set.current = ch;
+    OnPress_Channel(true);
 }
