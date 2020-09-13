@@ -10,7 +10,7 @@
 
 
 static ParameterDouble storedDouble = ParameterAmplitude();    // «десь будем сохран€ть настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости //-V1054
-static ParameterInteger storedInteger = ParameterInteger(ParameterIntegerType::PacketNumber, "", "", Value("0", Order::One), Value("100", Order::One), Value("0", Order::One));
+static ParameterInteger storedInteger = ParameterInteger(ParameterIntegerType::PacketNumber, "", "", Value("0", Order::One), Value("100", Order::One), Value("0", Order::One)); //-V810
 
 static Parameter *tuned = nullptr;     // Ќастраиваемый параметр //-V1054
 

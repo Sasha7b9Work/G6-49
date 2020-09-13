@@ -36,7 +36,7 @@ wxBitmap *Painter::GetBitmap()
 }
 
 
-void Painter::OnResizeEvent(wxSizeEvent &event)
+void Painter::OnResizeEvent(wxSizeEvent &event) //-V2009
 {
     delete bitmap;
     bitmap = new wxBitmap(event.GetSize());

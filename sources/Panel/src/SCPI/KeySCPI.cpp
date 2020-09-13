@@ -104,15 +104,15 @@ static pCHAR const regNames[Key::Count + 1] =
 
 pCHAR SCPI::FuncReg(pCHAR buffer)
 {
-    for (int i = 0; i < Key::Count; i++)
+    for (int i = 0; i < 3; i++)
     {
         const char *end = SCPI::BeginWith(buffer, regNames[i]);
         if (end)
         {
             SCPI_PROLOG(end)
 
-                Keyboard::AppendEvent(static_cast<Key::E>(i + Key::RotateLeft), Action::Down);
-                Keyboard::AppendEvent(static_cast<Key::E>(i + Key::RotateLeft), Action::Up);
+            Keyboard::AppendEvent(static_cast<Key::E>(i + Key::RotateLeft), Action::Down);
+            Keyboard::AppendEvent(static_cast<Key::E>(i + Key::RotateLeft), Action::Up);
 
             SCPI_EPILOG(end)
         }

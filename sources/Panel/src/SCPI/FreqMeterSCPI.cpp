@@ -249,7 +249,7 @@ static pCHAR FuncLPF(pCHAR buffer)
         SCPI_EPILOG(end)
     }
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 2; i++)
     {
         end = SCPI::BeginWith(buffer, lpfNames[i]);
         if (end)
@@ -294,7 +294,7 @@ static pCHAR FuncCoupling(pCHAR buffer)
         SCPI_EPILOG(end)
     }
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 2; i++)
     {
         end = SCPI::BeginWith(buffer, couplingNames[i]);
         if (end)
@@ -340,7 +340,7 @@ static pCHAR FuncResistance(pCHAR buffer)
         SCPI_EPILOG(end)
     }
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 2; i++)
     {
         end = SCPI::BeginWith(buffer, resistanceNames[i]);
         if (end)
@@ -386,7 +386,7 @@ static pCHAR FuncTest(pCHAR buffer)
         SCPI_EPILOG(end)
     }
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 2; i++)
     {
         end = SCPI::BeginWith(buffer, testNames[i]);
         if (end)

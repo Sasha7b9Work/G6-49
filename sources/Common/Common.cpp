@@ -1,6 +1,8 @@
 #include "defines.h"
 #include "common/Common.h"
+#ifdef PANEL
 #include "Display/Text.h"
+#endif
 #include "Utils/Math.h"
 #include <cmath>
 
@@ -110,6 +112,7 @@ static bool GetSign(int &sign, char *begin, char **end)
 }
 
 
+#ifdef PANEL
 static bool GetIntPart(Value &value, char *begin, char **end)
 {
     *end = begin;
@@ -131,8 +134,15 @@ static bool GetIntPart(Value &value, char *begin, char **end)
 
     return true;
 }
+#else
+static bool GetIntPart(Value &, char *, char **)
+{
+    return true;
+}
+#endif
 
 
+#ifdef PANEL
 static bool GetPower(int &pow, char *begin, char **end)
 {
     if (*begin != 'e' && *begin != 'E')
@@ -165,6 +175,12 @@ static bool GetPower(int &pow, char *begin, char **end)
 
     return true;
 }
+#else
+static bool GetPower(int &, char *, char **)
+{
+    return true;
+}
+#endif
 
 
 void Value::FromString(const char *const buffer, int pow10)

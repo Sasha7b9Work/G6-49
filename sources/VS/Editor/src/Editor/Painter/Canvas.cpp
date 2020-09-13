@@ -231,7 +231,7 @@ void Canvas::OnMouseRightUp(wxMouseEvent &event) //-V2009
 }
 
 
-void Canvas::OnMouseWheel(wxMouseEvent &event)
+void Canvas::OnMouseWheel(wxMouseEvent &event) //-V2009
 {
     if (mouseInWindow)
     {
@@ -240,7 +240,7 @@ void Canvas::OnMouseWheel(wxMouseEvent &event)
 }
 
 
-void Canvas::OnMouseEnter(wxMouseEvent &event)
+void Canvas::OnMouseEnter(wxMouseEvent &)
 {
     mouseInWindow = true;
 }
@@ -253,7 +253,7 @@ void Canvas::OnMouseLeave(wxMouseEvent &)
 }
 
 
-void Canvas::OnMouseLeftUp(wxMouseEvent &event)
+void Canvas::OnMouseLeftUp(wxMouseEvent &event) //-V2009
 {
     event.GetPosition(&mouseX, &mouseY);
 

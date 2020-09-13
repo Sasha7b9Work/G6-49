@@ -991,7 +991,7 @@ void DisplayCorrection::FillDigitsIntegerPartForDouble()
 
     if (param->IsSigned())
     {
-        indicator.digits[0].Set((value < Value("0.0", Order::One)) ? '-' : '+');
+        indicator.digits[0].Set((value.Sign() < 0) ? '-' : '+');
     }
 
     for (int i = 0; i < before; i++)

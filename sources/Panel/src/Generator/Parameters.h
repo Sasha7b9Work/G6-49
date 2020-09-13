@@ -120,7 +120,7 @@ class ParameterDouble : public Parameter
 
 public:
 
-    ParameterDouble(ParameterDoubleType::E t, const char *nameRU, const char *nameEN, const Value &_min, const Value &_max, const Value &_value);
+    ParameterDouble(ParameterDoubleType::E t, const char * const nameRU, const char * const nameEN, const Value &_min, const Value &_max, const Value &_value);
 
     virtual void Reset();
 
@@ -194,7 +194,7 @@ class ParameterInteger : public Parameter
 {
 public:
 
-    ParameterInteger(ParameterIntegerType::E t, const char *nameRU, const char *nameEN, const Value &min, const Value &max, const Value &value);
+    ParameterInteger(ParameterIntegerType::E t, const char * const nameRU, const char * const nameEN, const Value &min, const Value &max, const Value &value);
 
     virtual void Reset() { SetAndLoadValue(resetValue); }
 
@@ -383,7 +383,7 @@ public:
 class ParameterTime : public ParameterDouble
 {
 public:
-    ParameterTime(ParameterDoubleType::E t, const char *nameRU, const char *nameEN, const Value &min, const Value &max, const Value &value) :
+    ParameterTime(ParameterDoubleType::E t, const char *nameRU, const char * const nameEN, const Value &min, const Value &max, const Value &value) :
         ParameterDouble(t, nameRU, nameEN, min, max, value) { }
 };
 
@@ -405,7 +405,7 @@ public:
 class ParameterPeriod : public ParameterTime
 {
 public:
-    ParameterPeriod(const Value &max, const Value &value, const char *nameRU = "Период", const char *nameEN = "Period") :
+    ParameterPeriod(const Value &max, const Value &value, const char *nameRU = "Период", const char * const nameEN = "Period") :
         ParameterTime(ParameterDoubleType::Period, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, value) { }
 };
 
