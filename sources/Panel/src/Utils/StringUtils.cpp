@@ -463,35 +463,6 @@ float SU::Buffer2Float(const uint8 *buffer)
 }
 
 
-bool SU::String2Float(const char *buffer, float *value, char **end)
-{
-    Buffer string(std::strlen(buffer) + 1);
-
-    std::strcpy(string.DataChar(), buffer);
-
-    for(uint i = 0; i < string.Size(); i++)
-    {
-        if(string.Data()[i] == '.' || string.Data()[i] == ',')
-        {
-            string.Data()[i] = Locale::separator;
-        }
-    }
-
-    *value = std::strtof(string.DataChar(), end);
-
-    if(*end == string.DataChar())
-    {
-        *end = const_cast<char *>(buffer);
-    }
-    else
-    {
-        *end = const_cast<char *>(buffer) + (*end - string.DataChar());
-    }
-
-    return (*end != const_cast<char *>(buffer));
-}
-
-
 bool SU::String2Int(const char *buffer, int *value, char **end)
 {
     Buffer string(std::strlen(buffer) + 1);

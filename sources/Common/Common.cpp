@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "common/Common.h"
+#include "Display/Text.h"
 #include "Utils/Math.h"
 #include <cmath>
 
@@ -18,6 +19,15 @@ static uint AssembleTriple(const char *const buffer, int start, int *end);
 
 // Место для временного сохранения текущего порядка
 static Order::E stored = Order::Count;
+
+// Читает знак числа из buffer. Возвращает указатель на первый элемент после знака
+static bool GetSign(int &sign, char *begin, char **end);
+
+// Возвращает значение до степени (символа e)
+static bool GetIntPart(Value &value, char *begin, char **end);
+
+// Возвращает степень (то, что после символа e)
+static bool GetPower(int &power, char *begin, char **end);
 
 
 Value::Value(const char *const buffer, Order::E order) //-V730
@@ -38,21 +48,126 @@ Value::Value(int v)
 }
 
 
-void Value::FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign)
+bool Value::FromString(const char *buffer, char **end)
 {
-    value = static_cast<uint>(units);
-    value *= 1000 * 1000 * 1000;
+    char *begin = const_cast<char *>(buffer);
 
-    value += static_cast<uint>(nUnits + uUnits * 1000 + mUnits * 1000 * 1000);
+    int sign = 0;
 
-    if (sign < 0)
+    if (!GetSign(sign, begin, end))
     {
-        SetSign(sign);
+        return false;
     }
+
+    begin = *end;
+
+    if (!GetIntPart(*this, begin, end))
+    {
+        return false;
+    }
+
+    begin = *end;
+
+    int pow = 0;
+    
+    if (!GetPower(pow, begin, end))
+    {
+        return false;
+    }
+
+    MulPow10(pow);
+
+    SetSign(sign);
+
+    return true;
 }
 
 
-void Value::FromString(const char * const buffer, int pow10)
+static bool GetSign(int &sign, char *begin, char **end)
+{
+    if (*begin == '-')
+    {
+        *end = begin + 1;
+        sign = -1;
+        return true;
+    }
+    else if (*begin == '+')
+    {
+        *end = begin + 1;
+        sign = 1;
+        return true;
+    }
+
+    if (*begin >= '0' && *begin <= '9')
+    {
+        *end = begin;
+        sign = 1;
+        return true;
+    }
+
+    *end = begin;
+    return false;
+}
+
+
+static bool GetIntPart(Value &value, char *begin, char **end)
+{
+    *end = begin;
+
+    if (*begin < '0' || *begin > '9')
+    {
+        return false;
+    }
+
+    String buffer;
+
+    while (**end >= '0' && **end <= '9')
+    {
+        buffer.Append(**end);
+        *end = *end + 1;
+    }
+
+    value = Value(buffer.c_str(), Order::One);
+
+    return true;
+}
+
+
+static bool GetPower(int &pow, char *begin, char **end)
+{
+    if (*begin != 'e' && *begin != 'E')
+    {
+        *end = begin;
+        pow = 0;
+        return true; 
+    }
+
+    begin++;
+
+    if ((*begin < '0' || *begin > '9') && (*begin != '-' && *begin != '+'))
+    {
+        *end = begin;
+        pow = 0;
+        return true;
+    }
+
+    String buffer;
+
+    while ((*begin >= '0' && *begin <= '9') || *begin == '-' || *begin == '+')
+    {
+        buffer.Append(*begin);
+        begin++;
+    }
+
+    *end = begin;
+
+    pow = Value(buffer.c_str(), Order::One).Integer();
+
+    return true;
+}
+
+
+void Value::FromString(const char *const buffer, int pow10)
 {
     int pos = 0;                                    // Текущая обрабатываемая позиция в buffer
     int sign = 1;                                   // Отрицательное значение означает отрицательный знак
@@ -86,6 +201,20 @@ void Value::FromString(const char * const buffer, int pow10)
     {
         uint pow = Math::Pow10(-pow10);
         Div(pow);
+    }
+}
+
+
+void Value::FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign)
+{
+    value = static_cast<uint>(units);
+    value *= 1000 * 1000 * 1000;
+
+    value += static_cast<uint>(nUnits + uUnits * 1000 + mUnits * 1000 * 1000);
+
+    if (sign < 0)
+    {
+        SetSign(sign);
     }
 }
 

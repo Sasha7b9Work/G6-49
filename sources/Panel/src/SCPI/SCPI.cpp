@@ -265,13 +265,13 @@ pCHAR SCPI::ProcessParameterDouble(pCHAR buffer, ParameterDoubleType::E value)
 
     buffer++;
 
-    float paramValue = 0.0F;
-
     char *end_str = nullptr;
 
-    if(SU::String2Float(buffer, &paramValue, &end_str))
+    Value paramValue(0);
+
+    if (paramValue.FromString(buffer, &end_str))
     {
-        if(param->SetAndLoadValue(paramValue))
+        if (param->SetAndLoadValue(paramValue))
         {
             return end_str + 1;
         }
