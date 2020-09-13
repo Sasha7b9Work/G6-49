@@ -48,7 +48,7 @@ inline void EmptyFuncVV() {};
 #ifndef NULL
 #define NULL 0
 #endif
-#define nullptr NULL  
+#define nullptr NULL   //-V1059
 
 #endif
 

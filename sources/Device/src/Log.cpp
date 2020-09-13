@@ -18,7 +18,7 @@ void Log::AddString(char *format, ...) //-V2560
 }
 
 
-void Log::Trace(char *file, int line, char *format, ...)
+void Log::Trace(char *file, int line, char *format, ...) //-V2560
 {
     char message[200];
     std::sprintf(message, "%s:%d ", file, line);
