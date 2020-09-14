@@ -124,7 +124,7 @@ static bool GetIntPart(Value &value, char *begin, char **end)
 
     String buffer;
 
-    while (**end >= '0' && **end <= '9')
+    while ((**end >= '0' && **end <= '9') || **end == '.' || **end == ',')
     {
         buffer.Append(**end);
         *end = *end + 1;
@@ -199,7 +199,7 @@ void Value::FromString(const char *const buffer, int pow10)
 
     units = static_cast<int>(AssembleInteger(buffer, pos, end));    // Находим целую часть
 
-    if (buffer[end] == '.')
+    if (buffer[end] == '.' || buffer[end] == ',')
     {
         mUnits = AssembleTriple(buffer, end + 1, &end);
         uUnits = AssembleTriple(buffer, end, &end);

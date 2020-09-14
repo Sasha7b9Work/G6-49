@@ -274,9 +274,6 @@ void PGenerator::Reset()
 
     Menu::Init();
 
-    PGenerator::LoadPictureDDSfromStorage(Chan::A);
-    PGenerator::LoadPictureDDSfromStorage(Chan::B);
-
     WAVE(Chan::A).Reset();
     WAVE(Chan::B).Reset();
 
