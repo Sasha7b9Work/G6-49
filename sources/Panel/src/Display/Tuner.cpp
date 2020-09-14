@@ -38,7 +38,12 @@ void DisplayEntering::EnterBuffer::Push(Key::E key)
                                                                        
     if ((key == Key::Comma) && ConsistComma())                         { return; }
                                                                        
-    if (stack.Size() == 0 && (key == Key::_0 || key == Key::Comma))    { return; }
+    if (stack.Size() == 0 && key == Key::Comma)
+    {
+        stack.Push('0');
+        stack.Push('.');
+        return;
+    }
 
     stack.Push(Key(key).ToChar());
 }
@@ -785,6 +790,16 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
 
             Tuner::Current()->SetModeEntering();
             order = Tuner::Current()->GetParameter()->GetValue().GetOrder();
+
+            if (Tuner::Current()->GetParameter()->IsDouble())
+            {
+                ParameterDouble *p = Tuner::Current()->ReinterpretToDouble();
+
+                if (p->IsNotOrdered())
+                {
+                    order = Order::One;
+                }
+            }
         }
 
         TryToAddSymbol(control.key);
