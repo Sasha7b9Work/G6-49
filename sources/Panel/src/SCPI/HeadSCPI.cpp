@@ -113,7 +113,7 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF(":SOUND",         FuncSound,         "Set volume sound",                 HintSound),
     SCPI_NODE(":FREQMETER",     SCPI::freqmeter),
     SCPI_NODE(":KEY",           SCPI::key),
-    SCPI_NODE(":MANIPULATION",  SCPI::manipulation),
+    //SCPI_NODE(":MANIPULATION",  SCPI::manipulation),
     SCPI_EMPTY()
 };
 
