@@ -26,7 +26,7 @@ static Order::E stored = Order::Count;
 static bool GetSign(int &sign, char *begin, char **end);
 
 // Возвращает значение до степени (символа e)
-static bool GetIntPart(Value &value, char *begin, char **end);
+static bool GetIntPart(Value &value, char *begin, char **end, int numDigitsAfterComma);
 
 // Возвращает степень (то, что после символа e)
 static bool GetPower(int &power, char *begin, char **end);
@@ -50,7 +50,7 @@ Value::Value(int v)
 }
 
 
-bool Value::FromString(const char *buffer, char **end)
+bool Value::FromString(const char *buffer, char **end, int numDigitsAfterComma)
 {
     char *begin = const_cast<char *>(buffer);
 
@@ -63,7 +63,7 @@ bool Value::FromString(const char *buffer, char **end)
 
     begin = *end;
 
-    if (!GetIntPart(*this, begin, end))
+    if (!GetIntPart(*this, begin, end, numDigitsAfterComma))
     {
         return false;
     }
@@ -113,7 +113,7 @@ static bool GetSign(int &sign, char *begin, char **end)
 
 
 #ifdef PANEL
-static bool GetIntPart(Value &value, char *begin, char **end)
+static bool GetIntPart(Value &value, char *begin, char **end, int numDigitsAfterComma)
 {
     *end = begin;
 
@@ -124,9 +124,24 @@ static bool GetIntPart(Value &value, char *begin, char **end)
 
     String buffer;
 
+    bool comma = false;         // true будет означать, что точка уже была
+
     while ((**end >= '0' && **end <= '9') || **end == '.' || **end == ',')
     {
-        buffer.Append(**end);
+        if (**end == '.' || **end == ',')
+        {
+            comma = true;
+        }
+        else if(comma)
+        {
+            numDigitsAfterComma--;
+        }
+
+        if (numDigitsAfterComma >= 0)
+        {
+            buffer.Append(**end);
+        }
+        
         *end = *end + 1;
     }
 
@@ -135,7 +150,7 @@ static bool GetIntPart(Value &value, char *begin, char **end)
     return true;
 }
 #else
-static bool GetIntPart(Value &, char *, char **)
+static bool GetIntPart(Value &, char *, char **, int)
 {
     return true;
 }

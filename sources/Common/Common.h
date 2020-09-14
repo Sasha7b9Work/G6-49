@@ -59,7 +59,7 @@ struct Value
     void FromUINT64(uint64 v) { value = v; }
     void FromINT(int v);
     void FromString(const char * const buffer, int pow10);
-    bool FromString(const char *buffer, char **end);
+    bool FromString(const char *buffer, char **end, int numDigitsAfterComma);
 
     double ToDouble() const;
     uint64 ToUINT64() const { return value; }
