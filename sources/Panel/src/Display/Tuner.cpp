@@ -30,6 +30,13 @@ Tuner *Tuner::current = nullptr;
 
 void DisplayEntering::EnterBuffer::Push(Key::E key)
 {
+    ParameterDouble *p = Tuner::Current()->ReinterpretToDouble();
+
+    if (p && p->IsNotOrdered() && (NumDigitsAfterComma() == 3))
+    {
+        return;
+    }
+
     if ((key == Key::Minus) && !Tuner::Current()->ParameterIsOffset()) { return; }
 
     if (stack.Size() > 14)                                             { return; }
@@ -110,6 +117,33 @@ bool DisplayEntering::EnterBuffer::ConsistComma() const
     }
 
     return false;
+}
+
+
+int DisplayEntering::EnterBuffer::NumDigitsAfterComma() const
+{
+    int result = 0;
+
+    for (int i = PosComma() + 1; i < stack.Size(); i++)
+    {
+        result++;
+    }
+
+    return result;
+}
+
+
+int DisplayEntering::EnterBuffer::PosComma() const
+{
+    for (int i = 0; i < stack.Size(); i++)
+    {
+        if (stack[i] == Digit::COMMA)
+        {
+            return i;
+        }
+    }
+
+    return -1;
 }
 
 

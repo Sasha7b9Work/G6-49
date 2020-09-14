@@ -173,6 +173,10 @@ public:
         String ToString() const;
         // Возвращает true, если в буфере нет ничего, кроме, возможно, знака
         bool IsEmpty() const;
+        // Возвращает количетсво цифр после десятичной точки
+        int NumDigitsAfterComma() const;
+        // Возвращает позицию десятичной точки
+        int PosComma() const;
 
     private:
         Stack<char> stack;
