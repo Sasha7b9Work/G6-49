@@ -234,8 +234,8 @@ static Form *formsA[] =
 
 
 static ParameterManipulationEnabled  sineManipulationB_Enabled  (namesManipulationEnabled);
-static ParameterManipulationDuration sineManipulationB_Duration (Value("0", Order::One), Value("10", Order::Kilo), Value("0.5", Order::One));
-static ParameterManipulationPeriod   sineManipulationB_Period   (Value("0", Order::One), Value("10", Order::Kilo), Value("2.5", Order::Milli));
+static ParameterManipulationDuration sineManipulationB_Duration(Value("10", Order::Nano), Value("10", Order::One), Value("5", Order::Milli));
+static ParameterManipulationPeriod   sineManipulationB_Period(Value("20", Order::Nano), Value("10000", Order::One), Value("25", Order::Milli));
 static ParameterButton               sineManipulationB_Exit     ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
 
 static Parameter *sineManipulationB[] =
