@@ -796,7 +796,11 @@ void DisplayCorrection::ShowMessageOutRangIfNeed(Value value)
 
     if (value > param->GetMax() || value < param->GetMin())
     {
-        String min = param->ToString(param->GetMin());
+        String m = param->ToString(param->GetMin());
+        char *buffer = m.c_str();
+        while (*buffer == '0') { buffer++; }
+        String min(buffer);
+
         String max = param->ToString(param->GetMax());
 
         Display::ShowWarning(String("Выход за границы диапазона %s ... %s", min.c_str(), max.c_str()));
