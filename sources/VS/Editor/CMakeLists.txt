@@ -61,7 +61,7 @@ file(GLOB UTILS          src/Utils/*)
 file(GLOB WINDOWS        src/Windows/*)
 file(GLOB RESOURCES      *.rc *.ico)
 
-set_source_files_properties(your.ico your.rc2 PROPERTIES LANGUAGE RC)
+set_source_files_properties(*.ico *.rc2 PROPERTIES LANGUAGE RC)
 
 source_group(src             FILES ${SRC})
 source_group(doc             FILES ${DOC})
