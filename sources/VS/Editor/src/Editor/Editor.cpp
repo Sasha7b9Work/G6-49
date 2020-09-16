@@ -114,7 +114,8 @@ Frame::Frame(const wxString &title)
     : wxFrame(NULL, wxID_ANY, title),
     timer(this, TIMER_ID)
 {
-    SetIcon(wxICON(sample));
+    //SetIcon(wxICON(mondrian_xpm));
+    SetIcon(wxIcon("aaaaa"));
 
     CreateMenu();
 

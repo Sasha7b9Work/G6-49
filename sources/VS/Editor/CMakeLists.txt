@@ -8,7 +8,6 @@ add_definitions(-DWXUSINGDLL)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall -MTd")
 
-
 # Older cmake versions don't support string(APPEND ...) provide a workaround
 macro(wx_string_append var str)
     set(${var} ${${var}}${str})
@@ -60,6 +59,9 @@ file(GLOB EDITOR         src/Editor/*.h src/Editor/*.cpp)
 file(GLOB EDITOR_PAINTER src/Editor/Painter/*)
 file(GLOB UTILS          src/Utils/*)
 file(GLOB WINDOWS        src/Windows/*)
+file(GLOB RESOURCES      *.rc *.ico)
+
+set_source_files_properties(your.ico your.rc2 PROPERTIES LANGUAGE RC)
 
 source_group(src             FILES ${SRC})
 source_group(doc             FILES ${DOC})
@@ -69,8 +71,9 @@ source_group(Editor          FILES ${EDITOR})
 source_group(Editor\\Painter FILES ${EDITOR_PAINTER})
 source_group(Utils           FILES ${UTILS})
 source_group(Windows         FILES ${WINDOWS})
+source_group(Resources       FILES ${RESOURCES})
 
-add_executable(Editor ${DOC} ${SRC} ${CONTROLS} ${DIALOGS} ${EDITOR} ${EDITOR_PAINTER} ${UTILS} ${WINDOWS})
+add_executable(Editor ${DOC} ${SRC} ${CONTROLS} ${DIALOGS} ${EDITOR} ${EDITOR_PAINTER} ${UTILS} ${WINDOWS} ${RESOURCES})
 
 target_link_libraries(Editor ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
 target_link_libraries(Editor ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
