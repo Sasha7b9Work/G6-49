@@ -1,5 +1,6 @@
 /* The first icon in the resource file is the default icon in Explorer */
-MAIN_ICON           ICON "icon_small.ico"
+
+MAIN_ICON           ICON "SKY.ico"
                     
 TOOL_OPEN           BITMAP "tool_open.bmp"
 TOOL_SAVE           BITMAP "tool_save.bmp"
