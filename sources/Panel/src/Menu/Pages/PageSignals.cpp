@@ -136,6 +136,8 @@ void PageSignals::OnChanged_Form(bool)
 
     cParameters.form = CURRENT_FORM;
 
+    Display::Update();
+
     PGenerator::TuneChannel(CURRENT_CHANNEL);
 }
 
