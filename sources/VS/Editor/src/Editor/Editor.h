@@ -47,9 +47,7 @@ private:
 
     void CreateMenu();
 
-    void AddTool(int id, const wxString &label, const char *file, const char *fileDisabled = nullptr);
-
-    void AddToolFromResource(int id, const wxString &label, int idBitmap, const char *fileDisabled = nullptr);
+    void AddToolFromResource(int id, const wxString &label, const char *nameResource, const char *nameResourceDisabled = nullptr);
 
     void AddRadioTool(int id, const wxString &label, const char *file);
 

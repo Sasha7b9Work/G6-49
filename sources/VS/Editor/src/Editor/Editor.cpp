@@ -114,8 +114,7 @@ Frame::Frame(const wxString &title)
     : wxFrame(NULL, wxID_ANY, title),
     timer(this, TIMER_ID)
 {
-    //SetIcon(wxICON(mondrian_xpm));
-    SetIcon(wxICON(aaaaa));
+    SetIcon(wxICON(MAIN_ICON));
 
     CreateMenu();
 
@@ -255,33 +254,27 @@ void Frame::CreateMenu()
     SetMenuBar(menuBar);
 
     toolBar = CreateToolBar();
-    //AddTool(FILE_OPEN, wxT("Загрузить ранее созданный сигнал из файла"), "tool_open.bmp");
 
-    wxBitmap bitmap("TOOL_OPEN", wxBITMAP_TYPE_BMP_RESOURCE);
-
-    toolBar->AddTool(FILE_OPEN, wxT("Загрузить ранее созданный сигнал из файла"), bitmap, bitmap, wxITEM_NORMAL, wxT("Загрузить ранее созданный сигнал из файла"), wxT("Загрузить ранее созданный сигнал из файла"));
-
-
-
-    AddTool(FILE_SAVE, wxT("Сохранить сигнал в файл"), "save.bmp");
-    AddTool(FILE_NEW, wxT("Создать новый сигнал"), "new.bmp");
+    AddToolFromResource(FILE_OPEN, wxT("Загрузить ранее созданный сигнал из файла"), "TOOL_OPEN");
+    AddToolFromResource(FILE_SAVE, wxT("Сохранить сигнал в файл"), "TOOL_SAVE");
+    AddToolFromResource(FILE_NEW, wxT("Создать новый сигнал"), "TOOL_NEW");
 
     toolBar->AddSeparator();
-    AddTool(UNDO, wxT("Отменить предыдущее действие"), "undo.bmp");
-    AddTool(REDO, wxT("Восстановить следующее действие"), "redo.bmp");
+    AddToolFromResource(UNDO, wxT("Отменить предыдущее действие"), "TOOL_UNDO");
+    AddToolFromResource(REDO, wxT("Восстановить следующее действие"), "TOOL_REDO");
 
     toolBar->AddSeparator();
-    AddTool(CREATE_TRIANGLE, wxT("Создать новый сигнал в форме треугольника"), "triangle.bmp");
-    AddTool(CREATE_TRAPEZE, wxT("Создать новый сигнал в форме трапеции"), "trapeze.bmp");
-    AddTool(CREATE_EXPONENT, wxT("Создать новый экспоненциальный сигнал"), "exponent.bmp");
-    AddTool(CREATE_SINX, wxT("Создать сигнал вида sin(x)/x"), "sinx.bmp");
-    AddTool(CREATE_GAUSS, wxT("Создать новый сигнал в виде гуссовой функции"), "gauss.bmp");
-    AddTool(CREATE_GAVERSINE, wxT("Создать новый сигнал в форме гаверсинуса"), "gaversine.bmp");
-    AddTool(CREATE_NOISE, wxT("Создать шумовой сигнал"), "noise.bmp");
-    AddTool(CREATE_COMPISITE, wxT("Создать сложный сигнал из гармоник"), "composite.bmp");
+    AddToolFromResource(CREATE_TRIANGLE, wxT("Создать новый сигнал в форме треугольника"), "TOOL_TRIANGLE");
+    AddToolFromResource(CREATE_TRAPEZE, wxT("Создать новый сигнал в форме трапеции"), "TOOL_TRAPEZE");
+    AddToolFromResource(CREATE_EXPONENT, wxT("Создать новый экспоненциальный сигнал"), "TOOL_EXPONENT");
+    AddToolFromResource(CREATE_SINX, wxT("Создать сигнал вида sin(x)/x"), "TOOL_SINX");
+    AddToolFromResource(CREATE_GAUSS, wxT("Создать новый сигнал в виде гуссовой функции"), "TOOL_GAUSS");
+    AddToolFromResource(CREATE_GAVERSINE, wxT("Создать новый сигнал в форме гаверсинуса"), "TOOL_GAVERSINE");
+    AddToolFromResource(CREATE_NOISE, wxT("Создать шумовой сигнал"), "TOOL_NOISE");
+    AddToolFromResource(CREATE_COMPISITE, wxT("Создать сложный сигнал из гармоник"), "TOOL_COMPISITE");
 
     toolBar->AddSeparator();
-    AddTool(INSERT_POINTS, wxT("Вставить маркеры"), "points.bmp", "points_disable.bmp");
+    AddToolFromResource(INSERT_POINTS, wxT("Вставить маркеры"), "TOOL_POINTS", "TOOL_POINTS_DISABLE");
 
     toolBar->AddSeparator();
     AddRadioTool(MBL_POINTS, wxT("Режим редактирования точек"), "MBL_points.bmp");
@@ -291,34 +284,30 @@ void Frame::CreateMenu()
     AddCheckTool(MODE_SELECT, wxT("Режим выделения"), "MBL_select.bmp");
 
     toolBar->AddSeparator();
-    AddTool(SCALE_MORE, wxT("Увеличить масштаб"), "scale_more.bmp");
-    AddTool(SCALE_LESS, wxT("Уменьшить масштаб"), "scale_less.bmp");
-    AddTool(SCALE_REGION, wxT("Показать выделенную область"), "scale_region.bmp");
+    AddToolFromResource(SCALE_MORE, wxT("Увеличить масштаб"), "TOOL_SCALE_MORE");
+    AddToolFromResource(SCALE_LESS, wxT("Уменьшить масштаб"), "TOOL_SCALE_LESS");
+    AddToolFromResource(SCALE_REGION, wxT("Показать выделенную область"), "TOOL_SCALE_REGION");
 
     toolBar->AddSeparator();
-    AddTool(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - проценты"), "grid_percents.bmp");
+    AddToolFromResource(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - проценты"), "TOOL_GRID_PERCENTS");
 
     toolBar->Realize();
 }
 
 
-void Frame::AddTool(int id, const wxString &label, const char *file, const char *fileDisabld)
+void Frame::AddToolFromResource(int id, const wxString &label, const char *nameResource, const char *nameResourceDisabled)
 {
-    wxBitmap bitmap(wxImage(wxString("resources/") + wxString(file), wxBITMAP_TYPE_BMP));
+    wxBitmap bitmap(nameResource, wxBITMAP_TYPE_BMP_RESOURCE);
 
-    wxBitmap bitmapDisabled = (fileDisabld == nullptr) ? bitmap : wxBitmap(wxImage(wxString("resources/") + wxString(fileDisabld), wxBITMAP_TYPE_BMP));
+    if (!bitmap.IsOk())
+    {
+        int i = 0;
+    }
+
+    wxBitmap bitmapDisabled(nameResourceDisabled ? wxBitmap(nameResourceDisabled, wxBITMAP_TYPE_BMP_RESOURCE) : bitmap);
 
     toolBar->AddTool(id, label, bitmap, bitmapDisabled, wxITEM_NORMAL, label, label);
-}
 
-
-void Frame::AddToolFromResource(int id, const wxString &label, int idBitmap, const char *nameResourceDisabled)
-{
-//    wxBitmap bitmap(wxBITMAP(nameResource));
-//
-//    wxBitmap bitmapDisabled = bitmap; // (nameResourceDisabled == nullptr) ? bitmap : wxBitmap(nameResourceDisabled, wxBITMAP_TYPE_BMP_RESOURCE);
-//
-//    toolBar->AddTool(id, label, bitmap, bitmapDisabled, wxITEM_NORMAL, label, label);
 }
 
 
@@ -631,13 +620,13 @@ void Frame::OnChangeTypeGrid(wxCommandEvent &)
 
     if (Grid::TypeIsPercents())
     {
-        toolBar->SetToolNormalBitmap(CHANGE_TYPE_GRID, wxBitmap(wxT("resources/grid_percents.bmp"), wxBITMAP_TYPE_BMP));
+        toolBar->SetToolNormalBitmap(CHANGE_TYPE_GRID, wxBITMAP(TOOL_GRID_PERCENTS));
         toolBar->SetToolLongHelp(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - проценты"));
         toolBar->SetToolShortHelp(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - проценты"));
     }
     else
     {
-        toolBar->SetToolNormalBitmap(CHANGE_TYPE_GRID, wxBitmap(wxT("resources/grid_points.bmp"), wxBITMAP_TYPE_BMP));
+        toolBar->SetToolNormalBitmap(CHANGE_TYPE_GRID, wxBITMAP(TOOL_GRID_POINTS));
         toolBar->SetToolLongHelp(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - точки"));
         toolBar->SetToolShortHelp(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - точки"));
     }

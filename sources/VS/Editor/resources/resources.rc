@@ -1,7 +1,29 @@
 /* The first icon in the resource file is the default icon in Explorer */
-aaaaa ICON "icon_small.ico"
+MAIN_ICON           ICON "icon_small.ico"
+                    
+TOOL_OPEN           BITMAP "tool_open.bmp"
+TOOL_SAVE           BITMAP "tool_save.bmp"
+TOOL_NEW            BITMAP "tool_new.bmp"
+                    
+TOOL_UNDO           BITMAP "tool_undo.bmp"
+TOOL_REDO           BITMAP "tool_redo.bmp"
 
-TOOL_OPEN BITMAP "tool_open.bmp"
+TOOL_TRIANGLE       BITMAP "tool_triangle.bmp"
+TOOL_TRAPEZE        BITMAP "tool_trapeze.bmp"
+TOOL_EXPONENT       BITMAP "tool_exponent.bmp"
+TOOL_SINX           BITMAP "tool_sinx.bmp"
+TOOL_GAUSS          BITMAP "tool_gauss.bmp"
+TOOL_GAVERSINE      BITMAP "tool_gaversine.bmp"
+TOOL_NOISE          BITMAP "tool_noise.bmp"
+TOOL_COMPISITE      BITMAP "tool_composite.bmp"
+TOOL_POINTS         BITMAP "tool_points.bmp"
+TOOL_POINTS_DISABLE BITMAP "tool_points_disable.bmp"
+TOOL_SCALE_MORE     BITMAP "tool_scale_more.bmp"
+TOOL_SCALE_LESS     BITMAP "tool_scale_less.bmp"
+TOOL_SCALE_REGION   BITMAP "tool_scale_region.bmp"
+TOOL_GRID_PERCENTS  BITMAP "tool_grid_percents.bmp"
+TOOL_GRID_POINTS    BITMAP "tool_grid_points.bmp"
+
 
 #include "wx/msw/wx.rc"
 
