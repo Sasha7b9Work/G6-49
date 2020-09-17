@@ -17,4 +17,3 @@ goto Exit
 :Exit
 
 call copy.bat WX_DLLS
-call copy.bat resources

@@ -255,54 +255,49 @@ void Frame::CreateMenu()
 
     toolBar = CreateToolBar();
 
-    AddToolFromResource(FILE_OPEN, wxT("Загрузить ранее созданный сигнал из файла"), "TOOL_OPEN");
-    AddToolFromResource(FILE_SAVE, wxT("Сохранить сигнал в файл"), "TOOL_SAVE");
-    AddToolFromResource(FILE_NEW, wxT("Создать новый сигнал"), "TOOL_NEW");
+    AddTool(FILE_OPEN, wxT("Загрузить ранее созданный сигнал из файла"), "TOOL_OPEN");
+    AddTool(FILE_SAVE, wxT("Сохранить сигнал в файл"), "TOOL_SAVE");
+    AddTool(FILE_NEW, wxT("Создать новый сигнал"), "TOOL_NEW");
 
     toolBar->AddSeparator();
-    AddToolFromResource(UNDO, wxT("Отменить предыдущее действие"), "TOOL_UNDO");
-    AddToolFromResource(REDO, wxT("Восстановить следующее действие"), "TOOL_REDO");
+    AddTool(UNDO, wxT("Отменить предыдущее действие"), "TOOL_UNDO");
+    AddTool(REDO, wxT("Восстановить следующее действие"), "TOOL_REDO");
 
     toolBar->AddSeparator();
-    AddToolFromResource(CREATE_TRIANGLE, wxT("Создать новый сигнал в форме треугольника"), "TOOL_TRIANGLE");
-    AddToolFromResource(CREATE_TRAPEZE, wxT("Создать новый сигнал в форме трапеции"), "TOOL_TRAPEZE");
-    AddToolFromResource(CREATE_EXPONENT, wxT("Создать новый экспоненциальный сигнал"), "TOOL_EXPONENT");
-    AddToolFromResource(CREATE_SINX, wxT("Создать сигнал вида sin(x)/x"), "TOOL_SINX");
-    AddToolFromResource(CREATE_GAUSS, wxT("Создать новый сигнал в виде гуссовой функции"), "TOOL_GAUSS");
-    AddToolFromResource(CREATE_GAVERSINE, wxT("Создать новый сигнал в форме гаверсинуса"), "TOOL_GAVERSINE");
-    AddToolFromResource(CREATE_NOISE, wxT("Создать шумовой сигнал"), "TOOL_NOISE");
-    AddToolFromResource(CREATE_COMPISITE, wxT("Создать сложный сигнал из гармоник"), "TOOL_COMPISITE");
+    AddTool(CREATE_TRIANGLE, wxT("Создать новый сигнал в форме треугольника"), "TOOL_TRIANGLE");
+    AddTool(CREATE_TRAPEZE, wxT("Создать новый сигнал в форме трапеции"), "TOOL_TRAPEZE");
+    AddTool(CREATE_EXPONENT, wxT("Создать новый экспоненциальный сигнал"), "TOOL_EXPONENT");
+    AddTool(CREATE_SINX, wxT("Создать сигнал вида sin(x)/x"), "TOOL_SINX");
+    AddTool(CREATE_GAUSS, wxT("Создать новый сигнал в виде гуссовой функции"), "TOOL_GAUSS");
+    AddTool(CREATE_GAVERSINE, wxT("Создать новый сигнал в форме гаверсинуса"), "TOOL_GAVERSINE");
+    AddTool(CREATE_NOISE, wxT("Создать шумовой сигнал"), "TOOL_NOISE");
+    AddTool(CREATE_COMPISITE, wxT("Создать сложный сигнал из гармоник"), "TOOL_COMPISITE");
 
     toolBar->AddSeparator();
-    AddToolFromResource(INSERT_POINTS, wxT("Вставить маркеры"), "TOOL_POINTS", "TOOL_POINTS_DISABLE");
+    AddTool(INSERT_POINTS, wxT("Вставить маркеры"), "TOOL_POINTS", "TOOL_POINTS_DISABLE");
 
     toolBar->AddSeparator();
-    AddRadioTool(MBL_POINTS, wxT("Режим редактирования точек"), "MBL_points.bmp");
-    AddRadioTool(MBL_LINES, wxT("Режим редактирования интерполирующими прямыми"), "MBL_lines.bmp");
+    AddRadioTool(MBL_POINTS, wxT("Режим редактирования точек"), "TOOL_MBL_POINTS");
+    AddRadioTool(MBL_LINES, wxT("Режим редактирования интерполирующими прямыми"), "TOOL_MBL_LINES");
 
     toolBar->AddSeparator();
-    AddCheckTool(MODE_SELECT, wxT("Режим выделения"), "MBL_select.bmp");
+    AddCheckTool(MODE_SELECT, wxT("Режим выделения"), "TOOL_MBL_SELECT");
 
     toolBar->AddSeparator();
-    AddToolFromResource(SCALE_MORE, wxT("Увеличить масштаб"), "TOOL_SCALE_MORE");
-    AddToolFromResource(SCALE_LESS, wxT("Уменьшить масштаб"), "TOOL_SCALE_LESS");
-    AddToolFromResource(SCALE_REGION, wxT("Показать выделенную область"), "TOOL_SCALE_REGION");
+    AddTool(SCALE_MORE, wxT("Увеличить масштаб"), "TOOL_SCALE_MORE");
+    AddTool(SCALE_LESS, wxT("Уменьшить масштаб"), "TOOL_SCALE_LESS");
+    AddTool(SCALE_REGION, wxT("Показать выделенную область"), "TOOL_SCALE_REGION");
 
     toolBar->AddSeparator();
-    AddToolFromResource(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - проценты"), "TOOL_GRID_PERCENTS");
+    AddTool(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - проценты"), "TOOL_GRID_PERCENTS");
 
     toolBar->Realize();
 }
 
 
-void Frame::AddToolFromResource(int id, const wxString &label, const char *nameResource, const char *nameResourceDisabled)
+void Frame::AddTool(int id, const wxString &label, const char *nameResource, const char *nameResourceDisabled)
 {
     wxBitmap bitmap(nameResource, wxBITMAP_TYPE_BMP_RESOURCE);
-
-    if (!bitmap.IsOk())
-    {
-        int i = 0;
-    }
 
     wxBitmap bitmapDisabled(nameResourceDisabled ? wxBitmap(nameResourceDisabled, wxBITMAP_TYPE_BMP_RESOURCE) : bitmap);
 
@@ -311,17 +306,17 @@ void Frame::AddToolFromResource(int id, const wxString &label, const char *nameR
 }
 
 
-void Frame::AddRadioTool(int id, const wxString &label, const char *file)
+void Frame::AddRadioTool(int id, const wxString &label, const char *nameResource)
 {
-    wxBitmap bitmap(wxImage(wxString("resources/") + wxString(file), wxBITMAP_TYPE_BMP));
+    wxBitmap bitmap(nameResource, wxBITMAP_TYPE_BMP_RESOURCE);
 
     toolBar->AddRadioTool(id, label, bitmap, bitmap, label, label);
 }
 
 
-void Frame::AddCheckTool(int id, const wxString &label, const char *file)
+void Frame::AddCheckTool(int id, const wxString &label, const char *nameResource)
 {
-    wxBitmap bitmap(wxImage(wxString("resources/") + wxString(file), wxBITMAP_TYPE_BMP));
+    wxBitmap bitmap(nameResource, wxBITMAP_TYPE_BMP_RESOURCE);
 
     toolBar->AddCheckTool(id, label, bitmap, bitmap, label, label);
 }

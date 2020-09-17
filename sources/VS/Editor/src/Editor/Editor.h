@@ -47,11 +47,11 @@ private:
 
     void CreateMenu();
 
-    void AddToolFromResource(int id, const wxString &label, const char *nameResource, const char *nameResourceDisabled = nullptr);
+    void AddTool(int id, const wxString &label, const char *nameResource, const char *nameResourceDisabled = nullptr);
 
-    void AddRadioTool(int id, const wxString &label, const char *file);
+    void AddRadioTool(int id, const wxString &label, const char *nameResource);
 
-    void AddCheckTool(int id, const wxString &label, const char *file);
+    void AddCheckTool(int id, const wxString &label, const char *nameResource);
 
     void OnAlignLeft(wxCommandEvent &);
 

@@ -23,6 +23,9 @@ TOOL_SCALE_LESS     BITMAP "tool_scale_less.bmp"
 TOOL_SCALE_REGION   BITMAP "tool_scale_region.bmp"
 TOOL_GRID_PERCENTS  BITMAP "tool_grid_percents.bmp"
 TOOL_GRID_POINTS    BITMAP "tool_grid_points.bmp"
+TOOL_MBL_POINTS     BITMAP "tool_MBL_points.bmp"
+TOOL_MBL_LINES      BITMAP "tool_MBL_lines.bmp"
+TOOL_MBL_SELECT     BITMAP "tool_MBL_select.bmp"
 
 
 #include "wx/msw/wx.rc"
