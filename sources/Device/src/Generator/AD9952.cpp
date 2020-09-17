@@ -9,6 +9,9 @@
 bool AD9952::Manipulation::enabled[Chan::Count] = { false, false };
 double AD9952::phase[Chan::Count] = { 0.0, 0.0 };
 
+// Последнее записанное в ASF регистр значение. Используется для того, чтобы меандр при установленной амплитуде синусоиды "0" существовал
+static uint lastASF[Chan::Count] = { 100, 100 };
+
 
 void AD9952::Init()
 {
@@ -63,7 +66,7 @@ void AD9952::SetAmplitude(Chan::E ch)
 }
 
 
-void AD9952::WriteRegister(Chan::E ch, Register reg)
+void AD9952::WriteRegister(Chan::E ch, Register::E reg)
 {
     typedef void(*pFuncVCh)(Chan::E);
 
@@ -135,6 +138,18 @@ void AD9952::WriteASF(Chan::E ch)
 }
 
 
+void AD9952::SetAmplitudeForMeander(Chan::E ch)
+{
+    if(lastASF[ch] == ((1 << 14) + (1 << 15)))
+    {
+        uint value = 0x1FFF;
+        Bit::Set(value, 14);
+        Bit::Set(value, 15);
+        WriteToHardware(ch, Register::ASF, value);
+    }
+}
+
+
 void AD9952::WriteFTW0(Chan::E ch)
 {
     double FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 1e8F : 1e6F)) * std::powf(2.0F, 32.0F);
@@ -165,8 +180,13 @@ pString AD9952::Register::Name() const
 }
 
 
-void AD9952::WriteToHardware(Chan::E ch, Register reg, uint value)
+void AD9952::WriteToHardware(Chan::E ch, Register::E reg, uint value)
 {
+    if (reg == Register::ASF)
+    {
+        lastASF[ch] = value;
+    }
+
     static const int numBytes[] =               // Число байт данных для передачи
     { //CFR1 CFR2 ASF ARR FTW0 POW
          4,   3,   2,  1,  4,   2

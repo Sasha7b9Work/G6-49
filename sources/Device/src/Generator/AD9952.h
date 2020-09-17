@@ -9,6 +9,9 @@ struct AD9952
 {
     static void Init();
 
+    // При установке формы сигнала "меандр" нужно вызывать эту функцию, чтобы при нулевой амплитуде в синусе меандр поступал-таки на выход
+    static void SetAmplitudeForMeander(Chan::E ch);
+
     static void SetAmplitude(Chan::E ch);
 
     static void SetFrequency(Chan::E ch);
@@ -45,10 +48,10 @@ private:
         bool Is(E v) const { return value == v; };
     };
 
-    static void WriteToHardware(Chan::E ch, Register reg, uint value);
+    static void WriteToHardware(Chan::E ch, Register::E reg, uint value);
     static StructPIN ChipSelect(Chan::E ch);
     static void Reset();
-    static void WriteRegister(Chan::E ch, Register reg);
+    static void WriteRegister(Chan::E ch, Register::E reg);
     static void WriteCFR1(Chan::E ch);
     static void WriteCFR2(Chan::E ch);
     static void WriteARR(Chan::E ch);

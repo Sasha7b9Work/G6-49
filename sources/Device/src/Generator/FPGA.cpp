@@ -80,6 +80,7 @@ void FPGA::SetFormMeander(Chan::E ch)
 {
     modeWork[ch] = ModeWork::Meander;
     WriteControlRegister();
+    AD9952::SetAmplitudeForMeander(ch);
 }
 
 
