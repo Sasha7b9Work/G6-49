@@ -2,14 +2,15 @@
 #include "log.h"
 #include "structs.h"
 #include "common/Command.h"
-#include "FDrive_p.h"
-#include "Items.h"
-#include "File.h"
 #include "Display/Painter.h"
 #include "Display/Text.h" 
 #include "Display/WaveGraphics.h"
-#include "Settings/Settings.h"
+#include "FDrive/FDrive_p.h"
+#include "FDrive/Items.h"
+#include "FDrive/File.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
+#include "Settings/Settings.h"
 #include <cstdlib>
 #include <cstdio>
 
@@ -72,12 +73,14 @@ void FDrive::Draw()
 
     if (inStateWaitCompleteLoad)
     {
-        width = 200;
-        height = 100;
+        width = 128;
+        height = 31;
         x = (Display::WIDTH - width) / 2;
         y = (Display::HEIGHT - height) / 2;
 
         Rectangle(width, height).DrawFilled(x, y, Color::BACK, Color::FILL);
+
+        String(LANG_IS_RU ? "Сигнал загружается" : "Signal loaded").Draw(x + 10, y + 10, Color::FILL);
     }
 }
 
@@ -154,9 +157,9 @@ void FDrive::PressDown()
 void FDrive::PressChoose()
 {
     inStateWaitCompleteLoad = true;
-
+    
     Message::FDrive::LoadDDSfromFile(static_cast<uint8>(CURRENT_CHANNEL), static_cast<uint8>(ListFiles::NumberCurrentFile()), FDrive::CurrentDirectory()).Transmit();
-
+    
     File::SetDataToWave();
 }
 
