@@ -798,7 +798,18 @@ void DisplayCorrection::ShowMessageOutRangIfNeed(Value value)
     {
         String m = param->ToString(param->GetMin());
         char *buffer = m.c_str();
-        while (*buffer == '0') { buffer++; }
+        while (buffer && *buffer == '0')            // Удаляем все нули в начале
+        {
+            buffer++;
+        }
+        if (*buffer == '.' || *buffer == '.')       // Если первый символ - точка, добавляем один ноль перед точкой
+        {
+            if (buffer > m.c_str())
+            {
+                buffer--;
+            }
+        }
+
         String min(buffer);
 
         String max = param->ToString(param->GetMax());
