@@ -11,8 +11,7 @@
 using namespace Primitives;
 
 
-#define SIZE_BUFFER     300
-static uint8 formFlash[Chan::Count][SIZE_BUFFER];
+static uint8 formFlash[Chan::Count][POINTS_IN_FORM];
 
 
 
@@ -133,7 +132,7 @@ Form::Form(TypeForm::E v, Parameter **parameters, Wave *w) : value(v), wave(w), 
 
     if (v == TypeForm::Free)
     {
-        std::memset(&formFlash[0][0], 127, SIZE_BUFFER * 2);
+        std::memset(&formFlash[0][0], 127, POINTS_IN_FORM * 2);
     }
 }
 
@@ -713,9 +712,9 @@ void Form::DrawFree(Chan::E ch, int x0, int y0, int width, int height)
 }
 
 
-void Form::SetFormFlash(Chan::E ch, const uint8 data[SIZE_BUFFER])
+void Form::SetFormFlash(Chan::E ch, const uint8 data[POINTS_IN_FORM])
 {
-    std::memcpy(&formFlash[ch][0], data, SIZE_BUFFER);
+    std::memcpy(&formFlash[ch][0], data, POINTS_IN_FORM);
 }
 
 

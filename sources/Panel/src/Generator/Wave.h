@@ -9,6 +9,10 @@
 class Wave;
 
 
+// »з таого количества точек состоит отрисованный сигнал
+#define POINTS_IN_FORM 300
+
+
 class Form
 {
     friend class Wave;
@@ -72,7 +76,7 @@ public:
     void DrawUGO(Chan::E ch, int y0);
     
     // ”становить данные произвольного сигнала дл€ отрисовки
-    static void SetFormFlash(Chan::E ch, const uint8 data[300]);
+    static void SetFormFlash(Chan::E ch, const uint8 data[POINTS_IN_FORM]);
     
     // ¬озвращает указатель на данные произвольного сигнала дл€ отрисовки
     static uint8 *GetFormFlash(Chan::E ch);
