@@ -115,7 +115,7 @@ Frame::Frame(const wxString &title)
     timer(this, TIMER_ID)
 {
     //SetIcon(wxICON(mondrian_xpm));
-    SetIcon(wxIcon("aaaaa"));
+    SetIcon(wxICON(aaaaa));
 
     CreateMenu();
 
@@ -255,7 +255,14 @@ void Frame::CreateMenu()
     SetMenuBar(menuBar);
 
     toolBar = CreateToolBar();
-    AddTool(FILE_OPEN, wxT("Загрузить ранее созданный сигнал из файла"), "open.bmp");
+    //AddTool(FILE_OPEN, wxT("Загрузить ранее созданный сигнал из файла"), "tool_open.bmp");
+
+    wxBitmap bitmap("TOOL_OPEN", wxBITMAP_TYPE_BMP_RESOURCE);
+
+    toolBar->AddTool(FILE_OPEN, wxT("Загрузить ранее созданный сигнал из файла"), bitmap, bitmap, wxITEM_NORMAL, wxT("Загрузить ранее созданный сигнал из файла"), wxT("Загрузить ранее созданный сигнал из файла"));
+
+
+
     AddTool(FILE_SAVE, wxT("Сохранить сигнал в файл"), "save.bmp");
     AddTool(FILE_NEW, wxT("Создать новый сигнал"), "new.bmp");
 
@@ -302,6 +309,16 @@ void Frame::AddTool(int id, const wxString &label, const char *file, const char 
     wxBitmap bitmapDisabled = (fileDisabld == nullptr) ? bitmap : wxBitmap(wxImage(wxString("resources/") + wxString(fileDisabld), wxBITMAP_TYPE_BMP));
 
     toolBar->AddTool(id, label, bitmap, bitmapDisabled, wxITEM_NORMAL, label, label);
+}
+
+
+void Frame::AddToolFromResource(int id, const wxString &label, int idBitmap, const char *nameResourceDisabled)
+{
+//    wxBitmap bitmap(wxBITMAP(nameResource));
+//
+//    wxBitmap bitmapDisabled = bitmap; // (nameResourceDisabled == nullptr) ? bitmap : wxBitmap(nameResourceDisabled, wxBITMAP_TYPE_BMP_RESOURCE);
+//
+//    toolBar->AddTool(id, label, bitmap, bitmapDisabled, wxITEM_NORMAL, label, label);
 }
 
 
