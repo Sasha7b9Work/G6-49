@@ -7,10 +7,10 @@ goto HINT
 
 :COPY_RESOURCES
     @echo %TIME% Copying resources files
-    mkdir ..\..\generated\Win32\Editor\icons
-    mkdir ..\..\generated\Win32\Editor\Debug\icons
-    xcopy ..\..\VS\Editor\icons ..\..\generated\Win32\Editor\Debug\icons /q /y
-    xcopy ..\..\VS\Editor\icons ..\..\generated\Win32\Editor\icons /q /y
+    mkdir ..\..\generated\Win32\Editor\resources
+    mkdir ..\..\generated\Win32\Editor\Debug\resources
+    xcopy ..\..\VS\Editor\resources ..\..\generated\Win32\Editor\Debug\resources /q /y
+    xcopy ..\..\VS\Editor\resources ..\..\generated\Win32\Editor\resources /q /y
     goto EXIT
 
 :COPY_WX_DLLS

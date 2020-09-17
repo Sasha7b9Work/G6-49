@@ -297,9 +297,9 @@ void Frame::CreateMenu()
 
 void Frame::AddTool(int id, const wxString &label, const char *file, const char *fileDisabld)
 {
-    wxBitmap bitmap(wxImage(wxString("icons/") + wxString(file), wxBITMAP_TYPE_BMP));
+    wxBitmap bitmap(wxImage(wxString("resources/") + wxString(file), wxBITMAP_TYPE_BMP));
 
-    wxBitmap bitmapDisabled = (fileDisabld == nullptr) ? bitmap : wxBitmap(wxImage(wxString("icons/") + wxString(fileDisabld), wxBITMAP_TYPE_BMP));
+    wxBitmap bitmapDisabled = (fileDisabld == nullptr) ? bitmap : wxBitmap(wxImage(wxString("resources/") + wxString(fileDisabld), wxBITMAP_TYPE_BMP));
 
     toolBar->AddTool(id, label, bitmap, bitmapDisabled, wxITEM_NORMAL, label, label);
 }
@@ -307,7 +307,7 @@ void Frame::AddTool(int id, const wxString &label, const char *file, const char 
 
 void Frame::AddRadioTool(int id, const wxString &label, const char *file)
 {
-    wxBitmap bitmap(wxImage(wxString("icons/") + wxString(file), wxBITMAP_TYPE_BMP));
+    wxBitmap bitmap(wxImage(wxString("resources/") + wxString(file), wxBITMAP_TYPE_BMP));
 
     toolBar->AddRadioTool(id, label, bitmap, bitmap, label, label);
 }
@@ -315,7 +315,7 @@ void Frame::AddRadioTool(int id, const wxString &label, const char *file)
 
 void Frame::AddCheckTool(int id, const wxString &label, const char *file)
 {
-    wxBitmap bitmap(wxImage(wxString("icons/") + wxString(file), wxBITMAP_TYPE_BMP));
+    wxBitmap bitmap(wxImage(wxString("resources/") + wxString(file), wxBITMAP_TYPE_BMP));
 
     toolBar->AddCheckTool(id, label, bitmap, bitmap, label, label);
 }
@@ -614,13 +614,13 @@ void Frame::OnChangeTypeGrid(wxCommandEvent &)
 
     if (Grid::TypeIsPercents())
     {
-        toolBar->SetToolNormalBitmap(CHANGE_TYPE_GRID, wxBitmap(wxT("icons/grid_percents.bmp"), wxBITMAP_TYPE_BMP));
+        toolBar->SetToolNormalBitmap(CHANGE_TYPE_GRID, wxBitmap(wxT("resources/grid_percents.bmp"), wxBITMAP_TYPE_BMP));
         toolBar->SetToolLongHelp(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - проценты"));
         toolBar->SetToolShortHelp(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - проценты"));
     }
     else
     {
-        toolBar->SetToolNormalBitmap(CHANGE_TYPE_GRID, wxBitmap(wxT("icons/grid_points.bmp"), wxBITMAP_TYPE_BMP));
+        toolBar->SetToolNormalBitmap(CHANGE_TYPE_GRID, wxBitmap(wxT("resources/grid_points.bmp"), wxBITMAP_TYPE_BMP));
         toolBar->SetToolLongHelp(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - точки"));
         toolBar->SetToolShortHelp(CHANGE_TYPE_GRID, wxT("Изменение размерности линий сетки - точки"));
     }

@@ -59,9 +59,9 @@ file(GLOB EDITOR         src/Editor/*.h src/Editor/*.cpp)
 file(GLOB EDITOR_PAINTER src/Editor/Painter/*)
 file(GLOB UTILS          src/Utils/*)
 file(GLOB WINDOWS        src/Windows/*)
-file(GLOB RESOURCES      *.rc *.ico)
+file(GLOB RESOURCES      resources/*.rc resources/*.ico resources/*.png resources/*.bmp)
 
-set_source_files_properties(*.ico *.rc2 PROPERTIES LANGUAGE RC)
+set_source_files_properties(resources/*.ico resources/*.png resources/*.bmp resources/*.rc PROPERTIES LANGUAGE RC)
 
 source_group(src             FILES ${SRC})
 source_group(doc             FILES ${DOC})
