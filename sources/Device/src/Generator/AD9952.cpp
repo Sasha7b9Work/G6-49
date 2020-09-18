@@ -140,13 +140,10 @@ void AD9952::WriteASF(Chan::E ch)
 
 void AD9952::SetAmplitudeForMeander(Chan::E ch)
 {
-    if(lastASF[ch] == ((1 << 14) + (1 << 15)))
-    {
-        uint value = 0x1FFF;
-        Bit::Set(value, 14);
-        Bit::Set(value, 15);
-        WriteToHardware(ch, Register::ASF, value);
-    }
+    uint value = 0x1FFF;
+    Bit::Set(value, 14);
+    Bit::Set(value, 15);
+    WriteToHardware(ch, Register::ASF, value);
 }
 
 
