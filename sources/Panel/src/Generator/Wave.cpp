@@ -70,13 +70,13 @@ pString Register::Name() const
 
 Form *Wave::GetCurrentForm()
 {
-    return forms[indexCurrentForm];
+    return forms[numberForm];
 }
 
 
 void Wave::SetIndexForm(int8 num)
 {
-    indexCurrentForm = num;
+    numberForm = num;
 }
 
 
@@ -86,7 +86,7 @@ int Wave::NumberOfForms() const
 }
 
 
-Wave::Wave(Chan::E ch, Form **f) : channel(ch), indexCurrentForm(0), forms(f), prevOutputState(false)
+Wave::Wave(Chan::E ch, Form **f) : channel(ch), numberForm(0), forms(f), prevOutputState(false)
 {
     numForms = 0;
     
@@ -102,7 +102,7 @@ Wave::Wave(Chan::E ch, Form **f) : channel(ch), indexCurrentForm(0), forms(f), p
 
 void Wave::Reset()
 {
-    indexCurrentForm = 0;
+    numberForm = 0;
 
     for (int i = 0; i < NumberOfForms(); i++)
     {
@@ -762,10 +762,4 @@ void Wave::RestorePreviousOutputState()
         ENABLED_CH(channel) = prevOutputState;
         PGenerator::EnableChannel(channel, prevOutputState);
     }
-}
-
-
-Wave *Wave::Current()
-{
-    return &WAVE(CURRENT_CHANNEL);
 }

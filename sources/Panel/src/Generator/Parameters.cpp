@@ -2,6 +2,7 @@
 #include "Generator/Generator_p.h"
 #include "Generator/MathSupport.h"
 #include "Generator/Parameters.h"
+#include "Generator/Signals.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
@@ -314,30 +315,36 @@ String ParameterChoice::ToString(String &units) const
 
 void ParameterChoice::NextChoice()
 {
-    Math::CircleIncrease(&choice, 0, NumChoices() - 1);
-
-    Chan::E ch = form->GetWave()->GetChannel();
-
-    if(type == ParameterChoiceType::ModeStart)
+    if (type == ParameterChoiceType::ModeStart)
     {
-        int currentChoice = GetChoice();
-
-        if (currentChoice == 1)                                 // Если однократный запуск
-        {
-            Wave::Current()->EnableAndSavePreviousOutputState();
-        }
-        else if ((currentChoice == 2) ||                        // Вышли из однократного режима запуска на произвольном сигнале
-            (currentChoice == 0 && NumChoices() == 2))          // Вышли из однкоа
-        {
-            Wave::Current()->RestorePreviousOutputState();
-        }
-    
-        PGenerator::LoadStartMode(ch, GetChoice());
+        NextChoiceModeStart();
     }
     else
     {
+        Math::CircleIncrease(&choice, 0, NumChoices() - 1);
+
+        Chan::E ch = form->GetWave()->GetChannel();
+
         PGenerator::TuneChannel(ch);
     }
+}
+
+
+void ParameterChoice::NextChoiceModeStart()
+{
+    int currentChoice = GetChoice();
+
+    if (currentChoice == 1)                                 // Если однократный запуск
+    {
+        CURRENT_WAVE.EnableAndSavePreviousOutputState();
+    }
+    else if ((currentChoice == 2) ||                        // Вышли из однократного режима запуска на произвольном сигнале
+             (currentChoice == 0 && NumChoices() == 2))          // Вышли из однкоа
+    {
+        CURRENT_WAVE.RestorePreviousOutputState();
+    }
+
+    PGenerator::LoadStartMode(form->GetWave()->GetChannel(), GetChoice());
 }
 
 

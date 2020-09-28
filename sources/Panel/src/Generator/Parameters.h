@@ -275,6 +275,8 @@ private:
     
     // Количество вариантов выбора
     int NumChoices() const;
+
+    void NextChoiceModeStart();
 };
 
 
