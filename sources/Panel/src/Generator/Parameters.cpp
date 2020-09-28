@@ -11,7 +11,7 @@
 #include <cstdio>
 
 
-int ParameterChoice::choiceModeStart = 0;
+int ParameterChoice::choiceModeStartFree = 0;
 
 
 Parameter::Parameter(ParameterKind::E k, const char *nRU, const char *nEN) : viewer(this), form(nullptr), parent(nullptr), kind(k)
@@ -318,7 +318,15 @@ String ParameterChoice::ToString(String &units) const
 
 int ParameterChoice::GetChoice() const 
 {
-    return (type == ParameterChoiceType::ModeStart) ? choiceModeStart : choice;
+    if (type == ParameterChoiceType::ModeStart)
+    {
+        if (form->IsDDS())
+        {
+            return choiceModeStartFree;
+        }
+    }
+
+    return choice;
 }
 
 
@@ -341,22 +349,29 @@ void ParameterChoice::NextChoice()
 
 void ParameterChoice::NextChoiceModeStart()
 {
-    Math::CircleIncrease(&choiceModeStart, 0, NumChoices() - 1);
-
-    PGenerator::LoadStartMode(form->GetWave()->GetChannel(), GetChoice());
-}
-
-
-void ParameterChoice::TuneCurrentChoice()
-{
-    if (type == ParameterChoiceType::ModeStart)
+    if (form->IsDDS())
     {
-        if (choiceModeStart > 1 && NumChoices() == 2)
-        {
-            NextChoiceModeStart();
-        }
+        Math::CircleIncrease(&choiceModeStartFree, 0, NumChoices() - 1);
     }
+    else
+    {
+        Math::CircleIncrease(&choice, 0, NumChoices() - 1);
+    }
+
+    PGenerator::LoadStartMode(form->GetWave()->GetChannel(), form->IsDDS() ? 0 : 1, GetChoice());
 }
+
+
+//void ParameterChoice::TuneCurrentChoice()
+//{
+//    if (type == ParameterChoiceType::ModeStart)
+//    {
+//        if (choiceModeStart > 1 && NumChoices() == 2)
+//        {
+//            NextChoiceModeStart();
+//        }
+//    }
+//}
 
 
 bool ParameterChoice::SetAndLoadChoice(int ch)

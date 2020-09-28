@@ -258,7 +258,7 @@ public:
 
     void NextChoice();
 
-    void TuneCurrentChoice();
+//    void TuneCurrentChoice();
 
     bool SetAndLoadChoice(int ch);
 
@@ -272,13 +272,14 @@ public:
 
 private:
 	ParameterChoiceType::E type;
-    int choice;                     // Текущий выбор
-    static int choiceModeStart;     // Выбор режима запуска импульсных сигналов
-    const char **choices;           // Идут так - 0(рус), 0(англ), 1(рус), 1(англ)...
+    int choice;                         // Текущий выбор. И выбор для режима запуска импульсных сигналов
+    static int choiceModeStartFree;     // Выбор режима запуска произвольных сигналов
+    const char **choices;               // Идут так - 0(рус), 0(англ), 1(рус), 1(англ)...
     
     // Количество вариантов выбора
     int NumChoices() const;
 
+    // Эта функция вызывается дл установки режима запуска произвольного сигнала
     void NextChoiceModeStart();
 };
 

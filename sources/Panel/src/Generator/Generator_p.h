@@ -44,8 +44,8 @@ struct PGenerator
 
     static void TuneChannel(Chan::E ch);
 
-    // Загружает режим запуска из set в аппаратуру
-    static void LoadStartMode(Chan::E ch, int mode);
+    // Загружает режим запуска из set в аппаратуру для произвольного (signal == 0) или импульсного (signal == 1) сигнала
+    static void LoadStartMode(Chan::E ch, int signal, int mode);
 
     // Загружает изображение произвольного сигнала, хранящееся в ППЗУ
     static void LoadPictureDDSfromStorage(Chan::E ch);

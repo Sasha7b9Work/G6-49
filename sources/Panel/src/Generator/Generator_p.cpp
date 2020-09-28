@@ -33,9 +33,11 @@ void PGenerator::SingleStart()
 }
 
 
-void PGenerator::LoadStartMode(Chan::E ch, int mode)
+void PGenerator::LoadStartMode(Chan::E ch, int signal, int mode)
 {
-    Message::StartMode(static_cast<uint8>(ch), static_cast<uint8>(mode)).Transmit();
+    int firstByte = static_cast<uint8>(ch) + (signal << 1);
+
+    Message::StartMode(static_cast<uint8>(firstByte), static_cast<uint8>(mode)).Transmit();
 }
 
 
