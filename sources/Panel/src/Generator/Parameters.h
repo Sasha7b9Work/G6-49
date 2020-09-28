@@ -266,7 +266,7 @@ public:
 
     virtual void OnPressButtonTune();
 
-    virtual void Reset() { SetAndLoadChoice(choice); };
+    virtual void Reset() { SetAndLoadChoice(0); };
 
 private:
 	ParameterChoiceType::E type;
