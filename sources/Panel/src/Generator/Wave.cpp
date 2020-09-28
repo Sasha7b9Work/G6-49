@@ -78,7 +78,7 @@ void Wave::SetIndexForm(int8 num)
 {
     numberForm = num;
 
-    ParameterChoice *param = GetParameterChoice(ParameterChoiceType::ModeStart);
+    ParameterChoice *param = GetCurrentForm()->FindParameter(ParameterChoiceType::ModeStart);
 
     if (param)
     {
