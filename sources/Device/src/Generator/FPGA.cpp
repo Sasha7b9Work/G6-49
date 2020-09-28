@@ -19,7 +19,7 @@ FPGA::ModeWork::E       FPGA::modeWork[Chan::Count] = { FPGA::ModeWork::None, FP
 FPGA::ClockFrequency::E FPGA::clock = FPGA::ClockFrequency::_100MHz;
 Value                   FPGA::PacketImpulse::periodImpulse("0", Order::One);
 Value                   FPGA::PacketImpulse::durationImpulse("0", Order::One);
-StartMode               FPGA::startMode = StartMode::Auto;
+StartMode               FPGA::startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
 uint64                  FPGA::registers[RG::Count] = { 0 };
 
 
@@ -246,9 +246,9 @@ void FPGA::SetPeriodImpulse(Chan::E ch, Value period)
 }
 
 
-void FPGA::SetStartMode(StartMode mode)
+void FPGA::SetStartMode(Chan::E ch, uint8 signal, StartMode mode)
 {
-    startMode = mode;
+    startMode[ch][signal] = mode;
     WriteControlRegister();
 }
 
@@ -302,6 +302,11 @@ void FPGA::WriteControlRegister()
         Bit::Set(data, RG0::_7_Freq_MHz);
     }
 
+    if (modeWork[Chan::A] == ModeWork::PackedImpulse)
+    {
+        Bit::Set(data, RG0::_12_PacketImpulse);
+    }
+
     SetBitsStartMode(data);
 
     WriteRegister(RG::_0_Control, data);
@@ -314,53 +319,22 @@ bool FPGA::InModeDDS(Chan::E ch)
 }
 
 
-void FPGA::SetBitsStartMode(uint16 &data)
+void FPGA::SetBitsStartMode(Chan::E ch, uint16 &data)
 {
-    ModeWork::E mode = modeWork[Chan::A];
-    StartMode start = startMode;
+    ModeWork::E mode = modeWork[ch];
 
-    if (modeWork[Chan::A] == ModeWork::PackedImpulse)
+    if (mode == ModeWork::Impulse || mode == ModeWork::PackedImpulse)
     {
-        Bit::Set(data, RG0::_12_HandStartPacket);
-    }
-
-    if((mode == ModeWork::Impulse) || (mode == ModeWork::PackedImpulse))
-    {
-        if(start.Is(StartMode::Single))
+        if (startMode[ch][1].Is(StartMode::Single))
         {
-            Bit::Set(data, RG0::_10_HandStartA);
+            Bit::Set(data, (ch == Chan::A) ? RG0::_10_HandStartA : RG0::_11_HandStartB);
         }
     }
 
-    if(InModeDDS(Chan::A))
+    if (InModeDDS(ch))
     {
-        if(start.Is(StartMode::ComparatorA))
-        {
-            Bit::Set(data, RG0::_13_StartMode0);
-        }
-        else if(start.Is(StartMode::ShaperB))
-        {
-            Bit::Set(data, RG0::_14_StartMode1);
-        }
-        else if(start.Is(StartMode::Single))
-        {
-            Bit::Set(data, RG0::_13_StartMode0);
-            Bit::Set(data, RG0::_14_StartMode1);
-        }
-    }
+        StartMode start = startMode[ch][0];
 
-    mode = modeWork[Chan::B];
-
-    if((mode == ModeWork::Impulse) || (mode == ModeWork::PackedImpulse))
-    {
-        if(start.Is(StartMode::Single))
-        {
-            Bit::Set(data, RG0::_11_HandStartB);
-        }
-    }
-
-    if (InModeDDS(Chan::B))
-    {
         if (start.Is(StartMode::ComparatorA))
         {
             Bit::Set(data, RG0::_13_StartMode0);
@@ -375,6 +349,13 @@ void FPGA::SetBitsStartMode(uint16 &data)
             Bit::Set(data, RG0::_14_StartMode1);
         }
     }
+}
+
+
+void FPGA::SetBitsStartMode(uint16 &data)
+{
+    SetBitsStartMode(Chan::A, data);
+    SetBitsStartMode(Chan::B, data);
 }
 
 

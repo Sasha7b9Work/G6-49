@@ -292,11 +292,13 @@ static void SetManipulation(SimpleMessage *msg)
 
 static void SetStartMode(SimpleMessage *msg)
 {
-    msg->TakeUINT8();
+    uint8 firstByte = msg->TakeUINT8();
+
+    Chan::E ch = static_cast<Chan::E>(firstByte & 1);
 
     StartMode mode = static_cast<StartMode>(msg->TakeUINT8());
 
-    FPGA::SetStartMode(mode);
+    FPGA::SetStartMode(ch, static_cast<uint8>((firstByte & 2) >> 1), mode);
 }
 
 

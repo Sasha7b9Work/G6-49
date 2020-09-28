@@ -22,7 +22,8 @@ struct FPGA
     // 1 - положительная полярность, 0 - отрицательная полярность
     static void SetPolarity(Chan::E ch, uint8 polarity);
 
-    static void SetStartMode(StartMode mode);
+    // Установка режима запуска для произвольного (0) сигнала и импульсного (1) сигнала signal
+    static void SetStartMode(Chan::E ch, uint8 signal, StartMode mode);
     
     // Делает однократный запуск
     static void SingleStart();
@@ -133,7 +134,7 @@ private:
             _9_MeanderB,            // 1, если меандр по каналу B
             _10_HandStartA,         // Если бит установлен в 1, то ручной режим запуска
             _11_HandStartB,
-            _12_HandStartPacket,    // 1, если включён пакетный режим импульсов
+            _12_PacketImpulse,      // 1, если включён пакетный режим импульсов
             _13_StartMode0,         // Младший бит управления режимом запуска
             _14_StartMode1          // Старший бит управления режимом запуска
         };
@@ -176,13 +177,12 @@ private:
     
     // Установить биты, соответствующие режиму запуска
     static void SetBitsStartMode(uint16 &data);
-
-    // Режим запуска
-    static StartMode startMode;
-    
-    // Здесь хранятся записанные в регистры значения
-    static uint64 registers[RG::Count];
+    static void SetBitsStartMode(Chan::E ch, uint16 &data);
 
     // Возвращает true, если по каналу ch работает DDS
     static bool InModeDDS(Chan::E ch);
+
+    static StartMode startMode[Chan::Count][2];          // Режим запуска для произвольного сигнала (0) и для импульсного сигнала (1)
+    
+    static uint64 registers[RG::Count];     // Здесь хранятся записанные в регистры значения
 };
