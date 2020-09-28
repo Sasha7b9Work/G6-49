@@ -341,19 +341,7 @@ void ParameterChoice::NextChoice()
 
 void ParameterChoice::NextChoiceModeStart()
 {
-    Math::CircleDecrease(&choiceModeStart, 0, NumChoices() - 1);
-
-    int currentChoice = GetChoice();
-
-    if (currentChoice == 1)                                 // Если однократный запуск
-    {
-        CURRENT_WAVE.EnableAndSavePreviousOutputState();
-    }
-    else if ((currentChoice == 2) ||                        // Вышли из однократного режима запуска на произвольном сигнале
-             (currentChoice == 0 && NumChoices() == 2))          // Вышли из однкоа
-    {
-        CURRENT_WAVE.RestorePreviousOutputState();
-    }
+    Math::CircleIncrease(&choiceModeStart, 0, NumChoices() - 1);
 
     PGenerator::LoadStartMode(form->GetWave()->GetChannel(), GetChoice());
 }
@@ -363,7 +351,7 @@ void ParameterChoice::TuneCurrentChoice()
 {
     if (type == ParameterChoiceType::ModeStart)
     {
-        if (choiceModeStart == 2)
+        if (choiceModeStart > 1 && NumChoices() == 2)
         {
             NextChoiceModeStart();
         }

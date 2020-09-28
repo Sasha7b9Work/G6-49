@@ -61,6 +61,7 @@ private:
     
     // ќбрабатывает состо€ние выходов. ¬озвращает true, если состо€ние вывода изменилось
     static bool ProcessOutputs(const Control control);
+    static void ProcessOutput(Chan::E ch);
     
     // ≈сли какой-то итем раскрыт, то здесь его адрес
     static Item *openedItem;

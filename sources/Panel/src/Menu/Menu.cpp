@@ -94,33 +94,41 @@ bool Menu::ProcessOutputs(const Control control) //-V801
     {
         if (control.Is(Key::On1))
         {
-            if (WAVE(ChA).StartModeIsSingle())
-            {
-                PGenerator::SingleStart();
-            }
-            else
-            {
-                ENABLED_CH(ChA) = !ENABLED_CH(ChA);
-                PGenerator::EnableChannel(ChA, ENABLED_CH(ChA));
-            }
+            ProcessOutput(ChA);
+
             return true;
         }
         else if (control.Is(Key::On2))
         {
-            if (WAVE(ChB).StartModeIsSingle())
-            {
-                PGenerator::SingleStart();
-            }
-            else
-            {
-                ENABLED_CH(ChB) = !ENABLED_CH(ChB);
-                PGenerator::EnableChannel(ChB, ENABLED_CH(ChB));
-            }
+            ProcessOutput(ChB);
+
             return true;
         }
     }
 
     return false;
+}
+
+
+void Menu::ProcessOutput(Chan::E ch)
+{
+    if (WAVE(ch).StartModeIsSingle())
+    {
+        if (!ENABLED_CH(ch))
+        {
+            ENABLED_CH(ch) = true;
+            PGenerator::EnableChannel(ch, true);
+        }
+        else
+        {
+            PGenerator::SingleStart();
+        }
+    }
+    else
+    {
+        ENABLED_CH(ch) = !ENABLED_CH(ch);
+        PGenerator::EnableChannel(ch, ENABLED_CH(ch));
+    }
 }
 
 

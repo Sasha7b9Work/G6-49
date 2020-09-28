@@ -175,12 +175,6 @@ public:
 
     void Reset();
 
-    // Включить выход и сохранить предыдущее состояние выхода для последующего восстановления
-    void EnableAndSavePreviousOutputState();
-
-    // Восстановить предыдущее состояние выход
-    void RestorePreviousOutputState();
-
 private:
     
     Chan channel;           // Какому каналу принадлежит сигнал
@@ -190,6 +184,4 @@ private:
     Form **forms;           // Список форм, которые могут быть назначены
     
     int numForms;           // Количество возможных форм
-
-    bool prevOutputState;   // Предыдущее состояние выхода (чтобы можно было восстановить)
 };
