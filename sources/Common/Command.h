@@ -100,6 +100,7 @@ struct Command
             FDrive_CreateFile,
             FDrive_WriteToFile,
             FDrive_CloseFile,
+            SingleStart,                    // Даёт однократный запускф
             Count
     } value;
     Command(E v) : value(v) {};

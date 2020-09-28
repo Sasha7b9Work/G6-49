@@ -27,6 +27,12 @@ void PGenerator::EnableChannel(Chan::E ch, bool enable)
 }
 
 
+void PGenerator::SingleStart()
+{
+    Message::SingleStart().Transmit();
+}
+
+
 void PGenerator::LoadStartMode(Chan::E ch, int mode)
 {
     Message::StartMode(static_cast<uint8>(ch), static_cast<uint8>(mode)).Transmit();

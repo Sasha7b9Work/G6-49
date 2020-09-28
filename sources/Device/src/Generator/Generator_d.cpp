@@ -103,12 +103,15 @@ void DGenerator::Init()
 
 void DGenerator::EnableChannel(Chan::E ch, bool enable)
 {
-    if(!FPGA::SingleStart())
-    {
-        StructPIN pins[Chan::Count] = { {WR_OUT_A}, {WR_OUT_B} };
+    static const StructPIN pins[Chan::Count] = { {WR_OUT_A}, {WR_OUT_B} };
 
-        HAL_PIO::Write(pins[ch].port, pins[ch].pin, enable);
-    }
+    HAL_PIO::Write(pins[ch].port, pins[ch].pin, enable);
+}
+
+
+void DGenerator::SingleStart()
+{
+    FPGA::SingleStart();
 }
 
 

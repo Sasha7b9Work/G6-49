@@ -303,6 +303,9 @@ Message::EnableChannel::EnableChannel(uint8 ch, uint8 enable) : SimpleMessage(3,
 }
 
 
+Message::SingleStart::SingleStart() : SimpleMessage(1, Command::SingleStart) { }
+
+
 Message::RegCPU::RegCPU(uint8 port, uint8 pin, uint8 state) : SimpleMessage(4, Command::PortCPU)
 {
     PutUINT8(port);

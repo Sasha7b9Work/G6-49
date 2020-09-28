@@ -21,6 +21,8 @@ static void SendData(SimpleMessage *);
 
 static void EnableChannel(SimpleMessage *);
 
+static void SingleStart(SimpleMessage *);
+
 static void SetFormWave(SimpleMessage *);
 
 static void SetFrequency(SimpleMessage *);
@@ -135,6 +137,7 @@ void DHandlers::Processing(SimpleMessage *msg)
     case Command::FDrive_CloseFile:
         func = DDrive::Handler::Processing;
         break;
+    case Command::SingleStart : func = SingleStart; break;
     }
 
     func(msg);
@@ -179,6 +182,12 @@ static void EnableChannel(SimpleMessage *msg)
     bool enable = (msg->TakeUINT8() == 1);
 
     DGenerator::EnableChannel(ch, enable);
+}
+
+
+static void SingleStart(SimpleMessage *)
+{
+    DGenerator::SingleStart();
 }
 
 

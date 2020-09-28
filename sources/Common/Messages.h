@@ -143,6 +143,12 @@ namespace Message
         EnableChannel(uint8 ch, uint8 enable);
     };
 
+    class SingleStart : public SimpleMessage
+    {
+    public:
+        SingleStart();
+    };
+
     // Выставить порт регистра
     class RegCPU : public SimpleMessage
     {

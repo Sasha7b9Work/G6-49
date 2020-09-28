@@ -381,14 +381,9 @@ uint16 FPGA::SetBitsStartMode(uint16 data)
 }
 
 
-bool FPGA::SingleStart()
+void FPGA::SingleStart()
 {
-    if((startMode[Chan::A] == StartMode::Single) || (startMode[Chan::B] == StartMode::Single))
-    {
-        WriteRegister(RG::_11_Start, 2);
-        return true;
-    }
-    return false;
+    WriteRegister(RG::_11_Start, 2);
 }
 
 

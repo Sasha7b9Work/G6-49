@@ -18,6 +18,8 @@ struct PGenerator
 
     static void EnableChannel(Chan::E ch, bool enable);
 
+    static void SingleStart();
+
     static void SetFormWave(const Wave *w);
 
     static void SetFormWave(Chan::E ch, TypeForm::E form);
