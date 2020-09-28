@@ -116,7 +116,6 @@ void Menu::ProcessOutput(Chan::E ch)
     {
         if (!ENABLED_CH(ch))
         {
-            ENABLED_CH(ch) = true;
             PGenerator::EnableChannel(ch, true);
         }
         else
@@ -126,8 +125,7 @@ void Menu::ProcessOutput(Chan::E ch)
     }
     else
     {
-        ENABLED_CH(ch) = !ENABLED_CH(ch);
-        PGenerator::EnableChannel(ch, ENABLED_CH(ch));
+        PGenerator::EnableChannel(ch, !ENABLED_CH(ch));
     }
 }
 
