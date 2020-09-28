@@ -320,7 +320,18 @@ void ParameterChoice::NextChoice()
 
     if(type == ParameterChoiceType::ModeStart)
     {
-        Wave::Current()->EnableAndSavePreviousOutputState();
+        int currentChoice = GetChoice();
+
+        if (currentChoice == 1)                                 // Если однократный запуск
+        {
+            Wave::Current()->EnableAndSavePreviousOutputState();
+        }
+        else if ((currentChoice == 2) ||                        // Вышли из однократного режима запуска на произвольном сигнале
+            (currentChoice == 0 && NumChoices() == 2))          // Вышли из однкоа
+        {
+            Wave::Current()->RestorePreviousOutputState();
+        }
+    
         PGenerator::LoadStartMode(ch, GetChoice());
     }
     else

@@ -22,7 +22,7 @@ struct FPGA
     // 1 - положительна€ пол€рность, 0 - отрицательна€ пол€рность
     static void SetPolarity(Chan::E ch, uint8 polarity);
 
-    static void SetStartMode(Chan::E ch, StartMode mode);
+    static void SetStartMode(StartMode mode);
     
     // ƒелает однократный запуск
     static void SingleStart();
@@ -178,7 +178,7 @@ private:
     static uint16 SetBitsStartMode(uint16 data);
 
     // –ежим запуска
-    static StartMode startMode[Chan::Count];
+    static StartMode startMode;
     
     // «десь хран€тс€ записанные в регистры значени€
     static uint64 registers[RG::Count];

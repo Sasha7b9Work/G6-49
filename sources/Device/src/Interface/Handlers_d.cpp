@@ -292,11 +292,11 @@ static void SetManipulation(SimpleMessage *msg)
 
 static void SetStartMode(SimpleMessage *msg)
 {
-    Chan ch(msg->TakeUINT8());
+    msg->TakeUINT8();
 
     StartMode mode = static_cast<StartMode>(msg->TakeUINT8());
 
-    FPGA::SetStartMode(ch, mode);
+    FPGA::SetStartMode(mode);
 }
 
 
