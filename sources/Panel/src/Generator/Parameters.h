@@ -446,7 +446,7 @@ class ParameterManipulationEnabled : public ParameterChoice
 {
 public:
     ParameterManipulationEnabled(const char **names) : 
-        ParameterChoice(ParameterChoiceType::ManipulationEnabled, "Манипу", "Manip", names) { }
+        ParameterChoice(ParameterChoiceType::ManipulationEnabled, "Манип", "Manip", names) { }
 
 };
 
