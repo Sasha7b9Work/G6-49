@@ -266,8 +266,6 @@ public:
 
     virtual void OnPressButtonTune();
 
-    int GetHeightOpened() const;
-
     virtual void Reset() { SetAndLoadChoice(choice); };
 
 private:

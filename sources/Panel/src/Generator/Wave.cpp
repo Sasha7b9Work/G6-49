@@ -86,7 +86,7 @@ int Wave::NumberOfForms() const
 }
 
 
-Wave::Wave(Chan::E ch, Form **f) : channel(ch), indexCurrentForm(0), forms(f)
+Wave::Wave(Chan::E ch, Form **f) : channel(ch), indexCurrentForm(0), forms(f), prevOutputState(false)
 {
     numForms = 0;
     
@@ -737,4 +737,35 @@ double Form::GetAmplitude()
     ParameterDouble *parameter = FindParameter(ParameterDoubleType::Amplitude);
 
     return (parameter) ? parameter->GetValue().ToDouble() : 0.0;
+}
+
+
+void Wave::EnableAndSavePreviousOutputState()
+{
+    if (ENABLED_CH(channel))
+    {
+        prevOutputState = true;
+    }
+    else
+    {
+        prevOutputState = ENABLED_CH(channel);
+        ENABLED_CH(channel) = true;
+        PGenerator::EnableChannel(channel, true);
+    }
+}
+
+
+void Wave::RestorePreviousOutputState()
+{
+    if (ENABLED_CH(channel) != prevOutputState)
+    {
+        ENABLED_CH(channel) = prevOutputState;
+        PGenerator::EnableChannel(channel, prevOutputState);
+    }
+}
+
+
+Wave *Wave::Current()
+{
+    return &WAVE(CURRENT_CHANNEL);
 }

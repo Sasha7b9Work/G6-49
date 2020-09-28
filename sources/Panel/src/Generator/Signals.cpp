@@ -59,7 +59,7 @@ static Parameter *params_SineA[] =
 static Form formSineA(TypeForm::Sine, params_SineA, &waves[Chan::A]);
 
 
-static const char *namesModeStart[] =
+static const char *namesModeStartFree[] =       // Режимы запуска для произвольных сигналов
 {
     "Авто",   "Auto",
     "Однокр", "Single",
@@ -68,11 +68,18 @@ static const char *namesModeStart[] =
     nullptr
 };
 
+static const char *namesModeStartPulse[] =   // Режимы запуска для мпульсных сигналов
+{
+    "Авто",   "Auto",
+    "Однокр", "Single",
+    nullptr
+};
+
 
 static ParameterFrequency  rampPlusA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude  rampPlusA_Amplitude;
 static ParameterOffset     rampPlusA_Offset;
-static ParameterModeStart  rampPlusA_ModeStart(namesModeStart);
+static ParameterModeStart  rampPlusA_ModeStart(namesModeStartFree);
 
 static Parameter *params_RampPlusA[] =
 {
@@ -89,7 +96,7 @@ static Form formRampPlusA(TypeForm::RampPlus, params_RampPlusA, &waves[Chan::A])
 static ParameterFrequency  rampMinusA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude  rampMinusA_Amplitude;
 static ParameterOffset     rampMinusA_Offset;
-static ParameterModeStart  rampMinusA_ModeStart(namesModeStart);
+static ParameterModeStart  rampMinusA_ModeStart(namesModeStartFree);
 
 static Parameter *params_RampMinusA[] =
 {
@@ -106,7 +113,7 @@ static Form formRampMinusA(TypeForm::RampMinus, params_RampMinusA, &waves[Chan::
 static ParameterFrequency triangleA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude triangleA_Amplitude;
 static ParameterOffset    triangleA_Offset;
-static ParameterModeStart triangleA_ModeStart(namesModeStart);
+static ParameterModeStart triangleA_ModeStart(namesModeStartFree);
 
 static Parameter *params_TriangleA[] =
 {
@@ -128,7 +135,7 @@ static void OnChoose_FileA()
 static ParameterFrequency  freeA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude  freeA_Amplitude;
 static ParameterOffset     freeA_Offset;
-static ParameterModeStart  freeA_ModeStart(namesModeStart);
+static ParameterModeStart  freeA_ModeStart(namesModeStartFree);
 static ParameterButton     freeA_Choose   ("Выбрать", "Choose", OnChoose_FileA);
 
 static Parameter *params_FreeA[] =
@@ -173,7 +180,7 @@ static ParameterDuration  impulseA_Duration (Value("100", Order::Kilo), Value("2
 static ParameterAmplitude impulseA_Amplitude;
 static ParameterOffset    impulseA_Offset;
 static ParameterPolarity  impulseA_Polarity(namesPolarity);
-static ParameterModeStart impulseA_ModeStart(namesModeStart);
+static ParameterModeStart impulseA_ModeStart(namesModeStartPulse);
 
 static Parameter *params_ImpulseA[] =
 {
@@ -197,7 +204,7 @@ static ParameterPacketPeriod packetA_PacketPeriod  (Value("100", Order::Kilo), V
 static ParameterAmplitude    packetA_Amplitude;
 static ParameterOffset       packetA_Offset;
 static ParameterPolarity     packetA_Polarity(namesPolarity);
-static ParameterModeStart    packetA_ModeStart(namesModeStart);
+static ParameterModeStart    packetA_ModeStart(namesModeStartPulse);
 
 static Parameter *params_PacketA[] =
 {
@@ -269,7 +276,7 @@ static Form formSineB(TypeForm::Sine, params_SineB, &waves[Chan::B]);
 static ParameterFrequency  rampPlusB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude  rampPlusB_Amplitude;
 static ParameterOffset     rampPlusB_Offset;
-static ParameterModeStart  rampPlusB_ModeStart(namesModeStart);
+static ParameterModeStart  rampPlusB_ModeStart(namesModeStartFree);
 
 static Parameter *params_RampPlusB[] =
 {
@@ -286,7 +293,7 @@ static Form formRampPlusB(TypeForm::RampPlus, params_RampPlusB, &waves[Chan::B])
 static ParameterFrequency  rampMinusB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude  rampMinusB_Amplitude;
 static ParameterOffset     rampMinusB_Offset;
-static ParameterModeStart  rampMinusB_ModeStart(namesModeStart);
+static ParameterModeStart  rampMinusB_ModeStart(namesModeStartFree);
 
 static Parameter *params_RampMinusB[] =
 {
@@ -303,7 +310,7 @@ static Form formRampMinusB(TypeForm::RampMinus, params_RampMinusB, &waves[Chan::
 static ParameterFrequency  triangleB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude  triangleB_Amplitude;
 static ParameterOffset     triangleB_Offset;
-static ParameterModeStart  triangleB_ModeStart(namesModeStart);
+static ParameterModeStart  triangleB_ModeStart(namesModeStartFree);
 
 static Parameter *params_TriangleB[] =
 {
@@ -325,7 +332,7 @@ static void OnChoose_FileB()
 static ParameterFrequency  freeB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude  freeB_Amplitude;
 static ParameterOffset     freeB_Offset;
-static ParameterModeStart  freeB_ModeStart(namesModeStart);
+static ParameterModeStart  freeB_ModeStart(namesModeStartFree);
 static ParameterButton     freeB_Choose("Выбрать", "Choose", OnChoose_FileB);
 
 static Parameter *params_FreeB[] =
@@ -362,7 +369,7 @@ static ParameterDuration  impulseB_Duration (Value("100", Order::Kilo), Value("2
 static ParameterAmplitude impulseB_Amplitude;
 static ParameterOffset    impulseB_Offset;
 static ParameterPolarity  impulseB_Polarity(namesPolarity);
-static ParameterModeStart impulseB_ModeStart(namesModeStart);
+static ParameterModeStart impulseB_ModeStart(namesModeStartPulse);
 
 static Parameter *params_ImpulseB[] =
 {

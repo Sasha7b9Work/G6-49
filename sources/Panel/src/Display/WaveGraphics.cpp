@@ -37,11 +37,7 @@ void WaveGraphics::Draw(Chan::E ch)
 
 void WaveGraphics::DrawUGO(Chan::E ch, int x, int y)
 {
-    ParameterChoice *param = static_cast<ParameterChoice *>(FORM(ch)->FindParameter(ParameterChoiceType::ModeStart));
-
-    bool modeStartIsSingle = (param != nullptr) && (param->GetChoice() == 1);
-
-    if (ENABLED_CH(ch) || modeStartIsSingle)
+    if (ENABLED_CH(ch))
     {
         FORM(ch)->DrawUGO(ch, y);
     }
@@ -107,17 +103,22 @@ Parameter *WaveGraphics::GetParameterForDraw(Chan::E ch, int i)
 {
     Parameter *parameter = FORM(ch)->GetParameter(i);
 
-    if (ch != CURRENT_CHANNEL && FORM(Chan::A)->IsDDS() && FORM(Chan::B)->IsDDS())        // Если установлены произвольные сигналы на обоих каналах и выводим нетекущий канал,
-    {                                                                                   // то значение частоты будем брать из текущего канала (особенность работы аппаратной части прибора)
-        if (parameter->IsDouble())
+    if (FORM(Chan::A)->IsDDS() && FORM(Chan::B)->IsDDS())               // Если установлены произвольные сигналы на обоих каналах и выводим нетекущий канал,
+    {                                                                   // то значение частоты будем брать из текущего канала (особенность работы аппаратной части прибора)
+        if(FORM(Chan::A)->IsDDS() && FORM(Chan::B)->IsDDS())
         {
-            ParameterDouble *paramDouble = reinterpret_cast<ParameterDouble *>(parameter);
-
-            if (paramDouble->GetType() == ParameterDoubleType::Frequency)
+            if (parameter->IsDouble())
             {
-                parameter = FORM(Chan(ch).GetInverse())->GetParameter(i);
+                ParameterDouble *paramDouble = reinterpret_cast<ParameterDouble *>(parameter);
+            
+                if (paramDouble->GetType() == ParameterDoubleType::Frequency)
+                {
+                    parameter = FORM(Chan(ch).GetInverse())->GetParameter(i);
+                }
             }
         }
+
+        
     }
 
     return parameter;

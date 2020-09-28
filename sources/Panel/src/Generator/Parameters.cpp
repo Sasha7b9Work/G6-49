@@ -320,6 +320,7 @@ void ParameterChoice::NextChoice()
 
     if(type == ParameterChoiceType::ModeStart)
     {
+        Wave::Current()->EnableAndSavePreviousOutputState();
         PGenerator::LoadStartMode(ch, GetChoice());
     }
     else
