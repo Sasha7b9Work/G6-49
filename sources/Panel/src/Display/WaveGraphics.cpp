@@ -37,7 +37,11 @@ void WaveGraphics::Draw(Chan::E ch)
 
 void WaveGraphics::DrawUGO(Chan::E ch, int x, int y)
 {
-    if (ENABLED_CH(ch))
+    ParameterChoice *param = static_cast<ParameterChoice *>(FORM(ch)->FindParameter(ParameterChoiceType::ModeStart));
+
+    bool modeStartIsSingle = (param != nullptr) && (param->GetChoice() == 1);
+
+    if (ENABLED_CH(ch) || modeStartIsSingle)
     {
         FORM(ch)->DrawUGO(ch, y);
     }
