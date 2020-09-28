@@ -10,7 +10,7 @@ bool AD9952::Manipulation::enabled[Chan::Count] = { false, false };
 double AD9952::phase[Chan::Count] = { 0.0, 0.0 };
 
 // Последнее записанное в ASF регистр значение. Используется для того, чтобы меандр при установленной амплитуде синусоиды "0" существовал
-static uint lastASF[Chan::Count] = { 100, 100 };
+volatile uint lastASF[Chan::Count] = { 100, 100 };
 
 
 void AD9952::Init()

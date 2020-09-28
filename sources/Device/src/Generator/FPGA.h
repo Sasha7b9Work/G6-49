@@ -25,7 +25,7 @@ struct FPGA
     static void SetStartMode(Chan::E ch, StartMode mode);
     
     // Делает однократный запуск. Возвращает true в случае успеха (если установлены соответствующие настройки)
-    static bool Start();
+    static bool SingleStart();
 
     static void TransformCodeToData(const uint8 codeIn[FPGA::NUM_POINTS * 2], float dataOut[FPGA::NUM_POINTS]);
 

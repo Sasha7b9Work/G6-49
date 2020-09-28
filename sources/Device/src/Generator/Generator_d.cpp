@@ -103,7 +103,7 @@ void DGenerator::Init()
 
 void DGenerator::EnableChannel(Chan::E ch, bool enable)
 {
-    if(!FPGA::Start())
+    if(!FPGA::SingleStart())
     {
         StructPIN pins[Chan::Count] = { {WR_OUT_A}, {WR_OUT_B} };
 
