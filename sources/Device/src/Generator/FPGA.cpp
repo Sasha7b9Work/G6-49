@@ -302,12 +302,7 @@ void FPGA::WriteControlRegister()
         Bit::Set(data, RG0::_7_Freq_MHz);
     }
 
-    if(modeWork[Chan::A] == ModeWork::PackedImpulse)
-    {
-        Bit::Set(data, RG0::_12_HandStartPacket);
-    }
-
-    data = SetBitsStartMode(data);
+    SetBitsStartMode(data);
 
     WriteRegister(RG::_0_Control, data);
 }
@@ -319,10 +314,15 @@ bool FPGA::InModeDDS(Chan::E ch)
 }
 
 
-uint16 FPGA::SetBitsStartMode(uint16 data)
+void FPGA::SetBitsStartMode(uint16 &data)
 {
     ModeWork::E mode = modeWork[Chan::A];
     StartMode start = startMode;
+
+    if (modeWork[Chan::A] == ModeWork::PackedImpulse)
+    {
+        Bit::Set(data, RG0::_12_HandStartPacket);
+    }
 
     if((mode == ModeWork::Impulse) || (mode == ModeWork::PackedImpulse))
     {
@@ -375,8 +375,6 @@ uint16 FPGA::SetBitsStartMode(uint16 data)
             Bit::Set(data, RG0::_14_StartMode1);
         }
     }
-
-    return data;
 }
 
 

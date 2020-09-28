@@ -273,7 +273,7 @@ public:
 private:
 	ParameterChoiceType::E type;
     int choice;                     // Текущий выбор
-    static int choiceModeStart;     // Выбор персонально для режима запуска
+    static int choiceModeStart;     // Выбор режима запуска импульсных сигналов
     const char **choices;           // Идут так - 0(рус), 0(англ), 1(рус), 1(англ)...
     
     // Количество вариантов выбора

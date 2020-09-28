@@ -175,7 +175,7 @@ private:
     static void WriteMaxAmplitude(Chan::E ch);
     
     // Установить биты, соответствующие режиму запуска
-    static uint16 SetBitsStartMode(uint16 data);
+    static void SetBitsStartMode(uint16 &data);
 
     // Режим запуска
     static StartMode startMode;
