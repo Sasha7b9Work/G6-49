@@ -11,6 +11,9 @@
 #include <cstdio>
 
 
+int ParameterChoice::choiceModeStart = 0;
+
+
 Parameter::Parameter(ParameterKind::E k, const char *nRU, const char *nEN) : viewer(this), form(nullptr), parent(nullptr), kind(k)
 {
     names[0] = nRU;
@@ -313,16 +316,22 @@ String ParameterChoice::ToString(String &units) const
 }
 
 
+int ParameterChoice::GetChoice() const 
+{
+    return (type == ParameterChoiceType::ModeStart) ? choiceModeStart : choice;
+}
+
+
 void ParameterChoice::NextChoice()
 {
-    Math::CircleIncrease(&choice, 0, NumChoices() - 1);
-
     if (type == ParameterChoiceType::ModeStart)
     {
         NextChoiceModeStart();
     }
     else
     {
+        Math::CircleIncrease(&choice, 0, NumChoices() - 1);
+
         Chan::E ch = form->GetWave()->GetChannel();
 
         PGenerator::TuneChannel(ch);
@@ -332,6 +341,8 @@ void ParameterChoice::NextChoice()
 
 void ParameterChoice::NextChoiceModeStart()
 {
+    Math::CircleDecrease(&choiceModeStart, 0, NumChoices() - 1);
+
     int currentChoice = GetChoice();
 
     if (currentChoice == 1)                                 // Если однократный запуск
@@ -345,6 +356,18 @@ void ParameterChoice::NextChoiceModeStart()
     }
 
     PGenerator::LoadStartMode(form->GetWave()->GetChannel(), GetChoice());
+}
+
+
+void ParameterChoice::TuneCurrentChoice()
+{
+    if (type == ParameterChoiceType::ModeStart)
+    {
+        if (choiceModeStart == 2)
+        {
+            NextChoiceModeStart();
+        }
+    }
 }
 
 

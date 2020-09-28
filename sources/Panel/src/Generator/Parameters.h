@@ -254,9 +254,11 @@ public:
 
     ParameterChoiceType::E GetType() { return type; }
 
-    int GetChoice() const            {  return choice; }
+    int GetChoice() const;
 
     void NextChoice();
+
+    void TuneCurrentChoice();
 
     bool SetAndLoadChoice(int ch);
 
@@ -271,6 +273,7 @@ public:
 private:
 	ParameterChoiceType::E type;
     int choice;                     // Текущий выбор
+    static int choiceModeStart;     // Выбор персонально для режима запуска
     const char **choices;           // Идут так - 0(рус), 0(англ), 1(рус), 1(англ)...
     
     // Количество вариантов выбора

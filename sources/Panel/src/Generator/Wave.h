@@ -166,6 +166,8 @@ public:
 
     Form *GetForm(int i);
 
+    ParameterChoice *GetParameterChoice(ParameterChoiceType::E type);
+
     Form *GetForm(TypeForm::E form);
 
     Chan GetChannel() const { return channel; };

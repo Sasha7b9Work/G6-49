@@ -77,6 +77,13 @@ Form *Wave::GetCurrentForm()
 void Wave::SetIndexForm(int8 num)
 {
     numberForm = num;
+
+    ParameterChoice *param = GetParameterChoice(ParameterChoiceType::ModeStart);
+
+    if (param)
+    {
+        param->TuneCurrentChoice();     // Для паараметра установки режима запуска мы должны изменить запуск, если его индекс выходит за допустимые границы
+    }
 }
 
 
