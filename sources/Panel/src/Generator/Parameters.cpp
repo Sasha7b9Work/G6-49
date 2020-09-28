@@ -315,14 +315,14 @@ String ParameterChoice::ToString(String &units) const
 
 void ParameterChoice::NextChoice()
 {
+    Math::CircleIncrease(&choice, 0, NumChoices() - 1);
+
     if (type == ParameterChoiceType::ModeStart)
     {
         NextChoiceModeStart();
     }
     else
     {
-        Math::CircleIncrease(&choice, 0, NumChoices() - 1);
-
         Chan::E ch = form->GetWave()->GetChannel();
 
         PGenerator::TuneChannel(ch);
