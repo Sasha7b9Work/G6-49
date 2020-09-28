@@ -30,4 +30,7 @@ public:
 private:
 
     static void DrawParameters(Chan::E chan, int y0);
+
+    // Нарисовать УГО сигнала
+    static void DrawUGO(Chan::E ch, int x, int y);
 };

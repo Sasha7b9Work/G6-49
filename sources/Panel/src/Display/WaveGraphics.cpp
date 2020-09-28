@@ -31,16 +31,22 @@ void WaveGraphics::Draw(Chan::E ch)
 
     Color::Chan(ch).SetAsCurrent();
 
+    DrawUGO(ch, x0, y0);
+}
+
+
+void WaveGraphics::DrawUGO(Chan::E ch, int x, int y)
+{
     if (ENABLED_CH(ch))
     {
-        FORM(ch)->DrawUGO(ch, y0);
+        FORM(ch)->DrawUGO(ch, y);
     }
     else
     {
         Font::StoreAndSet(TypeFont::_GOST28);
         Font::Spacing::SetAndStore(3);
 
-        String(LANG_IS_RU ? "Œ“ À" : "DIS").Draw(x0 + 20, y0 + 50);
+        String(LANG_IS_RU ? "Œ“ À" : "DIS").Draw(x + 20, y + 50);
 
         Font::Restore();
         Font::Spacing::Restore();
