@@ -359,6 +359,7 @@ void ParameterChoice::NextChoiceModeStart()
     }
 
     PGenerator::LoadStartMode(form->GetWave()->GetChannel(), form->IsDDS() ? 0 : 1, GetChoice());
+    PGenerator::TuneChannel(form->GetWave()->GetChannel());
 }
 
 

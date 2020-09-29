@@ -1,8 +1,10 @@
 #include "defines.h"
+#include "Log.h"
 #include "Generator/Calibrator.h"
 #include "Generator/FPGA.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Math.h"
+#include "Utils/StringUtils.h"
 
 
 #ifdef WIN32
@@ -308,6 +310,9 @@ void FPGA::WriteControlRegister()
     }
 
     SetBitsStartMode(data);
+
+    char buffer[33];
+    LOG_WRITE("%s", SU::Bin2StringN(data, buffer, 16));
 
     WriteRegister(RG::_0_Control, data);
 }
