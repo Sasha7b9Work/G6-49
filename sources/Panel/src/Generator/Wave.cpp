@@ -77,13 +77,6 @@ Form *Wave::GetCurrentForm()
 void Wave::SetIndexForm(int8 num)
 {
     numberForm = num;
-
-//    ParameterChoice *param = GetCurrentForm()->FindParameter(ParameterChoiceType::ModeStart);
-
-//    if (param)
-//    {
-//        param->TuneCurrentChoice();     // ƒл€ паараметра установки режима запуска мы должны изменить запуск, если его индекс выходит за допустимые границы
-//    }
 }
 
 
@@ -228,11 +221,17 @@ void Form::TuneGenerator()
 
     if(value == TypeForm::Sine)
     {
+        Parameter *manipulation = FindParameter(ParameterChoiceType::ManipulationEnabled);
+        bool manipulationEnabled = reinterpret_cast<ParameterChoice *>(manipulation)->GetChoice() == 1;
+
         if(CurrentParameter()->GetParent())                                 // –аскрыт параметр ћјЌ»ѕ”Ћя÷»я
         {
             SendParameterToGenerator(ParameterChoiceType::ManipulationEnabled); //-V525
-            SendParameterToGenerator(ParameterDoubleType::ManipulationDuration);
-            SendParameterToGenerator(ParameterDoubleType::ManipulationPeriod);
+            if(manipulationEnabled)
+            {
+                SendParameterToGenerator(ParameterDoubleType::ManipulationDuration);
+                SendParameterToGenerator(ParameterDoubleType::ManipulationPeriod);
+            }
 
             int opened = currentParam;
 
@@ -251,8 +250,11 @@ void Form::TuneGenerator()
             OpenCompositeParameter();
 
             SendParameterToGenerator(ParameterChoiceType::ManipulationEnabled); //-V525
-            SendParameterToGenerator(ParameterDoubleType::ManipulationDuration);
-            SendParameterToGenerator(ParameterDoubleType::ManipulationPeriod);
+            if(manipulationEnabled)
+            {
+                SendParameterToGenerator(ParameterDoubleType::ManipulationDuration);
+                SendParameterToGenerator(ParameterDoubleType::ManipulationPeriod);
+            }
 
             CloseCompositeParameter();
 

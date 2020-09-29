@@ -429,6 +429,9 @@ void FPGA::WriteRegister(RG::E reg, uint64 value)
         2   // _11_Start
     };
 
+    char buffer[33];
+    LOG_WRITE("%d : %d", static_cast<int>(reg), value);
+
     registers[reg] = value;
 
     WriteAddress(reg);

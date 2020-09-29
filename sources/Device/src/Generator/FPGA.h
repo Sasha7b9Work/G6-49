@@ -85,7 +85,7 @@ struct FPGA
                                 // b0...b13 - нижнее значение, b14...b27 - верхнее значение
             _4_RectB,           // јналог _3_RectA дл€ канала B
             _5_PeriodImpulseA,
-            _6_DurationImpulseA,
+            _6_DurationImpulseA,    // —юда же записываетс€
             _7_PeriodImpulseB,
             _8_DurationImpulseB,
             _9_FreqMeter,
