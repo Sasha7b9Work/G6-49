@@ -5,7 +5,7 @@
 
 uint32_t HAL_GetTick()
 {
-#ifdef USE_SDL2
+#ifdef GUI
     return static_cast<uint>(clock());
 #else
     return 0;
