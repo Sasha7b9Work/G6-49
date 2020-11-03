@@ -360,7 +360,7 @@ void Value::FromDouble(double v)
 
 void Value::FromINT(int v)
 {
-    FromUnits(v < 0 ? -v : v, 0, 0, 0, v < 0);
+    FromUnits(v < 0 ? -v : v, 0, 0, 0, v < 0 ? -1 : 1);
 }
 
 
