@@ -86,7 +86,7 @@ enum
 };
 
 
-wxIMPLEMENT_APP_NO_MAIN(Application);
+wxIMPLEMENT_APP_NO_MAIN(Application); //-V2511
 
 
 int main(int argc, char **argv)
@@ -97,7 +97,7 @@ int main(int argc, char **argv)
 }
 
 
-bool Application::OnInit()
+bool Application::OnInit() //-V2506
 {
     if (!wxApp::OnInit())
     {
@@ -176,8 +176,8 @@ Frame::Frame(const wxString &title)
 
 Frame::~Frame()
 {
-    delete TheForm;
-    delete TheCanvas;
+    delete TheForm; //-V2511
+    delete TheCanvas; //-V2511
 }
 
 
@@ -242,13 +242,13 @@ wxRect Frame::GetMaxDisplay()
 
 void Frame::CreateMenu()
 {
-    wxMenu *fileMenu = new wxMenu;
+    wxMenu *fileMenu = new wxMenu; //-V2511
     fileMenu->Append(FILE_OPEN, wxT("Загрузить\tCtrl+O"), wxT("Загрузить данные из файла"));
     fileMenu->Append(FILE_SAVE, wxT("Сохранить\tCtrl+S"), wxT("Сохранить данные в файл"));
     fileMenu->AppendSeparator();
     fileMenu->Append(MENU_FILE_QUIT, wxT("Выход\tAlt+X"), wxT("Закрыть редактор"));
 
-    wxMenuBar *menuBar = new wxMenuBar();
+    wxMenuBar *menuBar = new wxMenuBar(); //-V2511
     menuBar->Append(fileMenu, wxT("Файл"));
 
     SetMenuBar(menuBar);
@@ -332,7 +332,7 @@ void Frame::ShowContextMenu(const wxPoint &pos)
 
     if (menuAlign == nullptr)
     {
-        menuAlign = new wxMenu();
+        menuAlign = new wxMenu(); //-V2511
 
         menuAlign->Append(ALIGN_LEFT, "Слева");
         menuAlign->Append(ALIGN_RIGHT, "Справа");
@@ -429,7 +429,7 @@ void Frame::OnOpenFile(wxCommandEvent &)
     }
 }
 
-void Frame::OnSaveFile(wxCommandEvent &)
+void Frame::OnSaveFile(wxCommandEvent &) //-V2506
 {
     wxFileDialog saveDialog(nullptr, wxT("Сохранить"), wxEmptyString, wxEmptyString, wxT("*.sig"), wxFD_SAVE);
 
@@ -503,9 +503,9 @@ void Frame::CreateGaversine(wxCommandEvent &)
 
     for (int i = 0; i < Point::AMOUNT; i++)
     {
-        float sinx = std::sinf(static_cast<float>(i) / Point::AMOUNT * 2.0F * 3.14F);
+        float sinx = std::sinf(static_cast<float>(i) / Point::AMOUNT * 2.0F * 3.14F); //-V2564
 
-        data[i] = static_cast<uint16>(Point::AVE + static_cast<uint16>(sinx * sinx * Point::AVE));
+        data[i] = static_cast<uint16>(Point::AVE + static_cast<uint16>(sinx * sinx * Point::AVE)); //-V2564
     }
 
     TheFrame->SetBlockingCanvas(true);
@@ -522,7 +522,7 @@ void Frame::CreateNoise(wxCommandEvent &)
     {
         float x = static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX);
 
-        data[i] = static_cast<uint16>(x * Point::MAX + 0.5F);
+        data[i] = static_cast<uint16>(x * Point::MAX + 0.5F); //-V2564
     }
 
     TheFrame->SetBlockingCanvas(true);

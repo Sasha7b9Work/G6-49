@@ -7,7 +7,7 @@
 wxBitmap* GetBitmapFromMemory(const char* t_data, const DWORD t_size)
 {
 	wxMemoryInputStream a_is(t_data, t_size);
-	return new wxBitmap(wxImage(a_is), -1);
+	return new wxBitmap(wxImage(a_is), -1); //-V2511
 }
 
 
@@ -17,14 +17,14 @@ static bool LoadDataFromResource(char*& t_data, DWORD& t_dataSize, int name)
 	HGLOBAL  a_resHandle = 0;
 	HRSRC    a_resource;
 
-	a_resource = FindResource(GetModuleHandle(NULL), MAKEINTRESOURCE(name), RT_RCDATA); //-V2001
+	a_resource = FindResource(GetModuleHandle(NULL), MAKEINTRESOURCE(name), RT_RCDATA); //-V2001 //-V2571
 
 	if (0 != a_resource)
 	{
 		a_resHandle = LoadResource(NULL, a_resource);
 		if (0 != a_resHandle)
 		{
-			t_data = static_cast<char*>(LockResource(a_resHandle));
+			t_data = static_cast<char*>(LockResource(a_resHandle)); //-V2571
 			t_dataSize = SizeofResource(NULL, a_resource);
 			r_result = true;
 		}

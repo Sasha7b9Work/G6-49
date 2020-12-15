@@ -147,13 +147,13 @@ static wxRect GetMaxDisplay()
 
 static void CreateFrame()
 {
-    Frame *frame = new Frame("");
+    Frame *frame = new Frame(""); //-V2511
 
     SetSizeAndPosition(frame);
 
-    wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL); //-V2511
 
-    screen = new Screen(frame);
+    screen = new Screen(frame); //-V2511
 
     sizer->Add(screen);
 
@@ -196,18 +196,18 @@ static void CreateButtons(Frame *frame)
         }
     }
 
-    governor = new GovernorGUI(frame, { 450, 170 });
+    governor = new GovernorGUI(frame, { 450, 170 }); //-V2511
 }
 
 
-static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxSize &size)
+static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxSize &size) //-V2506
 {
     if (key == Key::None)
     {
         return;
     }
 
-    wxButton *button = new wxButton(frame, static_cast<wxWindowID>(key), Key(key).Name(), pos, size);
+    wxButton *button = new wxButton(frame, static_cast<wxWindowID>(key), Key(key).Name(), pos, size); //-V2511
 
     button->Connect(static_cast<wxWindowID>(key), wxEVT_LEFT_DOWN, wxCommandEventHandler(Frame::OnKeyDown));
     button->Connect(static_cast<wxWindowID>(key), wxEVT_LEFT_UP, wxCommandEventHandler(Frame::OnKeyUp));

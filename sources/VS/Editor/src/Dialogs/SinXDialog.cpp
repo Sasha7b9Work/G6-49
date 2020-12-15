@@ -8,12 +8,12 @@ static int numPeriods = 1;
 
 wxPanel *SinXDialog::CreatePanelNumPeriods(wxDialog *dlg)
 {
-    wxPanel *panel = new wxPanel(dlg);
+    wxPanel *panel = new wxPanel(dlg); //-V2511
 
     int x = 40;
     int y = 20;
 
-    scNumPeriods = new SpinControl(panel, ID_SPINCTRL_NUMBER_PERIODS, wxPoint(x, y), wxSize(50, 20), 1, 1000, numPeriods, this, wxCommandEventHandler(Dialog::OnControlEvent),
+    scNumPeriods = new SpinControl(panel, ID_SPINCTRL_NUMBER_PERIODS, wxPoint(x, y), wxSize(50, 20), 1, 1000, numPeriods, this, wxCommandEventHandler(Dialog::OnControlEvent), //-V2511
         wxT("Число периодов"), this);
 
     return panel;
@@ -22,7 +22,7 @@ wxPanel *SinXDialog::CreatePanelNumPeriods(wxDialog *dlg)
 
 SinXDialog::SinXDialog() : Dialog(wxT("Параметры сигнала sin(x)/x"), true)
 {
-    wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL); //-V2511
 
     vBox->Add(CreatePanelNumPeriods(this));
 
@@ -47,7 +47,7 @@ void SinXDialog::SendAdditionForm()
         int curLess = i0 + i;
         int curMore = i0 - i;
 
-        uint16 value = static_cast<uint16>(Point::AVE + sinx_x * Point::AVE);
+        uint16 value = static_cast<uint16>(Point::AVE + sinx_x * Point::AVE); //-V2564
 
         if (i == 0)
         {

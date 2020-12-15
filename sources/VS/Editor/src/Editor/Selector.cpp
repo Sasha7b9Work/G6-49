@@ -41,7 +41,7 @@ void Selector::BeginGrab(int mouseX)
     {
         cursor1.Set(mouseX);
     }
-    else if(!cursor1.IsEnabled())
+    else if(!cursor1.IsEnabled()) //-V2516
     {
         cursor1.Set(mouseX);
         cursor2.Set(mouseX);
@@ -55,7 +55,7 @@ void Selector::MoveBorder(int mouseX)
     {
         cursor1.Set(mouseX);
     }
-    else if (cursor2.IsGrabbing())
+    else if (cursor2.IsGrabbing()) //-V2516
     {
         cursor2.Set(mouseX);
     }
@@ -106,7 +106,7 @@ void Cursor::Draw()
 }
 
 
-bool Cursor::OverMouseX(int mouseX)
+bool Cursor::OverMouseX(int mouseX) //-V2506
 {
     if (!IsEnabled())
     {

@@ -61,7 +61,7 @@ int Grabber::grabX = -1;
 int Grabber::indexFirstPoint = -1;
 
 
-bool Grabber::UnGrab()
+bool Grabber::UnGrab() //-V2506
 {
     if (isGrabbing)
     {
@@ -113,7 +113,7 @@ void Zoomer::Decrease(int /*mouseX*/)
 
 void Zoomer::CalculateIndexesPoints()
 {
-    numberDrawingPoints = static_cast<int>(100.0F / static_cast<float>(scale) * Point::AMOUNT);
+    numberDrawingPoints = static_cast<int>(100.0F / static_cast<float>(scale) * Point::AMOUNT); //-V2564
 
     indexFirstPoint = indexMiddlePoint - numberDrawingPoints / 2;
 
@@ -145,7 +145,7 @@ float Zoomer::ScaleF()
 }
 
 
-void Zoomer::Draw()
+void Zoomer::Draw() //-V2506
 {
     if (NoScaling())
     {
@@ -172,19 +172,19 @@ void Window::Draw()
 
 int Window::X()
 {
-    float dX = static_cast<float>(Zoomer::IndexFirsPoint()) / Point::AMOUNT * static_cast<float>(Grid::Width());
+    float dX = static_cast<float>(Zoomer::IndexFirsPoint()) / Point::AMOUNT * static_cast<float>(Grid::Width()); //-V2564
 
     return Zoomer::X() + static_cast<int>(dX + 0.5F);
 }
 
 
-bool Window::MoveTo(int mouseX)
+bool Window::MoveTo(int mouseX) //-V2506
 {
     if (Grabber::IsGrabbing())
     {
         int deltaPixels = mouseX - Grabber::CoordX();
 
-        int deltaPoints = static_cast<int>(PointsInPixel() * deltaPixels);
+        int deltaPoints = static_cast<int>(PointsInPixel() * deltaPixels); //-V2564
 
         Zoomer::indexFirstPoint = Math::Limitation<int>(Grabber::IndexFirstPoint() + deltaPoints, 0, static_cast<int>(Point::AMOUNT - Zoomer::numberDrawingPoints));
 
@@ -207,7 +207,7 @@ int Window::Right()
 
 int Window::Width()
 {
-    float width = static_cast<float>(Zoomer::NumberDrawingPoints()) / Point::AMOUNT * static_cast<float>(Grid::Width());
+    float width = static_cast<float>(Zoomer::NumberDrawingPoints()) / Point::AMOUNT * static_cast<float>(Grid::Width()); //-V2564
 
     return static_cast<int>(width + 0.5F);
 }
@@ -279,7 +279,7 @@ int Zoomer::NumberDrawingPoints()
 }
 
 
-bool Zoomer::UnderMouse(int mouseX, int mouseY)
+bool Zoomer::UnderMouse(int mouseX, int mouseY) //-V2506
 {
     if (NoScaling())
     {
@@ -290,7 +290,7 @@ bool Zoomer::UnderMouse(int mouseX, int mouseY)
 }
 
 
-bool Zoomer::Grab(int mouseX, int mouseY)
+bool Zoomer::Grab(int mouseX, int mouseY) //-V2506
 {
     if (!UnderMouse(mouseX, mouseY))
     {
@@ -315,7 +315,7 @@ bool Zoomer::MoveWindow(int mouseX)
 }
 
 
-bool Window::UnderMouse(int mouseX, int mouseY)
+bool Window::UnderMouse(int mouseX, int mouseY) //-V2506
 {
     if (Zoomer::NoScaling())
     {
@@ -326,7 +326,7 @@ bool Window::UnderMouse(int mouseX, int mouseY)
 }
 
 
-void Grabber::Grab(int mouseX, int mouseY)
+void Grabber::Grab(int mouseX, int mouseY) //-V2506
 {
     if (!Window::UnderMouse(mouseX, mouseY))
     {
@@ -341,5 +341,5 @@ void Grabber::Grab(int mouseX, int mouseY)
 
 double Window::PointsInPixel()
 {
-    return static_cast<double>(Point::AMOUNT) / Zoomer::Width();
+    return static_cast<double>(Point::AMOUNT) / Zoomer::Width(); //-V2564
 }

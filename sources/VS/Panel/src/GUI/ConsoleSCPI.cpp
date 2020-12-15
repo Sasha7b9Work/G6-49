@@ -27,9 +27,9 @@ static ConsoleSCPI *self = nullptr;
 
 ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("Ã6-49 SCPI"))
 {
-    text = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, { 600, 300 }, wxTE_MULTILINE | wxTE_READONLY);
+    text = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, { 600, 300 }, wxTE_MULTILINE | wxTE_READONLY); //-V2511
 
-    line = new wxTextCtrl(this, ID_LINE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+    line = new wxTextCtrl(this, ID_LINE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER); //-V2511
     line->SetFocus();
 
     wxFont font(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Courier New"));
@@ -101,7 +101,7 @@ ConsoleSCPI *ConsoleSCPI::Self()
 {
     if (!self)
     {
-        self = new ConsoleSCPI(nullptr);
+        self = new ConsoleSCPI(nullptr); //-V2511
     }
 
     return self;
@@ -124,7 +124,7 @@ void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
     }
     else
     {
-        SCPI::AppendNewData(txt.c_str(), std::strlen(txt.c_str()));
+        SCPI::AppendNewData(txt.c_str(), std::strlen(txt.c_str())); //-V2513
     }
 
     line->Clear();
@@ -195,7 +195,7 @@ void ConsoleSCPI::History::Add(const wxString &txt)
 }
 
 
-wxString ConsoleSCPI::History::Next()
+wxString ConsoleSCPI::History::Next() //-V2506
 {
     if (history.size() == 0)
     {
@@ -214,7 +214,7 @@ wxString ConsoleSCPI::History::Next()
 }
 
 
-wxString ConsoleSCPI::History::Prev()
+wxString ConsoleSCPI::History::Prev() //-V2506
 {
     if (history.size() == 0)
     {
