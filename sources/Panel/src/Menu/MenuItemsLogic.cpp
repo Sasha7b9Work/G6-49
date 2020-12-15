@@ -49,7 +49,7 @@ void Choice::StartChange(int delta) const
         {
             Math::CircleIncrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
         }
-        else if (delta < 0)
+        else if (delta < 0) //-V2516
         {
             Math::CircleDecrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
         }
@@ -61,7 +61,7 @@ void Choice::StartChange(int delta) const
 }
 
 
-float Choice::Step()
+float Choice::Step() //-V2506
 {
     static const float speed = 3000.0F;
     static const int numLines = 60;
@@ -75,17 +75,17 @@ float Choice::Step()
         int8 index = CurrentIndex();
         if (tsChoice.dir == INCREASE)
         {
-            if (delta <= numLines)
+            if (delta <= numLines) //-V2564
             {
                 return delta;
             }
             Math::CircleIncrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
         }
-        else if (tsChoice.dir == DECREASE)
+        else if (tsChoice.dir == DECREASE) //-V2516
         {
             delta = -delta;
     
-            if (delta >= -numLines)
+            if (delta >= -numLines) //-V2564
             {
                 return delta;
             }
@@ -119,12 +119,12 @@ void Governor::Press(const Control control) //-V801
                     funcPress(true);
                 }
             }
-            else if (Menu::GetCurrentItem() == this)
+            else if (Menu::GetCurrentItem() == this) //-V2516
             {
                 Menu::ResetCurrentItem();
             }
         }
-        else if(control.IsLong())
+        else if(control.IsLong()) //-V2516
         {
         }
     }
@@ -138,7 +138,7 @@ void Governor::Press(const Control control) //-V801
                 funcOfChanged();
             }
         }
-        else if(control.Is(Key::RotateRight))
+        else if(control.Is(Key::RotateRight)) //-V2516
         {
             if(*cell < maxValue)
             {
@@ -147,7 +147,7 @@ void Governor::Press(const Control control) //-V801
             }
         }
     }
-    else if(control.IsUp())
+    else if(control.IsUp()) //-V2516
     {
         if(control.Is(Key::Esc))
         {
@@ -194,7 +194,7 @@ int16 Governor::PrevValue() const
 }
 
 
-float Governor::Step()
+float Governor::Step() //-V2506
 {
     static const float speed = 0.05F;
     static const int numLines = 10;
@@ -209,7 +209,7 @@ float Governor::Step()
             {
                 return -0.001F;
             }
-            if (delta < -numLines)
+            if (delta < -numLines) //-V2564
             {
                 tsGovernor.dir = NONE;
                 *cell = PrevValue();
@@ -221,13 +221,13 @@ float Governor::Step()
                 tsGovernor.address = 0;
             }
         }
-        else if (tsGovernor.dir == INCREASE)
+        else if (tsGovernor.dir == INCREASE) //-V2516
         {
             if (delta == 0.0F)  // -V550 //-V2550 //-V550
             {
                 return 0.001F;
             }
-            if (delta > numLines)
+            if (delta > numLines) //-V2564
             {
                 tsGovernor.dir = NONE;
                 *cell = NextValue();
@@ -309,7 +309,7 @@ int Page::NumItems() const
 }
 
 
-void Item::Press(const Control control) //-V801
+void Item::Press(const Control control) //-V801 //-V2506
 {
     if(control.IsLong())
     {
@@ -349,7 +349,7 @@ void Item::Press(const Control control) //-V801
         {
             static_cast<Page *>(this)->Press(control);
         }
-        else if(type == TypeItem::Governor)
+        else if(type == TypeItem::Governor) //-V2516
         {
             static_cast<Governor *>(this)->Press(control);
         }
@@ -371,7 +371,7 @@ int8 Choice::CurrentIndex() const
     {
         retValue = *cell;
     }
-    else if (type == TypeItem::ChoiceParameter)
+    else if (type == TypeItem::ChoiceParameter) //-V2516
     {
         const ChoiceParameter *param = reinterpret_cast<const ChoiceParameter *>(this);
 
@@ -384,7 +384,7 @@ int8 Choice::CurrentIndex() const
 }
 
 
-int8 ChoiceBase::CurrentIndex() const
+int8 ChoiceBase::CurrentIndex() const //-V2506
 {
     if(type == TypeItem::Choice)
     {
@@ -394,7 +394,7 @@ int8 ChoiceBase::CurrentIndex() const
 }
 
 
-int Item::PositionOnPage() const
+int Item::PositionOnPage() const //-V2506
 {
     if(Keeper() == 0)                       // Если у страницы нет хранителя - она принадлежит главному меню
     {
@@ -403,7 +403,7 @@ int Item::PositionOnPage() const
 
     for(int i = 0; i < Keeper()->NumItems(); i++)
     {
-        if(this == Keeper()->items[i])
+        if(this == Keeper()->items[i]) //-V2563
         {
             return i;
         }
@@ -427,13 +427,13 @@ Item *ChoiceParameter::Press(const Control &control)
     {
         Menu::ResetOpenedItem();
     }
-    else if (Keeper()->GetItem(control.key))
+    else if (Keeper()->GetItem(control.key)) //-V2516
     {
         if (control.IsUp())
         {
             form->SetNextParameter();
         }
-        else if (control.IsLong())
+        else if (control.IsLong()) //-V2516
         {
             if (Menu::GetOpenedItem() == nullptr)
             {
@@ -465,13 +465,13 @@ Item *Choice::Press(const Control control) //-V801
     {
         Menu::ResetOpenedItem();
     }
-    else if (Keeper()->GetItem(control.key))
+    else if (Keeper()->GetItem(control.key)) //-V2516
     {
         if (control.IsUp())
         {
             StartChange(1);
         }
-        else if (control.IsLong())
+        else if (control.IsLong()) //-V2516
         {
             if (Menu::GetOpenedItem() == 0)
             {
@@ -488,7 +488,7 @@ Item *Choice::Press(const Control control) //-V801
 }
 
 
-Item *SButton::Press(Action::E action)
+Item *SButton::Press(Action::E action) //-V2506
 {
     if(action == Action::Down)
     {
@@ -556,12 +556,12 @@ String Item::FullPath()
     do
     {
         pointer--;
-        std::strcat(buffer, titles[pointer]);
-        std::strcat(buffer, " - ");
+        std::strcat(buffer, titles[pointer]); //-V2513
+        std::strcat(buffer, " - "); //-V2513
         
     } while(pointer > 0);
 
-    buffer[std::strlen(buffer) - 3] = 0;
+    buffer[std::strlen(buffer) - 3] = 0; //-V2513
 
     return String(buffer);
 }
@@ -579,7 +579,7 @@ int ChoiceParameter::GetHeightOpened() const
 }
 
 
-bool Page::Press(const Control control) //-V801
+bool Page::Press(const Control control) //-V801 //-V2506
 {
     if(funcOnKey(control))
     {
@@ -602,13 +602,13 @@ bool Page::Press(const Control control) //-V801
                 return true;
             }
         }
-        else if (control.IsFunctional())
+        else if (control.IsFunctional()) //-V2516
         {
             GetItem(control.key)->Press(control);
             return true;
         }
     }
-    else if (control.IsRelease())
+    else if (control.IsRelease()) //-V2516
     {
         CURRENT_PAGE = this;
         this->funcEnter(true);

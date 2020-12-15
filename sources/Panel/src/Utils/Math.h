@@ -27,9 +27,9 @@ struct Math
     // Обменивает местами содержимое памяти по адресам value0 и value1
     template<class T> static void Swap(T *value0, T *value1) { T temp = *value0; *value0 = *value1; *value1 = temp; }
 
-    template<class T> static int Sign(T x) { if(x > (T)(0)) { return 1; } if(x < (T)(0)) { return -1; } return 0; }
+    template<class T> static int Sign(T x) { if(x > (T)(0)) { return 1; } if(x < (T)(0)) { return -1; } return 0; } //-V2506
 
-    template<class T> static T Abs(T x) { if(x < (T)0) { return -x; }  return x; }
+    template<class T> static T Abs(T x) { if(x < (T)0) { return -x; }  return x; } //-V2506
 
     template<class T> static void CircleIncrease(T *value, T min, T max)
     {

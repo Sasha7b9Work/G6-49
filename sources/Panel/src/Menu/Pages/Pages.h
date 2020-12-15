@@ -159,7 +159,7 @@ struct PageDebug
         static Page *self;
     };
 
-    struct _Calibration
+    struct _Calibration //-V2573
     {
         struct PageA
         {

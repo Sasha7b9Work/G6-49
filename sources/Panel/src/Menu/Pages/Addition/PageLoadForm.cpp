@@ -7,7 +7,7 @@
 
 
 extern const PageBase pageLoad;
-Page *PageLoadForm::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageLoad));
+Page *PageLoadForm::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageLoad)); //-V2567
 
 
 DEF_BUTTON( bUp,                                                                                                                              //--- НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА - Вверх ---
@@ -51,7 +51,7 @@ DEF_BUTTON( bChoose,                                                            
 
 
 
-static bool OnControl(const Control control) //-V801
+static bool OnControl(const Control control) //-V801 //-V2506
 {
     if (control.Is(Key::RotateLeft))
     {
@@ -63,7 +63,7 @@ static bool OnControl(const Control control) //-V801
         FDrive::PressUp();
         return true;
     }
-    else if (control.Is(Key::Esc, Action::Up))
+    else if (control.Is(Key::Esc, Action::Up)) //-V2516
     {
         Menu::ResetAdditionPage();
         return true;
@@ -72,7 +72,7 @@ static bool OnControl(const Control control) //-V801
     return false;
 }
 
-DEF_PAGE_4( pageLoad,                                                                                                                         //--- НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА --- //-V641
+DEF_PAGE_4( pageLoad,                                                                                                                         //--- НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА --- //-V641 //-V2567
     "ВЫБОР", "CHOICE",   //-V641
     "Страница выбора формы произвольного сигнала для загрузки с флешки", "The page for choosing the shape of an arbitrary waveform to boot from a USB flash drive",
     &bChoose,   // НАСТРОЙКИ СИГНАЛОВ - ЗАГРУЗКА - Установить

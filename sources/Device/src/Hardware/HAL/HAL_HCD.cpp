@@ -24,17 +24,17 @@ void HAL_HCD::Init()
     101 - PA9  - VBUS
     */
 
-    __GPIOA_CLK_ENABLE();
-    __USB_OTG_FS_CLK_ENABLE();
-    __SYSCFG_CLK_ENABLE();
+    __GPIOA_CLK_ENABLE(); //-V2571
+    __USB_OTG_FS_CLK_ENABLE(); //-V2571
+    __SYSCFG_CLK_ENABLE(); //-V2571
 
     isGPIO.Speed = GPIO_SPEED_HIGH;
     isGPIO.Pin = GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12;
     isGPIO.Alternate = GPIO_AF10_OTG_FS;
 
-    HAL_GPIO_Init(GPIOA, &isGPIO);
+    HAL_GPIO_Init(GPIOA, &isGPIO); //-V2571
 
-    __HAL_RCC_USB_OTG_FS_CLK_ENABLE();
+    __HAL_RCC_USB_OTG_FS_CLK_ENABLE(); //-V2571
 
     HAL_NVIC_SetPriority(OTG_FS_IRQn, 6, 0);
 
@@ -50,10 +50,10 @@ void HAL_HCD::IRQHandler()
 
 int HAL_HCD::USBH_LL_Init(void *usbh_HandleTypeDef)
 {
-    USBH_HandleTypeDef *phost = static_cast<USBH_HandleTypeDef *>(usbh_HandleTypeDef);
+    USBH_HandleTypeDef *phost = static_cast<USBH_HandleTypeDef *>(usbh_HandleTypeDef); //-V2571
 
     /* Set the LL driver parameters */
-    handle.Instance = USB_OTG_FS;
+    handle.Instance = USB_OTG_FS; //-V2571
     handle.Init.speed = HCD_SPEED_FULL;
     handle.Init.Host_channels = 11;
     handle.Init.dma_enable = 0;

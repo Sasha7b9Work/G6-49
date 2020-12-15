@@ -115,7 +115,7 @@ void DLDrive::Update()
 
         state = State::Connected;
     }
-    else if(state == State::NeedUnmount)
+    else if(state == State::NeedUnmount) //-V2516
     {
         f_mount(0, "", 0);
 
@@ -130,7 +130,7 @@ bool DLDrive::IsConnected()
 }
 
 
-int DLDrive::File::Open(const char *name)
+int DLDrive::File::Open(const char *name) //-V2506
 {
     if(f_open(&file, name, FA_READ) == FR_OK)
     {
@@ -147,7 +147,7 @@ void DLDrive::File::Seek(int pos)
 }
 
 
-int DLDrive::File::Read(int size, uint8 *buffer)
+int DLDrive::File::Read(int size, uint8 *buffer) //-V2506
 {
     uint readed = 0;
 

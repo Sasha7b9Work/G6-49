@@ -23,7 +23,7 @@ void Menu::Draw()
 }
 
 
-int Menu::DrawTitle()
+int Menu::DrawTitle() //-V2506
 {
     Rectangle(Display::WIDTH - 1, Page::Title::HEIGHT).Draw(0, 0, Color::FILL);
     Rectangle(Display::WIDTH - 3, Page::Title::HEIGHT - 2).Fill(1, 1, Color::BLUE_10);

@@ -4,7 +4,7 @@
 
 
 extern const PageBase pFrequencyCounter;
-Page *PageFrequencyCounter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pFrequencyCounter));
+Page *PageFrequencyCounter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pFrequencyCounter)); //-V2567
 
 
 // Настроить вид страницы в соответствии с режимом измерения
@@ -178,7 +178,7 @@ DEF_GOVERNOR( gHysteresis,                                                      
 volatile const GovernorBase *pgHysteresis = &gHysteresis;
 
 
-DEF_PAGE_8( pFrequencyCounter,                                                                                                                                           //--- ЧАСТОТОМЕР --- //-V641
+DEF_PAGE_8( pFrequencyCounter,                                                                                                                                           //--- ЧАСТОТОМЕР --- //-V641 //-V2567
     "ЧАСТОТОМЕР", "FREQMETER", //-V641
     "Управление фукнциями частотомера", "Freqmeter control",
     &cMeasure,       // ЧАСТОТОМЕР - Измерение
@@ -195,22 +195,22 @@ DEF_PAGE_8( pFrequencyCounter,                                                  
 
 static void Tune_Page()
 {
-    PageBase *page = const_cast<PageBase *>(&pFrequencyCounter);
+    PageBase *page = const_cast<PageBase *>(&pFrequencyCounter); //-V2567
 
     if (set.freq.measure == FreqMeasure::Freq)
     {
-        page->items[2] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cBillingTime));
-        page->items[3] = &Item::emptyLight;
+        page->items[2] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cBillingTime)); //-V2563 //-V2567
+        page->items[3] = &Item::emptyLight; //-V2563
     }
     else if (set.freq.measure == FreqMeasure::Period)
     {
-        page->items[2] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cTimeStamps));
-        page->items[3] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cAvePeriod));
+        page->items[2] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cTimeStamps)); //-V2563 //-V2567
+        page->items[3] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cAvePeriod)); //-V2563 //-V2567
     }
     else
     {
-        page->items[2] = &Item::emptyLight;
-        page->items[3] = &Item::emptyLight; //-V656
+        page->items[2] = &Item::emptyLight; //-V2563
+        page->items[3] = &Item::emptyLight; //-V656 //-V2563
     } //-V656
 }
 

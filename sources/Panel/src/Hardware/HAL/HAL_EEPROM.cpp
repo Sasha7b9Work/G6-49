@@ -65,19 +65,19 @@ void HAL_EEPROM::LoadSettings(CalibrationSettings *settings)
 
     if (address)                                            // Если нашли сохранённую запись
     {
-        *settings = *(reinterpret_cast<CalibrationSettings *>(address));      // То запишем её в целевой объект
+        *settings = *(reinterpret_cast<CalibrationSettings *>(address));      // То запишем её в целевой объект //-V2571
     }
 }
 
 
-static uint FindFirstFreeRecord(uint start, uint sizeFull, uint sizeRecord)
+static uint FindFirstFreeRecord(uint start, uint sizeFull, uint sizeRecord) //-V2506
 {
     uint address = start;
     uint end = start + sizeFull;
 
     while (address < end)
     {
-        if (*(reinterpret_cast<uint *>(address)) == 0xffffffffU)
+        if (*(reinterpret_cast<uint *>(address)) == 0xffffffffU) //-V2571
         {
             return address;
         }
@@ -88,7 +88,7 @@ static uint FindFirstFreeRecord(uint start, uint sizeFull, uint sizeRecord)
 }
 
 
-static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord)
+static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord) //-V2506
 {
     uint address = FindFirstFreeRecord(start, sizeSector, sizeRecord);
 
@@ -106,14 +106,14 @@ static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord)
 }
 
 
-static void EraseSector(uint startAddress)
+static void EraseSector(uint startAddress) //-V2506
 {
     if (GetSector(startAddress) == static_cast<uint>(-1))
     {
         return;
     }
 
-    CLEAR_FLASH_FLAGS;
+    CLEAR_FLASH_FLAGS; //-V2571
 
     HAL_FLASH_Unlock();
 
@@ -131,7 +131,7 @@ static void EraseSector(uint startAddress)
 }
 
 
-static uint GetSector(uint address)
+static uint GetSector(uint address) //-V2506
 {
     struct StructSector
     {
@@ -161,13 +161,13 @@ static uint GetSector(uint address)
 
 static void WriteData(uint address, void *data, uint size)
 {
-    CLEAR_FLASH_FLAGS;
+    CLEAR_FLASH_FLAGS; //-V2571
 
     HAL_FLASH_Unlock();
 
     for (uint i = 0; i < size; i++)
     {
-        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address++, (static_cast<uint8 *>(data))[i]);
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address++, (static_cast<uint8 *>(data))[i]); //-V2563 //-V2571
     }
 
     HAL_FLASH_Lock();

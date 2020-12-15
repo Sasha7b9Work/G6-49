@@ -8,9 +8,9 @@ static PCD_HandleTypeDef handle;
 
 void HAL_PCD::Init()
 {
-    __GPIOB_CLK_ENABLE();
-    __USB_OTG_HS_CLK_ENABLE();
-    __SYSCFG_CLK_ENABLE();
+    __GPIOB_CLK_ENABLE(); //-V2571
+    __USB_OTG_HS_CLK_ENABLE(); //-V2571
+    __SYSCFG_CLK_ENABLE(); //-V2571
 
     GPIO_InitTypeDef isGPIO =
     {
@@ -21,7 +21,7 @@ void HAL_PCD::Init()
         GPIO_AF12_OTG_HS_FS
     };
 
-    HAL_GPIO_Init(GPIOB, &isGPIO);
+    HAL_GPIO_Init(GPIOB, &isGPIO); //-V2571
 
     /*
     isGPIO.Pin = GPIO_PIN_13;
@@ -43,11 +43,11 @@ void HAL_PCD::IRQHandler()
 
 int HAL_PCD::USBD_LL_Init(void *usbd_HandleTypeDef)
 {
-    USBD_HandleTypeDef *pdev = static_cast<USBD_HandleTypeDef *>(usbd_HandleTypeDef);
+    USBD_HandleTypeDef *pdev = static_cast<USBD_HandleTypeDef *>(usbd_HandleTypeDef); //-V2571
 
     NVIC_SetPriority(SysTick_IRQn, 0);
 
-    handle.Instance = USB_OTG_HS;
+    handle.Instance = USB_OTG_HS; //-V2571
     handle.Init.dev_endpoints = 6;
     handle.Init.speed = PCD_SPEED_FULL;
     handle.Init.dma_enable = DISABLE;

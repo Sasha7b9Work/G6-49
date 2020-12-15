@@ -13,7 +13,7 @@ void Queue::Pop()
 {
     if (Size() > 0)
     {
-        delete storage[first];
+        delete storage[first]; //-V2511
         first++;
         if (first == last)
         {
@@ -24,7 +24,7 @@ void Queue::Pop()
 }
 
 
-bool Queue::Push(SimpleMessage *message)
+bool Queue::Push(SimpleMessage *message) //-V2506
 {
     if (last < SIZE - 1)
     {

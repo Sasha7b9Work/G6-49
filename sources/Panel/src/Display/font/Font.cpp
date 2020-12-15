@@ -26,7 +26,7 @@ int Font::Spacing::old = 1;
 static Stack<TypeFont::E> stackFonts(10);       // Здесь хранятся сменяемые шрифты для пследующего восстановления
 
 
-int Font::GetHeight()
+int Font::GetHeight() //-V2506
 {
     if (IsAdvanced())
     {
@@ -47,7 +47,7 @@ void Font::ToggleCharacterSize()
 }
 
 
-int Font::GetHeight(char s)
+int Font::GetHeight(char s) //-V2506
 {
     if (IsAdvanced())
     {
@@ -58,7 +58,7 @@ int Font::GetHeight(char s)
 }
 
 
-int Font::GetWidth(char symbol)
+int Font::GetWidth(char symbol) //-V2506
 {
     if (IsAdvanced())
     {
@@ -98,7 +98,7 @@ int8 Font::Width(char symbol)
 }
 
 
-int8 Font::Width(uint8 symbol)
+int8 Font::Width(uint8 symbol) //-V2506
 {
     if(IsAdvanced())
     {
@@ -109,7 +109,7 @@ int8 Font::Width(uint8 symbol)
 }
 
 
-int8 Font::Height()
+int8 Font::Height() //-V2506
 {
     if(IsAdvanced())
     {
@@ -120,7 +120,7 @@ int8 Font::Height()
 }
 
 
-bool Font::RowNotEmpty(int s, int row)
+bool Font::RowNotEmpty(int s, int row) //-V2506
 {
     if(IsAdvanced())
     {
@@ -134,11 +134,11 @@ bool Font::RowNotEmpty(int s, int row)
         prevChar = s;
         bytes = font->symbol[static_cast<uint8>(prevChar)].bytes;
     }
-    return bytes[row] != 0;
+    return bytes[row] != 0; //-V2563
 }
 
 
-bool Font::BitIsExist(int s, int row, int bit)
+bool Font::BitIsExist(int s, int row, int bit) //-V2506
 {
     if(IsAdvanced())
     {

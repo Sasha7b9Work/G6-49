@@ -6,13 +6,13 @@
 
 Buffer::Buffer(uint _size) : data(nullptr), size(0)
 {
-    data = static_cast<uint8 *>(std::malloc(_size));
+    data = static_cast<uint8 *>(std::malloc(_size)); //-V2511
     size = _size;
 }
 
 
 Buffer::~Buffer()
 {
-    std::free(data);
+    std::free(data); //-V2511
 }
 

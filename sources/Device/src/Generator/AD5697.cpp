@@ -55,7 +55,7 @@ double AD5697::CalculateCodeOffset(Chan::E ch)
 
         result = 4095.0 - before;
     }
-    else if(offset < 0.0F)
+    else if(offset < 0.0F) //-V2516
     {
         double neg = Calibrator::GetOffsetK_Negative(ch);    // 4095
 
@@ -80,12 +80,12 @@ void AD5697::SetOffset(Chan::E ch)
 
     uint8 data[3] =
     {
-        static_cast<uint8>(BIN_U8(00010000) | (ch == Chan::A ? 0x01 : 0x08)), 
+        static_cast<uint8>(BIN_U8(00010000) | (ch == Chan::A ? 0x01 : 0x08)),  //-V2501
         static_cast<uint8>(value >> 8),
         static_cast<uint8>(value)
     };
 
-    WriteParameter(BIN_U8(00001100), data, WR_AD5697_OFFSET);
+    WriteParameter(BIN_U8(00001100), data, WR_AD5697_OFFSET); //-V2501
 }
 
 
@@ -97,12 +97,12 @@ void AD5697::SetFreqHysteresys(double hyst)
 
     uint8 data[3] =
     {
-        static_cast<uint8>(BIN_U8(00010000) | 0x08),
+        static_cast<uint8>(BIN_U8(00010000) | 0x08), //-V2501
         static_cast<uint8>(value >> 8),
         static_cast<uint8>(value)
     };
 
-    WriteParameter(BIN_U8(00001101), data, WR_AD5697_FREQ);
+    WriteParameter(BIN_U8(00001101), data, WR_AD5697_FREQ); //-V2501
 }
 
 
@@ -116,12 +116,12 @@ void AD5697::SetFreqLevel(double level)
 
     uint8 data[3] =
     {
-        static_cast<uint8>(BIN_U8(00010000) | 0x01),
+        static_cast<uint8>(BIN_U8(00010000) | 0x01), //-V2501
         static_cast<uint8>(value >> 8),
         static_cast<uint8>(value)
     };
 
-    WriteParameter(BIN_U8(00001101), data, WR_AD5697_FREQ);
+    WriteParameter(BIN_U8(00001101), data, WR_AD5697_FREQ); //-V2501
 }
 
 

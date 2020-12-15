@@ -23,7 +23,7 @@ void HAL_TIM4::Init(void (*func)())
 
     HAL_NVIC_EnableIRQ(TIM4_IRQn);
 
-    handleTIM4.Instance = TIM4;
+    handleTIM4.Instance = TIM4; //-V2571
     handleTIM4.Init.Period = TIME_UPDATE * 10 - 1;
     handleTIM4.Init.Prescaler = static_cast<uint>((SystemCoreClock / 2) / 10000) - 1;
     handleTIM4.Init.ClockDivision = 0;
@@ -41,7 +41,7 @@ void HAL_TIM4::Init(void (*func)())
 }
 
 
-void HAL_TIM4::Start(uint timeStopMS)
+void HAL_TIM4::Start(uint timeStopMS) //-V2506
 {
     Stop();
 

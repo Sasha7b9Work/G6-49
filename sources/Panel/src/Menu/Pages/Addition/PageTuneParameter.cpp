@@ -22,7 +22,7 @@ void PageTuneParameter::SetParameter(Parameter *parameter)
         storedDouble = *reinterpret_cast<ParameterDouble *>(parameter);
         tuned = parameter;
     }
-    else if (parameter->IsInteger())
+    else if (parameter->IsInteger()) //-V2516
     {
         storedInteger = *reinterpret_cast<ParameterInteger *>(parameter);
         tuned = parameter;
@@ -98,7 +98,7 @@ DEF_GRAPH_BUTTON(sbEnter,
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool PageTuneParameter::VerifyForPossiblyChangesAmplitude(const Control &control)
+bool PageTuneParameter::VerifyForPossiblyChangesAmplitude(const Control &control) //-V2506
 {
     if (control.IsRotate() || control.IsEntering())
     {
@@ -132,7 +132,7 @@ bool PageTuneParameter::VerifyForPossiblyChangesAmplitude(const Control &control
 }
 
 
-static bool OnControl_TuneParameter(const Control control) //-V801
+static bool OnControl_TuneParameter(const Control control) //-V801 //-V2506
 {
     if (control.IsUp() && control.Is(Key::Esc))
     {
@@ -180,7 +180,7 @@ static void OnOpenClose_TuneParameter(bool enter)
 }
 
 
-DEF_PAGE_SB(pTuneParameter,   //-V641
+DEF_PAGE_SB(pTuneParameter,   //-V641 //-V2567
     "ÂÂÎÄ ÇÍÀ×ÅÍÈß", "ENTER VALUE", //-V641
     "", "",
     &Item::emptyDark,
@@ -190,7 +190,7 @@ DEF_PAGE_SB(pTuneParameter,   //-V641
     Page::SB_Input, 0, Item::FuncActive, OnOpenClose_TuneParameter, OnDraw_TuneParameter, OnControl_TuneParameter
 )
 
-Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pTuneParameter));
+Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pTuneParameter)); //-V2567
 
 
 void PageTuneParameter::SetModeEntering()
@@ -201,16 +201,16 @@ void PageTuneParameter::SetModeEntering()
     }
     else
     {
-        pTuneParameter.items[0] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbMore));
-        pTuneParameter.items[1] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbLess));
+        pTuneParameter.items[0] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbMore)); //-V2563 //-V2567
+        pTuneParameter.items[1] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbLess)); //-V2563 //-V2567
     }
 }
 
 
 void PageTuneParameter::ResetModeEntering()
 {
-    pTuneParameter.items[0] = &Item::emptyDark;
-    pTuneParameter.items[1] = &Item::emptyDark;
+    pTuneParameter.items[0] = &Item::emptyDark; //-V2563
+    pTuneParameter.items[1] = &Item::emptyDark; //-V2563
 }
 
 
@@ -228,7 +228,7 @@ void PageTuneParameter::CallbackOnButtonCancel()
     {
         *reinterpret_cast<ParameterDouble *>(parameter) = storedDouble;
     }
-    else if (parameter->IsInteger())
+    else if (parameter->IsInteger()) //-V2516
     {
         *reinterpret_cast<ParameterInteger *>(parameter) = storedInteger;
     }

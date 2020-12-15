@@ -181,10 +181,10 @@ void FPGA::SetFrequency(Chan::E ch)
     }
     else if (InModeDDS(ch))
     {
-        uint64 N = static_cast<uint64>((frequency * (static_cast<uint64>(1) << 40)) / 1E8F);
+        uint64 N = static_cast<uint64>((frequency * (static_cast<uint64>(1) << 40)) / 1E8F); //-V2564
         WriteRegister(RG::_1_Freq, N);
     }
-    else if(modeWork[ch] == ModeWork::Impulse || modeWork[ch] == ModeWork::Impulse2)
+    else if(modeWork[ch] == ModeWork::Impulse || modeWork[ch] == ModeWork::Impulse2) //-V2516
     {
         if ((ch == Chan::B) && (modeWork[ch] == ModeWork::Impulse2))
         {
@@ -223,7 +223,7 @@ void FPGA::PacketImpulse::SetPeriodPacket(Value period)
 
 void FPGA::PacketImpulse::SetNumberImpules(uint value)
 {
-    uint64 n = static_cast<uint64>(((value - 1) * periodImpulse.ToDouble() + durationImpulse.ToDouble()) / 10E-9);
+    uint64 n = static_cast<uint64>(((value - 1) * periodImpulse.ToDouble() + durationImpulse.ToDouble()) / 10E-9); //-V2564
 
     WriteRegister(RG::_6_DurationImpulseA, n);
 }
@@ -264,7 +264,7 @@ void FPGA::SetClockAD992(ClockFrequency::E _clock)
 
 void FPGA::WriteControlRegister()
 {
-    uint16 data = BIN_U16(00000000, 01111000);       // Ѕиты 3, 4, 5, 6 устанавливаем в единичное состо€ние. »х активное состо€ние - нулевое
+    uint16 data = BIN_U16(00000000, 01111000);       // Ѕиты 3, 4, 5, 6 устанавливаем в единичное состо€ние. »х активное состо€ние - нулевое //-V2501
 
     Bit::Set(data, RG0::_0_WriteData);                    // ¬ нулевом бите 0 записываем только дл€ записи данных в пам€ть
 
@@ -348,7 +348,7 @@ void FPGA::SetBitsStartMode(Chan::E ch, uint16 &data)
         {
             Bit::Set(data, RG0::_14_StartMode1);
         }
-        else if (start.Is(StartMode::Single))
+        else if (start.Is(StartMode::Single)) //-V2516
         {
             Bit::Set(data, RG0::_13_StartMode0);
             Bit::Set(data, RG0::_14_StartMode1);
@@ -428,8 +428,7 @@ void FPGA::WriteRegister(RG::E reg, uint64 value)
         28, // _10_Offset
         2   // _11_Start
     };
-
-    char buffer[33];
+ //-V808
     LOG_WRITE("%d : %d", static_cast<int>(reg), value);
 
     registers[reg] = value;
@@ -470,7 +469,7 @@ static uint CalculateCodeAmplitude(Chan::E ch)
 
     double amplitude = k * att * SettingsGenerator::Amplitude(ch);
 
-    return static_cast<uint>(amplitude * 1023);
+    return static_cast<uint>(amplitude * 1023); //-V2564
 }
 
 
@@ -497,7 +496,7 @@ uint8 *FPGA::DataFreeSignal(Chan::E ch)
 
 void FPGA::SaveExtSignal(Chan::E ch, uint8 *data)
 {
-    HAL_EEPROM::Signal::Save(ch, reinterpret_cast<uint16 *>(data));
+    HAL_EEPROM::Signal::Save(ch, reinterpret_cast<uint16 *>(data)); //-V2571
 }
 
 
@@ -511,7 +510,7 @@ void FPGA::TransformCodeToData(const uint8 codeIn[FPGA::NUM_POINTS * 2], float d
 
         _CLEAR_BIT(code, 13);
 
-        float data = static_cast<float>(code) / 0x1fff;
+        float data = static_cast<float>(code) / 0x1fff; //-V2564
 
         dataOut[i] = data * sign;
     }

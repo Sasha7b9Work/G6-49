@@ -8,13 +8,13 @@ bool Key::IsDigit() const
 }
 
 
-char Key::ToChar() const
+char Key::ToChar() const //-V2506
 {
     if(IsDigit())
     {
         return static_cast<char>((value - _0) | 0x30);
     }
-    else if(value == Dot)
+    else if(value == Dot) //-V2516
     {
         return '.';
     }

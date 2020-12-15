@@ -14,7 +14,7 @@ union BitSet16 //-V2514
         uint8 byte1;
     };
     explicit BitSet16(uint16 value) : halfWord(value) {};
-    explicit BitSet16(uint8 *vals) : byte0(*vals), byte1(*(vals + 1)) {};
+    explicit BitSet16(uint8 *vals) : byte0(*vals), byte1(*(vals + 1)) {}; //-V2563
 
     void WriteToBuffer(uint8 buffer[2]) const
     {
@@ -54,7 +54,7 @@ union BitSet32 //-V2514
         {
             for (int i = 0; i < sizeof(uint); i++)
             {
-                byte[i] = buffer[i];
+                byte[i] = buffer[i]; //-V2563
             }
         }
     }
@@ -110,7 +110,7 @@ union BitSet64 //-V2514
         {
             for (int i = 0; i < 8; i++)
             {
-                byte[i] = buffer[i];
+                byte[i] = buffer[i]; //-V2563
             }
         }
     }

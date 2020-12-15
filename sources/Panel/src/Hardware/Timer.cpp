@@ -62,7 +62,7 @@ void Timer::DeInit()
 }
 
 
-void Timer::ElapsedCallback()
+void Timer::ElapsedCallback() //-V2506
 {
     uint time = TIME_MS;
 
@@ -173,7 +173,7 @@ static uint NearestTime()
 }
 
 
-static void StartTIM(uint timeStopMS)
+static void StartTIM(uint timeStopMS) //-V2506
 {
     StopTIM();
 

@@ -5,7 +5,7 @@
 
 static I2C_HandleTypeDef handle =
 {
-    I2C1,
+    I2C1, //-V2571
     {
         100000,                     // ClockSpeed
         I2C_DUTYCYCLE_2,            // DutyCycle
@@ -30,7 +30,7 @@ void HAL_I2C1::Init()
         GPIO_SPEED_FREQ_VERY_HIGH,
         GPIO_AF4_I2C1
     };
-    HAL_GPIO_Init(GPIOB, &isGPIO);
+    HAL_GPIO_Init(GPIOB, &isGPIO); //-V2571
 
     HAL_I2C_Init(&handle);
 }

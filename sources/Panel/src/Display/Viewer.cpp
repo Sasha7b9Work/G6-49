@@ -22,7 +22,7 @@ void Viewer::Draw(int y, int xName, int xValue, int xUnits, Chan::E ch)
     Color color = Color::Chan(ch);
 
     if((ch == CURRENT_CHANNEL) &&
-       (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) &&
+       (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) && //-V2513
        PageSignals::OnSubPageTuneChannels())
     {
         Rectangle(141, 9).Fill(xName, y, Color::GRAY_50);
@@ -53,7 +53,7 @@ void Viewer::DrawName(int x, int y, int width, Chan::E ch)
     Color color = Color::FILL;
 
     if ((ch == CURRENT_CHANNEL) &&
-        (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) &&
+        (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) && //-V2513
         PageSignals::OnSubPageTuneChannels())
     {
         Rectangle(width - 2, 8).Fill(x + 1, y + 1, Color::GREEN_50);

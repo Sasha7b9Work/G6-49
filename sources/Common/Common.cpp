@@ -50,9 +50,9 @@ Value::Value(int v)
 }
 
 
-bool Value::FromString(const char *buffer, char **end, int numDigitsAfterComma)
+bool Value::FromString(const char *buffer, char **end, int numDigitsAfterComma) //-V2506
 {
-    char *begin = const_cast<char *>(buffer);
+    char *begin = const_cast<char *>(buffer); //-V2567
 
     int sign = 0;
 
@@ -85,17 +85,17 @@ bool Value::FromString(const char *buffer, char **end, int numDigitsAfterComma)
 }
 
 
-static bool GetSign(int &sign, char *begin, char **end)
+static bool GetSign(int &sign, char *begin, char **end) //-V2506
 {
     if (*begin == '-')
     {
-        *end = begin + 1;
+        *end = begin + 1; //-V2563
         sign = -1;
         return true;
     }
-    else if (*begin == '+')
+    else if (*begin == '+') //-V2516
     {
-        *end = begin + 1;
+        *end = begin + 1; //-V2563
         sign = 1;
         return true;
     }
@@ -113,7 +113,7 @@ static bool GetSign(int &sign, char *begin, char **end)
 
 
 #ifdef PANEL
-static bool GetIntPart(Value &value, char *begin, char **end, int numDigitsAfterComma)
+static bool GetIntPart(Value &value, char *begin, char **end, int numDigitsAfterComma) //-V2506
 {
     *end = begin;
 
@@ -132,7 +132,7 @@ static bool GetIntPart(Value &value, char *begin, char **end, int numDigitsAfter
         {
             comma = true;
         }
-        else if(comma)
+        else if(comma) //-V2516
         {
             numDigitsAfterComma--;
         }
@@ -142,7 +142,7 @@ static bool GetIntPart(Value &value, char *begin, char **end, int numDigitsAfter
             buffer.Append(**end);
         }
         
-        *end = *end + 1;
+        *end = *end + 1; //-V2563
     }
 
     value = Value(buffer.c_str(), Order::One);
@@ -158,7 +158,7 @@ static bool GetIntPart(Value &, char *, char **, int)
 
 
 #ifdef PANEL
-static bool GetPower(int &pow, char *begin, char **end)
+static bool GetPower(int &pow, char *begin, char **end) //-V2506
 {
     if (*begin != 'e' && *begin != 'E')
     {
@@ -214,7 +214,7 @@ void Value::FromString(const char *const buffer, int pow10)
 
     units = static_cast<int>(AssembleInteger(buffer, pos, end));    // Находим целую часть
 
-    if (buffer[end] == '.' || buffer[end] == ',')
+    if (buffer[end] == '.' || buffer[end] == ',') //-V2563
     {
         mUnits = AssembleTriple(buffer, end + 1, &end);
         uUnits = AssembleTriple(buffer, end, &end);
@@ -228,7 +228,7 @@ void Value::FromString(const char *const buffer, int pow10)
         uint pow = Math::Pow10(pow10);
         Mul(pow);
     }
-    else if (pow10 < 0)
+    else if (pow10 < 0) //-V2516
     {
         uint pow = Math::Pow10(-pow10);
         Div(pow);
@@ -252,12 +252,12 @@ void Value::FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign
 
 static void ProcessSign(const char *const buffer, int *pos, int *sign)
 {
-    if (buffer[0] == '+')
+    if (buffer[0] == '+') //-V2563
     {
         *sign = 1;
         *pos = *pos + 1;
     }
-    else if (buffer[0] == '-')
+    else if (buffer[0] == '-') //-V2516 //-V2563
     {
         *sign = -1;
         *pos = *pos + 1;
@@ -269,7 +269,7 @@ static int FindIntegerPart(const char *const buffer, int start)
 {
     int pos = start;
 
-    while (buffer[pos] >= '0' && buffer[pos] <= '9')
+    while (buffer[pos] >= '0' && buffer[pos] <= '9') //-V2563
     {
         pos++;
     }
@@ -286,7 +286,7 @@ static uint AssembleInteger(const char *const buffer, int start, int end)
 
     for (int i = start; i < end; i++)
     {
-        stack[posStack++] = buffer[i];
+        stack[posStack++] = buffer[i]; //-V2563
     }
 
     uint result = 0;
@@ -315,10 +315,10 @@ static uint AssembleTriple(const char *const buffer, int start, int *end)
 
     int i = start;
 
-    while ((buffer[i] >= '0' && buffer[i] <= '9') &&
+    while ((buffer[i] >= '0' && buffer[i] <= '9') && //-V2563
            (posStack < 3))
     {
-        stack[posStack] = buffer[i];
+        stack[posStack] = buffer[i]; //-V2563
         posStack++;
         i++;
     }
@@ -545,7 +545,7 @@ bool Value::operator!=(const Value &rhs)
 }
 
 
-Order::E Value::GetOrder() const
+Order::E Value::GetOrder() const //-V2506
 {
     Value temp = *this;
     temp.SetSign(1);
@@ -554,13 +554,13 @@ Order::E Value::GetOrder() const
 
     if      (integer >= 1000 * 1000) { return Order::Mega;  }
     else if (integer >= 1000)        { return Order::Kilo;  }
-    else if (integer > 0)            { return Order::One;   }
+    else if (integer > 0)            { return Order::One;   } //-V2516
 
     int fract = temp.FractNano();
 
     if      (fract >= 1000 * 1000)   { return Order::Milli; }
     else if (fract >= 1000)          { return Order::Micro; }
-    else if (fract > 0)              { return Order::Nano;  }
+    else if (fract > 0)              { return Order::Nano;  } //-V2516
 
     return Order::One;
 }

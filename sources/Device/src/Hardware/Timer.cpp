@@ -58,7 +58,7 @@ void Timer::Init()
 }
 
 
-void Timer::ElapsedCallback()
+void Timer::ElapsedCallback() //-V2506
 {
     uint time = TIME_MS;
 
@@ -169,7 +169,7 @@ static uint NearestTime()
 }
 
 
-static void StartTIM(uint timeStopMS)
+static void StartTIM(uint timeStopMS) //-V2506
 {
     StopTIM();
 
@@ -211,7 +211,7 @@ uint Timer::LogPointUS(char * name)
 {
     uint interval = TIME_TICKS - timePrevPoint;
     timePrevPoint = TIME_TICKS;
-    LOG_WRITE("%s %.2f us", name, interval / 120.0);
+    LOG_WRITE("%s %.2f us", name, interval / 120.0); //-V2564
     return interval;
 }
 
@@ -220,7 +220,7 @@ uint Timer::LogPointMS(char * name)
 {
     uint interval = TIME_TICKS - timePrevPoint;
     timePrevPoint = TIME_TICKS;
-    LOG_WRITE("%s %.2f ms", name, interval / 120e3);
+    LOG_WRITE("%s %.2f ms", name, interval / 120e3); //-V2564
     return interval;
 }
 

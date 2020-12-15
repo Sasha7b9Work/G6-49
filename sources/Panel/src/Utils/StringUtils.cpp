@@ -24,11 +24,11 @@
 uint8 Locale::separator = '.';
 
 
-char *SU::Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[20])
+char *SU::Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[20]) //-V2506
 {
     if (Math::IsEquals(value, ERROR_VALUE_FLOAT))
     {
-        std::strcpy(bufferOut, ERROR_STRING_VALUE);
+        std::strcpy(bufferOut, ERROR_STRING_VALUE); //-V2513
         return bufferOut;
     }
 
@@ -36,11 +36,11 @@ char *SU::Float2String(float value, bool alwaysSign, int numDigits, char bufferO
     
     char *pBuffer = bufferOut;
 
-    if (value < 0)
+    if (value < 0) //-V2564
     {
         *pBuffer++ = '-';
     }
-    else if (alwaysSign)
+    else if (alwaysSign) //-V2516
     {
         *pBuffer++ = '+';
     }
@@ -73,10 +73,10 @@ char *SU::Float2String(float value, bool alwaysSign, int numDigits, char bufferO
         std::sprintf(pBuffer, format, static_cast<double>(value));
     }
 
-    bool signExist = alwaysSign || value < 0;
-    while (std::strlen(bufferOut) < static_cast<uint>(numDigits + (signExist ? 2 : 1)))
+    bool signExist = alwaysSign || value < 0; //-V2564
+    while (std::strlen(bufferOut) < static_cast<uint>(numDigits + (signExist ? 2 : 1))) //-V2513
     {
-        std::strcat(bufferOut, "0");
+        std::strcat(bufferOut, "0"); //-V2513
     }
 
     return bufferOut;
@@ -105,11 +105,11 @@ char *SU::Int2String(int value, bool alwaysSign, int numMinFields, char *buffer)
     const int SIZE = 20;
     char format[SIZE] = "%";
     std::snprintf(&(format[1]), SIZE, "0%d", numMinFields);
-    std::strcat(format, "d");
+    std::strcat(format, "d"); //-V2513
     if (alwaysSign && value >= 0)
     {
-        buf[0] = '+';
-        std::snprintf(buf + 1, SIZE - 1, format, value);
+        buf[0] = '+'; //-V2563
+        std::snprintf(buf + 1, SIZE - 1, format, value); //-V2563
     }
     else
     {
@@ -152,7 +152,7 @@ uint SU::StringToBin32(char buffer[33])
 {
     uint result = 0;
 
-    uint size = std::strlen(buffer);
+    uint size = std::strlen(buffer); //-V2513
 
     char *pointer = buffer;
 
@@ -168,9 +168,9 @@ uint SU::StringToBin32(char buffer[33])
 }
 
 
-bool SU::String2UInt64(const char *str, uint64 *value)
+bool SU::String2UInt64(const char *str, uint64 *value) //-V2506
 {
-    uint length = std::strlen(str);
+    uint length = std::strlen(str); //-V2513
     if(length == 0)
     {
         return false;
@@ -182,7 +182,7 @@ bool SU::String2UInt64(const char *str, uint64 *value)
     do 
     {
         --i;
-        int val = str[i] &(~(0x30));
+        int val = str[i] &(~(0x30)); //-V2563
         if(val < 0 || val > 9)
         {
             return false;
@@ -195,9 +195,9 @@ bool SU::String2UInt64(const char *str, uint64 *value)
 }
 
 
-bool SU::String2UInt(const char *str, uint *value)
+bool SU::String2UInt(const char *str, uint *value) //-V2506
 {
-    uint length = std::strlen(str);
+    uint length = std::strlen(str); //-V2513
     if (length == 0)
     {
         return false;
@@ -209,7 +209,7 @@ bool SU::String2UInt(const char *str, uint *value)
     do
     {
         --i;
-        int val = str[i] & (~(0x30));
+        int val = str[i] & (~(0x30)); //-V2563
         if (val < 0 || val > 9)
         {
             return false;
@@ -222,7 +222,7 @@ bool SU::String2UInt(const char *str, uint *value)
 }
 
 
-int SU::NumWords(const char *string)
+int SU::NumWords(const char *string) //-V2506
 {
     ChooseSpaces(&string);
 
@@ -243,7 +243,7 @@ int SU::NumWords(const char *string)
 }
 
 
-char *SU::GetWord(char *string, int n, char *out, int size)
+char *SU::GetWord(char *string, int n, char *out, int size) //-V2506
 {
     if (n >= NumWords(string))
     {
@@ -284,14 +284,14 @@ char *SU::GetWord(char *string, int n, char *out, int size)
 
     if (length + 1 > size)
     {
-        return reinterpret_cast<char *>(0xffffffffU);           // Не хватит места в выходном буфере - выходим с соответствующим кодом //-V566
+        return reinterpret_cast<char *>(0xffffffffU);           // Не хватит места в выходном буфере - выходим с соответствующим кодом //-V566 //-V2571
     }
 
     for (int i = 0; i < length; i++)
     {
-        out[i] = string[i];
+        out[i] = string[i]; //-V2563
     }
-    out[length] = 0;
+    out[length] = 0; //-V2563
 
     return out;
 }
@@ -312,14 +312,14 @@ int SU::NumDigitsInNumber(int value)
 #define  SYMBOL(x) (*(*(x)))
 
 
-bool SU::ChooseSymbols(const char **string)
+bool SU::ChooseSymbols(const char **string) //-V2506
 {
-    if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a)
+    if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a) //-V2563
     {
         return false;
     }
 
-    while (SYMBOL(string) != ' ' && SYMBOL(string) != 0x0d && SYMBOL(string + 1) != 0x0a)
+    while (SYMBOL(string) != ' ' && SYMBOL(string) != 0x0d && SYMBOL(string + 1) != 0x0a) //-V2563
     {
         (*string)++;
     }
@@ -328,9 +328,9 @@ bool SU::ChooseSymbols(const char **string)
 }
 
 
-bool SU::ChooseSpaces(const char **string)
+bool SU::ChooseSpaces(const char **string) //-V2506
 {
-    if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a)
+    if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a) //-V2563
     {
         return false;
     }
@@ -346,7 +346,7 @@ bool SU::ChooseSpaces(const char **string)
 #undef SYMBOL
 
 
-bool SU::GetWord(const char *string, Word *word, const int numWord)
+bool SU::GetWord(const char *string, Word *word, const int numWord) //-V2506
 {
     ChooseSpaces(&string);
 
@@ -356,7 +356,7 @@ bool SU::GetWord(const char *string, Word *word, const int numWord)
     {
         if (currentWord == numWord)
         {
-            word->address = const_cast<char *>(string);
+            word->address = const_cast<char *>(string); //-V2567
             ChooseSymbols(&string);
             word->numSymbols = static_cast<int8>(string - word->address);
 
@@ -382,7 +382,7 @@ bool SU::GetWord(const char *string, Word *word, const int numWord)
 }
 
 
-bool SU::WordEqualZeroString(Word *word, char* string)
+bool SU::WordEqualZeroString(Word *word, char* string) //-V2506
 {
     char *ch = string;
     char *w = static_cast<char*>(word->address);
@@ -399,7 +399,7 @@ bool SU::WordEqualZeroString(Word *word, char* string)
 }
 
 
-int SU::FindSymbol(const char *string, char symbol)
+int SU::FindSymbol(const char *string, char symbol) //-V2506
 {
     int pos = 0;
     while(*string)  
@@ -415,7 +415,7 @@ int SU::FindSymbol(const char *string, char symbol)
 }
 
 
-char SU::ToUpper(char symbol)
+char SU::ToUpper(char symbol) //-V2506
 {
     uint8 s = static_cast<uint8>(symbol);
 
@@ -427,7 +427,7 @@ char SU::ToUpper(char symbol)
     {
         return s - 0x10;
     }
-    else if (s <= 0x7a)
+    else if (s <= 0x7a) //-V2516
     {
         return static_cast<char>(std::toupper(s));
     }
@@ -439,7 +439,7 @@ char SU::ToUpper(char symbol)
 void SU::ConcatenateSymbol(char *str, char symbol)
 {
     char con[2] = {symbol, 0};
-    std::strcat(str, con);
+    std::strcat(str, con); //-V2513
 }
 
 
@@ -465,32 +465,32 @@ float SU::Buffer2Float(const uint8 *buffer)
 
 bool SU::String2Int(const char *buffer, int *value, char **end)
 {
-    Buffer string(std::strlen(buffer) + 1);
+    Buffer string(std::strlen(buffer) + 1); //-V2513
 
-    std::strcpy(string.DataChar(), buffer);
+    std::strcpy(string.DataChar(), buffer); //-V2513
 
     *value = std::strtol(string.DataChar(), end, 10);
 
     if (*end == string.DataChar())
     {
-        *end = const_cast<char *>(buffer);
+        *end = const_cast<char *>(buffer); //-V2567
     }
     else
     {
-        *end = const_cast<char *>(buffer) + (*end - string.DataChar());
+        *end = const_cast<char *>(buffer) + (*end - string.DataChar()); //-V2563 //-V2567
     }
 
-    return (*end != const_cast<char *>(buffer));
+    return (*end != const_cast<char *>(buffer)); //-V2567
 }
 
 
 char *SU::ToUpper(void *s, uint size)
 {
-    char *str = static_cast<char *>(s);
+    char *str = static_cast<char *>(s); //-V2571
 
     for (uint i = 0; i < size; i++)
     {
-        str[i] = static_cast<char>(std::toupper(str[i]));
+        str[i] = static_cast<char>(std::toupper(str[i])); //-V2563
     }
 
     return str;
@@ -499,11 +499,11 @@ char *SU::ToUpper(void *s, uint size)
 
 char *SU::ToUpper(char *str)
 {
-    return ToUpper(str, std::strlen(str));
+    return ToUpper(str, std::strlen(str)); //-V2513
 }
 
 
-char SU::ToLower(char symbol)
+ char SU::ToLower(char symbol) //-V2506
 {
     uint8 s = static_cast<uint8>(symbol);
 
@@ -511,7 +511,7 @@ char SU::ToLower(char symbol)
     {
         return static_cast<char>(s + 0x20);
     }
-    else if(s >= 0xc0 && s < 0xE0)
+    else if(s >= 0xc0 && s < 0xE0) //-V2516
     {
         return static_cast<char>(s + 0x20);
     }
@@ -526,7 +526,7 @@ char *SU::UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, in
 
     char *start = bufferOut;
 
-    char *pointer = start + allSymbols; // Выводить символы будем начиная с конца
+    char *pointer = start + allSymbols; // Выводить символы будем начиная с конца //-V2563
 
     *pointer-- = 0;                         // Пишем ноль в конец строки как символ её конца
 
@@ -571,5 +571,5 @@ void Locale::FindSeparator()
 
     std::strtof(str, &end);
 
-    separator = static_cast<uint8>((end == (str + 1) ? ',' : '.'));
+    separator = static_cast<uint8>((end == (str + 1) ? ',' : '.')); //-V2563
 }

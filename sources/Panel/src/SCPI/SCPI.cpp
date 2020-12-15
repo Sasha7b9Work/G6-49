@@ -47,7 +47,7 @@ void SCPI::AppendNewData(pCHAR buffer, uint size)
 }
 
 
-void SCPI::Update()
+void SCPI::Update() //-V2506
 {
     RemoveBadSymbolsFromBegin();
 
@@ -66,7 +66,7 @@ void SCPI::Update()
 }
 
 
-static pCHAR Process(pCHAR buffer, const StructSCPI strct[]) //-V2504
+static pCHAR Process(pCHAR buffer, const StructSCPI strct[]) //-V2504 //-V2506
 {
     while (!strct->IsEmpty())
     {
@@ -93,11 +93,11 @@ static pCHAR Process(pCHAR buffer, const StructSCPI strct[]) //-V2504
 
     badSymbols.Append(*buffer);         // Перебрали все ключи в strct и не нашли ни одного соответствия. Поэтому помещаем начальный разделитель в бракованные символыа
 
-    return buffer + 1;
+    return buffer + 1; //-V2563
 }
 
 
-pCHAR SCPI::BeginWith(pCHAR buffer, pCHAR word)
+pCHAR SCPI::BeginWith(pCHAR buffer, pCHAR word) //-V2506
 {
     while (*word)
     {
@@ -127,7 +127,7 @@ static pCHAR ProcessNode(pCHAR begin, const StructSCPI *node)
 }
 
 
-static pCHAR ProcessLeaf(pCHAR begin, const StructSCPI *node)
+static pCHAR ProcessLeaf(pCHAR begin, const StructSCPI *node) //-V2506
 {
     if (*begin == '\0')                     // Подстраховка от того, что символ окончания команды не принят
     {
@@ -143,7 +143,7 @@ static pCHAR ProcessLeaf(pCHAR begin, const StructSCPI *node)
 
     badSymbols.Append(*begin);
 
-    return begin + 1;
+    return begin + 1; //-V2563
 }
 
 
@@ -209,7 +209,7 @@ static bool RemoveSeparatorsSequenceFromBegin()
 
 void SCPI::SendAnswer(pCHAR message)
 {
-    if(message[std::strlen(message) - 1] != 0x0D)
+    if(message[std::strlen(message) - 1] != 0x0D) //-V2513 //-V2563
     {
         String msg(message);
         msg.Append(0x0D);
@@ -231,7 +231,7 @@ static bool IsBeginCommand(const char &symbol)
 void SCPI::ProcessHint(String *message, pString names[]) //-V2504
 {
     message->Append(" {");
-    for(int i = 0; i < names[i][0] != 0; i++)
+    for(int i = 0; i < names[i][0] != 0; i++) //-V2563
     {
         message->Append(names[i]);
         message->Append(" |");
@@ -252,7 +252,7 @@ bool SCPI::Handler::Processing(SimpleMessage *message)
 }
 
 
-pCHAR SCPI::ProcessParameterDouble(pCHAR buffer, ParameterDoubleType::E value)
+pCHAR SCPI::ProcessParameterDouble(pCHAR buffer, ParameterDoubleType::E value) //-V2506
 {
     ParameterDouble *param = CURRENT_FORM->FindParameter(value);
 
@@ -273,7 +273,7 @@ pCHAR SCPI::ProcessParameterDouble(pCHAR buffer, ParameterDoubleType::E value)
     {
         if (param->SetAndLoadValue(paramValue))
         {
-            return end_str + 1;
+            return end_str + 1; //-V2563
         }
     }
 
@@ -281,7 +281,7 @@ pCHAR SCPI::ProcessParameterDouble(pCHAR buffer, ParameterDoubleType::E value)
 }
 
 
-pCHAR SCPI::ProcessParameterInteger(pCHAR buffer, ParameterIntegerType::E type)
+pCHAR SCPI::ProcessParameterInteger(pCHAR buffer, ParameterIntegerType::E type) //-V2506
 {
     ParameterInteger *param = CURRENT_FORM->FindParameter(type);
 
@@ -302,7 +302,7 @@ pCHAR SCPI::ProcessParameterInteger(pCHAR buffer, ParameterIntegerType::E type)
     {
         if (param->SetAndLoadValue(paramValue))
         {
-            return end_str + 1;
+            return end_str + 1; //-V2563
         }
     }
 
@@ -310,7 +310,7 @@ pCHAR SCPI::ProcessParameterInteger(pCHAR buffer, ParameterIntegerType::E type)
 }
 
 
-pCHAR SCPI::ProcessParameterChoice(pCHAR buffer, ParameterChoiceType::E choice, pString *names)
+pCHAR SCPI::ProcessParameterChoice(pCHAR buffer, ParameterChoiceType::E choice, pString *names) //-V2506
 {
     ParameterChoice *param = CURRENT_FORM->FindParameter(choice);
 
@@ -320,9 +320,9 @@ pCHAR SCPI::ProcessParameterChoice(pCHAR buffer, ParameterChoiceType::E choice, 
         return nullptr;
     }
 
-    SCPI_REQUEST(SCPI::SendAnswer(names[param->GetChoice()]));
+    SCPI_REQUEST(SCPI::SendAnswer(names[param->GetChoice()])); //-V2563
 
-    SCPI_PROCESS_ARRAY(names, param->SetAndLoadChoice(i));
+    SCPI_PROCESS_ARRAY(names, param->SetAndLoadChoice(i)); //-V2563
 }
 
 

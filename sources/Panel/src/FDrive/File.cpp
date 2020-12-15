@@ -44,17 +44,17 @@ static void DrawSignal(int x, int y, const uint8 *data, float scale)
     for (int i = 1; i < 240; i++)
     {
         int x1 = x + i - 1;
-        int y1 = static_cast<int>(static_cast<float>(y) - static_cast<float>(data[i - 1]) * scale);
+        int y1 = static_cast<int>(static_cast<float>(y) - static_cast<float>(data[i - 1]) * scale); //-V2563
 
         int x2 = x + i;
-        int y2 = static_cast<int>(static_cast<float>(y) - static_cast<float>(data[i]) * scale);
+        int y2 = static_cast<int>(static_cast<float>(y) - static_cast<float>(data[i]) * scale); //-V2563
 
         Line().Draw(x1, y1, x2, y2);
     }
 }
 
 
-void File::Draw(int x, int y)
+void File::Draw(int x, int y) //-V2506
 {
     Color::GRAY_10.SetAsCurrent();
 
@@ -62,7 +62,7 @@ void File::Draw(int x, int y)
 
     Color::GRAY_25.SetAsCurrent();
 
-    DrawSignal(x, y, &Form::GetFormFlash(CURRENT_CHANNEL)[0], scale);
+    DrawSignal(x, y, &Form::GetFormFlash(CURRENT_CHANNEL)[0], scale); //-V2563
 
     if (num == -1)
     {
@@ -75,7 +75,7 @@ void File::Draw(int x, int y)
 }
 
 
-bool File::Handler(SimpleMessage *msg)
+bool File::Handler(SimpleMessage *msg) //-V2506
 {
     uint8 com = msg->TakeUINT8();
 
@@ -116,7 +116,7 @@ void File::RequestFromPicture(int numberFile)
 
     Message::FDrive::RequestPictureDDSfromFile message(static_cast<uint8>(numberFile));
 
-    Task *task = new Task(&message, File::Handler, EqualsRequestPicture);
+    Task *task = new Task(&message, File::Handler, EqualsRequestPicture); //-V2511
 
     PInterface::AddTask(task);
 }

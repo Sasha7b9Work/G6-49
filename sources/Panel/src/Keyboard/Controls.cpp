@@ -8,7 +8,7 @@ bool Key::IsDigit() const
 }
 
 
-char Key::ToChar() const
+char Key::ToChar() const //-V2506
 {
     if(IsDigit())
     {
@@ -18,7 +18,7 @@ char Key::ToChar() const
     {
         return '.';
     }
-    else if (value == Key::Minus)
+    else if (value == Key::Minus) //-V2516
     {
         return '-';
     }
@@ -80,7 +80,7 @@ pString Key::Name() const
 }
 
 
-bool Control::IsEntering() const
+bool Control::IsEntering() const //-V2506
 {
     if (key >= Key::_0 && key <= Key::_9)
     {

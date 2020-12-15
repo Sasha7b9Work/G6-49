@@ -34,7 +34,7 @@ struct Math
         {
             *value = min;
         }
-        else if(*value > max)
+        else if(*value > max) //-V2516
         {
             *value = max;
         }
@@ -42,5 +42,5 @@ struct Math
         return *value;
     }
 
-    template<class T> static int Sign(T x) { if(x > (T)(0)) { return 1; } if(x < (T)(0)) { return -1; } return 0; }
+    template<class T> static int Sign(T x) { if(x > (T)(0)) { return 1; } if(x < (T)(0)) { return -1; } return 0; } //-V2506
 };

@@ -86,7 +86,7 @@ void ParameterComposite::SetForm(Form *f)
 
     for (int i = 0; i < NumParameters(); i++)
     {
-        params[i]->SetForm(f);
+        params[i]->SetForm(f); //-V2563
     }
 }
 
@@ -95,7 +95,7 @@ int ParameterComposite::NumParameters() const
 {
     int counter = 0;
 
-    while (params[counter] != nullptr)
+    while (params[counter] != nullptr) //-V2563
     {
         counter++;
     }
@@ -104,11 +104,11 @@ int ParameterComposite::NumParameters() const
 }
 
 
-ParameterChoice *ParameterComposite::FindParameter(ParameterChoiceType::E p)
+ParameterChoice *ParameterComposite::FindParameter(ParameterChoiceType::E p) //-V2506
 {
     for(int i = 0; i < NumParameters(); i++)
     {
-        Parameter *param = params[i];
+        Parameter *param = params[i]; //-V2563
 
         if(param->IsChoice())
         {
@@ -125,11 +125,11 @@ ParameterChoice *ParameterComposite::FindParameter(ParameterChoiceType::E p)
 }
 
 
-ParameterDouble *ParameterComposite::FindParameter(ParameterDoubleType::E p)
+ParameterDouble *ParameterComposite::FindParameter(ParameterDoubleType::E p) //-V2506
 {
     for(int i = 0; i < NumParameters(); i++)
     {
-        Parameter *param = params[i];
+        Parameter *param = params[i]; //-V2563
 
         if(param->IsDouble())
         {
@@ -180,14 +180,14 @@ pString ParameterDouble::GetUnits(Order::E order) const
 
     static char units[10];
 
-    std::strcpy(units, Order::Suffix(order));
-    std::strcat(units, GetMainUnits());
+    std::strcpy(units, Order::Suffix(order)); //-V2513
+    std::strcat(units, GetMainUnits()); //-V2513
 
     return units;
 }
 
 
-bool ParameterDouble::SetAndLoadValue(double val)
+bool ParameterDouble::SetAndLoadValue(double val) //-V2506
 {
     if(!InRange(val))
     {
@@ -202,7 +202,7 @@ bool ParameterDouble::SetAndLoadValue(double val)
 }
 
 
-bool ParameterDouble::SetAndLoadValue(Value val)
+bool ParameterDouble::SetAndLoadValue(Value val) //-V2506
 {
     if (!InRange(val))
     {
@@ -217,7 +217,7 @@ bool ParameterDouble::SetAndLoadValue(Value val)
 }
 
 
-bool ParameterInteger::SetAndLoadValue(Value val)
+bool ParameterInteger::SetAndLoadValue(Value val) //-V2506
 {
     if (!InRange(val))
     {
@@ -231,7 +231,7 @@ bool ParameterInteger::SetAndLoadValue(Value val)
     return true;
 }
 
-bool ParameterInteger::SetAndLoadValue(int val)
+bool ParameterInteger::SetAndLoadValue(int val) //-V2506
 {
     if (!InRange(Value(val)))
     {
@@ -283,7 +283,7 @@ bool ParameterDouble::IsTime() const
 }
 
 
-String ParameterComposite::ToString(String &units) const
+String ParameterComposite::ToString(String &units) const //-V2506
 {
     units.Free();
 
@@ -312,11 +312,11 @@ String ParameterChoice::ToString(String &units) const
 {
     units.Free();
 
-    return String(choices[GetChoice() * 2 + LANGUAGE]);
+    return String(choices[GetChoice() * 2 + LANGUAGE]); //-V2563
 }
 
 
-int ParameterChoice::GetChoice() const 
+int ParameterChoice::GetChoice() const  //-V2506
 {
     if (type == ParameterChoiceType::ModeStart)
     {
@@ -375,7 +375,7 @@ void ParameterChoice::NextChoiceModeStart()
 //}
 
 
-bool ParameterChoice::SetAndLoadChoice(int ch)
+bool ParameterChoice::SetAndLoadChoice(int ch) //-V2506
 {
     if(ch < 0 || ch >= NumChoices())
     {
@@ -418,12 +418,12 @@ int ParameterChoice::NumChoices() const
 {
     int count = 0;
 
-    const char *ch = choices[count];
+    const char *ch = choices[count]; //-V2563
 
     while (ch != nullptr)
     {
         count++;
-        ch = choices[count];
+        ch = choices[count]; //-V2563
     }
 
     return count / 2;
@@ -530,7 +530,7 @@ Value ParameterAmplitude::GetMax() const
 }
 
 
-Value ParameterOffset::GetMax() const
+Value ParameterOffset::GetMax() const //-V2506
 {
     // ΐμολ == 0  | [0 ... 5]
     // ΐμολ <= 1Β | [0 ... 2.5], ampl / 2 + fabs(ρμ) <= 2.5
@@ -544,7 +544,7 @@ Value ParameterOffset::GetMax() const
     {
         return max;
     }
-    else if (amplitude.ToDouble() <= 1.0F)
+    else if (amplitude.ToDouble() <= 1.0F) //-V2516
     {
         result.Div(2);
     }

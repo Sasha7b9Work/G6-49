@@ -102,7 +102,7 @@ void Page::DrawClosed(int x, int y) const
     {
         color = Color::MENU_ITEM_SHADE;
     }
-    else if(IsPressed())
+    else if(IsPressed()) //-V2516
     {
         color = Color::GREEN_50;
     }
@@ -271,7 +271,7 @@ void Page::DrawOpened() const
 
         if(i < NumItems())
         {
-            items[i]->Draw(false, x, y);
+            items[i]->Draw(false, x, y); //-V2563
         }
     }
 

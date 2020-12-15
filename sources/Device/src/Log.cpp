@@ -29,7 +29,7 @@ void Log::Trace(char *file, int line, char *format, ...) //-V2560
     std::vsprintf(text, format, args);
     va_end(args);
 
-    std::strcat(message, text);
+    std::strcat(message, text); //-V2513
 
     Message::Log(message).Transmit();
 }

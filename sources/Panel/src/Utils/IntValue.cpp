@@ -10,9 +10,9 @@ IntValue::IntValue(const char *buffer, int _posComma) : sign(1)
     posComma = _posComma;
 
     char temp[20];
-    std::strcpy(temp, buffer);
+    std::strcpy(temp, buffer); //-V2513
 
-    fract1000 = ToFract1000(temp + posComma + 1);
+    fract1000 = ToFract1000(temp + posComma + 1); //-V2563
 
     temp[posComma + 1] = 0;
 
@@ -41,7 +41,7 @@ void IntValue::Sub5(char *bufferOut, int *_posComma)
 
 int IntValue::ToWhole(pCHAR buffer)
 {
-    int numDigits = static_cast<int>(std::strlen(buffer));
+    int numDigits = static_cast<int>(std::strlen(buffer)); //-V2513
 
     int pow = 1;
 
@@ -49,7 +49,7 @@ int IntValue::ToWhole(pCHAR buffer)
 
     for (int i = numDigits - 1; i >= 0; i--)
     {
-        result += pow * (buffer[i] & 0x0f);
+        result += pow * (buffer[i] & 0x0f); //-V2563
         pow *= 10;
     }
 
@@ -63,11 +63,11 @@ int IntValue::ToFract1000(pCHAR buffer)
 
     int result = 0;
 
-    uint size = std::strlen(buffer);
+    uint size = std::strlen(buffer); //-V2513
 
     for (uint i = 0; i < size; i++)
     {
-        result += pow * (buffer[i] & 0x0f);
+        result += pow * (buffer[i] & 0x0f); //-V2563
         pow /= 10;
     }
 
@@ -77,10 +77,10 @@ int IntValue::ToFract1000(pCHAR buffer)
 
 void IntValue::ToString(char *buffer)
 {
-    buffer[0] = (sign > 0) ? '+' : '-';
+    buffer[0] = (sign > 0) ? '+' : '-'; //-V2563
 
-    WholeToString(buffer + 1, posComma + 1);
-    Fract1000toString(buffer + posComma + 1 + 1, 4 - posComma);
+    WholeToString(buffer + 1, posComma + 1); //-V2563
+    Fract1000toString(buffer + posComma + 1 + 1, 4 - posComma); //-V2563
 }
 
 
@@ -90,7 +90,7 @@ void IntValue::WholeToString(char *buffer, int numDigits)
 
     for (int i = numDigits - 1; i >= 0; i--)
     {
-        buffer[i] = (number % 10) | 0x30;
+        buffer[i] = (number % 10) | 0x30; //-V2563
         number /= 10;
     }
 }
@@ -102,7 +102,7 @@ void IntValue::Fract1000toString(char *buffer, int numDigits)
     {
         if (i < numDigits)
         {
-            buffer[i] = static_cast<char>(DigitFromFract1000(i) | 0x30);
+            buffer[i] = static_cast<char>(DigitFromFract1000(i) | 0x30); //-V2563
         }
     }
 }

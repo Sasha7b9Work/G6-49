@@ -8,7 +8,7 @@
 // Для связи с основным процессором
 static SPI_HandleTypeDef handleSPI4 =
 {
-	SPI4,
+	SPI4, //-V2571
 	{
 		SPI_MODE_MASTER,
 		SPI_DIRECTION_2LINES,
@@ -38,7 +38,7 @@ void HAL_SPI4::Init()
 		GPIO_AF5_SPI4
 	};
 
-	HAL_GPIO_Init(GPIOE, &isGPIO);
+	HAL_GPIO_Init(GPIOE, &isGPIO); //-V2571
 
 	HAL_SPI_Init(&handleSPI4);
 
@@ -46,13 +46,13 @@ void HAL_SPI4::Init()
 	isGPIO.Pin = GPIO_PIN_4;
 	isGPIO.Mode = GPIO_MODE_INPUT;
 	isGPIO.Alternate = 0;
-	HAL_GPIO_Init(GPIOE, &isGPIO);
+	HAL_GPIO_Init(GPIOE, &isGPIO); //-V2571
 }
 
 
-bool HAL_SPI4::Transmit(const void *buffer, int size, int timeout)
+bool HAL_SPI4::Transmit(const void *buffer, int size, int timeout) //-V2506
 {
-	if (HAL_SPI_Transmit(&handleSPI4, static_cast<uint8 *>(const_cast<void *>(buffer)), static_cast<uint16>(size), static_cast<uint>(timeout)) != HAL_OK)
+	if (HAL_SPI_Transmit(&handleSPI4, static_cast<uint8 *>(const_cast<void *>(buffer)), static_cast<uint16>(size), static_cast<uint>(timeout)) != HAL_OK) //-V2567 //-V2571
 	{
 		return false;
 	}
@@ -67,9 +67,9 @@ bool HAL_SPI4::Transmit(int value, int timeout)
 }
 
 
-bool HAL_SPI4::Receive(void *recv, int size, int timeout)
+bool HAL_SPI4::Receive(void *recv, int size, int timeout) //-V2506
 {
-	if (HAL_SPI_Receive(&handleSPI4, static_cast<uint8 *>(recv), static_cast<uint16>(size), static_cast<uint>(timeout)) != HAL_OK)
+	if (HAL_SPI_Receive(&handleSPI4, static_cast<uint8 *>(recv), static_cast<uint16>(size), static_cast<uint>(timeout)) != HAL_OK) //-V2571
 	{
 		return false;
 	}
@@ -84,11 +84,11 @@ uint HAL_SPI4::ReceiveAndCompare(const void *compared, int size)
 
     uint8 byte = 0;
 
-    uint8 *data = static_cast<uint8 *>(const_cast<void *>(compared));
+    uint8 *data = static_cast<uint8 *>(const_cast<void *>(compared)); //-V2567 //-V2571
 
     for (int i = 0; i < size; i++)
     {
-        if (Receive(&byte, 1, 10) && data[i] != byte)
+        if (Receive(&byte, 1, 10) && data[i] != byte) //-V2563
         {
             result++;
         }
@@ -114,5 +114,5 @@ void HAL_SPI4::WaitFalling()
 
 bool HAL_SPI4::IsReady()
 {
-	return HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_SET;
+	return HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_SET; //-V2571
 }

@@ -3,7 +3,7 @@
 #include <stm32f4xx_hal.h>
 
 
-static CRC_HandleTypeDef handle = { CRC };
+static CRC_HandleTypeDef handle = { CRC }; //-V2571
 
 
 void HAL_CRC32::Init()
@@ -14,5 +14,5 @@ void HAL_CRC32::Init()
 
 uint HAL_CRC32::CalculateALIGN32(void *data, int size)
 {
-    return HAL_CRC_Calculate(&handle, reinterpret_cast<uint *>(data), static_cast<uint>(size / 4));
+    return HAL_CRC_Calculate(&handle, reinterpret_cast<uint *>(data), static_cast<uint>(size / 4)); //-V2571
 }

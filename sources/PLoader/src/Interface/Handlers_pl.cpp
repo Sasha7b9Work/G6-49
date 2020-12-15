@@ -15,7 +15,7 @@ static bool E(SimpleMessage *)
 }
 
 
-bool PHandlers::Processing(SimpleMessage *msg)
+bool PHandlers::Processing(SimpleMessage *msg) //-V2506
 {
     typedef bool(*pFuncBpM)(SimpleMessage *);
   
@@ -52,7 +52,7 @@ static bool OnStartMainApplication(SimpleMessage *)
 
     pFunction JumpToApplication;
 
-    JumpToApplication = (pFunction)(*(__IO uint *)(Updater::MAIN_PROGRAM_START_ADDRESS + 4));
+    JumpToApplication = (pFunction)(*(__IO uint *)(Updater::MAIN_PROGRAM_START_ADDRESS + 4)); //-V2571
 
     __set_MSP(*(__IO uint *)Updater::MAIN_PROGRAM_START_ADDRESS);
 

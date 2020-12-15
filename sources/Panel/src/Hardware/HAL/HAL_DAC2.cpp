@@ -5,7 +5,7 @@
 #include <stm32f4xx_hal.h>
 
 
-static DAC_HandleTypeDef handleDAC = { DAC };
+static DAC_HandleTypeDef handleDAC = { DAC }; //-V2571
 
 static TIM_HandleTypeDef hTIM;
 
@@ -14,7 +14,7 @@ static bool isRunning = false;
 
 void HAL_DAC2::Init()
 {
-    __TIM7_CLK_ENABLE();
+    __TIM7_CLK_ENABLE(); //-V2571
 
     GPIO_InitTypeDef structGPIO =
     {
@@ -24,13 +24,13 @@ void HAL_DAC2::Init()
         0, 0
     };
 
-    HAL_GPIO_Init(GPIOA, &structGPIO);
+    HAL_GPIO_Init(GPIOA, &structGPIO); //-V2571
 
     HAL_NVIC_SetPriority(TIM7_IRQn, 5, 5);
 
     HAL_NVIC_EnableIRQ(TIM7_IRQn);
 
-    hTIM.Instance = TIM7;
+    hTIM.Instance = TIM7; //-V2571
     /*
     * 100 - 5 êÃö
     * 125 - 4 êÃö
@@ -88,19 +88,19 @@ extern "C" {
 
 void TIM7_IRQHandler()
 {
-    if ((TIM7->SR & TIM_SR_UIF) == TIM_SR_UIF)
+    if ((TIM7->SR & TIM_SR_UIF) == TIM_SR_UIF) //-V2571
     {
-        if ((TIM7->DIER & TIM_DIER_UIE) == TIM_DIER_UIE)
+        if ((TIM7->DIER & TIM_DIER_UIE) == TIM_DIER_UIE) //-V2571
         {
-            TIM7->SR = ~TIM_DIER_UIE;
+            TIM7->SR = ~TIM_DIER_UIE; //-V2571
 
-            if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5) == GPIO_PIN_SET)
+            if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5) == GPIO_PIN_SET) //-V2571
             {
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET); //-V2571
             }
             else
             {
-                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET); //-V2571
             }
         }
     }

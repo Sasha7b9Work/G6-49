@@ -90,7 +90,7 @@ static void JumpToMainApplication()
 
     pFuncVV JumpToApplication;
 
-    JumpToApplication = reinterpret_cast<pFuncVV>(*reinterpret_cast<__IO uint *>(Updater::MAIN_PROGRAM_START_ADDRESS + 4)); //-V566
+    JumpToApplication = reinterpret_cast<pFuncVV>(*reinterpret_cast<__IO uint *>(Updater::MAIN_PROGRAM_START_ADDRESS + 4)); //-V566 //-V2571
 
     __set_MSP(*(__IO uint *)Updater::MAIN_PROGRAM_START_ADDRESS);
 

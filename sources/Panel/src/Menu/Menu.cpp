@@ -82,13 +82,13 @@ void Menu::ProcessKey(const Control control) //-V801
     {
         Menu::GetCurrentItem()->Press(control);
     }
-    else if (CURRENT_PAGE->Press(control))          // Иначе передаём управление текущей странице
+    else if (CURRENT_PAGE->Press(control))          // Иначе передаём управление текущей странице //-V2516
     {
     }
 }
 
 
-bool Menu::ProcessOutputs(const Control control) //-V801
+bool Menu::ProcessOutputs(const Control control) //-V801 //-V2506
 {
     if (control.IsRelease())
     {
@@ -98,7 +98,7 @@ bool Menu::ProcessOutputs(const Control control) //-V801
 
             return true;
         }
-        else if (control.Is(Key::On2))
+        else if (control.Is(Key::On2)) //-V2516
         {
             ProcessOutput(ChB);
 
@@ -136,7 +136,7 @@ bool Menu::RegIsControlSubPages()
 }
 
 
-int Menu::GetPosition(const Page *page)
+int Menu::GetPosition(const Page *page) //-V2506
 {
     Page *keeper = page->Keeper();
 
@@ -147,7 +147,7 @@ int Menu::GetPosition(const Page *page)
 
     for(int i = 0; i < keeper->NumItems(); i++)
     {
-        if(page == keeper->items[i])
+        if(page == keeper->items[i]) //-V2563
         {
             return i;
         }
@@ -209,7 +209,7 @@ void Menu::ResetOpenedItem()
 }
 
 
-bool Menu::OpenDebugPage(const Control control) //-V801
+bool Menu::OpenDebugPage(const Control control) //-V801 //-V2506
 {
     if(CURRENT_PAGE != PageService::self)
     {

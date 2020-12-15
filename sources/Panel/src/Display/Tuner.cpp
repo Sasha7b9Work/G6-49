@@ -28,7 +28,7 @@ Order::E                     DisplayEntering::order = Order::Count;
 Tuner *Tuner::current = nullptr;
 
 
-void DisplayEntering::EnterBuffer::Push(Key::E key)
+void DisplayEntering::EnterBuffer::Push(Key::E key) //-V2506
 {
     ParameterDouble *p = Tuner::Current()->ReinterpretToDouble();
 
@@ -106,7 +106,7 @@ Value DisplayEntering::ToValue()
 }
 
 
-bool DisplayEntering::EnterBuffer::ConsistComma() const
+bool DisplayEntering::EnterBuffer::ConsistComma() const //-V2506
 {
     for (int i = 0; i < stack.Size(); i++)
     {
@@ -133,7 +133,7 @@ int DisplayEntering::EnterBuffer::NumDigitsAfterComma() const
 }
 
 
-int DisplayEntering::EnterBuffer::PosComma() const
+int DisplayEntering::EnterBuffer::PosComma() const //-V2506
 {
     for (int i = 0; i < stack.Size(); i++)
     {
@@ -175,7 +175,7 @@ int Indicator::Draw(int x, int y, int width, const pString units) const
 }
 
 
-int Indicator::DrawDouble(int x, int y, int width, const pString units) const
+int Indicator::DrawDouble(int x, int y, int width, const pString units) const //-V2506
 {
     if (Tuner::Current()->ParameterIsNotOrdered())
     {
@@ -221,7 +221,7 @@ int Indicator::DrawDouble(int x, int y, const pString units, bool test) const
 
     Font::ForceUpperCase(false);
 
-    if (units[0] == Ideograph::_8::Degree)
+    if (units[0] == Ideograph::_8::Degree) //-V2563
     {
         Font::StoreAndSet(TypeFont::_8);
         Char(Ideograph::_8::BigDegree).Draw4InRect(x + 5, y - 1, test ? Color::BACK : Color::FILL);
@@ -277,7 +277,7 @@ int Indicator::DrawInteger(int x, int y, int width) const
 #define COLOR_SHADOW Color::GRAY_10;        // Этим цветом выводятся "назначащие знакоместа"
 
 
-Color Indicator::CalculateColorInteger(int pos, bool test) const
+Color Indicator::CalculateColorInteger(int pos, bool test) const //-V2506
 {
     if (test)
     {
@@ -296,7 +296,7 @@ Color Indicator::CalculateColorInteger(int pos, bool test) const
 }
 
 
-Color Indicator::CalculateColorDouble(int pos, bool test) const
+Color Indicator::CalculateColorDouble(int pos, bool test) const //-V2506
 {
     if (test)
     {
@@ -350,7 +350,7 @@ Color Indicator::CalculateColorDouble(int pos, bool test) const
 }
 
 
-bool Indicator::AllNumbersOfLeftIsZero(int pos) const
+bool Indicator::AllNumbersOfLeftIsZero(int pos) const //-V2506
 {
     for (int i = 0; i < pos; i++)
     {
@@ -364,7 +364,7 @@ bool Indicator::AllNumbersOfLeftIsZero(int pos) const
 }
 
 
-bool Indicator::RightDigitIzComma(int pos) const
+bool Indicator::RightDigitIzComma(int pos) const //-V2506
 {
     if (pos == Indicator::MAX_NUM_DIGITS - 1)
     {
@@ -375,7 +375,7 @@ bool Indicator::RightDigitIzComma(int pos) const
 }
 
 
-bool Indicator::AllNumberOfRightIsZero(int pos) const
+bool Indicator::AllNumberOfRightIsZero(int pos) const //-V2506
 {
     for (int i = pos + 1; (i < MAX_NUM_DIGITS) && !digits[i].IsEmpty(); i++)
     {
@@ -389,7 +389,7 @@ bool Indicator::AllNumberOfRightIsZero(int pos) const
 }
 
 
-int Indicator::AdditionShiftForDigit(int pos) const
+int Indicator::AdditionShiftForDigit(int pos) const //-V2506
 {
     static const int d = 5;
 
@@ -431,7 +431,7 @@ int Indicator::IndexHighlightReal() const
 }
 
 
-bool Indicator::OnControlKey(const Control control) //-V801
+bool Indicator::OnControlKey(const Control control) //-V801 //-V2506
 {
     if (control.IsRotate() || control.IsCursors())
     {
@@ -447,7 +447,7 @@ bool Indicator::OnControlKey(const Control control) //-V801
         {
             DecreaseInPosition(IndexHighlightReal());
         }
-        else if (control.Is(Key::RotateRight))
+        else if (control.Is(Key::RotateRight)) //-V2516
         {
             IncreaseInPosition(IndexHighlightReal());
         }
@@ -544,7 +544,7 @@ void Indicator::DecreaseInPosition(int pos)
 }
 
 
-bool Indicator::ChangeSign(Value *value, int pos)
+bool Indicator::ChangeSign(Value *value, int pos) //-V2506
 {
     if (IsSigned() && (pos == 0))
     {
@@ -616,7 +616,7 @@ bool Indicator::CommaInPosition(int pos) const
 }
 
 
-int Indicator::PositionComma() const
+int Indicator::PositionComma() const //-V2506
 {
     Parameter *param = Tuner::Current()->GetParameter();
 
@@ -630,7 +630,7 @@ int Indicator::PositionComma() const
             }
         }
     }
-    else if(param->IsInteger())
+    else if(param->IsInteger()) //-V2516
     {
         for (int i = 0; i < MAX_NUM_DIGITS; i++)
         {
@@ -645,7 +645,7 @@ int Indicator::PositionComma() const
 }
 
 
-bool Indicator::FirstSignedDigitInPosition(int pos) const
+bool Indicator::FirstSignedDigitInPosition(int pos) const //-V2506
 {
     for (int i = 0; digits[i] != '\0'; i++)
     {
@@ -659,7 +659,7 @@ bool Indicator::FirstSignedDigitInPosition(int pos) const
 }
 
 
-int Indicator::FindPositionLeftDigit(int pos) const
+int Indicator::FindPositionLeftDigit(int pos) const //-V2506
 {
     if (FirstSignedDigitInPosition(pos))
     {
@@ -779,7 +779,7 @@ void DisplayCorrection::DrawTitle(int x, int y, int width)
 }
 
 
-bool DisplayCorrection::OnControlKey(const Control &control)
+bool DisplayCorrection::OnControlKey(const Control &control) //-V2506
 {
     if (control.IsEntering())
     {
@@ -802,7 +802,7 @@ void DisplayCorrection::ShowMessageOutRangIfNeed(Value value)
         {
             buffer++;
         }
-        if (*buffer == '.' || *buffer == '.')       // Если первый символ - точка, добавляем один ноль перед точкой
+        if (*buffer == '.' || *buffer == ',')       // Если первый символ - точка, добавляем один ноль перед точкой //-V501 //-V522
         {
             if (buffer > m.c_str())
             {
@@ -826,7 +826,7 @@ void DisplayEntering::Init()
 }
 
 
-bool DisplayEntering::OnEnteringKey(const Control &control)
+bool DisplayEntering::OnEnteringKey(const Control &control) //-V2506
 {
     if (control.IsEntering())
     {
@@ -862,7 +862,7 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
 }
 
 
-bool DisplayEntering::ValueInBoundaries()
+bool DisplayEntering::ValueInBoundaries() //-V2506
 {
     Parameter *param = Tuner::Current()->GetParameter();
 
@@ -941,8 +941,8 @@ void DisplayEntering::DrawUnits(int x, int y, int width)
     {
         char units[10];
 
-        std::strcpy(units, Order::Suffix(order));
-        std::strcat(units, Tuner::Current()->ReinterpretToDouble()->GetMainUnits());
+        std::strcpy(units, Order::Suffix(order)); //-V2513
+        std::strcat(units, Tuner::Current()->ReinterpretToDouble()->GetMainUnits()); //-V2513
 
         Font::ForceUpperCase(false);
 
@@ -1030,7 +1030,7 @@ void DisplayCorrection::InitInteger()
 }
 
 
-Order::E DisplayCorrection::CalculateOrderForIndication()
+Order::E DisplayCorrection::CalculateOrderForIndication() //-V2506
 {
     if (Tuner::Current()->GetParameter()->IsDouble())
     {
@@ -1113,7 +1113,7 @@ void DisplayCorrection::Init(Value value)
     {
         tuner->ReinterpretToDouble()->SetAndLoadValue(value);
     }
-    else if (param->IsInteger())
+    else if (param->IsInteger()) //-V2516
     {
         tuner->ReinterpretToInteger()->SetAndLoadValue(value);
     }
@@ -1142,7 +1142,7 @@ void Tuner::Draw()
 }
 
 
-bool Tuner::OnControlKey(const Control control) //-V801
+bool Tuner::OnControlKey(const Control control) //-V801 //-V2506
 {
     if (control.IsCursors() || control.IsRotate() || control.IsEntering())
     {
@@ -1167,7 +1167,7 @@ void Tuner::OnButtonCancel()
 }
 
 
-void Tuner::OnButtonApply()
+void Tuner::OnButtonApply() //-V2506
 {
     if (InModeCorrection())
     {

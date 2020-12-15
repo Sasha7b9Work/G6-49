@@ -1,10 +1,10 @@
 #pragma once
 
 #ifdef WIN32
-#define __attribute(x)
+#define __attribute(x) //-V2573
 #endif
 
-#define __weak __attribute((weak))
+#define __weak __attribute((weak)) //-V2573
 
 
 #define HAL_MODULE_ENABLED

@@ -5,7 +5,7 @@
 
 
 
-USBD_StatusTypeDef USBD_Init(USBD_HandleTypeDef *pdev, USBD_DescriptorsTypeDef *pdesc, uint8_t id)
+USBD_StatusTypeDef USBD_Init(USBD_HandleTypeDef *pdev, USBD_DescriptorsTypeDef *pdesc, uint8_t id) //-V2506
 {
     if (pdev == NULL)
     {
@@ -161,7 +161,7 @@ USBD_StatusTypeDef USBD_LL_DataOutStage(USBD_HandleTypeDef *pdev , uint8_t epnum
             }
         }
     }
-    else if ((pdev->pClass->DataOut != NULL) && (pdev->dev_state == USBD_STATE_CONFIGURED))
+    else if ((pdev->pClass->DataOut != NULL) && (pdev->dev_state == USBD_STATE_CONFIGURED)) //-V2516
     {
         pdev->pClass->DataOut(pdev, epnum);
     }
@@ -217,7 +217,7 @@ USBD_StatusTypeDef USBD_LL_DataInStage(USBD_HandleTypeDef *pdev ,uint8_t epnum, 
             pdev->dev_test_mode = 0;
         }
     }
-    else if ((pdev->pClass->DataIn != NULL) &&
+    else if ((pdev->pClass->DataIn != NULL) && //-V2516
         (pdev->dev_state == USBD_STATE_CONFIGURED))
     {
         pdev->pClass->DataIn(pdev, epnum);

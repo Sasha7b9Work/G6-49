@@ -28,23 +28,23 @@ void HAL::Init()
     /* SysTick_IRQn interrupt configuration */
     HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    __HAL_RCC_GPIOC_CLK_ENABLE();
-    __HAL_RCC_GPIOD_CLK_ENABLE();
-    __HAL_RCC_GPIOE_CLK_ENABLE();
-    __HAL_RCC_GPIOF_CLK_ENABLE();
-    __HAL_RCC_GPIOG_CLK_ENABLE();
-    __HAL_RCC_GPIOH_CLK_ENABLE();
-    __HAL_RCC_GPIOI_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE(); //-V2571
+    __HAL_RCC_GPIOB_CLK_ENABLE(); //-V2571
+    __HAL_RCC_GPIOC_CLK_ENABLE(); //-V2571
+    __HAL_RCC_GPIOD_CLK_ENABLE(); //-V2571
+    __HAL_RCC_GPIOE_CLK_ENABLE(); //-V2571
+    __HAL_RCC_GPIOF_CLK_ENABLE(); //-V2571
+    __HAL_RCC_GPIOG_CLK_ENABLE(); //-V2571
+    __HAL_RCC_GPIOH_CLK_ENABLE(); //-V2571
+    __HAL_RCC_GPIOI_CLK_ENABLE(); //-V2571
 
-    __HAL_RCC_TIM2_CLK_ENABLE();    // Для тиков
-    __HAL_RCC_TIM3_CLK_ENABLE();    // Для таймеров
-    __HAL_RCC_TIM4_CLK_ENABLE();    // Для опроса клавиатуры
+    __HAL_RCC_TIM2_CLK_ENABLE();    // Для тиков //-V2571
+    __HAL_RCC_TIM3_CLK_ENABLE();    // Для таймеров //-V2571
+    __HAL_RCC_TIM4_CLK_ENABLE();    // Для опроса клавиатуры //-V2571
 
-    __HAL_RCC_DMA2D_CLK_ENABLE();
-    __HAL_RCC_LTDC_CLK_ENABLE();
-    __HAL_RCC_SPI4_CLK_ENABLE();
+    __HAL_RCC_DMA2D_CLK_ENABLE(); //-V2571
+    __HAL_RCC_LTDC_CLK_ENABLE(); //-V2571
+    __HAL_RCC_SPI4_CLK_ENABLE(); //-V2571
 
     SystemClockConfig();
 
@@ -62,9 +62,9 @@ static void SystemClockConfig()
 
     /**Configure the main internal regulator output voltage
     */
-    __HAL_RCC_PWR_CLK_ENABLE();
+    __HAL_RCC_PWR_CLK_ENABLE(); //-V2571
 
-    __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+    __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1); //-V2571
 
     /**Initializes the CPU, AHB and APB busses clocks
     */

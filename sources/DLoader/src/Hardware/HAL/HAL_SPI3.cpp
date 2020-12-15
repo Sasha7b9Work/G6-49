@@ -5,7 +5,7 @@
 
 static SPI_HandleTypeDef handle =
 {
-    SPI3,
+    SPI3, //-V2571
     {
         SPI_MODE_MASTER,
         SPI_DIRECTION_1LINE,
@@ -34,7 +34,7 @@ void HAL_SPI3::Init()
         GPIO_AF6_SPI3
     };
 
-    HAL_GPIO_Init(GPIOC, &isGPIO);
+    HAL_GPIO_Init(GPIOC, &isGPIO); //-V2571
 
     HAL_SPI_Init(&handle);
 }

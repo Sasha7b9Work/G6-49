@@ -70,7 +70,7 @@ pString Register::Name() const
 
 Form *Wave::GetCurrentForm()
 {
-    return forms[numberForm];
+    return forms[numberForm]; //-V2563
 }
 
 
@@ -90,12 +90,12 @@ Wave::Wave(Chan::E ch, Form **f) : channel(ch), numberForm(0), forms(f)
 {
     numForms = 0;
     
-    Form *form = forms[numForms];
+    Form *form = forms[numForms]; //-V2563
     
     while(form)
     {
         numForms++;
-        form = forms[numForms];
+        form = forms[numForms]; //-V2563
     }
 }
 
@@ -119,14 +119,14 @@ Form::Form(TypeForm::E v, Parameter **parameters, Wave *w) : value(v), wave(w), 
 
     if(params)
     {
-        while(params[numParams])
+        while(params[numParams]) //-V2563
         {
             numParams++;
         }
 
         for (int i = 0; i < numParams; i++)
         {
-            params[i]->SetForm(this);
+            params[i]->SetForm(this); //-V2563
         }
     }
 
@@ -150,7 +150,7 @@ void Form::Reset()
 
 Parameter *Form::CurrentParameter() const
 {
-    return params[currentParam];
+    return params[currentParam]; //-V2563
 }
 
 
@@ -160,34 +160,34 @@ int Form::NumParameters() const
 }
 
 
-Parameter *Form::GetParameter(int i)
+Parameter *Form::GetParameter(int i) //-V2506
 {
     if(i < numParams)
     {
-        return params[i];
+        return params[i]; //-V2563
     }
     return 0;
 }
 
 
-Form *Wave::GetForm(int i)
+Form *Wave::GetForm(int i) //-V2506
 {
     if(i < numForms)
     {
-        return forms[i];
+        return forms[i]; //-V2563
     }
     
     return nullptr;
 }
 
 
-Form *Wave::GetForm(TypeForm::E form)
+Form *Wave::GetForm(TypeForm::E form) //-V2506
 {
     for(int i = 0; i < numForms; i++)
     {
-        if(forms[i]->value == form)
+        if(forms[i]->value == form) //-V2563
         {
-            return forms[i];
+            return forms[i]; //-V2563
         }
     }
    
@@ -282,11 +282,11 @@ void Form::TuneGenerator()
 }
 
 
-ParameterDouble *Form::FindParameter(ParameterDoubleType::E p)
+ParameterDouble *Form::FindParameter(ParameterDoubleType::E p) //-V2506
 {
     for(int i = 0; i < numParams; i++)
     {
-        Parameter *param = params[i];
+        Parameter *param = params[i]; //-V2563
 
         if(param->IsDouble())
         {
@@ -297,7 +297,7 @@ ParameterDouble *Form::FindParameter(ParameterDoubleType::E p)
                 return parameter;
             }
         }
-        else if(param->IsComposite())
+        else if(param->IsComposite()) //-V2516
         {
             ParameterComposite *parameter = static_cast<ParameterComposite *>(param);
 
@@ -314,11 +314,11 @@ ParameterDouble *Form::FindParameter(ParameterDoubleType::E p)
 }
 
 
-ParameterChoice *Form::FindParameter(ParameterChoiceType::E p)
+ParameterChoice *Form::FindParameter(ParameterChoiceType::E p) //-V2506
 {
     for(int i = 0; i < numParams; i++)
     {
-        Parameter *param = params[i];
+        Parameter *param = params[i]; //-V2563
 
         if(param->IsChoice())
         {
@@ -347,11 +347,11 @@ ParameterChoice *Form::FindParameter(ParameterChoiceType::E p)
 }
 
 
-ParameterComposite *Form::FindParameter(ParameterCompositeType::E t)
+ParameterComposite *Form::FindParameter(ParameterCompositeType::E t) //-V2506
 {
     for (int i = 0; i < numParams; i++)
     {
-        Parameter *param = params[i];
+        Parameter *param = params[i]; //-V2563
 
         if (param->IsComposite())
         {
@@ -368,7 +368,7 @@ ParameterComposite *Form::FindParameter(ParameterCompositeType::E t)
     {
         for (int i = 0; i < numParams; i++)
         {
-            Parameter *param = old.params[i];
+            Parameter *param = old.params[i]; //-V2563
 
             if (param->IsComposite())
             {
@@ -386,11 +386,11 @@ ParameterComposite *Form::FindParameter(ParameterCompositeType::E t)
 }
 
 
-ParameterInteger *Form::FindParameter(ParameterIntegerType::E t)
+ParameterInteger *Form::FindParameter(ParameterIntegerType::E t) //-V2506
 {
     for (int i = 0; i < numParams; i++)
     {
-        Parameter *param = params[i];
+        Parameter *param = params[i]; //-V2563
 
         if (param->IsInteger())
         {
@@ -440,7 +440,7 @@ void Form::SendParameterToGenerator(ParameterIntegerType::E p)
 }
 
 
-void Form::OpenCompositeParameter()
+void Form::OpenCompositeParameter() //-V2506
 {
     if(!CurrentParameter()->IsComposite())
     {
@@ -457,15 +457,15 @@ void Form::OpenCompositeParameter()
 
     for(int i = 0; i < numParams; i++)
     {
-        params[i]->SetForm(this);
-        params[i]->SetParent(parent);
+        params[i]->SetForm(this); //-V2563
+        params[i]->SetParent(parent); //-V2563
     }
 }
 
 
-bool Form::CloseCompositeParameter()
+bool Form::CloseCompositeParameter() //-V2506
 {
-    if (params[0]->IsOpened())
+    if (params[0]->IsOpened()) //-V2563
     {
         params = old.params;
         numParams = old.numParams;
@@ -477,7 +477,7 @@ bool Form::CloseCompositeParameter()
 }
 
 
-bool Wave::StartModeIsSingle()
+bool Wave::StartModeIsSingle() //-V2506
 {
     ParameterChoice* param = static_cast<ParameterChoice *>(GetCurrentForm()->FindParameter(ParameterChoiceType::ModeStart));
 
@@ -549,7 +549,7 @@ void Form::DrawUGO(Chan::E ch, int y0)
 }
 
 
-void Form::DrawSine(Chan::E ch, int x0, int y0, int width, int height)
+void Form::DrawSine(Chan::E ch, int x0, int y0, int width, int height) //-V2506
 {
     ParameterComposite *param = FORM(ch)->FindParameter(ParameterCompositeType::Manipulation);
 
