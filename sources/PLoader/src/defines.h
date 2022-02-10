@@ -1,5 +1,8 @@
 #pragma once
 
+// ≈сли определено, то без обновлени€ прошивки
+#define WITHOUT_UPDATE
+
 #ifdef WIN32
 
 #define __ARMCLIB_VERSION 6070001 //-V2573

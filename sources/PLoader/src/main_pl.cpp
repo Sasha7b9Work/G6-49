@@ -6,6 +6,7 @@
 #include "Hardware/Timer.h"
 #include "Keyboard/Keyboard.h"
 #include "Utils/Debug.h"
+#include "Interface/Handlers_pl.h"
 
 
 // True будет означать, что запрос на обновление уже послан
@@ -18,6 +19,12 @@ int main()
     Timer::Init();
     HAL_LTDC::Init();
     Keyboard::Init();
+
+#ifdef WITHOUT_UPDATE
+
+    PHandlers::OnStartMainApplication();
+
+#endif
 
     while(true)
     {
