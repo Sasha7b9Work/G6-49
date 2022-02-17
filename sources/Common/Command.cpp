@@ -6,7 +6,7 @@
 
 
 
-pString Command::Name() const //-V2506
+pString Command::Name() const
 {
     static const pString names[Count] =
     {

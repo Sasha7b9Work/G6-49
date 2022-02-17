@@ -18,7 +18,7 @@ bool PFreqMeter::sendToSCPI = false;
 static String FormValue(uint8 lang);
 
 
-void PFreqMeter::Draw() //-V2506
+void PFreqMeter::Draw()
 {
     if (set.freq.measure == FreqMeasure::Disable)
     {
@@ -76,7 +76,7 @@ static String FormValue(uint8 lang)
 }
 
 
-void PFreqMeter::SetMeasure(uint value) //-V2506
+void PFreqMeter::SetMeasure(uint value)
 {
     if(value == MAX_UINT)
     {

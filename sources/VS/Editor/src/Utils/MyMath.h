@@ -22,15 +22,15 @@ namespace Math
     }
 
     template<class T>
-    T Limitation(T value, T min, T max) //-V2506
+    T Limitation(T value, T min, T max)
     {
         if (value < min)      { return min; }
-        else if (value > max) { return max; } //-V2516
+        else if (value > max) { return max; }
         return value;
     }
 
     template<class T>
-    T LimitationBelow(T value, T min) //-V2506
+    T LimitationBelow(T value, T min)
     {
         if (value < min) { return min; }
         return value;

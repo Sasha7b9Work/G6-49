@@ -88,13 +88,13 @@ void DInterface::Update()
 }
 
 
-bool DInterface::AddMessageForTransmit(SimpleMessage *message) //-V2506
+bool DInterface::AddMessageForTransmit(SimpleMessage *message)
 {
     SimpleMessage *clone = message->Clone();
 
     if (!outbox.Push(clone))
     {
-        delete clone; //-V2511
+        delete clone;
         // \tood Здесь нужно сообщать об ошибке. Сделать так, чтобы сообщения об ошибках обладали привилегированным статусом - помещать их в очередь даже когда там нет места (освободить)
         // LOG_ERROR("Очередь переполнена");
         return false;

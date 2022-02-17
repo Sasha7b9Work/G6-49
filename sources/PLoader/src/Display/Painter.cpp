@@ -12,7 +12,7 @@ void Painter::BeginScene(Color col)
     col.SetAsCurrent();
 
     uint *address = reinterpret_cast<uint *>(HAL_LTDC::GetBuffer());
-    uint *end = address + (SCREEN_HEIGHT * SCREEN_WIDTH) / 4; //-V2563
+    uint *end = address + (SCREEN_HEIGHT * SCREEN_WIDTH) / 4;
     uint value = static_cast<uint>(col.value) + static_cast<uint>(col.value << 8) + static_cast<uint>(col.value << 16) + static_cast<uint>(col.value << 24);
     while(address != end)
     {
@@ -31,8 +31,8 @@ void Painter::DrawHLine(int y, int x0, int x1, Color col)
 {
     col.SetAsCurrent();
 
-    uint8 *address = HAL_LTDC::GetBuffer() + x0 + y * SCREEN_WIDTH; //-V2563
-    uint8 *end = HAL_LTDC::GetBuffer() + SCREEN_WIDTH * SCREEN_HEIGHT; //-V2563
+    uint8 *address = HAL_LTDC::GetBuffer() + x0 + y * SCREEN_WIDTH;
+    uint8 *end = HAL_LTDC::GetBuffer() + SCREEN_WIDTH * SCREEN_HEIGHT;
 
     uint8 value = Color::CurrentValue();
 
@@ -55,8 +55,8 @@ void Painter::DrawVLine(int x, int y0, int y1, Color col)
 
     col.SetAsCurrent();
 
-    uint8 *address = HAL_LTDC::GetBuffer() + x + y0 * SCREEN_WIDTH; //-V2563
-    uint8 *end = HAL_LTDC::GetBuffer() + SCREEN_WIDTH * SCREEN_HEIGHT; //-V2563
+    uint8 *address = HAL_LTDC::GetBuffer() + x + y0 * SCREEN_WIDTH;
+    uint8 *end = HAL_LTDC::GetBuffer() + SCREEN_WIDTH * SCREEN_HEIGHT;
 
     uint8 value = Color::CurrentValue();
 
@@ -66,7 +66,7 @@ void Painter::DrawVLine(int x, int y0, int y1, Color col)
         {
             *address = value;
         };
-        address += SCREEN_WIDTH; //-V2563
+        address += SCREEN_WIDTH;
     }
 }
 
@@ -148,7 +148,7 @@ void Painter::FillRegion(int x, int y, int width, int height, Color col)
 
 void Painter::SetPoint(int x, int y)
 {
-    uint8 *buffer = HAL_LTDC::GetBuffer() + y * SCREEN_WIDTH + x; //-V2563
+    uint8 *buffer = HAL_LTDC::GetBuffer() + y * SCREEN_WIDTH + x;
 
     if(x >= 0 && x < SCREEN_WIDTH && y >= 0 && y < SCREEN_HEIGHT)
     {

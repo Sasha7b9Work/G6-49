@@ -18,7 +18,7 @@ void Painter::BeginScene(Color col)
     col.SetAsCurrent();
 
     uint *address = reinterpret_cast<uint *>(Display::GetBuffer());
-    uint *end = address + (BUFFER_HEIGHT * BUFFER_WIDTH) / 4; //-V2563
+    uint *end = address + (BUFFER_HEIGHT * BUFFER_WIDTH) / 4;
     uint value = static_cast<uint>(col.value) + static_cast<uint>(col.value << 8) + static_cast<uint>(col.value << 16) + static_cast<uint>(col.value << 24);
     while (address != end)
     {
@@ -43,8 +43,8 @@ void Primitives::HLine::Draw(int y, int x0, int x1, Color col)
 {
     col.SetAsCurrent();
 
-    uint8 *address = Display::GetBuffer() + x0 + y * BUFFER_WIDTH; //-V2563
-    uint8 *end = Display::GetBuffer() + BUFFER_WIDTH * BUFFER_HEIGHT; //-V2563
+    uint8 *address = Display::GetBuffer() + x0 + y * BUFFER_WIDTH;
+    uint8 *end = Display::GetBuffer() + BUFFER_WIDTH * BUFFER_HEIGHT;
 
     uint8 value = Color::CurrentValue();
 
@@ -67,8 +67,8 @@ void Primitives::VLine::Draw(int x, int y0, int y1, Color col)
 
     col.SetAsCurrent();
 
-    uint8 *address = Display::GetBuffer() + x + y0 * BUFFER_WIDTH; //-V2563
-    uint8 *end = Display::GetBuffer() + BUFFER_WIDTH * BUFFER_HEIGHT; //-V2563
+    uint8 *address = Display::GetBuffer() + x + y0 * BUFFER_WIDTH;
+    uint8 *end = Display::GetBuffer() + BUFFER_WIDTH * BUFFER_HEIGHT;
 
     uint8 value = Color::CurrentValue();
 
@@ -78,7 +78,7 @@ void Primitives::VLine::Draw(int x, int y0, int y1, Color col)
         {
             *address = value;
         };
-        address += BUFFER_WIDTH; //-V2563
+        address += BUFFER_WIDTH;
     }
 }
 
@@ -138,7 +138,7 @@ void Primitives::Line::Draw(int x1, int y1, int x2, int y2, Color col)
 
 void Point::Draw(int x, int y)
 {
-    uint8 *buffer = Display::GetBuffer() + y * BUFFER_WIDTH + x; //-V2563
+    uint8 *buffer = Display::GetBuffer() + y * BUFFER_WIDTH + x;
 
     if (x >= 0 && x < BUFFER_WIDTH && y >= 0 && y < BUFFER_HEIGHT)
     {

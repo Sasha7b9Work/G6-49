@@ -80,7 +80,7 @@ typedef struct
 }SPI_InitTypeDef;
 
 
-typedef struct __SPI_HandleTypeDef //-V2573
+typedef struct __SPI_HandleTypeDef
 {
     SPI_TypeDef                *Instance;    /* SPI registers base address */
 

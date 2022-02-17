@@ -92,7 +92,7 @@ public:
 
         int dY = canvasY - CanvasY();
 
-        return std::sqrt(dX * dX + dY * dY); //-V2564
+        return std::sqrt(dX * dX + dY * dY);
 	}
 	// Масштаб по горизонтали - пикселей на точку
 	static float PixelsInPointX()

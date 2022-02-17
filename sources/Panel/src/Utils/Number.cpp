@@ -45,7 +45,7 @@ uint64 Number::GetInteger(pCHAR buffer)
 
     for(int i = SIZE_PART - 1; i >=0; i--)
     {
-        result += (buffer[i] - 0x30) * pow; //-V2563
+        result += (buffer[i] - 0x30) * pow;
         pow *= 10;
     }
 
@@ -85,23 +85,23 @@ void Number::ChangeInPositiveInteger(int position, Step step)
 
     if(step == Step::Plus)
     {
-        integer[pos]++; //-V2563
+        integer[pos]++;
 
-        if(integer[pos] > '9') //-V2563
+        if(integer[pos] > '9')
         {
-            integer[pos] = '0'; //-V2563
+            integer[pos] = '0';
             ChangeDigit(position - 1, Step::Plus);
         }
     }
     else
     {
-        if(integer[pos] == '0') //-V2563
+        if(integer[pos] == '0')
         {
             if(AllLeftZeroInInteger(position))
             {
                 if(GetValue() == 0.0F) //-V550 //-V2550
                 {
-                    integer[pos] = 1; //-V2563
+                    integer[pos] = 1;
                     sign = '-';
                 }
                 else
@@ -111,13 +111,13 @@ void Number::ChangeInPositiveInteger(int position, Step step)
             }
             else
             {
-                integer[pos] = '9'; //-V2563
+                integer[pos] = '9';
                 ChangeDigit(position - 1, Step::Minus);
             }
         }
         else
         {
-            integer[pos]--; //-V2563
+            integer[pos]--;
         }
     }
 }

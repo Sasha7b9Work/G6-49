@@ -22,7 +22,7 @@ void Queue<T>::Pop()
 {
     if (Size() > 0)
     {
-        delete storage[first]; //-V2511
+        delete storage[first];
         first++;
         if (first == last)
         {
@@ -34,7 +34,7 @@ void Queue<T>::Pop()
 
 
 template <typename T>
-bool Queue<T>::Push(T *message) //-V2506
+bool Queue<T>::Push(T *message)
 {
     if (last < SIZE - 1)
     {

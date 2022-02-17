@@ -133,10 +133,10 @@ static void LoadDDSfromFile()
     char fullName[255];
     Chan ch(msg->TakeUINT8());
     int numFile = static_cast<int>(msg->TakeUINT8());
-    std::strcpy(fullName, msg->String(2)); //-V2513
-    std::strcat(fullName, "\\"); //-V2513
+    std::strcpy(fullName, msg->String(2));
+    std::strcat(fullName, "\\");
 
-    if (FileSystem::GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)])) //-V2513
+    if (FileSystem::GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
     {
         Buffer buffer(DGenerator::DDS_NUM_POINTS * sizeof(float));
         FileSystem::ReadFloats(buffer.DataFloat(), &fullName[1]);
@@ -158,10 +158,10 @@ static void GetPictureDDS()
     int numFile = static_cast<int>(msg->TakeUINT8());
 
     char fullName[255];
-    std::strcpy(fullName, msg->String(2)); //-V2513
-    std::strcpy(fullName, "\\"); //-V2513
+    std::strcpy(fullName, msg->String(2));
+    std::strcpy(fullName, "\\");
 
-    if (FileSystem::GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)])) //-V2513
+    if (FileSystem::GetNameFile(msg->String(2), numFile, &fullName[std::strlen(fullName)]))
     {
         float values[FPGA::NUM_POINTS];
         if (FileSystem::ReadFloats(values, &fullName[1]))
@@ -177,11 +177,11 @@ static void GetPictureDDS()
 // Возвращает true, если расширение соответствует расширению сигнала
 static bool ExtensionIsSignal(const TCHAR *name, const char *ext = "sig")
 {
-    uint lenght = std::strlen(name); //-V2513
+    uint lenght = std::strlen(name);
 
-    return (name[lenght - 1] == ext[2]) && //-V2563
-           (name[lenght - 2] == ext[1]) && //-V2563
-           (name[lenght - 3] == ext[0]); //-V2563
+    return (name[lenght - 1] == ext[2]) &&
+           (name[lenght - 2] == ext[1]) &&
+           (name[lenght - 3] == ext[0]);
 }
 
 
@@ -194,8 +194,8 @@ void FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *n
     *numFiles = 0;
 
     char nameDir[_MAX_LFN + 1];
-    std::memcpy(nameDir, const_cast<char *>(fullPath), std::strlen(fullPath)); //-V2567 //-V2513
-    nameDir[std::strlen(fullPath)] = '\0'; //-V2513
+    std::memcpy(nameDir, const_cast<char *>(fullPath), std::strlen(fullPath)); //-V2567
+    nameDir[std::strlen(fullPath)] = '\0';
 
     if (f_opendir(&dir, nameDir) == FR_OK)
     {
@@ -224,7 +224,7 @@ void FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *n
                 {
                     (*numDirs)++;
                 }
-                else if(ExtensionIsSignal(fno.fname)) //-V2516
+                else if(ExtensionIsSignal(fno.fname))
                 {
                     (*numFiles)++;
                 }
@@ -236,12 +236,12 @@ void FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *n
 }
 
 
-bool FileSystem::GetNameFile(const char *fullPath, int numFile, char *nameFileOut) //-V2506
+bool FileSystem::GetNameFile(const char *fullPath, int numFile, char *nameFileOut)
 {
     StructForReadDir srd;
 
-    std::memcpy(srd.nameDir, const_cast<char *>(fullPath), std::strlen(fullPath)); //-V2567 //-V2513
-    srd.nameDir[std::strlen(fullPath)] = '\0'; //-V2513
+    std::memcpy(srd.nameDir, const_cast<char *>(fullPath), std::strlen(fullPath)); //-V2567
+    srd.nameDir[std::strlen(fullPath)] = '\0';
 
     DIR *pDir = &srd.dir;
     FILINFO *pFNO = &srd.fno;
@@ -269,7 +269,7 @@ bool FileSystem::GetNameFile(const char *fullPath, int numFile, char *nameFileOu
             }
             if (numFile == numFiles && (pFNO->fattrib & AM_DIR) == 0 && ExtensionIsSignal(pFNO->fname))
             {
-                std::strcpy(nameFileOut, pFNO->fname); //-V2513
+                std::strcpy(nameFileOut, pFNO->fname);
                 return true;
             }
             if ((pFNO->fattrib & AM_DIR) == 0 && (pFNO->fname[0] != '.'))
@@ -285,7 +285,7 @@ bool FileSystem::GetNameFile(const char *fullPath, int numFile, char *nameFileOu
 }
 
 
-uint FileSystem::GetFileSize(const char *fullPath) //-V2506
+uint FileSystem::GetFileSize(const char *fullPath)
 {
     FIL fp;
     if (f_open(&fp, fullPath, FA_READ) == FR_OK)
@@ -330,11 +330,11 @@ bool FileSystem::ReadFloats(float values[FPGA::NUM_POINTS], const char *name)
         char buffer[255];
         f_gets(buffer, 255, &fp);
 
-        if (std::strcmp(buffer, "Data file G6-49\r\n") == 0) //-V2513
+        if (std::strcmp(buffer, "Data file G6-49\r\n") == 0)
         {
             f_gets(buffer, 255, &fp);
 
-            if (std::strcmp(buffer, "points\r\n") == 0) //-V2513
+            if (std::strcmp(buffer, "points\r\n") == 0)
             {
                 int indexFilled = -1;                        // Индекс последней рассчитанной и занесённой точки
 
@@ -467,7 +467,7 @@ static void FillPicture(uint8 *picture, uint size, float values[FPGA::NUM_POINTS
     {
         float val = values[static_cast<int>(static_cast<float>(i) * step)];
 
-        picture[i] = static_cast<uint8>(aveValue + val * 125.0F); //-V2563
+        picture[i] = static_cast<uint8>(aveValue + val * 125.0F);
     }
 }
 
@@ -479,7 +479,7 @@ static void CreateFile()
 {
     char fullName[256];
 
-    std::strcpy(fullName, msg->String(1)); //-V2513
+    std::strcpy(fullName, msg->String(1));
 
     f_open(&fileObj, fullName, FA_CREATE_ALWAYS | FA_WRITE);
 }

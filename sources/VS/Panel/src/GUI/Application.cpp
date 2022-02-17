@@ -26,7 +26,7 @@ enum
 };
 
 
-wxIMPLEMENT_APP_NO_MAIN(Application); //-V2511
+wxIMPLEMENT_APP_NO_MAIN(Application);
 
 
 int main(int argc, char **argv)
@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 
 
 
-bool Application::OnInit() //-V2506
+bool Application::OnInit()
 {
     if (!wxApp::OnInit())
     {
@@ -58,14 +58,14 @@ Frame::Frame(const wxString& title)
 {
     SetIcon(wxICON(sample));
 
-    wxMenu *fileMenu = new wxMenu; //-V2511
-    wxMenu *toolsMenu = new wxMenu; //-V2511
+    wxMenu *fileMenu = new wxMenu;
+    wxMenu *toolsMenu = new wxMenu;
 
     fileMenu->Append(FILE_QUIT, "E&xit\tAlt-X", "Quit this program");
 
     toolsMenu->Append(TOOL_SCPI, "SCPI");
 
-    wxMenuBar *menuBar = new wxMenuBar(); //-V2511
+    wxMenuBar *menuBar = new wxMenuBar();
     menuBar->Append(fileMenu, "Файл");
     menuBar->Append(toolsMenu, "Инструменты");
 

@@ -21,7 +21,7 @@ static bool E(SimpleMessage *)
 }
 
 
-bool PHandlers::Processing(SimpleMessage *msg) //-V2506
+bool PHandlers::Processing(SimpleMessage *msg)
 {
     typedef bool(*pFuncBpM)(SimpleMessage *);
 

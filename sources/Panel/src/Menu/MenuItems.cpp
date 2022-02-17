@@ -18,7 +18,7 @@ Item Item::emptyDark = { TypeItem::NoneDark };
 
 const String Choice::NameCurrentSubItem() const
 {
-    return String(NAME_FROM_INDEX(CurrentIndex(), LANGUAGE)); //-V2563
+    return String(NAME_FROM_INDEX(CurrentIndex(), LANGUAGE));
 }
 
 
@@ -30,7 +30,7 @@ String Choice::NameNextSubItem() const
     {
         nextIndex = 0;
     }
-    return String(NAME_FROM_INDEX(nextIndex, LANGUAGE)); //-V2563
+    return String(NAME_FROM_INDEX(nextIndex, LANGUAGE));
 }
 
 
@@ -42,7 +42,7 @@ const char *Choice::NamePrevSubItem()
     {
         prevIndex = NumSubItems() - 1;
     }
-    return NAME_FROM_INDEX(prevIndex, LANGUAGE); //-V2563
+    return NAME_FROM_INDEX(prevIndex, LANGUAGE);
 }
 
 
@@ -50,13 +50,13 @@ Item *Page::GetItem(const Key::E key) const
 {
     int index = CurrentSubPage() * Menu::NUM_ITEMS_ON_DISPLAY + (key - Key::F1);
 
-    return (index < NumItems()) ? const_cast<Item *>(items[index]) : &Item::emptyLight; //-V2563 //-V2567
+    return (index < NumItems()) ? const_cast<Item *>(items[index]) : &Item::emptyLight;
 }
 
 
 String Choice::NameSubItem(int i) const
 {
-    return String(NAME_FROM_INDEX(i, LANGUAGE)); //-V2563
+    return String(NAME_FROM_INDEX(i, LANGUAGE));
 }
 
 
@@ -72,7 +72,7 @@ void Page::ChangeSubPage(int delta)
     {
         SetCurrentSubPage(CurrentSubPage() + 1);
     }
-    else if (delta < 0 && CurrentSubPage() > 0) //-V2516
+    else if (delta < 0 && CurrentSubPage() > 0)
     {
         SetCurrentSubPage(CurrentSubPage() - 1);
     }
@@ -91,7 +91,7 @@ bool Item::IsPressed() const
 }
 
 
-bool Item::IsOpened() const //-V2506
+bool Item::IsOpened() const
 {
     if (type == TypeItem::Page)
     {

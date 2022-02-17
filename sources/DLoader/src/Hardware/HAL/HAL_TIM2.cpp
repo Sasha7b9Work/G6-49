@@ -8,9 +8,9 @@ static TIM_HandleTypeDef handler;
 
 void HAL_TIM2::Init()
 {
-    __HAL_RCC_TIM2_CLK_ENABLE(); //-V2571
+    __HAL_RCC_TIM2_CLK_ENABLE();
 
-    handler.Instance = TIM2; //-V2571
+    handler.Instance = TIM2;
     handler.Init.Prescaler = 0;
     handler.Init.CounterMode = TIM_COUNTERMODE_UP;
     handler.Init.Period = static_cast<uint>(-1);
@@ -24,19 +24,19 @@ void HAL_TIM2::Init()
 
 uint HAL_TIM2::GetTicks()
 {
-    return TIM2->CNT; //-V2571
+    return TIM2->CNT;
 }
 
 
 void HAL_TIM2::StartMultiMeasurement()
 {
-    TIM2->CR1 &= (uint)~TIM_CR1_CEN; //-V2571
-    TIM2->CNT = 0; //-V2571
-    TIM2->CR1 |= TIM_CR1_CEN; //-V2571
+    TIM2->CR1 &= (uint)~TIM_CR1_CEN;
+    TIM2->CNT = 0;
+    TIM2->CR1 |= TIM_CR1_CEN;
 }
 
 
 uint HAL_TIM2::TimeUS()
 {
-    return (TIM2->CNT / 90); //-V2571
+    return (TIM2->CNT / 90);
 }

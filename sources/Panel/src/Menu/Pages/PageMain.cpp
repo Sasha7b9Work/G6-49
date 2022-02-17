@@ -1,7 +1,7 @@
 #include "Menu/Pages/Pages.h"
 
 
-DEF_PAGE_3(pageMain, //-V2567
+DEF_PAGE_3(pageMain,
            "лемч", "MENU",
            "", "",
            PageSignals::self,
@@ -10,4 +10,4 @@ DEF_PAGE_3(pageMain, //-V2567
            Page::Main, nullptr, Item::FuncActive, Page::FuncEnter, FuncOnKey, FuncBeforeDraw
 )
 
-Page *PageMain::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageMain)); //-V2567
+Page *PageMain::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageMain));

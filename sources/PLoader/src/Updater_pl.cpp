@@ -76,7 +76,7 @@ static void DrawProgress(int y, float portion)
 
     Painter::DrawRectangle(x, y, width, height, Color::WHITE);
 
-    Painter::FillRegion(x, y, static_cast<int>(width * portion), height); //-V2564
+    Painter::FillRegion(x, y, static_cast<int>(width * portion), height);
 }
 
 
@@ -102,7 +102,7 @@ bool Updater::Handler(SimpleMessage *message)
     case Command::AnswerPortionUpgradePanel:
         int16 num = message->TakeINT16();
         uint crc = message->TakeUINT();
-        WriteNewChunk(num, crc, message->TakeData(1 + sizeof(int16) + sizeof(uint))); //-V2571
+        WriteNewChunk(num, crc, message->TakeData(1 + sizeof(int16) + sizeof(uint)));
         break;
     }
 
@@ -110,7 +110,7 @@ bool Updater::Handler(SimpleMessage *message)
 }
 
 
-float StructUpgradePanel::PortionUpgrade() //-V2506
+float StructUpgradePanel::PortionUpgrade()
 {
     if(numChunk == -1)
     {

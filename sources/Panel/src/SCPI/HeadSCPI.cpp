@@ -119,7 +119,7 @@ const StructSCPI SCPI::head[] =
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncIDN(pCHAR buffer) //-V2506
+static pCHAR FuncIDN(pCHAR buffer)
 {
     SCPI_PROLOG(buffer)
 
@@ -136,7 +136,7 @@ static void HintIDN(String *message) //-V2009 //-V2558
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncReset(pCHAR buffer) //-V2506
+static pCHAR FuncReset(pCHAR buffer)
 {
     SCPI_PROLOG(buffer)
 
@@ -153,7 +153,7 @@ static void HintReset(String *message) //-V2009 //-V2558
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncHelp(pCHAR buffer) //-V2506
+static pCHAR FuncHelp(pCHAR buffer)
 {
     SCPI_PROLOG(buffer);
     
@@ -180,11 +180,11 @@ static pCHAR const channelNames[] =
 };
 
 
-static pCHAR FuncChannel(pCHAR buffer) //-V2506
+static pCHAR FuncChannel(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(channelNames[CURRENT_CHANNEL]));
 
-    SCPI_PROCESS_ARRAY(channelNames, PageSignals::SetCurrentChanenl(static_cast<Chan::E>(channelNames[i][1] - 'A'))); //-V2563
+    SCPI_PROCESS_ARRAY(channelNames, PageSignals::SetCurrentChanenl(static_cast<Chan::E>(channelNames[i][1] - 'A')));
 }
 
 
@@ -208,11 +208,11 @@ static pCHAR const formNames[TypeForm::Count + 1] =
     ""
 };
 
-static pCHAR FuncForm(pCHAR buffer) //-V2506
+static pCHAR FuncForm(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(formNames[*CURRENT_FORM]));
 
-    SCPI_PROCESS_ARRAY(formNames, PageSignals::SCPI_SetForm(static_cast<TypeForm::E>(i))); //-V2563
+    SCPI_PROCESS_ARRAY(formNames, PageSignals::SCPI_SetForm(static_cast<TypeForm::E>(i)));
 }
 
 
@@ -237,11 +237,11 @@ static void SetOutput(int i)
 }
 
 
-static pCHAR FuncOutput(pCHAR buffer) //-V2506
+static pCHAR FuncOutput(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(outputs[ENABLED_CH(CURRENT_CHANNEL)]));
 
-    SCPI_PROCESS_ARRAY(outputs, SetOutput(i)); //-V2563
+    SCPI_PROCESS_ARRAY(outputs, SetOutput(i));
 }
 
 
@@ -330,7 +330,7 @@ static pCHAR const langNames[] =
 };
 
 
-static pCHAR FuncLanguage(pCHAR buffer) //-V2506
+static pCHAR FuncLanguage(pCHAR buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -376,7 +376,7 @@ static pCHAR const soundNames[] =
     ""
 };
 
-static pCHAR FuncSound(pCHAR buffer) //-V2506
+static pCHAR FuncSound(pCHAR buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -502,7 +502,7 @@ static void ProcessHelp(const StructSCPI strct[], String msg) //-V2504
             message.Append(strct->key);
             ProcessHelp(strct->strct, message);
         }
-        else if(strct->IsLeaf()) //-V2516
+        else if(strct->IsLeaf())
         {
             String message(msg); //-V820
             message.Append(strct->key);

@@ -60,7 +60,7 @@ void Form::Clear()
 }
 
 
-uint Form::PointInPosition(uint16 pos) //-V2506
+uint Form::PointInPosition(uint16 pos)
 {
     for (uint i = 0; i < markers.size(); i++)
     {
@@ -95,7 +95,7 @@ void Form::SetPoint(Point point)
 }
 
 
-void Form::SetMarkerInMouseCoord(int mouseX, int mouseY) //-V2506
+void Form::SetMarkerInMouseCoord(int mouseX, int mouseY)
 {
     if (mouseY < Grid::Y())
     {
@@ -199,7 +199,7 @@ void Form::MoveMarker(int canvasX, int canvasY)
         {
             point.pos = static_cast<uint16>(left.pos + 1);
         }
-        else if (point.pos >= right.pos) //-V2516
+        else if (point.pos >= right.pos)
         {
             point.pos = static_cast<uint16>(right.pos - 1);
         }
@@ -313,7 +313,7 @@ int Point::CanvasY() const
 }
 
 
-bool Form::ExistMarker(int canvasX, int canvasY, bool pressed, uint16 *index, uint16 *value) //-V2506
+bool Form::ExistMarker(int canvasX, int canvasY, bool pressed, uint16 *index, uint16 *value)
 {
     if (canvasY < Grid::Y())
     {
@@ -334,7 +334,7 @@ bool Form::ExistMarker(int canvasX, int canvasY, bool pressed, uint16 *index, ui
         }
     }
 
-    if(nearestDistance < Marker::SIZE * 2.5) //-V2564
+    if(nearestDistance < Marker::SIZE * 2.5)
     {
         if(iCurMarker == static_cast<uint>(-1) || !pressed)
         {
@@ -531,7 +531,7 @@ void Form::SetAdditionForm(const uint16 d[Point::AMOUNT])
 }
 
 
-bool Form::IsEquals(const Form *form) const //-V2506
+bool Form::IsEquals(const Form *form) const
 {
     if(markers != form->markers)
     {
@@ -575,7 +575,7 @@ void Form::SaveToFile(wxTextFile &file)
 }
 
 
-void Form::LoadFromFile(wxTextFile &file) //-V2506
+void Form::LoadFromFile(wxTextFile &file)
 {
     wxString line = file.GetFirstLine();
 
@@ -622,7 +622,7 @@ static void ErrorMessage(uint numString)
 }
 
 
-static bool ConvertStringToTwoShort(const wxString &line, uint16 *val1, uint16 *val2) //-V2506
+static bool ConvertStringToTwoShort(const wxString &line, uint16 *val1, uint16 *val2)
 {
     int pos = line.Find(' ');
 
@@ -645,7 +645,7 @@ static bool ConvertStringToTwoShort(const wxString &line, uint16 *val1, uint16 *
 }
 
 
-static bool ConvertSubStringToShort(const wxString &line, uint startPos, uint endPos, uint16 *value, unsigned long max) //-V2506
+static bool ConvertSubStringToShort(const wxString &line, uint startPos, uint endPos, uint16 *value, unsigned long max)
 {
     wxString str = line.SubString(startPos, endPos);
 

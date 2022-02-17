@@ -28,18 +28,18 @@ void Console::AddString(const char *string)
     {
         for(int i = 1; i < MAX_STRINGS; i++)
         {
-            std::strcpy(&buffer[i - 1][0], &buffer[i][0]); //-V2513
+            std::strcpy(&buffer[i - 1][0], &buffer[i][0]);
         }
         numStrings--;
     }
     std::sprintf(&buffer[numStrings][0], "%d ", fullNumber);
-    std::strcat(&buffer[numStrings][0], string); //-V2513
+    std::strcat(&buffer[numStrings][0], string);
     numStrings++;
     fullNumber++;
 }
 
 
-void Console::Draw() //-V2506
+void Console::Draw()
 {
     if (!set.dbg.showConsole)
     {

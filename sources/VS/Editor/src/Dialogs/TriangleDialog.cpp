@@ -27,14 +27,14 @@ static int levelDown = -100;
 
 wxPanel *TriangleDialog::CreatePanelOffsets()
 {
-    wxPanel *panel = new wxPanel(this); //-V2511
+    wxPanel *panel = new wxPanel(this);
 
     int y = 20, x = 10;
 
-    new wxStaticBox(panel, wxID_ANY, wxT("Смещения"), wxDefaultPosition, wxSize(Dialog::WIDTH_PANEL, 75)); //-V2511
+    new wxStaticBox(panel, wxID_ANY, wxT("Смещения"), wxDefaultPosition, wxSize(Dialog::WIDTH_PANEL, 75));
 
-    scCenter = new SpinControl(panel, ID_SPINCTRL_CENTER, wxPoint(x, y), wxSize(51, 20), -100, 100, center, this, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Центр, %"), this); //-V2511
-    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, wxPoint(x, y + 26), wxSize(51, 20), 0, Point::AMOUNT, delay, this, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Задержка, точки"), this); //-V2511
+    scCenter = new SpinControl(panel, ID_SPINCTRL_CENTER, wxPoint(x, y), wxSize(51, 20), -100, 100, center, this, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Центр, %"), this);
+    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, wxPoint(x, y + 26), wxSize(51, 20), 0, Point::AMOUNT, delay, this, wxCommandEventHandler(TriangleDialog::OnControlEvent), wxT("Задержка, точки"), this);
 
     return panel;
 }
@@ -42,8 +42,8 @@ wxPanel *TriangleDialog::CreatePanelOffsets()
 
 TriangleDialog::TriangleDialog() : Dialog(wxT("Параметры треугольного сигнала"), false)
 {
-    wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL); //-V2511
-    wxBoxSizer *hBoxPanels = new wxBoxSizer(wxHORIZONTAL); //-V2511
+    wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer *hBoxPanels = new wxBoxSizer(wxHORIZONTAL);
 
     hBoxPanels->Add(CreatePanelPolarity(polarityDirect, polarityBack));
     hBoxPanels->AddStretchSpacer();
@@ -61,10 +61,10 @@ void TriangleDialog::SendAdditionForm()
 
     float pointsInTriangle = static_cast<float>(Point::AMOUNT - start);
 
-    int top = static_cast<int>(static_cast<float>(start) + pointsInTriangle / 2 + pointsInTriangle / 2.0F * static_cast<float>(scCenter->GetValue()) / 100.0F); //-V2564
+    int top = static_cast<int>(static_cast<float>(start) + pointsInTriangle / 2 + pointsInTriangle / 2.0F * static_cast<float>(scCenter->GetValue()) / 100.0F);
 
-    int levelHI = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * static_cast<float>(scLevelUp->GetValue()) / 100.0F); //-V2007 //-V2564
-    int levelLOW = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * static_cast<float>(scLevelDown->GetValue()) / 100.0F); //-V2007 //-V2564
+    int levelHI = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * static_cast<float>(scLevelUp->GetValue()) / 100.0F); //-V2007
+    int levelLOW = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * static_cast<float>(scLevelDown->GetValue()) / 100.0F); //-V2007
 
     int min = levelLOW;
     int max = levelHI;

@@ -46,7 +46,7 @@ void Transceiver::Transmit(SimpleMessage *message)
 }
 
 
-bool Transceiver::Receive(SimpleMessage *message) //-V2506
+bool Transceiver::Receive(SimpleMessage *message)
 {
     HAL_SPI4::WaitFalling();
 

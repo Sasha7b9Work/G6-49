@@ -115,7 +115,7 @@ void Canvas::Redraw()
 }
 
 
-void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009 //-V2506
+void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009
 {
     if (mouseIsDown)
     {
@@ -157,14 +157,14 @@ void Canvas::OnMouseMove(wxMouseEvent &event) //-V2009 //-V2506
 
         Redraw();
     }
-    else if (ModeButtonLeft::Get() == ModeButtonLeft::EditPoints) //-V2516
+    else if (ModeButtonLeft::Get() == ModeButtonLeft::EditPoints)
     {
 
     }
 }
 
 
-void Canvas::OnMouseLeftDown(wxMouseEvent &event) //-V2009 //-V2506
+void Canvas::OnMouseLeftDown(wxMouseEvent &event) //-V2009
 {
     event.GetPosition(&mouseX, &mouseY);
 
@@ -253,7 +253,7 @@ void Canvas::OnMouseLeave(wxMouseEvent &)
 }
 
 
-void Canvas::OnMouseLeftUp(wxMouseEvent &event) //-V2009 //-V2506
+void Canvas::OnMouseLeftUp(wxMouseEvent &event) //-V2009
 {
     event.GetPosition(&mouseX, &mouseY);
 
@@ -273,7 +273,7 @@ void Canvas::OnMouseLeftUp(wxMouseEvent &event) //-V2009 //-V2506
     {
 
     }
-    else if (ModeButtonLeft::Get() == ModeButtonLeft::EditPoints) //-V2516
+    else if (ModeButtonLeft::Get() == ModeButtonLeft::EditPoints)
     {
 
     }
@@ -289,7 +289,7 @@ void Canvas::SetMouseCursor()
 
     if (Zoomer::UnderMouse(mouseX, mouseY))
     {
-        HCURSOR cursor = LoadCursor(NULL, IDC_HAND); //-V2571
+        HCURSOR cursor = LoadCursor(NULL, IDC_HAND);
         ::SetCursor(cursor);
         ::ShowCursor(true);
     }
@@ -297,7 +297,7 @@ void Canvas::SetMouseCursor()
     {
         if (Selector::CursorOverBorder(mouseX))
         {
-            HCURSOR cursor = LoadCursor(NULL, IDC_SIZEWE); //-V2571
+            HCURSOR cursor = LoadCursor(NULL, IDC_SIZEWE);
             ::SetCursor(cursor);
             ::ShowCursor(true);
         }
@@ -306,11 +306,11 @@ void Canvas::SetMouseCursor()
     {
 
     }
-    else if (ModeButtonLeft::Get() == ModeButtonLeft::EditLines) //-V2516
+    else if (ModeButtonLeft::Get() == ModeButtonLeft::EditLines)
     {
         if (TheForm->ExistMarker(mouseX, mouseY, mouseIsDown))
         {
-            HCURSOR cursor = LoadCursor(NULL, IDC_HAND); //-V2571
+            HCURSOR cursor = LoadCursor(NULL, IDC_HAND);
             ::SetCursor(cursor);
             ::ShowCursor(true);
         }
@@ -365,23 +365,23 @@ void Grid::Draw()
 
 void Grid::DrawHorizontalLines()
 {
-    float stepY = Height() / 20.0F; //-V2564
+    float stepY = Height() / 20.0F;
 
     for (int i = 1; i < 20; i++)
     {
-        Painter::DrawHLine(X(), static_cast<int>(Y() + i * stepY + 0.5F), Right(), (i == 10) ? Color::GRAY_5F : Color::GRAY_2F); //-V2564
+        Painter::DrawHLine(X(), static_cast<int>(Y() + i * stepY + 0.5F), Right(), (i == 10) ? Color::GRAY_5F : Color::GRAY_2F);
     }
 }
 
 
 void Grid::DrawTypePercents()
 {
-    float stepX = Point::AMOUNT / static_cast<float>((100.0F / (static_cast<float>(deltaPercents) / 1000))); //-V2564
+    float stepX = Point::AMOUNT / static_cast<float>((100.0F / (static_cast<float>(deltaPercents) / 1000)));
 
     for (int i = 0; i < Point::AMOUNT / 2; i++)
     {
-        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 + stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F); //-V2564
-        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 - stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F); //-V2564
+        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 + stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F);
+        Painter::DrawVLine(Point::FromData(Math::Round<uint16>(Point::AMOUNT / 2 - stepX * i), 0).CanvasX(), Grid::Y(), Grid::Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F);
     }
 }
 
@@ -433,7 +433,7 @@ void Grid::CalculateScale()
     if (TypeIsPercents())
     {
         CalculateDeltaPercents();
-        sScale = wxString::Format(wxT("%.2f%%"), deltaPercents / 1000.0F); //-V2564
+        sScale = wxString::Format(wxT("%.2f%%"), deltaPercents / 1000.0F);
     }
     else
     {

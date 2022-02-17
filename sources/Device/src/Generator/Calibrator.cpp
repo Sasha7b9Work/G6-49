@@ -89,7 +89,7 @@ void Calibrator::SetAmplitude(Chan::E ch, bool zeroAmplitude)
 }
 
 
-uint8 Calibrator::CalculateRange(Chan::E ch) //-V2506
+uint8 Calibrator::CalculateRange(Chan::E ch)
 {
     if(inModeCalibration)
     {
@@ -111,7 +111,7 @@ uint8 Calibrator::CalculateRange(Chan::E ch) //-V2506
     {
         return 3;
     }
-    else if(amplitude > Attenuation(Attenuation::_10Db).Units() / 10) //-V2564
+    else if(amplitude > Attenuation(Attenuation::_10Db).Units() / 10)
     {
         return 2;
     }
@@ -148,7 +148,7 @@ double Calibrator::GetOffsetK_Negative(Chan::E ch)
 {
     uint8 r = CalculateRange(ch);
 
-    return 4095.0 - *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 3U); //-V2564
+    return 4095.0 - *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 3U);
 }
 
 
@@ -156,7 +156,7 @@ double Calibrator::GetOffsetK_Positive(Chan::E ch)
 {
     uint8 r = CalculateRange(ch);
 
-    return 0.0 - *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 1U); //-V2564
+    return 0.0 - *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 1U);
 }
 
 

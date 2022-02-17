@@ -8,9 +8,9 @@ TIM_HandleTypeDef handler;
 
 void HAL_TIM3::Init()
 {
-    __HAL_RCC_TIM3_CLK_ENABLE(); //-V2571
+    __HAL_RCC_TIM3_CLK_ENABLE();
 
-    handler.Instance = TIM3; //-V2571
+    handler.Instance = TIM3;
     handler.Init.Prescaler = 54000 - 1;
     handler.Init.CounterMode = TIM_COUNTERMODE_UP;
     handler.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -43,5 +43,5 @@ void HAL_TIM3::DeInit()
 
     HAL_TIM_Base_Stop_IT(&handler);
 
-    __HAL_RCC_TIM3_CLK_DISABLE(); //-V2571
+    __HAL_RCC_TIM3_CLK_DISABLE();
 }

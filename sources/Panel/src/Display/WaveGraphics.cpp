@@ -10,7 +10,7 @@
 using namespace Primitives;
 
 
-void WaveGraphics::Draw(Chan::E ch) //-V2506
+void WaveGraphics::Draw(Chan::E ch)
 {
     if((set.freq.measure != FreqMeasure::Disable) && (CURRENT_CHANNEL != ch))
     {

@@ -32,7 +32,7 @@ List<T>::List() : head(nullptr)
 template <class T>
 void List<T>::Append(T *t)
 {
-    ListElement<T> *element = new ListElement<T>(t); //-V2511
+    ListElement<T> *element = new ListElement<T>(t);
 
     ListElement<T> *last = Last();
 
@@ -49,7 +49,7 @@ void List<T>::Append(T *t)
 
 
 template <class T>
-void List<T>::Remove(T *removed) //-V2506
+void List<T>::Remove(T *removed)
 {
     ListElement<T> *element = First();
 
@@ -89,7 +89,7 @@ void List<T>::Remove(T *removed) //-V2506
 
 
 template <class T>
-ListElement<T> *List<T>::Last() //-V2506
+ListElement<T> *List<T>::Last()
 {
     if (head == nullptr)
     {
@@ -108,7 +108,7 @@ ListElement<T> *List<T>::Last() //-V2506
 
 
 template <class T>
-bool List<T>::IsMember(T *t) //-V2506
+bool List<T>::IsMember(T *t)
 {
     ListElement<T> *element = First();
 
@@ -150,7 +150,7 @@ ListElement<T> *ListElement<T>::Next()
 template <class T>
 ListElement<T>::~ListElement()
 {
-    delete value; //-V2511
+    delete value;
 }
 
 
@@ -178,7 +178,7 @@ void List<T>::Clear()
     {
         T *elem = First()->Get();
         Remove(elem);
-        delete elem; //-V2511
+        delete elem;
     }
 }
 

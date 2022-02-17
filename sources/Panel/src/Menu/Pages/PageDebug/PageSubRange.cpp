@@ -88,7 +88,7 @@ DEF_CHOICE_2(cPC14,
 )
 
 
-DEF_PAGE_6(pSubRanges, //-V641 //-V2567
+DEF_PAGE_6(pSubRanges, //-V641
     "Диапазоны", "Ranges",
     "", "",
     &cPE15,
@@ -100,4 +100,4 @@ DEF_PAGE_6(pSubRanges, //-V641 //-V2567
     Page::SubRanges, PageDebug::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
-Page *PageDebug::SubRange::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pSubRanges)); //-V2567
+Page *PageDebug::SubRange::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pSubRanges));

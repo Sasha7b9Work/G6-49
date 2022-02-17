@@ -507,13 +507,13 @@ static void RequestPictureDDSfromStorage(SimpleMessage *message)
 
     float data[FPGA::NUM_POINTS];
 
-    FPGA::TransformCodeToData(reinterpret_cast<uint8 *>(code), data); //-V2571
+    FPGA::TransformCodeToData(reinterpret_cast<uint8 *>(code), data);
 
     const int size = 240;
 
     float aveValue = 127.0F;
 
-    float step = FPGA::NUM_POINTS / static_cast<float>(size); //-V2564
+    float step = FPGA::NUM_POINTS / static_cast<float>(size);
 
     uint8 picture[size];
 

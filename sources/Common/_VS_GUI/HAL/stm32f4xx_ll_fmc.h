@@ -23,7 +23,7 @@
 #define FMC_DATA_ADDRESS_MUX_ENABLE     0x00000002U
 
 
-#define __FMC_NORSRAM_ENABLE(__INSTANCE__, __BANK__)  ((__INSTANCE__)->BTCR[(__BANK__)] |= FMC_BCR1_MBKEN) //-V2573
+#define __FMC_NORSRAM_ENABLE(__INSTANCE__, __BANK__)  ((__INSTANCE__)->BTCR[(__BANK__)] |= FMC_BCR1_MBKEN)
 
 
 typedef struct

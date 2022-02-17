@@ -79,7 +79,7 @@ bool Task::PassedLittleTimeAfterSend()
 }
 
 
-bool PInterface::ProcessTask(SimpleMessage *answer) //-V2506
+bool PInterface::ProcessTask(SimpleMessage *answer)
 {
     ListElement<Task> *element = tasks.First();
 
@@ -107,7 +107,7 @@ void PInterface::RunAnswer(ListElement<Task> *element, SimpleMessage *answer)
 {
     element->Get()->funcProcess(answer);
     tasks.Remove(element->Get());
-    delete element; //-V2511
+    delete element;
 }
 
 
@@ -131,7 +131,7 @@ Task::Task(SimpleMessage *msg, bool(*process)(SimpleMessage *), bool(*equal)(Tas
 
 Task::~Task()
 {
-    delete message; //-V2511
+    delete message;
 }
 
 

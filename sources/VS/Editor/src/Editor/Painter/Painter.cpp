@@ -12,7 +12,7 @@ void Painter::Init(wxWindow *_parent)
 {
     parent = _parent;
 
-    bitmap = new wxBitmap(parent->GetClientSize()); //-V2511
+    bitmap = new wxBitmap(parent->GetClientSize());
 
 #pragma warning(push, 0)
 
@@ -26,7 +26,7 @@ void Painter::Init(wxWindow *_parent)
 
 void Painter::DeInit()
 {
-    delete bitmap; //-V2511
+    delete bitmap;
 }
 
 
@@ -38,8 +38,8 @@ wxBitmap *Painter::GetBitmap()
 
 void Painter::OnResizeEvent(wxSizeEvent &event) //-V2009
 {
-    delete bitmap; //-V2511
-    bitmap = new wxBitmap(event.GetSize()); //-V2511
+    delete bitmap;
+    bitmap = new wxBitmap(event.GetSize());
 }
 
 

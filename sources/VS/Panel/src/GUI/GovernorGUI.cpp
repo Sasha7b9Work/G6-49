@@ -44,7 +44,7 @@ void GovernorGUI::OnMouseLeftDown(wxMouseEvent &event)
 {
     if(MouseOnGovernor(event))
     {
-        ::SetCursor(LoadCursor(NULL, IDC_HAND)); //-V2571
+        ::SetCursor(LoadCursor(NULL, IDC_HAND));
 
         cursor.OnPressLeftButton();
     }
@@ -55,7 +55,7 @@ void GovernorGUI::OnMouseMove(wxMouseEvent &event)
 {
     if(MouseOnGovernor(event))
     {
-        ::SetCursor(LoadCursor(NULL, IDC_HAND)); //-V2571
+        ::SetCursor(LoadCursor(NULL, IDC_HAND));
     }
 }
 
@@ -87,7 +87,7 @@ void GovernorGUI::OnTimer(wxTimerEvent &)
 {
     if(cursor.LeftIsDown())
     {
-        ::SetCursor(LoadCursor(NULL, IDC_HAND)); //-V2571
+        ::SetCursor(LoadCursor(NULL, IDC_HAND));
 
         int delta = cursor.CalculateDelta();
 

@@ -14,14 +14,14 @@ template class Stack<TypeFont::E>;
 template <typename T>
 Stack<T>::Stack(int _size) : buffer(0), size(_size), numElements(0U)
 {
-    buffer = static_cast<T *>(std::malloc(sizeof(T) * _size)); //-V2511
+    buffer = static_cast<T *>(std::malloc(sizeof(T) * _size));
 }
 
 
 template <typename T>
 Stack<T>::~Stack()
 {
-    std::free(buffer); //-V2511
+    std::free(buffer);
 }
 
 
@@ -30,19 +30,19 @@ void Stack<T>::Push(T elem)
 {
     if(numElements < size)
     {
-        buffer[numElements] = elem; //-V2563
+        buffer[numElements] = elem;
         numElements++;
     }
 }
 
 
 template <typename T>
-T Stack<T>::Pop() //-V2506
+T Stack<T>::Pop()
 {
     if(numElements != 0)
     {
         numElements--;
-        return buffer[numElements]; //-V2563
+        return buffer[numElements];
     }
 
     return (T)0;
@@ -64,11 +64,11 @@ bool Stack<T>::IsEmpty() const
 
 
 template <typename T>
-T &Stack<T>::operator[](const int index) const //-V2506
+T &Stack<T>::operator[](const int index) const
 {
     if (index < numElements)
     {
-        return buffer[index]; //-V2563
+        return buffer[index];
     }
 
     static T nullValue = static_cast<T>(0);

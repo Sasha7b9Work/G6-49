@@ -39,14 +39,14 @@ static void WriteData(uint dest, void *src, uint size);
 static uint GetSector(uint address);
 
 
-static void EraseSector(uint startAddress) //-V2506
+static void EraseSector(uint startAddress)
 {
     if (GetSector(startAddress) == static_cast<uint>(-1))
     {
         return;
     }
 
-    CLEAR_FLASH_FLAGS; //-V2571
+    CLEAR_FLASH_FLAGS;
 
     HAL_FLASH_Unlock();
 
@@ -64,7 +64,7 @@ static void EraseSector(uint startAddress) //-V2506
 }
 
 
-static uint GetSector(uint address) //-V2506
+static uint GetSector(uint address)
 {
     struct StructSector
     {
@@ -96,13 +96,13 @@ static uint GetSector(uint address) //-V2506
 
 static void WriteData(uint dest, void *src, uint size)
 {
-    CLEAR_FLASH_FLAGS; //-V2571
+    CLEAR_FLASH_FLAGS;
 
     HAL_FLASH_Unlock();
 
     for (uint i = 0; i < size; i++)
     {
-        HAL_FLASH_Program(TYPEPROGRAM_BYTE, dest++, (reinterpret_cast<uint8 *>(src))[i]); //-V2563 //-V2571
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, dest++, (reinterpret_cast<uint8 *>(src))[i]);
     }
 
     HAL_FLASH_Lock();
@@ -120,11 +120,11 @@ void HAL_EEPROM::Signal::Save(Chan::E ch, uint16 data[DGenerator::DDS_NUM_POINTS
 
     ch = (ch == Chan::A) ? Chan::B : Chan::A;
 
-    data = (uint16 *)SECTOR_TEMP_10; //-V566 //-V2571
+    data = (uint16 *)SECTOR_TEMP_10; //-V566
 
     if (ch == Chan::B)
     {
-        data += FPGA::NUM_POINTS;                                                        // Вычисляем указатель на данные канала, который не требуется перезаписывать //-V2563
+        data += FPGA::NUM_POINTS;                                                        // Вычисляем указатель на данные канала, который не требуется перезаписывать
     }
 
     WriteData(AddressForData(ch), data, sizeData);                                      // И сохраняем их
@@ -145,24 +145,24 @@ uint HAL_EEPROM::Signal::AddressForData(Chan::E ch)
 
 uint16 *HAL_EEPROM::Signal::Get(Chan::E ch)
 {
-    uint16 *result = (uint16 *)(SECTOR_SIGNAL_FPGA_11); //-V566 //-V2571
+    uint16 *result = (uint16 *)(SECTOR_SIGNAL_FPGA_11); //-V566
 
     if (ch == Chan::B)
     {
-        result += FPGA::NUM_POINTS; //-V2563
+        result += FPGA::NUM_POINTS;
     }
 
     return result;
 }
 
 
-void HAL_EEPROM::Init() //-V2506
+void HAL_EEPROM::Init()
 {
-    uint *data = (uint *)SECTOR_SIGNAL_FPGA_11; //-V566 //-V2571
+    uint *data = (uint *)SECTOR_SIGNAL_FPGA_11; //-V566
 
     for (int i = 0; i < (FPGA::NUM_POINTS * Chan::Count); i++)
     {
-        if (data[i] != static_cast<uint>(-1)) //-V2563
+        if (data[i] != static_cast<uint>(-1))
         {
             return;
         }
@@ -170,12 +170,12 @@ void HAL_EEPROM::Init() //-V2506
 
     EraseSector(SECTOR_SIGNAL_FPGA_11);
 
-    float *address = (float *)SECTOR_SIGNAL_FPGA_11; //-V566 //-V2571
+    float *address = (float *)SECTOR_SIGNAL_FPGA_11; //-V566
 
     float value = 0.0F;
 
     for (int i = 0; i < (FPGA::NUM_POINTS * Chan::Count); i++)
     {
-        WriteData(reinterpret_cast<uint>(address), &value, 4); //-V2571
+        WriteData(reinterpret_cast<uint>(address), &value, 4);
     }
 }

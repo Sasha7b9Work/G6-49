@@ -20,8 +20,8 @@ void HAL_FSMC::Init()
 
     static const SRAM_HandleTypeDef sramHandle =
     {
-        FMC_NORSRAM_DEVICE, //-V2571
-        FMC_NORSRAM_EXTENDED_DEVICE, //-V2571
+        FMC_NORSRAM_DEVICE,
+        FMC_NORSRAM_EXTENDED_DEVICE,
         {
             FMC_NORSRAM_BANK1,                 // Init.NSBank
             FMC_DATA_ADDRESS_MUX_ENABLE,       // Init.DataAddressMux
@@ -41,7 +41,7 @@ void HAL_FSMC::Init()
         HAL_UNLOCKED, HAL_SRAM_STATE_RESET, 0
     };
 
-    if(HAL_SRAM_Init(const_cast<SRAM_HandleTypeDef *>(&sramHandle), const_cast<FMC_NORSRAM_TimingTypeDef *>(&sramTiming), const_cast<FMC_NORSRAM_TimingTypeDef *>(&sramTiming)) != HAL_OK) //-V2567
+    if(HAL_SRAM_Init(const_cast<SRAM_HandleTypeDef *>(&sramHandle), const_cast<FMC_NORSRAM_TimingTypeDef *>(&sramTiming), const_cast<FMC_NORSRAM_TimingTypeDef *>(&sramTiming)) != HAL_OK)
     {
         ERROR_HANDLER();
     };

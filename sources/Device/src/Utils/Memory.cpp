@@ -25,7 +25,7 @@ struct Block
 #define SIZE_POOL (1 * 1024)
 static uint8 pool[SIZE_POOL];
 //static uint8 *begin = pool;
-static Block *firstBlock = ((Block *)&pool[SIZE_POOL]) - 1; //-V2563
+static Block *firstBlock = ((Block *)&pool[SIZE_POOL]) - 1;
 //static Block *lastBlock = nullptr;
 
 
@@ -107,7 +107,7 @@ static Block *FindBlockWithAddress(const uint8 *address)
 */
 
 
-static Block *FirstBlock() //-V2506
+static Block *FirstBlock()
 {
     if (firstBlock->address == 0)
     {

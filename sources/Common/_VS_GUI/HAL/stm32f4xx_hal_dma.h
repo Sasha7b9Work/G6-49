@@ -113,7 +113,7 @@ typedef struct
 } DMA_InitTypeDef;
 
 
-typedef struct __DMA_HandleTypeDef //-V2573
+typedef struct __DMA_HandleTypeDef
 {
     DMA_Stream_TypeDef         *Instance;                                                        /*!< Register base address                  */
 

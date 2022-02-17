@@ -38,7 +38,7 @@ inline void EmptyFuncVV() {};
 
 #ifdef WIN32
 
-#define __attribute__(x) //-V2573
+#define __attribute__(x)
 
 #else
 

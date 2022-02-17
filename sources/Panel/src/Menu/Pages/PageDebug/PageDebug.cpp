@@ -26,7 +26,7 @@ extern const PageBase pDebug;
 extern const ButtonBase bSend;
 
 
-Page *PageDebug::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pDebug)); //-V2567
+Page *PageDebug::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pDebug));
 // Регистр, в который будет производится занесение значения по нажатию кнопки ЗАСЛАТЬ
 Register::E currentRegister = Register::FreqMeterLevel;
 // Флаг показа окна ввода
@@ -115,7 +115,7 @@ static void LoadRegister()
 }
 
 
-static bool OnRegulator(Control control) //-V2506
+static bool OnRegulator(Control control)
 {
     if (TypeBuffer(currentRegister) == Uint)
     {
@@ -131,7 +131,7 @@ static bool OnRegulator(Control control) //-V2506
 }
 
 
-static bool OnKey_PageRegisters(const Control control) //-V801 //-V2506
+static bool OnKey_PageRegisters(const Control control) //-V801
 {
     if (!showInputWindow)
     {
@@ -146,7 +146,7 @@ static bool OnKey_PageRegisters(const Control control) //-V801 //-V2506
             return true;
         }
     }
-    else if (control.IsDown()) //-V2516
+    else if (control.IsDown())
     {
         if (AllowableSymbol(control.key))
         {
@@ -189,7 +189,7 @@ static TypeInput TypeBuffer(Register::E name)
 }
 
 
-uint64 FirstValue() //-V2506
+uint64 FirstValue()
 {
     char buff[20];
 
@@ -217,7 +217,7 @@ uint64 FirstValue() //-V2506
 }
 
 
-uint64 SecondValue() //-V2506
+uint64 SecondValue()
 {
     for (uint i = 0; i < sizeof(buffer); i++)
     {
@@ -269,7 +269,7 @@ static uint64 BufferToValue()
 }
 
 
-static bool AllowableSymbol(Key::E key) //-V2506
+static bool AllowableSymbol(Key::E key)
 {
     TypeInput type = TypeBuffer(currentRegister);
 
@@ -305,9 +305,9 @@ static bool AllowableSymbol(Key::E key) //-V2506
 }
 
 
-void PageDebug::PageRegisters::Draw() //-V2506
+void PageDebug::PageRegisters::Draw()
 {
-    if (CURRENT_PAGE != reinterpret_cast<Page *>(const_cast<PageBase *>(&pRegisters))) //-V2567
+    if (CURRENT_PAGE != reinterpret_cast<Page *>(const_cast<PageBase *>(&pRegisters)))
     {
         return;
     }
@@ -337,7 +337,7 @@ void PageDebug::PageRegisters::DrawRegisters(int x, int y)
 }
 
 
-void PageDebug::PageRegisters::DrawInputWindow() //-V2506
+void PageDebug::PageRegisters::DrawInputWindow()
 {
     if (!showInputWindow)
     {
@@ -353,7 +353,7 @@ void PageDebug::PageRegisters::DrawInputWindow() //-V2506
 
     int position = NumberBuffer::PositionCursor();
 
-    int size = static_cast<int>(std::strlen(buffer)); //-V2513
+    int size = static_cast<int>(std::strlen(buffer));
 
     for (int i = 0; i < size; i++)
     {
@@ -364,14 +364,14 @@ void PageDebug::PageRegisters::DrawInputWindow() //-V2506
         }
         x = BigChar(buffer[i], 4).Draw(x, Y_INPUT + 20) + 3;
     }
-    if (position == static_cast<int>(std::strlen(buffer)) && position < SizeBuffer()) //-V2513
+    if (position == static_cast<int>(std::strlen(buffer)) && position < SizeBuffer())
     {
         Rectangle(19, 31).DrawFilled(x - 2, Y_INPUT + 19, Color::GRAY_10, Color::BLUE);
     }
 }
 
 
-static void DrawValue(int x, int y, uint8 i) //-V2506
+static void DrawValue(int x, int y, uint8 i)
 {
     if (!SENDING(i))
     {
@@ -507,9 +507,9 @@ static void OnPress_Cancel()
 {
     showInputWindow = false;
     std::memset(buffer, 0, MAX_SIZE_BUFFER + 1);
-    pRegisters.items[0] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bPrev)); //-V2563 //-V2567
-    pRegisters.items[1] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bNext)); //-V2563 //-V2567
-    pRegisters.items[2] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bSend)); //-V2563 //-V2567
+    pRegisters.items[0] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bPrev));
+    pRegisters.items[1] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bNext));
+    pRegisters.items[2] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bSend));
 }
 
 static void OnDraw_Cancel(int x, int y)
@@ -559,9 +559,9 @@ static void OnPress_Send()
     showInputWindow = true;
     std::memset(buffer, 0, MAX_SIZE_BUFFER + 1);
 
-    pRegisters.items[0] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bBackspace)); //-V2563 //-V2567
-    pRegisters.items[1] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bCancel)); //-V2563 //-V2567
-    pRegisters.items[2] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bSave)); //-V2563 //-V2567
+    pRegisters.items[0] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bBackspace));
+    pRegisters.items[1] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bCancel));
+    pRegisters.items[2] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bSave));
 
     int position = 0;
 
@@ -572,12 +572,12 @@ static void OnPress_Send()
         if (type == Uint)
         {
             SU::UInt64_2String(VALUE(currentRegister), buffer);
-            position = static_cast<int>(std::strlen(buffer)); //-V2513
+            position = static_cast<int>(std::strlen(buffer));
         }
         else if (type == Binary)
         {
             SU::Bin2StringN((uint)VALUE(currentRegister), buffer, SizeBuffer(currentRegister));
-            position = static_cast<int>(std::strlen(buffer)); //-V2513
+            position = static_cast<int>(std::strlen(buffer));
         }
         else // if (type == Uint10_Uint10 || type == Uint14_Uint14)
         {
@@ -587,9 +587,9 @@ static void OnPress_Send()
             uint first = VALUE(currentRegister) & mask;
             uint second = (VALUE(currentRegister) >> numBits)& mask;
 
-            std::strcpy(buffer, SU::UInt2String(first)); //-V2513
-            std::strcat(buffer, "."); //-V2513
-            std::strcat(buffer, SU::UInt2String(second)); //-V2513
+            std::strcpy(buffer, SU::UInt2String(first));
+            std::strcat(buffer, ".");
+            std::strcat(buffer, SU::UInt2String(second));
         }
     }
     else
@@ -610,7 +610,7 @@ DEF_BUTTON( bSend,                                                              
 )
 
 
-DEF_PAGE_4_VAR( pRegisters,                                                                                                                                       //--- РЕГИСТРЫ --- //-V641 //-V2567
+DEF_PAGE_4_VAR( pRegisters,                                                                                                                                       //--- РЕГИСТРЫ --- //-V641
     "РЕГИСТРЫ", "REGISTERS",   //-V641
     "", "",
     &bPrev,
@@ -636,7 +636,7 @@ DEF_GOVERNOR(gFreqMeterK,                                                       
 )
 
 
-DEF_PAGE_10( pDebug,                                                                                                                                                 //--- ОТЛАДКА --- //-V641 //-V2567
+DEF_PAGE_10( pDebug,                                                                                                                                                 //--- ОТЛАДКА --- //-V641
     "ОТЛАДКА", "DEBUG",   //-V641
     "", "",
     PageDebug::Calibartion::self,

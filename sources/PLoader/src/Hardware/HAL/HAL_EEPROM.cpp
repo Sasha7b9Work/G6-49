@@ -14,13 +14,13 @@
 
 void HAL_EEPROM::WriteBuffer(int address, const uint8 *data, int size)
 {
-    CLEAR_FLASH_FLAGS; //-V2571
+    CLEAR_FLASH_FLAGS;
 
     HAL_FLASH_Unlock();
 
     for(int i = 0; i < size; i++)
     {
-        HAL_FLASH_Program(TYPEPROGRAM_BYTE, static_cast<uint>(address), data[i]); //-V2563
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, static_cast<uint>(address), data[i]);
         ++address;
     }
 
@@ -30,7 +30,7 @@ void HAL_EEPROM::WriteBuffer(int address, const uint8 *data, int size)
 
 void HAL_EEPROM::EraseSectors(int count)
 {
-    CLEAR_FLASH_FLAGS; //-V2571
+    CLEAR_FLASH_FLAGS;
 
     HAL_FLASH_Unlock();
 

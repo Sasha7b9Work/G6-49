@@ -47,7 +47,7 @@ const StructSCPI SCPI::key[] =
 };
 
 
-static pCHAR FuncKeyPress(pCHAR buffer) //-V2506
+static pCHAR FuncKeyPress(pCHAR buffer)
 {
     for(int i = 0; i < Key::Count; i++)
     {
@@ -73,7 +73,7 @@ static void HintKey(String *message)
 }
 
 
-static pCHAR FuncKeyLong(pCHAR buffer) //-V2506
+static pCHAR FuncKeyLong(pCHAR buffer)
 {
     for(int i = 0; i < Key::Count; i++)
     {
@@ -102,7 +102,7 @@ static pCHAR const regNames[Key::Count + 1] =
 };
 
 
-pCHAR SCPI::FuncReg(pCHAR buffer) //-V2506
+pCHAR SCPI::FuncReg(pCHAR buffer)
 {
     for (int i = 0; i < 3; i++)
     {

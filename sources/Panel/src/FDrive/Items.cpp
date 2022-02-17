@@ -43,7 +43,7 @@ struct StructFile
     void Clear() { name[0] = 0; size = -1; }
     void CopyFrom(const StructFile &file)
     {
-        std::strcpy(name, file.name); //-V2513
+        std::strcpy(name, file.name);
         size = file.size;
     }
 }
@@ -80,7 +80,7 @@ void ListFiles::SendRequest()
 }
 
 
-bool ListFiles::Handler::Processing(SimpleMessage *msg) //-V2506
+bool ListFiles::Handler::Processing(SimpleMessage *msg)
 {
     msg->ResetPointer();
 
@@ -96,7 +96,7 @@ bool ListFiles::Handler::Processing(SimpleMessage *msg) //-V2506
     else if (command == Command::FDrive_RequestFile)
     {
         int num = msg->TakeUINT8();
-        std::strcpy(files[num - firstFile].name, msg->String(2)); //-V2513
+        std::strcpy(files[num - firstFile].name, msg->String(2));
 
         if (num == curFile)
         {
@@ -105,7 +105,7 @@ bool ListFiles::Handler::Processing(SimpleMessage *msg) //-V2506
 
         return true;
     }
-    else if (command == Command::FDrive_RequestFileSize) //-V2516
+    else if (command == Command::FDrive_RequestFileSize)
     {
         int num = msg->TakeUINT8();
         files[num - firstFile].size = msg->TakeINT();
@@ -134,7 +134,7 @@ static void SendRequestForNameFile(int number)
 {
     Message::FDrive::FileName message(static_cast<uint8>(number), FDrive::CurrentDirectory());
     
-    Task *task = new Task(&message, ListFiles::Handler::Processing, EqualsRequestNameFile); //-V2511
+    Task *task = new Task(&message, ListFiles::Handler::Processing, EqualsRequestNameFile);
     
     PInterface::AddTask(task);
 }
@@ -157,7 +157,7 @@ int ListFiles::NumberFiles()
 }
 
 
-void ListFiles::PressUp() //-V2506
+void ListFiles::PressUp()
 {
     if (curFile == 0)
     {
@@ -183,7 +183,7 @@ void ListFiles::PressUp() //-V2506
 
 
 
-void ListFiles::PressDown() //-V2506
+void ListFiles::PressDown()
 {
     if (curFile == numFiles - 1)
     {

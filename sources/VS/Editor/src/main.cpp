@@ -8,11 +8,11 @@ void init()
 {
     FreeConsole();
 
-    Frame *frame = new Frame("Редактор сигналов Г6-49"); //-V2511
+    Frame *frame = new Frame("Редактор сигналов Г6-49");
 
-    TheCanvas = new Canvas(frame); //-V2511
+    TheCanvas = new Canvas(frame);
 
-    TheForm = new Form(); //-V2511
+    TheForm = new Form();
 
 	History::Add(TheForm);
 }

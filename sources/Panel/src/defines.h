@@ -2,7 +2,7 @@
 
 #ifdef WIN32
 
-#define __ARMCLIB_VERSION 6070001 //-V2573
+#define __ARMCLIB_VERSION 6070001
 
 #else
 
@@ -51,9 +51,9 @@ typedef void (*pFuncVB)(bool);
 #define CHAR_BUF(name, size)            char name[size]
 #define CHAR_BUF2(name, size1, size2)   char name[size1][size2]
 
-#define _GET_BIT(value, bit)        (((value) >> (bit)) & 0x01) //-V2573
-#define _SET_BIT(value, bit)        ((value) |= (1 << (bit))) //-V2573
-#define _CLEAR_BIT(value, bit)      ((value) &= (~(1 << (bit)))) //-V2573
+#define _GET_BIT(value, bit)        (((value) >> (bit)) & 0x01)
+#define _SET_BIT(value, bit)        ((value) |= (1 << (bit)))
+#define _CLEAR_BIT(value, bit)      ((value) &= (~(1 << (bit))))
 
 #define ERROR_VALUE_FLOAT   1.111e29F
 #define ERROR_VALUE_UINT8   255

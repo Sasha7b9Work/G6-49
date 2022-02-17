@@ -18,10 +18,10 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    wxStaticText *stPosition = new wxStaticText(this, wxID_ANY, wxT("Индекс")); //-V2511
-    tcPosition = new TextControlInt(0, 8 * 1024 - 1, this, ID_TEXT_CONTROL_POSITION, _itoa(index, buffer, 10), pos, size); //-V2511
+    wxStaticText *stPosition = new wxStaticText(this, wxID_ANY, wxT("Индекс"));
+    tcPosition = new TextControlInt(0, 8 * 1024 - 1, this, ID_TEXT_CONTROL_POSITION, _itoa(index, buffer, 10), pos, size);
 
-    wxBoxSizer *hBoxPosition = new wxBoxSizer(wxHORIZONTAL); //-V2511
+    wxBoxSizer *hBoxPosition = new wxBoxSizer(wxHORIZONTAL);
 
     ADD_SPACER(hBoxPosition);
     hBoxPosition->Add(stPosition, 1, wxALIGN_CENTER);
@@ -31,10 +31,10 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    wxStaticText *stValue = new wxStaticText(this, wxID_ANY, wxT("Значение")); //-V2511
-    tcValue = new TextControlInt(0, 4095, this, ID_TEXT_CONTROL_VALUE, _itoa(value, buffer, 10), pos, size); //-V2511
+    wxStaticText *stValue = new wxStaticText(this, wxID_ANY, wxT("Значение"));
+    tcValue = new TextControlInt(0, 4095, this, ID_TEXT_CONTROL_VALUE, _itoa(value, buffer, 10), pos, size);
 
-    wxBoxSizer *hBoxValue = new wxBoxSizer(wxHORIZONTAL); //-V2511
+    wxBoxSizer *hBoxValue = new wxBoxSizer(wxHORIZONTAL);
 
     ADD_SPACER(hBoxValue);
     hBoxValue->Add(stValue, 1, wxALIGN_CENTER);
@@ -44,13 +44,13 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Применить"), wxDefaultPosition, SMALL_BUTTON_SIZE); //-V2511
+    wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Применить"), wxDefaultPosition, SMALL_BUTTON_SIZE);
     Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(ParametersDialog::OnButtonApply));
 
-    wxButton *btnClose = new wxButton(this, ID_BUTTON_CANCEL, wxT("Закрыть"), wxDefaultPosition, SMALL_BUTTON_SIZE); //-V2511
+    wxButton *btnClose = new wxButton(this, ID_BUTTON_CANCEL, wxT("Закрыть"), wxDefaultPosition, SMALL_BUTTON_SIZE);
     Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(ParametersDialog::OnButtonClose));
 
-    wxBoxSizer *hBoxButtons = new wxBoxSizer(wxHORIZONTAL); //-V2511
+    wxBoxSizer *hBoxButtons = new wxBoxSizer(wxHORIZONTAL);
 
     hBoxButtons->Add(btnOk, 1, wxALIGN_CENTER);
     hBoxButtons->AddSpacer(20);
@@ -58,7 +58,7 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);          // Главный бокс //-V2511
+    wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);          // Главный бокс
 
     vBox->AddSpacer(10);
     vBox->Add(hBoxPosition, 0, wxALIGN_CENTER);
@@ -79,8 +79,8 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
 
 void ParametersDialog::OnButtonApply(wxCommandEvent &)
 {
-    uint16 index = static_cast<uint16>(atoi(tcPosition->GetValue().c_str())); //-V2508
-    uint16 value = static_cast<uint16>(atoi(tcValue->GetValue().c_str())); //-V2508
+    uint16 index = static_cast<uint16>(atoi(tcPosition->GetValue().c_str()));
+    uint16 value = static_cast<uint16>(atoi(tcValue->GetValue().c_str()));
 
     TheForm->RemoveCurrentMarker();
     TheForm->SetPointInRealCoord(index, value);

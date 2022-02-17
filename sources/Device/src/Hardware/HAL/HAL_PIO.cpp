@@ -56,14 +56,14 @@ static const uint alternates[HAlternate::Count] =
 
 static GPIO_TypeDef * const ports[HPort::Count] =
 {
-    GPIOA, //-V2571
-    GPIOB, //-V2571
-    GPIOC, //-V2571
-    GPIOD, //-V2571
-    GPIOE, //-V2571
-    GPIOF, //-V2571
-    GPIOG, //-V2571
-    GPIOH //-V2571
+    GPIOA,
+    GPIOB,
+    GPIOC,
+    GPIOD,
+    GPIOE,
+    GPIOF,
+    GPIOG,
+    GPIOH
 };
 
 #define PORT(p)      (ports[p])
@@ -196,7 +196,7 @@ void HAL_PIO::Init()
 void HAL_PIO::WriteFPGA(uint8 byte)
 {
     //                                                                                 биты 0,1                                    биты 2,3
-    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(byte) & 0x03) << 14) + ((static_cast<uint16>(byte & 0x0c)) >> 2);; //-V2571
+    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(byte) & 0x03) << 14) + ((static_cast<uint16>(byte & 0x0c)) >> 2);;
     //                                                                                биты 4,5,6
-    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(byte) & 0xf0) << 3); //-V2571
+    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(byte) & 0xf0) << 3);
 }

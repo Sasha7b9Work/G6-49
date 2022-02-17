@@ -287,7 +287,7 @@ void Amplifier::Unlock()
 }
 
 
-void Amplifier::Tune(Chan::E ch) //-V2506
+void Amplifier::Tune(Chan::E ch)
 {
     if (locked)
     {

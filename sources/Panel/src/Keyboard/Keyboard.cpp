@@ -75,7 +75,7 @@ void Keyboard::Init()
 }
 
 
-void Keyboard::Update() //-V2506
+void Keyboard::Update()
 {
     if(!init)
     {
@@ -104,7 +104,7 @@ void Keyboard::Update() //-V2506
                         timePress[rl][sl] = MAX_UINT;
                         AppendEvent(keys[rl][sl], Action::Long);                    // это будет длинное нажатие
                     }
-                    else if (delta > 100 &&                                         // Если прошло более 100 мс с момента нажатия //-V2516
+                    else if (delta > 100 &&                                         // Если прошло более 100 мс с момента нажатия
                         !BUTTON_IS_PRESS(state))                                    // и сейчас кнопка находится в отжатом состоянии
                     {
                         timePress[rl][sl] = MAX_UINT;                               // То учитываем это в массиве
@@ -116,7 +116,7 @@ void Keyboard::Update() //-V2506
                     timePress[rl][sl] = time;                                       // то сохраняем время её нажатия
                     AppendEvent(keys[rl][sl], Action::Down);
                 }
-                else if(!BUTTON_IS_PRESS(state) && timePress[rl][sl] == MAX_UINT) //-V2516
+                else if(!BUTTON_IS_PRESS(state) && timePress[rl][sl] == MAX_UINT)
                 {
                     timePress[rl][sl] = 0;
                 }
@@ -197,7 +197,7 @@ static void DetectRegulator()
         Keyboard::AppendEvent(Key::RotateLeft, Action::Down);
         prevStatesIsOne = false;
     }
-    else if (prevStatesIsOne && !stateLeft && stateRight) //-V2516
+    else if (prevStatesIsOne && !stateLeft && stateRight)
     {
         Keyboard::AppendEvent(Key::RotateRight, Action::Down);
         prevStatesIsOne = false;
@@ -310,7 +310,7 @@ void Keyboard::Draw()
 } 
 
 
-bool Keyboard::Decoder::Decode(const Control controls[20], const Control &control) //-V2506
+bool Keyboard::Decoder::Decode(const Control controls[20], const Control &control)
 {
     static int step = 0;        // Номер следующего проверяемого элемента массива
 

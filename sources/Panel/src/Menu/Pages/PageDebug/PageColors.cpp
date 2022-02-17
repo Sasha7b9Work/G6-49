@@ -60,7 +60,7 @@ DEF_GOVERNOR(gBlueChanA,
     blueChanA, 0, 255, *PageDebug::Colors::ChanA::self, Item::FuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
 
 
-DEF_PAGE_3( pChanA, //-V641 //-V2567
+DEF_PAGE_3( pChanA, //-V641
     "Канал 1", "Channel 1", //-V641
     "", "",
     &gRedChanA,
@@ -89,7 +89,7 @@ DEF_GOVERNOR(gBlueChanB,
     blueChanB, 0, 255, *PageDebug::Colors::ChanB::self, Item::FuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
 
 
-DEF_PAGE_3(pChanB, //-V641 //-V2567
+DEF_PAGE_3(pChanB, //-V641
     "Канал 2", "Channel 2", //-V641
     "", "",
     &gRedChanB,
@@ -117,7 +117,7 @@ DEF_GOVERNOR(gBlueMenu,
     blueMenu, 0, 255, *PageDebug::Colors::Menu::self, Item::FuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
 
 
-DEF_PAGE_3(pMenu, //-V641 //-V2567
+DEF_PAGE_3(pMenu, //-V641
     "Меню", "Menu", //-V641
     "", "",
     &gRedMenu,
@@ -128,7 +128,7 @@ DEF_PAGE_3(pMenu, //-V641 //-V2567
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-DEF_PAGE_3(pColors, //-V2567
+DEF_PAGE_3(pColors,
     "Цвета", "Colors",
     "", "",
     PageDebug::Colors::ChanA::self,
@@ -138,7 +138,7 @@ DEF_PAGE_3(pColors, //-V2567
 )
 
 
-Page *PageDebug::Colors::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pColors)); //-V2567
-Page *PageDebug::Colors::ChanA::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pChanA)); //-V2567
-Page *PageDebug::Colors::ChanB::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pChanB)); //-V2567
-Page *PageDebug::Colors::Menu::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pMenu)); //-V2567
+Page *PageDebug::Colors::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pColors));
+Page *PageDebug::Colors::ChanA::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pChanA));
+Page *PageDebug::Colors::ChanB::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pChanB));
+Page *PageDebug::Colors::Menu::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pMenu));

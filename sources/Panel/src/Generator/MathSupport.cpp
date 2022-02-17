@@ -20,19 +20,19 @@ static void RepayEmptySymbols(char *buffer)
     if (*buffer == '-')
     {
         sign = -1;
-        buffer[0] = ' '; //-V2563
+        buffer[0] = ' ';
         buffer++;
     }
-    else if (*buffer == '+') //-V2516
+    else if (*buffer == '+')
     {
         sign = +1;
-        buffer[0] = ' '; //-V2563
+        buffer[0] = ' ';
         buffer++;
     }
 
     while (*buffer == '0')
     {
-        if ((*buffer == '\0') || (*(buffer + 1) == '.')) //-V2563
+        if ((*buffer == '\0') || (*(buffer + 1) == '.'))
         {
             break;
         }
@@ -42,12 +42,12 @@ static void RepayEmptySymbols(char *buffer)
 
     if (sign != 0)
     {
-        *(buffer - 1) = (sign < 0) ? '-' : '+'; //-V2563
+        *(buffer - 1) = (sign < 0) ? '-' : '+';
     }
 
     char *end = SU::FindEnd(buffer);
 
-    buffer = end - 1; //-V2563
+    buffer = end - 1;
 
     while (*buffer == '0')
     {
@@ -62,7 +62,7 @@ static void RepayEmptySymbols(char *buffer)
         do 
         {
             buffer++;
-            *(buffer - 1) = *buffer; //-V2563
+            *(buffer - 1) = *buffer;
         } while (*buffer != '\0');
     }
 }
@@ -74,7 +74,7 @@ static Order::E CalculateOrder(const ParameterDouble *param)
 }
 
 
-static pString ZeroValue(const ParameterDouble *param) //-V2506
+static pString ZeroValue(const ParameterDouble *param)
 {
     ParameterDoubleType::E type = param->GetType();
 
@@ -82,7 +82,7 @@ static pString ZeroValue(const ParameterDouble *param) //-V2506
     {
         return "00.0000";
     }
-    else if (type == ParameterDoubleType::Offset) //-V2516
+    else if (type == ParameterDoubleType::Offset)
     {
         return "+00.0000";
     }
@@ -103,7 +103,7 @@ pString MathDouble::GetIndicatedValue(const ParameterDouble *param)
 
     if (value.Abs() == 0)
     {
-        std::strcpy(buffer, ZeroValue(param)); //-V2513
+        std::strcpy(buffer, ZeroValue(param));
     }
     else
     {
@@ -144,7 +144,7 @@ pString MathDouble::GetIndicatedValue(const ParameterDouble *param)
 }
 
 
-int MathDouble::GetPositionFirstDigit(const ParameterDouble *param, Order::E order) //-V2506
+int MathDouble::GetPositionFirstDigit(const ParameterDouble *param, Order::E order)
 {
     if (param->IsPhase())
     {
@@ -155,7 +155,7 @@ int MathDouble::GetPositionFirstDigit(const ParameterDouble *param, Order::E ord
 }
 
 
-int MathDouble::GetPositionFirstDigit(const Value &val, Order::E order) //-V2506
+int MathDouble::GetPositionFirstDigit(const Value &val, Order::E order)
 {
     Value value = val;
     value.SetSign(1);
@@ -200,7 +200,7 @@ char MathDouble::GetChar(const Value &value, int position, Order::E order)
 }
 
 
-int MathDouble::GetDigit(const Value &val, int position, Order::E order) //-V2506
+int MathDouble::GetDigit(const Value &val, int position, Order::E order)
 {
     Value value = val;
     value.SetSign(1);
@@ -244,7 +244,7 @@ int MathDouble::GetDigit(const Value &val, int position, Order::E order) //-V250
 }
 
 
-int MathParameterDouble::GetNumberDigitsBeforeComma(Order::E order) //-V2506
+int MathParameterDouble::GetNumberDigitsBeforeComma(Order::E order)
 {
     if (param->IsNotOrdered())
     {
@@ -255,7 +255,7 @@ int MathParameterDouble::GetNumberDigitsBeforeComma(Order::E order) //-V2506
 }
 
 
-int MathParameterDouble::GetNumberDigitsAfterComma(Order::E) //-V2506
+int MathParameterDouble::GetNumberDigitsAfterComma(Order::E)
 {
     if (param->IsNotOrdered())
     {

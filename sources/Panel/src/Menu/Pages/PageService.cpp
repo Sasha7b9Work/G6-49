@@ -20,7 +20,7 @@ extern const PageBase pUSB;
 
 
 extern const PageBase pService;
-Page *PageService::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pService)); //-V2567
+Page *PageService::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pService));
 
 
 void PageService::OnPress_Reset()
@@ -69,7 +69,7 @@ DEF_CHOICE_4(cVolume,
 extern const PageBase pDebug;
 
 
-DEF_PAGE_4_VAR(pService,                                                                                                                                            //--- ÑÅÐÂÈÑ --- //-V641 //-V2567
+DEF_PAGE_4_VAR(pService,                                                                                                                                            //--- ÑÅÐÂÈÑ --- //-V641
     "ÑÅÐÂÈÑ", "SERVICE",    //-V641
     "Ñåðâèñíûå ôóíêöèè", "Service functions",
     &cLanguage,
@@ -83,5 +83,5 @@ DEF_PAGE_4_VAR(pService,                                                        
 
 void PageDebug::Enable()
 {
-    pService.items[3] = PageDebug::self; //-V2563
+    pService.items[3] = PageDebug::self;
 }

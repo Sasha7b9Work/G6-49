@@ -8,7 +8,7 @@ static void AddChar(char *buffer, const Value &value, int pos, Order::E order)
 {
     char digit[2] = { 0, 0 };
     digit[0] = MathDouble::GetChar(value, pos, order);
-    std::strcat(buffer, digit); //-V2513
+    std::strcat(buffer, digit);
 }
 
 
@@ -33,16 +33,16 @@ pString Value::ToString(bool sign, Order::E order) const
         AddChar(buffer, *this, i, order);
     }
 
-    std::strcat(buffer, "."); //-V2513
+    std::strcat(buffer, ".");
 
     for (int i = -1; i >= -9; i--)
     {
         AddChar(buffer, *this, i, order);
     }
 
-    while (buffer[std::strlen(buffer) - 1] == '0') //-V1044 //-V2513
+    while (buffer[std::strlen(buffer) - 1] == '0') //-V1044
     {
-        buffer[std::strlen(buffer) - 1] = '\0'; //-V2513
+        buffer[std::strlen(buffer) - 1] = '\0';
     }
 
     return buffer;

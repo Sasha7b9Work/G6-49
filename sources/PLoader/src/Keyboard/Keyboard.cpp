@@ -73,7 +73,7 @@ void Keyboard::Init()
 }
 
 
-void Keyboard::Update() //-V2506
+void Keyboard::Update()
 {
     if(!init)
     {
@@ -102,7 +102,7 @@ void Keyboard::Update() //-V2506
                         timePress[rl][sl] = MAX_UINT;
                         AppendEvent(controls[rl][sl], Key::Long);                       // это будет длинное нажатие
                     }
-                    else if (delta > 100 &&                                             // Если прошло более 100 мс с момента нажатия //-V2516
+                    else if (delta > 100 &&                                             // Если прошло более 100 мс с момента нажатия
                         !BUTTON_IS_PRESS(state))                                        // и сейчас кнопка находится в отжатом состоянии
                     {
                         timePress[rl][sl] = MAX_UINT;                                   // То учитываем это в массиве
@@ -114,7 +114,7 @@ void Keyboard::Update() //-V2506
                     timePress[rl][sl] = time;                                           // то сохраняем время её нажатия
                     AppendEvent(controls[rl][sl], Key::Down);
                 }
-                else if(!BUTTON_IS_PRESS(state) && timePress[rl][sl] == MAX_UINT) //-V2516
+                else if(!BUTTON_IS_PRESS(state) && timePress[rl][sl] == MAX_UINT)
                 {
                     timePress[rl][sl] = 0;
                 }
@@ -195,7 +195,7 @@ static void DetectRegulator()
         Keyboard::AppendEvent(Key::RegLeft, Key::Down);
         prevStatesIsOne = false;
     }
-    else if (prevStatesIsOne && !stateLeft && stateRight) //-V2516
+    else if (prevStatesIsOne && !stateLeft && stateRight)
     {
         Keyboard::AppendEvent(Key::RegRight, Key::Down);
         prevStatesIsOne = false;
@@ -306,7 +306,7 @@ void Keyboard::Draw()
 } 
 
 
-bool Keyboard::Decoder::Decode(const Key keys[20], const Key &key) //-V2506
+bool Keyboard::Decoder::Decode(const Key keys[20], const Key &key)
 {
     static int step = 0;        // Номер следующего проверяемого элемента массива
 

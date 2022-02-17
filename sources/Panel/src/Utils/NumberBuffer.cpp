@@ -42,14 +42,14 @@ void NumberBuffer::ProcessKey(const Key::E key)
             ++position;
         }
     }
-    else if(AllowableSymbol(key) && position < NumSymbols())                    // Символьная кнопка //-V2516
+    else if(AllowableSymbol(key) && position < NumSymbols())                    // Символьная кнопка
     {
-        buffer[position++] = Key(key).ToChar(); //-V2563
+        buffer[position++] = Key(key).ToChar();
     }
 }
 
 
-bool NumberBuffer::AllowableSymbol(const Key::E key) //-V2506
+bool NumberBuffer::AllowableSymbol(const Key::E key)
 {
     if(Key(key).IsDigit() || (key == Key::Comma) || (key == Key::Minus))
     {
@@ -60,7 +60,7 @@ bool NumberBuffer::AllowableSymbol(const Key::E key) //-V2506
 }
 
 
-void NumberBuffer::ProcessRegulator(const Key::E key) //-V2506
+void NumberBuffer::ProcessRegulator(const Key::E key)
 {
     if(NumSymbols() == 0)                           // Если буфер пуст -
     {
@@ -75,7 +75,7 @@ void NumberBuffer::ProcessRegulator(const Key::E key) //-V2506
     {
         IncreaseDigit(PositionSymbolForChange());
     }
-    else if(key == Key::RotateLeft) //-V2516
+    else if(key == Key::RotateLeft)
     {
         DecreaseDigit(PositionSymbolForChange());
     }
@@ -94,11 +94,11 @@ int NumberBuffer::PositionSymbolForChange()
 }
 
 
-bool NumberBuffer::IncreaseDigit(int pos) //-V2506
+bool NumberBuffer::IncreaseDigit(int pos)
 {
-    if(buffer[pos] < '9') //-V2563
+    if(buffer[pos] < '9')
     {
-        ++buffer[pos]; //-V2563
+        ++buffer[pos];
         return true;
     }
     else
@@ -107,7 +107,7 @@ bool NumberBuffer::IncreaseDigit(int pos) //-V2506
         {
             if (IncreaseDigit(pos - 1))
             {
-                buffer[pos] = '0'; //-V2563
+                buffer[pos] = '0';
                 return true;
             }
         }
@@ -115,13 +115,13 @@ bool NumberBuffer::IncreaseDigit(int pos) //-V2506
         {
             if (position == NumSymbols() && All9())
             {
-                buffer[0] = '1'; //-V2563
+                buffer[0] = '1';
                 position++;
                 for (int i = 1; i < position; i++)
                 {
-                    buffer[i] = '0'; //-V2563
+                    buffer[i] = '0';
                 }
-                buffer[position + 1] = 0; //-V2563
+                buffer[position + 1] = 0;
                 return true;
             }
         }
@@ -131,11 +131,11 @@ bool NumberBuffer::IncreaseDigit(int pos) //-V2506
 }
 
 
-bool NumberBuffer::All9() //-V2506
+bool NumberBuffer::All9()
 {
     for(int i = 0; i < NumSymbols(); i++)
     {
-        if(buffer[i] != '9') //-V2563
+        if(buffer[i] != '9')
         {
             return false;
         }
@@ -144,18 +144,18 @@ bool NumberBuffer::All9() //-V2506
 }
 
 
-bool NumberBuffer::DecreaseDigit(int pos) //-V2506
+bool NumberBuffer::DecreaseDigit(int pos)
 {
-    if(buffer[pos] > '0') //-V2563
+    if(buffer[pos] > '0')
     {
-        --buffer[pos]; //-V2563
+        --buffer[pos];
         return true;
     }
-    else if(pos > 0) //-V2516
+    else if(pos > 0)
     {
         if(DecreaseDigit(pos - 1))
         {
-            buffer[pos] = '9'; //-V2563
+            buffer[pos] = '9';
             return true;
         }
     }
@@ -177,7 +177,7 @@ void NumberBuffer::PressBackspace()
         position--;
         for (int i = position; i < size; i++)
         {
-            buffer[i] = 0; //-V2563
+            buffer[i] = 0;
         }
     }
 }
@@ -189,7 +189,7 @@ int NumberBuffer::PositionCursor()
 }
 
 
-uint NumberBuffer::ToUINT() //-V2506
+uint NumberBuffer::ToUINT()
 {
     uint result = static_cast<uint>(-1);
     if(!SU::String2UInt(buffer, &result))

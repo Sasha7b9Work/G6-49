@@ -54,7 +54,7 @@ DEF_CHOICE_7( cFormB,                                                           
 )
 
 
-static void OnPress_TuneParameter() //-V2506
+static void OnPress_TuneParameter()
 {
     if (CURRENT_PARAM->IsDouble())
     {
@@ -87,7 +87,7 @@ static void OnDraw_TuneParameter(int x, int y)
 
         if (param->GetType() == ParameterDoubleType::ManipulationDuration || param->GetType() == ParameterDoubleType::ManipulationPeriod)
         {
-            const Item *item = reinterpret_cast<const Item *>(&bTuneParameter); //-V641
+            const Item *item = reinterpret_cast<const Item *>(&bTuneParameter);
 
             bool isShade = item->IsShade();
 
@@ -103,7 +103,7 @@ DEF_CHOICE_PARAMETER( cParameters,                                              
 )
 
 
-DEF_PAGE_4( pageSignals,   //-V641 //-V2567
+DEF_PAGE_4( pageSignals,   //-V641
     "НАСТРОЙКИ СИГНАЛОВ", "SIGNAL SETTINGS",   //-V641 //-V1027
     "", "",
     &cChannel,                  // НАСТРОЙКИ СИГНАЛОВ - Канал
@@ -113,7 +113,7 @@ DEF_PAGE_4( pageSignals,   //-V641 //-V2567
     Page::Signals, PageMain::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, FuncBeforeDraw
 )
 
-Page *PageSignals::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageSignals)); //-V2567
+Page *PageSignals::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageSignals));
 
 
 bool PageSignals::OnSubPageTuneChannels()
@@ -130,7 +130,7 @@ void PageSignals::Init()
 
 void PageSignals::OnChanged_Form(bool)
 {
-    ChoiceBase *choice = reinterpret_cast<ChoiceBase *>(pageSignals.items[1]);      // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала //-V2563 //-V2567
+    ChoiceBase *choice = reinterpret_cast<ChoiceBase *>(pageSignals.items[1]);      // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала
 
     CURRENT_WAVE.SetIndexForm(choice->CurrentIndex());                              // Установить для текущего сигнала индекс формы из ChoiceBase
 
@@ -142,7 +142,7 @@ void PageSignals::OnChanged_Form(bool)
 }
 
 
-void PageSignals::SCPI_SetForm(TypeForm::E form) //-V2506
+void PageSignals::SCPI_SetForm(TypeForm::E form)
 {
     if(form == TypeForm::PacketImpuls && CURRENT_CHANNEL_IS_B)
     {
@@ -160,7 +160,7 @@ void PageSignals::OnPress_Channel(bool)
     cParameters.form = CURRENT_FORM;
     numForm = CURRENT_FORM->value;
 
-    pageSignals.items[1] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB)); //-V2563 //-V2567
+    pageSignals.items[1] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB));
 
     PGenerator::TuneChannel(CURRENT_CHANNEL);
 }

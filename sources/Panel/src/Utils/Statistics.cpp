@@ -49,11 +49,11 @@ void Statistics::Show()
         Rectangle(60, 10).DrawFilled(0, Display::HEIGHT - 12, Color::BACK, Color::FILL);
 
         char buffer[100] = {0};
-        std::strcpy(buffer, SU::Int2String(static_cast<int>(CPU::GetFPS() + 0.5F), false, 3).c_str()); //-V2513
-        std::strcat(buffer, "/"); //-V2513
-        std::strcat(buffer, SU::Int2String(timeFrame, false, 3).c_str()); //-V2513
-        std::strcat(buffer, "/"); //-V2513
-        std::strcat(buffer, SU::Int2String(timeAllFrames, false, 3).c_str()); //-V2513
+        std::strcpy(buffer, SU::Int2String(static_cast<int>(CPU::GetFPS() + 0.5F), false, 3).c_str());
+        std::strcat(buffer, "/");
+        std::strcat(buffer, SU::Int2String(timeFrame, false, 3).c_str());
+        std::strcat(buffer, "/");
+        std::strcat(buffer, SU::Int2String(timeAllFrames, false, 3).c_str());
         String(buffer).Draw(2, Display::HEIGHT - 11, Color::FILL);
     }
 }

@@ -75,7 +75,7 @@ static pCHAR const measureNames[] =
 };
 
 
-static pCHAR FuncMeasure(pCHAR buffer) //-V2506
+static pCHAR FuncMeasure(pCHAR buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -113,7 +113,7 @@ static void HintMeasure(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncLevel(pCHAR buffer) //-V2506
+static pCHAR FuncLevel(pCHAR buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -140,7 +140,7 @@ static pCHAR FuncLevel(pCHAR buffer) //-V2506
         {
             set.freq.level = static_cast<int16>(paramValue);
             PageFrequencyCounter::OnChange_FreqLevel();
-            return end_str +1; //-V2563
+            return end_str +1;
         }
     }
 
@@ -155,7 +155,7 @@ static void HintLevel(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncValue(pCHAR buffer) //-V2506
+static pCHAR FuncValue(pCHAR buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "");
 
@@ -190,7 +190,7 @@ static pCHAR const countingNames[] =
 };
 
 
-static pCHAR FuncTimeCounting(pCHAR buffer) //-V2506
+static pCHAR FuncTimeCounting(pCHAR buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -236,7 +236,7 @@ static pCHAR const lpfNames[] =
     ""
 };
 
-static pCHAR FuncLPF(pCHAR buffer) //-V2506
+static pCHAR FuncLPF(pCHAR buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -281,7 +281,7 @@ static pCHAR const couplingNames[] =
     ""
 };
 
-static pCHAR FuncCoupling(pCHAR buffer) //-V2506
+static pCHAR FuncCoupling(pCHAR buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -327,7 +327,7 @@ static pCHAR const resistanceNames[] =
 };
 
 
-static pCHAR FuncResistance(pCHAR buffer) //-V2506
+static pCHAR FuncResistance(pCHAR buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -373,7 +373,7 @@ static pCHAR const testNames[] =
 };
 
 
-static pCHAR FuncTest(pCHAR buffer) //-V2506
+static pCHAR FuncTest(pCHAR buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -422,7 +422,7 @@ static pCHAR const lablelsgNames[] =
 };
 
 
-static pCHAR FuncTimeLabels(pCHAR buffer) //-V2506
+static pCHAR FuncTimeLabels(pCHAR buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -471,7 +471,7 @@ static pCHAR const numberPeriodsNames[] =
 };
 
 
-static pCHAR FuncNumberPeriods(pCHAR buffer) //-V2506
+static pCHAR FuncNumberPeriods(pCHAR buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 

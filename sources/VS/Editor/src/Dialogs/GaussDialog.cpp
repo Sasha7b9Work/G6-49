@@ -9,12 +9,12 @@ static int width = 500;
 
 wxPanel *GaussDialog::CreatePanelWidth(wxDialog *dlg)
 {
-    wxPanel *panel = new wxPanel(dlg); //-V2511
+    wxPanel *panel = new wxPanel(dlg);
 
     int x = 40;
     int y = 20;
 
-    scWidth = new SpinControl(panel, ID_SPINCTRL_NUMBER_PERIODS, wxPoint(x, y), wxSize(50, 20), 1, 1500, width, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Ўмирина"), this); //-V2511
+    scWidth = new SpinControl(panel, ID_SPINCTRL_NUMBER_PERIODS, wxPoint(x, y), wxSize(50, 20), 1, 1500, width, this, wxCommandEventHandler(Dialog::OnControlEvent), wxT("Ўмирина"), this);
 
     return panel;
 }
@@ -22,7 +22,7 @@ wxPanel *GaussDialog::CreatePanelWidth(wxDialog *dlg)
 
 GaussDialog::GaussDialog() : Dialog(wxT("ѕараметры гауссовой функции"), true)
 {
-    wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL); //-V2511
+    wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
 
     vBox->Add(CreatePanelWidth(this));
 
@@ -38,10 +38,10 @@ void GaussDialog::SendAdditionForm()
 
     for (int i = 0; i < Point::AMOUNT / 2; i++)
     {
-        uint16 g = static_cast<uint16>(Point::AVE + Point::AVE * std::expf(-static_cast<float>(i * i) / (2 * c * c))); //-V2564
+        uint16 g = static_cast<uint16>(Point::AVE + Point::AVE * std::expf(-static_cast<float>(i * i) / (2 * c * c)));
 
         if (g < Point::AVE)      { g = Point::AVE; }
-        else if (g > Point::MAX) { g = Point::MAX; } //-V2516
+        else if (g > Point::MAX) { g = Point::MAX; }
 
         data[Point::AMOUNT / 2 - i] = g;
         data[Point::AMOUNT / 2 + i] = g;

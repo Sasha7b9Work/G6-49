@@ -101,7 +101,7 @@ void DDrive::Update()
 //            LOG_WRITE("не удалось примонтировать флешку");
         }
     }
-    else if(state == State::NeedUnmount) //-V2516
+    else if(state == State::NeedUnmount)
     {
         f_mount(0, "", 0);
 

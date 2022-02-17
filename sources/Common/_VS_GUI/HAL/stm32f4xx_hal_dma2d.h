@@ -58,7 +58,7 @@ typedef struct
                                                                   with original alpha channel value                                */
 
 
-typedef struct __DMA2D_HandleTypeDef //-V2573
+typedef struct __DMA2D_HandleTypeDef
 {
     DMA2D_TypeDef               *Instance;                                                    /*!< DMA2D register base address.               */
 //

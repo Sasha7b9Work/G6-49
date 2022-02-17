@@ -16,8 +16,8 @@ struct TypeFont
         _5,
         _7,
         _8,
-        _GOSTB20, //-V2573
-        _GOST28, //-V2573
+        _GOSTB20,
+        _GOST28,
         Count
     };
 };

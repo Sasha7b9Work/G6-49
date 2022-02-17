@@ -34,12 +34,12 @@ static bool E()
 
 void FDrive::Init()
 {
-    std::strcpy(directory, "\\"); //-V2513
+    std::strcpy(directory, "\\");
     ListFiles::Init();
 }
 
 
-void FDrive::Draw() //-V2506
+void FDrive::Draw()
 {
     int x = WaveGraphics::X();
     int y = WaveGraphics::Y(Chan::A) + 1;
@@ -53,7 +53,7 @@ void FDrive::Draw() //-V2506
         BigText("Подключите флешку", 2).Draw(30, 110, Color::FILL);
         return;
     }
-    else if (mounted == Failed) //-V2516
+    else if (mounted == Failed)
     {
         BigText("Флешка неисправна", 2).Draw(30, 110, Color::FILL);
         return;
@@ -64,7 +64,7 @@ void FDrive::Draw() //-V2506
         ListFiles::SendRequest();
         return;
     }
-    else if (ListFiles::WaitAnswer()) //-V2516
+    else if (ListFiles::WaitAnswer())
     {
         return;
     }

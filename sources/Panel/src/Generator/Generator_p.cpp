@@ -261,7 +261,7 @@ void PGenerator::SetParameter(Parameter *parameter)
     {
         SetParameter(static_cast<ParameterChoice *>(parameter));
     }
-    else if (parameter->IsInteger()) //-V2516
+    else if (parameter->IsInteger())
     {
         SetParameter(static_cast<ParameterInteger *>(parameter));
     }

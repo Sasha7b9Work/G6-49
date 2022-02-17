@@ -17,7 +17,7 @@ Buffer::~Buffer()
 
 uint8 *Buffer::Data()
 {
-    return static_cast<uint8 *>(buffer); //-V2571
+    return static_cast<uint8 *>(buffer);
 }
 
 
@@ -43,7 +43,7 @@ bool Buffer::ReSize(uint _size)
 
 void Buffer::Free()
 {
-    std::free(buffer); //-V2511
+    std::free(buffer);
 
     size = 0;
 }
@@ -51,7 +51,7 @@ void Buffer::Free()
 
 void Buffer::Allocate(uint _size)
 {
-    buffer = std::malloc(_size); //-V2511
+    buffer = std::malloc(_size);
     size = buffer ? _size : 0;
 }
 

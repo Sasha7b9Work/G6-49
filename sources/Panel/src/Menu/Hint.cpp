@@ -20,7 +20,7 @@ bool        Hint::needCalculate = false;
 
 
 
-bool Hint::ProcessControl(const Control control) //-V801 //-V2506
+bool Hint::ProcessControl(const Control control) //-V801
 {
     if (control.Is(Key::Esc) && control.IsLong())
     {
@@ -52,7 +52,7 @@ bool Hint::ProcessControl(const Control control) //-V801 //-V2506
                         currentPage--;
                     }
                 }
-                else if(currentPage < numPages) //-V2516
+                else if(currentPage < numPages)
                 {
                     currentPage++;
                 }
@@ -118,7 +118,7 @@ void Hint::Draw()
                     {
                         DrawDetailedHint(choice, x0, y0, width, 0, firstItemOnSecondPage - 1);
                     }
-                    else if(currentPage == 2) //-V2516
+                    else if(currentPage == 2)
                     {
                         DrawDetailedHint(choice, x0, y0, width, firstItemOnSecondPage, choice->NumSubItems() - 1);
                     }
@@ -148,7 +148,7 @@ int Hint::DrawDetailedHint(const Choice *choice, int x0, int y0, int width, int 
     for (int i = start; i <= end; i++)
     {
         y0 = String(
-            "%d. \"%s\" %s", number++, choice->NameSubItem(i).c_str(), LANG_IS_RU ? choice->hintsRU[i] : choice->hintsEN[i] //-V2563
+            "%d. \"%s\" %s", number++, choice->NameSubItem(i).c_str(), LANG_IS_RU ? choice->hintsRU[i] : choice->hintsEN[i]
                     ).DrawInColumnWithTransfersDiffColors(x0 + 2, y0, width, colorGreen) + 5;
     }
 
@@ -156,7 +156,7 @@ int Hint::DrawDetailedHint(const Choice *choice, int x0, int y0, int width, int 
 }
 
 
-int Hint::NumPagesInHint(const Choice *choice, int x, int y, int width) //-V2506
+int Hint::NumPagesInHint(const Choice *choice, int x, int y, int width)
 {
     if(DrawDetailedHint(choice, x, y, width, 0, choice->NumSubItems(), true) < Display::HEIGHT)
     {
@@ -187,7 +187,7 @@ void Hint::Calcualte(const Choice *choice, int x, int y, int width)
 }
 
 
-void Hint::DrawPagesUGO(const int xRight, const int y0) //-V2506
+void Hint::DrawPagesUGO(const int xRight, const int y0)
 {
     if(numPages < 2)
     {

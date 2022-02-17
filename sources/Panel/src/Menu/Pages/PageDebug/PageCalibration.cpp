@@ -40,7 +40,7 @@ static bool ChannelIsValid()
 }
 
 
-static void LoadK() //-V2506
+static void LoadK()
 {
     if(!ChannelIsValid())
     {
@@ -51,7 +51,7 @@ static void LoadK() //-V2506
 }
 
 
-static void SendMessage() //-V2506
+static void SendMessage()
 {
     if(!ChannelIsValid())
     {
@@ -74,7 +74,7 @@ static void SendMessage() //-V2506
 
 
 // Вызывается при изменении калибруемого параметра
-static void OnChange_Parameters(bool) //-V2506
+static void OnChange_Parameters(bool)
 {
     if(!ChannelIsValid())
     {
@@ -97,7 +97,7 @@ static void OnChange_Parameters(bool) //-V2506
 }
 
 // Вызывается при изменении источника сигнал
-static void OnChange_Source(bool) //-V2506
+static void OnChange_Source(bool)
 {
     if(!ChannelIsValid())
     {
@@ -163,7 +163,7 @@ DEF_CHOICE_4(cParameterHalfVoltage,
 )
 
 
-static void DrawPage() //-V2506
+static void DrawPage()
 {
     if(!ChannelIsValid())
     {
@@ -180,7 +180,7 @@ static void DrawPage() //-V2506
 }
 
 
-static bool FuncOnControlKeyPage(const Control control) //-V2009 //-V801 //-V2506
+static bool FuncOnControlKeyPage(const Control control) //-V2009 //-V801
 {
     if(control.Is(Key::RegButton, Action::Down))
     {
@@ -188,7 +188,7 @@ static bool FuncOnControlKeyPage(const Control control) //-V2009 //-V801 //-V250
         OnChange_Parameters(true);
         return true;
     }
-    else if(control.IsRotate()) //-V2516
+    else if(control.IsRotate())
     {
         if(control.IsDown())
         {
@@ -196,7 +196,7 @@ static bool FuncOnControlKeyPage(const Control control) //-V2009 //-V801 //-V250
             int16 max = 1024;
 
             if(parameter == 1)      { max = 0; }    // для смещения +max будем ограничивать нулём сверху - можно сделать только меньше
-            else if(parameter == 3) { min = 0; }    // для смещения -max будем ограничивать нулём снизу - можно сделать только больше //-V2516
+            else if(parameter == 3) { min = 0; }    // для смещения -max будем ограничивать нулём снизу - можно сделать только больше
             if(parameter == 0)      { max = 0; }    // амплитуду можно только уменьшать
 
             if(control.Is(Key::RotateLeft))
@@ -253,7 +253,7 @@ static void OnEnter_Calibration(bool enter)
 const PageBase *page = const_cast<const PageBase *>(reinterpret_cast<PageBase *>(PageDebug::self));
 
 
-DEF_PAGE_4_VAR( pCalibration, //-V641 //-V2567
+DEF_PAGE_4_VAR( pCalibration, //-V641
     "КАЛИБРОВКА", "CALIBRATION",
     "", "",
     &cChannel,
@@ -264,18 +264,18 @@ DEF_PAGE_4_VAR( pCalibration, //-V641 //-V2567
 )
 
 
-Page *PageDebug::Calibartion::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pCalibration)); //-V2567
+Page *PageDebug::Calibartion::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pCalibration));
 
 
 static void TuneControls()
 {
     if(range < 3)
     {
-        pCalibration.items[3] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cParameterHalfVoltage)); //-V2563 //-V2567
+        pCalibration.items[3] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cParameterHalfVoltage));
     }
     else
     {
-        pCalibration.items[3] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cParameterFullVoltage)); //-V2563 //-V2567
+        pCalibration.items[3] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(&cParameterFullVoltage));
     }
 }
 

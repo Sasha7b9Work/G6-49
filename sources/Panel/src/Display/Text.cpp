@@ -151,14 +151,14 @@ bool Char::IsLetter()
 }
 
 
-int String::DrawPartWord(char *word, int x, int y, int xRight, bool draw) //-V2506
+int String::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 {
     uint *lengthSyllables = WordWorker::BreakWord(word);
     int numSyllabels = 0;
     char buffer[30];
     for (int i = 0; i < 10; i++)
     {
-        if (lengthSyllables[i] == 0) //-V2563
+        if (lengthSyllables[i] == 0)
         {
             numSyllabels = i;
             break;
@@ -175,7 +175,7 @@ int String::DrawPartWord(char *word, int x, int y, int xRight, bool draw) //-V25
             {
                 String(subString).Draw(x, y);
             }
-            return static_cast<int>(std::strlen(subString)) - 1; //-V2513
+            return static_cast<int>(std::strlen(subString)) - 1;
         }
     }
 
@@ -194,7 +194,7 @@ int String::DrawInColumnWithTransfersDiffColors(const int left, const int top, c
     int right = left + width;
 
     char buf[20];
-    int numSymbols = static_cast<int>(std::strlen(text)); //-V2513
+    int numSymbols = static_cast<int>(std::strlen(text));
 
     int y = top - 1;
     int x = left;
@@ -206,11 +206,11 @@ int String::DrawInColumnWithTransfersDiffColors(const int left, const int top, c
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            char *word = WordWorker::GetWord(text + curSymbol, &length, buf); //-V2563
+            char *word = WordWorker::GetWord(text + curSymbol, &length, buf);
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
-                char symbol = text[curSymbol++]; //-V2563
+                char symbol = text[curSymbol++];
                 if (symbol == '\n')
                 {
                     x = right;
@@ -236,20 +236,20 @@ int String::DrawInColumnWithTransfersDiffColors(const int left, const int top, c
                 {
                     curSymbol += length;
 
-                    uint size = std::strlen(word); //-V2513
+                    uint size = std::strlen(word);
 
                     for (uint i = 0; i < size; ++i)
                     {
-                        if(inverse && word[i] == '\"') //-V2563
+                        if(inverse && word[i] == '\"')
                         {
                             colorDraw.SetAsCurrent();
                             inverse = false;
-                            x = Char(word[i]).Draw(x, y); //-V2563
+                            x = Char(word[i]).Draw(x, y);
                         }
                         else
                         {
-                            x = Char(word[i]).Draw(x, y); //-V2563
-                            if (!inverse && word[i] == '\"') //-V2563
+                            x = Char(word[i]).Draw(x, y);
+                            if (!inverse && word[i] == '\"')
                             {
                                 colorDif.SetAsCurrent();
                                 inverse = true;
@@ -277,16 +277,16 @@ uint *WordWorker::BreakWord(char *word)
     char *position = word;
     while (FindNextTransfer(position, &(lengthSyllables[num])))
     {
-        position += lengthSyllables[num]; //-V2563
+        position += lengthSyllables[num];
         num++;
     }
     lengthSyllables[num + 1] = 0;
-    if (std::strcmp(word, "структуру") == 0) //-V2513
+    if (std::strcmp(word, "структуру") == 0)
     {
         int8 lengths[] = {5, 2, 2, 0};
         std::memcpy(lengthSyllables, lengths, 4);
     }
-    else if (std::strcmp(word, "соответствующей") == 0) //-V2513
+    else if (std::strcmp(word, "соответствующей") == 0)
     {
         int8 lenghts[] = {4, 3, 4, 5, 3, 0};
         std::memcpy(lengthSyllables, lenghts, 6);
@@ -304,7 +304,7 @@ char *WordWorker::PartWordForTransfer(const char *word, const uint *lengthSyllab
     uint length = 0;
     for (int i = 0; i <= numSyllable; i++)
     {
-        length += static_cast<uint>(lengthSyllables[i]); //-V2563
+        length += static_cast<uint>(lengthSyllables[i]);
     }
     std::memcpy(buffer, word, length);
     buffer[length] = '-';
@@ -313,14 +313,14 @@ char *WordWorker::PartWordForTransfer(const char *word, const uint *lengthSyllab
 }
 
 
-bool WordWorker::FindNextTransfer(const char *letters, uint *lettersInSyllable) //-V2506
+bool WordWorker::FindNextTransfer(const char *letters, uint *lettersInSyllable)
 {
 
 #define VOWEL       0   // Гласная
 #define CONSONANT   1   // Согласная
 
-    * lettersInSyllable = std::strlen(letters); //-V2513
-    if (std::strlen(letters) <= 3) //-V2513
+    * lettersInSyllable = std::strlen(letters);
+    if (std::strlen(letters) <= 3)
     {
         return false;
     }
@@ -336,10 +336,10 @@ bool WordWorker::FindNextTransfer(const char *letters, uint *lettersInSyllable) 
 
     bool consonant[20];
 
-    uint size = std::strlen(letters); //-V2513
+    uint size = std::strlen(letters);
     for (uint i = 0; i < size; i++)
     {
-        consonant[i] = Char(letters[i]).IsConsonant(); //-V2563
+        consonant[i] = Char(letters[i]).IsConsonant();
     }
 
     if (CompareArrays(template1, consonant, 3))
@@ -352,7 +352,7 @@ bool WordWorker::FindNextTransfer(const char *letters, uint *lettersInSyllable) 
         *lettersInSyllable = 2;
         return true;
     }
-    if (std::strlen(letters) < 5) //-V2513
+    if (std::strlen(letters) < 5)
     {
         return false;
     }
@@ -362,7 +362,7 @@ bool WordWorker::FindNextTransfer(const char *letters, uint *lettersInSyllable) 
         *lettersInSyllable = 3;
         return true;
     }
-    if (std::strlen(letters) < 6) //-V2513
+    if (std::strlen(letters) < 6)
     {
         return false;
     }
@@ -406,11 +406,11 @@ bool Char::IsConsonant()
 }
 
 
-bool WordWorker::CompareArrays(const bool *array1, const bool *array2, int numElems) //-V2506
+bool WordWorker::CompareArrays(const bool *array1, const bool *array2, int numElems)
 {
     for (int i = 0; i < numElems; i++)
     {
-        if (array1[i] != array2[i]) //-V2563
+        if (array1[i] != array2[i])
         {
             return false;
         }
@@ -456,13 +456,13 @@ void BigText::Draw(int eX, int eY, Color color)
 {
     color.SetAsCurrent();
 
-    uint numSymbols = std::strlen(text); //-V2513
+    uint numSymbols = std::strlen(text);
 
     int x = eX;
 
     for (uint i = 0; i < numSymbols; i++)
     {
-        x = BigChar(text[i], size).Draw(x, eY); //-V2563
+        x = BigChar(text[i], size).Draw(x, eY);
         x += size;
     }
 }
@@ -500,9 +500,9 @@ String::String(const String &rhs) : text(nullptr)
 {
     Set(TypeConversionString::None, "");
 
-    if (Allocate(std::strlen(rhs.c_str()) + 1)) //-V2513
+    if (Allocate(std::strlen(rhs.c_str()) + 1))
     {
-        std::strcpy(text, rhs.c_str()); //-V2513
+        std::strcpy(text, rhs.c_str());
     }
 }
 
@@ -513,13 +513,13 @@ String::String(char symbol) : text(nullptr)
 
     if (Allocate(2))
     {
-        text[0] = symbol; //-V2563
-        text[1] = 0; //-V2563
+        text[0] = symbol;
+        text[1] = 0;
     }
 }
 
 
-String::String(const char *format, ...) : text(nullptr) //-V2506
+String::String(const char *format, ...) : text(nullptr)
 {
     Set(TypeConversionString::None, "");
 
@@ -532,17 +532,17 @@ String::String(const char *format, ...) : text(nullptr) //-V2506
     char buf[SIZE + 1];
 
     std::va_list args;
-    va_start(args, format); //-V2528 //-V2563 //-V2567 //-V2571
+    va_start(args, format); //-V2528
     int numSymbols = std::vsprintf(buf, format, args);
     va_end(args);
 
     if (numSymbols < 0 || numSymbols > SIZE)
     {
-        std::strcpy(text, "Буфер слишком мал"); //-V2513
+        std::strcpy(text, "Буфер слишком мал");
     }
-    else if (Allocate(std::strlen(buf) + 1)) //-V2513 //-V2516
+    else if (Allocate(std::strlen(buf) + 1))
     {
-        std::strcpy(text, buf); //-V2513
+        std::strcpy(text, buf);
     }
 }
 
@@ -557,24 +557,24 @@ void String::Set(TypeConversionString::E conv, const char *format, ...)
         char buf[SIZE + 1];
 
         std::va_list args;
-        va_start(args, format); //-V2528 //-V2563 //-V2567 //-V2571
+        va_start(args, format); //-V2528
         int numSymbols = std::vsprintf(buf, format, args);
         va_end(args);
 
         if (numSymbols < 0 || numSymbols > SIZE)
         {
-            std::strcpy(text, "Буфер слишком мал"); //-V2513
+            std::strcpy(text, "Буфер слишком мал");
         }
-        else if (Allocate(std::strlen(buf) + 1)) //-V2513 //-V2516
+        else if (Allocate(std::strlen(buf) + 1))
         {
-            std::strcpy(text, buf); //-V2513
+            std::strcpy(text, buf);
             Conversion(conv);
         }
     }
 }
 
 
-void String::Append(const char *str) //-V2506
+void String::Append(const char *str)
 {
     if (!str || *str == '\0')
     {
@@ -585,14 +585,14 @@ void String::Append(const char *str) //-V2506
 
     Free();
 
-    Allocate(old.Size() + std::strlen(str) + 1); //-V2513
+    Allocate(old.Size() + std::strlen(str) + 1);
 
-    std::strcpy(text, old.c_str()); //-V2513
-    std::strcat(text, str); //-V2513
+    std::strcpy(text, old.c_str());
+    std::strcat(text, str);
 }
 
 
-void String::Append(const char *str, uint numSymbols) //-V2506
+void String::Append(const char *str, uint numSymbols)
 {
     if (!str || *str == '\0')
     {
@@ -607,9 +607,9 @@ void String::Append(const char *str, uint numSymbols) //-V2506
 
     Allocate(size);
 
-    std::strcpy(text, old.c_str()); //-V2513
-    std::memcpy(text + old.Size(), str, numSymbols); //-V2563
-    text[size - 1] = '\0'; //-V2563
+    std::strcpy(text, old.c_str());
+    std::memcpy(text + old.Size(), str, numSymbols);
+    text[size - 1] = '\0';
 }
 
 
@@ -622,7 +622,7 @@ void String::Append(char symbol)
 
 String::~String()
 {
-    std::free(text); //-V2511
+    std::free(text);
 }
 
 
@@ -630,7 +630,7 @@ void String::Free()
 {
     if (text)
     {
-        std::free(text); //-V2511
+        std::free(text);
         text = nullptr;
         Set(TypeConversionString::None, "");
     }
@@ -643,10 +643,10 @@ char *String::c_str() const
 }
 
 
-bool String::Allocate(uint size) //-V2506
+bool String::Allocate(uint size)
 {
-    std::free(text); //-V2511
-    text = static_cast<char *>(std::malloc(size)); //-V2511
+    std::free(text);
+    text = static_cast<char *>(std::malloc(size));
     if (text)
     {
         return true;
@@ -662,10 +662,10 @@ int String::Draw(int x, int y, Color color) const
 
     int spacing = Font::Spacing::Get();
 
-    uint numSymbols = std::strlen(text); //-V2513
+    uint numSymbols = std::strlen(text);
     for (uint i = 0; i < numSymbols; ++i)
     {
-        x = Char(text[i]).Draw(x, y); //-V2563
+        x = Char(text[i]).Draw(x, y);
         x += spacing;
     }
 
@@ -677,7 +677,7 @@ int String::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color
 {
     color.SetAsCurrent();
 
-    int height = Font::GetHeight(text[0]); //-V2563
+    int height = Font::GetHeight(text[0]);
     int x = eX + (width - Width()) / 2;
     int y = eY + (eHeight - height) / 2;
 
@@ -718,10 +718,10 @@ void String::DrawInColumn(int x, int y, int width, int delta)
         }
         int numSymbols = 0;
         numSymbols = DrawSubString(x, y, t);
-        t += numSymbols; //-V2563
+        t += numSymbols;
         x += length;
         x = DrawSpaces(x, y, t, &numSymbols);
-        t += numSymbols;     // -V102 //-V2563
+        t += numSymbols;     // -V102
     }
 }
 
@@ -744,7 +744,7 @@ int String::DrawInColumnWithTransfers(const int left, const int top, const int w
     int right = left + width;
 
     char buf[20];
-    int numSymbols = static_cast<int>(std::strlen(text)); //-V2513
+    int numSymbols = static_cast<int>(std::strlen(text));
 
     int y = top - 1;
     int x = left;
@@ -756,11 +756,11 @@ int String::DrawInColumnWithTransfers(const int left, const int top, const int w
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            String word(WordWorker::GetWord(text + curSymbol, &length, buf)); //-V2563
+            String word(WordWorker::GetWord(text + curSymbol, &length, buf));
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
-                char symbol = text[curSymbol++]; //-V2563
+                char symbol = text[curSymbol++];
                 if (symbol == '\n')
                 {
                     x = right;
@@ -876,7 +876,7 @@ int String::DrawSpaces(int x, int y, pString _t, int *numSymbols)
 bool String::GetHeightTextWithTransfers(int left, int top, int right, int *height)
 {
     char buf[20];
-    int numSymbols = static_cast<int>(std::strlen(text)); //-V2513
+    int numSymbols = static_cast<int>(std::strlen(text));
 
     int y = top - 1;
     int x = left;
@@ -888,11 +888,11 @@ bool String::GetHeightTextWithTransfers(int left, int top, int right, int *heigh
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            String word(WordWorker::GetWord(text + curSymbol, &length, buf)); //-V2563
+            String word(WordWorker::GetWord(text + curSymbol, &length, buf));
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
-                char symbol = text[curSymbol++]; //-V2563
+                char symbol = text[curSymbol++];
                 if (symbol == '\n')
                 {
                     x = right;
@@ -933,7 +933,7 @@ bool String::GetHeightTextWithTransfers(int left, int top, int right, int *heigh
 
 void String::RemoveFromBegin(uint numSymbols)
 {
-    if (std::strlen(text) == numSymbols) //-V2513
+    if (std::strlen(text) == numSymbols)
     {
         Free();
     }
@@ -945,7 +945,7 @@ void String::RemoveFromBegin(uint numSymbols)
 
         Allocate(old.Size() - numSymbols + 1);
 
-        std::strcpy(text, old.c_str() + numSymbols); //-V2513 //-V2563
+        std::strcpy(text, old.c_str() + numSymbols);
     }
 }
 
@@ -954,19 +954,19 @@ void String::RemoveFromEnd()
 {
     if (Size() > 0)
     {
-        text[Size() - 1] = '\0'; //-V2563
+        text[Size() - 1] = '\0';
     }
 }
 
 
-int String::Size() const //-V2506
+int String::Size() const
 {
     if (text == nullptr)
     {
         return 0;
     }
 
-    return static_cast<int>(std::strlen(text)); //-V2513
+    return static_cast<int>(std::strlen(text));
 }
 
 
@@ -989,7 +989,7 @@ int String::NumberWords() const
 }
 
 
-char &String::operator[](int i) //-V2506
+char &String::operator[](int i)
 {
     static char result = 0;
 
@@ -998,5 +998,5 @@ char &String::operator[](int i) //-V2506
         return result;
     }
 
-    return text[i]; //-V2563
+    return text[i];
 }

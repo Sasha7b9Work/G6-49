@@ -6,13 +6,16 @@
 #include <stm32f429xx.h>
 
 
+static bool OnStartMainApplication(SimpleMessage *message);
+
+
 static bool E(SimpleMessage *)
 {
     return false;
 }
 
 
-bool PHandlers::Processing(SimpleMessage *msg) //-V2506
+bool PHandlers::Processing(SimpleMessage *msg)
 {
     typedef bool(*pFuncBpM)(SimpleMessage *);
   
@@ -41,7 +44,7 @@ bool PHandlers::Processing(SimpleMessage *msg) //-V2506
 }
 
 
-bool PHandlers::OnStartMainApplication(SimpleMessage *)
+static bool OnStartMainApplication(SimpleMessage *)
 {
     typedef void(*pFunction)();
 
@@ -49,7 +52,7 @@ bool PHandlers::OnStartMainApplication(SimpleMessage *)
 
     pFunction JumpToApplication;
 
-    JumpToApplication = (pFunction)(*(__IO uint *)(Updater::MAIN_PROGRAM_START_ADDRESS + 4)); //-V2571
+    JumpToApplication = (pFunction)(*(__IO uint *)(Updater::MAIN_PROGRAM_START_ADDRESS + 4));
 
     __set_MSP(*(__IO uint *)Updater::MAIN_PROGRAM_START_ADDRESS);
 

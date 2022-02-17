@@ -20,8 +20,8 @@ using namespace Primitives;
 
 struct Warning
 {
-    Warning(pString msg = "") : timeStart(TIME_MS) { if (msg[0] != '\0') { message = new String(msg); } else { message = nullptr; } }; //-V2511 //-V2563
-    void Delete()   { if (message) { delete message; message = nullptr; } } //-V2511
+    Warning(pString msg = "") : timeStart(TIME_MS) { if (msg[0] != '\0') { message = new String(msg); } else { message = nullptr; } };
+    void Delete()   { if (message) { delete message; message = nullptr; } }
     bool IsEqual(const String &msg);
     uint timeStart;
     String *message;
@@ -64,7 +64,7 @@ uint8 *Display::GetBuffer()
 
 uint8 *Display::GetRow(int row)
 {
-    return frontBuffer + row * 320; //-V2563
+    return frontBuffer + row * 320;
 }
 
 
@@ -259,5 +259,5 @@ int Warnings::Width() const
 
 bool Warning::IsEqual(const String &msg)
 {
-    return std::strcmp(msg.c_str(), message->c_str()) == 0; //-V2513
+    return std::strcmp(msg.c_str(), message->c_str()) == 0;
 }
