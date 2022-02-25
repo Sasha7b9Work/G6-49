@@ -7,8 +7,6 @@ JLink*.*
 *.uvgui*.*
 archive.zip
 *out.txt
-*.exe
-*.dll
 *.aps
 
 

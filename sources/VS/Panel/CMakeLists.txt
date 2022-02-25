@@ -54,6 +54,7 @@ add_compile_options(/wd4514)    # unreferenced inline function has been removed
 add_compile_options(/wd4623)    # 'xxx': default constructor was implicitly defined as deleted
 add_compile_options(/wd4625)    # copy constructor was implicitly defined as deleted
 add_compile_options(/wd4626)    # assignment operator was implicitly defined as deleted
+add_compile_options(/wd4668)
 add_compile_options(/wd4710)    # function not inlined
 add_compile_options(/wd4774)    # format string expected in argument 3 is not a string literal
 add_compile_options(/wd4820)    # 'N' bytes padding added after data member
@@ -61,7 +62,9 @@ add_compile_options(/wd4946)    # reinterpret_cast used between related classes:
 add_compile_options(/wd4996)    # function or variable may be unsafe
 add_compile_options(/wd5026)    # move constructor was implicitly defined as deleted
 add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
+add_compile_options(/wd5039)
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+add_compile_options(/wd5246)
 add_compile_options(/wd26812)   # The enum type 'xxx' in unscoped. Prefer 'enum class' over 'enum'
 
 file(GLOB COMMON                 ../../common/Command.*
