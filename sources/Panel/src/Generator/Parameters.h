@@ -175,6 +175,9 @@ private:
     bool InRange(double v) const;
     bool InRange(Value v) const;
 
+    // Для пакета импульсов после изменения периода или длительности импульсов нужно заслать ещё и число импульсов
+    void LoadNumberImpulsesIfNeed();
+
 protected:
     Value max;
 };
@@ -217,6 +220,8 @@ public:
     bool SetAndLoadValue(Value val);
 
     bool SetAndLoadValue(int val);
+
+    void LoadValue();
 
     bool InRange(Value v) const;
 

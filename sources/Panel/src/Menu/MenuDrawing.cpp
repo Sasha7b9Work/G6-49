@@ -16,6 +16,7 @@ void Menu::Draw()
     int x = DrawTitle();
     DrawPagesUGO(x);
     CURRENT_PAGE->DrawOpened();
+
     if(GetOpenedItem())
     {
         GetOpenedItem()->Draw(true);

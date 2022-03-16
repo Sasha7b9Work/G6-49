@@ -187,6 +187,20 @@ pString ParameterDouble::GetUnits(Order::E order) const
 }
 
 
+void ParameterDouble::LoadNumberImpulsesIfNeed()
+{
+    ParameterInteger *parameter = CURRENT_FORM->FindParameter(ParameterIntegerType::PacketNumber);
+
+    if (parameter)
+    {
+        if (type == ParameterDoubleType::Period || type == ParameterDoubleType::Duration)
+        {
+            parameter->LoadValue();
+        }
+    }
+}
+
+
 bool ParameterDouble::SetAndLoadValue(double val)
 {
     if(!InRange(val))
@@ -197,6 +211,8 @@ bool ParameterDouble::SetAndLoadValue(double val)
     value.FromDouble(val);
 
     PGenerator::SetParameter(this);
+
+    LoadNumberImpulsesIfNeed();
 
     return true;
 }
@@ -212,6 +228,8 @@ bool ParameterDouble::SetAndLoadValue(Value val)
     value = val;
 
     PGenerator::SetParameter(this);
+
+    LoadNumberImpulsesIfNeed();
 
     return true;
 }
@@ -243,6 +261,12 @@ bool ParameterInteger::SetAndLoadValue(int val)
     PGenerator::SetParameter(this);
 
     return true;
+}
+
+
+void ParameterInteger::LoadValue()
+{
+    PGenerator::SetParameter(this);
 }
 
 
