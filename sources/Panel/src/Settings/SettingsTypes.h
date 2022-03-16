@@ -65,6 +65,9 @@ struct FreqTimeStamps
         _1MHz,
         _10MHz
     } value;
+
+    FreqTimeStamps(E v) : value(v) { }
+
     operator uint8() const { return static_cast<uint8>(value); };
 };
 

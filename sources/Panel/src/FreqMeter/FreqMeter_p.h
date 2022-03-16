@@ -33,6 +33,9 @@ struct PFreqMeter
             _1000ms,
             _10000ms
         } value;
+
+        BillingTime(E v) : value(v) { }
+
         operator uint8() const { return static_cast<uint8>(value); };
     };
 
@@ -47,6 +50,9 @@ struct PFreqMeter
             _1000,
             _10000
         } value;
+
+        AvePeriod(E v) : value(v) { }
+
         operator uint8() const { return static_cast<uint8>(value); };
     };
 
