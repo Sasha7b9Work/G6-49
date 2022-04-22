@@ -17,8 +17,8 @@ extern const PageBase pCalibration;
 
 static uint8 channel = 0;
 static uint8 signal = 0;
-static uint8 parameter = 0;
 static uint8 range = 0;
+static uint8 parameter = 0;
 
 static int16 *calK = nullptr;
 
@@ -81,19 +81,11 @@ static void OnChange_Parameters(bool)
         return;
     }
 
-    //Message::Debug().Transmit();
-
     TuneControls();
-
-    //Message::Debug().Transmit();
 
     LoadK();
 
-    //Message::Debug().Transmit();
-
     SendMessage();
-
-    //Message::Debug().Transmit();
 }
 
 // Вызывается при изменении источника сигнал
@@ -143,10 +135,10 @@ DEF_CHOICE_5(cRange,
 DEF_CHOICE_4(cParameterFullVoltage,
     "Параметр", "Parameter",
     "", "",
-    "Амплитуда", "Amplitude", "", "",
-    "+5В",       "+5V",       "", "",
-    "0В",        "0V",        "", "",
-    "-5В",       "-5V",       "", "",
+    "Размах",  "Amplitude", "", "",
+    "+5В",     "+5V",       "", "",
+    "0В",      "0V",        "", "",
+    "-5В",     "-5V",       "", "",
     parameter, pCalibration, Item::FuncActive, OnChange_Parameters, FuncDraw
 )
 
@@ -155,10 +147,10 @@ DEF_CHOICE_4(cParameterFullVoltage,
 DEF_CHOICE_4(cParameterHalfVoltage,
     "Параметр", "Parameter",
     "", "",
-    "Амплитуда", "Amplitude", "", "",
-    "+2.5В",     "+2.5V",     "", "",
-    "0В",        "0V",        "", "",
-    "-2.5В",     "-2.5V",     "", "",
+    "Размах",  "Amplitude", "", "",
+    "+2.5В",   "+2.5V",     "", "",
+    "0В",      "0V",        "", "",
+    "-2.5В",   "-2.5V",     "", "",
     parameter, pCalibration, Item::FuncActive, OnChange_Parameters, FuncDraw
 )
 
