@@ -50,9 +50,14 @@ void Calibrator::SetK(uint8 channel, uint8 _signal, uint8 _range, uint8 param, i
 
     AD5697::EnabledCalibrateMode(true);
 
-    SetAmplitude(ch, (param != 0) && (_signal == 0));       // Для калибровки смещения нужно установить нулевой уровень на выходе, но аттенюатор не трогать
+    SetAmplitude(ch, (param != 0));       // Для калибровки смещения нужно установить нулевой уровень на выходе, но аттенюатор не трогать
 
     SetOffset(ch, param);
+
+    if (_signal == 1)
+    {
+        Amplifier::Tune(ch, (int)_range);
+    }
 
     AD5697::EnabledCalibrateMode(false);
 

@@ -159,16 +159,32 @@
           <Type>0</Type>
           <LineNumber>331</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134403872</Address>
+          <Address>134403884</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Projects\stm32\G6-49\sources\DLoader\src\FDrive\FDrive_d_Handler.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\FDrive\FDrive_d_Handler.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\G6_49_D\src/FDrive/FDrive_d_Handler.cpp\331</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>53</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134402360</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;1&gt;.\src\Generator\Calibrator.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\G6_49_D\src/Generator/Calibrator.cpp\53</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

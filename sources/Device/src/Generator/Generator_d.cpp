@@ -287,6 +287,48 @@ void Amplifier::Unlock()
 }
 
 
+void Amplifier::Tune(Chan::E ch, int range)
+{
+    static float amplitudes[6] =
+    {
+        0.05f,
+        0.3f,
+        0.9f,
+        3.0f,
+        9.0f
+    };
+
+    float amplitude = amplitudes[range];
+
+    if (amplitude > Attenuation(Attenuation::_10Db).Units())                     // (3,16 ... 10.0] Â
+    {
+        SetAttenuation(ch, Attenuation::_0Db);
+    }
+    else if (amplitude > 1.0F)                                                   // (1 ... 3.16] Â 
+    {
+        SetAttenuation(ch, Attenuation::_10Db);
+    }
+    else if (amplitude > Attenuation(Attenuation::_10Db).Units() / 10.0F)        // (0.316 ... 1] Â
+    {
+        SetAttenuation(ch, Attenuation::_0Db);
+    }
+    else if (amplitude > 0.100F)                                                 // (0.100 ... 0.316] Â
+    {
+        SetAttenuation(ch, Attenuation::_10Db);
+    }
+    else if (amplitude > Attenuation(Attenuation::_10Db).Units() / 100.0F)       // (31.6 ... 0.100] Â
+    {
+        SetAttenuation(ch, Attenuation::_20Db);
+    }
+    else
+    {
+        SetAttenuation(ch, Attenuation::_30Db);                                  // [0 ... 31.6] Â
+    }
+
+    Enable(ch, amplitude > 1.0F);
+}
+
+
 void Amplifier::Tune(Chan::E ch)
 {
     if (locked)
