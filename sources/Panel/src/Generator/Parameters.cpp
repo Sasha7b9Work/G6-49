@@ -604,3 +604,29 @@ const char *ParameterChoiceType::Name(ParameterChoiceType::E type)
 
     return names[type];
 }
+
+
+void ParameterPacketPeriod::RecalcualateValue()
+{
+    // «начение периода не может быть меньше (N - 1) * Tи + tи + 10нс
+
+    ParameterPeriod *par_period = (ParameterPeriod *)form->FindParameter(ParameterDoubleType::Period);
+    ParameterInteger *par_number = form->FindParameter(ParameterIntegerType::PacketNumber);
+    ParameterDuration *par_duration = (ParameterDuration *)form->FindParameter(ParameterDoubleType::Duration);
+
+    if (par_period && par_number && par_duration)
+    {
+        Value min_value = par_period->GetValue();
+
+        min_value.Mul((uint)(par_number->GetValue().Integer() - 1));
+
+        min_value.Add(par_duration->GetValue());
+
+        min_value.Add(Value("10", Order::Nano));
+
+        if (GetValue() < min_value)
+        {
+            SetValue(min_value);
+        }
+    }
+}

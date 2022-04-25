@@ -162,6 +162,8 @@ public:
     // ¬озвращает текущее значение параметра
     virtual Value GetValue() const { return value; };
 
+    void SetValue(Value val) { value = val; }
+     
     ParameterDoubleType::E GetType() const { return type; }
 
 private:
@@ -410,6 +412,9 @@ class ParameterPacketPeriod : public ParameterTime
 public:
     ParameterPacketPeriod(const Value &max, const Value &value) : ParameterTime(ParameterDoubleType::PacketPeriod,
         "ѕериод пак", "Packet per", IMPULSE_PERIOD_MIN, max, value) { }
+
+    // ≈сли установленное значение не позвол€ет поместить в себ€ все импульсы пакета, то его нужно пересчитать
+    void RecalcualateValue();
 };
 
 
