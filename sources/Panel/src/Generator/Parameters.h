@@ -392,22 +392,24 @@ public:
 class ParameterTime : public ParameterDouble
 {
 public:
-    ParameterTime(ParameterDoubleType::E t, const char *nameRU, const char * const nameEN, const Value &min, const Value &max, const Value &value) :
-        ParameterDouble(t, nameRU, nameEN, min, max, value) { }
+    ParameterTime(ParameterDoubleType::E t, const char *nameRU, const char * const nameEN, const Value &min,
+        const Value &max, const Value &value) : ParameterDouble(t, nameRU, nameEN, min, max, value) { }
 };
 
 
 class ParameterPhase : public ParameterDouble
 {
 public:
-    ParameterPhase() : ParameterDouble(ParameterDoubleType::Phase, "Фаза", "Phase", Value("0", Order::One), Value("360", Order::One), Value("0", Order::One)) { }
+    ParameterPhase() : ParameterDouble(ParameterDoubleType::Phase, "Фаза", "Phase", Value("0", Order::One),
+        Value("360", Order::One), Value("0", Order::One)) { }
 };
 
 
 class ParameterPacketPeriod : public ParameterTime
 {
 public:
-    ParameterPacketPeriod(const Value &max, const Value &value) : ParameterTime(ParameterDoubleType::PacketPeriod, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, value) { }
+    ParameterPacketPeriod(const Value &max, const Value &value) : ParameterTime(ParameterDoubleType::PacketPeriod,
+        "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, value) { }
 };
 
 
