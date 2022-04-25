@@ -210,7 +210,7 @@ bool ParameterDouble::SetAndLoadValue(double val)
 
     value.FromDouble(val);
 
-    PGenerator::SetParameter(this);
+    PGenerator::SetParameterDouble(this);
 
     LoadNumberImpulsesIfNeed();
 
@@ -227,7 +227,7 @@ bool ParameterDouble::SetAndLoadValue(Value val)
 
     value = val;
 
-    PGenerator::SetParameter(this);
+    PGenerator::SetParameterDouble(this);
 
     LoadNumberImpulsesIfNeed();
 
