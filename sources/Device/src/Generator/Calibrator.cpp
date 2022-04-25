@@ -54,10 +54,7 @@ void Calibrator::SetK(uint8 channel, uint8 _signal, uint8 _range, uint8 param, i
 
     SetOffset(ch, param);
 
-    if (_signal == 1)
-    {
-        Amplifier::Tune(ch, (int)_range);
-    }
+    Amplifier::Tune(ch, (int)_range);
 
     AD5697::EnabledCalibrateMode(false);
 
