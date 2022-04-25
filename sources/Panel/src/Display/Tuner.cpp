@@ -1194,7 +1194,19 @@ void Tuner::OnButtonApply()
 
             ParameterDoubleType::E type = paramDouble->GetType();
 
-            if (type == ParameterDoubleType::Duration || type == ParameterDoubleType::Period || type == ParameterDoubleType::PacketPeriod)
+            if (type == ParameterDoubleType::PacketPeriod)
+            {
+                ParameterPacketPeriod *pack_period = (ParameterPacketPeriod *)paramDouble;
+
+                if (DisplayEntering::ToValue() < pack_period->CalculateMinValue())
+                {
+                    Display::ShowWarning(String("Параметр не может быть меньше %s сек",
+                        pack_period->CalculateMinValue().ToString(false, Order::One)));
+                    return;
+                }
+            }
+            else if (type == ParameterDoubleType::Duration || type == ParameterDoubleType::Period ||
+                type == ParameterDoubleType::PacketPeriod)
             {
                 int fractNano = DisplayEntering::ToValue().FractNano();
 

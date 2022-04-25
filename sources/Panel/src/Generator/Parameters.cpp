@@ -606,7 +606,7 @@ const char *ParameterChoiceType::Name(ParameterChoiceType::E type)
 }
 
 
-void ParameterPacketPeriod::RecalcualateValue()
+Value ParameterPacketPeriod::CalculateMinValue() const
 {
     // «начение периода не может быть меньше (N - 1) * Tи + tи + 10нс
 
@@ -624,9 +624,19 @@ void ParameterPacketPeriod::RecalcualateValue()
 
         min_value.Add(Value("10", Order::Nano));
 
-        if (GetValue() < min_value)
-        {
-            SetValue(min_value);
-        }
+        return min_value;
+    }
+
+    return Value("20", Order::Nano);
+}
+
+
+void ParameterPacketPeriod::RecalcualateValue()
+{
+    Value min_value = CalculateMinValue();
+
+    if (GetValue() < min_value)
+    {
+        SetValue(min_value);
     }
 }

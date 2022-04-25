@@ -415,6 +415,11 @@ public:
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
     void RecalcualateValue();
+
+    // Рассчитывает минимально возможное значение при данных параметрах
+    Value CalculateMinValue() const;
+
+    virtual Value GetMin() const { return CalculateMinValue(); }
 };
 
 
