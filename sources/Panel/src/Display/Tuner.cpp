@@ -1109,15 +1109,6 @@ void DisplayCorrection::Init(Value value)
 {
     Parameter *param = Tuner::Current()->GetParameter();
 
-    if (param->IsDouble())
-    {
-        tuner->ReinterpretToDouble()->SetAndLoadValue(value);
-    }
-    else if (param->IsInteger())
-    {
-        tuner->ReinterpretToInteger()->SetAndLoadValue(value);
-    }
-
     Form *form = param->GetForm();
 
     if (form->value == TypeForm::PacketImpuls)
@@ -1128,6 +1119,15 @@ void DisplayCorrection::Init(Value value)
         {
             ((ParameterPacketPeriod *)form->FindParameter(ParameterDoubleType::PacketPeriod))->RecalcualateValue();
         }
+    }
+
+    if (param->IsDouble())
+    {
+        tuner->ReinterpretToDouble()->SetAndLoadValue(value);
+    }
+    else if (param->IsInteger())
+    {
+        tuner->ReinterpretToInteger()->SetAndLoadValue(value);
     }
 
     Init();

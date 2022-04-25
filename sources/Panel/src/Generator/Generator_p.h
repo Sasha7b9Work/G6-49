@@ -28,9 +28,9 @@ struct PGenerator
 
     static void SetParameter(ParameterChoice *param);
 
-    static void SetParameter(ParameterInteger *param);
+    static void SetParameterInt(ParameterInteger *param);
 
-    static void SetParameter(Parameter *param);
+    static void SetParameterCommon(Parameter *param);
 
     static void SetOffset(Chan::E ch, float offset);
 

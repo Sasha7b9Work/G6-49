@@ -244,7 +244,7 @@ bool ParameterInteger::SetAndLoadValue(Value val)
 
     value = val;
 
-    PGenerator::SetParameter(this);
+    PGenerator::SetParameterInt(this);
 
     return true;
 }
@@ -258,7 +258,7 @@ bool ParameterInteger::SetAndLoadValue(int val)
 
     value.FromINT(val);
 
-    PGenerator::SetParameter(this);
+    PGenerator::SetParameterInt(this);
 
     return true;
 }
@@ -266,7 +266,7 @@ bool ParameterInteger::SetAndLoadValue(int val)
 
 void ParameterInteger::LoadValue()
 {
-    PGenerator::SetParameter(this);
+    PGenerator::SetParameterInt(this);
 }
 
 

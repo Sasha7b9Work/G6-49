@@ -220,7 +220,7 @@ void PGenerator::SetParameter(ParameterDouble *param)
 }
 
 
-void PGenerator::SetParameter(ParameterInteger *param)
+void PGenerator::SetParameterInt(ParameterInteger *param)
 {
     static const Command::E commands[ParameterIntegerType::Count] =
     {
@@ -251,7 +251,7 @@ void PGenerator::LoadSettings()
     PGenerator::TuneChannel(Chan::B);
 }
 
-void PGenerator::SetParameter(Parameter *parameter)
+void PGenerator::SetParameterCommon(Parameter *parameter)
 {
     if(parameter->IsDouble())
     {
@@ -263,7 +263,7 @@ void PGenerator::SetParameter(Parameter *parameter)
     }
     else if (parameter->IsInteger())
     {
-        SetParameter(static_cast<ParameterInteger *>(parameter));
+        SetParameterInt(static_cast<ParameterInteger *>(parameter));
     }
 }
 
