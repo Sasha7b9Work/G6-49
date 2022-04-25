@@ -422,13 +422,13 @@ ParameterManipulation::ParameterManipulation(Parameter **parameters) : Parameter
 
 bool ParameterDouble::InRange(double val) const
 {
-    return (val >= min.ToDouble()) && (val <= max.ToDouble());
+    return (val >= GetMin().ToDouble()) && (val <= GetMax().ToDouble());
 }
 
 
 bool ParameterDouble::InRange(Value val) const
 {
-    return (val >= min && val <= max);
+    return (val >= GetMin() && val <= GetMax());
 }
 
 
@@ -454,8 +454,10 @@ int ParameterChoice::NumChoices() const
 }
 
 
-ParameterDouble::ParameterDouble(ParameterDoubleType::E t, const char *nameRU, const char * const nameEN, const Value &_min, const Value &_max, const Value &_value) :
-    Parameter(ParameterKind::Double, nameRU, nameEN), tuner(this), type(t), min(_min), value(_value), resetValue(_value), max(_max)
+ParameterDouble::ParameterDouble(ParameterDoubleType::E t, const char *nameRU, const char * const nameEN,
+    const Value &_min_, const Value &_max, const Value &_value) :
+    Parameter(ParameterKind::Double, nameRU, nameEN), tuner(this), type(t), min(_min_), value(_value),
+    resetValue(_value), max(_max)
 {
 }
 
