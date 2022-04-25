@@ -28,7 +28,7 @@ struct PGenerator
 
     static void SetParameterChoice(ParameterChoice *param);
 
-    static void SetParameterInt(ParameterInteger *param);
+    static void SetParameterInteger(ParameterInteger *param);
 
     static void SetParameterCommon(Parameter *param);
 

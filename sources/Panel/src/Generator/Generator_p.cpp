@@ -220,7 +220,7 @@ void PGenerator::SetParameterDouble(ParameterDouble *param)
 }
 
 
-void PGenerator::SetParameterInt(ParameterInteger *param)
+void PGenerator::SetParameterInteger(ParameterInteger *param)
 {
     static const Command::E commands[ParameterIntegerType::Count] =
     {
@@ -255,7 +255,7 @@ void PGenerator::SetParameterCommon(Parameter *parameter)
 {
     if(parameter->IsDouble())
     {
-        SetParameter(static_cast<ParameterDouble *>(parameter));
+        SetParameterDouble(static_cast<ParameterDouble *>(parameter));
     }
     else if(parameter->IsChoice())
     {
@@ -263,7 +263,7 @@ void PGenerator::SetParameterCommon(Parameter *parameter)
     }
     else if (parameter->IsInteger())
     {
-        SetParameterInt(static_cast<ParameterInteger *>(parameter));
+        SetParameterInteger(static_cast<ParameterInteger *>(parameter));
     }
 }
 
