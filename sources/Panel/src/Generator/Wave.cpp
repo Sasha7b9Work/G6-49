@@ -413,7 +413,7 @@ void Form::SendParameterToGenerator(ParameterDoubleType::E p)
 
     if (param)
     {
-        PGenerator::SetParameterCommon(param);
+        PGenerator::SetParameter(param);
     }
 }
 
@@ -424,7 +424,7 @@ void Form::SendParameterToGenerator(ParameterChoiceType::E p)
 
     if(param)
     {
-        PGenerator::SetParameterCommon(param);
+        PGenerator::SetParameter(param);
     }
 }
 
@@ -435,7 +435,7 @@ void Form::SendParameterToGenerator(ParameterIntegerType::E p)
 
     if (param)
     {
-        PGenerator::SetParameterCommon(param);
+        PGenerator::SetParameter(param);
     }
 }
 

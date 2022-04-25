@@ -30,7 +30,7 @@ struct PGenerator
 
     static void SetParameterInteger(ParameterInteger *param);
 
-    static void SetParameterCommon(Parameter *param);
+    static void SetParameter(Parameter *param);
 
     static void SetOffset(Chan::E ch, float offset);
 

@@ -251,7 +251,7 @@ void PGenerator::LoadSettings()
     PGenerator::TuneChannel(Chan::B);
 }
 
-void PGenerator::SetParameterCommon(Parameter *parameter)
+void PGenerator::SetParameter(Parameter *parameter)
 {
     if(parameter->IsDouble())
     {
