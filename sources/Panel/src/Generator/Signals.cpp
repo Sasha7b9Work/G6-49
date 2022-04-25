@@ -28,8 +28,10 @@ static void FuncCloseManipulation()
 
 
 static ParameterManipulationEnabled   sineManipulationA_Enabled (namesManipulationEnabled);
-static ParameterManipulationDuration  sineManipulationA_Duration(Value("10", Order::Nano), Value("10", Order::One),    Value("5", Order::Milli));
-static ParameterManipulationPeriod    sineManipulationA_Period  (Value("20", Order::Nano), Value("10000", Order::One), Value("25", Order::Milli));
+static ParameterManipulationDuration  sineManipulationA_Duration(Value("10", Order::Nano), Value("10", Order::One),
+    Value("5", Order::Milli));
+static ParameterManipulationPeriod    sineManipulationA_Period  (Value("20", Order::Nano), Value("10000", Order::One),
+    Value("25", Order::Milli));
 static ParameterButton                sineManipulationA_Exit    ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
 
 
@@ -197,9 +199,12 @@ static Form formImpulseA(TypeForm::Impulse, params_ImpulseA, &waves[Chan::A]);
 
 
 
-static ParameterPeriod       packetA_Period        (Value("100", Order::Kilo), Value("200", Order::Micro), "Период имп", "Period imp"); //-V666
-static ParameterDuration     packetA_Duration      (Value("100", Order::Kilo), Value("10", Order::Micro),  "Длит имп",   "Dur imp"); //-V666
-static ParameterInteger      packetA_PacketNumber  (ParameterIntegerType::PacketNumber, "Кол-во имп", "Count imp", Value("1", Order::One), Value("100000", Order::One), Value("3", Order::One)); //-V666
+static ParameterPeriod       packetA_Period        (Value("100", Order::Kilo), Value("200", Order::Micro),
+    "Период имп", "Period imp"); //-V666
+static ParameterDuration     packetA_Duration      (Value("100", Order::Kilo), Value("10", Order::Micro),  "Длит имп",
+    "Dur imp"); //-V666
+static ParameterInteger      packetA_PacketNumber  (ParameterIntegerType::PacketNumber,
+    "Кол-во имп", "Count imp", Value("1", Order::One), Value("100000", Order::One), Value("3", Order::One)); //-V666
 static ParameterPacketPeriod packetA_PacketPeriod  (Value("100", Order::Kilo), Value("0.1", Order::One));
 static ParameterAmplitude    packetA_Amplitude;
 static ParameterOffset       packetA_Offset;
@@ -241,8 +246,10 @@ static Form *formsA[] =
 
 
 static ParameterManipulationEnabled  sineManipulationB_Enabled  (namesManipulationEnabled);
-static ParameterManipulationDuration sineManipulationB_Duration(Value("10", Order::Nano), Value("10", Order::One), Value("5", Order::Milli));
-static ParameterManipulationPeriod   sineManipulationB_Period(Value("20", Order::Nano), Value("10000", Order::One), Value("25", Order::Milli));
+static ParameterManipulationDuration sineManipulationB_Duration(Value("10", Order::Nano), Value("10", Order::One),
+    Value("5", Order::Milli));
+static ParameterManipulationPeriod   sineManipulationB_Period(Value("20", Order::Nano), Value("10000", Order::One),
+    Value("25", Order::Milli));
 static ParameterButton               sineManipulationB_Exit     ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
 
 static Parameter *sineManipulationB[] =
