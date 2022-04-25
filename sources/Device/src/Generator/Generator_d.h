@@ -78,6 +78,8 @@ public:
     // Установить заданные настройки и заблокировать
     static void TuneAndLock(Chan::E ch, bool enabled, Attenuation::E attenuation);
 
+    static void Lock();
+
     // Разблокировать
     static void Unlock();
    

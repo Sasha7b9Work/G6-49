@@ -287,6 +287,12 @@ void Amplifier::Unlock()
 }
 
 
+void Amplifier::Lock()
+{
+    locked = true;
+}
+
+
 void Amplifier::Tune(Chan::E ch, int range)
 {
     static float amplitudes[6] =
