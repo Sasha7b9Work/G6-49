@@ -387,18 +387,6 @@ void ParameterChoice::NextChoiceModeStart()
 }
 
 
-//void ParameterChoice::TuneCurrentChoice()
-//{
-//    if (type == ParameterChoiceType::ModeStart)
-//    {
-//        if (choiceModeStart > 1 && NumChoices() == 2)
-//        {
-//            NextChoiceModeStart();
-//        }
-//    }
-//}
-
-
 bool ParameterChoice::SetAndLoadChoice(int ch)
 {
     if(ch < 0 || ch >= NumChoices())
@@ -408,7 +396,7 @@ bool ParameterChoice::SetAndLoadChoice(int ch)
 
     choice = ch;
 
-    PGenerator::SetParameter(this);
+    PGenerator::SetParameterChoice(this);
 
     return true;
 }
