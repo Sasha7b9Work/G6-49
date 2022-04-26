@@ -1111,6 +1111,15 @@ void DisplayCorrection::Init(Value value)
 
     Form *form = param->GetForm();
 
+    if (param->IsDouble())
+    {
+        tuner->ReinterpretToDouble()->SetAndLoadValue(value);
+    }
+    else if (param->IsInteger())
+    {
+        tuner->ReinterpretToInteger()->SetAndLoadValue(value);
+    }
+
     if (form->value == TypeForm::PacketImpuls)
     {
         if (param == form->FindParameter(ParameterDoubleType::Period) ||
@@ -1124,15 +1133,6 @@ void DisplayCorrection::Init(Value value)
                 par_per->SetAndLoadValue(par_per->GetValue());
             }
         }
-    }
-
-    if (param->IsDouble())
-    {
-        tuner->ReinterpretToDouble()->SetAndLoadValue(value);
-    }
-    else if (param->IsInteger())
-    {
-        tuner->ReinterpretToInteger()->SetAndLoadValue(value);
     }
 
     Init();
