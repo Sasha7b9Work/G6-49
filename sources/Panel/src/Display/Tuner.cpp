@@ -1117,7 +1117,12 @@ void DisplayCorrection::Init(Value value)
             param == form->FindParameter(ParameterIntegerType::PacketNumber) ||
             param == form->FindParameter(ParameterDoubleType::Duration))
         {
-            ((ParameterPacketPeriod *)form->FindParameter(ParameterDoubleType::PacketPeriod))->RecalcualateValue();
+            ParameterPacketPeriod *par_per = (ParameterPacketPeriod *)form->FindParameter(ParameterDoubleType::PacketPeriod);
+
+            if (par_per->RecalcualateValue())
+            {
+                par_per->SetAndLoadValue(par_per->GetValue());
+            }
         }
     }
 

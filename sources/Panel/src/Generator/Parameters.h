@@ -414,7 +414,8 @@ public:
         "ѕериод пак", "Packet per", IMPULSE_PERIOD_MIN, max, value) { }
 
     // ≈сли установленное значение не позвол€ет поместить в себ€ все импульсы пакета, то его нужно пересчитать
-    void RecalcualateValue();
+    // ¬озвращает true, если значение изменилось
+    bool RecalcualateValue();
 
     // –ассчитывает минимально возможное значение при данных параметрах
     Value CalculateMinValue() const;

@@ -619,12 +619,16 @@ Value ParameterPacketPeriod::CalculateMinValue() const
 }
 
 
-void ParameterPacketPeriod::RecalcualateValue()
+bool ParameterPacketPeriod::RecalcualateValue()
 {
     Value min_value = CalculateMinValue();
 
     if (GetValue() < min_value)
     {
         SetValue(min_value);
+
+        return true;
     }
+
+    return false;
 }
