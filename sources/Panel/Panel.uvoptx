@@ -157,9 +157,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>1124</LineNumber>
+          <LineNumber>1230</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134394738</Address>
+          <Address>134408850</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -168,23 +168,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>.\src\Display\Tuner.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\G6_49_P\src/Display/Tuner.cpp\1124</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>17</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>.\src\main_p.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\\src/Display/Tuner.cpp\1230</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -208,6 +192,16 @@
           <WinNumber>1</WinNumber>
           <ItemText>points</ItemText>
         </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>value</ItemText>
+        </Ww>
+        <Ww>
+          <count>5</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>val_d</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>
@@ -220,15 +214,15 @@
         <Mm>
           <WinNumber>1</WinNumber>
           <SubType>0</SubType>
-          <ItemText>cword</ItemText>
+          <ItemText>buffer</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>
       <MemoryWindow2>
         <Mm>
           <WinNumber>2</WinNumber>
-          <SubType>8</SubType>
-          <ItemText>command-&gt;symbols</ItemText>
+          <SubType>0</SubType>
+          <ItemText>text</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow2>

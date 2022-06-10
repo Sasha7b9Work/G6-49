@@ -53,6 +53,11 @@ void DisplayEntering::EnterBuffer::Push(Key::E key)
     }
 
     stack.Push(Key(key).ToChar());
+
+    if (stack.Size() == 1)
+    {
+        order = Order::One;
+    }
 }
 
 
@@ -84,10 +89,14 @@ void DisplayEntering::EnterBuffer::Prepare(ParameterDouble *parameter)
 String DisplayEntering::EnterBuffer::ToString() const
 {
     String string;
+    
+    int size = stack.Size();
 
-    for (int i = 0; i < stack.Size(); i++)
+    for (int i = 0; i < size; i++)
     {
-        string.Append(stack[i]);
+        char symbol = stack[i];
+        
+        string.Append(symbol);
     }
 
     return string;
@@ -102,7 +111,9 @@ bool DisplayEntering::EnterBuffer::IsEmpty() const
 
 Value DisplayEntering::ToValue()
 {
-    return Value(buffer.ToString().c_str(), order);
+    Value result(buffer.ToString().c_str(), order);
+
+    return result;
 }
 
 
@@ -1223,7 +1234,12 @@ void Tuner::OnButtonApply()
             }
         }
 
-        display.Init(DisplayEntering::ToValue());
+        Value value = DisplayEntering::ToValue();
+
+        volatile double val_d = value.ToDouble();
+        val_d = val_d;
+
+        display.Init(value);
         display.indicator.InitHighlight();
         mode = ModeTuning::Correction;
         PageTuneParameter::ResetModeEntering();
