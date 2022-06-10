@@ -166,7 +166,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\FDrive\FDrive_d_Handler.cpp</Filename>
+          <Filename>D:\Projects\G6-49\sources\Panel\src\FDrive\FDrive_d_Handler.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\G6_49_D\src/FDrive/FDrive_d_Handler.cpp\331</Expression>
         </Bp>
@@ -182,7 +182,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Generator\Calibrator.cpp</Filename>
+          <Filename>D:\Projects\G6-49\sources\Panel\src\Generator\Calibrator.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\G6_49_D\src/Generator/Calibrator.cpp\53</Expression>
         </Bp>
