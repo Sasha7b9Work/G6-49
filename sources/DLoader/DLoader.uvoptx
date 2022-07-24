@@ -161,7 +161,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>.\src\main_dl.cpp</Filename>
+          <Filename>C:\My\GitHub\_work\G6-49\sources\Panel\src\main_dl.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -177,7 +177,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Updater_dl.cpp</Filename>
+          <Filename>C:\My\GitHub\_work\G6-49\sources\Panel\src\Updater_dl.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\Generator\src/Updater_dl.cpp\75</Expression>
         </Bp>
