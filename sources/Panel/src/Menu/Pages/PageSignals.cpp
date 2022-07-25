@@ -26,9 +26,7 @@ static bool IsActive_Channel()
 
 void PageSignals::OnPress_Channel(bool)
 {
-    if (CURRENT_CHANNEL)
-
-        cParameters.form = CURRENT_FORM;
+    cParameters.form = CURRENT_FORM;
     numForm = CURRENT_FORM->value;
 
     pageSignals.items[1] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB));
@@ -47,6 +45,19 @@ DEF_CHOICE_2( cChannel,                                                         
     set.current, *PageSignals::self, IsActive_Channel, PageSignals::OnPress_Channel, FuncDraw
 )
 
+
+void PageSignals::OnChanged_Form(bool)
+{
+    ChoiceBase *choice = reinterpret_cast<ChoiceBase *>(pageSignals.items[1]);      // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала
+
+    CURRENT_WAVE.SetIndexForm(choice->CurrentIndex());                              // Установить для текущего сигнала индекс формы из ChoiceBase
+
+    cParameters.form = CURRENT_FORM;
+
+    Display::Update();
+
+    PGenerator::TuneChannel(CURRENT_CHANNEL);
+}
 
 
 DEF_CHOICE_8( cFormA,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
@@ -148,20 +159,6 @@ bool PageSignals::OnSubPageTuneChannels()
 void PageSignals::Init()
 {
     OnPress_Channel(true);
-}
-
-
-void PageSignals::OnChanged_Form(bool)
-{
-    ChoiceBase *choice = reinterpret_cast<ChoiceBase *>(pageSignals.items[1]);      // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала
-
-    CURRENT_WAVE.SetIndexForm(choice->CurrentIndex());                              // Установить для текущего сигнала индекс формы из ChoiceBase
-
-    cParameters.form = CURRENT_FORM;
-
-    Display::Update();
-
-    PGenerator::TuneChannel(CURRENT_CHANNEL);
 }
 
 
