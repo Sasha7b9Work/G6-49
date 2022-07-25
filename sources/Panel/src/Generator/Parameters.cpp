@@ -1,3 +1,4 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Generator/Generator_p.h"
 #include "Generator/MathSupport.h"

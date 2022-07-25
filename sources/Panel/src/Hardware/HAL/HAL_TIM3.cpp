@@ -1,3 +1,4 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Hardware/HAL/HAL.h"
 #include <stm32f4xx_hal.h>
 

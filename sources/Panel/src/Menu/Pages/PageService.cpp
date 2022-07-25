@@ -1,3 +1,4 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Display/Colors.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"

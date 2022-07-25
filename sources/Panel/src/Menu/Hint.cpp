@@ -1,3 +1,4 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Hint.h"
 #include "Log.h"
 #include "Display/DisplayTypes.h"

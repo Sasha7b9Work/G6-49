@@ -1,3 +1,4 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "common/Messages.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"

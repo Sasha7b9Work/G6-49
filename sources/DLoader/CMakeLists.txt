@@ -1,3 +1,4 @@
+# (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (DLoader)
 
 include_directories(../common/_VS_KEIL
