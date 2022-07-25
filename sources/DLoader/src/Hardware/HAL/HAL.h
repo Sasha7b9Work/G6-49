@@ -41,17 +41,17 @@ struct HAL_EEPROM
 };
 
 
-struct HAL_HCD
+namespace HAL_HCD
 {
-    static void Init();
+    void Init();
 
-    static void IRQHandler();
+    void IRQHandler();
 
-    static int USBH_LL_Init(void *usbh_HandleTypeDef);
+    int USBH_LL_Init(void *usbh_HandleTypeDef);
 
-    static int USBH_LL_SetToggle(uint8 pipe, uint8 toggle);
+    int USBH_LL_SetToggle(uint8 pipe, uint8 toggle);
 
-    static uint8 USBH_LL_GetToggle(uint8 pipe);
+    uint8 USBH_LL_GetToggle(uint8 pipe);
 };
 
 
@@ -67,11 +67,11 @@ struct HAL_SPI1
 };
 
 
-struct HAL_SPI3
+namespace HAL_SPI3
 {
-    static void Init();
+    void Init();
     // Запускает счётчик для измерения малых отрезков времени
-    static void Transmit(uint8 *buffer, uint16 num);
+    void Transmit(uint8 *buffer, uint16 num);
 };
 
 
@@ -95,11 +95,11 @@ struct HAL_TIM2
 };
 
 
-struct HAL_TIM3
+namespace HAL_TIM3
 {
-    static void Init();
+    void Init();
 
-    static void StartIT(uint period);
+    void StartIT(uint period);
 
-    static void StopIT();
+    void StopIT();
 };

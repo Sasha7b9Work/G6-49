@@ -5,7 +5,10 @@
 #include <usbh_core.h>
 
 
-static HCD_HandleTypeDef handle;
+namespace HAL_HCD
+{
+    static HCD_HandleTypeDef handle;
+}
 
 
 void HAL_HCD::Init()

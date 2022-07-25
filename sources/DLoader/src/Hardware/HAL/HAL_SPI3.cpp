@@ -4,24 +4,29 @@
 #include <stm32f4xx_hal.h>
 
 
-static SPI_HandleTypeDef handle =
+namespace HAL_SPI3
 {
-    SPI3,
+
+    static SPI_HandleTypeDef handle =
     {
-        SPI_MODE_MASTER,
-        SPI_DIRECTION_1LINE,
-        SPI_DATASIZE_8BIT,
-        SPI_POLARITY_LOW,
-        SPI_PHASE_1EDGE,
-        SPI_NSS_SOFT,
-        SPI_BAUDRATEPRESCALER_2,
-        SPI_FIRSTBIT_MSB,
-        SPI_TIMODE_DISABLE,
-        SPI_CRCCALCULATION_DISABLE,
-        10
-    },
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
-};
+        SPI3,
+        {
+            SPI_MODE_MASTER,
+            SPI_DIRECTION_1LINE,
+            SPI_DATASIZE_8BIT,
+            SPI_POLARITY_LOW,
+            SPI_PHASE_1EDGE,
+            SPI_NSS_SOFT,
+            SPI_BAUDRATEPRESCALER_2,
+            SPI_FIRSTBIT_MSB,
+            SPI_TIMODE_DISABLE,
+            SPI_CRCCALCULATION_DISABLE,
+            10
+        },
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
+    };
+
+}
 
 
 void HAL_SPI3::Init()

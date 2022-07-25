@@ -4,7 +4,10 @@
 #include <stm32f4xx_hal.h>
 
 
-static TIM_HandleTypeDef handler;
+namespace HAL_TIM3
+{
+    static TIM_HandleTypeDef handler;
+}
 
 
 void HAL_TIM3::Init()
