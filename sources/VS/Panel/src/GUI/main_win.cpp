@@ -43,14 +43,14 @@ void update()
     {
         first = false;
 
-        timeStart = TIME_MS;
+        timeStart = _TIME_MS;
     }
 
-    if (TIME_MS - timeStart < 1000)
+    if (_TIME_MS - timeStart < 1000)
     {
         Display::DrawScreenSplash();
     }
-    else if (TIME_MS - timeStart < 3000)
+    else if (_TIME_MS - timeStart < 3000)
     {
         TestsHardware::Run();
     }

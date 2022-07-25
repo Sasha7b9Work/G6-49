@@ -160,13 +160,13 @@ int DisplayEntering::EnterBuffer::PosComma() const
 
 void DisplayEntering::Cursor::Init()
 {
-    timeInit = TIME_MS;
+    timeInit = _TIME_MS;
 }
 
 
 void DisplayEntering::Cursor::Draw(int x, int y)
 {
-    uint time = TIME_MS - timeInit;
+    uint time = _TIME_MS - timeInit;
 
     if ((time % 1000) < 500)
     {

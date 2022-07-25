@@ -68,7 +68,7 @@ float Choice::Step()
     static const int numLines = 60;
     if (tsChoice.address == this)
     {
-        float delta = speed * static_cast<float>(TIME_MS - tsChoice.timeStart);
+        float delta = speed * static_cast<float>(_TIME_MS - tsChoice.timeStart);
         if (delta == 0.0F)  // -V550 //-V2550 //-V550
         {
             delta = 0.001F; // Таймер в несколько первых кадров может показать, что прошло 0 мс, но мы возвращаем большее число, потому что ноль будет говорить о том, что движения нет
@@ -176,7 +176,7 @@ void Governor::StartChange(int delta)
     }
     else
     {
-        tsGovernor.timeStart = TIME_MS;
+        tsGovernor.timeStart = _TIME_MS;
         tsGovernor.address = this;
     }
     tsGovernor.dir = delta > 0 ? INCREASE : DECREASE;
@@ -202,7 +202,7 @@ float Governor::Step()
     float delta = 0.0F;
     if (tsGovernor.address == this)
     {
-        delta = speed * static_cast<float>(TIME_MS - tsGovernor.timeStart);
+        delta = speed * static_cast<float>(_TIME_MS - tsGovernor.timeStart);
         if (tsGovernor.dir == DECREASE)
         {
             delta *= -1.0F;

@@ -30,12 +30,12 @@ void PInterface::Update()
 {
     static uint time = 0;
 
-    if (TIME_MS - time < 100)
+    if (_TIME_MS - time < 100)
     {
         return;
     }
 
-    time = TIME_MS;
+    time = _TIME_MS;
 
     Message::RequestData message;
 
@@ -68,7 +68,7 @@ void PInterface::AddTask(Task *task)
 void Task::TransmitMessage()
 {
     message->Transmit();    // Посылаем сообщение
-    timeLast = TIME_MS;     // запоминаем время посылки
+    timeLast = _TIME_MS;     // запоминаем время посылки
 }
 
 
@@ -92,7 +92,7 @@ void PInterface::SendTasks()
 
 bool Task::PassedLittleTimeAfterSend()
 {
-    return (TIME_MS - timeLast) < 1000;
+    return (_TIME_MS - timeLast) < 1000;
 }
 
 

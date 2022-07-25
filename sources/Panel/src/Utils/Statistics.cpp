@@ -24,20 +24,20 @@ uint Statistics::timeStart = 0;
 
 void Statistics::BeginFrame()
 {
-    timeStart = TIME_MS;
+    timeStart = _TIME_MS;
 }
 
 
 void Statistics::EndFrame()
 {
-    timeFrame = (int)(TIME_MS - timeStart);
+    timeFrame = (int)(_TIME_MS - timeStart);
 
     timeAccumFrames += timeFrame;
 
-    if (TIME_MS >= timeStartFrames + 1000) //-V1051
+    if (_TIME_MS >= timeStartFrames + 1000) //-V1051
     {
         timeAllFrames = static_cast<int>(timeAccumFrames);
-        timeStartFrames = TIME_MS;
+        timeStartFrames = _TIME_MS;
         timeAccumFrames = 0;
     }
 }

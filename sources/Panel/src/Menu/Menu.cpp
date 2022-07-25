@@ -53,12 +53,12 @@ void Menu::Update()
 
         ProcessKey(control);
 
-        time_press = TIME_MS;
+        time_press = _TIME_MS;
     }
 
     const uint TIME_WAIT = 5000;
 
-    if((time_press != 0) && ((TIME_MS  - time_press) > TIME_WAIT))     // Сохраняем настройки, если прошло более TIME_WAIT мс
+    if((time_press != 0) && ((_TIME_MS  - time_press) > TIME_WAIT))     // Сохраняем настройки, если прошло более TIME_WAIT мс
     {
         //Settings::Save();
         time_press = 0;

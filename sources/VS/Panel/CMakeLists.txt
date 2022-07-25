@@ -1,6 +1,6 @@
 project (G6-49)
 
-#set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_UNITY_BUILD ON)
 
 include_directories(src
                     ../../Panel/src

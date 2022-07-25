@@ -30,10 +30,10 @@ static String GetNameItem(int i);
 static int numFiles;                        // Количество файлов в текущем каталоге
 static int firstFile = 0;                   // Этот файл первый в списке на экране
 static int curFile = 0;                     // Текущий файл
-static uint timeStopUnderFile = TIME_MS;    // Время остановки курсора над файлов. Через некоторое время после последней остановки нужно посылать запрос на изображение
+static uint timeStopUnderFile = _TIME_MS;   // Время остановки курсора над файлов. Через некоторое время после последней остановки нужно посылать запрос на изображение
 bool ListFiles::requestIsSend = false;
 
-#define NUM_FILES_ON_SCREEN 10          // Столько файлов помещается на экране
+#define NUM_FILES_ON_SCREEN 10              // Столько файлов помещается на экране
 
 struct StructFile
 {
@@ -178,7 +178,7 @@ void ListFiles::PressUp()
         files[0].Clear();
     }
 
-    timeStopUnderFile = TIME_MS;
+    timeStopUnderFile = _TIME_MS;
 }
 
 
@@ -204,7 +204,7 @@ void ListFiles::PressDown()
         files[NUM_FILES_ON_SCREEN - 1].Clear();
     }
 
-    timeStopUnderFile = TIME_MS;
+    timeStopUnderFile = _TIME_MS;
 }
 
 
@@ -231,7 +231,7 @@ void ListFiles::Draw(int x, int y)
 
     String("%d/%d", curFile + 1, numFiles).Draw(75, 5, Color::FILL);
 
-    if (timeStopUnderFile != 0 && TIME_MS - timeStopUnderFile >= 500)
+    if (timeStopUnderFile != 0 && _TIME_MS - timeStopUnderFile >= 500)
     {
         file.RequestFromPicture(curFile);
         timeStopUnderFile = 0;

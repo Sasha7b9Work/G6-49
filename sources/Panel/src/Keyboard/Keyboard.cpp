@@ -86,7 +86,7 @@ void Keyboard::Update()
         return;
     }
     
-    uint time = TIME_MS;
+    uint time = _TIME_MS;
 
     for (int sl = 0; sl < NUM_SL; sl++)
     {
@@ -152,7 +152,7 @@ void Keyboard::DetectRegulator()
 
     if(needDetectButton)
     {
-        uint time = TIME_MS;
+        uint time = _TIME_MS;
 
         if(press && prevPressButton && time - timePrevPress > 500)          // Если нажатие длится более 0.5 сек
         {

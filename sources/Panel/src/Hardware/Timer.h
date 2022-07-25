@@ -2,9 +2,8 @@
 #pragma once
 
 
-#define TIME_TICKS HAL_TIM2::GetTicks()
-#define TIME_US    HAL_TIM2::TimeUS()
-#define TIME_MS    HAL_TIM::TimeMS()
+#define _TIME_TICKS HAL_TIM2::GetTicks()
+#define _TIME_MS    HAL_TIM::TimeMS()
 
 
 struct Timer

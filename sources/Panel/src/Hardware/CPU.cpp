@@ -29,11 +29,11 @@ void CPU::Init()
 void CPU::Update()
 {
     ++numFrames;
-    if(TIME_MS >= timeStartMeasFPS + 1000)  // Если прошло более 1 секунды с начала 1-сек отрезка
+    if(_TIME_MS >= timeStartMeasFPS + 1000)  // Если прошло более 1 секунды с начала 1-сек отрезка
     {                                       // рассчитываем ФПС
-        fps = static_cast<float>(numFrames) / static_cast<float>(TIME_MS - timeStartMeasFPS) * 1e3F;
+        fps = static_cast<float>(numFrames) / static_cast<float>(_TIME_MS - timeStartMeasFPS) * 1e3F;
         numFrames = 0;
-        timeStartMeasFPS = TIME_MS;
+        timeStartMeasFPS = _TIME_MS;
     }
 }
 

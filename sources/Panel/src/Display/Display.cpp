@@ -20,7 +20,7 @@ using namespace Primitives;
 
 struct Warning
 {
-    Warning(pString msg = "") : timeStart(TIME_MS) { if (msg[0] != '\0') { message = new String(msg); } else { message = nullptr; } };
+    Warning(pString msg = "") : timeStart(_TIME_MS) { if (msg[0] != '\0') { message = new String(msg); } else { message = nullptr; } };
     void Delete()   { if (message) { delete message; message = nullptr; } }
     bool IsEqual(const String &msg);
     uint timeStart;
@@ -132,7 +132,7 @@ void Warnings::Append(const String &warning)
 {
     if (!IsEmpty() && Last().IsEqual(warning))
     {
-        Last().timeStart = TIME_MS;
+        Last().timeStart = _TIME_MS;
     }
     else
     {
@@ -165,7 +165,7 @@ void Warnings::Show()
 
 void Warnings::Update()
 {
-    while ((last != 0) && (warnings[0].timeStart + 5000 < TIME_MS))
+    while ((last != 0) && (warnings[0].timeStart + 5000 < _TIME_MS))
     {
         warnings[0].Delete();
 
@@ -219,7 +219,7 @@ void Warnings::DeleteFirst()
 
 Color Warnings::ColorText() const
 {
-    return (TIME_MS % 1000) < 500 ? Color::FILL : Color::BACK;
+    return (_TIME_MS % 1000) < 500 ? Color::FILL : Color::BACK;
 }
 
 

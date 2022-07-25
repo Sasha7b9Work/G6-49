@@ -51,7 +51,7 @@ void HAL_TIM4::Start(uint timeStopMS)
         return;
     }
 
-    uint dT = timeStopMS - TIME_MS;
+    uint dT = timeStopMS - _TIME_MS;
 
     handleTIM4.Init.Period = (dT * 2) - 1;  // 10 соответствует 0.1мс. Т.е. если нам нужна 1мс, нужно засылать (100 - 1)
 
