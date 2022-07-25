@@ -80,15 +80,15 @@ namespace HAL_PCD
 };
 
 
-struct HAL_SPI1
+namespace HAL_SPI1
 {
-    static void Init();
+    void Init();
 
-    static bool Receive(void *buffer, int size, int timeout);
+    bool Receive(void *buffer, int size, int timeout);
 
-    static bool Transmit(void *buffer, int size, int timeout);
+    bool Transmit(void *buffer, int size, int timeout);
 
-    static bool Transmit(int value, int timeout);
+    bool Transmit(int value, int timeout);
 };
 
 
