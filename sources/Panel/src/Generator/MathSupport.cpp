@@ -8,7 +8,17 @@
 #include <cstring>
 
 
-ParameterDouble *MathParameterDouble::param = nullptr;
+namespace MathParameterDouble
+{
+    // Собственно параметр, по которому будут производится вычислеиня
+    static ParameterDouble *param = nullptr;
+}
+
+
+void MathParameterDouble::SetParameterDouble(ParameterDouble* parameter)
+{
+    param = parameter;
+}
 
 
 // Погасить незначащие символы

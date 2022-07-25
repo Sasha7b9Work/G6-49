@@ -28,20 +28,15 @@ namespace MathDouble
 };
 
 
-struct MathParameterDouble
+namespace MathParameterDouble
 {
-    static void SetParameterDouble(ParameterDouble *parameter) { param = parameter; };
+    void SetParameterDouble(ParameterDouble *);
 
     // Возвращает количество значащих знакомест перед запятой (исключая знаковый разряд). В предположении, что значение приведено к порядку order
-    static int GetNumberDigitsBeforeComma(Order::E order = Order::Count);
+    int GetNumberDigitsBeforeComma(Order::E order = Order::Count);
 
     // Возвращает количество значащих знакомест после запятой
-    static int GetNumberDigitsAfterComma(Order::E order = Order::Count);
-
-private:
-
-    // Собственно параметр, по которому будут производится вычислеиня
-    static ParameterDouble *param;
+    int GetNumberDigitsAfterComma(Order::E order = Order::Count);
 };
 
 
