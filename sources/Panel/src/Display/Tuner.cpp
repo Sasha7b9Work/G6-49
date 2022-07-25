@@ -1221,8 +1221,7 @@ void Tuner::OnButtonApply()
                     return;
                 }
             }
-            else if (type == ParameterDoubleType::Duration || type == ParameterDoubleType::Period ||
-                type == ParameterDoubleType::PacketPeriod)
+            else if (type == ParameterDoubleType::Duration || type == ParameterDoubleType::Period)
             {
                 int fractNano = DisplayEntering::ToValue().FractNano();
 
