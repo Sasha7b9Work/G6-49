@@ -312,6 +312,11 @@ int Page::NumItems() const
 
 void Item::Press(const Control control) //-V801
 {
+    if (!funcOfActive())
+    {
+        return;
+    }
+
     if(control.IsLong())
     {
         if (IsOpened() || control.Is(Key::RegButton) || control.Is(Key::Esc))
@@ -472,7 +477,7 @@ Item *Choice::Press(const Control control) //-V801
         {
             StartChange(1);
         }
-        else if (control.IsLong() && funcOfActive())
+        else if (control.IsLong())
         {
             if (Menu::GetOpenedItem() == 0)
             {
