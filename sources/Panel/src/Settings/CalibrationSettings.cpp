@@ -7,19 +7,19 @@
 #include "Settings/CalibrationSettings.h"
 
 
-static const CalibrationSettings defSet =
+static const CalibrationSettings defCalSet =
 {
     {0}
 };
 
-CalibrationSettings setCal = defSet;
+CalibrationSettings setCal = defCalSet;
 
 static int16 *currentCAL = CalibrationSettings::GetK(0, 0, 0, 0);
 
 
 void CalibrationSettings::Load()
 {
-    *this = defSet;                     // Сначала заполняем значениями по умолчанию - вдруг сохранённых настроек нету
+    *this = defCalSet;                     // Сначала заполняем значениями по умолчанию - вдруг сохранённых настроек нету
     HAL_EEPROM::LoadSettings(this);
 
     for(int ch = 0; ch < NUM_CHAN; ch++)
