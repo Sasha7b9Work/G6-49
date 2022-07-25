@@ -10,9 +10,31 @@
 
 
 extern ChoiceParameterBase cParameters;
+extern const PageBase pageSignals;
+extern const ChoiceBase cFormA;
+extern const ChoiceBase cFormB;
+
 // Номер текущей формы сигнал
 static int numForm = 0;
 
+
+static bool IsActive_Channel()
+{
+    return !(CURRENT_CHANNEL_IS_A && CURRENT_FORM->Is(TypeForm::PacketImpuls));
+}
+
+
+void PageSignals::OnPress_Channel(bool)
+{
+    if (CURRENT_CHANNEL)
+
+        cParameters.form = CURRENT_FORM;
+    numForm = CURRENT_FORM->value;
+
+    pageSignals.items[1] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB));
+
+    PGenerator::TuneChannel(CURRENT_CHANNEL);
+}
 
 
 DEF_CHOICE_2( cChannel,                                                                                                                                  //--- НАСТРОЙКИ СИГНАЛОВ - Канал ---
@@ -22,7 +44,7 @@ DEF_CHOICE_2( cChannel,                                                         
     "Управление параметрами сигнала на выходе A", "Control the parameters of the signal at output A",
     "B",                                          "B",
     "Управление параметрами сигнала на выходе B", "Control the parameters of the signal at output B",
-    set.current, *PageSignals::self, Item::FuncActive, PageSignals::OnPress_Channel, FuncDraw
+    set.current, *PageSignals::self, IsActive_Channel, PageSignals::OnPress_Channel, FuncDraw
 )
 
 
@@ -153,19 +175,6 @@ void PageSignals::SCPI_SetForm(TypeForm::E form)
    
     numForm = (form == TypeForm::Free && CURRENT_CHANNEL_IS_B) ? (form - 1) : form;
     OnChanged_Form();
-}
-
-
-void PageSignals::OnPress_Channel(bool)
-{
-    if(CURRENT_CHANNEL)
-
-    cParameters.form = CURRENT_FORM;
-    numForm = CURRENT_FORM->value;
-
-    pageSignals.items[1] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB));
-
-    PGenerator::TuneChannel(CURRENT_CHANNEL);
 }
 
 
