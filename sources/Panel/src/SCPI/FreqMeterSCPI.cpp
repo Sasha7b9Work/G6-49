@@ -76,9 +76,9 @@ static pCHAR const measureNames[] =
 };
 
 
-static pCHAR FuncMeasure(pCHAR buffer)
+static pCHAR FuncMeasure(pCHAR buf)
 {
-    const char *end = SCPI::BeginWith(buffer, "?");
+    const char *end = SCPI::BeginWith(buf, "?");
 
     if (end)
     {
@@ -91,7 +91,7 @@ static pCHAR FuncMeasure(pCHAR buffer)
 
     for (int i = 0; i < 3; i++)
     {
-        end = SCPI::BeginWith(buffer, measureNames[i]);
+        end = SCPI::BeginWith(buf, measureNames[i]);
         if (end)
         {
             SCPI_PROLOG(end)
