@@ -36,8 +36,10 @@ struct HeaderFont
 
 TypeFont::E AdvancedFont::currentType = TypeFont::Count;
 
-
-static const unsigned char * font = nullptr;
+namespace AFont
+{
+    static const unsigned char *font = nullptr;
+}
 
 
 void AdvancedFont::Set(TypeFont::E type)
@@ -46,15 +48,15 @@ void AdvancedFont::Set(TypeFont::E type)
 
     if(type == TypeFont::_GOSTB20)
     {
-        font = fontGOSTB20;
+        AFont::font = fontGOSTB20;
     }
     else if(type == TypeFont::_GOST28)
     {
-        font = fontGOST28;
+        AFont::font = fontGOST28;
     }
     else
     {
-        font = nullptr;
+        AFont::font = nullptr;
     }
 }
 
@@ -169,7 +171,7 @@ NativeSymbol *HeaderFont::GetSymbol(uint8 num)
 
 HeaderFont *HeaderFont::Sefl()
 {
-    return reinterpret_cast<HeaderFont *>(const_cast<uint8 *>(font)); //-V2567
+    return reinterpret_cast<HeaderFont *>(const_cast<uint8 *>(AFont::font)); //-V2567
 }
 
 
