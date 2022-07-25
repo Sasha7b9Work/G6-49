@@ -5,23 +5,23 @@
 
 
 // :MANIPULATION:DURATION
-static pCHAR FuncDuration(pCHAR);
-static void HintDuration(String *);
+static pCHAR FuncMDuration(pCHAR);
+static void HintMDuration(String *);
 
 // :MANIPULATION:ENABLED
 static pCHAR FuncEnabled(pCHAR);
 static void HintEnabled(String *);
 
 // :MANIPULATION:PERIOD
-static pCHAR FuncPeriod(pCHAR);
+static pCHAR FuncMPeriod(pCHAR);
 static void HintPeriod(String *);
 
 
 const StructSCPI SCPI::manipulation[] =
 {
-    SCPI_LEAF(":DURATION", FuncDuration, "Set duration of manipulation wave",     HintDuration),
+    SCPI_LEAF(":DURATION", FuncMDuration, "Set duration of manipulation wave",    HintMDuration),
     SCPI_LEAF(":ENABLED",  FuncEnabled,  "Enabled or disabled mode manipulation", HintEnabled),
-    SCPI_LEAF(":PERIOD",   FuncPeriod,   "Set period of manipulation wave",       HintPeriod),
+    SCPI_LEAF(":PERIOD",   FuncMPeriod,   "Set period of manipulation wave",       HintPeriod),
     SCPI_EMPTY()
 };
 
@@ -46,18 +46,18 @@ static void HintEnabled(String *message)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncDuration(pCHAR buffer)
+static pCHAR FuncMDuration(pCHAR buffer)
 {
     return SCPI::ProcessParameterDouble(buffer, ParameterDoubleType::ManipulationDuration);
 }
 
-static void HintDuration(String *)
+static void HintMDuration(String *)
 {
 }
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncPeriod(pCHAR buffer)
+static pCHAR FuncMPeriod(pCHAR buffer)
 {
     return SCPI::ProcessParameterDouble(buffer, ParameterDoubleType::ManipulationPeriod);
 }
