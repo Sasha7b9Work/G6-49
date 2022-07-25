@@ -96,31 +96,31 @@ struct HAL_TIM
 
 
 // Используетя для тиков
-struct HAL_TIM2
+namespace HAL_TIM2
 {
-    static void Init();
+    void Init();
 
-    static void DeInit();
+    void DeInit();
 
-    static uint TimeUS();
+    uint TimeUS();
 
-    static uint GetTicks();
+    uint GetTicks();
     
     // Запускает счётчик для измерения малых отрезков времени
-    static void StartMultiMeasurement();
+    void StartMultiMeasurement();
 };
 
 
 // Для таймеров
-struct HAL_TIM3
+namespace HAL_TIM3
 {
-    static void Init();
+    void Init();
 
-    static void StartIT(uint period);
+    void StartIT(uint period);
 
-    static void StopIT();
+    void StopIT();
 
-    static void DeInit();
+    void DeInit();
 };
 
 

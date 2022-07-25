@@ -103,7 +103,7 @@ static void OnChange_Source(bool)
     SendMessage();
 }
 
-DEF_CHOICE_3(cChannel,
+DEF_CHOICE_3(cChannelCal,
     " ¿Õ¿À", "CHANNEL",
     "", "",
     "A", "A", "", "",
@@ -249,7 +249,7 @@ const PageBase *page = const_cast<const PageBase *>(reinterpret_cast<PageBase *>
 DEF_PAGE_4_VAR( pCalibration, //-V641
     " ¿À»¡–Œ¬ ¿", "CALIBRATION",
     "", "",
-    &cChannel,
+    &cChannelCal,
     &cSignal,
     &cRange,
     &cParameterFullVoltage,
