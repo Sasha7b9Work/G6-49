@@ -1,5 +1,7 @@
 project (Editor)
 
+#set(CMAKE_UNITY_BUILD ON)
+
 include_directories(src
                     ../../ThirdParty/wxWidgets/include
                     ../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud)

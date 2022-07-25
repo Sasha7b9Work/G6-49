@@ -37,4 +37,6 @@ private:
     int prevValue = 0;
 
     void OnKeyUp(wxKeyEvent &);
+
+    char buffer[100];
 };

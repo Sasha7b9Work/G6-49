@@ -4,9 +4,6 @@
 #include <wx/event.h>
 
 
-static char buffer[100];
-
-
 SpinControl::SpinControl(wxWindow *window, wxWindowID id, const wxPoint &position, const wxSize &size, int min, int max, const int initial,
     wxDialog *dlg, wxEventFunction handler, const wxString &label, Dialog *_dialog) :
     wxSpinCtrl(window, id, _itoa(initial, buffer, 10), position, size, wxSP_ARROW_KEYS, min, max),
