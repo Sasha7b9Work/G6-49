@@ -70,13 +70,13 @@ struct HAL_I2C1
 };
 
 
-struct HAL_PCD
+namespace HAL_PCD
 {
-    static void Init();
+    void Init();
 
-    static void IRQHandler();
+    void IRQHandler();
 
-    static int USBD_LL_Init(void *usbd_HandleTypeDef);
+    int USBD_LL_Init(void *usbd_HandleTypeDef);
 };
 
 

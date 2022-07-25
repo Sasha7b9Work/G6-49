@@ -96,12 +96,12 @@ bool ListFiles::Handler::Processing(SimpleMessage *msg)
     }
     else if (command == Command::FDrive_RequestFile)
     {
-        int num = msg->TakeUINT8();
-        std::strcpy(files[num - firstFile].name, msg->String(2));
+        int _num = msg->TakeUINT8();
+        std::strcpy(files[_num - firstFile].name, msg->String(2));
 
-        if (num == curFile)
+        if (_num == curFile)
         {
-            file.RequestFromPicture(num);
+            file.RequestFromPicture(_num);
         }
 
         return true;

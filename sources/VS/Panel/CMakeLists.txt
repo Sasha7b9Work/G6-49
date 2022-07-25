@@ -1,5 +1,7 @@
 project (G6-49)
 
+set(CMAKE_UNITY_BUILD ON)
+
 include_directories(src
                     ../../Panel/src
                     ../../Panel/src/Hardware
@@ -48,6 +50,7 @@ foreach(cfg "" ${CMAKE_CONFIGURATION_TYPES})
 endforeach()
 
 
+add_compile_options(/wd4103)
 add_compile_options(/wd4211)    # nonstandard extension used: redefined extern to static
 add_compile_options(/wd4355)    # used in base member initializer list
 add_compile_options(/wd4514)    # unreferenced inline function has been removed

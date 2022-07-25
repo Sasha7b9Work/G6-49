@@ -4,7 +4,10 @@
 #include <usbd_core.h>
 
 
-static PCD_HandleTypeDef handle;
+namespace HAL_PCD
+{
+    static PCD_HandleTypeDef handle;
+}
 
 
 void HAL_PCD::Init()

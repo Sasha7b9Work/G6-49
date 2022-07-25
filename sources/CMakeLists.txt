@@ -17,6 +17,8 @@ endif ()
 # Set project name
 project (G6-49)
 
+set(CMAKE_UNITY_BUILD ON)
+
 set (TARGET_NAME G6-49)
 
 add_subdirectory(Device)
