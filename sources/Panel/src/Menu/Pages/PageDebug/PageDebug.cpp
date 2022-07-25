@@ -101,7 +101,7 @@ static uint64 BufferToValue();
 
 static void OnPress_Send();
 
-static void OnPress_Cancel();
+static void OnPress_DebugCancel();
 
 
 
@@ -161,7 +161,7 @@ static bool OnKey_PageRegisters(const Control control) //-V801
         }
         else if (control.Is(Key::Esc))
         {
-            OnPress_Cancel();
+            OnPress_DebugCancel();
             return true;
         }
         else
@@ -504,7 +504,7 @@ DEF_BUTTON( bNext,                                                              
 )
 
 
-static void OnPress_Cancel()
+static void OnPress_DebugCancel()
 {
     showInputWindow = false;
     std::memset(dbuffer, 0, MAX_SIZE_BUFFER + 1);
@@ -521,7 +521,7 @@ static void OnDraw_Cancel(int x, int y)
 DEF_BUTTON( bCancel,                                                                                                                               //--- РЕГИСТРЫ - Input window - Отмена ---
     "Отмена", "Cancel",
     "Отменяет засылку значения в регистр и закрывает окно ввода", "Cancels registering a value and closes the input window",
-    pRegisters, Item::FuncActive, OnPress_Cancel, OnDraw_Cancel
+    pRegisters, Item::FuncActive, OnPress_DebugCancel, OnDraw_Cancel
 )
 
 
@@ -540,7 +540,7 @@ DEF_BUTTON( bBackspace,                                                         
 static void OnPress_Save()
 {
     LoadRegister();
-    OnPress_Cancel();
+    OnPress_DebugCancel();
 }
 
 static void OnDraw_Save(int x, int y)
