@@ -221,12 +221,12 @@ void Choice::Draw(bool opened, int x, int y) const
     else
     {
         bool pressed = IsPressed();
-        bool isShade = IsShade();
+        bool shade_or_inactive = IsShade() || !funcOfActive();
         opened = IsOpened();
 
-        Rectangle(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (isShade ? Color::MENU_ITEM_SHADE : Color::GREEN_10));
+        Rectangle(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (shade_or_inactive ? Color::MENU_ITEM_SHADE : Color::GREEN_10));
         DrawTitle(x, y);
-        Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::MENU_ITEM_SHADE : Color::GREEN_25);
+        Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, shade_or_inactive ? Color::MENU_ITEM_SHADE : Color::GREEN_25);
 
         NameCurrentSubItem().DrawInCenterRect(x, y + 30, Item::WIDTH, 10, Color::BACK);
     }
