@@ -1,7 +1,8 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
 
-class String																// -V690
+class String
 {
 public:
              String(const String &);

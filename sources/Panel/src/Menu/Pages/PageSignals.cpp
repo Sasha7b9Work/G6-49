@@ -157,6 +157,8 @@ void PageSignals::SCPI_SetForm(TypeForm::E form)
 
 void PageSignals::OnPress_Channel(bool)
 {
+    if(CURRENT_CHANNEL)
+
     cParameters.form = CURRENT_FORM;
     numForm = CURRENT_FORM->value;
 
