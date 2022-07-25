@@ -108,8 +108,7 @@ bool ListFiles::Handler::Processing(SimpleMessage *msg)
     }
     else if (command == Command::FDrive_RequestFileSize)
     {
-        int num = msg->TakeUINT8();
-        files[num - firstFile].size = msg->TakeINT();
+        files[msg->TakeUINT8() - firstFile].size = msg->TakeINT();
         return true;
     }
 

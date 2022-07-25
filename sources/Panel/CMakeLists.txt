@@ -1,7 +1,6 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Panel)
 
-set(CMAKE_UNITY_BUILD OFF)
 
 include_directories( src
                      src/Hardware/HAL
@@ -17,6 +16,7 @@ add_definitions(-DSTM32F429xx -DPANEL)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
+add_compile_options(/wd4103)
 add_compile_options(/wd4211)    # nonstandard extension used: redefined extern to static
 add_compile_options(/wd4355)    # 'this': used in base member initializer list
 add_compile_options(/wd4514)    # unreferenced inline function has been removed

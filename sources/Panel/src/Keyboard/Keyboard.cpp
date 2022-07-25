@@ -9,11 +9,13 @@
 #include "Keyboard/Keyboard.h"
 
 
-static Control commands[10];
-static int pointer = 0;
+namespace Keyboard
+{
+    static Control commands[10];
+    static int pointer = 0;
 
 
-static void DetectRegulator();
+    static void DetectRegulator();
 
 #define SL0 (1 << 12)
 #define SL1 (1 << 13)
@@ -32,28 +34,29 @@ static void DetectRegulator();
 
 #define BUTTON_IS_PRESS(state)  ((state) == 0)
 
-// При обнаружении нажатия кнопки сюда записывается время нажатия
-static uint timePress[5][6];
+    // При обнаружении нажатия кнопки сюда записывается время нажатия
+    static uint timePress[5][6];
 
-//                                         SL0      SL1       SL2          SL3        S4          SL5
-static const Key::E keys[5][6] =     {{Key::_0, Key::_5, Key::Comma,   Key::Esc,   Key::F1,   Key::None},    // RL0
-                                      {Key::_1, Key::_6, Key::Minus, Key::Right, Key::F2,   Key::None},    // RL1
-                                      {Key::_2, Key::_7, Key::None,  Key::Left,  Key::F3,   Key::None},    // RL2
-                                      {Key::_3, Key::_8, Key::On1,   Key::None,  Key::F4,   Key::None},    // RL3
-                                      {Key::_4, Key::_9, Key::On2,   Key::None,  Key::None, Key::None}};   // RL4
+    //                                         SL0      SL1       SL2          SL3        S4          SL5
+    static const Key::E keys[5][6] = { {Key::_0, Key::_5, Key::Comma,   Key::Esc,   Key::F1,   Key::None},    // RL0
+                                          {Key::_1, Key::_6, Key::Minus, Key::Right, Key::F2,   Key::None},    // RL1
+                                          {Key::_2, Key::_7, Key::None,  Key::Left,  Key::F3,   Key::None},    // RL2
+                                          {Key::_3, Key::_8, Key::On1,   Key::None,  Key::F4,   Key::None},    // RL3
+                                          {Key::_4, Key::_9, Key::On2,   Key::None,  Key::None, Key::None} };   // RL4
 
-static uint16 sls[] =             {SL0,   SL1,   SL2,   SL3,   SL4,   SL5};
-static char slsAsciiPorts[] =     {'B',   'B',   'B',   'B',   'D',   'D'};
+    static uint16 sls[] = { SL0,   SL1,   SL2,   SL3,   SL4,   SL5 };
+    static char slsAsciiPorts[] = { 'B',   'B',   'B',   'B',   'D',   'D' };
 
-static uint16 rls[] =             {RL0,   RL1,   RL2,   RL3,   RL4};
-static char rlsAsciiPorts[] =     {'A',   'A',   'A',   'D',   'D'};
+    static uint16 rls[] = { RL0,   RL1,   RL2,   RL3,   RL4 };
+    static char rlsAsciiPorts[] = { 'A',   'A',   'A',   'D',   'D' };
 
 #define SET_SL(n)       HAL_PIO::WritePin(slsAsciiPorts[n], sls[n], true)
 #define SET_ALL_SL      HAL_PIO::WritePin('B', SL0 | SL1 | SL2 | SL3, true); HAL_PIO::WritePin('D', SL4 | SL5, true);
 #define RESET_SL(n)     HAL_PIO::WritePin(slsAsciiPorts[n], sls[n], false)
 #define READ_RL(n)      HAL_PIO::ReadPin(rlsAsciiPorts[n], rls[n])
 
-static bool init = false;
+    static bool init = false;
+}
 
 
 void Keyboard::Init()
@@ -133,7 +136,7 @@ void Keyboard::Update()
 }
 
 
-static void DetectRegulator()
+void Keyboard::DetectRegulator()
 {
     // Детектируем кнопку
     static bool prevPressButton = false;

@@ -10,14 +10,15 @@
 
 using namespace Primitives;
 
-
-static const int MAX_STRINGS = 20;
-static const int MAX_SYMBOLS_IN_STRING = 64;
-// Здесь хранятся строки консоли
-static char buffer[MAX_STRINGS][MAX_SYMBOLS_IN_STRING] = {};
-// Количество строк в консоли
-static int  numStrings = 0;
-
+namespace Console
+{
+    static const int MAX_STRINGS = 20;
+    static const int MAX_SYMBOLS_IN_STRING = 64;
+    // Здесь хранятся строки консоли
+    static char buffer[MAX_STRINGS][MAX_SYMBOLS_IN_STRING] = {};
+    // Количество строк в консоли
+    static int  numStrings = 0;
+}
 
 
 void Console::AddString(const char *string)
