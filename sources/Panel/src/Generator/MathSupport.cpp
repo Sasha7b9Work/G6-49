@@ -15,6 +15,15 @@ namespace MathParameterDouble
 }
 
 
+namespace MathDouble
+{
+    static Order::E CalculateOrder(const ParameterDouble* param)
+    {
+        return param->IsNotOrdered() ? Order::One : Order::Count;
+    }
+}
+
+
 void MathParameterDouble::SetParameterDouble(ParameterDouble* parameter)
 {
     param = parameter;
@@ -76,12 +85,6 @@ static void RepayEmptySymbols(char *buffer)
             *(buffer - 1) = *buffer;
         } while (*buffer != '\0');
     }
-}
-
-
-static Order::E CalculateOrder(const ParameterDouble *param)
-{
-    return param->IsNotOrdered() ? Order::One : Order::Count;
 }
 
 
