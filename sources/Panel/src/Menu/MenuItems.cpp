@@ -1,3 +1,4 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "MenuItems.h"
 #include "Display/Colors.h"
 #include "Display/DisplayTypes.h"

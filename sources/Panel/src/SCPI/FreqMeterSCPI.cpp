@@ -1,3 +1,4 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "FreqMeter/FreqMeter_p.h"
 #include "Menu/Pages/Pages.h"
