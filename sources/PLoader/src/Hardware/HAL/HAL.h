@@ -17,11 +17,11 @@ struct HAL
 };
 
 
-struct HAL_CRC32
+namespace HAL_CRC32
 {
-    static void Init();
+    void Init();
 
-    static uint CalculateALIGN32(void *address, int size);
+    uint CalculateALIGN32(void *address, int size);
 };
 
 
@@ -91,15 +91,15 @@ struct HAL_TIM2
 
 
 // Для таймеров
-struct HAL_TIM3
+namespace HAL_TIM3
 {
-    static void Init();
+    void Init();
 
-    static void StartIT(uint period);
+    void StartIT(uint period);
 
-    static void StopIT();
+    void StopIT();
 
-    static void DeInit();
+    void DeInit();
 };
 
 

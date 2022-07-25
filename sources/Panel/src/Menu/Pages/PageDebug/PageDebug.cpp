@@ -34,7 +34,7 @@ Register::E currentRegister = Register::FreqMeterLevel;
 static bool showInputWindow = false;
 #define MAX_SIZE_BUFFER 14
 // Здесь хранятся введённые символы
-static char buffer[MAX_SIZE_BUFFER + 1];
+static char dbuffer[MAX_SIZE_BUFFER + 1];
 
 // Тип вводимых чисел в окне ввода
 enum TypeInput
@@ -140,9 +140,9 @@ static bool OnKey_PageRegisters(const Control control) //-V801
         {
             SENDING(currentRegister) = false;
             OnPress_Send();
-            std::memset(buffer, 0, MAX_SIZE_BUFFER + 1);
-            buffer[0] = Key(control.key).ToChar();
-            NumberBuffer::Set(buffer, MAX_SIZE_BUFFER, 1, (currentRegister == Register::FreqMeterLevel ||
+            std::memset(dbuffer, 0, MAX_SIZE_BUFFER + 1);
+            dbuffer[0] = Key(control.key).ToChar();
+            NumberBuffer::Set(dbuffer, MAX_SIZE_BUFFER, 1, (currentRegister == Register::FreqMeterLevel ||
                                                            currentRegister == Register::FreqMeterHYS) ? 4095 : 0);
             return true;
         }
@@ -194,13 +194,13 @@ uint64 FirstValue()
 {
     char buff[20];
 
-    for (uint i = 0; i < sizeof(buffer); i++)
+    for (uint i = 0; i < sizeof(dbuffer); i++)
     {
-        if (buffer[i] == '.')
+        if (dbuffer[i] == '.')
         {
             for (uint j = 0; j < i; j++)
             {
-                buff[j] = buffer[j];
+                buff[j] = dbuffer[j];
             }
             buff[i] = 0;
 
@@ -220,13 +220,13 @@ uint64 FirstValue()
 
 uint64 SecondValue()
 {
-    for (uint i = 0; i < sizeof(buffer); i++)
+    for (uint i = 0; i < sizeof(dbuffer); i++)
     {
-        if (buffer[i] == '.')
+        if (dbuffer[i] == '.')
         {
             uint64 result = 0;
 
-            if (SU::String2UInt64(&buffer[i + 1], &result))
+            if (SU::String2UInt64(&dbuffer[i + 1], &result))
             {
                 return result;
             }
@@ -246,14 +246,14 @@ static uint64 BufferToValue()
 
     if (type == Uint)
     {
-        if (!SU::String2UInt64(buffer, &result))
+        if (!SU::String2UInt64(dbuffer, &result))
         {
             result = 0;
         }
     }
     else if (type == Binary)
     {
-        result = SU::StringToBin32(buffer);
+        result = SU::StringToBin32(dbuffer);
     }
     //else if (type == Uint10_Uint10 || type == Uint14_Uint14)
     else
@@ -291,9 +291,9 @@ static bool AllowableSymbol(Key::E key)
 
         if (key == Key::Comma)
         {
-            for (int i = 0; i < sizeof(buffer); i++)
+            for (int i = 0; i < sizeof(dbuffer); i++)
             {
-                if (buffer[i] == '.')
+                if (dbuffer[i] == '.')
                 {
                     return false;
                 }
@@ -354,7 +354,7 @@ void PageDebug::PageRegisters::DrawInputWindow()
 
     int position = NumberBuffer::PositionCursor();
 
-    int size = static_cast<int>(std::strlen(buffer));
+    int size = static_cast<int>(std::strlen(dbuffer));
 
     for (int i = 0; i < size; i++)
     {
@@ -363,9 +363,9 @@ void PageDebug::PageRegisters::DrawInputWindow()
             Rectangle(19, 31).DrawFilled(x - 2, Y_INPUT + 19, Color::GRAY_10, Color::BLUE);
             Color::FILL.SetAsCurrent();
         }
-        x = BigChar(buffer[i], 4).Draw(x, Y_INPUT + 20) + 3;
+        x = BigChar(dbuffer[i], 4).Draw(x, Y_INPUT + 20) + 3;
     }
-    if (position == static_cast<int>(std::strlen(buffer)) && position < SizeBuffer())
+    if (position == static_cast<int>(std::strlen(dbuffer)) && position < SizeBuffer())
     {
         Rectangle(19, 31).DrawFilled(x - 2, Y_INPUT + 19, Color::GRAY_10, Color::BLUE);
     }
@@ -507,7 +507,7 @@ DEF_BUTTON( bNext,                                                              
 static void OnPress_Cancel()
 {
     showInputWindow = false;
-    std::memset(buffer, 0, MAX_SIZE_BUFFER + 1);
+    std::memset(dbuffer, 0, MAX_SIZE_BUFFER + 1);
     pRegisters.items[0] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bPrev));
     pRegisters.items[1] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bNext));
     pRegisters.items[2] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bSend));
@@ -558,7 +558,7 @@ DEF_BUTTON( bSave,                                                              
 static void OnPress_Send()
 {
     showInputWindow = true;
-    std::memset(buffer, 0, MAX_SIZE_BUFFER + 1);
+    std::memset(dbuffer, 0, MAX_SIZE_BUFFER + 1);
 
     pRegisters.items[0] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bBackspace));
     pRegisters.items[1] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bCancel));
@@ -572,13 +572,13 @@ static void OnPress_Send()
 
         if (type == Uint)
         {
-            SU::UInt64_2String(VALUE(currentRegister), buffer);
-            position = static_cast<int>(std::strlen(buffer));
+            SU::UInt64_2String(VALUE(currentRegister), dbuffer);
+            position = static_cast<int>(std::strlen(dbuffer));
         }
         else if (type == Binary)
         {
-            SU::Bin2StringN((uint)VALUE(currentRegister), buffer, SizeBuffer(currentRegister));
-            position = static_cast<int>(std::strlen(buffer));
+            SU::Bin2StringN((uint)VALUE(currentRegister), dbuffer, SizeBuffer(currentRegister));
+            position = static_cast<int>(std::strlen(dbuffer));
         }
         else // if (type == Uint10_Uint10 || type == Uint14_Uint14)
         {
@@ -588,19 +588,19 @@ static void OnPress_Send()
             uint first = VALUE(currentRegister) & mask;
             uint second = (VALUE(currentRegister) >> numBits)& mask;
 
-            std::strcpy(buffer, SU::UInt2String(first));
-            std::strcat(buffer, ".");
-            std::strcat(buffer, SU::UInt2String(second));
+            std::strcpy(dbuffer, SU::UInt2String(first));
+            std::strcat(dbuffer, ".");
+            std::strcat(dbuffer, SU::UInt2String(second));
         }
     }
     else
     {
         position = 0;
-        std::memset(buffer, 0, MAX_SIZE_BUFFER + 1);
+        std::memset(dbuffer, 0, MAX_SIZE_BUFFER + 1);
         VALUE(position) = 0;
     }
 
-    NumberBuffer::Set(buffer, desc[currentRegister].size, position, (currentRegister == Register::FreqMeterLevel ||
+    NumberBuffer::Set(dbuffer, desc[currentRegister].size, position, (currentRegister == Register::FreqMeterLevel ||
         currentRegister == Register::FreqMeterHYS) ? 4095 : 0);
 }
 
