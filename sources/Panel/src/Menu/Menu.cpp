@@ -30,7 +30,7 @@ void Menu::Init()
 
 void Menu::Update()
 {
-    static uint timePress = 0;  // Время наступления последнего события. Если равно нулю, то настройки уже сохранены и сохранять их не требуется
+    static uint time_press = 0;  // Время наступления последнего события. Если равно нулю, то настройки уже сохранены и сохранять их не требуется
 
     while (!Keyboard::BufferIsEmpty())
     {
@@ -53,15 +53,15 @@ void Menu::Update()
 
         ProcessKey(control);
 
-        timePress = TIME_MS;
+        time_press = TIME_MS;
     }
 
     const uint TIME_WAIT = 5000;
 
-    if((timePress != 0) && ((TIME_MS  - timePress) > TIME_WAIT))     // Сохраняем настройки, если прошло более TIME_WAIT мс
+    if((time_press != 0) && ((TIME_MS  - time_press) > TIME_WAIT))     // Сохраняем настройки, если прошло более TIME_WAIT мс
     {
         //Settings::Save();
-        timePress = 0;
+        time_press = 0;
     }
 }
 
