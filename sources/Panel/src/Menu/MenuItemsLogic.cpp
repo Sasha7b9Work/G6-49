@@ -472,7 +472,7 @@ Item *Choice::Press(const Control control) //-V801
         {
             StartChange(1);
         }
-        else if (control.IsLong())
+        else if (control.IsLong() && funcOfActive())
         {
             if (Menu::GetOpenedItem() == 0)
             {
