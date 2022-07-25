@@ -16,13 +16,12 @@ enum
     ID_SPINCTRL_DELAY
 };
 
-
-static int center = 0;
-static int delay = 0;
-static bool polarityDirect = true;
-static bool polarityBack = false;
-static int levelUp = 100;
-static int levelDown = -100;
+int TriangleDialog::center = 0;
+int TriangleDialog::delay = 0;
+bool TriangleDialog::polarityDirect = true;
+bool TriangleDialog::polarityBack = false;
+int TriangleDialog::levelUp = 100;
+int TriangleDialog::levelDown = -100;
 
 
 wxPanel *TriangleDialog::CreatePanelOffsets()

@@ -20,4 +20,13 @@ protected:
 
     SpinControl *scCenter = nullptr;
     SpinControl *scDelay = nullptr;
+
+private:
+
+    static int center;
+    static int delay;
+    static bool polarityDirect;
+    static bool polarityBack;
+    static int levelUp;
+    static int levelDown;
 };
