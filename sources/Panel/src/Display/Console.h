@@ -1,9 +1,9 @@
 #pragma once
 
 
-struct Console
+namespace Console
 {
-    static void AddString(const char *string);
+    void AddString(const char *string);
 
-    static void Draw();
+    void Draw();
 };
