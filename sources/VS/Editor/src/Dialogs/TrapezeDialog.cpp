@@ -12,7 +12,7 @@
 
 enum
 {
-    ID_SPINCTRL_DELAY,
+    ID_SPINCTRL_DELAY_TRAP,
     ID_SPINCTRL_VERTEX_1,
     ID_SPINCTRL_VERTEX_2
 };
@@ -35,7 +35,7 @@ wxPanel *TrapezeDialog::CreatePanelOffsets()
 
     new wxStaticBox(panel, wxID_ANY, wxT("Смещения"), wxDefaultPosition, { Dialog::WIDTH_PANEL, 73 + 26 });
 
-    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY, { x, y }, { 51, 20 }, 0, Point::AMOUNT, delay,
+    scDelay = new SpinControl(panel, ID_SPINCTRL_DELAY_TRAP, { x, y }, { 51, 20 }, 0, Point::AMOUNT, delay,
                                 this, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Задержка, точки"), this);
     scVertex1 = new SpinControl(panel, ID_SPINCTRL_VERTEX_1, { x, y + 26 }, { 51, 20 }, -100, 100, vertex1,
                                 this, wxCommandEventHandler(TrapezeDialog::OnControlEvent), wxT("Левая вершина, %"), this);
