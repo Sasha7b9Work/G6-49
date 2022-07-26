@@ -80,6 +80,12 @@ public:
 
     virtual String ToString(Value) const { return String(""); };
 
+    // Сохранить состояние параметра
+    virtual void SaveState() { };
+
+    // Восстановить состояине параметра
+    virtual void RestoreState() { };
+
 protected:
     
     Form *form;         // Форма, для которой зада этот параметр
@@ -167,9 +173,15 @@ public:
      
     ParameterDoubleType::E GetType() const { return type; }
 
+    virtual void SaveState();
+
+    virtual void RestoreState();
+
+    ParameterDouble operator=(const ParameterDouble &);
+
 private:
     Tuner tuner;        // Используется для настройки 
-    ParameterDoubleType::E type;
+    const ParameterDoubleType::E type;
     Value min;
     Value value;
     Value resetValue;

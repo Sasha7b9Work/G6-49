@@ -76,6 +76,24 @@ void PageSignals::OnChanged_Form(bool)
 
             FORM(ChB)->SaveState();                         // Сохраняем параметры импульсов на втором канале
 
+            {                                               // Получем параметры импульсов
+                Form *formA = WAVE(ChA).GetForm(TypeForm::Packet);
+
+                Form *formB = WAVE(ChB).GetForm(TypeForm::Impulse);
+
+                {
+                    ParameterDouble *period = formA->FindParameter(ParameterDoubleType::Period);
+
+                    formB->FindParameter(ParameterDoubleType::Period)->SetValue(period->GetValue());
+                }
+
+                {
+                    ParameterDouble *duration = formA->FindParameter(ParameterDoubleType::Duration);
+
+                    formB->FindParameter(ParameterDoubleType::Duration)->SetValue(duration->GetValue());
+                }
+            }
+
             SetCurrentChanenl(ChB);
 
             OnChanged_Form(true);

@@ -746,11 +746,17 @@ double Form::GetAmplitude()
 
 void Form::SaveState()
 {
-
+    for (int i = 0; i < NumParameters(); i++)
+    {
+        GetParameter(i)->SaveState();
+    }
 }
 
 
 void Form::RestoreState()
 {
-
+    for (int i = 0; i < NumParameters(); i++)
+    {
+        GetParameter(i)->RestoreState();
+    }
 }
