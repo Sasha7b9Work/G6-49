@@ -32,7 +32,7 @@ struct Filtr
         {
             SetType(ch, Type::Chebyshev);
         }
-        else if(form == TypeForm::Impulse || form == TypeForm::PacketImpuls || form == TypeForm::Meander)
+        else if(form == TypeForm::Impulse || form == TypeForm::Packet || form == TypeForm::Meander)
         {
             SetType(ch, Type::None);
         }

@@ -13,7 +13,7 @@ struct TypeForm
         Triangle,       // Треугольник
         Meander,        // Меандр
         Impulse,        // Импульсы
-        PacketImpuls,   // Пачка импульсов
+        Packet,         // Пачка импульсов
         Free,           // Произвольный сигнал
         Count
     };

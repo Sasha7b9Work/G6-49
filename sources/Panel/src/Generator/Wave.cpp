@@ -748,3 +748,15 @@ double Form::GetAmplitude()
 
     return (parameter) ? parameter->GetValue().ToDouble() : 0.0;
 }
+
+
+void Form::PushState()
+{
+
+}
+
+
+void Form::PopState()
+{
+
+}

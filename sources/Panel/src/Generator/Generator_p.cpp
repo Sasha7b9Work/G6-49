@@ -126,7 +126,7 @@ void PGenerator::LoadFormDDS(Form *form)
         case TypeForm::Meander:
         case TypeForm::Sine:
         case TypeForm::Impulse:
-        case TypeForm::PacketImpuls:
+        case TypeForm::Packet:
         case TypeForm::Free:
         case TypeForm::Count:
             break;

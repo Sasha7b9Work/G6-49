@@ -20,7 +20,7 @@ static int numForm = 0;
 
 static bool IsActive_Channel()
 {
-    return !(CURRENT_CHANNEL_IS_A && CURRENT_FORM->Is(TypeForm::PacketImpuls));
+    return !(CURRENT_CHANNEL_IS_A && CURRENT_FORM->Is(TypeForm::Packet));
 }
 
 
@@ -46,7 +46,7 @@ DEF_CHOICE_2( cChannel,                                                         
 )
 
 
-void PageSignals::OnChanged_Form(bool)
+static void ChangedForm()
 {
     ChoiceBase *choice = reinterpret_cast<ChoiceBase *>(pageSignals.items[1]);      // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала
 
@@ -60,17 +60,43 @@ void PageSignals::OnChanged_Form(bool)
 }
 
 
+void PageSignals::OnChanged_Form(bool)
+{
+    ChangedForm();
+
+    if (CURRENT_CHANNEL_IS_A)
+    {
+        if (CURRENT_FORM->Is(TypeForm::Packet))             // Вошли в пакетный режим
+        {
+            FORM(ChB)->PushState();
+
+            *cFormB.cell = 5;                                                           // Устанавливаем форму импульса на втором канале
+
+            *cChannel.cell = 1;                                                         // Устанавливаем текущим второй канал
+
+            OnPress_Channel(true);
+
+            OnChanged_Form(true);
+        }
+        else if (CURRENT_FORM->Is(TypeForm::Free))          // Вышли из пакетного режима
+        {
+            FORM(ChB)->PopState();
+        }
+    }
+}
+
+
 DEF_CHOICE_8( cFormA,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
     "ФОРМА", "FORM",
     "Выбор формы сигнала", "Waveform selection",
-    FORM_RU(TypeForm::Sine),         FORM_EN(TypeForm::Sine),         "Синус",            "Sinus",
-    FORM_RU(TypeForm::RampPlus),     FORM_EN(TypeForm::RampPlus),     "Нарастающая пила", "Escalating saw",
-    FORM_RU(TypeForm::RampMinus),    FORM_EN(TypeForm::RampMinus),    "Убывающая пила",   "Waning saw",
-    FORM_RU(TypeForm::Triangle),     FORM_EN(TypeForm::Triangle),     "Треугольник",      "Triangle",
-    FORM_RU(TypeForm::Meander),      FORM_EN(TypeForm::Meander),      "Меандр",           "Meander",
-    FORM_RU(TypeForm::Impulse),      FORM_EN(TypeForm::Impulse),      "Импульсы",         "Impulse",
-    FORM_RU(TypeForm::PacketImpuls), FORM_EN(TypeForm::PacketImpuls), "Пакеты",           "Packets",
-    FORM_RU(TypeForm::Free),         FORM_EN(TypeForm::Free),         "Произвольный",     "Free",
+    FORM_RU(TypeForm::Sine),        FORM_EN(TypeForm::Sine),        "Синус",            "Sinus",
+    FORM_RU(TypeForm::RampPlus),    FORM_EN(TypeForm::RampPlus),    "Нарастающая пила", "Escalating saw",
+    FORM_RU(TypeForm::RampMinus),   FORM_EN(TypeForm::RampMinus),   "Убывающая пила",   "Waning saw",
+    FORM_RU(TypeForm::Triangle),    FORM_EN(TypeForm::Triangle),    "Треугольник",      "Triangle",
+    FORM_RU(TypeForm::Meander),     FORM_EN(TypeForm::Meander),     "Меандр",           "Meander",
+    FORM_RU(TypeForm::Impulse),     FORM_EN(TypeForm::Impulse),     "Импульсы",         "Impulse",
+    FORM_RU(TypeForm::Packet),      FORM_EN(TypeForm::Packet),      "Пакеты",           "Packets",
+    FORM_RU(TypeForm::Free),        FORM_EN(TypeForm::Free),        "Произвольный",     "Free",
     numForm, *PageSignals::self, Item::FuncActive, PageSignals::OnChanged_Form, FuncDraw
 )
 
@@ -164,7 +190,7 @@ void PageSignals::Init()
 
 void PageSignals::SCPI_SetForm(TypeForm::E form)
 {
-    if(form == TypeForm::PacketImpuls && CURRENT_CHANNEL_IS_B)
+    if(form == TypeForm::Packet && CURRENT_CHANNEL_IS_B)
     {
         SCPI::SendAnswer("Can not set form \"packet\" on channel B");
         return;

@@ -1131,7 +1131,7 @@ void DisplayCorrection::Init(Value value)
         tuner->ReinterpretToInteger()->SetAndLoadValue(value);
     }
 
-    if (form->value == TypeForm::PacketImpuls)
+    if (form->value == TypeForm::Packet)
     {
         if (param == form->FindParameter(ParameterDoubleType::Period) ||
             param == form->FindParameter(ParameterIntegerType::PacketNumber) ||

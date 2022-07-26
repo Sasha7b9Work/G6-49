@@ -225,7 +225,7 @@ static Parameter *params_PacketA[] =
     nullptr
 };
 
-static Form formPacketImpulseA(TypeForm::PacketImpuls, params_PacketA, &waves[Chan::A]);
+static Form formPacketImpulseA(TypeForm::Packet, params_PacketA, &waves[Chan::A]);
 
 
 

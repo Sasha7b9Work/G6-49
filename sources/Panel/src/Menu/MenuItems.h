@@ -395,16 +395,16 @@ class ChoiceParameterBase
 {
 public:
     COMMON_PART_MENU_ITEM;
-    pFuncVV     funcOnPress;
-    Form  *form;
+    pFuncVV  funcOnPress;
+    Form    *form;
 };
 
 
 class ChoiceParameter : public Item
 {
 public:
-    pFuncVV     funcOnPress;
-    Form  *form;
+    pFuncVV  funcOnPress;
+    Form    *form;
     
     // ќбрабатывает нажатие кнопки. ¬озвращает указатель на себ€, если находитс€ в открытом состо€нии и 0 в противном.
     Item *Press(const Control &control);
