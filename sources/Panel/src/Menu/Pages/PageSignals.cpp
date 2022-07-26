@@ -70,13 +70,17 @@ void PageSignals::OnChanged_Form(bool)
         {
             FORM(ChB)->PushState();
 
-            *cFormB.cell = 5;                                                           // Устанавливаем форму импульса на втором канале
+            WAVE(ChB).SetIndexForm(5);                      // Устанавливаем форму импульса на втором канале
 
-            *cChannel.cell = 1;                                                         // Устанавливаем текущим второй канал
+            set.current = ChB;                              // Устанавливаем текущим второй канал
 
             OnPress_Channel(true);
 
             OnChanged_Form(true);
+
+            set.current = ChA;                              // Возвращаемся на первый канал
+
+            OnPress_Channel(true);
         }
         else if (CURRENT_FORM->Is(TypeForm::Free))          // Вышли из пакетного режима
         {
