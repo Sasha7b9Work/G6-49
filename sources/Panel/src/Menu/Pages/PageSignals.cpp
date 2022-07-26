@@ -42,7 +42,7 @@ DEF_CHOICE_2( cChannel,                                                         
     "Управление параметрами сигнала на выходе A", "Control the parameters of the signal at output A",
     "B",                                          "B",
     "Управление параметрами сигнала на выходе B", "Control the parameters of the signal at output B",
-    set.current, *PageSignals::self, IsActive_Channel, PageSignals::OnPress_Channel, FuncDraw
+    set.cur_chan, *PageSignals::self, IsActive_Channel, PageSignals::OnPress_Channel, FuncDraw
 )
 
 
@@ -66,25 +66,33 @@ void PageSignals::OnChanged_Form(bool)
 
     if (CURRENT_CHANNEL_IS_A)
     {
-        if (CURRENT_FORM->Is(TypeForm::Packet))             // Вошли в пакетный режим
+        static int index_form = 0;
+
+        if (CURRENT_FORM->Is(TypeForm::Impulse))            // Вошли в пакетный режим
         {
-            FORM(ChB)->PushState();
+            index_form = WAVE(ChB).GetIndexForm();
 
             WAVE(ChB).SetIndexForm(5);                      // Устанавливаем форму импульса на втором канале
 
-            set.current = ChB;                              // Устанавливаем текущим второй канал
+            FORM(ChB)->SaveState();                         // Сохраняем параметры импульсов на втором канале
 
-            OnPress_Channel(true);
+            SetCurrentChanenl(ChB);
 
             OnChanged_Form(true);
 
-            set.current = ChA;                              // Возвращаемся на первый канал
-
-            OnPress_Channel(true);
+            SetCurrentChanenl(ChA);
         }
         else if (CURRENT_FORM->Is(TypeForm::Free))          // Вышли из пакетного режима
         {
-            FORM(ChB)->PopState();
+            FORM(ChB)->RestoreState();
+
+            WAVE(ChB).SetIndexForm(index_form);
+
+            SetCurrentChanenl(ChB);
+
+            OnChanged_Form(true);
+
+            SetCurrentChanenl(ChA);
         }
     }
 }
@@ -207,6 +215,6 @@ void PageSignals::SCPI_SetForm(TypeForm::E form)
 
 void PageSignals::SetCurrentChanenl(Chan::E ch)
 {
-    set.current = ch;
+    set.cur_chan = ch;
     OnPress_Channel(true);
 }

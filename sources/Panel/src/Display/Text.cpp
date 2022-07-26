@@ -507,6 +507,19 @@ String::String(const String &rhs) : text(nullptr)
 }
 
 
+String String::operator=(const String &rhs)
+{
+    Set(TypeConversionString::None, "");
+
+    if (Allocate(std::strlen(rhs.c_str()) + 1))
+    {
+        std::strcpy(text, rhs.c_str());
+    }
+
+    return *this;
+}
+
+
 String::String(char symbol) : text(nullptr)
 {
     Set(TypeConversionString::None, "");

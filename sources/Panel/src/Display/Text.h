@@ -127,4 +127,6 @@ private:
 
     // ¬озвращает ширину, занимаемую словом до первого пробела или нуль-символа
     int WidthWithoutSpaces(const char *t) const;
+
+    String operator=(const String &);
 };

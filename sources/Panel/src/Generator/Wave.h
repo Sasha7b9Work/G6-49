@@ -108,11 +108,11 @@ public:
 
     void Reset();
 
-    // Сохраниить состояние (возможно только одно)
-    void PushState();
+    // Сохранить состояние
+    void SaveState();
 
-    // Восстановить состояние (возможно только одно)
-    void PopState();
+    // Восстановить ранее сохранённое состояние
+    void RestoreState();
 
 private:
     
@@ -151,6 +151,7 @@ private:
         Parameter **params;
         int numParams;
         int currentParam;
+        Old() : params(nullptr), numParams(0), currentParam(0) { }
         void Init(Parameter **parameters, int num, int current) { params = parameters; numParams = num; currentParam = current; }
     } old;
 };
@@ -167,7 +168,8 @@ public:
     Form *GetCurrentForm();
     
     // Установить индекс текущей формы сигнала.
-    void SetIndexForm(int8 num);
+    void SetIndexForm(int num) { numberForm = num; };
+    int GetIndexForm() const { return numberForm; }
 
     int NumberOfForms() const;
 

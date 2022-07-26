@@ -75,12 +75,6 @@ Form *Wave::GetCurrentForm()
 }
 
 
-void Wave::SetIndexForm(int8 num)
-{
-    numberForm = num;
-}
-
-
 int Wave::NumberOfForms() const
 {
     return numForms;
@@ -750,13 +744,13 @@ double Form::GetAmplitude()
 }
 
 
-void Form::PushState()
+void Form::SaveState()
 {
 
 }
 
 
-void Form::PopState()
+void Form::RestoreState()
 {
 
 }

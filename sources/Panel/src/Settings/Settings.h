@@ -13,7 +13,7 @@
 #define CURRENT_PAGE                (set._menu_currentPage)
 #define MENU_POS_ACT_ITEM(x)        (set.menu_posActItem[x])
 #define MENU_CURRENT_SUBPAGE(x)     (set.menu_currentSubPage[x])
-#define CURRENT_CHANNEL             (set.current)
+#define CURRENT_CHANNEL             (set.cur_chan)
 #define CURRENT_CHANNEL_IS_A        (CURRENT_CHANNEL == Chan::A)
 #define CURRENT_CHANNEL_IS_B        (CURRENT_CHANNEL == Chan::B)
 #define ENABLED_CH(ch)              (set.enabled[ch])
@@ -58,11 +58,11 @@ struct Settings // -V690
 {
     uint16    size;                             // Размер структуры Settings
     col_val   disp_Colors[32];                  // Цвета
-    Page*     _menu_currentPage;                 // Адрес открытой страницы меню. 0, если открыта главная страница
+    Page*     _menu_currentPage;                // Адрес открытой страницы меню. 0, если открыта главная страница
     int8      menu_posActItem[Page::Count];     // Позиция активного пункта меню для каждой страницы
     int8      menu_currentSubPage[Page::Count]; // Номер текущей подстраницы для каждой страницы
     bool      enabled[2];
-    Chan::E   current;
+    Chan::E   cur_chan;
     uint8     lang;
     bool      bigSymbols;                       // Если 1, то символы выводятся чуть увеличенными
 

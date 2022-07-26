@@ -73,7 +73,7 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
 
     Centre();
 
-    SetFocus();
+    SetFocus(); //-V1053
 }
 
 
