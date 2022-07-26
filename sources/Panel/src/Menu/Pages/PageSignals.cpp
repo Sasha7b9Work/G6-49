@@ -68,7 +68,7 @@ void PageSignals::OnChanged_Form(bool)
     {
         static int index_form = 0;
 
-        if (CURRENT_FORM->Is(TypeForm::Impulse))            // Вошли в пакетный режим
+        if (CURRENT_FORM->Is(TypeForm::Packet))            // Вошли в пакетный режим
         {
             index_form = WAVE(ChB).GetIndexForm();
 
