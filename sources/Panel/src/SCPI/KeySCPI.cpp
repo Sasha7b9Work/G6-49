@@ -5,14 +5,14 @@
 
 
 // :KEY:PRESS:
-static pCHAR FuncKeyPress(pCHAR);
+static pchar FuncKeyPress(pchar);
 // :KEY:LONG:
-static pCHAR FuncKeyLong(pCHAR);
+static pchar FuncKeyLong(pchar);
 
 static void HintKey(String *);
 
 
-static pCHAR const keyNames[Key::Count + 1] =
+static pchar const keyNames[Key::Count + 1] =
 {
     " NONE",       // None
     " F1",         // F1
@@ -48,7 +48,7 @@ const StructSCPI SCPI::key[] =
 };
 
 
-static pCHAR FuncKeyPress(pCHAR buffer)
+static pchar FuncKeyPress(pchar buffer)
 {
     for(int i = 0; i < Key::Count; i++)
     {
@@ -74,7 +74,7 @@ static void HintKey(String *message)
 }
 
 
-static pCHAR FuncKeyLong(pCHAR buffer)
+static pchar FuncKeyLong(pchar buffer)
 {
     for(int i = 0; i < Key::Count; i++)
     {
@@ -94,7 +94,7 @@ static pCHAR FuncKeyLong(pCHAR buffer)
 }
 
 
-static pCHAR const regNames[Key::Count + 1] =
+static pchar const regNames[Key::Count + 1] =
 {
     " LEFT",   // Поворот вправо
     " RIGHT",  // Поворот влево
@@ -103,7 +103,7 @@ static pCHAR const regNames[Key::Count + 1] =
 };
 
 
-pCHAR SCPI::FuncReg(pCHAR buffer)
+pchar SCPI::FuncReg(pchar buffer)
 {
     for (int i = 0; i < 3; i++)
     {

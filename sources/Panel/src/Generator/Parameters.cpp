@@ -326,12 +326,12 @@ String ParameterComposite::ToString(String &units) const
 
     if(type == ParameterCompositeType::Manipulation)
     {
-        static pCHAR valuesRU[2] =
+        static pchar valuesRU[2] =
         {
             "Откл", "Вкл"
         };
 
-        static pCHAR valuesEN[2] =
+        static pchar valuesEN[2] =
         {
             "Off", "On"
         };
@@ -455,7 +455,7 @@ int ParameterChoice::NumChoices() const
 }
 
 
-ParameterDouble::ParameterDouble(ParameterDoubleType::E t, pCHAR nameRU, pCHAR const nameEN,
+ParameterDouble::ParameterDouble(ParameterDoubleType::E t, pchar nameRU, pchar const nameEN,
     const Value &_min_, const Value &_max, const Value &_value) :
     Parameter(ParameterKind::Double, nameRU, nameEN), tuner(this), type(t), min(_min_), value(_value),
     resetValue(_value), max(_max), saved(_value)

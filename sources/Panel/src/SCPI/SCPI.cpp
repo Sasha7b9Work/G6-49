@@ -14,11 +14,11 @@
 // Рекурсивная функция обработки массива структур StructSCPI.
 // В случае успешного выполнения возвращает адрес символа, расположенного за последним обработанным символом.
 // В случае неуспешного завершения - возвращает nullptr. Код ошибки находится в *error
-static pCHAR Process(pCHAR buffer, const StructSCPI structs[]); //-V2504
+static pchar Process(pchar buffer, const StructSCPI structs[]); //-V2504
 // Обработка узла дерева node
-static pCHAR ProcessNode(pCHAR begin, const StructSCPI *node);
+static pchar ProcessNode(pchar begin, const StructSCPI *node);
 // Обработка листа node
-static pCHAR ProcessLeaf(pCHAR begin, const StructSCPI *node);
+static pchar ProcessLeaf(pchar begin, const StructSCPI *node);
 // Возвращает true, если символ является началом комнады - разделителем или '*'
 static bool IsBeginCommand(const char &symbol);
 // Удаляет неправильные символы из начала строки
@@ -33,7 +33,7 @@ static String data;
 static String badSymbols;
 
 
-void SCPI::AppendNewData(pCHAR buffer, uint size)
+void SCPI::AppendNewData(pchar buffer, uint size)
 {
     data.Append(buffer, size);
 
@@ -67,7 +67,7 @@ void SCPI::Update()
 }
 
 
-static pCHAR Process(pCHAR buffer, const StructSCPI strct[]) //-V2504
+static pchar Process(pchar buffer, const StructSCPI strct[]) //-V2504
 {
     while (!strct->IsEmpty())
     {
@@ -98,7 +98,7 @@ static pCHAR Process(pCHAR buffer, const StructSCPI strct[]) //-V2504
 }
 
 
-pCHAR SCPI::BeginWith(pCHAR buffer, pCHAR word)
+pchar SCPI::BeginWith(pchar buffer, pchar word)
 {
     while (*word)
     {
@@ -122,13 +122,13 @@ pCHAR SCPI::BeginWith(pCHAR buffer, pCHAR word)
 }
 
 
-static pCHAR ProcessNode(pCHAR begin, const StructSCPI *node)
+static pchar ProcessNode(pchar begin, const StructSCPI *node)
 {
     return Process(begin, node->strct);
 }
 
 
-static pCHAR ProcessLeaf(pCHAR begin, const StructSCPI *node)
+static pchar ProcessLeaf(pchar begin, const StructSCPI *node)
 {
     if (*begin == '\0')                     // Подстраховка от того, что символ окончания команды не принят
     {
@@ -148,7 +148,7 @@ static pCHAR ProcessLeaf(pCHAR begin, const StructSCPI *node)
 }
 
 
-bool SCPI::IsLineEnding(pCHAR *buffer)
+bool SCPI::IsLineEnding(pchar *buffer)
 {
     bool result = (**buffer == 0x0D);
 
@@ -208,7 +208,7 @@ static bool RemoveSeparatorsSequenceFromBegin()
 }
 
 
-void SCPI::SendAnswer(pCHAR message)
+void SCPI::SendAnswer(pchar message)
 {
     if(message[std::strlen(message) - 1] != 0x0D)
     {
@@ -247,13 +247,13 @@ bool SCPI::Handler::Processing(SimpleMessage *message)
 {
     uint size = message->TakeUINT();
 
-    SCPI::AppendNewData(reinterpret_cast<pCHAR>(message->TakeData(5)), size);
+    SCPI::AppendNewData(reinterpret_cast<pchar>(message->TakeData(5)), size);
 
     return true;
 }
 
 
-pCHAR SCPI::ProcessParameterDouble(pCHAR buffer, ParameterDoubleType::E value)
+pchar SCPI::ProcessParameterDouble(pchar buffer, ParameterDoubleType::E value)
 {
     ParameterDouble *param = CURRENT_FORM->FindParameter(value);
 
@@ -282,7 +282,7 @@ pCHAR SCPI::ProcessParameterDouble(pCHAR buffer, ParameterDoubleType::E value)
 }
 
 
-pCHAR SCPI::ProcessParameterInteger(pCHAR buffer, ParameterIntegerType::E type)
+pchar SCPI::ProcessParameterInteger(pchar buffer, ParameterIntegerType::E type)
 {
     ParameterInteger *param = CURRENT_FORM->FindParameter(type);
 
@@ -311,7 +311,7 @@ pCHAR SCPI::ProcessParameterInteger(pCHAR buffer, ParameterIntegerType::E type)
 }
 
 
-pCHAR SCPI::ProcessParameterChoice(pCHAR buffer, ParameterChoiceType::E choice, pString *names)
+pchar SCPI::ProcessParameterChoice(pchar buffer, ParameterChoiceType::E choice, pString *names)
 {
     ParameterChoice *param = CURRENT_FORM->FindParameter(choice);
 

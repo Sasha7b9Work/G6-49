@@ -5,15 +5,15 @@
 
 
 // :MANIPULATION:DURATION
-static pCHAR FuncMDuration(pCHAR);
+static pchar FuncMDuration(pchar);
 static void HintMDuration(String *);
 
 // :MANIPULATION:ENABLED
-static pCHAR FuncEnabled(pCHAR);
+static pchar FuncEnabled(pchar);
 static void HintEnabled(String *);
 
 // :MANIPULATION:PERIOD
-static pCHAR FuncMPeriod(pCHAR);
+static pchar FuncMPeriod(pchar);
 static void HintMPeriod(String *);
 
 
@@ -27,14 +27,14 @@ const StructSCPI SCPI::manipulation[] =
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR const enabledNames[] =
+static pchar const enabledNames[] =
 {
     " OFF",
     " ON",
     ""
 };
 
-static pCHAR FuncEnabled(pCHAR buffer)
+static pchar FuncEnabled(pchar buffer)
 {
     return SCPI::ProcessParameterChoice(buffer, ParameterChoiceType::ManipulationEnabled, enabledNames);
 }
@@ -46,7 +46,7 @@ static void HintEnabled(String *message)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncMDuration(pCHAR buffer)
+static pchar FuncMDuration(pchar buffer)
 {
     return SCPI::ProcessParameterDouble(buffer, ParameterDoubleType::ManipulationDuration);
 }
@@ -57,7 +57,7 @@ static void HintMDuration(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncMPeriod(pCHAR buffer)
+static pchar FuncMPeriod(pchar buffer)
 {
     return SCPI::ProcessParameterDouble(buffer, ParameterDoubleType::ManipulationPeriod);
 }

@@ -91,7 +91,7 @@ protected:
     Form                *form;          // ‘орма, дл€ которой зада этот параметр
     Parameter           *parent;        // ≈сли параметр вложенный, то здесь адрес родител€
     ParameterKind::E     kind;
-    pCHAR                names[2];
+    pchar                names[2];
     pFuncBV              funcOfActive;  // јктивен ли данный параметр
 };
 
@@ -128,7 +128,7 @@ class ParameterDouble : public Parameter
 
 public:
 
-    ParameterDouble(ParameterDoubleType::E t, pCHAR const nameRU, pCHAR const nameEN, const Value &_min, const Value &_max, const Value &_value);
+    ParameterDouble(ParameterDoubleType::E t, pchar const nameRU, pchar const nameEN, const Value &_min, const Value &_max, const Value &_value);
 
     ParameterDouble(const ParameterDouble &);
 

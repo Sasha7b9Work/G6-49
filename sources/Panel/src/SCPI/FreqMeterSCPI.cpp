@@ -10,43 +10,43 @@
 
 
 // :MEASURE
-static pCHAR FuncMeasure(pCHAR);
+static pchar FuncMeasure(pchar);
 static void HintMeasure(String *);
 
 // :LEVEL
-static pCHAR FuncLevel(pCHAR);
+static pchar FuncLevel(pchar);
 static void HintLevel(String *);
 
 // :TIMECOUNTING
-static pCHAR FuncTimeCounting(pCHAR);
+static pchar FuncTimeCounting(pchar);
 static void HintTimeCounting(String *);
 
 // :TIMELABELS
-static pCHAR FuncTimeLabels(pCHAR);
+static pchar FuncTimeLabels(pchar);
 static void HintTimeLabels(String *);
 
 // :NUMBERPERIODS
-static pCHAR FuncNumberPeriods(pCHAR);
+static pchar FuncNumberPeriods(pchar);
 static void HintNumberPeriods(String *);
 
 // :RESISTANCE
-static pCHAR FuncResistance(pCHAR);
+static pchar FuncResistance(pchar);
 static void HintResistance(String *);
 
 // :COUPLING
-static pCHAR FuncCoupling(pCHAR);
+static pchar FuncCoupling(pchar);
 static void HintCoupling(String *);
 
 // :LPF
-static pCHAR FuncLPF(pCHAR);
+static pchar FuncLPF(pchar);
 static void HintLPF(String *);
 
 // :TEST
-static pCHAR FuncTest(pCHAR);
+static pchar FuncTest(pchar);
 static void HintTest(String *);
 
 // :VALUE
-static pCHAR FuncValue(pCHAR);
+static pchar FuncValue(pchar);
 static void HintValue(String *);
 
 
@@ -67,7 +67,7 @@ const StructSCPI SCPI::freqmeter[] =
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR const measureNames[] =
+static pchar const measureNames[] =
 {
     " OFF",
     " FREQUENCY",
@@ -76,7 +76,7 @@ static pCHAR const measureNames[] =
 };
 
 
-static pCHAR FuncMeasure(pCHAR buf)
+static pchar FuncMeasure(pchar buf)
 {
     const char *end = SCPI::BeginWith(buf, "?");
 
@@ -114,7 +114,7 @@ static void HintMeasure(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncLevel(pCHAR buffer)
+static pchar FuncLevel(pchar buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -156,7 +156,7 @@ static void HintLevel(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR FuncValue(pCHAR buffer)
+static pchar FuncValue(pchar buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "");
 
@@ -180,7 +180,7 @@ static void HintValue(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR const countingNames[] =
+static pchar const countingNames[] =
 {
     " 1MS",
     " 10MS",
@@ -191,7 +191,7 @@ static pCHAR const countingNames[] =
 };
 
 
-static pCHAR FuncTimeCounting(pCHAR buffer)
+static pchar FuncTimeCounting(pchar buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -230,14 +230,14 @@ static void HintTimeCounting(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR const lpfNames[] =
+static pchar const lpfNames[] =
 {
     " OFF",
     " ON",
     ""
 };
 
-static pCHAR FuncLPF(pCHAR buffer)
+static pchar FuncLPF(pchar buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -275,14 +275,14 @@ static void HintLPF(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR const couplingNames[] =
+static pchar const couplingNames[] =
 {
     " AC",
     " DC",
     ""
 };
 
-static pCHAR FuncCoupling(pCHAR buffer)
+static pchar FuncCoupling(pchar buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -320,7 +320,7 @@ static void HintCoupling(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR const resistanceNames[] =
+static pchar const resistanceNames[] =
 {
     " 1MOHM",
     " 50OHM",
@@ -328,7 +328,7 @@ static pCHAR const resistanceNames[] =
 };
 
 
-static pCHAR FuncResistance(pCHAR buffer)
+static pchar FuncResistance(pchar buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -366,7 +366,7 @@ static void HintResistance(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR const testNames[] =
+static pchar const testNames[] =
 {
     " OFF",
     " ON",
@@ -374,7 +374,7 @@ static pCHAR const testNames[] =
 };
 
 
-static pCHAR FuncTest(pCHAR buffer)
+static pchar FuncTest(pchar buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -412,7 +412,7 @@ static void HintTest(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR const lablelsgNames[] =
+static pchar const lablelsgNames[] =
 {
     " 10E-3",
     " 10E-4",
@@ -423,7 +423,7 @@ static pCHAR const lablelsgNames[] =
 };
 
 
-static pCHAR FuncTimeLabels(pCHAR buffer)
+static pchar FuncTimeLabels(pchar buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
@@ -461,7 +461,7 @@ static void HintTimeLabels(String *)
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static pCHAR const numberPeriodsNames[] =
+static pchar const numberPeriodsNames[] =
 {
     " 10000",
     " 1000",
@@ -472,7 +472,7 @@ static pCHAR const numberPeriodsNames[] =
 };
 
 
-static pCHAR FuncNumberPeriods(pCHAR buffer)
+static pchar FuncNumberPeriods(pchar buffer)
 {
     const char *end = SCPI::BeginWith(buffer, "?");
 
