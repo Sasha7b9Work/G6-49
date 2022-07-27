@@ -88,10 +88,10 @@ public:
 
 protected:
     
-    Form *form;         // ‘орма, дл€ которой зада этот параметр
-    Parameter *parent;  // ≈сли параметр вложенный, то здесь адрес родител€
-    ParameterKind::E kind;
-    const char *names[2];
+    Form             *form;         // ‘орма, дл€ которой зада этот параметр
+    Parameter        *parent;       // ≈сли параметр вложенный, то здесь адрес родител€
+    ParameterKind::E  kind;
+    pCHAR             names[2];
 };
 
 
@@ -127,7 +127,9 @@ class ParameterDouble : public Parameter
 
 public:
 
-    ParameterDouble(ParameterDoubleType::E t, const char * const nameRU, const char * const nameEN, const Value &_min, const Value &_max, const Value &_value);
+    ParameterDouble(ParameterDoubleType::E t, pCHAR const nameRU, pCHAR const nameEN, const Value &_min, const Value &_max, const Value &_value);
+
+    ParameterDouble(const ParameterDouble &);
 
     virtual void Reset();
 
@@ -195,6 +197,14 @@ private:
 
 protected:
     Value max;
+
+private:
+
+    struct Saved
+    {
+        Saved(const Value &val) : value(val) { }
+        Value value;
+    } saved;
 };
 
 

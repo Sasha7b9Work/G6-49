@@ -236,6 +236,18 @@ bool ParameterDouble::SetAndLoadValue(Value val)
 }
 
 
+void ParameterDouble::SaveState()
+{
+    saved.value = value;
+}
+
+
+void ParameterDouble::RestoreState()
+{
+    value = saved.value;
+}
+
+
 bool ParameterInteger::SetAndLoadValue(Value val)
 {
     if (!InRange(val))
@@ -443,11 +455,39 @@ int ParameterChoice::NumChoices() const
 }
 
 
-ParameterDouble::ParameterDouble(ParameterDoubleType::E t, const char *nameRU, const char * const nameEN,
+ParameterDouble::ParameterDouble(ParameterDoubleType::E t, pCHAR nameRU, pCHAR const nameEN,
     const Value &_min_, const Value &_max, const Value &_value) :
     Parameter(ParameterKind::Double, nameRU, nameEN), tuner(this), type(t), min(_min_), value(_value),
-    resetValue(_value), max(_max)
+    resetValue(_value), max(_max), saved(_value)
 {
+}
+
+
+ParameterDouble::ParameterDouble(const ParameterDouble &rhs) :
+    Parameter(ParameterKind::Double, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
+    min(rhs.min), value(rhs.value), resetValue(rhs.resetValue), max(rhs.max), saved(rhs.saved)
+{
+}
+
+
+ParameterDouble ParameterDouble::operator=(const ParameterDouble &rhs)
+{
+    form = rhs.form;
+    parent = rhs.parent;
+    kind = rhs.kind;
+    names[0] = rhs.names[0];
+    names[1] = rhs.names[1];
+
+    tuner = rhs.tuner;
+    min = rhs.min;
+    value = rhs.value;
+    resetValue = rhs.resetValue;
+
+    max = rhs.max;
+
+    saved.value = rhs.saved.value;
+
+    return *this;
 }
 
 
