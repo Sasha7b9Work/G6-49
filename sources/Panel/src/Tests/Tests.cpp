@@ -34,7 +34,11 @@ static void TestKeyboard()
             keys[control.key] = true;
         }
 
-        char buffer[Key::Count * 10] = { 0 };
+        static const int SIZE_BUFFER = Key::Count * 10;
+
+        char buffer[SIZE_BUFFER];
+
+        std::memset(buffer, 0, SIZE_BUFFER);
 
         int counter = 0;
 
@@ -46,11 +50,6 @@ static void TestKeyboard()
                 std::strcat(buffer, ", ");
                 counter++;
             }
-        }
-
-        if (counter > 1)
-        {
-            buffer[std::strlen(buffer) - 2] = '\0';
         }
 
         Painter::BeginScene(Color::BACK);
