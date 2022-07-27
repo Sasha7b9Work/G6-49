@@ -470,7 +470,7 @@ ParameterDouble::ParameterDouble(const ParameterDouble &rhs) :
 }
 
 
-ParameterDouble ParameterDouble::operator=(const ParameterDouble &rhs)
+ParameterDouble &ParameterDouble::operator=(const ParameterDouble &rhs)
 {
     form = rhs.form;
     parent = rhs.parent;

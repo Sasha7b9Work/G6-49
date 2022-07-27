@@ -179,7 +179,7 @@ public:
 
     virtual void RestoreState();
 
-    ParameterDouble operator=(const ParameterDouble &);
+    ParameterDouble &operator=(const ParameterDouble &);
 
 private:
     Tuner tuner;        // Используется для настройки 
