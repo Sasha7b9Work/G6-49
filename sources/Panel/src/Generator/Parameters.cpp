@@ -15,7 +15,8 @@
 int ParameterChoice::choiceModeStartFree = 0;
 
 
-Parameter::Parameter(ParameterKind::E k, pchar nRU, pchar nEN) : viewer(this), form(nullptr), parent(nullptr), kind(k)
+Parameter::Parameter(ParameterKind::E k, pFuncBV funcActive, pchar nRU, pchar nEN) :
+    viewer(this), form(nullptr), parent(nullptr), kind(k), funcOfActive(funcActive)
 {
     names[0] = nRU;
     names[1] = nEN;
@@ -457,14 +458,14 @@ int ParameterChoice::NumChoices() const
 
 ParameterDouble::ParameterDouble(ParameterDoubleType::E t, pchar nameRU, pchar const nameEN,
     const Value &_min_, const Value &_max, const Value &_value) :
-    Parameter(ParameterKind::Double, nameRU, nameEN), tuner(this), type(t), min(_min_), value(_value),
+    Parameter(ParameterKind::Double, Parameter::FuncActive, nameRU, nameEN), tuner(this), type(t), min(_min_), value(_value),
     resetValue(_value), max(_max), saved(_value)
 {
 }
 
 
 ParameterDouble::ParameterDouble(const ParameterDouble &rhs) :
-    Parameter(ParameterKind::Double, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
+    Parameter(ParameterKind::Double, Parameter::FuncActive, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
     min(rhs.min), value(rhs.value), resetValue(rhs.resetValue), max(rhs.max), saved(rhs.saved)
 {
 }
@@ -530,7 +531,7 @@ String ParameterInteger::ToString(Value val) const
 
 
 ParameterInteger::ParameterInteger(ParameterIntegerType::E t, pchar nameRU, pchar nameEN, const Value &_min, const Value &_max, const Value &_value) :
-    Parameter(ParameterKind::Integer, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value), resetValue(_value)
+    Parameter(ParameterKind::Integer, Parameter::FuncActive, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value), resetValue(_value)
 {
 }
 

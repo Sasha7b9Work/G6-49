@@ -36,7 +36,7 @@ class Parameter
 {
 public:
 
-    Parameter(ParameterKind::E k, pchar nRU, pchar nEN);
+    Parameter(ParameterKind::E k, pFuncBV funcActive, pchar nRU, pchar nEN);
 
     virtual ~Parameter() { }
 
@@ -85,6 +85,8 @@ public:
 
     // Восстановить состояине параметра
     virtual void RestoreState() { };
+
+    static bool FuncActive() { return true; }
 
 protected:
     
@@ -281,7 +283,7 @@ class ParameterChoice : public Parameter
 public:
 
     ParameterChoice(ParameterChoiceType::E t, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
-        Parameter(ParameterKind::Choice, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
+        Parameter(ParameterKind::Choice, Parameter::FuncActive, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
 
     ParameterChoiceType::E GetType() { return type; }
 
@@ -330,7 +332,7 @@ class ParameterComposite : public Parameter
 public:
 
     ParameterComposite(ParameterCompositeType::E v, pchar nameRU, pchar nameEN, Parameter **parameters) :
-        Parameter(ParameterKind::Composite, nameRU, nameEN), params(parameters), type(v) { }
+        Parameter(ParameterKind::Composite, Parameter::FuncActive, nameRU, nameEN), params(parameters), type(v) { }
 
     virtual void SetForm(Form *form);
 
@@ -361,7 +363,8 @@ class ParameterButton : public Parameter
 {
 public:
 
-    ParameterButton(pchar titleRU, pchar titleEN, pFuncVV f) : Parameter(ParameterKind::Button, titleRU, titleEN), func(f) {};
+    ParameterButton(pchar titleRU, pchar titleEN, pFuncVV f) :
+        Parameter(ParameterKind::Button, Parameter::FuncActive, titleRU, titleEN), func(f) {};
 
     virtual String ToString(String &) const { return String(""); };
 
