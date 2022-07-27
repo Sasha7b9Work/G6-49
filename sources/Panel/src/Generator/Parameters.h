@@ -88,10 +88,11 @@ public:
 
 protected:
     
-    Form             *form;         // ‘орма, дл€ которой зада этот параметр
-    Parameter        *parent;       // ≈сли параметр вложенный, то здесь адрес родител€
-    ParameterKind::E  kind;
-    pCHAR             names[2];
+    Form                *form;          // ‘орма, дл€ которой зада этот параметр
+    Parameter           *parent;        // ≈сли параметр вложенный, то здесь адрес родител€
+    ParameterKind::E     kind;
+    pCHAR                names[2];
+    pFuncBV              funcOfActive;  // јктивен ли данный параметр
 };
 
 
