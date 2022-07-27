@@ -10,9 +10,10 @@
 
 
 extern ChoiceParameterBase cParameters;
-extern const PageBase pageSignals;
+extern const PageBase   pageSignals;
 extern const ChoiceBase cFormA;
 extern const ChoiceBase cFormB;
+extern const ButtonBase bTuneParameter;
 
 // Номер текущей формы сигнал
 static int numForm = 0;
@@ -160,15 +161,6 @@ static void OnPress_TuneParameter()
 }
 
 
-static void OnDraw_TuneParameter(int x, int y);
-
-
-DEF_BUTTON( bTuneParameter,                                                                                                        //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---
-    "Изменить", "Change",
-    "Открывает окно ввода параметра", "Opens the parameter input window",
-    *PageSignals::self, Item::FuncActive, OnPress_TuneParameter, OnDraw_TuneParameter
-)
-
 static void OnDraw_TuneParameter(int x, int y)
 {
     if (CURRENT_PARAM->IsDouble())
@@ -185,6 +177,14 @@ static void OnDraw_TuneParameter(int x, int y)
         }
     }
 }
+
+
+DEF_BUTTON( bTuneParameter,                                                                                                        //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---
+    "Изменить", "Change",
+    "Открывает окно ввода параметра", "Opens the parameter input window",
+    *PageSignals::self, Item::FuncActive, OnPress_TuneParameter, OnDraw_TuneParameter
+)
+
 
 DEF_CHOICE_PARAMETER( cParameters,                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Параметр ---
     "ПАРАМЕТР", "PARAMETER",
