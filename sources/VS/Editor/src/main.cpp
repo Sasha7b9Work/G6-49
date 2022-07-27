@@ -1,3 +1,4 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Editor/Editor.h"
 #include "Editor/Form.h"
 #include "Editor/Painter/Canvas.h"
