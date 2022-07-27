@@ -33,6 +33,16 @@ SimpleMessage::SimpleMessage(int size, uint8 v0) : allocated(0), buffer(0), used
 }
 
 
+SimpleMessage &SimpleMessage::operator=(const SimpleMessage &rhs)
+{
+    FreeMemory();
+
+    CreateAllocate(rhs.buffer, rhs.used);
+
+    return *this;
+}
+
+
 SimpleMessage *SimpleMessage::Clone()
 {
     SimpleMessage *result = new SimpleMessage();
