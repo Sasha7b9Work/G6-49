@@ -4,5 +4,5 @@
 
 struct PVCP
 {
-    static void SendStringAsynch(const char *data);
+    static void SendStringAsynch(pchar data);
 };

@@ -378,7 +378,7 @@ public:
     // Возвращает высоту раскрытого
     int GetHeightOpened() const;
 
-    const char *NamePrevSubItem();
+    pchar NamePrevSubItem();
     
     // Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
     String NameSubItem(int i) const;

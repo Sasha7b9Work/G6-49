@@ -241,7 +241,7 @@ namespace Message
         class CreateFile : public SimpleMessage
         {
         public:
-            CreateFile(const char *name);
+            CreateFile(pchar name);
         };
 
         class WriteToFile : public SimpleMessage

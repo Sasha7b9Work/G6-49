@@ -15,7 +15,7 @@
 int ParameterChoice::choiceModeStartFree = 0;
 
 
-Parameter::Parameter(ParameterKind::E k, const char *nRU, const char *nEN) : viewer(this), form(nullptr), parent(nullptr), kind(k)
+Parameter::Parameter(ParameterKind::E k, pchar nRU, pchar nEN) : viewer(this), form(nullptr), parent(nullptr), kind(k)
 {
     names[0] = nRU;
     names[1] = nEN;
@@ -443,7 +443,7 @@ int ParameterChoice::NumChoices() const
 {
     int count = 0;
 
-    const char *ch = choices[count];
+    pchar ch = choices[count];
 
     while (ch != nullptr)
     {
@@ -529,7 +529,7 @@ String ParameterInteger::ToString(Value val) const
 }
 
 
-ParameterInteger::ParameterInteger(ParameterIntegerType::E t, const char *nameRU, const char *nameEN, const Value &_min, const Value &_max, const Value &_value) :
+ParameterInteger::ParameterInteger(ParameterIntegerType::E t, pchar nameRU, pchar nameEN, const Value &_min, const Value &_max, const Value &_value) :
     Parameter(ParameterKind::Integer, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value), resetValue(_value)
 {
 }
@@ -622,9 +622,9 @@ Value ParameterOffset::GetMin() const
 }
 
 
-const char *ParameterChoiceType::Name(ParameterChoiceType::E type)
+pchar ParameterChoiceType::Name(ParameterChoiceType::E type)
 {
-    static const char * const names[ParameterChoiceType::Count] =
+    static pchar  const names[ParameterChoiceType::Count] =
     {
         "Polarity",
         "Mode start",

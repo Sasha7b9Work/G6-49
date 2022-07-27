@@ -12,7 +12,7 @@
 #define SCPI_RUN_IF_END(func) if(end) { SCPI_PROLOG(end) func; SCPI_EPILOG(end) }
 
 #define SCPI_REQUEST(func)                          \
-    const char *end = SCPI::BeginWith(buffer, "?"); \
+    pchar end = SCPI::BeginWith(buffer, "?"); \
     SCPI_RUN_IF_END(func)
 
 #define SCPI_PROCESS_ARRAY(names, func)             \

@@ -169,7 +169,7 @@ uint SU::StringToBin32(char buffer[33])
 }
 
 
-bool SU::String2UInt64(const char *str, uint64 *value)
+bool SU::String2UInt64(pchar str, uint64 *value)
 {
     uint length = std::strlen(str);
     if(length == 0)
@@ -196,7 +196,7 @@ bool SU::String2UInt64(const char *str, uint64 *value)
 }
 
 
-bool SU::String2UInt(const char *str, uint *value)
+bool SU::String2UInt(pchar str, uint *value)
 {
     uint length = std::strlen(str);
     if (length == 0)
@@ -223,7 +223,7 @@ bool SU::String2UInt(const char *str, uint *value)
 }
 
 
-int SU::NumWords(const char *string)
+int SU::NumWords(pchar string)
 {
     ChooseSpaces(&string);
 
@@ -313,7 +313,7 @@ int SU::NumDigitsInNumber(int value)
 #define  SYMBOL(x) (*(*(x)))
 
 
-bool SU::ChooseSymbols(const char **string)
+bool SU::ChooseSymbols(pchar *string)
 {
     if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a)
     {
@@ -329,7 +329,7 @@ bool SU::ChooseSymbols(const char **string)
 }
 
 
-bool SU::ChooseSpaces(const char **string)
+bool SU::ChooseSpaces(pchar *string)
 {
     if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a)
     {
@@ -347,7 +347,7 @@ bool SU::ChooseSpaces(const char **string)
 #undef SYMBOL
 
 
-bool SU::GetWord(const char *string, Word *word, const int numWord)
+bool SU::GetWord(pchar string, Word *word, const int numWord)
 {
     ChooseSpaces(&string);
 
@@ -400,7 +400,7 @@ bool SU::WordEqualZeroString(Word *word, char* string)
 }
 
 
-int SU::FindSymbol(const char *string, char symbol)
+int SU::FindSymbol(pchar string, char symbol)
 {
     int pos = 0;
     while(*string)  
@@ -464,7 +464,7 @@ float SU::Buffer2Float(const uint8 *buffer)
 }
 
 
-bool SU::String2Int(const char *buffer, int *value, char **end)
+bool SU::String2Int(pchar buffer, int *value, char **end)
 {
     Buffer string(std::strlen(buffer) + 1);
 
@@ -566,7 +566,7 @@ char *SU::FindEnd(char *buffer)
 
 void Locale::FindSeparator()
 {
-    const char * const str = "1.5";
+    pchar  const str = "1.5";
 
     char *end = nullptr;
 

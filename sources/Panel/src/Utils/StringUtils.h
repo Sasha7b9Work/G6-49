@@ -33,7 +33,7 @@ struct SU
 
     static float Buffer2Float(const uint8 *buffer);
 
-    static bool String2Int(const char *buffer, int *value, char **end);
+    static bool String2Int(pchar buffer, int *value, char **end);
 
     static String Int2String(int value, bool alwaysSign, int numMinFields);
     
@@ -57,7 +57,7 @@ struct SU
     static char *Buffer2FloatString(const uint8 *buffer);
     
     // ¬озвращает число слов в строке string
-    static int NumWords(const char *string);
+    static int NumWords(pchar string);
     
     // ¬озвращает указатель на n слово в строке. ≈сли char == 0 - слова нет, если ret value == 0xffffffff - выходной буфер слишком мал
     static char *GetWord(char *string, int n, char *out, int size);
@@ -66,11 +66,11 @@ struct SU
     static int NumDigitsInNumber(int value);
     
     // Ёта команда сразу преобразует к верхенму регистру слово.
-    static bool GetWord(const char *string, Word *word, const int numWord);
+    static bool GetWord(pchar string, Word *word, const int numWord);
 
     static bool WordEqualZeroString(Word *word, char* string);
 
-    static int FindSymbol(const char *string, char symbol);
+    static int FindSymbol(pchar string, char symbol);
 
     static char ToUpper(char symbol);
 
@@ -82,9 +82,9 @@ struct SU
 
     static char ToLower(char symbol);
 
-    static bool String2UInt64(const char *str, uint64 *value);
+    static bool String2UInt64(pchar str, uint64 *value);
 
-    static bool String2UInt(const char *str, uint *value);
+    static bool String2UInt(pchar str, uint *value);
 
     // ѕереводит числов в двоичный вид с заданный количеством разр€дов
     static char *Bin2StringN(uint value, char buffer[33], int n);
@@ -92,8 +92,8 @@ struct SU
 private:
     
     // ¬озвращает false, если выбор невозможен - строка кончилась.
-    static bool ChooseSymbols(const char **string);
+    static bool ChooseSymbols(pchar *string);
     
     // ¬озвращает false, если выбор невозможен - строка кончилась.
-    static bool ChooseSpaces(const char **string);
+    static bool ChooseSpaces(pchar *string);
 };

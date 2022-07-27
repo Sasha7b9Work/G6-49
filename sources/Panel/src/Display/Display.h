@@ -24,7 +24,7 @@ namespace Display
     uint8 *GetRow(int row);
     
     void ShowWarning(String warning);
-    void ShowWarning(const char *warning);
+    void ShowWarning(pchar warning);
 
     void ClearWarnings();
 

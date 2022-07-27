@@ -15,10 +15,10 @@
 namespace Debug
 {
     void StartProfilingUS();
-    uint PointProfilingUS(const char *file, int line);
+    uint PointProfilingUS(pchar file, int line);
 
     void StartProfilingMS();
-    uint PointProfilingMS(const char *file, int line);
+    uint PointProfilingMS(pchar file, int line);
 
     void ClearTimeCounter();
     void StartIncreaseCounter();
@@ -26,5 +26,5 @@ namespace Debug
     uint GetTimeCounterUS();
 
     extern int line[10];
-    extern const char *file[10];
+    extern pchar file[10];
 };

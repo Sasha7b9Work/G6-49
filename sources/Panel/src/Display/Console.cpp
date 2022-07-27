@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "Console.h"
 #include "Display/Font/Font.h"
 #include "Display/Painter.h"
@@ -21,7 +22,7 @@ namespace Console
 }
 
 
-void Console::AddString(const char *string)
+void Console::AddString(pchar string)
 {
     static int fullNumber = 0;
 

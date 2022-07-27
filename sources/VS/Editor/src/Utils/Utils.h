@@ -5,5 +5,5 @@ namespace Utils
 {
     char *DoubleToString(double value);
 
-    double StringToDouble(const char *buffer);
+    double StringToDouble(pchar buffer);
 };

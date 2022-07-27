@@ -14,7 +14,7 @@
 #define FREQUENCY_DDS_MAX   Value("10",  Order::Mega)
 
 
-static const char *namesManipulationEnabled[] =
+static pchar namesManipulationEnabled[] =
 {
     DISABLED_RU, DISABLED_EN,
     ENABLED_RU,  ENABLED_EN,
@@ -62,7 +62,7 @@ static Parameter *params_SineA[] =
 static Form formSineA(TypeForm::Sine, params_SineA, &waves[Chan::A]);
 
 
-static const char *namesModeStartFree[] =       // Режимы запуска для произвольных сигналов
+static pchar namesModeStartFree[] =       // Режимы запуска для произвольных сигналов
 {
     "Авто",   "Auto",
     "Однокр", "Single",
@@ -71,7 +71,7 @@ static const char *namesModeStartFree[] =       // Режимы запуска для произвольн
     nullptr
 };
 
-static const char *namesModeStartPulse[] =   // Режимы запуска для мпульсных сигналов
+static pchar namesModeStartPulse[] =   // Режимы запуска для мпульсных сигналов
 {
     "Авто",   "Auto",
     "Однокр", "Single",
@@ -170,7 +170,7 @@ static Parameter *params_MeanderA[] =
 static Form formMeanderA(TypeForm::Meander, params_MeanderA, &waves[Chan::A]);
 
 
-static const char *namesPolarity[] =
+static pchar namesPolarity[] =
 {
     POLARITY_POS, POLARITY_POS,
     POLARITY_NEG, POLARITY_NEG,

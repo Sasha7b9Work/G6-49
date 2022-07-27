@@ -295,7 +295,7 @@ void Frame::CreateMenu()
 }
 
 
-void Frame::AddTool(int id, const wxString &label, const char *nameResource, const char *nameResourceDisabled)
+void Frame::AddTool(int id, const wxString &label, pchar nameResource, pchar nameResourceDisabled)
 {
     wxBitmap bitmap(nameResource, wxBITMAP_TYPE_BMP_RESOURCE);
 
@@ -306,7 +306,7 @@ void Frame::AddTool(int id, const wxString &label, const char *nameResource, con
 }
 
 
-void Frame::AddRadioTool(int id, const wxString &label, const char *nameResource)
+void Frame::AddRadioTool(int id, const wxString &label, pchar nameResource)
 {
     wxBitmap bitmap(nameResource, wxBITMAP_TYPE_BMP_RESOURCE);
 
@@ -314,7 +314,7 @@ void Frame::AddRadioTool(int id, const wxString &label, const char *nameResource
 }
 
 
-void Frame::AddCheckTool(int id, const wxString &label, const char *nameResource)
+void Frame::AddCheckTool(int id, const wxString &label, pchar nameResource)
 {
     wxBitmap bitmap(nameResource, wxBITMAP_TYPE_BMP_RESOURCE);
 

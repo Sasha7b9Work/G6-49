@@ -6,7 +6,7 @@
 
 
 
-IntValue::IntValue(const char *buffer, int _posComma) : sign(1)
+IntValue::IntValue(pchar buffer, int _posComma) : sign(1)
 {
     posComma = _posComma;
 

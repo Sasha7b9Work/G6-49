@@ -53,14 +53,14 @@ struct Value
 
     // Берёт значение из строкового представления. При этом первым символом может идти знак ("+" или "-"), дробная часть отделяется от целой точкой ("."),
     // а order указыват, на сколько нужно умножжить итоговое число (3 - умножить на 1000, -3 - разделить на 1000)
-    explicit Value(const char *const buffer, Order::E order);
+    explicit Value(pchar const buffer, Order::E order);
 
     void FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign);
     void FromDouble(double v);
     void FromUINT64(uint64 v) { value = v; }
     void FromINT(int v);
-    void FromString(const char * const buffer, int pow10);
-    bool FromString(const char *buffer, char **end, int numDigitsAfterComma);
+    void FromString(pchar  const buffer, int pow10);
+    bool FromString(pchar buffer, char **end, int numDigitsAfterComma);
 
     double ToDouble() const;
     uint64 ToUINT64() const { return value; }

@@ -35,7 +35,7 @@ String Choice::NameNextSubItem() const
 }
 
 
-const char *Choice::NamePrevSubItem()
+pchar Choice::NamePrevSubItem()
 {
     int8 prevIndex = CurrentIndex() - 1;
 

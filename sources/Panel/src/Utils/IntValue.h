@@ -5,7 +5,7 @@
 class IntValue
 {
 public:
-    IntValue(const char *buffer, int posComma);
+    IntValue(pchar buffer, int posComma);
     // Отнимает от числа 5
     void Sub5(char *bufferOut, int *posComma);
 private:

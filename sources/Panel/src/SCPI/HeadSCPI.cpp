@@ -333,7 +333,7 @@ static pchar const langNames[] =
 
 static pchar FuncLanguage(pchar buffer)
 {
-    const char *end = SCPI::BeginWith(buffer, "?");
+    pchar end = SCPI::BeginWith(buffer, "?");
 
     if (end)
     {
@@ -379,7 +379,7 @@ static pchar const soundNames[] =
 
 static pchar FuncSound(pchar buffer)
 {
-    const char *end = SCPI::BeginWith(buffer, "?");
+    pchar end = SCPI::BeginWith(buffer, "?");
 
     if (end)
     {

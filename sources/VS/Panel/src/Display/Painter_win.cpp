@@ -12,7 +12,7 @@
 #define uint16  unsigned short
 #define uint    unsigned int
 #define uchar   unsigned char
-#define pString const char * const
+#define pString pchar  const
 
 #include "Display/Painter.h"
 #include "Display/Text.h"

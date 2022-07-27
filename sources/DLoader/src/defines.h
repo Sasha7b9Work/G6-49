@@ -11,6 +11,7 @@ typedef unsigned char      uint8;
 typedef unsigned char      uint8_t;
 typedef signed char        int8;
 typedef const char * const pString;
+typedef const char *       pchar;
 
 typedef void(*pFuncVV)();
 typedef void(*pFuncVI)(int);

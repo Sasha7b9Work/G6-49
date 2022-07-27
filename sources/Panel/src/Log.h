@@ -51,7 +51,7 @@ struct TypeTrace
 class Log
 {
 public:
-    static void Trace(TypeTrace::E type, const char *module, const char *func, int numLine, char *format, ...);
+    static void Trace(TypeTrace::E type, pchar module, pchar func, int numLine, char *format, ...);
     static void Write(TypeTrace::E type, char *format, ...);
     static void Finalize();
 };

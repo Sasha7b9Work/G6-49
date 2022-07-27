@@ -22,11 +22,11 @@ public:
     static bool CompareArrays(const bool *array1, const bool *array2, int numElems);
     // \brief Находит следующий перенос. C letters начинается часть слово, где нужно найти перенос, в lettersInSyllable будет записано число букв в 
     // найденном слоге. Если слово закончилось, функция возвращает false
-    static bool FindNextTransfer(const char *letters, uint *lettersInSyllable);
+    static bool FindNextTransfer(pchar letters, uint *lettersInSyllable);
     static uint *BreakWord(char *word);
-    static char *GetWord(const char *firstSymbol, int *length, char buffer[20]);
+    static char *GetWord(pchar firstSymbol, int *length, char buffer[20]);
     // Возвращает часть слова до слога numSyllable(включительн) вместе со знаком переноса
-    static char *PartWordForTransfer(const char *word, const uint *lengthSyllables, int numSyllable, char buffer[30]);
+    static char *PartWordForTransfer(pchar word, const uint *lengthSyllables, int numSyllable, char buffer[30]);
 };
 
 
@@ -107,7 +107,7 @@ void Char::Draw2Horizontal(int x, int y, Color color)
 }
 
 
-char *WordWorker::GetWord(const char *firstSymbol, int *length, char buffer[20])
+char *WordWorker::GetWord(pchar firstSymbol, int *length, char buffer[20])
 {
     int pointer = 0;
     *length = 0;
@@ -299,7 +299,7 @@ uint *WordWorker::BreakWord(char *word)
 }
 
 
-char *WordWorker::PartWordForTransfer(const char *word, const uint *lengthSyllables, int numSyllable, char buffer[30])
+char *WordWorker::PartWordForTransfer(pchar word, const uint *lengthSyllables, int numSyllable, char buffer[30])
 {
     uint length = 0;
     for (int i = 0; i <= numSyllable; i++)
@@ -313,7 +313,7 @@ char *WordWorker::PartWordForTransfer(const char *word, const uint *lengthSyllab
 }
 
 
-bool WordWorker::FindNextTransfer(const char *letters, uint *lettersInSyllable)
+bool WordWorker::FindNextTransfer(pchar letters, uint *lettersInSyllable)
 {
 
 #define VOWEL       0   // Гласная
@@ -532,7 +532,7 @@ String::String(char symbol) : text(nullptr)
 }
 
 
-String::String(const char *format, ...) : text(nullptr)
+String::String(pchar format, ...) : text(nullptr)
 {
     Set(TypeConversionString::None, "");
 
@@ -560,7 +560,7 @@ String::String(const char *format, ...) : text(nullptr)
 }
 
 
-void String::Set(TypeConversionString::E conv, const char *format, ...)
+void String::Set(TypeConversionString::E conv, pchar format, ...)
 {
     Free();
 
@@ -587,7 +587,7 @@ void String::Set(TypeConversionString::E conv, const char *format, ...)
 }
 
 
-void String::Append(const char *str)
+void String::Append(pchar str)
 {
     if (!str || *str == '\0')
     {
@@ -605,7 +605,7 @@ void String::Append(const char *str)
 }
 
 
-void String::Append(const char *str, uint numSymbols)
+void String::Append(pchar str, uint numSymbols)
 {
     if (!str || *str == '\0')
     {
@@ -719,7 +719,7 @@ void String::DrawInColumn(int x, int y, int width, int delta)
     int begin = x;
     int end = begin + width;
 
-    const char *t = text;
+    pchar t = text;
 
     while (t && *t != 0)
     {
@@ -811,7 +811,7 @@ int String::DrawInColumnWithTransfers(const int left, const int top, const int w
 
 int String::Width() const
 {
-    const char *t = text;
+    pchar t = text;
 
     int width = 0;
     while (*t != '\0')
@@ -823,7 +823,7 @@ int String::Width() const
 }
 
 
-int String::WidthWithoutSpaces(const char *t) const
+int String::WidthWithoutSpaces(pchar t) const
 {
     int width = 0;
 
@@ -860,7 +860,7 @@ void String::Conversion(TypeConversionString::E conv)
 
 int String::DrawSubString(int x, int y, pString _t)
 {
-    const char *t = _t;
+    pchar t = _t;
     int numSymbols = 0;
     while (((*t) != ' ') && ((*t) != '\0'))
     {
@@ -874,7 +874,7 @@ int String::DrawSubString(int x, int y, pString _t)
 
 int String::DrawSpaces(int x, int y, pString _t, int *numSymbols)
 {
-    const char *t = _t;
+    pchar t = _t;
     *numSymbols = 0;
     while (*t == ' ')
     {

@@ -122,7 +122,7 @@ void Display::ShowWarning(String warning)
 }
 
 
-void Display::ShowWarning(const char *warning)
+void Display::ShowWarning(pchar warning)
 {
     ShowWarning(String(warning));
 }

@@ -9,16 +9,16 @@
 
 
 // Находит знак, если первый элемент buffer - знак. В pos записывается позиция элемента за знаком в этом случае
-static void ProcessSign(const char *const buffer, int *pos, int *sign);
+static void ProcessSign(pchar const buffer, int *pos, int *sign);
 
 // Находит позицю за последним элементом целой части числа
-static int FindIntegerPart(const char *const buffer, int start);
+static int FindIntegerPart(pchar const buffer, int start);
 
 // Собрать целое число из строки символов
-static uint AssembleInteger(const char *const buffer, int start, int end);
+static uint AssembleInteger(pchar const buffer, int start, int end);
 
 // Собрать число из трех или менее символов. В end возвращается позиция следующего символа
-static uint AssembleTriple(const char *const buffer, int start, int *end);
+static uint AssembleTriple(pchar const buffer, int start, int *end);
 
 // Место для временного сохранения текущего порядка
 static Order::E stored = Order::Count;
@@ -33,7 +33,7 @@ static bool GetIntPart(Value &value, char *begin, char **end, int numDigitsAfter
 static bool GetPower(int &power, char *begin, char **end);
 
 
-Value::Value(const char *const buffer, Order::E order) //-V730
+Value::Value(pchar const buffer, Order::E order) //-V730
 {
     FromString(buffer, Order::GetPow10(order));
 }
@@ -51,7 +51,7 @@ Value::Value(int v)
 }
 
 
-bool Value::FromString(const char *buffer, char **end, int numDigitsAfterComma)
+bool Value::FromString(pchar buffer, char **end, int numDigitsAfterComma)
 {
     char *begin = const_cast<char *>(buffer);
 
@@ -199,7 +199,7 @@ static bool GetPower(int &, char *, char **)
 #endif
 
 
-void Value::FromString(const char *const buffer, int pow10)
+void Value::FromString(pchar const buffer, int pow10)
 {
     int pos = 0;                                    // Текущая обрабатываемая позиция в buffer
     int sign = 1;                                   // Отрицательное значение означает отрицательный знак
@@ -251,7 +251,7 @@ void Value::FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign
 }
 
 
-static void ProcessSign(const char *const buffer, int *pos, int *sign)
+static void ProcessSign(pchar const buffer, int *pos, int *sign)
 {
     if (buffer[0] == '+')
     {
@@ -266,7 +266,7 @@ static void ProcessSign(const char *const buffer, int *pos, int *sign)
 }
 
 
-static int FindIntegerPart(const char *const buffer, int start)
+static int FindIntegerPart(pchar const buffer, int start)
 {
     int pos = start;
 
@@ -279,7 +279,7 @@ static int FindIntegerPart(const char *const buffer, int start)
 }
 
 
-static uint AssembleInteger(const char *const buffer, int start, int end)
+static uint AssembleInteger(pchar const buffer, int start, int end)
 {
     char stack[20];
 
@@ -307,7 +307,7 @@ static uint AssembleInteger(const char *const buffer, int start, int end)
 }
 
 
-static uint AssembleTriple(const char *const buffer, int start, int *end)
+static uint AssembleTriple(pchar const buffer, int start, int *end)
 {
     char stack[3];
     int posStack = 0;

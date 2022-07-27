@@ -247,9 +247,9 @@ Control Keyboard::GetNextControl()
 }
 
 #ifdef WIN32
-void Keyboard::InitInputs(const uint16 *, const char *, int, const uint16 *, const char *, int) {}
+void Keyboard::InitInputs(const uint16 *, pchar , int, const uint16 *, pchar , int) {}
 #else
-void Keyboard::InitInputs(const uint16 *sl, const char *portSL, int numSL, const uint16 *rl, const char *portRL, int numRL)
+void Keyboard::InitInputs(const uint16 *sl, pchar portSL, int numSL, const uint16 *rl, pchar portRL, int numRL)
 {
     for (int i = 0; i < numRL; i++)
     {
@@ -269,7 +269,7 @@ void Keyboard::InitInputs(const uint16 *sl, const char *portSL, int numSL, const
 #endif
 
 
-const char *PanelControlName(const Key::E key)
+pchar PanelControlName(const Key::E key)
 {
     static pchar names[] =
     {

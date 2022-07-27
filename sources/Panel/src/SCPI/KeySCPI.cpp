@@ -52,7 +52,7 @@ static pchar FuncKeyPress(pchar buffer)
 {
     for(int i = 0; i < Key::Count; i++)
     {
-        const char *end = SCPI::BeginWith(buffer, keyNames[i]);
+        pchar end = SCPI::BeginWith(buffer, keyNames[i]);
         if(end)
         {
             SCPI_PROLOG(end)
@@ -78,7 +78,7 @@ static pchar FuncKeyLong(pchar buffer)
 {
     for(int i = 0; i < Key::Count; i++)
     {
-        const char *end = SCPI::BeginWith(buffer, keyNames[i]);
+        pchar end = SCPI::BeginWith(buffer, keyNames[i]);
         if(end)
         {
             SCPI_PROLOG(end)
@@ -107,7 +107,7 @@ pchar SCPI::FuncReg(pchar buffer)
 {
     for (int i = 0; i < 3; i++)
     {
-        const char *end = SCPI::BeginWith(buffer, regNames[i]);
+        pchar end = SCPI::BeginWith(buffer, regNames[i]);
         if (end)
         {
             SCPI_PROLOG(end)

@@ -31,7 +31,7 @@ char *Utils::DoubleToString(double value)
 }
 
 
-double Utils::StringToDouble(const char *value)
+double Utils::StringToDouble(pchar value)
 {
     char buffer[100];
 

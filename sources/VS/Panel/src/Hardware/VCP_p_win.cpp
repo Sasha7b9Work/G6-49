@@ -4,7 +4,7 @@
 #include "Hardware/VCP_p.h"
 
 
-void PVCP::SendStringAsynch(const char *data)
+void PVCP::SendStringAsynch(pchar data)
 {
     String text(">>> %s", data);
     ConsoleSCPI::Self()->AddText(text.c_str());

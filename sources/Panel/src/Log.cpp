@@ -37,7 +37,7 @@ void Log::Finalize()
 
 
 
-void Log::Trace(TypeTrace::E type, const char *module, const char *func, int numLine, char *format, ...)
+void Log::Trace(TypeTrace::E type, pchar module, pchar func, int numLine, char *format, ...)
 {
     char buffer[SIZE_BUFFER_LOG];
     char message[SIZE_BUFFER_LOG];

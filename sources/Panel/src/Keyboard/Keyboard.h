@@ -9,7 +9,7 @@ namespace Keyboard
 
     void Update();
 
-    void InitInputs(const uint16 *sl, const char *portSL, int numSL, const uint16 *rl, const char *portRL, int numRL);
+    void InitInputs(const uint16 *sl, pchar portSL, int numSL, const uint16 *rl, pchar portRL, int numRL);
     
     // Возвращает true, если буфер пуст
     bool BufferIsEmpty();

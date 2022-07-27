@@ -54,10 +54,10 @@ public:
     explicit String();
     String(const String &);
     explicit String(char symbol);
-    explicit String(const char *format, ...);
+    explicit String(pchar format, ...);
     ~String();
 
-    void Set(TypeConversionString::E conv, const char *format, ...);
+    void Set(TypeConversionString::E conv, pchar format, ...);
 
     char *c_str() const;
 
@@ -89,9 +89,9 @@ public:
 
     void Free();
 
-    void Append(const char *str);
+    void Append(pchar str);
 
-    void Append(const char *str, uint numSymbols);
+    void Append(pchar str, uint numSymbols);
 
     void Append(char symbol);
     // Удаляет numSymbols из начала строки
@@ -126,7 +126,7 @@ private:
     int DrawPartWord(char *word, int x, int y, int xRight, bool draw);
 
     // Возвращает ширину, занимаемую словом до первого пробела или нуль-символа
-    int WidthWithoutSpaces(const char *t) const;
+    int WidthWithoutSpaces(pchar t) const;
 
     String operator=(const String &);
 };

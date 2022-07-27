@@ -3,7 +3,7 @@
 
 namespace Console
 {
-    void AddString(const char *string);
+    void AddString(pchar string);
 
     void Draw();
 };

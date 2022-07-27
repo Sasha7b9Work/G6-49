@@ -25,7 +25,7 @@
 typedef int bool;
 #endif
 
-typedef const char *const      pString;
+typedef const char * const     pString;
 typedef const char *           pchar;
 typedef unsigned int           uint;
 typedef unsigned short int     uint16;

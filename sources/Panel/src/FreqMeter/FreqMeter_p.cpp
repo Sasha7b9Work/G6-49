@@ -57,7 +57,7 @@ static String FormValue(uint8 lang)
         static const struct StrOut
         {
             int forFract;
-            const char * suffix[2];
+            pchar  suffix[2];
         }
         strs[5][5] =
         {

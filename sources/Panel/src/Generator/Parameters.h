@@ -36,7 +36,7 @@ class Parameter
 {
 public:
 
-    Parameter(ParameterKind::E k, const char *nRU, const char *nEN);
+    Parameter(ParameterKind::E k, pchar nRU, pchar nEN);
 
     virtual ~Parameter() { }
 
@@ -223,7 +223,7 @@ class ParameterInteger : public Parameter
 {
 public:
 
-    ParameterInteger(ParameterIntegerType::E t, const char * const nameRU, const char * const nameEN, const Value &min, const Value &max, const Value &value);
+    ParameterInteger(ParameterIntegerType::E t, pchar  const nameRU, pchar  const nameEN, const Value &min, const Value &max, const Value &value);
 
     virtual void Reset() { SetAndLoadValue(resetValue); }
 
@@ -272,7 +272,7 @@ struct ParameterChoiceType
         Count
     };
 
-    static const char *Name(ParameterChoiceType::E type);
+    static pchar Name(ParameterChoiceType::E type);
 };
 
 
@@ -280,7 +280,7 @@ class ParameterChoice : public Parameter
 {
 public:
 
-    ParameterChoice(ParameterChoiceType::E t, const char *nameRU, const char *nameEN, const char **_choices = nullptr) :
+    ParameterChoice(ParameterChoiceType::E t, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
         Parameter(ParameterKind::Choice, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
 
     ParameterChoiceType::E GetType() { return type; }
@@ -305,7 +305,7 @@ private:
 	ParameterChoiceType::E type;
     int choice;                         // Текущий выбор. И выбор для режима запуска импульсных сигналов
     static int choiceModeStartFree;     // Выбор режима запуска произвольных сигналов
-    const char **choices;               // Идут так - 0(рус), 0(англ), 1(рус), 1(англ)...
+    pchar *choices;               // Идут так - 0(рус), 0(англ), 1(рус), 1(англ)...
     
     // Количество вариантов выбора
     int NumChoices() const;
@@ -329,7 +329,7 @@ class ParameterComposite : public Parameter
 {
 public:
 
-    ParameterComposite(ParameterCompositeType::E v, const char *nameRU, const char *nameEN, Parameter **parameters) :
+    ParameterComposite(ParameterCompositeType::E v, pchar nameRU, pchar nameEN, Parameter **parameters) :
         Parameter(ParameterKind::Composite, nameRU, nameEN), params(parameters), type(v) { }
 
     virtual void SetForm(Form *form);
@@ -361,7 +361,7 @@ class ParameterButton : public Parameter
 {
 public:
 
-    ParameterButton(const char *titleRU, const char *titleEN, pFuncVV f) : Parameter(ParameterKind::Button, titleRU, titleEN), func(f) {};
+    ParameterButton(pchar titleRU, pchar titleEN, pFuncVV f) : Parameter(ParameterKind::Button, titleRU, titleEN), func(f) {};
 
     virtual String ToString(String &) const { return String(""); };
 
@@ -381,7 +381,7 @@ private:
 class ParameterVoltage : public ParameterDouble
 {
 public:
-    ParameterVoltage(ParameterDoubleType::E type, const char *nameRU, const char *nameEN, const Value &min, const Value &max, const Value &value) :
+    ParameterVoltage(ParameterDoubleType::E type, pchar nameRU, pchar nameEN, const Value &min, const Value &max, const Value &value) :
         ParameterDouble(type, nameRU, nameEN, min, max, value) { }
 };
 
@@ -418,7 +418,7 @@ public:
 class ParameterTime : public ParameterDouble
 {
 public:
-    ParameterTime(ParameterDoubleType::E t, const char *nameRU, const char * const nameEN, const Value &min,
+    ParameterTime(ParameterDoubleType::E t, pchar nameRU, pchar  const nameEN, const Value &min,
         const Value &max, const Value &value) : ParameterDouble(t, nameRU, nameEN, min, max, value) { }
 };
 
@@ -451,7 +451,7 @@ public:
 class ParameterPeriod : public ParameterTime
 {
 public:
-    ParameterPeriod(const Value &max, const Value &value, const char *nameRU = "Период", const char * const nameEN = "Period") :
+    ParameterPeriod(const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
         ParameterTime(ParameterDoubleType::Period, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, value) { }
 };
 
@@ -459,7 +459,7 @@ public:
 class ParameterDuration : public ParameterTime
 {
 public:
-    ParameterDuration(const Value &max, const Value &value, const char *nameRU = "Длит", const char *nameEN = "Dur") :
+    ParameterDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
         ParameterTime(ParameterDoubleType::Duration, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, value) { }
 };
 
@@ -484,14 +484,14 @@ public:
 class ParameterModeStart : public ParameterChoice
 {
 public:
-    ParameterModeStart(const char **names) : ParameterChoice(ParameterChoiceType::ModeStart, "Запуск", "Start", names) { }
+    ParameterModeStart(pchar *names) : ParameterChoice(ParameterChoiceType::ModeStart, "Запуск", "Start", names) { }
 };
 
 
 class ParameterManipulationEnabled : public ParameterChoice
 {
 public:
-    ParameterManipulationEnabled(const char **names) : 
+    ParameterManipulationEnabled(pchar *names) : 
         ParameterChoice(ParameterChoiceType::ManipulationEnabled, "Манип", "Manip", names) { }
 
 };
@@ -500,7 +500,7 @@ public:
 class ParameterPolarity : public ParameterChoice
 {
 public:
-    ParameterPolarity(const char **names) : ParameterChoice(ParameterChoiceType::Polarity, "Полярность", "Polarity", names) { }
+    ParameterPolarity(pchar *names) : ParameterChoice(ParameterChoiceType::Polarity, "Полярность", "Polarity", names) { }
 };
 
 

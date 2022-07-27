@@ -2,6 +2,7 @@
 #pragma warning(push, 0)
 #include "wx/wx.h"
 #pragma warning(pop)
+#include "defines.h"
 
 
 class Application : public wxApp
@@ -47,11 +48,11 @@ private:
 
     void CreateMenu();
 
-    void AddTool(int id, const wxString &label, const char *nameResource, const char *nameResourceDisabled = nullptr);
+    void AddTool(int id, const wxString &label, pchar nameResource, pchar nameResourceDisabled = nullptr);
 
-    void AddRadioTool(int id, const wxString &label, const char *nameResource);
+    void AddRadioTool(int id, const wxString &label, pchar nameResource);
 
-    void AddCheckTool(int id, const wxString &label, const char *nameResource);
+    void AddCheckTool(int id, const wxString &label, pchar nameResource);
 
     void OnAlignLeft(wxCommandEvent &);
 

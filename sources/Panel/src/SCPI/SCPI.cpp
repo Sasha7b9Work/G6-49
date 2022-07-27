@@ -58,7 +58,7 @@ void SCPI::Update()
         return;
     }
 
-    const char *end = Process(data.c_str(), head);
+    pchar end = Process(data.c_str(), head);
 
     if(end)
     {
@@ -71,7 +71,7 @@ static pchar Process(pchar buffer, const StructSCPI strct[]) //-V2504
 {
     while (!strct->IsEmpty())
     {
-        const char *end = SCPI::BeginWith(buffer, strct->key);
+        pchar end = SCPI::BeginWith(buffer, strct->key);
 
         if (end)
         {
@@ -135,7 +135,7 @@ static pchar ProcessLeaf(pchar begin, const StructSCPI *node)
         return nullptr;
     }
 
-    const char *result = node->func(begin);
+    pchar result = node->func(begin);
 
     if (result)
     {

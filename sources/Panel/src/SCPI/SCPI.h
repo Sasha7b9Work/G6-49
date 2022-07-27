@@ -16,7 +16,7 @@ class ParameterDouble;
 class String;
 class SimpleMessage;
 
-typedef const char *(*FuncSCPI)(pchar);
+typedef pchar (*FuncSCPI)(pchar);
 typedef bool (*FuncTestSCPI)();
 typedef void (*FuncHint)(String *);
 
@@ -24,13 +24,13 @@ typedef void (*FuncHint)(String *);
 // Структура, соотвествующая узлу дерева.
 struct StructSCPI
 {
-    const char *key;            // Ключевое слово узла (морфема)
+    pchar key;            // Ключевое слово узла (морфема)
 
     const StructSCPI *strct;    // Если структура имеет тип Node, то здесь хранится массив потомков - StructSCPI *structs.
 
     FuncSCPI  func;             // Если структура имеет тип Leaf, то здесь хранится функция - обработчик листа типа FuncSCPI
 
-    const char *hint;
+    pchar hint;
 
     FuncHint funcHint;
 
