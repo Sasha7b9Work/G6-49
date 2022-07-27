@@ -15,7 +15,7 @@ SpinControl::SpinControl(wxWindow *window, wxWindowID id, const wxPoint &positio
    
     new wxStaticText(window, wxID_ANY, label, { position.x + 55, position.y + 2 }, wxDefaultSize, wxALIGN_LEFT | wxALIGN_CENTER_VERTICAL);
 
-    prevValue = GetValue();
+    prevValue = wxSpinCtrl::GetValue();
 }
 
 

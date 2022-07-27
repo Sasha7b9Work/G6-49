@@ -118,7 +118,7 @@ Frame::Frame(const wxString &title)
 
     CreateMenu();
 
-    CreateStatusBar(2);
+    wxFrame::CreateStatusBar(2);
 
     SetSizeAndPosition();
 
@@ -156,7 +156,7 @@ Frame::Frame(const wxString &title)
     Bind(wxEVT_PAINT,    &Frame::OnRepaint,         this);
     Bind(wxEVT_KEY_DOWN, &Frame::OnKeyDown,         this);
 
-    Show(true);
+    wxTopLevelWindowMSW::Show(true);
 
     timer.Start(0);
 
@@ -164,11 +164,11 @@ Frame::Frame(const wxString &title)
 
     ModeButtonLeft::Set(ModeButtonLeft::EditLines);
 
-    GetStatusBar()->SetFieldsCount(3);
+    wxFrame::GetStatusBar()->SetFieldsCount(3);
 
     int widths[3] = { -1, 100, 95 };
 
-    GetStatusBar()->SetStatusWidths(3, widths);
+    wxFrame::GetStatusBar()->SetStatusWidths(3, widths);
 
     UpdateStatusBar();
 }
