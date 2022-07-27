@@ -16,7 +16,7 @@ int ParameterChoice::choiceModeStartFree = 0;
 
 
 Parameter::Parameter(ParameterKind::E k, pFuncBV funcActive, pchar nRU, pchar nEN) :
-    viewer(this), form(nullptr), parent(nullptr), kind(k), funcOfActive(funcActive)
+    viewer(this), funcOfActive(funcActive), form(nullptr), parent(nullptr), kind(k)
 {
     names[0] = nRU;
     names[1] = nEN;

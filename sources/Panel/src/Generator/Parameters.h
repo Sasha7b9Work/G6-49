@@ -88,13 +88,14 @@ public:
 
     static bool FuncActive() { return true; }
 
+    pFuncBV              funcOfActive;  // Активен ли данный параметр
+
 protected:
     
     Form                *form;          // Форма, для которой зада этот параметр
     Parameter           *parent;        // Если параметр вложенный, то здесь адрес родителя
     ParameterKind::E     kind;
     pchar                names[2];
-    pFuncBV              funcOfActive;  // Активен ли данный параметр
 };
 
 

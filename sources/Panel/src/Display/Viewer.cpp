@@ -19,14 +19,14 @@ Viewer::Viewer(Parameter *_param) : param(_param)
 
 void Viewer::Draw(int y, int xName, int xValue, int xUnits, Chan::E ch)
 {
-    Color color = Color::Chan(ch);
+    Color color = param->funcOfActive() ? Color::Chan(ch) : Color::GRAY_10;
 
     if((ch == CURRENT_CHANNEL) &&
        (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) &&
        PageSignals::OnSubPageTuneChannels())
     {
-        Rectangle(141, 9).Fill(xName, y, Color::GRAY_50);
-        color = Color::BACK;
+        Rectangle(141, 9).Fill(xName, y, param->funcOfActive() ? Color::GRAY_50 : Color::GRAY_10);
+        color = param->funcOfActive() ? Color::BACK : Color::GRAY_10;
     }
 
     Font::ForceUpperCase(true);

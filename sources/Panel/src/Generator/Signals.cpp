@@ -7,6 +7,8 @@
 #include "Menu/Pages/Pages.h"
 
 
+extern ParameterModeStart impulseA_ModeStart;
+
 #define FREQUENCY_SINE_MIN  Value("300", Order::Micro)
 #define FREQUENCY_SINE_MAX  Value("100", Order::Mega)
 
@@ -180,7 +182,7 @@ static pchar namesPolarity[] =
 
 static bool FuncActive_PeriodImpulseA()
 {
-    return true;
+    return (impulseA_ModeStart.GetChoice() == 0);
 }
 
 static ParameterPeriod    impulseA_Period   (FuncActive_PeriodImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
