@@ -178,7 +178,12 @@ static pchar namesPolarity[] =
 };
 
 
-static ParameterPeriod    impulseA_Period   (Value("100", Order::Kilo), Value("100", Order::Micro));
+static bool FuncActive_PeriodImpulseA()
+{
+    return true;
+}
+
+static ParameterPeriod    impulseA_Period   (FuncActive_PeriodImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
 static ParameterDuration  impulseA_Duration (Value("100", Order::Kilo), Value("20", Order::Micro));
 static ParameterAmplitude impulseA_Amplitude;
 static ParameterOffset    impulseA_Offset;
@@ -199,8 +204,12 @@ static Parameter *params_ImpulseA[] =
 static Form formImpulseA(TypeForm::Impulse, params_ImpulseA, &waves[Chan::A]);
 
 
+static bool FuncActive_PeriodPacketA()
+{
+    return true;
+}
 
-static ParameterPeriod       packetA_Period        (Value("100", Order::Kilo), Value("200", Order::Micro),
+static ParameterPeriod       packetA_Period        (FuncActive_PeriodPacketA, Value("100", Order::Kilo), Value("200", Order::Micro),
     "Период имп", "Period imp");
 static ParameterDuration     packetA_Duration      (Value("100", Order::Kilo), Value("10", Order::Micro),  "Длит имп",
     "Dur imp");
@@ -371,8 +380,12 @@ static Parameter *params_MeanderB[] =
 static Form formMeanderB(TypeForm::Meander, params_MeanderB, &waves[Chan::B]);
 
 
+static bool FuncActive_PeriodImpulseB()
+{
+    return true;
+}
 
-static ParameterPeriod    impulseB_Period   (Value("100", Order::Kilo), Value("100", Order::Micro));
+static ParameterPeriod    impulseB_Period   (FuncActive_PeriodImpulseB, Value("100", Order::Kilo), Value("100", Order::Micro));
 static ParameterDuration  impulseB_Duration (Value("100", Order::Kilo), Value("20", Order::Micro));
 static ParameterAmplitude impulseB_Amplitude;
 static ParameterOffset    impulseB_Offset;

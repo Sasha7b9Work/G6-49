@@ -130,7 +130,8 @@ class ParameterDouble : public Parameter
 
 public:
 
-    ParameterDouble(ParameterDoubleType::E t, pchar const nameRU, pchar const nameEN, const Value &_min, const Value &_max, const Value &_value);
+    ParameterDouble(ParameterDoubleType::E t, pFuncBV funcActive, pchar const nameRU, pchar const nameEN,
+        const Value &_min, const Value &_max, const Value &_value);
 
     ParameterDouble(const ParameterDouble &);
 
@@ -385,7 +386,7 @@ class ParameterVoltage : public ParameterDouble
 {
 public:
     ParameterVoltage(ParameterDoubleType::E type, pchar nameRU, pchar nameEN, const Value &min, const Value &max, const Value &value) :
-        ParameterDouble(type, nameRU, nameEN, min, max, value) { }
+        ParameterDouble(type, Parameter::FuncActive, nameRU, nameEN, min, max, value) { }
 };
 
 
@@ -414,22 +415,22 @@ class ParameterFrequency : public ParameterDouble
 {
 public:
     ParameterFrequency(const Value &min, const Value &max, const Value &value = Value("1", Order::Kilo)) :
-        ParameterDouble(ParameterDoubleType::Frequency, "Частота", "Frequency", min, max, value) { }
+        ParameterDouble(ParameterDoubleType::Frequency, Parameter::FuncActive, "Частота", "Frequency", min, max, value) { }
 };
 
 
 class ParameterTime : public ParameterDouble
 {
 public:
-    ParameterTime(ParameterDoubleType::E t, pchar nameRU, pchar  const nameEN, const Value &min,
-        const Value &max, const Value &value) : ParameterDouble(t, nameRU, nameEN, min, max, value) { }
+    ParameterTime(ParameterDoubleType::E t, pFuncBV funcActive, pchar nameRU, pchar  const nameEN, const Value &min,
+        const Value &max, const Value &value) : ParameterDouble(t, funcActive, nameRU, nameEN, min, max, value) { }
 };
 
 
 class ParameterPhase : public ParameterDouble
 {
 public:
-    ParameterPhase() : ParameterDouble(ParameterDoubleType::Phase, "Фаза", "Phase", Value("0", Order::One),
+    ParameterPhase() : ParameterDouble(ParameterDoubleType::Phase, Parameter::FuncActive, "Фаза", "Phase", Value("0", Order::One),
         Value("360", Order::One), Value("0", Order::One)) { }
 };
 
@@ -437,8 +438,8 @@ public:
 class ParameterPacketPeriod : public ParameterTime
 {
 public:
-    ParameterPacketPeriod(const Value &max, const Value &value) : ParameterTime(ParameterDoubleType::PacketPeriod,
-        "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, value) { }
+    ParameterPacketPeriod(const Value &max, const Value &value) :
+        ParameterTime(ParameterDoubleType::PacketPeriod, Parameter::FuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, value) { }
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
     // Возвращает true, если значение изменилось
@@ -454,8 +455,8 @@ public:
 class ParameterPeriod : public ParameterTime
 {
 public:
-    ParameterPeriod(const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
-        ParameterTime(ParameterDoubleType::Period, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, value) { }
+    ParameterPeriod(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
+        ParameterTime(ParameterDoubleType::Period, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, value) { }
 };
 
 
@@ -463,7 +464,7 @@ class ParameterDuration : public ParameterTime
 {
 public:
     ParameterDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
-        ParameterTime(ParameterDoubleType::Duration, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, value) { }
+        ParameterTime(ParameterDoubleType::Duration, Parameter::FuncActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, value) { }
 };
 
 
@@ -471,7 +472,7 @@ class ParameterManipulationDuration : public ParameterTime
 {
 public:
     ParameterManipulationDuration(const Value &min, const Value &max, const Value &value) :
-        ParameterTime(ParameterDoubleType::ManipulationDuration, "Длит", "Duration", min, max, value) { }
+        ParameterTime(ParameterDoubleType::ManipulationDuration, Parameter::FuncActive, "Длит", "Duration", min, max, value) { }
 };
 
 
@@ -479,7 +480,7 @@ class ParameterManipulationPeriod : public ParameterTime
 {
 public:
     ParameterManipulationPeriod(const Value &min, const Value &max, const Value &value) :
-        ParameterTime(ParameterDoubleType::ManipulationPeriod, "Период", "Period", min, max, value) { }
+        ParameterTime(ParameterDoubleType::ManipulationPeriod, Parameter::FuncActive, "Период", "Period", min, max, value) { }
 };
 
 

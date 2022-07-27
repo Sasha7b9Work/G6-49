@@ -456,9 +456,9 @@ int ParameterChoice::NumChoices() const
 }
 
 
-ParameterDouble::ParameterDouble(ParameterDoubleType::E t, pchar nameRU, pchar const nameEN,
+ParameterDouble::ParameterDouble(ParameterDoubleType::E t, pFuncBV funcActive, pchar nameRU, pchar const nameEN,
     const Value &_min_, const Value &_max, const Value &_value) :
-    Parameter(ParameterKind::Double, Parameter::FuncActive, nameRU, nameEN), tuner(this), type(t), min(_min_), value(_value),
+    Parameter(ParameterKind::Double, funcActive, nameRU, nameEN), tuner(this), type(t), min(_min_), value(_value),
     resetValue(_value), max(_max), saved(_value)
 {
 }
