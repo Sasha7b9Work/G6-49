@@ -13,35 +13,35 @@ public:
 
     static void Init();
 
-    static void EnableChannel(Chan::E ch, bool enable);
+    static void EnableChannel(const Chan &, bool enable);
 
     static void SingleStart();
 
-    static void SetFormWave(Chan::E ch, TypeForm::E form);
+    static void SetFormWave(const Chan &, TypeForm::E form);
 
-    static void SetOffset(Chan::E ch, Value offset);
+    static void SetOffset(const Chan &, Value offset);
 
-    static void SetFrequency(Chan::E ch, Value frequency);
+    static void SetFrequency(const Chan &, Value frequency);
 
-    static void SetAmplitude(Chan::E ch, Value amplitude);
+    static void SetAmplitude(const Chan &, Value amplitude);
 
-    static void SetDuration(Chan::E ch, Value duration);
+    static void SetDuration(const Chan &, Value duration);
 
-    static void SetDutyRatio(Chan::E ch, Value dutyRatio);
+    static void SetDutyRatio(const Chan &, Value dutyRatio);
 
-    static void SetPhase(Chan::E ch, Value phase);
+    static void SetPhase(const Chan &, Value phase);
 
-    static void SetDelay(Chan::E ch, Value duration);
+    static void SetDelay(const Chan &, Value duration);
 
-    static void SetManipulationDuration(Chan::E ch, Value duration);
+    static void SetManipulationDuration(const Chan &, Value duration);
 
-    static void SetManipulationPeriod(Chan::E ch, Value period);
+    static void SetManipulationPeriod(const Chan &, Value period);
 
-    static void SetPacketPeriod(Chan::E ch, Value duration);
+    static void SetPacketPeriod(const Chan &, Value duration);
 
-    static void SetPacketNumber(Chan::E ch, Value number);
+    static void SetPacketNumber(const Chan &, Value number);
 
-    static void SetPeriod(Chan::E ch, Value period);
+    static void SetPeriod(const Chan &, Value period);
 };
 
 

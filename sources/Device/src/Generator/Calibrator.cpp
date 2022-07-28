@@ -11,7 +11,7 @@ uint8 Calibrator::range[Chan::Count] = { 255, 255 };
 uint8 Calibrator::signal[Chan::Count] = { 0 , 0 };
 
 
-void Calibrator::SetFormWave(Chan::E ch, uint8 sig)
+void Calibrator::SetFormWave(const Chan &ch, uint8 sig)
 {
     bool isSine = (sig == 0);
 
@@ -21,7 +21,7 @@ void Calibrator::SetFormWave(Chan::E ch, uint8 sig)
 }
 
 
-void Calibrator::SetOffset(Chan::E ch, uint8 param)
+void Calibrator::SetOffset(const Chan &ch, uint8 param)
 {
     static const float offset[4] =
     {
@@ -45,7 +45,7 @@ void Calibrator::SetK(uint8 channel, uint8 _signal, uint8 _range, uint8 param, i
 
     *setCal.GetK(channel, _signal, range[channel], param) = k;
 
-    Chan::E ch = static_cast<Chan::E>(channel);
+    Chan ch(channel);
 
     SetFormWave(ch, _signal);
 
@@ -67,7 +67,7 @@ void Calibrator::SetK(uint8 channel, uint8 _signal, uint8 _range, uint8 param, i
 }
 
 
-void Calibrator::SetAmplitude(Chan::E ch, bool zeroAmplitude)
+void Calibrator::SetAmplitude(const Chan &ch, bool zeroAmplitude)
 {
     if (zeroAmplitude)
     {

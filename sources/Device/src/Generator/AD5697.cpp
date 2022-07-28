@@ -20,14 +20,14 @@ bool AD5697::calibrateMode = false;
 
 void AD5697::Init()
 {
-    Reset(Chan::A);
-    Reset(Chan::B);
+    Reset(ChA);
+    Reset(ChB);
 
     HAL_I2C1::Init();
 }
 
 
-double AD5697::CalculateCodeOffset(Chan::E ch)
+double AD5697::CalculateCodeOffset(const Chan &ch)
 {
     double zero = Calibrator::GetOffsetK_Zero(ch);           // 2048
 
@@ -71,7 +71,7 @@ double AD5697::CalculateCodeOffset(Chan::E ch)
 }
 
 
-void AD5697::SetOffset(Chan::E ch)
+void AD5697::SetOffset(const Chan &ch)
 {
     double code = CalculateCodeOffset(ch);
 
@@ -141,7 +141,7 @@ void AD5697::WriteParameter(uint8 address, uint8 data[3], HPort::E port, uint16 
 }
 
 
-void AD5697::Reset(Chan::E ch)
+void AD5697::Reset(const Chan &ch)
 {
     StructPIN str = PinLDAC(ch);
 
@@ -158,7 +158,7 @@ void AD5697::Reset(Chan::E ch)
 }
 
 
-StructPIN AD5697::PinLDAC(Chan::E ch)
+StructPIN AD5697::PinLDAC(const Chan &ch)
 {
     static const StructPIN strLDAC[Chan::Count] = { {WR_AD5697_OFFSET}, {WR_AD5697_FREQ} };
 

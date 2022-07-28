@@ -35,13 +35,13 @@ private:
     static uint8 CalculateRange(Chan::E ch);
     
     // Устанавливает форму сигнала для соотвествующей формы сигнала
-    static void SetFormWave(Chan::E ch, uint8 signal);
+    static void SetFormWave(const Chan &, uint8 signal);
     
     // Установить амплитуду для заданного диапазона
-    static void SetAmplitude(Chan::E ch, bool zeroAmplitude);
+    static void SetAmplitude(const Chan &, bool zeroAmplitude);
     
     // Установить смещение для заданного параметра
-    static void SetOffset(Chan::E ch, uint8 param);
+    static void SetOffset(const Chan &, uint8 param);
     
     // Если true, то мы находимся в режиме калибровки, и диапазон нужно не рассчитывать, исходя из установленного значения, а брать тот, который сейчас калибруется
     static bool inModeCalibration;

@@ -200,7 +200,7 @@ static void SetFormWave(SimpleMessage *msg)
 }
 
 
-static void SetGeneratorParameter(SimpleMessage *msg, void(*func)(Chan::E, Value))
+static void SetGeneratorParameter(SimpleMessage *msg, void(*func)(const Chan &, Value))
 {
     Chan ch(msg->TakeUINT8());
 
@@ -393,13 +393,13 @@ static void WriteRegister(SimpleMessage *msg)
     switch (reg)
     {
     case Register::OffsetA:
-        DGenerator::SetOffset(Chan::A, value);
-        AD5697::SetOffset(Chan::A);
+        DGenerator::SetOffset(ChA, value);
+        AD5697::SetOffset(ChA);
         break;
 
     case Register::OffsetB:
-        DGenerator::SetOffset(Chan::B, value);
-        AD5697::SetOffset(Chan::B);
+        DGenerator::SetOffset(ChB, value);
+        AD5697::SetOffset(ChB);
         break;
 
     case Register::FreqMeterLevel:
