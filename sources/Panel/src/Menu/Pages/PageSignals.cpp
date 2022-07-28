@@ -61,6 +61,23 @@ static void ChangedForm()
 }
 
 
+// Записать параметры импульсного сигнала канала В соответствии с параметрами пакета импульсов из канала А
+static void WriteParametersImpulseFromPacket(Form *formImpulse, Form *formPacket)
+{
+    ParameterDouble *period_packet = formPacket->FindParameter(ParameterDoubleType::PacketPeriod);
+
+    formImpulse->FindParameter(ParameterDoubleType::Period)->SetValue(period_packet->GetValue());
+
+    Value period_impulse = formPacket->FindParameter(ParameterDoubleType::Period)->GetValue();
+    Value duration_impulse = formPacket->FindParameter(ParameterDoubleType::Duration)->GetValue();
+    Value number_impulse = formPacket->FindParameter(ParameterIntegerType::PacketNumber)->GetValue();
+
+    double duration = (number_impulse.ToDouble() - 1.0) * period_impulse.ToDouble() + duration_impulse.ToDouble();
+
+    formImpulse->FindParameter(ParameterDoubleType::Duration)->SetValue(Value(duration));
+}
+
+
 void PageSignals::OnChanged_Form(bool)
 {
     ChangedForm();
@@ -71,33 +88,13 @@ void PageSignals::OnChanged_Form(bool)
 
         if (CURRENT_FORM->Is(TypeForm::Packet))            // Вошли в пакетный режим
         {
-            index_form = WAVE(ChB).GetIndexForm();
+            index_form = WAVE_B.GetIndexForm();
 
-            WAVE(ChB).SetIndexForm(5);                      // Устанавливаем форму импульса на втором канале
+            Signals::B::impulse->SaveState();               // Сохраняем параметры импульсов на втором канале
 
-            FORM(ChB)->SaveState();                         // Сохраняем параметры импульсов на втором канале
+            WAVE_B.SetForm(Signals::B::impulse);         // Устанавливаем форму импульса на втором канале
 
-            {                                               // Получем параметры импульсов
-                Form *formA = WAVE(ChA).GetForm(TypeForm::Packet);
-
-                Form *formB = WAVE(ChB).GetForm(TypeForm::Impulse);
-
-                {
-                    ParameterDouble *period_packet = formA->FindParameter(ParameterDoubleType::PacketPeriod);
-
-                    formB->FindParameter(ParameterDoubleType::Period)->SetValue(period_packet->GetValue());
-                }
-
-                {
-                    Value period_impulse = formA->FindParameter(ParameterDoubleType::Period)->GetValue();
-                    Value duration_impulse = formA->FindParameter(ParameterDoubleType::Duration)->GetValue();
-                    Value number_impulse = formA->FindParameter(ParameterIntegerType::PacketNumber)->GetValue();
-
-                    double duration = (number_impulse.ToDouble() - 1.0) * period_impulse.ToDouble() + duration_impulse.ToDouble();
-
-                    formB->FindParameter(ParameterDoubleType::Duration)->SetValue(Value(duration));
-                }
-            }
+            WriteParametersImpulseFromPacket(Signals::B::impulse, Signals::A::packet);
 
             SetCurrentChanenl(ChB);
 
@@ -107,9 +104,9 @@ void PageSignals::OnChanged_Form(bool)
         }
         else if (CURRENT_FORM->Is(TypeForm::Free))          // Вышли из пакетного режима
         {
-            FORM(ChB)->RestoreState();
+            FORM_B->RestoreState();
 
-            WAVE(ChB).SetIndexForm(index_form);
+            WAVE_B.SetIndexForm(index_form);
 
             SetCurrentChanenl(ChB);
 

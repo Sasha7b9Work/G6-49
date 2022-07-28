@@ -760,3 +760,16 @@ void Form::RestoreState()
         GetParameter(i)->RestoreState();
     }
 }
+
+
+void Wave::SetForm(Form *form)
+{
+    for (int i = 0; i < NumberOfForms(); i++)
+    {
+        if (form == GetForm(i))
+        {
+            SetIndexForm(i);
+            break;
+        }
+    }
+}

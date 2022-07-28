@@ -430,3 +430,8 @@ Wave waves[Chan::Count] =
     Wave(Chan::A, formsA),
     Wave(Chan::B, formsB)
 };
+
+
+Form *Signals::A::impulse = &formImpulseA;
+Form *Signals::A::packet = &formPacketImpulseA;
+Form *Signals::B::impulse = &formImpulseB;
