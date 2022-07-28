@@ -238,8 +238,9 @@ void FPGA::SetPeriodImpulse(const Chan &ch, Value period)
 
     PacketImpulse::periodImpulse = period;
 
-    RG::E reg = Chan(ch).IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB;
-    if(Chan(ch).IsA() && (modeWork[Chan::A] == ModeWork::PackedImpulse))
+    RG::E reg = ch.IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB;
+
+    if(ch.IsA() && (modeWork[Chan::A] == ModeWork::PackedImpulse))
     {
         reg = RG::_7_PeriodImpulseB;
     }
