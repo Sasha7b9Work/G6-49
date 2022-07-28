@@ -20,18 +20,18 @@ void AD9952::Init()
 
     Reset();
 
-    WriteCFR1(Chan::A);
-    WriteCFR1(Chan::B);
+    WriteCFR1(ChA);
+    WriteCFR1(ChB);
 
-    WriteCFR2(Chan::A);
-    WriteCFR2(Chan::B);
+    WriteCFR2(ChA);
+    WriteCFR2(ChB);
 
-    WriteARR(Chan::A);      // «десь скорость нарастани€ фронта импульса при манипул€ции
-    WriteARR(Chan::B);
+    WriteARR(ChA);      // «десь скорость нарастани€ фронта импульса при манипул€ции
+    WriteARR(ChB);
 }
 
 
-void AD9952::Manipulation::SetEnabled(Chan::E ch, bool enable)
+void AD9952::Manipulation::SetEnabled(const Chan &ch, bool enable)
 {
     enabled[ch] = enable;
     WriteCFR1(ch);
@@ -40,7 +40,7 @@ void AD9952::Manipulation::SetEnabled(Chan::E ch, bool enable)
 }
 
 
-void AD9952::SetFrequency(Chan::E ch)
+void AD9952::SetFrequency(const Chan &ch)
 {
     FPGA::SetClockAD992(SettingsGenerator::Frequency(ch) < 0.2F ? FPGA::ClockFrequency::_1MHz : FPGA::ClockFrequency::_100MHz);
 
@@ -50,7 +50,7 @@ void AD9952::SetFrequency(Chan::E ch)
 }
 
 
-void AD9952::SetPhase(Chan::E ch, Value ph)
+void AD9952::SetPhase(const Chan &ch, Value ph)
 {
     phase[ch] = ph.ToDouble();
 
@@ -61,15 +61,15 @@ void AD9952::SetPhase(Chan::E ch, Value ph)
 }
 
 
-void AD9952::SetAmplitude(Chan::E ch)
+void AD9952::SetAmplitude(const Chan &ch)
 {
     WriteRegister(ch, Register::ASF);
 }
 
 
-void AD9952::WriteRegister(Chan::E ch, Register::E reg)
+void AD9952::WriteRegister(const Chan &ch, Register::E reg)
 {
-    typedef void(*pFuncVCh)(Chan::E);
+    typedef void(*pFuncVCh)(const Chan &);
 
     static const pFuncVCh func[] = {WriteCFR1, WriteCFR2, WriteASF, WriteARR, WriteFTW0, WritePOW};
 
@@ -82,11 +82,11 @@ void AD9952::WriteRegister(Chan::E ch, Register::E reg)
 }
 
 
-void AD9952::WriteCFR1(Chan::E ch)
+void AD9952::WriteCFR1(const Chan &ch)
 {
     uint value = 0;
 
-    if(ch == Chan::B)
+    if(ch.IsB())
     {
         Bit::Set(value, 1);
         Bit::Set(value, 23);
@@ -104,7 +104,7 @@ void AD9952::WriteCFR1(Chan::E ch)
 }
 
 
-void AD9952::WriteCFR2(Chan::E ch)
+void AD9952::WriteCFR2(const Chan &ch)
 {
     uint value = 0;
     if (FPGA::clock == FPGA::ClockFrequency::_100MHz)
@@ -116,14 +116,14 @@ void AD9952::WriteCFR2(Chan::E ch)
 }
 
 
-void AD9952::WritePOW(Chan::E ch)
+void AD9952::WritePOW(const Chan &ch)
 {
     uint value = static_cast<uint>(phase[ch] / 360.0F * static_cast<float>(1 << 13) + 0.5F);
     WriteToHardware(ch, Register::POW, value * 2);
 }
 
 
-void AD9952::WriteASF(Chan::E ch)
+void AD9952::WriteASF(const Chan &ch)
 {
     float k = Calibrator::GetAmplitudeK(ch);
 
@@ -139,7 +139,7 @@ void AD9952::WriteASF(Chan::E ch)
 }
 
 
-void AD9952::SetAmplitudeForMeander(Chan::E ch)
+void AD9952::SetAmplitudeForMeander(const Chan &ch)
 {
     uint value = 0x1FFF;
     Bit::Set(value, 14);
@@ -148,7 +148,7 @@ void AD9952::SetAmplitudeForMeander(Chan::E ch)
 }
 
 
-void AD9952::WriteFTW0(Chan::E ch)
+void AD9952::WriteFTW0(const Chan &ch)
 {
     double FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 1e8F : 1e6F)) * std::powf(2.0F, 32.0F);
 
@@ -156,7 +156,7 @@ void AD9952::WriteFTW0(Chan::E ch)
 }
 
 
-void AD9952::WriteARR(Chan::E ch)
+void AD9952::WriteARR(const Chan &ch)
 {
     WriteToHardware(ch, Register::ARR, 1);
 }
@@ -178,7 +178,7 @@ pString AD9952::Register::Name() const
 }
 
 
-void AD9952::WriteToHardware(Chan::E ch, Register::E reg, uint value)
+void AD9952::WriteToHardware(const Chan &ch, Register::E reg, uint value)
 {
     if (reg == Register::ASF)
     {
@@ -218,7 +218,7 @@ void AD9952::WriteToHardware(Chan::E ch, Register::E reg, uint value)
 }
 
 
-StructPIN AD9952::ChipSelect(Chan::E ch)
+StructPIN AD9952::ChipSelect(const Chan &ch)
 {
     static const StructPIN cs[Chan::Count] = { {WR_AD9952_SPI3_CSA}, {WR_AD9952_SPI3_CSB} };
 

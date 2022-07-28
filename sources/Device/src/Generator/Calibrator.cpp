@@ -89,7 +89,7 @@ void Calibrator::SetAmplitude(const Chan &ch, bool zeroAmplitude)
 }
 
 
-uint8 Calibrator::CalculateRange(Chan::E ch)
+uint8 Calibrator::CalculateRange(const Chan &ch)
 {
     if(inModeCalibration)
     {
@@ -126,7 +126,7 @@ uint8 Calibrator::CalculateRange(Chan::E ch)
 }
 
 
-float Calibrator::GetAmplitudeK(Chan::E ch)
+float Calibrator::GetAmplitudeK(const Chan &ch)
 {
     uint8 r = CalculateRange(ch);
 
@@ -136,7 +136,7 @@ float Calibrator::GetAmplitudeK(Chan::E ch)
 }
 
 
-float Calibrator::GetOffsetK_Zero(Chan::E ch)
+float Calibrator::GetOffsetK_Zero(const Chan &ch)
 {
     uint8 r = CalculateRange(ch);
 
@@ -144,7 +144,7 @@ float Calibrator::GetOffsetK_Zero(Chan::E ch)
 }
 
 
-double Calibrator::GetOffsetK_Negative(Chan::E ch)
+double Calibrator::GetOffsetK_Negative(const Chan &ch)
 {
     uint8 r = CalculateRange(ch);
 
@@ -152,7 +152,7 @@ double Calibrator::GetOffsetK_Negative(Chan::E ch)
 }
 
 
-double Calibrator::GetOffsetK_Positive(Chan::E ch)
+double Calibrator::GetOffsetK_Positive(const Chan &ch)
 {
     uint8 r = CalculateRange(ch);
 

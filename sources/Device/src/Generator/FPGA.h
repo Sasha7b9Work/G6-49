@@ -10,9 +10,9 @@ struct FPGA
 
     static void Init();
 
-    static void SetWaveForm(Chan::E ch, TypeForm::E form);
+    static void SetWaveForm(const Chan &, TypeForm::E);
 
-    static void SetFrequency(Chan::E ch);
+    static void SetFrequency(const Chan &);
 
     static void SetAmplitude();
 
@@ -141,25 +141,25 @@ private:
         };
     };
     
-    static void SetFormSine(Chan::E ch);
+    static void SetFormSine(const Chan &);
     
     // Установить режим Пила+
-    static void SetFormRampPlus(Chan::E ch);
+    static void SetFormRampPlus(const Chan &);
     
     // Установить режим Пила-
-    static void SetFormRampMinus(Chan::E ch);
+    static void SetFormRampMinus(const Chan &);
     
     // Установить режим Треугольник
-    static void SetFormTriangle(Chan::E ch);
+    static void SetFormTriangle(const Chan &);
     
     // Установить режим произвольного сигнала, загруженного с флешки
-    static void SetFormFree(Chan::E ch);
+    static void SetFormFree(const Chan &);
     
-    static void SetFormMeander(Chan::E ch);
+    static void SetFormMeander(const Chan &);
     
-    static void SetFormImpulse(Chan::E ch);
+    static void SetFormImpulse(const Chan &);
     
-    static void SetFormPackedImpulse(Chan::E ch);
+    static void SetFormPackedImpulse(const Chan &);
     
     // Заслать рассчитанные точки обоих каналов в плис
     static void SendData();

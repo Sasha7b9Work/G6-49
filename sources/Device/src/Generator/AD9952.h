@@ -11,13 +11,13 @@ struct AD9952
     static void Init();
 
     // При установке формы сигнала "меандр" нужно вызывать эту функцию, чтобы при нулевой амплитуде в синусе меандр поступал-таки на выход
-    static void SetAmplitudeForMeander(Chan::E ch);
+    static void SetAmplitudeForMeander(const Chan &);
 
-    static void SetAmplitude(Chan::E ch);
+    static void SetAmplitude(const Chan &);
 
-    static void SetFrequency(Chan::E ch);
+    static void SetFrequency(const Chan &);
 
-    static void SetPhase(Chan::E ch, Value phase);
+    static void SetPhase(const Chan &, Value phase);
 
     // Манипуляция
     struct Manipulation
@@ -25,8 +25,8 @@ struct AD9952
         // True означает, что манипуляция включена
         static bool enabled[Chan::Count];
         // Установить/отменить модулирование синусоиды сигналом "пилы"
-        static void SetEnabled(Chan::E ch, bool enable);
-        static inline bool IsEnabled(Chan::E ch) { return enabled[ch]; };
+        static void SetEnabled(const Chan &, bool enable);
+        static inline bool IsEnabled(const Chan &ch) { return enabled[ch]; };
     };
 
 private:
@@ -49,16 +49,16 @@ private:
         bool Is(E v) const { return value == v; };
     };
 
-    static void WriteToHardware(Chan::E ch, Register::E reg, uint value);
-    static StructPIN ChipSelect(Chan::E ch);
+    static void WriteToHardware(const Chan &, Register::E reg, uint value);
+    static StructPIN ChipSelect(const Chan &);
     static void Reset();
-    static void WriteRegister(Chan::E ch, Register::E reg);
-    static void WriteCFR1(Chan::E ch);
-    static void WriteCFR2(Chan::E ch);
-    static void WriteARR(Chan::E ch);
-    static void WriteASF(Chan::E ch);
-    static void WriteFTW0(Chan::E ch);
-    static void WritePOW(Chan::E ch);
+    static void WriteRegister(const Chan &, Register::E reg);
+    static void WriteCFR1(const Chan &);
+    static void WriteCFR2(const Chan &);
+    static void WriteARR(const Chan &);
+    static void WriteASF(const Chan &);
+    static void WriteFTW0(const Chan &);
+    static void WritePOW(const Chan &);
 
     static double phase[Chan::Count];
 };

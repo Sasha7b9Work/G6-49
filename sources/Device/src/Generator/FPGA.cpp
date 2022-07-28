@@ -57,9 +57,9 @@ void FPGA::Init()
 }
 
 
-void FPGA::SetWaveForm(Chan::E ch, TypeForm::E form)
+void FPGA::SetWaveForm(const Chan &ch, TypeForm::E form)
 {
-    typedef void(*pFuncFpgaVU8)(Chan::E);
+    typedef void(*pFuncFpgaVU8)(const Chan &);
 
     static const pFuncFpgaVU8 funcs[TypeForm::Count] =
     {
@@ -79,7 +79,7 @@ void FPGA::SetWaveForm(Chan::E ch, TypeForm::E form)
 }
 
 
-void FPGA::SetFormMeander(Chan::E ch)
+void FPGA::SetFormMeander(const Chan &ch)
 {
     modeWork[ch] = ModeWork::Meander;
     WriteControlRegister();
@@ -99,41 +99,41 @@ void FPGA::WriteMaxAmplitude(Chan::E ch)
 }
 
 
-void FPGA::SetFormSine(Chan::E ch)
+void FPGA::SetFormSine(const Chan &ch)
 {
     modeWork[ch] = ModeWork::Sine;
 }
 
 
-void FPGA::SetFormFree(Chan::E ch)
+void FPGA::SetFormFree(const Chan &ch)
 {
     modeWork[ch] = ModeWork::Free;
     SendData();
 }
 
 
-void FPGA::SetFormRampPlus(Chan::E ch)
+void FPGA::SetFormRampPlus(const Chan &ch)
 {
     modeWork[ch] = ModeWork::DDS;
     SendData();
 }
 
 
-void FPGA::SetFormRampMinus(Chan::E ch)
+void FPGA::SetFormRampMinus(const Chan &ch)
 {
     modeWork[ch] = ModeWork::DDS;
     SendData();
 }
 
 
-void FPGA::SetFormTriangle(Chan::E ch)
+void FPGA::SetFormTriangle(const Chan &ch)
 {
     modeWork[ch] = ModeWork::DDS;
     SendData();
 }
 
 
-void FPGA::SetFormPackedImpulse(Chan::E)
+void FPGA::SetFormPackedImpulse(const Chan &)
 {
     modeWork[Chan::A] = ModeWork::PackedImpulse;
     WriteControlRegister();
@@ -161,7 +161,7 @@ void FPGA::SetPolarity(Chan::E ch, uint8 polarity)
 }
 
 
-void FPGA::SetFormImpulse(Chan::E ch)
+void FPGA::SetFormImpulse(const Chan &ch)
 {
     modeWork[ch] = ModeWork::Impulse;
     WriteControlRegister();
@@ -170,7 +170,7 @@ void FPGA::SetFormImpulse(Chan::E ch)
 }
 
 
-void FPGA::SetFrequency(Chan::E ch)
+void FPGA::SetFrequency(const Chan &ch)
 {
     WriteControlRegister();
 
@@ -269,12 +269,12 @@ void FPGA::WriteControlRegister()
 
     Bit::Set(data, RG0::_0_WriteData);                    // В нулевом бите 0 записываем только для записи данных в память
 
-    if((modeWork[Chan::A] == ModeWork::Sine) && AD9952::Manipulation::IsEnabled(Chan::A))
+    if((modeWork[Chan::A] == ModeWork::Sine) && AD9952::Manipulation::IsEnabled(ChA))
     {
         Bit::Clear(data, RG0::_3_ManipulationOSK2);
     }
 
-    if ((modeWork[Chan::B] == ModeWork::Sine) && AD9952::Manipulation::IsEnabled(Chan::B))
+    if ((modeWork[Chan::B] == ModeWork::Sine) && AD9952::Manipulation::IsEnabled(ChB))
     {
         Bit::Clear(data, RG0::_5_ManipulationOSK1);
     }
@@ -462,7 +462,7 @@ void FPGA::WriteAddress(RG::E reg)
 
 
 // Расчёт кода для засылки в регистр амлпитуды FPGA
-static uint CalculateCodeAmplitude(Chan::E ch)
+static uint CalculateCodeAmplitude(const Chan &ch)
 {
     float k = Calibrator::GetAmplitudeK(ch);
 
@@ -476,8 +476,8 @@ static uint CalculateCodeAmplitude(Chan::E ch)
 
 void FPGA::SetAmplitude()
 {
-    uint nA = CalculateCodeAmplitude(Chan::A);
-    uint nB = CalculateCodeAmplitude(Chan::B);
+    uint nA = CalculateCodeAmplitude(ChA);
+    uint nB = CalculateCodeAmplitude(ChB);
 
     WriteRegister(RG::_2_Amplitude, nA + (nB << 10));
 }
