@@ -378,7 +378,7 @@ void ParameterChoice::NextChoice()
     {
         Math::CircleIncrease(&choice, 0, NumChoices() - 1);
 
-        Chan::E ch = form->GetWave()->GetChannel();
+        Chan ch = form->GetWave()->GetChannel();
 
         PGenerator::TuneChannel(ch);
     }

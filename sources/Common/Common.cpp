@@ -1,8 +1,10 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "common/Common.h"
+#include "Common/CommonTypes.h"
 #ifdef PANEL
 #include "Display/Text.h"
+#include "Settings/Settings.h"
 #endif
 #include "Utils/Math.h"
 #include <cmath>
@@ -597,3 +599,13 @@ int Order::GetPow10(Order::E order)
 
     return pows[order];
 }
+
+
+#ifdef PANEL
+
+bool Chan::Enabled() const
+{
+    return set.enabled[value];
+}
+
+#endif

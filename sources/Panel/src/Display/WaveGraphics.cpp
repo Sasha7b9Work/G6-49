@@ -24,12 +24,12 @@ void WaveGraphics::Draw(const Chan &ch)
     Rectangle(Width(), Height()).Draw(x0, y0, Color::FILL);
 
     Font::StoreAndSet(TypeFont::_GOSTB20);
-    String(ch.IsA() ? "A" : "B").Draw(x0 + 5, y0 + 5, Color::Chan(ch));
+    String(ch.IsA() ? "A" : "B").Draw(x0 + 5, y0 + 5, Color::Channel(ch));
     Font::Restore();
 
     DrawParameters(ch, y0);
 
-    Color::Chan(ch).SetAsCurrent();
+    Color::Channel(ch).SetAsCurrent();
 
     DrawUGO(ch, x0, y0);
 }
@@ -88,7 +88,7 @@ void WaveGraphics::DrawParameters(const Chan &ch, int y)
 
     Font::ForceUpperCase(true);
 
-    String(form->Name()).Draw(22, y + 3, Color::Chan(ch));
+    String(form->Name()).Draw(22, y + 3, Color::Channel(ch));
     
     for (int i = 0; i < form->NumParameters(); i++)
     {

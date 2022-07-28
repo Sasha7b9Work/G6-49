@@ -19,7 +19,7 @@ Viewer::Viewer(Parameter *_param) : param(_param)
 
 void Viewer::Draw(int y, int xName, int xValue, int xUnits, const Chan &ch)
 {
-    Color color = param->funcOfActive() ? Color::Chan(ch) : Color::GRAY_10;
+    Color color = param->funcOfActive() ? Color::Channel(ch) : Color::GRAY_10;
 
     if(ch.Is(CURRENT_CHANNEL) &&
        (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) &&

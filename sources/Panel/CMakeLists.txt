@@ -89,6 +89,7 @@ file(GLOB HARDWARE_HAL         src/Hardware/HAL/*
 file(GLOB SRC                  src/*.h src/*.cpp)
 file(GLOB COMMON               ../common/Command.*
                                ../common/Common.*
+                               ../common/CommonTypes.h
                                ../common/Common_pan.cpp
                                ../common/Interface_p.h
                                ../common/Messages.*
