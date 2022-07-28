@@ -204,6 +204,7 @@ private:
 
     struct Stored
     {
+        Stored() : index_form(0) { }
         int index_form;
 
     } stored;

@@ -161,7 +161,8 @@ Parameter *Form::GetParameter(int i)
     {
         return params[i];
     }
-    return 0;
+
+    return nullptr;
 }
 
 
@@ -748,7 +749,12 @@ void Form::StoreState()
 {
     for (int i = 0; i < NumParameters(); i++)
     {
-        GetParameter(i)->StoreState();
+        Parameter *parameter = GetParameter(i);
+
+        if (parameter)
+        {
+            parameter->StoreState();
+        }
     }
 }
 
@@ -757,7 +763,12 @@ void Form::RestoreState()
 {
     for (int i = 0; i < NumParameters(); i++)
     {
-        GetParameter(i)->RestoreState();
+        Parameter *parameter = GetParameter(i);
+
+        if (parameter)
+        {
+            parameter->RestoreState();
+        }
     }
 }
 
