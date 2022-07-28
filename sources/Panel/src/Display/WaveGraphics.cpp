@@ -10,9 +10,9 @@
 using namespace Primitives;
 
 
-void WaveGraphics::Draw(Chan::E ch)
+void WaveGraphics::Draw(const Chan &ch)
 {
-    if((set.freq.measure != FreqMeasure::Disable) && (CURRENT_CHANNEL != ch))
+    if((set.freq.measure != FreqMeasure::Disable) && !ch.Is(CURRENT_CHANNEL))
     {
         return;
     }
@@ -24,7 +24,7 @@ void WaveGraphics::Draw(Chan::E ch)
     Rectangle(Width(), Height()).Draw(x0, y0, Color::FILL);
 
     Font::StoreAndSet(TypeFont::_GOSTB20);
-    String((ch == Chan::A) ? "A" : "B").Draw(x0 + 5, y0 + 5, Color::Chan(ch));
+    String(ch.IsA() ? "A" : "B").Draw(x0 + 5, y0 + 5, Color::Chan(ch));
     Font::Restore();
 
     DrawParameters(ch, y0);
@@ -35,9 +35,9 @@ void WaveGraphics::Draw(Chan::E ch)
 }
 
 
-void WaveGraphics::DrawUGO(Chan::E ch, int x, int y)
+void WaveGraphics::DrawUGO(const Chan &ch, int x, int y)
 {
-    if (ENABLED_CH(ch))
+    if (ch.Enabled())
     {
         FORM(ch)->DrawUGO(ch, y);
     }
@@ -60,7 +60,7 @@ int WaveGraphics::X()
 }
 
 
-int WaveGraphics::Y(Chan::E ch)
+int WaveGraphics::Y(const Chan &ch)
 {
     return (ch == Chan::A || (set.freq.measure != FreqMeasure::Disable)) ? Page::Title::HEIGHT : Page::Title::HEIGHT + SIGNAL_HEIGHT;
 }
@@ -78,7 +78,7 @@ int WaveGraphics::Height()
 }
 
 
-void WaveGraphics::DrawParameters(Chan::E ch, int y)
+void WaveGraphics::DrawParameters(const Chan &ch, int y)
 {
     Form *form = FORM(ch);
 
@@ -99,13 +99,13 @@ void WaveGraphics::DrawParameters(Chan::E ch, int y)
 }
 
 
-Parameter *WaveGraphics::GetParameterForDraw(Chan::E ch, int i)
+Parameter *WaveGraphics::GetParameterForDraw(const Chan &ch, int i)
 {
     Parameter *parameter = FORM(ch)->GetParameter(i);
 
-    if (FORM(Chan::A)->IsDDS() && FORM(Chan::B)->IsDDS())               // Если установлены произвольные сигналы на обоих каналах и выводим нетекущий канал,
+    if (FORM(ChA)->IsDDS() && FORM(ChB)->IsDDS())               // Если установлены произвольные сигналы на обоих каналах и выводим нетекущий канал,
     {                                                                   // то значение частоты будем брать из текущего канала (особенность работы аппаратной части прибора)
-        if(FORM(Chan::A)->IsDDS() && FORM(Chan::B)->IsDDS())
+        if(FORM(ChA)->IsDDS() && FORM(ChB)->IsDDS())
         {
             if (parameter->IsDouble())
             {

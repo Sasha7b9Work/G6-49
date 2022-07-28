@@ -17,11 +17,11 @@ Viewer::Viewer(Parameter *_param) : param(_param)
 }
 
 
-void Viewer::Draw(int y, int xName, int xValue, int xUnits, Chan::E ch)
+void Viewer::Draw(int y, int xName, int xValue, int xUnits, const Chan &ch)
 {
     Color color = param->funcOfActive() ? Color::Chan(ch) : Color::GRAY_10;
 
-    if((ch == CURRENT_CHANNEL) &&
+    if(ch.Is(CURRENT_CHANNEL) &&
        (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) &&
        PageSignals::OnSubPageTuneChannels())
     {
@@ -48,11 +48,11 @@ void Viewer::Draw(int y, int xName, int xValue, int xUnits, Chan::E ch)
 }
 
 
-void Viewer::DrawName(int x, int y, int width, Chan::E ch)
+void Viewer::DrawName(int x, int y, int width, const Chan &ch)
 {
     Color color = Color::FILL;
 
-    if ((ch == CURRENT_CHANNEL) &&
+    if (ch.Is(CURRENT_CHANNEL) &&
         (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) &&
         PageSignals::OnSubPageTuneChannels())
     {

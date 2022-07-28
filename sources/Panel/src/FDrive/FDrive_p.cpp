@@ -43,7 +43,7 @@ void FDrive::Init()
 void FDrive::Draw()
 {
     int x = WaveGraphics::X();
-    int y = WaveGraphics::Y(Chan::A) + 1;
+    int y = WaveGraphics::Y(ChA) + 1;
     int width = WaveGraphics::Width() - 2;
     int height = WaveGraphics::Height() * 2;
 

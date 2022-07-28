@@ -313,9 +313,9 @@ void PageDebug::PageRegisters::Draw()
         return;
     }
 
-    Rectangle(WaveGraphics::Width() - 1, WaveGraphics::Height() * 2).Fill(WaveGraphics::X(), WaveGraphics::Y(Chan::A) + 1, Color::BACK);
+    Rectangle(WaveGraphics::Width() - 1, WaveGraphics::Height() * 2).Fill(WaveGraphics::X(), WaveGraphics::Y(ChA) + 1, Color::BACK);
 
-    DrawRegisters(WaveGraphics::X() + 4, WaveGraphics::Y(Chan::A) + 3);
+    DrawRegisters(WaveGraphics::X() + 4, WaveGraphics::Y(ChA) + 3);
 
     DrawInputWindow();
 }

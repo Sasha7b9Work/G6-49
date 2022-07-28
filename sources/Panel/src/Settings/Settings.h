@@ -14,9 +14,6 @@
 #define MENU_POS_ACT_ITEM(x)        (set.menu_posActItem[x])
 #define MENU_CURRENT_SUBPAGE(x)     (set.menu_currentSubPage[x])
 #define CURRENT_CHANNEL             (set.cur_chan)
-#define CURRENT_CHANNEL_IS_A        (CURRENT_CHANNEL == Chan::A)
-#define CURRENT_CHANNEL_IS_B        (CURRENT_CHANNEL == Chan::B)
-#define ENABLED_CH(ch)              (set.enabled[ch])
 
 
 struct SettingsFreqMeter
@@ -62,7 +59,7 @@ struct Settings // -V690
     int8      menu_posActItem[Page::Count];     // Позиция активного пункта меню для каждой страницы
     int8      menu_currentSubPage[Page::Count]; // Номер текущей подстраницы для каждой страницы
     bool      enabled[2];
-    Chan::E   cur_chan;
+    Chan      cur_chan;
     uint8     lang;
     bool      bigSymbols;                       // Если 1, то символы выводятся чуть увеличенными
 

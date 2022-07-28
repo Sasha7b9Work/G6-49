@@ -5,7 +5,7 @@
 
 
 // Текущий сигнал
-#define WAVE(ch)            (waves[ch])
+#define WAVE(ch)            (waves[ch.value])
 #define CURRENT_WAVE        (WAVE(CURRENT_CHANNEL))
 #define WAVE_B              WAVE(ChB)
 

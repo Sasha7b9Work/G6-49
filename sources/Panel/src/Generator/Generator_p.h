@@ -17,7 +17,7 @@ struct PGenerator
 {
     static const int DDS_NUM_POINTS = 8 * 1024;
 
-    static void EnableChannel(Chan::E ch, bool enable);
+    static void EnableChannel(const Chan &, bool enable);
 
     static void SingleStart();
 
@@ -43,7 +43,7 @@ struct PGenerator
 
     static void LoadSettings();
 
-    static void TuneChannel(Chan::E ch);
+    static void TuneChannel(const Chan &);
 
     // Загружает режим запуска из set в аппаратуру для произвольного (signal == 0) или импульсного (signal == 1) сигнала
     static void LoadStartMode(Chan::E ch, int signal, int mode);

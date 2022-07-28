@@ -185,7 +185,7 @@ static pchar FuncChannel(pchar buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(channelNames[CURRENT_CHANNEL]));
 
-    SCPI_PROCESS_ARRAY(channelNames, PageSignals::SetCurrentChanenl(static_cast<Chan::E>(channelNames[i][1] - 'A')));
+    SCPI_PROCESS_ARRAY(channelNames, PageSignals::SetCurrentChanenl(Chan((Chan::E)(channelNames[i][1] - 'A'))));
 }
 
 
@@ -240,7 +240,7 @@ static void SetOutput(int i)
 
 static pchar FuncOutput(pchar buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(outputs[ENABLED_CH(CURRENT_CHANNEL)]));
+    SCPI_REQUEST(SCPI::SendAnswer(outputs[CURRENT_CHANNEL.Enabled()]));
 
     SCPI_PROCESS_ARRAY(outputs, SetOutput(i));
 }

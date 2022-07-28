@@ -24,7 +24,7 @@ struct PageSignals
 
     static void OnPress_Channel(bool);
 
-    static void SetCurrentChanenl(Chan::E ch);
+    static void SetCurrentChanenl(const Chan &);
 
     // Эта функция должна вызываться после выбора формы сигнала - по её нажатию происходит загрузка формы в прибор
     static void OnChanged_Form(bool = true);
@@ -78,7 +78,7 @@ class PageLoadForm
 public:
     static Page *self;
 
-    static void LoadForm(Chan::E ch);
+    static void LoadForm(const Chan &ch);
 };
 
 

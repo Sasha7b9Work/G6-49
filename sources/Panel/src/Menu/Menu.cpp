@@ -111,11 +111,11 @@ bool Menu::ProcessOutputs(const Control control) //-V801
 }
 
 
-void Menu::ProcessOutput(Chan::E ch)
+void Menu::ProcessOutput(const Chan &ch)
 {
     if (WAVE(ch).StartModeIsSingle())
     {
-        if (!ENABLED_CH(ch))
+        if (!ch.Enabled())
         {
             PGenerator::EnableChannel(ch, true);
         }
@@ -126,7 +126,7 @@ void Menu::ProcessOutput(Chan::E ch)
     }
     else
     {
-        PGenerator::EnableChannel(ch, !ENABLED_CH(ch));
+        PGenerator::EnableChannel(ch, !ch.Enabled());
     }
 }
 

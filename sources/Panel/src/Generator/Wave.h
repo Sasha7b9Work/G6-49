@@ -74,13 +74,13 @@ public:
     Wave *GetWave() { return wave; };
   
     // Нарисовать изображение сигнала
-    void DrawUGO(Chan::E ch, int y0);
+    void DrawUGO(const Chan &, int y0);
     
     // Установить данные произвольного сигнала для отрисовки
-    static void SetFormFlash(Chan::E ch, const uint8 data[POINTS_IN_FORM]);
+    static void SetFormFlash(const Chan &, const uint8 data[POINTS_IN_FORM]);
     
     // Возвращает указатель на данные произвольного сигнала для отрисовки
-    static uint8 *GetFormFlash(Chan::E ch);
+    static uint8 *GetFormFlash(const Chan &);
     
     // Получить смещение сигнала
     double GetOffset();
@@ -128,21 +128,21 @@ private:
     // Номер текущего параметра в массиве params
     int currentParam;
 
-    static void DrawSine(Chan::E ch, int x, int y, int width, int height);
+    static void DrawSine(const Chan &, int x, int y, int width, int height);
 
-    static void DrawRampPlus(Chan::E ch, int x, int y, int width, int height);
+    static void DrawRampPlus(const Chan &, int x, int y, int width, int height);
 
-    static void DrawRampMinus(Chan::E ch, int x, int y, int width, int height);
+    static void DrawRampMinus(const Chan &, int x, int y, int width, int height);
 
-    static void DrawTriangle(Chan::E ch, int x, int y, int width, int height);
+    static void DrawTriangle(const Chan &, int x, int y, int width, int height);
 
-    static void DrawMeander(Chan::E ch, int x, int y, int width, int height);
+    static void DrawMeander(const Chan &, int x, int y, int width, int height);
 
-    static void DrawImpulse(Chan::E ch, int x, int y, int width, int height);
+    static void DrawImpulse(const Chan &, int x, int y, int width, int height);
 
-    static void DrawPacketImpulse(Chan::E ch, int x, int y, int width, int height);
+    static void DrawPacketImpulse(const Chan &, int x, int y, int width, int height);
 
-    static void DrawFree(Chan::E ch, int x, int y, int width, int height);
+    static void DrawFree(const Chan &, int x, int y, int width, int height);
 
     // Здесь будут храниться основные параметры формы при раскрытии составного параметра
     struct Old

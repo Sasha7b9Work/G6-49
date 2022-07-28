@@ -100,8 +100,8 @@ void Display::Update()
     Font::Set(TypeFont::_8);
     Statistics::BeginFrame();
     Painter::BeginScene(Color::BACK);
-    WaveGraphics::Draw(Chan::A);
-    WaveGraphics::Draw(Chan::B);
+    WaveGraphics::Draw(ChA);
+    WaveGraphics::Draw(ChB);
     Menu::Draw();
     PageDebug::PageRegisters::Draw();
     Rectangle(318, 238).Draw(0, 0, Color::FILL);

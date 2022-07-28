@@ -21,7 +21,7 @@ static int numForm = 0;
 
 static bool IsActive_Channel()
 {
-    return !(CURRENT_CHANNEL_IS_A && CURRENT_FORM->Is(TypeForm::Packet));
+    return !(CURRENT_CHANNEL.IsA() && CURRENT_FORM->Is(TypeForm::Packet));
 }
 
 
@@ -82,7 +82,7 @@ void PageSignals::OnChanged_Form(bool)
 {
     ChangedForm();
 
-    if (CURRENT_CHANNEL_IS_A)
+    if (CURRENT_CHANNEL.IsA())
     {
         if (CURRENT_FORM->Is(TypeForm::Packet))            // Вошли в пакетный режим
         {
@@ -188,7 +188,7 @@ DEF_BUTTON( bTuneParameter,                                                     
 DEF_CHOICE_PARAMETER( cParameters,                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Параметр ---
     "ПАРАМЕТР", "PARAMETER",
     "Выбор параметра для настройки", "Select an option to configure",
-    *PageSignals::self, Item::FuncActive, OnPress_TuneParameter, WAVE(Chan::A).GetForm(0)
+    *PageSignals::self, Item::FuncActive, OnPress_TuneParameter, WAVE(ChA).GetForm(0)
 )
 
 
@@ -219,18 +219,18 @@ void PageSignals::Init()
 
 void PageSignals::SCPI_SetForm(TypeForm::E form)
 {
-    if(form == TypeForm::Packet && CURRENT_CHANNEL_IS_B)
+    if(form == TypeForm::Packet && CURRENT_CHANNEL.IsB())
     {
         SCPI::SendAnswer("Can not set form \"packet\" on channel B");
         return;
     }
    
-    numForm = (form == TypeForm::Free && CURRENT_CHANNEL_IS_B) ? (form - 1) : form;
+    numForm = (form == TypeForm::Free && CURRENT_CHANNEL.IsB()) ? (form - 1) : form;
     OnChanged_Form();
 }
 
 
-void PageSignals::SetCurrentChanenl(Chan::E ch)
+void PageSignals::SetCurrentChanenl(const Chan &ch)
 {
     set.cur_chan = ch;
     OnPress_Channel(true);

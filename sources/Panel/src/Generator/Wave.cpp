@@ -259,7 +259,7 @@ void Form::TuneGenerator()
             SendParameterToGenerator(ParameterDoubleType::Offset);
         }
 
-        if(GetWave()->GetChannel() != Chan::A)
+        if(GetWave()->GetChannel().IsB())
         {
             SendParameterToGenerator(ParameterDoubleType::Phase);
         }
@@ -495,7 +495,7 @@ bool Form::IsDDS() const
 }
 
 
-void Form::DrawUGO(Chan::E ch, int y0)
+void Form::DrawUGO(const Chan &ch, int y0)
 {
     y0 += 30;
     int height = 50;
@@ -527,7 +527,7 @@ void Form::DrawUGO(Chan::E ch, int y0)
     VLine::Draw(x0, minY - 3, maxY + 3);
     HLine::Draw(aveY, x0, x0 + width);
 
-    typedef void(*pFuncIIII)(Chan::E, int, int, int, int);
+    typedef void(*pFuncIIII)(const Chan &, int, int, int, int);
 
     static const pFuncIIII funcs[TypeForm::Count] =
     {
@@ -545,7 +545,7 @@ void Form::DrawUGO(Chan::E ch, int y0)
 }
 
 
-void Form::DrawSine(Chan::E ch, int x0, int y0, int width, int height)
+void Form::DrawSine(const Chan &ch, int x0, int y0, int width, int height)
 {
     ParameterComposite *param = FORM(ch)->FindParameter(ParameterCompositeType::Manipulation);
 
@@ -597,7 +597,7 @@ void Form::DrawSine(Chan::E ch, int x0, int y0, int width, int height)
 }
 
 
-void Form::DrawRampPlus(Chan::E, int x0, int y0, int, int height)
+void Form::DrawRampPlus(const Chan &, int x0, int y0, int, int height)
 {
     y0 += height;
     int dX = 28;
@@ -609,7 +609,7 @@ void Form::DrawRampPlus(Chan::E, int x0, int y0, int, int height)
 }
 
 
-void Form::DrawRampMinus(Chan::E, int x0, int y0, int, int height)
+void Form::DrawRampMinus(const Chan &, int x0, int y0, int, int height)
 {
     int aveY = y0 + height / 2;
     int dX = 28;
@@ -622,7 +622,7 @@ void Form::DrawRampMinus(Chan::E, int x0, int y0, int, int height)
 }
 
 
-void Form::DrawTriangle(Chan::E, int x, int y, int width, int height)
+void Form::DrawTriangle(const Chan &, int x, int y, int width, int height)
 {
     int min = y + height;
     Line::Draw(x, min, x + width / 2, y);
@@ -630,7 +630,7 @@ void Form::DrawTriangle(Chan::E, int x, int y, int width, int height)
 }
 
 
-void Form::DrawMeander(Chan::E, int x0, int y0, int, int height)
+void Form::DrawMeander(const Chan &, int x0, int y0, int, int height)
 {
     int dX = 40;
     int dY = 20;
@@ -645,7 +645,7 @@ void Form::DrawMeander(Chan::E, int x0, int y0, int, int height)
 }
 
 
-void Form::DrawImpulse(Chan::E ch, int x0, int y0, int, int height)
+void Form::DrawImpulse(const Chan &ch, int x0, int y0, int, int height)
 {
     int minY = y0;
     int maxY = y0 + height;
@@ -671,7 +671,7 @@ void Form::DrawImpulse(Chan::E ch, int x0, int y0, int, int height)
 }
 
 
-void Form::DrawPacketImpulse(Chan::E, int x0, int y0, int, int height)
+void Form::DrawPacketImpulse(const Chan &, int x0, int y0, int, int height)
 {
     int minY = y0;
     int maxY = y0 + height;
@@ -697,7 +697,7 @@ void Form::DrawPacketImpulse(Chan::E, int x0, int y0, int, int height)
 }
 
 
-void Form::DrawFree(Chan::E ch, int x0, int y0, int width, int height)
+void Form::DrawFree(const Chan &ch, int x0, int y0, int width, int height)
 {
     int numPoints = 240;
 
@@ -707,25 +707,25 @@ void Form::DrawFree(Chan::E ch, int x0, int y0, int width, int height)
     for (int i = 1; i < numPoints; i++)
     {
         int x1 = static_cast<int>(static_cast<float>(x0) + sX * static_cast<float>(i - 1));
-        int y1 = static_cast<int>(static_cast<float>(y0 + height) - static_cast<float>(formFlash[ch][i - 1]) * sY);
+        int y1 = static_cast<int>(static_cast<float>(y0 + height) - static_cast<float>(formFlash[ch.value][i - 1]) * sY);
 
         int x2 = static_cast<int>(static_cast<float>(x0) + sX * static_cast<float>(i));
-        int y2 = static_cast<int>(static_cast<float>(y0 + height) - static_cast<float>(formFlash[ch][i]) * sY);
+        int y2 = static_cast<int>(static_cast<float>(y0 + height) - static_cast<float>(formFlash[ch.value][i]) * sY);
 
         Line().Draw(x1, y1, x2, y2);
     }
 }
 
 
-void Form::SetFormFlash(Chan::E ch, const uint8 data[POINTS_IN_FORM])
+void Form::SetFormFlash(const Chan &ch, const uint8 data[POINTS_IN_FORM])
 {
-    std::memcpy(&formFlash[ch][0], data, POINTS_IN_FORM);
+    std::memcpy(&formFlash[ch.value][0], data, POINTS_IN_FORM);
 }
 
 
-uint8 *Form::GetFormFlash(Chan::E ch)
+uint8 *Form::GetFormFlash(const Chan &ch)
 {
-    return &formFlash[ch][0];
+    return &formFlash[ch.value][0];
 }
 
 

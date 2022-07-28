@@ -21,10 +21,10 @@
 #include <cstdlib>
 
 
-void PGenerator::EnableChannel(Chan::E ch, bool enable)
+void PGenerator::EnableChannel(const Chan &ch, bool enable)
 {
-    ENABLED_CH(ch) = enable;
-    Message::EnableChannel(static_cast<uint8>(ch), static_cast<uint8>(enable ? 1U : 0U)).Transmit();
+    set.enabled[ch] = enable;
+    Message::EnableChannel((uint8)(ch.value), static_cast<uint8>(enable ? 1U : 0U)).Transmit();
 }
 
 
@@ -56,7 +56,7 @@ void PGenerator::SetDebugMode(bool enable)
 
 void PGenerator::SetFormWave(const Wave *w)
 {
-    Chan::E ch = w->GetChannel();
+    Chan ch = w->GetChannel();
     uint8 form = static_cast<uint8>(FORM(ch)->value);
 
     if(FORM(ch)->IsDDS())
@@ -238,9 +238,9 @@ void PGenerator::SetParameterInteger(ParameterInteger *param)
 }
 
 
-void PGenerator::TuneChannel(Chan::E ch)
+void PGenerator::TuneChannel(const Chan &ch)
 {
-    EnableChannel(ch, ENABLED_CH(ch));
+    EnableChannel(ch, ch.Enabled());
 
     FORM(ch)->TuneGenerator();
 }
@@ -248,8 +248,8 @@ void PGenerator::TuneChannel(Chan::E ch)
 
 void PGenerator::LoadSettings()
 {
-    PGenerator::TuneChannel(Chan::A);
-    PGenerator::TuneChannel(Chan::B);
+    PGenerator::TuneChannel(ChA);
+    PGenerator::TuneChannel(ChB);
 }
 
 void PGenerator::SetParameter(Parameter *parameter)
@@ -283,12 +283,12 @@ void PGenerator::Reset()
 
     Menu::Init();
 
-    WAVE(Chan::A).Reset();
-    WAVE(Chan::B).Reset();
+    WAVE(ChA).Reset();
+    WAVE(ChB).Reset();
 
-    PageSignals::SetCurrentChanenl(Chan::B);
+    PageSignals::SetCurrentChanenl(ChB);
     PageSignals::SCPI_SetForm(TypeForm::Sine);
 
-    PageSignals::SetCurrentChanenl(Chan::A);
+    PageSignals::SetCurrentChanenl(ChA);
     PageSignals::SCPI_SetForm(TypeForm::Sine);
 }

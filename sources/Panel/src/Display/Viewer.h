@@ -16,9 +16,9 @@ public:
     Viewer(Parameter *param);
 
     // Отрисовать параметр со значением в горизонтали y. Название параметра выводится с xName, значение - с xValue, единциы измерения - c xUnits
-    void Draw(int y, int xName, int xValue, int xUnits, Chan::E ch);
+    void Draw(int y, int xName, int xValue, int xUnits, const Chan &);
 
-    void DrawName(int x, int y, int width, Chan::E ch);
+    void DrawName(int x, int y, int width, const Chan &);
 
 private:
 

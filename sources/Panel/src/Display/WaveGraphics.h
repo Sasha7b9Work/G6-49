@@ -10,13 +10,13 @@ class WaveGraphics
 public:
     
     // Нарисовать информацию о параметрах сигнала на экране
-    static void Draw(Chan::E ch);
+    static void Draw(const Chan &);
     
     // Позиция x области отрисовки сигнала
     static int X();
     
     // Позиция y области отрисовки сигнала
-    static int Y(Chan::E ch);
+    static int Y(const Chan &);
     
     // Ширина области отрисовки сигнала
     static int Width();
@@ -25,12 +25,12 @@ public:
     static int Height();
 
 
-    static Parameter *GetParameterForDraw(Chan::E ch, int i);
+    static Parameter *GetParameterForDraw(const Chan &, int i);
 
 private:
 
-    static void DrawParameters(Chan::E chan, int y0);
+    static void DrawParameters(const Chan &, int y0);
 
     // Нарисовать УГО сигнала
-    static void DrawUGO(Chan::E ch, int x, int y);
+    static void DrawUGO(const Chan &, int x, int y);
 };

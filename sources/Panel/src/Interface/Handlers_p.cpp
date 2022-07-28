@@ -85,7 +85,7 @@ static bool Log(SimpleMessage *msg)
 
 static bool RequestPictureDDSfromStorage(SimpleMessage *message)
 {
-    Chan::E ch = static_cast<Chan::E>(message->TakeUINT8());
+    Chan ch(message->TakeUINT8());
 
     uint8 picture[240];
 

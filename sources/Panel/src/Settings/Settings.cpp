@@ -63,11 +63,11 @@ static const Settings defSet =
         MAKE_COLOR(15, 15, 15)          // MENU_ITEM_SHADE
 #endif
     },
-    static_cast<Page *>(PageMain::self), // menu_currentPage
+    static_cast<Page *>(PageMain::self),    // menu_currentPage
     {0},                                    // menu_posActItem[]
     {0},                                    // menu_currentSubPage[]
     {false, false},                         // enabled[2]
-    Chan::A,                                // current
+    ChA,                                    // current
     0,                                      // lang
     true                                    // bigSymbols
     ,                               
