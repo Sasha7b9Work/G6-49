@@ -10,10 +10,11 @@
 #include <cmath>
 
 
-static ParameterDouble storedDouble = ParameterAmplitude();    // «десь будем сохран€ть настраиваемый параметр перед
-                                                    // его изменением, чтобы восстановить в случае необходимости
+// «десь будем сохран€ть настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости
+static ParameterDouble storedDouble = ParameterAmplitude(); //-V1054 «десь ошибки не случитс€, потому что в наследуемых от ParameterDouble
+                                                            // классах нет данных
 
-static ParameterInteger storedInteger = ParameterInteger(ParameterIntegerType::PacketNumber, "", "",
+static ParameterInteger storedInteger = ParameterInteger(ParameterIntegerType::PacketNumber, "", "", //-V810
                 Value("0", Order::One), Value("100", Order::One), Value("0", Order::One));
 
 static Parameter *tuned = nullptr;     // Ќастраиваемый параметр
