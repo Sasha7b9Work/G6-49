@@ -54,7 +54,7 @@ void AD9952::SetPhase(const Chan &ch, Value ph)
 {
     phase[ch] = ph.ToDouble();
 
-    if(SettingsGenerator::Frequency(Chan::A) == SettingsGenerator::Frequency(Chan::B)) //-V550 //-V2550
+    if(SettingsGenerator::Frequency(ChA) == SettingsGenerator::Frequency(ChB)) //-V550 //-V2550
     {
         WriteRegister(ch, Register::POW);
     }

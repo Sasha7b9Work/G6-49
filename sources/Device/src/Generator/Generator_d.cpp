@@ -229,7 +229,7 @@ void DGenerator::SetDelay(const Chan &, Value)
 }
 
 
-void Amplifier::SetAttenuation(Chan::E ch, Attenuation::E att)
+void Amplifier::SetAttenuation(const Chan &ch, Attenuation::E att)
 {
     static const HPort::E gpio0[Chan::Count] = { HPort::_E, HPort::_F };
     static const HPort::E gpio1[Chan::Count] = { HPort::_B, HPort::_C };
@@ -274,7 +274,7 @@ void Amplifier::Init()
 }
 
 
-void Amplifier::TuneAndLock(Chan::E ch, bool enabled, Attenuation::E att)
+void Amplifier::TuneAndLock(const Chan &ch, bool enabled, Attenuation::E att)
 {
     Enable(ch, enabled);
     SetAttenuation(ch, att);
@@ -294,7 +294,7 @@ void Amplifier::Lock()
 }
 
 
-void Amplifier::Tune(Chan::E ch, int range)
+void Amplifier::Tune(const Chan &ch, int range)
 {
     static float amplitudes[6] =
     {
@@ -336,7 +336,7 @@ void Amplifier::Tune(Chan::E ch, int range)
 }
 
 
-void Amplifier::Tune(Chan::E ch)
+void Amplifier::Tune(const Chan &ch)
 {
     if (locked)
     {
@@ -390,7 +390,7 @@ void Amplifier::Tune(Chan::E ch)
 }
 
 
-void Amplifier::Enable(Chan::E ch, bool enable)
+void Amplifier::Enable(const Chan &ch, bool enable)
 {
     static const HPort::E gpio[Chan::Count] = { HPort::_F, HPort::_C };
     static const uint16   pin[Chan::Count] =  { HPin::_0,  HPin::_14 };
@@ -401,7 +401,7 @@ void Amplifier::Enable(Chan::E ch, bool enable)
 }
 
 
-double Amplifier::GetAmplification(Chan::E ch)
+double Amplifier::GetAmplification(const Chan &ch)
 {
     static const Attenuation att[Attenuation::Count] =
     {

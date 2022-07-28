@@ -69,15 +69,15 @@ public:
     static void Init();
     
     // Настроить усилитель в соответствии с текущими настройками
-    static void Tune(Chan::E ch);
+    static void Tune(const Chan &);
 
-    static void Tune(Chan::E, int range);
+    static void Tune(const Chan &, int range);
     
     // Возвращает коэффициент усиления в разах всего тракта, включая аттенюатор и усилитель. Усилитель даёт усиление 10 раз, за каждые 10 Дб нужно разделить на 3.16
-    static double GetAmplification(Chan::E ch);
+    static double GetAmplification(const Chan &);
 
     // Установить заданные настройки и заблокировать
-    static void TuneAndLock(Chan::E ch, bool enabled, Attenuation::E attenuation);
+    static void TuneAndLock(const Chan &, bool enabled, Attenuation::E attenuation);
 
     static void Lock();
 
@@ -85,16 +85,16 @@ public:
     static void Unlock();
    
     // Возвращает true, если на данном канале включён усилитель
-    static bool IsEnabled(Chan::E ch) { return isEnabled[ch]; }
+    static bool IsEnabled(const Chan &ch) { return isEnabled[ch]; }
 
     // Включить/выключить аппаратный усилитель усилитель
-    static void Enable(Chan::E ch, bool enable);
+    static void Enable(const Chan &, bool enable);
 
 //    static void LogState();
 
 private:
     
-    static void SetAttenuation(Chan::E ch, Attenuation::E attenuation);
+    static void SetAttenuation(const Chan &, Attenuation::E attenuation);
 
     static Attenuation::E attenuation[Chan::Count];
   
@@ -110,15 +110,15 @@ struct SettingsGenerator
     friend class DGenerator;
 public:
     // Возвращает установленную на канале амплитуду. Амплитуда возвращается без учёта аттёнюатора
-    static double Amplitude(Chan::E ch)     { return amplitude[ch].ToDouble(); }
-    static Value AmplitudeValue(Chan::E ch) { return amplitude[ch]; }
+    static double Amplitude(const Chan &ch)     { return amplitude[ch].ToDouble(); }
+    static Value AmplitudeValue(const Chan &ch) { return amplitude[ch]; }
     // Возвращает установленное на канале смещение
-    static double Offset(Chan::E ch)        { return offset[ch].ToDouble(); }
-    static Value OffsetValue(Chan::E ch)    { return offset[ch]; }
+    static double Offset(const Chan &ch)        { return offset[ch].ToDouble(); }
+    static Value OffsetValue(const Chan &ch)    { return offset[ch]; }
     // Возвращает установленную частоту на канале
-    static double Frequency(Chan::E ch) { return frequency[ch].ToDouble(); }
+    static double Frequency(const Chan &ch) { return frequency[ch].ToDouble(); }
     // Возвращает true, если на канале ch установлена синусоидальная форма сигнала
-    static bool FormIsSine(Chan::E ch) { return waveIsSine[ch]; }
+    static bool FormIsSine(const Chan &ch) { return waveIsSine[ch]; }
 private:
     // true, если на канале установлена форма сигнала "синусоида"
     static bool waveIsSine[Chan::Count];
