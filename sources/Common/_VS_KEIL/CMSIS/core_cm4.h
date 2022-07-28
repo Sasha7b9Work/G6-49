@@ -3,7 +3,7 @@
 #define __CC_ARM
 
 #ifndef __IO
-#define __IO
+#define __IO volatile
 #endif
 
 #include <stdint.h>

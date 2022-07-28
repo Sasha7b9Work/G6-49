@@ -480,7 +480,7 @@ Message::Set::Parameter::Parameter(Command::E param, uint8 ch, uint8 value) : Si
 Message::FDrive::LoadDDSfromFile::LoadDDSfromFile(uint8 ch, uint8 numFile, char *directory) : SimpleMessage()
 {
     //          com ch  numFile directory                 завершающий_ноль
-    int size = 1 + 1 + 1 +      static_cast<int>(std::strlen(directory)) + 1;
+    int size = 1 + 1 + 1 +      static_cast<int>(std::strlen(directory)) + 1; //-V522
     AllocateMemory(size);
     PutUINT8(Command::FDrive_LoadDDSfromFile);
     PutUINT8(ch);
