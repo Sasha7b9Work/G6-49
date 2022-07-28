@@ -41,11 +41,6 @@ pString Value::ToString(bool sign, Order::E order) const
         AddChar(buffer, *this, i, order);
     }
 
-    while (buffer[std::strlen(buffer) - 1] == '0') //-V1044
-    {
-        buffer[std::strlen(buffer) - 1] = '\0';
-    }
-
     return buffer;
 }
 

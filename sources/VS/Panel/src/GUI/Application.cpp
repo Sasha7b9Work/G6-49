@@ -69,9 +69,9 @@ Frame::Frame(const wxString& title)
     menuBar->Append(fileMenu, "Файл");
     menuBar->Append(toolsMenu, "Инструменты");
 
-    SetMenuBar(menuBar);
+    wxFrameBase::SetMenuBar(menuBar);
 
-    CreateStatusBar(2);
+    wxFrameBase::CreateStatusBar(2);
 
     Bind(wxEVT_MENU, &Frame::OnQuit, this, FILE_QUIT);
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
