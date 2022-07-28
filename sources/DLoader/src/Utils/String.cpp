@@ -9,10 +9,21 @@
 
 String::String(const String &rhs) : buffer(0)
 {
-    if (Allocate(std::strlen(rhs.CString()) + 1))
+    if (Allocate(std::strlen(rhs.c_str()) + 1))
     {
-        std::strcpy(buffer, rhs.CString());
+        std::strcpy(buffer, rhs.c_str());
     }
+}
+
+
+String &String::operator=(const String &rhs)
+{
+    if (Allocate(std::strlen(rhs.c_str()) + 1))
+    {
+        std::strcpy(buffer, rhs.c_str());
+    }
+
+    return *this;
 }
 
 
@@ -51,12 +62,15 @@ String::~String()
 
 void String::Free()
 {
-    std::free(buffer);
-    buffer = 0;
+    if (buffer)
+    {
+        std::free(buffer);
+        buffer = 0;
+    }
 }
 
 
-char *String::CString() const
+char *String::c_str() const
 {
     return buffer;
 }

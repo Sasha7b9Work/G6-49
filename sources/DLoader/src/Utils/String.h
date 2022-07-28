@@ -10,7 +10,7 @@ public:
     explicit String(const char *format, ...);
     ~String();
 
-    char *CString() const;
+    char *c_str() const;
 
 private:
 
@@ -18,4 +18,6 @@ private:
     void Free();
 
     char *buffer;
+
+    String &operator=(const String &);
 };
