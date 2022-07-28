@@ -744,11 +744,11 @@ double Form::GetAmplitude()
 }
 
 
-void Form::SaveState()
+void Form::StoreState()
 {
     for (int i = 0; i < NumParameters(); i++)
     {
-        GetParameter(i)->SaveState();
+        GetParameter(i)->StoreState();
     }
 }
 

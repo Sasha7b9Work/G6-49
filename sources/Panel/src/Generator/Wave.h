@@ -109,7 +109,7 @@ public:
     void Reset();
 
     // Сохранить состояние
-    void SaveState();
+    void StoreState();
 
     // Восстановить ранее сохранённое состояние
     void RestoreState();
@@ -186,6 +186,12 @@ public:
 
     void Reset();
 
+    // Сохраняет нидекс текущей формы
+    void StoreIndexCurrentForm();
+
+    // Восстанавливает индекс текущей формы
+    void RestoreIndexCurrentForm();
+
 private:
     
     Chan channel;           // Какому каналу принадлежит сигнал
@@ -195,4 +201,11 @@ private:
     Form **forms;           // Список форм, которые могут быть назначены
     
     int numForms;           // Количество возможных форм
+
+    struct Stored
+    {
+        int index_form;
+    };
+
+    static Stored stored;
 };

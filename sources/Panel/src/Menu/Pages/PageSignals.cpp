@@ -90,7 +90,7 @@ void PageSignals::OnChanged_Form(bool)
         {
             index_form = WAVE_B.GetIndexForm();
 
-            Signals::B::impulse->SaveState();               // Сохраняем параметры импульсов на втором канале
+            Signals::B::impulse->StoreState();               // Сохраняем параметры импульсов на втором канале
 
             WAVE_B.SetForm(Signals::B::impulse);         // Устанавливаем форму импульса на втором канале
 

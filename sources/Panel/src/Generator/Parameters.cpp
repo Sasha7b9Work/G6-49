@@ -237,15 +237,15 @@ bool ParameterDouble::SetAndLoadValue(Value val)
 }
 
 
-void ParameterDouble::SaveState()
+void ParameterDouble::StoreState()
 {
-    saved.value = value;
+    stored.value = value;
 }
 
 
 void ParameterDouble::RestoreState()
 {
-    value = saved.value;
+    value = stored.value;
 }
 
 
@@ -459,14 +459,14 @@ int ParameterChoice::NumChoices() const
 ParameterDouble::ParameterDouble(ParameterDoubleType::E t, pFuncBV funcActive, pchar nameRU, pchar const nameEN,
     const Value &_min_, const Value &_max, const Value &_value) :
     Parameter(ParameterKind::Double, funcActive, nameRU, nameEN), tuner(this), type(t), min(_min_), value(_value),
-    resetValue(_value), max(_max), saved(_value)
+    resetValue(_value), max(_max), stored(_value)
 {
 }
 
 
 ParameterDouble::ParameterDouble(const ParameterDouble &rhs) :
     Parameter(ParameterKind::Double, Parameter::FuncActive, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
-    min(rhs.min), value(rhs.value), resetValue(rhs.resetValue), max(rhs.max), saved(rhs.saved)
+    min(rhs.min), value(rhs.value), resetValue(rhs.resetValue), max(rhs.max), stored(rhs.stored)
 {
 }
 
@@ -486,7 +486,7 @@ ParameterDouble &ParameterDouble::operator=(const ParameterDouble &rhs)
 
     max = rhs.max;
 
-    saved.value = rhs.saved.value;
+    stored.value = rhs.stored.value;
 
     return *this;
 }

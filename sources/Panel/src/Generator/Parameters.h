@@ -81,7 +81,7 @@ public:
     virtual String ToString(Value) const { return String(""); };
 
     // Сохранить состояние параметра
-    virtual void SaveState() { };
+    virtual void StoreState() { };
 
     // Восстановить состояине параметра
     virtual void RestoreState() { };
@@ -180,7 +180,7 @@ public:
      
     ParameterDoubleType::E GetType() const { return type; }
 
-    virtual void SaveState();
+    virtual void StoreState();
 
     virtual void RestoreState();
 
@@ -205,11 +205,11 @@ protected:
 
 private:
 
-    struct Saved
+    struct Stored
     {
-        Saved(const Value &val) : value(val) { }
+        Stored(const Value &val) : value(val) { }
         Value value;
-    } saved;
+    } stored;
 };
 
 
