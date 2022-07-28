@@ -34,8 +34,8 @@ int main()
 
     Menu::Init();
 
-    PGenerator::LoadPictureDDSfromStorage(Chan::A);
-    PGenerator::LoadPictureDDSfromStorage(Chan::B);
+    PGenerator::LoadPictureDDSfromStorage(ChA);
+    PGenerator::LoadPictureDDSfromStorage(ChB);
 
     while (1)
     {

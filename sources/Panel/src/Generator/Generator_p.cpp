@@ -34,7 +34,7 @@ void PGenerator::SingleStart()
 }
 
 
-void PGenerator::LoadStartMode(Chan::E ch, int signal, int mode)
+void PGenerator::LoadStartMode(const Chan &ch, int signal, int mode)
 {
     int firstByte = static_cast<uint8>(ch) + (signal << 1);
 
@@ -68,7 +68,7 @@ void PGenerator::SetFormWave(const Wave *w)
 }
 
 
-void PGenerator::SetFormWave(Chan::E ch, TypeForm::E form)
+void PGenerator::SetFormWave(const Chan &ch, TypeForm::E form)
 {
     // \todo Здесь, наверное, неправильная установка формы сигнала - что будет при установке произвольной формы?
 
@@ -176,14 +176,14 @@ void PGenerator::SetParameterChoice(ParameterChoice *param)
 }
 
 
-void PGenerator::SetOffset(Chan::E ch, float offset)
+void PGenerator::SetOffset(const Chan &ch, float offset)
 {
     // \todo Говнокод - запись параметра из двух мест
     Message::Set::Offset(static_cast<uint8>(ch), Value(offset).ToUINT64()).Transmit();
 }
 
 
-void PGenerator::SetAmplitude(Chan::E ch, float amplitude)
+void PGenerator::SetAmplitude(const Chan &ch, float amplitude)
 {
     // \todo Говнокод - запись параметра из двух мест
     Message::Set::Amplitude(static_cast<uint8>(ch), Value(amplitude).ToUINT64()).Transmit();
@@ -269,9 +269,9 @@ void PGenerator::SetParameter(Parameter *parameter)
 }
 
 
-void PGenerator::LoadPictureDDSfromStorage(Chan::E ch)
+void PGenerator::LoadPictureDDSfromStorage(const Chan &ch)
 {
-    Message::Storage::RequestPictureDDS(static_cast<uint8>(ch)).Transmit();
+    Message::Storage::RequestPictureDDS(ch).Transmit();
 }
 
 

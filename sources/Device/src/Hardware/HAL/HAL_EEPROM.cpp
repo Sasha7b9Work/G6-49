@@ -110,7 +110,7 @@ static void WriteData(uint dest, void *src, uint size)
 }
 
 
-void HAL_EEPROM::Signal::Save(Chan::E ch, uint16 data[DGenerator::DDS_NUM_POINTS])
+void HAL_EEPROM::Signal::Save(const Chan &ch, uint16 data[DGenerator::DDS_NUM_POINTS])
 {
     uint sizeData = FPGA::NUM_POINTS * sizeof(data[0]);
 
@@ -119,23 +119,24 @@ void HAL_EEPROM::Signal::Save(Chan::E ch, uint16 data[DGenerator::DDS_NUM_POINTS
     EraseSector(SECTOR_SIGNAL_FPGA_11);                                                 // Стираем сектор для хранения данных
     WriteData(AddressForData(ch), data, sizeData);                                      // Записываем данные канала
 
-    ch = (ch == Chan::A) ? Chan::B : Chan::A;
+    Chan chan = ch.IsA() ? ChB : ChA;
 
     data = (uint16 *)SECTOR_TEMP_10; //-V566
 
-    if (ch == Chan::B)
+    if (chan.IsB())
     {
         data += FPGA::NUM_POINTS;                                                        // Вычисляем указатель на данные канала, который не требуется перезаписывать
     }
 
-    WriteData(AddressForData(ch), data, sizeData);                                      // И сохраняем их
+    WriteData(AddressForData(chan), data, sizeData);                                      // И сохраняем их
 }
 
 
-uint HAL_EEPROM::Signal::AddressForData(Chan::E ch)
+uint HAL_EEPROM::Signal::AddressForData(const Chan &ch)
 {
     uint result = SECTOR_SIGNAL_FPGA_11;
-    if (ch == Chan::B)
+
+    if (ch.IsB())
     {
         result += FPGA::NUM_POINTS * sizeof(uint16);
     }
@@ -144,7 +145,7 @@ uint HAL_EEPROM::Signal::AddressForData(Chan::E ch)
 }
 
 
-uint16 *HAL_EEPROM::Signal::Get(Chan::E ch)
+uint16 *HAL_EEPROM::Signal::Get(const Chan &ch)
 {
     uint16 *result = (uint16 *)(SECTOR_SIGNAL_FPGA_11); //-V566
 

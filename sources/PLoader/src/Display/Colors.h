@@ -51,7 +51,7 @@ public:
     static Color BorderMenu(bool shade);    // Цвет окантовки меню
     static Color LightShadingText();        // Светлый цвет в тени.
     static Color Contrast(Color color);     // Возвращает цвет, контрастный к color. Может быть белым или чёрным.
-    static Color Chan(Chan::E ch);
+    static Color Channel(const Chan &);
     
     uint8 value;
 

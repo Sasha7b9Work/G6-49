@@ -172,12 +172,12 @@ struct PageDebug
             static Page *self;
         };
 
-        static void OnPress_OffsetAD9952(Chan::E ch, bool enter, KoeffCal::E koeff);
+        static void OnPress_OffsetAD9952(const Chan &, bool enter, KoeffCal::E koeff);
 
-        static void OnPress_DDS(Chan::E ch, bool enter, KoeffCal::E koeff);
+        static void OnPress_DDS(const Chan &, bool enter, KoeffCal::E koeff);
 
-        static void OnPress_AmplitudeAD9952(Chan::E ch, bool enter, KoeffCal::E koeff);
+        static void OnPress_AmplitudeAD9952(const Chan &, bool enter, KoeffCal::E koeff);
 
-        static void WriteKoeffCal(Chan::E ch, KoeffCal::E koeff);
+        static void WriteKoeffCal(const Chan &, KoeffCal::E koeff);
     };
 };

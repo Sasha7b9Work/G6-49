@@ -37,13 +37,13 @@ struct HAL_EEPROM
 
     struct Signal
     {
-        static void Save(Chan::E ch, uint16 data[DGenerator::DDS_NUM_POINTS]);
+        static void Save(const Chan &, uint16 data[DGenerator::DDS_NUM_POINTS]);
 
-        static uint16 *Get(Chan::E ch);
+        static uint16 *Get(const Chan &);
 
     private:
         // Возвращает адрес EEPROM, куда надо сохранять данные этого канала
-        static uint AddressForData(Chan::E ch);
+        static uint AddressForData(const Chan &);
     };
 };
 

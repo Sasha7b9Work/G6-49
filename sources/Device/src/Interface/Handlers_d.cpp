@@ -502,7 +502,7 @@ static void FDebug(SimpleMessage *)
 
 static void RequestPictureDDSfromStorage(SimpleMessage *message)
 {
-    Chan::E ch = static_cast<Chan::E>(message->TakeUINT8());
+    Chan ch(message->TakeUINT8());
 
     uint16 *code = HAL_EEPROM::Signal::Get(ch);
 

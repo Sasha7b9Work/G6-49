@@ -81,7 +81,7 @@ int Wave::NumberOfForms() const
 }
 
 
-Wave::Wave(Chan::E ch, Form **f) : channel(ch), numberForm(0), forms(f)
+Wave::Wave(const Chan &ch, Form **f) : channel(ch), numberForm(0), forms(f)
 {
     numForms = 0;
     

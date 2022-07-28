@@ -436,8 +436,8 @@ static Form *formsB[] =
 
 Wave waves[Chan::Count] =
 {
-    Wave(Chan::A, formsA),
-    Wave(Chan::B, formsB)
+    Wave(ChA, formsA),
+    Wave(ChB, formsB)
 };
 
 

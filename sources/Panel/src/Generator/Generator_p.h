@@ -23,7 +23,7 @@ struct PGenerator
 
     static void SetFormWave(const Wave *w);
 
-    static void SetFormWave(Chan::E ch, TypeForm::E form);
+    static void SetFormWave(const Chan &, TypeForm::E form);
 
     static void SetParameterDouble(ParameterDouble *param);
 
@@ -33,9 +33,9 @@ struct PGenerator
 
     static void SetParameter(Parameter *param);
 
-    static void SetOffset(Chan::E ch, float offset);
+    static void SetOffset(const Chan &, float offset);
 
-    static void SetAmplitude(Chan::E ch, float amplitude);
+    static void SetAmplitude(const Chan &, float amplitude);
 
     static void SetDebugMode(bool enable);
 
@@ -46,10 +46,10 @@ struct PGenerator
     static void TuneChannel(const Chan &);
 
     // Загружает режим запуска из set в аппаратуру для произвольного (signal == 0) или импульсного (signal == 1) сигнала
-    static void LoadStartMode(Chan::E ch, int signal, int mode);
+    static void LoadStartMode(const Chan &, int signal, int mode);
 
     // Загружает изображение произвольного сигнала, хранящееся в ППЗУ
-    static void LoadPictureDDSfromStorage(Chan::E ch);
+    static void LoadPictureDDSfromStorage(const Chan &);
 
     static void Reset();
 

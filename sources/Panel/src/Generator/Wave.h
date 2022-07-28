@@ -162,7 +162,7 @@ class Wave
 {
 public:
 
-    Wave(Chan::E ch, Form **forms);
+    Wave(const Chan &, Form **forms);
     
     // Возвращает установленную форму
     Form *GetCurrentForm();
