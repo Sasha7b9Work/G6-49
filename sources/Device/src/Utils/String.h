@@ -10,7 +10,7 @@ public:
     explicit String(const char *format, ...);
     ~String();
 
-    char *CString() const;
+    char *c_str() const;
 
 private:
 

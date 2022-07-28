@@ -122,7 +122,7 @@ static void RequestFileSize()
     {
         String fullPath("%s\\%s", msg->String(2), name);
 
-        uint size = FileSystem::GetFileSize(fullPath.CString());
+        uint size = FileSystem::GetFileSize(fullPath.c_str());
 
         Message::FDrive::FileSize(static_cast<uint8>(numFile), size).Transmit();
     }
