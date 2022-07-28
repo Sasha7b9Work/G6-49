@@ -17,6 +17,19 @@ String::String(const String &rhs) : buffer(0)
 }
 
 
+String &String::operator=(const String &rhs)
+{
+    Free();
+
+    if (Allocate(std::strlen(rhs.CString()) + 1))
+    {
+        std::strcpy(buffer, rhs.CString());
+    }
+
+    return *this;
+}
+
+
 String::String(char symbol) : buffer(0)
 {
     if (Allocate(2))
@@ -70,7 +83,10 @@ char *String::CString() const
 
 bool String::Allocate(uint size)
 {
+    Free();
+
     buffer = static_cast<char *>(std::malloc(size));
+
     if (buffer)
     {
         return true;
@@ -79,5 +95,6 @@ bool String::Allocate(uint size)
     {
         LOG_ERROR("Не хватает памяти");
     }
+
     return false;
 }

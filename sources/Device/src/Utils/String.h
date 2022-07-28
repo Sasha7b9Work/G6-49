@@ -18,4 +18,6 @@ private:
     void Free();
 
     char *buffer;
+
+    String &operator=(const String &);
 };
