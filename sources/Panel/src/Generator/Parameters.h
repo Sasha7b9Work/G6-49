@@ -270,9 +270,10 @@ struct ParameterChoiceType
 {
     enum E
     {
-        Polarity,             // Полярность импульсов
-        ModeStart,            // Режим запуска сигналов DDS и импульсных
-        ManipulationEnabled,  // Включен или выключен режим манипуляции
+        Polarity,               // Полярность импульсов
+        ModeStart,              // Режим запуска сигналов DDS и импульсных
+        ManipulationEnabled,    // Включен или выключен режим манипуляции
+        OutputImpulse,          // Режим формирования импульса - обычный или СТАРТ/СТОП
         Count
     };
 
@@ -490,6 +491,13 @@ class ParameterModeStart : public ParameterChoice
 {
 public:
     ParameterModeStart(pchar *names) : ParameterChoice(ParameterChoiceType::ModeStart, "Запуск", "Start", names) { }
+};
+
+
+class ParameterOutputImpulse : public ParameterChoice
+{
+public:
+    ParameterOutputImpulse(pchar *names) : ParameterChoice(ParameterChoiceType::OutputImpulse, "Режим", "Mode", names) { }
 };
 
 

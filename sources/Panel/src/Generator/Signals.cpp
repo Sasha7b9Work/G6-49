@@ -73,10 +73,17 @@ static pchar namesModeStartFree[] =       // Режимы запуска для произвольных сиг
     nullptr
 };
 
-static pchar namesModeStartPulse[] =   // Режимы запуска для мпульсных сигналов
+static pchar namesModeStartImpulse[] =   // Режимы запуска для мпульсных сигналов
 {
     "Авто",   "Auto",
     "Однокр", "Single",
+    nullptr
+};
+
+static pchar namesOutputImpulse[] =     // Вывод импульсов - обычный или "Старт/Стоп"
+{
+    "Стандарт",   "Standard",
+    "Старт/Стоп", "Start/Stop",
     nullptr
 };
 
@@ -185,12 +192,13 @@ static bool FuncActive_PeriodImpulseA()
     return (impulseA_ModeStart.GetChoice() == 0);
 }
 
-static ParameterPeriod    impulseA_Period   (FuncActive_PeriodImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
-static ParameterDuration  impulseA_Duration (Value("100", Order::Kilo), Value("20", Order::Micro));
-static ParameterAmplitude impulseA_Amplitude;
-static ParameterOffset    impulseA_Offset;
-static ParameterPolarity  impulseA_Polarity(namesPolarity);
-static ParameterModeStart impulseA_ModeStart(namesModeStartPulse);
+static ParameterPeriod        impulseA_Period   (FuncActive_PeriodImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
+static ParameterDuration      impulseA_Duration (Value("100", Order::Kilo), Value("20", Order::Micro));
+static ParameterAmplitude     impulseA_Amplitude;
+static ParameterOffset        impulseA_Offset;
+static ParameterPolarity      impulseA_Polarity(namesPolarity);
+static ParameterModeStart     impulseA_ModeStart(namesModeStartImpulse);
+static ParameterOutputImpulse impulseA_Output(namesOutputImpulse);
 
 static Parameter *params_ImpulseA[] =
 {
@@ -200,6 +208,7 @@ static Parameter *params_ImpulseA[] =
     &impulseA_Offset,
     &impulseA_Polarity,
     &impulseA_ModeStart,
+    &impulseA_Output,
     nullptr
 };
 
@@ -221,7 +230,7 @@ static ParameterPacketPeriod packetA_PacketPeriod  (Value("100", Order::Kilo), V
 static ParameterAmplitude    packetA_Amplitude;
 static ParameterOffset       packetA_Offset;
 static ParameterPolarity     packetA_Polarity(namesPolarity);
-static ParameterModeStart    packetA_ModeStart(namesModeStartPulse);
+static ParameterModeStart    packetA_ModeStart(namesModeStartImpulse);
 
 static Parameter *params_PacketA[] =
 {
@@ -392,7 +401,7 @@ static ParameterDuration  impulseB_Duration (Value("100", Order::Kilo), Value("2
 static ParameterAmplitude impulseB_Amplitude;
 static ParameterOffset    impulseB_Offset;
 static ParameterPolarity  impulseB_Polarity(namesPolarity);
-static ParameterModeStart impulseB_ModeStart(namesModeStartPulse);
+static ParameterModeStart impulseB_ModeStart(namesModeStartImpulse);
 
 static Parameter *params_ImpulseB[] =
 {

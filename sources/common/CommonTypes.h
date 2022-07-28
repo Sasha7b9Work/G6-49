@@ -23,6 +23,8 @@ struct Chan
     Chan::E GetInverse() { return (value == A) ? Chan::B : Chan::A; }
 };
 
+
+
 // Сопротивление входа частотомера
 struct FreqResist
 {
