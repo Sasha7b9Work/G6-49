@@ -8,6 +8,10 @@
 #include <cmath>
 
 
+Chan ChanA(Chan::A);
+Chan ChanB(Chan::B);
+
+
 // Находит знак, если первый элемент buffer - знак. В pos записывается позиция элемента за знаком в этом случае
 static void ProcessSign(pchar const buffer, int *pos, int *sign);
 

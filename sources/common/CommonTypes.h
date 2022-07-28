@@ -24,6 +24,9 @@ struct Chan
 };
 
 
+extern Chan ChanA;
+extern Chan ChanB;
+
 
 // Сопротивление входа частотомера
 struct FreqResist
