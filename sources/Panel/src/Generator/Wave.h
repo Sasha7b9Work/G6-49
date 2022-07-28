@@ -187,10 +187,10 @@ public:
     void Reset();
 
     // Сохраняет нидекс текущей формы
-    void StoreIndexCurrentForm();
+    void StoreIndexCurrentForm() { stored.index_form = numberForm; };
 
     // Восстанавливает индекс текущей формы
-    void RestoreIndexCurrentForm();
+    void RestoreIndexCurrentForm() { numberForm = stored.index_form; };
 
 private:
     
@@ -205,7 +205,6 @@ private:
     struct Stored
     {
         int index_form;
-    };
 
-    static Stored stored;
+    } stored;
 };

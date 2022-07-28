@@ -84,13 +84,11 @@ void PageSignals::OnChanged_Form(bool)
 
     if (CURRENT_CHANNEL_IS_A)
     {
-        static int index_form = 0;
-
         if (CURRENT_FORM->Is(TypeForm::Packet))            // Вошли в пакетный режим
         {
-            index_form = WAVE_B.GetIndexForm();
-
             Signals::B::impulse->StoreState();               // Сохраняем параметры импульсов на втором канале
+
+            WAVE_B.StoreIndexCurrentForm();
 
             WAVE_B.SetForm(Signals::B::impulse);         // Устанавливаем форму импульса на втором канале
 
@@ -106,7 +104,7 @@ void PageSignals::OnChanged_Form(bool)
         {
             FORM_B->RestoreState();
 
-            WAVE_B.SetIndexForm(index_form);
+            WAVE_B.RestoreIndexCurrentForm();
 
             SetCurrentChanenl(ChB);
 
