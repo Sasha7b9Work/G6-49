@@ -83,15 +83,19 @@ void PageSignals::OnChanged_Form(bool)
                 Form *formB = WAVE(ChB).GetForm(TypeForm::Impulse);
 
                 {
-                    ParameterDouble *period = formA->FindParameter(ParameterDoubleType::Period);
+                    ParameterDouble *period_packet = formA->FindParameter(ParameterDoubleType::PacketPeriod);
 
-                    formB->FindParameter(ParameterDoubleType::Period)->SetValue(period->GetValue());
+                    formB->FindParameter(ParameterDoubleType::Period)->SetValue(period_packet->GetValue());
                 }
 
                 {
-                    ParameterDouble *duration = formA->FindParameter(ParameterDoubleType::Duration);
+                    Value period_impulse = formA->FindParameter(ParameterDoubleType::Period)->GetValue();
+                    Value duration_impulse = formA->FindParameter(ParameterDoubleType::Duration)->GetValue();
+                    Value number_impulse = formA->FindParameter(ParameterIntegerType::PacketNumber)->GetValue();
 
-                    formB->FindParameter(ParameterDoubleType::Duration)->SetValue(duration->GetValue());
+                    double duration = (number_impulse.ToDouble() - 1.0) * period_impulse.ToDouble() + duration_impulse.ToDouble();
+
+                    formB->FindParameter(ParameterDoubleType::Duration)->SetValue(Value(duration));
                 }
             }
 
