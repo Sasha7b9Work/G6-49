@@ -17,7 +17,6 @@ struct Chan
     bool Is(const Chan &ch) const   { return value == ch.value; }
     operator uint8()        const   { return static_cast<uint8>(value); }
     operator int()          const   { return static_cast<int>(value); }
-    operator E()            const   { return value; }
     Chan GetInverse()               { return (value == A) ? Chan(B) : Chan(A); }
     bool Enabled() const;
 };

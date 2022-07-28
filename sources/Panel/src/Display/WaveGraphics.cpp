@@ -62,7 +62,7 @@ int WaveGraphics::X()
 
 int WaveGraphics::Y(const Chan &ch)
 {
-    return (ch == Chan::A || (set.freq.measure != FreqMeasure::Disable)) ? Page::Title::HEIGHT : Page::Title::HEIGHT + SIGNAL_HEIGHT;
+    return (ch.IsA() || (set.freq.measure != FreqMeasure::Disable)) ? Page::Title::HEIGHT : Page::Title::HEIGHT + SIGNAL_HEIGHT;
 }
 
 

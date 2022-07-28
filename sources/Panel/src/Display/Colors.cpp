@@ -249,7 +249,7 @@ Color& Color::operator=(const Color &color)
 
 Color Color::Channel(const Chan &ch)
 {
-    return (ch == Chan::A) ? CHAN_A : CHAN_B;
+    return ch.IsA() ? CHAN_A : CHAN_B;
 }
 
 

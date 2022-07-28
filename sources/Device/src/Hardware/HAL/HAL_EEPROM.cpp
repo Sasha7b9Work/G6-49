@@ -149,7 +149,7 @@ uint16 *HAL_EEPROM::Signal::Get(const Chan &ch)
 {
     uint16 *result = (uint16 *)(SECTOR_SIGNAL_FPGA_11); //-V566
 
-    if (ch == Chan::B)
+    if (ch.IsB())
     {
         result += FPGA::NUM_POINTS;
     }

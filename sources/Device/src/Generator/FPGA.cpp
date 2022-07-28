@@ -187,13 +187,13 @@ void FPGA::SetFrequency(const Chan &ch)
     }
     else if(modeWork[ch] == ModeWork::Impulse || modeWork[ch] == ModeWork::Impulse2)
     {
-        if ((ch == Chan::B) && (modeWork[ch] == ModeWork::Impulse2))
+        if (ch.IsB() && (modeWork[ch] == ModeWork::Impulse2))
         {
             modeWork[ch] = ModeWork::Impulse;
             WriteControlRegister();
         }
         uint N = static_cast<uint>(1E8F / frequency + 0.5F);
-        WriteRegister(ch == Chan::A ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB, N);
+        WriteRegister(ch.IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB, N);
     }
 }
 
@@ -202,8 +202,9 @@ void FPGA::SetDurationImpulse(const Chan &ch, Value duration)
 {
     PacketImpulse::durationImpulse = duration;
 
-    RG::E reg = Chan(ch).IsA() ? RG::_6_DurationImpulseA : RG::_8_DurationImpulseB;
-    if(Chan(ch).IsA() && (modeWork[Chan::A] == ModeWork::PackedImpulse))
+    RG::E reg = ch.IsA() ? RG::_6_DurationImpulseA : RG::_8_DurationImpulseB;
+
+    if(ch.IsA() && (modeWork[Chan::A] == ModeWork::PackedImpulse))
     {
         reg = RG::_8_DurationImpulseB;
     }
@@ -333,7 +334,7 @@ void FPGA::SetBitsStartMode(const Chan &ch, uint16 &data)
     {
         if (startMode[ch][1].Is(StartMode::Single))
         {
-            Bit::Set(data, (ch == Chan::A) ? RG0::_10_HandStartA : RG0::_11_HandStartB);
+            Bit::Set(data, ch.IsA() ? RG0::_10_HandStartA : RG0::_11_HandStartB);
         }
     }
 

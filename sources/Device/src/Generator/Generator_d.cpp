@@ -26,7 +26,7 @@ struct Filtr
         HAL_PIO::Init(HPort::_F, HPin::_4, HMode::Output_PP, HPull::No);
     }
 
-    static void Tune(Chan::E ch, TypeForm::E form)
+    static void Tune(const Chan &ch, TypeForm::E form)
     {
         if (form == TypeForm::Sine)
         {
@@ -55,7 +55,7 @@ private:
         };
     };
 
-    static void SetType(Chan::E ch, Type::E type)
+    static void SetType(const Chan &ch, Type::E type)
     {
         /*  +-----------+---------+---------+
             |           | Канал А | Канал B |
@@ -121,7 +121,7 @@ void DGenerator::SetFormWave(const Chan &ch, TypeForm::E form)
 {
     Filtr::Tune(ch, form);
 
-    if(ch < Chan::Count && form < TypeForm::Count)
+    if(ch.value < Chan::Count && form < TypeForm::Count)
     {
         SettingsGenerator::waveIsSine[ch] = (form == TypeForm::Sine);
 
