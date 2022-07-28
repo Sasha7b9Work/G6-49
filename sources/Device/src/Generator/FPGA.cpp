@@ -52,8 +52,8 @@ void FPGA::Init()
     HAL_PIO::Reset(WR_FPGA_A2_RG);
     HAL_PIO::Reset(WR_FPGA_A3_RG);
 
-    WriteMaxAmplitude(Chan::A);
-    WriteMaxAmplitude(Chan::B);
+    WriteMaxAmplitude(ChA);
+    WriteMaxAmplitude(ChB);
 }
 
 
@@ -87,7 +87,7 @@ void FPGA::SetFormMeander(const Chan &ch)
 }
 
 
-void FPGA::WriteMaxAmplitude(Chan::E ch)
+void FPGA::WriteMaxAmplitude(const Chan &ch)
 {
     // Записать максимальный размах сигнала в регистры
 
@@ -142,11 +142,11 @@ void FPGA::SetFormPackedImpulse(const Chan &)
 
     WriteRegister(RG::_3_RectA, data);
 
-    SetPolarity(Chan::A, 0);
+    SetPolarity(ChA, 0);
 }
 
 
-void FPGA::SetPolarity(Chan::E ch, uint8 polarity)
+void FPGA::SetPolarity(const Chan &ch, uint8 polarity)
 {
     uint64 data = (8191 << 14) + 16383;     // Положительная полярность
 
@@ -198,7 +198,7 @@ void FPGA::SetFrequency(const Chan &ch)
 }
 
 
-void FPGA::SetDurationImpulse(Chan::E ch, Value duration)
+void FPGA::SetDurationImpulse(const Chan &ch, Value duration)
 {
     PacketImpulse::durationImpulse = duration;
 
@@ -230,7 +230,7 @@ void FPGA::PacketImpulse::SetNumberImpules(uint value)
 }
 
 
-void FPGA::SetPeriodImpulse(Chan::E ch, Value period)
+void FPGA::SetPeriodImpulse(const Chan &ch, Value period)
 {
     // Для пакетного и одиночного импульсных режимов период задаётся здесь. Поэтому сохраняем значение периода импульсов, чтобы использовать его
     // в пакетном режиме при необходимости
@@ -249,7 +249,7 @@ void FPGA::SetPeriodImpulse(Chan::E ch, Value period)
 }
 
 
-void FPGA::SetStartMode(Chan::E ch, uint8 signal, StartMode mode)
+void FPGA::SetStartMode(const Chan &ch, uint8 signal, StartMode mode)
 {
     startMode[ch][signal] = mode;
     WriteControlRegister();
@@ -319,13 +319,13 @@ void FPGA::WriteControlRegister()
 }
 
 
-bool FPGA::InModeDDS(Chan::E ch)
+bool FPGA::InModeDDS(const Chan &ch)
 {
     return (modeWork[ch] == FPGA::ModeWork::DDS) || (modeWork[ch] == FPGA::ModeWork::Free);
 }
 
 
-void FPGA::SetBitsStartMode(Chan::E ch, uint16 &data)
+void FPGA::SetBitsStartMode(const Chan &ch, uint16 &data)
 {
     ModeWork::E mode = modeWork[ch];
 
@@ -360,8 +360,8 @@ void FPGA::SetBitsStartMode(Chan::E ch, uint16 &data)
 
 void FPGA::SetBitsStartMode(uint16 &data)
 {
-    SetBitsStartMode(Chan::A, data);
-    SetBitsStartMode(Chan::B, data);
+    SetBitsStartMode(ChA, data);
+    SetBitsStartMode(ChB, data);
 }
 
 
@@ -385,14 +385,14 @@ void FPGA::SendData()
 
     WriteRegister(RG::_0_Control, 0);
     
-    SendDataChannel(Chan::A);
-    SendDataChannel(Chan::B);
+    SendDataChannel(ChA);
+    SendDataChannel(ChB);
 
     WriteRegister(RG::_0_Control, 1);
 }
 
 
-void FPGA::SendDataChannel(Chan::E ch)
+void FPGA::SendDataChannel(const Chan &ch)
 {
     volatile int j = 0;
     for(j = 0; j < 10; j++) { }
@@ -483,19 +483,19 @@ void FPGA::SetAmplitude()
 }
 
 
-uint8 *FPGA::DataDDS(Chan::E ch)
+uint8 *FPGA::DataDDS(const Chan &ch)
 {
     return &dataDDS[ch][0];
 }
 
 
-uint8 *FPGA::DataFreeSignal(Chan::E ch)
+uint8 *FPGA::DataFreeSignal(const Chan &ch)
 {
     return reinterpret_cast<uint8 *>(HAL_EEPROM::Signal::Get(ch));
 }
 
 
-void FPGA::SaveExtSignal(Chan::E ch, uint8 *data)
+void FPGA::SaveExtSignal(const Chan &ch, uint8 *data)
 {
     HAL_EEPROM::Signal::Save(ch, reinterpret_cast<uint16 *>(data));
 }

@@ -295,7 +295,7 @@ static void SetStartMode(SimpleMessage *msg)
 {
     uint8 firstByte = msg->TakeUINT8();
 
-    Chan::E ch = static_cast<Chan::E>(firstByte & 1);
+    Chan ch((uint8)(firstByte & 1));
 
     StartMode mode = static_cast<StartMode>(msg->TakeUINT8());
 

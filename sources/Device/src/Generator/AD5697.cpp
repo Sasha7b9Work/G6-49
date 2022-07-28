@@ -81,7 +81,7 @@ void AD5697::SetOffset(const Chan &ch)
 
     uint8 data[3] =
     {
-        static_cast<uint8>(BIN_U8(00010000) | (ch == Chan::A ? 0x01 : 0x08)), 
+        static_cast<uint8>(BIN_U8(00010000) | (ch.IsA() ? 0x01 : 0x08)),
         static_cast<uint8>(value >> 8),
         static_cast<uint8>(value)
     };

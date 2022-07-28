@@ -16,15 +16,15 @@ struct FPGA
 
     static void SetAmplitude();
 
-    static void SetDurationImpulse(Chan::E ch, Value duration);
+    static void SetDurationImpulse(const Chan &, Value duration);
 
-    static void SetPeriodImpulse(Chan::E ch, Value period);
+    static void SetPeriodImpulse(const Chan &, Value period);
 
     // 1 - положительная полярность, 0 - отрицательная полярность
-    static void SetPolarity(Chan::E ch, uint8 polarity);
+    static void SetPolarity(const Chan &, uint8 polarity);
 
     // Установка режима запуска для произвольного (0) сигнала и импульсного (1) сигнала signal
-    static void SetStartMode(Chan::E ch, uint8 signal, StartMode mode);
+    static void SetStartMode(const Chan &, uint8 signal, StartMode mode);
     
     // Делает однократный запуск
     static void SingleStart();
@@ -104,16 +104,16 @@ struct FPGA
     // Режим работы ПЛИС
     static ModeWork::E modeWork[Chan::Count];
 
-    static inline ModeWork::E CurrentMode(Chan::E ch) { return modeWork[ch]; }
+    static inline ModeWork::E CurrentMode(const Chan &ch) { return modeWork[ch]; }
     
     // Возвращает указатель на точки сигнала, загружаемого из флешки
-    static uint8 *DataFreeSignal(Chan::E ch);
+    static uint8 *DataFreeSignal(const Chan &);
     
     // Сохранить данные сигнала, загруженного с флешки
-    static void SaveExtSignal(Chan::E ch, uint8 *data);
+    static void SaveExtSignal(const Chan &, uint8 *data);
     
     // Возвращает указатель на точки произвольного сигнала (программно определёного)
-    static uint8 *DataDDS(Chan::E ch);
+    static uint8 *DataDDS(const Chan &);
     
     // Записать значение в регистр
     static void WriteRegister(RG::E reg, uint64 value);
@@ -165,7 +165,7 @@ private:
     static void SendData();
 
     // Заслать рассчитанные точки одного канала в плис
-    static void SendDataChannel(Chan::E ch);
+    static void SendDataChannel(const Chan &);
     
     // Установить на A0_RG...A3_RG адрес, соответсвующй регистру
     static void WriteAddress(RG::E reg);
@@ -174,14 +174,14 @@ private:
     static void WriteControlRegister();
     
     // Записывает коды, соответствующие максимальному и минимальному значению
-    static void WriteMaxAmplitude(Chan::E ch);
+    static void WriteMaxAmplitude(const Chan &);
     
     // Установить биты, соответствующие режиму запуска
     static void SetBitsStartMode(uint16 &data);
-    static void SetBitsStartMode(Chan::E ch, uint16 &data);
+    static void SetBitsStartMode(const Chan &, uint16 &data);
 
     // Возвращает true, если по каналу ch работает DDS
-    static bool InModeDDS(Chan::E ch);
+    static bool InModeDDS(const Chan &);
 
     static StartMode startMode[Chan::Count][2];          // Режим запуска для произвольного сигнала (0) и для импульсного сигнала (1)
     
