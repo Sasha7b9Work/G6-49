@@ -116,7 +116,7 @@ void Display::Update()
 }
 
 
-void Display::ShowWarning(String warning)
+void Display::ShowWarning(const String &warning)
 {
     warnings.Append(warning);
 }

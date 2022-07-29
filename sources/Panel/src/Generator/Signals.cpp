@@ -8,6 +8,8 @@
 
 
 extern ParameterModeStart impulseA_ModeStart;
+extern ParameterModeStart packetA_ModeStart;
+extern ParameterModeStart impulseB_ModeStart;
 
 #define FREQUENCY_SINE_MIN  Value("300", Order::Micro)
 #define FREQUENCY_SINE_MAX  Value("100", Order::Mega)
@@ -217,7 +219,7 @@ static Form formImpulseA(TypeForm::Impulse, params_ImpulseA, &waves[Chan::A]);
 
 static bool FuncActive_PeriodPacketA()
 {
-    return true;
+    return (packetA_ModeStart.GetChoice() == 0);
 }
 
 static ParameterPeriod       packetA_Period        (FuncActive_PeriodPacketA, Value("100", Order::Kilo), Value("200", Order::Micro),
@@ -393,7 +395,7 @@ static Form formMeanderB(TypeForm::Meander, params_MeanderB, &waves[Chan::B]);
 
 static bool FuncActive_PeriodImpulseB()
 {
-    return true;
+    return (impulseB_ModeStart.GetChoice() == 0);
 }
 
 static ParameterPeriod    impulseB_Period   (FuncActive_PeriodImpulseB, Value("100", Order::Kilo), Value("100", Order::Micro));
