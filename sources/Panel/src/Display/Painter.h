@@ -4,16 +4,16 @@
 #include "Display/Font/Font.h"
 
 
-struct Painter
+namespace Painter
 {
     // Вызывается в начале отрисовки каждого кадра. Заполняет буфер цветом color
-    static void BeginScene(Color color);
+    void BeginScene(Color color);
     
     // Вызывается в конце отрисовки каждого кадра. Переносит содержимое буфера на экран
-    static void EndScene();
+    void EndScene();
     
     // Загружает в дисплей все цвета
-    static void LoadPalette();
+    void LoadPalette();
 };
 
 
