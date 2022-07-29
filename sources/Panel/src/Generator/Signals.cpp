@@ -64,7 +64,7 @@ static Parameter *params_SineA[] =
 static Form formSineA(TypeForm::Sine, params_SineA, &waves[Chan::A]);
 
 
-static pchar namesModeStartFree[] =       // Режимы запуска для произвольных сигналов
+static pchar namesModeStartFree[] =         // Режимы запуска для произвольных сигналов
 {
     "Авто",   "Auto",
     "Однокр", "Single",
@@ -73,17 +73,17 @@ static pchar namesModeStartFree[] =       // Режимы запуска для произвольных сиг
     nullptr
 };
 
-static pchar namesModeStartImpulse[] =   // Режимы запуска для мпульсных сигналов
+static pchar namesModeStartImpulse[] =      // Режимы запуска для мпульсных сигналов
 {
     "Авто",   "Auto",
     "Однокр", "Single",
     nullptr
 };
 
-static pchar namesOutputImpulse[] =     // Вывод импульсов - обычный или "Старт/Стоп"
+static pchar namesModeStartStopImpulse[] =  // Включение режима "А-Старт,В-Стоп"
 {
-    "Стандарт",   "Standard",
-    "Старт/Стоп", "Start/Stop",
+    "Откл", "Disable",
+    "Вкл",  "Enable",
     nullptr
 };
 
@@ -198,7 +198,7 @@ static ParameterAmplitude     impulseA_Amplitude;
 static ParameterOffset        impulseA_Offset;
 static ParameterPolarity      impulseA_Polarity(namesPolarity);
 static ParameterModeStart     impulseA_ModeStart(namesModeStartImpulse);
-static ParameterOutputImpulse impulseA_Output(namesOutputImpulse);
+static ParameterModeStartStop impulseA_Output(namesModeStartStopImpulse);
 
 static Parameter *params_ImpulseA[] =
 {

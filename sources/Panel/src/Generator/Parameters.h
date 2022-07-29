@@ -273,7 +273,7 @@ struct ParameterChoiceType
         Polarity,               // Полярность импульсов
         ModeStart,              // Режим запуска сигналов DDS и импульсных
         ManipulationEnabled,    // Включен или выключен режим манипуляции
-        OutputImpulse,          // Режим формирования импульса - обычный или СТАРТ/СТОП
+        ModeStartStop,          // Режим А-Старт/В-Стоп
         Count
     };
 
@@ -494,10 +494,10 @@ public:
 };
 
 
-class ParameterOutputImpulse : public ParameterChoice
+class ParameterModeStartStop : public ParameterChoice
 {
 public:
-    ParameterOutputImpulse(pchar *names) : ParameterChoice(ParameterChoiceType::OutputImpulse, "Режим", "Mode", names) { }
+    ParameterModeStartStop(pchar *names) : ParameterChoice(ParameterChoiceType::ModeStartStop, "А-Старт,В-Стоп", "A-Start,B-Stop", names) { }
 };
 
 
