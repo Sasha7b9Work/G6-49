@@ -21,8 +21,20 @@
 #endif
 
 
+namespace Locale
+{
+    uint8 separator = '.';
+}
 
-uint8 Locale::separator = '.';
+
+namespace SU
+{
+    // Возвращает false, если выбор невозможен - строка кончилась.
+    static bool ChooseSymbols(pchar *string);
+
+    // Возвращает false, если выбор невозможен - строка кончилась.
+    static bool ChooseSpaces(pchar *string);
+}
 
 
 char *SU::Float2String(float value, bool alwaysSign, int numDigits, char bufferOut[20])
