@@ -17,14 +17,6 @@ using namespace Primitives;
 
 // Запрос имени файла с порядковым номером number
 static void SendRequestForNameFile(int number);
-// Запрос размера файла с порядковым номером number
-//static void SendRequestForSizeFile(int number);
-// Нарисовать i-й итем
-static void DrawItem(int i, int x, int y, bool highlight);
-// Возвращает имя i-го итема
-static String GetNameItem(int i);
-// Возвращает размер i-го итема
-//static int GetSizeItem(int i);
 
 
 static int numFiles;                        // Количество файлов в текущем каталоге
@@ -32,30 +24,36 @@ static int firstFile = 0;                   // Этот файл первый в списке на экра
 static int curFile = 0;                     // Текущий файл
 static uint timeStopUnderFile = _TIME_MS;   // Время остановки курсора над файлов. Через некоторое время после последней остановки нужно посылать запрос на изображение
 
-#define NUM_FILES_ON_SCREEN 10              // Столько файлов помещается на экране
-
-
 namespace ListFiles
 {
     // Запрос послан. Ожидается ответ
     static bool requestIsSend = false;
-}
 
+    static const int NUM_FILES_ON_SCREEN = 10;  // Столько файлов помещается на экране
 
-struct StructFile
-{
-    char name[50];
-    uint8 nutUsed[2];
-    int size;
-    StructFile() : size(-1) { name[0] = 0; } //-V730
-    void Clear() { name[0] = 0; size = -1; }
-    void CopyFrom(const StructFile &file)
+    struct StructFile
     {
-        std::strcpy(name, file.name);
-        size = file.size;
+        char name[50];
+        uint8 nutUsed[2];
+        int size;
+        StructFile() : size(-1) { name[0] = 0; } //-V730
+        void Clear() { name[0] = 0; size = -1; }
+        void CopyFrom(const StructFile &file)
+        {
+            std::strcpy(name, file.name);
+            size = file.size;
+        }
     }
+
+    files[NUM_FILES_ON_SCREEN];
+
+    // Возвращает имя i-го итема
+    static String GetNameItem(int i);
+
+    // Нарисовать i-й итем
+    static void DrawItem(int i, int x, int y, bool highlight);
 }
-files[NUM_FILES_ON_SCREEN];
+
 
 // Теукущий файл
 static File file;
@@ -153,7 +151,7 @@ static void SendRequestForNameFile(int number)
 }
 
 
-String GetNameItem(int i)
+String ListFiles::GetNameItem(int i)
 {
     if (files[i - firstFile].name[0] == 0)
     {
@@ -252,7 +250,7 @@ void ListFiles::Draw(int x, int y)
 }
 
 
-static void DrawItem(int i, int x, int y, bool highlight)
+static void ListFiles::DrawItem(int i, int x, int y, bool highlight)
 {
     Color color = Color::FILL;
     if (highlight)
@@ -260,6 +258,6 @@ static void DrawItem(int i, int x, int y, bool highlight)
         Rectangle(230, 9).Fill(x - 1, y, color);
         color = Color::BACK;
     }
+
     GetNameItem(i).Draw(x, y, color);
-    //String("%d", GetSizeItem(i)).Draw(x + 180, y);
 }
