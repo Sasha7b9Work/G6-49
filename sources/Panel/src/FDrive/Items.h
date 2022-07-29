@@ -4,47 +4,36 @@
 #include "common/Messages.h"
 
 
-
 class File;
 
-class ListFiles
-{
-public:
 
-    static void Init();
+namespace ListFiles
+{
+    void Init();
 
     // true означает, что идёт ожидание ответа от устройства
-    static bool WaitAnswer()
-    {
-        return requestIsSend;
-    }
+    bool WaitAnswer();
 
     // Послать запрос на количество итемов
-    static void SendRequest();
+    void SendRequest();
 
     // Обработка нажатия кнопки "Вверх"
-    static void PressUp();
+    void PressUp();
 
     // Обработка нажатия кнопки "Вниз"
-    static void PressDown();
+    void PressDown();
 
     // Возвращает количество файлов. если == -1, запрос не посылался
-    static int NumberFiles();
+    int NumberFiles();
 
     // Нарисовать списокфайлов
-    static void Draw(int x, int y);
+    void Draw(int x, int y);
 
     // Возвращает номер текущего файла
-    static int NumberCurrentFile();
+    int NumberCurrentFile();
 
-    class Handler
+    struct Handler
     {
-    public:
         static bool Processing(SimpleMessage *msg);
     };
-
-private:
-
-    // Запрос послан. Ожидается ответ
-    static bool requestIsSend;
 };

@@ -31,9 +31,16 @@ static int numFiles;                        // Количество файлов в текущем катал
 static int firstFile = 0;                   // Этот файл первый в списке на экране
 static int curFile = 0;                     // Текущий файл
 static uint timeStopUnderFile = _TIME_MS;   // Время остановки курсора над файлов. Через некоторое время после последней остановки нужно посылать запрос на изображение
-bool ListFiles::requestIsSend = false;
 
 #define NUM_FILES_ON_SCREEN 10              // Столько файлов помещается на экране
+
+
+namespace ListFiles
+{
+    // Запрос послан. Ожидается ответ
+    static bool requestIsSend = false;
+}
+
 
 struct StructFile
 {
@@ -64,6 +71,12 @@ void ListFiles::Init()
     {
         files[i].Clear();
     }
+}
+
+
+bool ListFiles::WaitAnswer()
+{
+    return requestIsSend;
 }
 
 
