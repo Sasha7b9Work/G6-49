@@ -15,21 +15,17 @@
 using namespace Primitives;
 
 
-// Запрос имени файла с порядковым номером number
-static void SendRequestForNameFile(int number);
-
-
-static int numFiles;                        // Количество файлов в текущем каталоге
-static int firstFile = 0;                   // Этот файл первый в списке на экране
-static int curFile = 0;                     // Текущий файл
-static uint timeStopUnderFile = _TIME_MS;   // Время остановки курсора над файлов. Через некоторое время после последней остановки нужно посылать запрос на изображение
-
 namespace ListFiles
 {
     // Запрос послан. Ожидается ответ
     static bool requestIsSend = false;
 
     static const int NUM_FILES_ON_SCREEN = 10;  // Столько файлов помещается на экране
+
+    static int numFiles;                        // Количество файлов в текущем каталоге
+    static int firstFile = 0;                   // Этот файл первый в списке на экране
+    static int curFile = 0;                     // Текущий файл
+    static uint timeStopUnderFile = _TIME_MS;   // Время остановки курсора над файлов. Через некоторое время после последней остановки нужно посылать запрос на изображение
 
     struct StructFile
     {
@@ -47,16 +43,18 @@ namespace ListFiles
 
     files[NUM_FILES_ON_SCREEN];
 
+    // Теукущий файл
+    static File file;
+
     // Возвращает имя i-го итема
     static String GetNameItem(int i);
 
     // Нарисовать i-й итем
     static void DrawItem(int i, int x, int y, bool highlight);
+
+    // Запрос имени файла с порядковым номером number
+    static void SendRequestForNameFile(int number);
 }
-
-
-// Теукущий файл
-static File file;
 
 
 void ListFiles::Init()
@@ -141,7 +139,7 @@ static bool EqualsRequestNameFile(Task *task1, Task *task2)
 }
 
 
-static void SendRequestForNameFile(int number)
+static void ListFiles::SendRequestForNameFile(int number)
 {
     Message::FDrive::FileName message(static_cast<uint8>(number), FDrive::CurrentDirectory());
     
