@@ -21,6 +21,16 @@
 #include <cstdlib>
 
 
+namespace PGenerator
+{
+    // Загружает форму произвольного сигнала
+    void LoadFormDDS(Form *form);
+
+    // Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, пригодные для отправки в ПЛИС
+    void TransformDataToCodeAndTransmit(const float data[DDS_NUM_POINTS], Form *form);
+}
+
+
 void PGenerator::EnableChannel(const Chan &ch, bool enable)
 {
     set.enabled[ch] = enable;

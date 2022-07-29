@@ -52,12 +52,4 @@ namespace PGenerator
     void LoadPictureDDSfromStorage(const Chan &);
 
     void Reset();
-
-private:
-
-    // Загружает форму произвольного сигнала
-    static void LoadFormDDS(Form *form);
-
-    // Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, пригодные для отправки в ПЛИС
-    static void TransformDataToCodeAndTransmit(const float data[DDS_NUM_POINTS], Form *form);
 };
