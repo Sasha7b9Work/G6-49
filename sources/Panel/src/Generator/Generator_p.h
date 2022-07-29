@@ -13,45 +13,45 @@
 class SimpleMessage;
 
 
-struct PGenerator
+namespace PGenerator
 {
     static const int DDS_NUM_POINTS = 8 * 1024;
 
-    static void EnableChannel(const Chan &, bool enable);
+    void EnableChannel(const Chan &, bool enable);
 
-    static void SingleStart();
+    void SingleStart();
 
-    static void SetFormWave(const Wave *w);
+    void SetFormWave(const Wave *w);
 
-    static void SetFormWave(const Chan &, TypeForm::E form);
+    void SetFormWave(const Chan &, TypeForm::E form);
 
-    static void SetParameterDouble(ParameterDouble *param);
+    void SetParameterDouble(ParameterDouble *param);
 
-    static void SetParameterChoice(ParameterChoice *param);
+    void SetParameterChoice(ParameterChoice *param);
 
-    static void SetParameterInteger(ParameterInteger *param);
+    void SetParameterInteger(ParameterInteger *param);
 
-    static void SetParameter(Parameter *param);
+    void SetParameter(Parameter *param);
 
-    static void SetOffset(const Chan &, float offset);
+    void SetOffset(const Chan &, float offset);
 
-    static void SetAmplitude(const Chan &, float amplitude);
+    void SetAmplitude(const Chan &, float amplitude);
 
-    static void SetDebugMode(bool enable);
+    void SetDebugMode(bool enable);
 
-    static void LoadRegister(Register::E reg, uint64 value);
+    void LoadRegister(Register::E reg, uint64 value);
 
-    static void LoadSettings();
+    void LoadSettings();
 
-    static void TuneChannel(const Chan &);
+    void TuneChannel(const Chan &);
 
     // Загружает режим запуска из set в аппаратуру для произвольного (signal == 0) или импульсного (signal == 1) сигнала
-    static void LoadStartMode(const Chan &, int signal, int mode);
+    void LoadStartMode(const Chan &, int signal, int mode);
 
     // Загружает изображение произвольного сигнала, хранящееся в ППЗУ
-    static void LoadPictureDDSfromStorage(const Chan &);
+    void LoadPictureDDSfromStorage(const Chan &);
 
-    static void Reset();
+    void Reset();
 
 private:
 
