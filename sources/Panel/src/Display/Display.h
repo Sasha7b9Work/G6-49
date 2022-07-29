@@ -22,15 +22,17 @@ namespace Display
     uint8 *GetBuffer();
 
     uint8 *GetRow(int row);
-    
-    void ShowWarning(const String &warning);
-    void ShowWarning(pchar warning);
-
-    void ClearWarnings();
 
     // Экран
     extern uint8 frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
 
     // Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
     extern uint8 backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
+
+    struct Warnings
+    {
+        static void Show(const String &ru, const String &en);
+        static void Show(pchar ru, pchar en);
+        static void Clear();
+    };
 };

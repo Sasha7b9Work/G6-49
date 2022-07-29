@@ -11,6 +11,7 @@
 #include "Menu/Menu.h"
 #include "Menu/Pages/Pages.h"
 #include "Utils/Statistics.h"
+#include "Settings/Settings.h"
 #include <cstdlib>
 #include <cstring>
 
@@ -116,15 +117,15 @@ void Display::Update()
 }
 
 
-void Display::ShowWarning(const String &warning)
+void Display::Warnings::Show(const String &ru, const String &en)
 {
-    warnings.Append(warning);
+    warnings.Append(LANG_IS_RU ? ru : en);
 }
 
 
-void Display::ShowWarning(pchar warning)
+void Display::Warnings::Show(pchar ru, pchar en)
 {
-    ShowWarning(String(warning));
+    Show(String(ru), String(en));
 }
 
 
@@ -198,7 +199,7 @@ void Warnings::Clear()
 }
 
 
-void Display::ClearWarnings()
+void Display::Warnings::Clear()
 {
     warnings.Clear();
 }
