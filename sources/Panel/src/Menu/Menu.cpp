@@ -11,14 +11,30 @@
 #include "Settings/Settings.h"
 
 
-Item *Menu::pressedItem = nullptr;
-static Page *oldPage = nullptr;
-Item *Menu::openedItem = nullptr;
-Item *Menu::currentItem = nullptr;
-
 extern const PageBase pSignals;
 
 
+namespace Menu
+{
+    // Открывает страницу отладки, если обнаружена соотвествующая клавиватурная последовательнсость
+    static bool OpenDebugPage(const Control);
+
+    // Обработать управляющее воздействие control
+    static void ProcessKey(const Control);
+
+    // Обрабатывает состояние выходов. Возвращает true, если состояние вывода изменилось
+    static bool ProcessOutputs(const Control);
+    static void ProcessOutput(const Chan &);
+
+    // Если какой-то итем раскрыт, то здесь его адрес
+    static Item *openedItem = nullptr;
+
+    static Item *currentItem = nullptr;
+
+    Item *pressedItem = nullptr;
+
+    static Page *oldPage = nullptr;
+}
 
 
 void Menu::Init()

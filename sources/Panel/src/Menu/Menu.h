@@ -3,69 +3,52 @@
 #include "Menu/MenuItems.h"
 
 
-struct Menu
+namespace Menu
 {
     // Столько элементов меню помещается на дисплее одновременно
     static const int NUM_ITEMS_ON_DISPLAY = 4;
 
-    static void Init();
-    
-    static void Update();
+    void Init();
 
-    static void Draw();
-    
+    void Update();
+
+    void Draw();
+
     // Нарисовать заголовок
-    static int DrawTitle();
+    int DrawTitle();
 
-    static void DrawPagesUGO(int x);
-    
+    void DrawPagesUGO(int x);
+
     // Возвращает true, если ручка управляет переклюичением подстраниц меню
-    static bool RegIsControlSubPages();
-    
+    bool RegIsControlSubPages();
+
     // Возвращает адрес открытого элемента меню
-    static Item* GetOpenedItem();
-    
+    Item *GetOpenedItem();
+
     // Установить Item, который будет считаться открытым
-    static void SetOpenedItem(Item *item);
-    
+    void SetOpenedItem(Item *item);
+
     // Установить текущий Item - именно к нему будут приходить события ручки и ESC
-    static void SetCurrentItem(Item *item);
-    
+    void SetCurrentItem(Item *item);
+
     // Сброс текущего Item - текущего Item'a больше нет
-    static void ResetCurrentItem();
-    
+    void ResetCurrentItem();
+
     // Возвращает текущий Item
-    static Item* GetCurrentItem();
-    
+    Item *GetCurrentItem();
+
     // Обнулить открытый итем - итем закрыт
-    static void ResetOpenedItem();
-    
+    void ResetOpenedItem();
+
     // Возвращает позицию страницы на страницы. Только если страница принадлежит главному меню. Иначе -1
-    static int GetPosition(const Page *page);
-    
+    int GetPosition(const Page *page);
+
     // Устанавливает для отрисовки дополнительноую страницу
-    static void SetAdditionPage(Page *page);
-    
+    void SetAdditionPage(Page *page);
+
     // Синмает дополнительную страницу с отрисовки
-    static void ResetAdditionPage();
-  
+    void ResetAdditionPage();
+
     // Здесь хранится адрес элемента меню, соответствующего функциональной клавише [F1..F4], если она находится в нижнем положении, и 0, если ни одна кнопка не нажата.
-    static Item *pressedItem;
-
-private:
-    
-    // Открывает страницу отладки, если обнаружена соотвествующая клавиватурная последовательнсость
-    static bool OpenDebugPage(const Control);
-    
-    // Обработать управляющее воздействие control
-    static void ProcessKey(const Control);
-    
-    // Обрабатывает состояние выходов. Возвращает true, если состояние вывода изменилось
-    static bool ProcessOutputs(const Control);
-    static void ProcessOutput(const Chan &);
-    
-    // Если какой-то итем раскрыт, то здесь его адрес
-    static Item *openedItem;
-
-    static Item *currentItem;
+    extern Item *pressedItem;
 };
