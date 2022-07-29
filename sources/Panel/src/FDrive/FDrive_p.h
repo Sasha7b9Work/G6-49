@@ -3,10 +3,10 @@
 #include "common/Messages.h"
 
 
-struct FDrive
+namespace FDrive
 {
     // Начальная инициализация
-    static void Init();
+    void Init();
 
     // Что показываем - каталоги или файлы
     enum View
@@ -15,23 +15,23 @@ struct FDrive
         Files
     };
     
-    static View view;
+    extern View view;
 
     // Отрисовка файло-менеджера
-    static void Draw();
+    void Draw();
     
     // Обработка нажатия кнопки "Вверх"
-    static void PressUp();
+    void PressUp();
     
     // Обработка нажатия кнопки "Вниз"
-    static void PressDown();
+    void PressDown();
     
     // Обработка нажатия кнопки "Выбрать"
-    static void PressChoose();
+    void PressChoose();
 
-    static char *CurrentDirectory();
+    char *CurrentDirectory();
 
-    static void SaveScreenToFlash();
+    void SaveScreenToFlash();
 
     struct Handler
     {
@@ -44,21 +44,4 @@ struct FDrive
         static bool RequestFileSize();
         static bool LoadDDSfromFile();
     };
-
-private:
-    enum Mount
-    {
-        Disconnect,
-        Mounted,
-        Failed
-    };
-    
-    // Текущее состояние флешки
-    static Mount mounted;
-    
-    // Путь к текущему каталогу
-    static char directory[255];
-    
-    // Если true - идёт загрузка сигнала с флешки в память
-    static bool inStateWaitCompleteLoad;
 };
