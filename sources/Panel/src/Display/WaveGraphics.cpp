@@ -10,6 +10,15 @@
 using namespace Primitives;
 
 
+namespace WaveGraphics
+{
+    static void DrawParameters(const Chan &, int y0);
+
+    // Нарисовать УГО сигнала
+    static void DrawUGO(const Chan &, int x, int y);
+}
+
+
 void WaveGraphics::Draw(const Chan &ch)
 {
     if((set.freq.measure != FreqMeasure::Disable) && !ch.Is(CURRENT_CHANNEL))
