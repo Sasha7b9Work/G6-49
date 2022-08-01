@@ -27,7 +27,7 @@ namespace DInterface
     static Queue outbox;
 
     // Ненулевое значение означает, что его следует передать в панель как измеренное частотомером значение
-    static uint freqForSend = MAX_UINT;
+    uint freqForSend = MAX_UINT;
 }
 
 
