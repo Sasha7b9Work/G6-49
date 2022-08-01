@@ -21,8 +21,14 @@
 #include <cstdlib>
 
 
-uint  DInterface::freqForSend = MAX_UINT;
-Queue DInterface::outbox;
+namespace DInterface
+{
+    // ќчередь сообщений, ожидающих отправки
+    static Queue outbox;
+
+    // Ќенулевое значение означает, что его следует передать в панель как измеренное частотомером значение
+    static uint freqForSend = MAX_UINT;
+}
 
 
 Queue &DInterface::GetOutbox()
