@@ -55,7 +55,7 @@ void WaveGraphics::DrawUGO(const Chan &ch, int x, int y)
         Font::StoreAndSet(TypeFont::_GOST28);
         Font::Spacing::SetAndStore(3);
 
-        String(LANG_IS_RU ? "Œ“ À" : "DIS").Draw(x + 20, y + 50);
+        String(LANG_RU ? "Œ“ À" : "DIS").Draw(x + 20, y + 50);
 
         Font::Restore();
         Font::Spacing::Restore();

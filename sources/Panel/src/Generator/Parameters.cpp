@@ -339,7 +339,7 @@ String ParameterComposite::ToString(String &units) const
 
         ParameterChoice *enabled = const_cast<ParameterComposite *>(this)->FindParameter(ParameterChoiceType::ManipulationEnabled);
 
-        return String(LANG_IS_RU ? valuesRU[enabled->GetChoice()] : valuesEN[enabled->GetChoice()]);
+        return String(LANG_RU ? valuesRU[enabled->GetChoice()] : valuesEN[enabled->GetChoice()]);
     }
 
     return String("");

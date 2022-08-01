@@ -15,9 +15,8 @@
 #include <cctype>
 
 
-#ifndef LANG
-#define LANG 0
-#define LANG_RU true
+#ifndef LANGUAGE
+#define LANGUAGE 0
 #endif
 
 

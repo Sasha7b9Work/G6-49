@@ -123,13 +123,13 @@ void Display::Update()
 
 void Display::Warnings::Show(const String &ru, const String &en)
 {
-    warnings.Append(LANG_IS_RU ? ru : en);
+    warnings.Append(LANG_RU ? ru : en);
 }
 
 
 void Display::Warnings::ShowFlash(const pchar &ru, const pchar &en)
 {
-    warnings.AppendFlash(LANG_IS_RU ? String(ru) : String(en));
+    warnings.AppendFlash(LANG_RU ? String(ru) : String(en));
 }
 
 

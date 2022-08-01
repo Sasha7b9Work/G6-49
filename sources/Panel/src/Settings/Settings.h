@@ -7,13 +7,13 @@
 #include "Settings/SettingsTypes.h"
 
 
-#define LANGUAGE                    (set.lang)
-#define LANG_IS_RU                  (LANGUAGE == 0)
-#define COLOR(x)                    (set.disp_Colors[x])
-#define CURRENT_PAGE                (set._menu_currentPage)
-#define MENU_POS_ACT_ITEM(x)        (set.menu_posActItem[x])
-#define MENU_CURRENT_SUBPAGE(x)     (set.menu_currentSubPage[x])
-#define CURRENT_CHANNEL             (set.cur_chan)
+#define LANGUAGE                (set.lang)
+#define LANG_RU                 (LANGUAGE == 0)
+#define COLOR(x)                (set.disp_Colors[x])
+#define CURRENT_PAGE            (set._menu_currentPage)
+#define MENU_POS_ACT_ITEM(x)    (set.menu_posActItem[x])
+#define MENU_CURRENT_SUBPAGE(x) (set.menu_currentSubPage[x])
+#define CURRENT_CHANNEL         (set.cur_chan)
 
 
 struct SettingsFreqMeter

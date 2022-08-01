@@ -97,7 +97,7 @@ void FDrive::Draw()
 
         Rectangle(width, height).DrawFilled(x, y, Color::BACK, Color::FILL);
 
-        String(LANG_IS_RU ? "Сигнал загружается" : "Signal loaded").Draw(x + 10, y + 10, Color::FILL);
+        String(LANG_RU ? "Сигнал загружается" : "Signal loaded").Draw(x + 10, y + 10, Color::FILL);
     }
 }
 

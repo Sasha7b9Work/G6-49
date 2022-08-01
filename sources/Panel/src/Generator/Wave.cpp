@@ -789,6 +789,32 @@ String Form::InvalidParameters() const
 {
     CheckerParameters checker(this);
 
+    if (!checker.CheckDurationImpulse())
+    {
+        if (Is(TypeForm::Impulse))
+        {
+            if (LANG_RU)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        if (Is(TypeForm::Packet))
+        {
+            if (LANG_RU)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+    }
+
     return String("");
 }
 
@@ -798,5 +824,31 @@ Form::CheckerParameters::CheckerParameters(const Form *_form) : form(_form) { }
 
 bool Form::CheckerParameters::CheckDurationImpulse() const
 {
+    if (form->Is(TypeForm::Impulse))
+    {
+        double duration = form->FindParameter(ParameterDoubleType::Duration)->GetValue().ToDouble();
+        double period = form->FindParameter(ParameterDoubleType::Period)->GetValue().ToDouble();
+
+        if (duration >= period)
+        {
+            return false;
+        }
+    }
+
+    if (form->Is(TypeForm::Packet))
+    {
+        uint64 number = form->FindParameter(ParameterIntegerType::PacketNumber)->GetValue().ToUINT64();
+        double duration_impulse = form->FindParameter(ParameterDoubleType::Duration)->GetValue().ToDouble();
+        double period_impulse = form->FindParameter(ParameterDoubleType::Period)->GetValue().ToDouble();
+        double period_packet = form->FindParameter(ParameterDoubleType::PacketPeriod)->GetValue().ToDouble();
+
+        double duration_packet = (double)(number - 1) * period_impulse + duration_impulse;
+
+        if (duration_packet >= period_packet)
+        {
+            return false;
+        }
+    }
+
     return true;
 }

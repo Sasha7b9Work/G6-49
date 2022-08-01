@@ -149,7 +149,7 @@ int Hint::DrawDetailedHint(const Choice *choice, int x0, int y0, int width, int 
     for (int i = start; i <= end; i++)
     {
         y0 = String(
-            "%d. \"%s\" %s", number++, choice->NameSubItem(i).c_str(), LANG_IS_RU ? choice->hintsRU[i] : choice->hintsEN[i]
+            "%d. \"%s\" %s", number++, choice->NameSubItem(i).c_str(), LANG_RU ? choice->hintsRU[i] : choice->hintsEN[i]
                     ).DrawInColumnWithTransfersDiffColors(x0 + 2, y0, width, colorGreen) + 5;
     }
 
