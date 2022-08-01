@@ -1,8 +1,8 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "common/Common.h"
-#include "Display/Tuner.h"
-#include "Display/Viewer.h"
+#include "Signals/Tuner.h"
+#include "Signals/Viewer.h"
 #include "Generator/MathSupport.h"
 #include "Settings/SettingsTypes.h"
 

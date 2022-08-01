@@ -3,7 +3,7 @@
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "Display/Text.h"
-#include "Display/Tuner.h"
+#include "Signals/Tuner.h"
 #include "Display/Font/Font.h"
 #include "Display/WaveGraphics.h"
 #include "Generator/Parameters.h"

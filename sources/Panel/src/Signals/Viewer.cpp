@@ -2,7 +2,7 @@
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
 #include "Display/Text.h"
-#include "Display/Viewer.h"
+#include "Signals/Viewer.h"
 #include "Generator/Signals.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"

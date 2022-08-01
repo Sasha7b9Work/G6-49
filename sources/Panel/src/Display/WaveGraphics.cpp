@@ -1,6 +1,7 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Display/Painter.h"
 #include "Display/Text.h"
-#include "Display/Viewer.h"
+#include "Signals/Viewer.h"
 #include "Display/WaveGraphics.h"
 #include "Generator/Signals.h"
 #include "Menu/Pages/Pages.h"

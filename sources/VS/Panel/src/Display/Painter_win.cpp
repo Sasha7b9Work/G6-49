@@ -6,6 +6,7 @@
 #include "GUI/GovernorGUI.h"
 #include "GUI/Dimensions.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 
 
 #define uint    unsigned int
