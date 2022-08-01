@@ -140,7 +140,7 @@ private:
 namespace DisplayEntering
 {
     // Обработка нажатия клавиши набора цифрового значения
-    bool OnEnteringKey(const Control &control);
+    bool OnEnteringKey(const Control &);
 
     void Draw(int x, int y, int width);
 
@@ -208,7 +208,7 @@ public:
 
     void Draw();
 
-    bool OnControlKey(const Control &control);
+    bool OnControlKey(const Control &);
 
     // Вывод сообщения о выходе за пределы допустимого диапазона, если необходимо
     static void ShowMessageOutRangIfNeed(Value value);
@@ -265,7 +265,7 @@ public:
 
     void Draw();
 
-    bool OnControlKey(const Control control);
+    bool OnControlKey(const Control &);
 
     // Обработчик нажатия кнопки "Отмена"
     void OnButtonCancel();

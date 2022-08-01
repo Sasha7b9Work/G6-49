@@ -101,7 +101,7 @@ struct PageTuneParameter
     static bool IsOpened();
 
     // ѕроверка на возможность изменени€ размаха. ¬озвращает false, если изменение невозможно
-    static bool VerifyForPossiblyChangesAmplitude(const Control &control);
+    static bool VerifyForPossiblyChangesAmplitude(const Control &);
 };
 
 

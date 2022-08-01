@@ -8,7 +8,7 @@
 #include "common/Command.h"
 
 
-typedef bool (*pFuncBKey)(const Control);
+typedef bool (*pFuncBKey)(const Control &);
 
 
 // ќбща€ часть дл€ всех типов элементов меню
@@ -70,7 +70,7 @@ public:
     void DrawTitle(int x, int y) const;
     
     // ќбрабатывает нажатие кнопки. ¬озвращает указатель на себ€, если находитс€ в открытом состо€нии после нажати€, и 0 в противном случае
-    void Press(const Control control);
+    void Press(const Control &);
 
     TypeItem::E GetType() const;
 
@@ -194,7 +194,7 @@ public:
     void ChangeSubPage(int delta);
     
     // ќбрабатывает нажатие кнопки. ¬озвращает указатель на себ€, если находитс€ в открытом состо€нии после нажати€, и 0 в противном случае
-    bool Press(const Control control);
+    bool Press(const Control &);
 
     struct Title
     {
@@ -326,7 +326,7 @@ public:
     void DrawValue(int x, int y) const;
     
     // ќбработка воздействи€
-    void Press(const Control control);
+    void Press(const Control &);
 };
 
 
@@ -384,7 +384,7 @@ public:
     String NameSubItem(int i) const;
     
     // ¬озвращает указатель на себ€, если находитс€ ы открытом состо€нии, и 0, если в закрытом
-    Item *Press(const Control control);
+    Item *Press(const Control &);
 
     int8 CurrentIndex() const;
 };
@@ -407,7 +407,7 @@ public:
     Form    *form;
     
     // ќбрабатывает нажатие кнопки. ¬озвращает указатель на себ€, если находитс€ в открытом состо€нии и 0 в противном.
-    Item *Press(const Control &control);
+    Item *Press(const Control &);
 
     pString NameSubItem(int num) const;
 

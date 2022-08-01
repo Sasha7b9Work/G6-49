@@ -173,7 +173,7 @@ static void DrawPage()
 }
 
 
-static bool FuncOnControlKeyPage(const Control control) //-V2009 //-V801
+static bool FuncOnControlKeyPage(const Control &control)
 {
     if(control.Is(Key::RegButton, Action::Down))
     {
@@ -246,7 +246,7 @@ static void OnEnter_Calibration(bool enter)
 const PageBase *page = const_cast<const PageBase *>(reinterpret_cast<PageBase *>(PageDebug::self));
 
 
-DEF_PAGE_4_VAR( pCalibration, //-V641
+DEF_PAGE_4_VAR( pCalibration,
     " ¿À»¡–Œ¬ ¿", "CALIBRATION",
     "", "",
     &cChannelCal,

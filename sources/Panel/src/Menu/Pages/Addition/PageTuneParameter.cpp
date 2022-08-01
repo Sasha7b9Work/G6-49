@@ -148,7 +148,7 @@ bool PageTuneParameter::VerifyForPossiblyChangesAmplitude(const Control &control
 }
 
 
-static bool OnControl_TuneParameter(const Control control) //-V801
+static bool OnControl_TuneParameter(const Control &control)
 {
     if (control.IsUp() && control.Is(Key::Esc))
     {
@@ -196,8 +196,8 @@ static void OnOpenClose_TuneParameter(bool enter)
 }
 
 
-DEF_PAGE_SB(pTuneParameter,   //-V641
-    "ббнд гмювемхъ", "ENTER VALUE", //-V641
+DEF_PAGE_SB(pTuneParameter,
+    "ббнд гмювемхъ", "ENTER VALUE",
     "", "",
     &Item::emptyDark,
     &Item::emptyDark,

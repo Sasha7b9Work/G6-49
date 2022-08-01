@@ -11,7 +11,7 @@ public:
     static void Draw();
     
     // Орган упралвения. Возвращает false, если обработка не произошла
-    static bool ProcessControl(const Control control);
+    static bool ProcessControl(const Control &);
 
 private:
     

@@ -106,7 +106,7 @@ float Choice::Step()
 }
 
 
-void Governor::Press(const Control control) //-V801
+void Governor::Press(const Control &control) //-V801
 {
     if(control.IsFunctional() && Keeper()->GetItem(control.key) == this)
     {
@@ -310,7 +310,7 @@ int Page::NumItems() const
 }
 
 
-void Item::Press(const Control control) //-V801
+void Item::Press(const Control &control) //-V801
 {
     if (!funcOfActive())
     {
@@ -457,7 +457,7 @@ Item *ChoiceParameter::Press(const Control &control)
 }
 
 
-Item *Choice::Press(const Control control) //-V801
+Item *Choice::Press(const Control &control)
 {
     if ((control.Is(Key::Right) && control.IsRelease()) || control.Is(Key::RotateRight))
     {
@@ -585,7 +585,7 @@ int ChoiceParameter::GetHeightOpened() const
 }
 
 
-bool Page::Press(const Control control) //-V801
+bool Page::Press(const Control &control)
 {
     if(funcOnKey(control))
     {

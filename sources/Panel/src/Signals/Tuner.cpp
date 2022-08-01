@@ -1191,7 +1191,7 @@ void Tuner::Draw()
 }
 
 
-bool Tuner::OnControlKey(const Control control) //-V801
+bool Tuner::OnControlKey(const Control &control)
 {
     if (control.IsCursors() || control.IsRotate() || control.IsEntering())
     {
