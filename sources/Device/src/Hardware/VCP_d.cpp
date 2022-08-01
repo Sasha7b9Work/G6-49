@@ -11,12 +11,17 @@
 #include <cstring>
 
 
+namespace DVCP
+{
+    bool PrevSendingComplete();
 
-static USBD_HandleTypeDef handleUSBD;
-void *DVCP::handle = &handleUSBD;
+    bool connectedToUSB = false;
 
-bool               DVCP::cableUSBisConnected = false;
-bool               DVCP::connectedToUSB = false;
+    bool cableUSBisConnected = false;
+
+    static USBD_HandleTypeDef handleUSBD;
+    void *handle = &handleUSBD;
+}
 
 
 void DVCP::Init()
