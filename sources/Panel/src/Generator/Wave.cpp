@@ -795,11 +795,11 @@ String Form::InvalidParameters() const
         {
             if (LANG_RU)
             {
-
+                return String("Ќеверные параметры : длительность, период");
             }
             else
             {
-
+                return String("Invalid parameters: duration, period");
             }
         }
         if (Is(TypeForm::Packet))
