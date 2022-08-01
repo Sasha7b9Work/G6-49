@@ -89,25 +89,33 @@ namespace Amplifier
 };
 
 
-struct SettingsGenerator
+namespace SettingsGenerator
 {
-public:
-    // Возвращает установленную на канале амплитуду. Амплитуда возвращается без учёта аттёнюатора
-    static double Amplitude(const Chan &ch)     { return amplitude[ch].ToDouble(); }
-    static Value AmplitudeValue(const Chan &ch) { return amplitude[ch]; }
-    // Возвращает установленное на канале смещение
-    static double Offset(const Chan &ch)        { return offset[ch].ToDouble(); }
-    static Value OffsetValue(const Chan &ch)    { return offset[ch]; }
-    // Возвращает установленную частоту на канале
-    static double Frequency(const Chan &ch) { return frequency[ch].ToDouble(); }
-    // Возвращает true, если на канале ch установлена синусоидальная форма сигнала
-    static bool FormIsSine(const Chan &ch) { return waveIsSine[ch]; }
     // true, если на канале установлена форма сигнала "синусоида"
-    static bool waveIsSine[Chan::Count];
+    extern bool waveIsSine[Chan::Count];
+
     // Текущая частота на канале
-    static Value frequency[Chan::Count];
+    extern Value frequency[Chan::Count];
+
     // Текущая установленная амплитуда на канале
-    static Value amplitude[Chan::Count];
+    extern Value amplitude[Chan::Count];
+
     // Текущая установленное смещение на кнаале
-    static Value offset[Chan::Count];
+    extern Value offset[Chan::Count];
+
+    // Возвращает установленную на канале амплитуду. Амплитуда возвращается без учёта аттёнюатора
+    inline double Amplitude(const Chan &ch) { return amplitude[ch].ToDouble(); }
+
+    inline Value AmplitudeValue(const Chan &ch) { return amplitude[ch]; }
+
+    // Возвращает установленное на канале смещение
+    inline double Offset(const Chan &ch) { return offset[ch].ToDouble(); }
+
+    inline Value OffsetValue(const Chan &ch) { return offset[ch]; }
+
+    // Возвращает установленную частоту на канале
+    inline double Frequency(const Chan &ch) { return frequency[ch].ToDouble(); }
+
+    // Возвращает true, если на канале ch установлена синусоидальная форма сигнала
+    inline bool FormIsSine(const Chan &ch) { return waveIsSine[ch]; }
 };
