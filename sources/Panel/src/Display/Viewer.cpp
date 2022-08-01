@@ -11,6 +11,13 @@
 using namespace Primitives;
 
 
+// ¬озвращает true, если открыта перва€ подстраница (с которой производитс€ настройка каналов)
+static bool IsOpenedFirstSubPageSignals()
+{
+    return (CURRENT_PAGE == PageSignals::self) && (CURRENT_PAGE->CurrentSubPage() == 0);
+}
+
+
 Viewer::Viewer(Parameter *_param) : param(_param)
 {
 
@@ -23,7 +30,7 @@ void Viewer::Draw(int y, int xName, int xValue, int xUnits, const Chan &ch)
 
     if(ch.Is(CURRENT_CHANNEL) &&
        (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) &&
-       PageSignals::OnSubPageTuneChannels())
+       IsOpenedFirstSubPageSignals())
     {
         Rectangle(141, 9).Fill(xName, y, param->funcOfActive() ? Color::GRAY_50 : Color::GRAY_10);
         color = param->funcOfActive() ? Color::BACK : Color::GRAY_10;
@@ -54,7 +61,7 @@ void Viewer::DrawName(int x, int y, int width, const Chan &ch)
 
     if (ch.Is(CURRENT_CHANNEL) &&
         (std::strcmp(CURRENT_PARAM->Name(), param->Name()) == 0) &&
-        PageSignals::OnSubPageTuneChannels())
+        IsOpenedFirstSubPageSignals())
     {
         Rectangle(width - 2, 8).Fill(x + 1, y + 1, Color::GREEN_50);
         HLine::Draw(y, x + 1, x - 1 + Item::WIDTH - 1, Color::GREEN_75);

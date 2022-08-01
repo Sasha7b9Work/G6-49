@@ -205,12 +205,6 @@ DEF_PAGE_4( pageSignals,   //-V641
 Page *PageSignals::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageSignals));
 
 
-bool PageSignals::OnSubPageTuneChannels()
-{
-    return (CURRENT_PAGE == PageSignals::self) && (CURRENT_PAGE->CurrentSubPage() == 0);
-}
-
-
 void PageSignals::Init()
 {
     OnPress_Channel(true);

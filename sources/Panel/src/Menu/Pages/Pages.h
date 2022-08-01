@@ -17,9 +17,6 @@ struct PageSignals
 {
     static Page *self;
 
-    // ¬озвращает true, если открыта перва€ подстраница (с которой производитс€ настройка каналов)
-    static bool OnSubPageTuneChannels();
-
     static void Init();
 
     static void OnPress_Channel(bool);
