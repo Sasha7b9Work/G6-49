@@ -1,3 +1,4 @@
+// 2022/8/1 10:54:56 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Colors.h"
 #include "Log.h"
@@ -5,6 +6,8 @@
 #include "Display/Painter.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
+#include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 
 
 Color Color::BLACK(COLOR_BLACK);
@@ -255,13 +258,21 @@ Color Color::Channel(const Chan &ch)
 
 Color Color::GetCurrent()
 {
+    uint8 val = current.value;
+
+    static Color white(COLOR_WHITE);
+    static Color black(COLOR_BLACK);
+
+    if (val == COLOR_FLASH_01)
+    {
+        return ((_TIME_MS / 500) % 2) ? white : black;
+    }
+    else if (val == COLOR_FLASH_10)
+    {
+        return ((_TIME_MS / 500) % 2) ? black : white;
+    }
+
     return current;
-}
-
-
-uint8 Color::CurrentValue()
-{
-    return current.value;
 }
 
 

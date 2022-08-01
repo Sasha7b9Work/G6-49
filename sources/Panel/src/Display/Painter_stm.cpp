@@ -46,7 +46,7 @@ void Primitives::HLine::Draw(int y, int x0, int x1, Color col)
     uint8 *address = Display::GetBuffer() + x0 + y * BUFFER_WIDTH;
     uint8 *end = Display::GetBuffer() + BUFFER_WIDTH * BUFFER_HEIGHT;
 
-    uint8 value = Color::CurrentValue();
+    uint8 value = Color::GetCurrent().value;
 
     for (int x = x0; x <= x1; ++x)
     {
@@ -70,7 +70,7 @@ void Primitives::VLine::Draw(int x, int y0, int y1, Color col)
     uint8 *address = Display::GetBuffer() + x + y0 * BUFFER_WIDTH;
     uint8 *end = Display::GetBuffer() + BUFFER_WIDTH * BUFFER_HEIGHT;
 
-    uint8 value = Color::CurrentValue();
+    uint8 value = Color::GetCurrent().value;
 
     for (int y = y0; y < y1; ++y)
     {
@@ -142,7 +142,7 @@ void Point::Draw(int x, int y)
 
     if (x >= 0 && x < BUFFER_WIDTH && y >= 0 && y < BUFFER_HEIGHT)
     {
-        *buffer = Color::CurrentValue();
+        *buffer = Color::GetCurrent().value;
     }
 }
 

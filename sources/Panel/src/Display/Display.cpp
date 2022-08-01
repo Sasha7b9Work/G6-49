@@ -112,6 +112,10 @@ void Display::Update()
     Console::Draw();
     Keyboard::Draw();
     warnings.Show();
+
+    Rectangle(50, 50).Fill(10, 10, Color::FLASH_01);
+    Rectangle(50, 50).Fill(100, 10, Color::FLASH_10);
+
     Painter::EndScene();
     Statistics::EndFrame();
 }

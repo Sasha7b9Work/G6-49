@@ -1,3 +1,4 @@
+// 2022/8/1 10:55:30 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "common/CommonTypes.h"
 
@@ -57,7 +58,6 @@ public:
 
     void SetAsCurrent() const;
     static Color GetCurrent();
-    static uint8 CurrentValue();
     col_val GetRGB();
 
     Color& operator=(const Color &color);
