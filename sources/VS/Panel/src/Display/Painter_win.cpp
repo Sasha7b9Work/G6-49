@@ -3,6 +3,7 @@
 
 #include "GUI/Application.h"
 #include "GUI/GovernorGUI.h"
+#include "GUI/Dimensions.h"
 
 
 #define uint    unsigned int
@@ -113,7 +114,7 @@ void Painter::EndScene()
 
 static void SetSizeAndPosition(Frame *frame)
 {
-    wxSize size = { 680, 240 };
+    wxSize size = { Size::Frame::Client::Width(), Size::Frame::Client::Height() };
 
     frame->SetMinClientSize(size);
     frame->SetMaxClientSize(size);
