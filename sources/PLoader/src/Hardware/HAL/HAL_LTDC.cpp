@@ -152,7 +152,7 @@ void HAL_LTDC::ToggleBuffers()
 }
 
 
-void HAL_LTDC::FillRegion(int, int, int, int, Color color)
+void HAL_LTDC::FillRegion(int, int, int, int, const Color &color)
 {
     // \todo Не работает функция
 

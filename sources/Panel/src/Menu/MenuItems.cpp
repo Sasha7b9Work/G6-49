@@ -147,7 +147,7 @@ void Page::SetCurrentSubPage(int pos)
 }
 
 
-int Item::DrawHint(int x, int y, int width, Color color) const
+int Item::DrawHint(int x, int y, int width, const Color &color) const
 {
     color.SetAsCurrent();
 

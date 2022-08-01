@@ -66,7 +66,7 @@ private:
     DisplayCorrection *display;
 
     // Ќарисовать значок подсветки
-    void HighlightSymbol(int x, int y, Color color) const;
+    void HighlightSymbol(int x, int y, const Color &) const;
 
     // ¬озвращает действительный индекс подсвеченного разр€да (номер разр€да в массиве digits)
     int IndexHighlightReal() const;

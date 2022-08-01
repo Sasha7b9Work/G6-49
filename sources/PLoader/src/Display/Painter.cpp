@@ -8,7 +8,7 @@
 #include <cmath>
 
 
-void Painter::BeginScene(Color col)
+void Painter::BeginScene(const Color &col)
 {
     col.SetAsCurrent();
 
@@ -28,7 +28,7 @@ void Painter::EndScene()
 }
 
 
-void Painter::DrawHLine(int y, int x0, int x1, Color col)
+void Painter::DrawHLine(int y, int x0, int x1, const Color &col)
 {
     col.SetAsCurrent();
 
@@ -47,7 +47,7 @@ void Painter::DrawHLine(int y, int x0, int x1, Color col)
 }
 
 
-void Painter::DrawVLine(int x, int y0, int y1, Color col)
+void Painter::DrawVLine(int x, int y0, int y1, const Color &col)
 {
     if(y1 < y0)
     {
@@ -72,7 +72,7 @@ void Painter::DrawVLine(int x, int y0, int y1, Color col)
 }
 
 
-void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
+void Painter::DrawLine(int x1, int y1, int x2, int y2, const Color &col)
 {
     col.SetAsCurrent();
 
@@ -125,7 +125,7 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2, Color col)
 }
 
 
-void Painter::DrawRectangle(int x, int y, int width, int height, Color col)
+void Painter::DrawRectangle(int x, int y, int width, int height, const Color &col)
 {
     col.SetAsCurrent();
 
@@ -136,7 +136,7 @@ void Painter::DrawRectangle(int x, int y, int width, int height, Color col)
 }
 
 
-void Painter::FillRegion(int x, int y, int width, int height, Color col)
+void Painter::FillRegion(int x, int y, int width, int height, const Color &col)
 {
     col.SetAsCurrent();
 

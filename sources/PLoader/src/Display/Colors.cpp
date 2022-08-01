@@ -86,7 +86,7 @@ Color Color::MenuItem(bool shade)
     return shade ? Color(COLOR_MENU_ITEM_DARK) : Color(COLOR_MENU_ITEM);
 }
 
-Color Color::Contrast(Color color)
+Color Color::Contrast(const Color &color)
 {
     col_val colorValue = COLOR(color.value);
     if (R_FROM_COLOR(colorValue) > 16 || G_FROM_COLOR(colorValue) > 32 || B_FROM_COLOR(colorValue) > 16)

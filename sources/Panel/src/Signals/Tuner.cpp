@@ -439,7 +439,7 @@ int Indicator::AdditionShiftForDigit(int pos) const
 }
 
 
-void Indicator::HighlightSymbol(int x, int y, Color color) const
+void Indicator::HighlightSymbol(int x, int y, const Color &color) const
 {
     Font::StoreAndSet(TypeFont::_7);
 

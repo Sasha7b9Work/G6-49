@@ -81,7 +81,7 @@ public:
     String FullPath();
     
     // Вывести подсказку в заданном месте экрана. Возвращает нижнюю координату выведенного тектса
-    int DrawHint(int x, int y, int width, Color color = Color::NUMBER) const;
+    int DrawHint(int x, int y, int width, const Color & = Color::NUMBER) const;
 
     Page *Keeper() const { return const_cast<Page *>(reinterpret_cast<const Page *>(keeper)); }; //-V2567
 

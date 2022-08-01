@@ -60,7 +60,7 @@ struct HAL_LTDC
 
     static void ToggleBuffers();
 
-    static void FillRegion(int x, int y, int width, int height, Color color);
+    static void FillRegion(int x, int y, int width, int height, const Color &);
 };
 
 

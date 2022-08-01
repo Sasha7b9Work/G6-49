@@ -7,9 +7,9 @@ class Char
 {
 public:
     Char(char s) : symbol(s) { }
-    int Draw(int x, int y, Color color = Color::NUMBER);
-    void Draw4InRect(int x, int y, Color color = Color::NUMBER);
-    void Draw2Horizontal(int x, int y, Color color = Color::NUMBER);
+    int Draw(int x, int y, const Color & = Color::NUMBER);
+    void Draw4InRect(int x, int y, const Color & = Color::NUMBER);
+    void Draw2Horizontal(int x, int y, const Color & = Color::NUMBER);
     bool IsLetter();
     bool IsConsonant();
 private:
@@ -32,7 +32,7 @@ class BigText
 {
 public:
     BigText(pString t, int s) : text(t), size(s) {}
-    void Draw(int x, int y, Color color = Color::NUMBER);
+    void Draw(int x, int y, const Color & = Color::NUMBER);
 private:
     pString text;
     int size;
@@ -62,18 +62,18 @@ public:
 
     char *c_str() const;
 
-    int Draw(int x, int y, Color color = Color::NUMBER) const;
+    int Draw(int x, int y, const Color & = Color::NUMBER) const;
     
-    int DrawInCenterRect(int x, int y, int width, int height, Color color = Color::NUMBER) const;
+    int DrawInCenterRect(int x, int y, int width, int height, const Color & = Color::NUMBER) const;
     
-    int DrawInArea(int x, int y, int width, Color color = Color::NUMBER);
+    int DrawInArea(int x, int y, int width, const Color & = Color::NUMBER);
     
-    void DrawRelativelyRight(int xRight, int y, Color color = Color::NUMBER);
+    void DrawRelativelyRight(int xRight, int y, const Color & = Color::NUMBER);
     
     // Выввести слова "в столбик"
     void DrawInColumn(int x, int y, int width, int delta = 2);
     
-    int DrawInColumnWithTransfers(const int left, const int top, const int width, const Color color = Color::NUMBER);
+    int DrawInColumnWithTransfers(const int left, const int top, const int width, const Color & = Color::NUMBER);
     
     int DrawInColumnWithTransfersDiffColors(const int left, const int top, const int width, const Color colorDif, const Color = Color::NUMBER);
     

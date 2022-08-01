@@ -30,7 +30,7 @@ public:
 };
 
 
-int Char::Draw(int eX, int eY, Color color)
+int Char::Draw(int eX, int eY, const Color &color)
 {
     color.SetAsCurrent();
 
@@ -85,7 +85,7 @@ int Char::Draw(int eX, int eY, Color color)
 }
 
 
-void Char::Draw4InRect(int x, int y, Color color)
+void Char::Draw4InRect(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
@@ -98,7 +98,7 @@ void Char::Draw4InRect(int x, int y, Color color)
 
 
 
-void Char::Draw2Horizontal(int x, int y, Color color)
+void Char::Draw2Horizontal(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
@@ -452,7 +452,7 @@ int BigChar::Draw(int eX, int eY)
 }
 
 
-void BigText::Draw(int eX, int eY, Color color)
+void BigText::Draw(int eX, int eY, const Color &color)
 {
     color.SetAsCurrent();
 
@@ -669,7 +669,7 @@ bool String::Allocate(uint size)
 }
 
 
-int String::Draw(int x, int y, Color color) const
+int String::Draw(int x, int y, const Color &color) const
 {
     color.SetAsCurrent();
 
@@ -686,7 +686,7 @@ int String::Draw(int x, int y, Color color) const
 }
 
 
-int String::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color) const
+int String::DrawInCenterRect(int eX, int eY, int width, int eHeight, const Color &color) const
 {
     color.SetAsCurrent();
 
@@ -698,7 +698,7 @@ int String::DrawInCenterRect(int eX, int eY, int width, int eHeight, Color color
 }
 
 
-int String::DrawInArea(int x, int y, int width, Color color)
+int String::DrawInArea(int x, int y, int width, const Color &color)
 {
     color.SetAsCurrent();
 
@@ -708,7 +708,7 @@ int String::DrawInArea(int x, int y, int width, Color color)
 }
 
 
-void String::DrawRelativelyRight(int xRight, int y, Color color)
+void String::DrawRelativelyRight(int xRight, int y, const Color &color)
 {
     Draw(xRight - Width(), y, color);
 }
@@ -750,7 +750,7 @@ int String::DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorB
 }
 
 
-int String::DrawInColumnWithTransfers(const int left, const int top, const int width, const Color color) //-V801
+int String::DrawInColumnWithTransfers(const int left, const int top, const int width, const Color &color) //-V801
 {
     color.SetAsCurrent();
 

@@ -50,7 +50,7 @@ public:
     static Color MenuTitle(bool shade);     // Цвет заголовка страницы. inShade == true, если страница затенена
     static Color BorderMenu(bool shade);    // Цвет окантовки меню
     static Color LightShadingText();        // Светлый цвет в тени.
-    static Color Contrast(Color color);     // Возвращает цвет, контрастный к color. Может быть белым или чёрным.
+    static Color Contrast(const Color &);     // Возвращает цвет, контрастный к color. Может быть белым или чёрным.
     static Color Channel(const Chan &);
     
     uint8 value;
