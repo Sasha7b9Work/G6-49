@@ -99,7 +99,7 @@ void Display::Init()
 }
 
 
-void Painter::BeginScene(Color color)
+void Painter::BeginScene(const Color &color)
 {
     memDC.SelectObject(bitmap);
     wxBrush brush({ 0, 0, 0 }, wxTRANSPARENT);
@@ -248,21 +248,21 @@ void Color::SetAsCurrent() const
 }
 
 
-void Primitives::VLine::Draw(int x, int y0, int y1, Color color)
+void Primitives::VLine::Draw(int x, int y0, int y1, const Color &color)
 {
     color.SetAsCurrent();
     memDC.DrawLine({ x, y0 }, { x, y1 });
 }
 
 
-void Primitives::HLine::Draw(int y, int x0, int x1, Color color)
+void Primitives::HLine::Draw(int y, int x0, int x1, const Color &color)
 {
     color.SetAsCurrent();
     memDC.DrawLine({ x0, y }, { x1, y });
 }
 
 
-void Primitives::Line::Draw(int x0, int y0, int x1, int y1, Color color)
+void Primitives::Line::Draw(int x0, int y0, int x1, int y1, const Color &color)
 {
     color.SetAsCurrent();
     memDC.DrawLine({ x0, y0 }, { x1, y1 });
@@ -275,7 +275,7 @@ void Painter::LoadPalette()
 }
 
 
-void Primitives::Rectangle::Fill(int x, int y, Color color)
+void Primitives::Rectangle::Fill(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
@@ -287,7 +287,7 @@ void Primitives::Rectangle::Fill(int x, int y, Color color)
 }
 
 
-void Primitives::Rectangle::Draw(int x, int y, Color color)
+void Primitives::Rectangle::Draw(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 

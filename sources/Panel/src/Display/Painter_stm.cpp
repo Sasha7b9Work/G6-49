@@ -13,7 +13,7 @@
 using namespace Primitives;
 
 
-void Painter::BeginScene(Color col)
+void Painter::BeginScene(const Color &col)
 {   
     col.SetAsCurrent();
 
@@ -39,7 +39,7 @@ void Painter::EndScene()
 }
 
 
-void Primitives::HLine::Draw(int y, int x0, int x1, Color col)
+void Primitives::HLine::Draw(int y, int x0, int x1, const Color &col)
 {
     col.SetAsCurrent();
 
@@ -58,7 +58,7 @@ void Primitives::HLine::Draw(int y, int x0, int x1, Color col)
 }
 
 
-void Primitives::VLine::Draw(int x, int y0, int y1, Color col)
+void Primitives::VLine::Draw(int x, int y0, int y1, const Color &col)
 {
     if(y1 < y0)
     {
@@ -83,7 +83,7 @@ void Primitives::VLine::Draw(int x, int y0, int y1, Color col)
 }
 
 
-void Primitives::Line::Draw(int x1, int y1, int x2, int y2, Color col)
+void Primitives::Line::Draw(int x1, int y1, int x2, int y2, const Color &col)
 {
     col.SetAsCurrent();
 
@@ -147,7 +147,7 @@ void Point::Draw(int x, int y)
 }
 
 
-void Rectangle::Fill(int x, int y, Color color)
+void Rectangle::Fill(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
@@ -158,7 +158,7 @@ void Rectangle::Fill(int x, int y, Color color)
 }
 
 
-void Rectangle::Draw(int x, int y, Color col)
+void Rectangle::Draw(int x, int y, const Color &col)
 {
     col.SetAsCurrent();
 
