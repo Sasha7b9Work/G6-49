@@ -186,9 +186,8 @@ void Warnings::Show()
 
     if (warning_flash.Size())
     {
-        int width = warning_flash.Width();
-        Rectangle(width + 2, 11).DrawFilled(0, 0, Color::FLASH_01, Color::WHITE);
-        warning_flash.Draw(2, 1, Color::FLASH_10);
+        Rectangle(Display::WIDTH - 2, 18).DrawFilled(0, 0, Color::FLASH_01, Color::WHITE);
+        warning_flash.Draw(3, 4, Color::FLASH_10);
     }
 }
 
