@@ -18,17 +18,89 @@
 #define MIN_VALUE (0)
 
 
-FPGA::ModeWork::E       FPGA::modeWork[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
-FPGA::ClockFrequency::E FPGA::clock = FPGA::ClockFrequency::_100MHz;
 Value                   FPGA::PacketImpulse::periodImpulse("0", Order::One);
 Value                   FPGA::PacketImpulse::durationImpulse("0", Order::One);
-StartMode               FPGA::startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
-uint64                  FPGA::registers[RG::Count] = { 0 };
 
 
 // \brief Здесь хранятся значения, предназначенные непосредственно для засылки в ПЛИС. Сначала идут младшие 8 бит, а потом старшие 6 бит
 // Данные должны быть записаны в прямом коде - 0 в старшем разряде обозначает положительное число, а 1 - отрицательное
 static uint8 dataDDS[Chan::Count][FPGA::NUM_POINTS * 2] __attribute__((section("CCM_DATA")));
+
+
+namespace FPGA
+{
+    struct RG0
+    {
+        enum E
+        {
+            _0_WriteData,           // В этот бит записываем 0, перед загрузкой данных сигнала в ПЛИС
+            _1_ImpulseA,            // 1, если в канале А ПЛИС формирует импульсы/прямоугольник
+            _2_ImpulseB,            // 1, если в канале B ПЛИС формирует импульсы/прямоугольник
+            _3_ManipulationOSK2,    // Здесь 0, если синус канала 1 должен манипулироваться сигналом OSK2 ("пилой" от AD9952 второго канала)
+            deleted__4_ManipulationFPGA1,   // Здесь 0, если синус канала 1 должен манипулироваться формирователем импульсов канала 1
+            _5_ManipulationOSK1,    // Здесь 0, если синус канала 2 должен манипулироваться сигналом OSK1 ("пилой" от AD9952 первого канала)
+            deleted_6_ManipulationFPGA2,   // Здесь 0, есил синус канала 2 должен манипулироваться формирователем импульсов канала 2
+            _7_Freq_MHz,            // 1, если тактовая частота 1МГц
+            _8_MeanderA,            // 1, если меандр по каналу A
+            _9_MeanderB,            // 1, если меандр по каналу B
+            _10_HandStartA,         // Если бит установлен в 1, то ручной режим запуска
+            _11_HandStartB,
+            _12_PacketImpulse,      // 1, если включён пакетный режим импульсов
+            _13_StartMode0,         // Младший бит управления режимом запуска
+            _14_StartMode1          // Старший бит управления режимом запуска
+        };
+    };
+
+    static void SetFormSine(const Chan &);
+
+    // Установить режим Пила+
+    static void SetFormRampPlus(const Chan &);
+
+    // Установить режим Пила-
+    static void SetFormRampMinus(const Chan &);
+
+    // Установить режим Треугольник
+    static void SetFormTriangle(const Chan &);
+
+    // Установить режим произвольного сигнала, загруженного с флешки
+    static void SetFormFree(const Chan &);
+
+    static void SetFormMeander(const Chan &);
+
+    static void SetFormImpulse(const Chan &);
+
+    static void SetFormPackedImpulse(const Chan &);
+
+    // Заслать рассчитанные точки обоих каналов в плис
+    static void SendData();
+
+    // Заслать рассчитанные точки одного канала в плис
+    static void SendDataChannel(const Chan &);
+
+    // Установить на A0_RG...A3_RG адрес, соответсвующй регистру
+    static void WriteAddress(RG::E reg);
+
+    // Запись управляющего регистра
+    static void WriteControlRegister();
+
+    // Записывает коды, соответствующие максимальному и минимальному значению
+    static void WriteMaxAmplitude(const Chan &);
+
+    // Установить биты, соответствующие режиму запуска
+    static void SetBitsStartMode(uint16 &data);
+    static void SetBitsStartMode(const Chan &, uint16 &data);
+
+    // Возвращает true, если по каналу ch работает DDS
+    static bool InModeDDS(const Chan &);
+
+    // Режим запуска для произвольного сигнала (0) и для импульсного сигнала (1)
+    static StartMode startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
+
+    uint64 registers[RG::Count] = { 0 };     // Здесь хранятся записанные в регистры значения
+
+    ModeWork::E       modeWork[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
+    ClockFrequency::E clock = FPGA::ClockFrequency::_100MHz;
+}
 
 
 void FPGA::Init()
