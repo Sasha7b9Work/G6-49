@@ -15,4 +15,9 @@ namespace Size
         int Width();
         int Height();
     }
+
+    namespace Buttons
+    {
+        int X0();
+    }
 }

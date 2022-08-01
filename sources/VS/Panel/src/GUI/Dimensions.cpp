@@ -20,7 +20,11 @@ namespace Size
 
 int Size::Client::Width()
 {
-    return 680 * d;
+#ifdef BIG_SIZE
+    return 1000;
+#else
+    return 680;
+#endif
 }
 
 
@@ -39,4 +43,10 @@ int Size::Screen::Width()
 int Size::Screen::Height()
 {
     return 240 * d;
+}
+
+
+int Size::Buttons::X0()
+{
+    return Screen::Width() + 20;
 }

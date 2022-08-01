@@ -177,7 +177,7 @@ static void CreateButtons(Frame *frame)
         {Key::None, Key::RotateLeft, Key::RegButton, Key::RotateRight, Key::On2}
     };
 
-    int x0 = 340;
+    int x0 = Size::Buttons::X0();
     int y0 = 10;
 
     int dX = 5;
