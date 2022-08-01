@@ -1,3 +1,4 @@
+// 2022/8/1 11:34:38 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Display/Colors.h"
 
@@ -99,13 +100,15 @@ public:
 
     void RemoveFromEnd();
 
-    // Размер строки в символах (без учёта заверщающего)
+    // Размер строки в символах (без учёта заверщающего нуля)
     int Size() const;
 
     // Возвращает колечество слов, разделённых пробелами
     int NumberWords() const;
 
     char &operator[](int i);
+
+    String operator=(const String &);
 
 private:
 
@@ -127,6 +130,4 @@ private:
 
     // Возвращает ширину, занимаемую словом до первого пробела или нуль-символа
     int WidthWithoutSpaces(pchar t) const;
-
-    String operator=(const String &);
 };

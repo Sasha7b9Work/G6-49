@@ -32,11 +32,15 @@ struct Warnings
 {
     Warnings() : last(0) { }
     void Show();
-    void Append(const String &warning);
+    void Append(const String &);
     void Clear();
+    void AppendFlash(const String &);
+    void ClearFlash();
+
 private:
     static const int NUM_WARNINGS = 10;
     Warning warnings[NUM_WARNINGS];
+    String warning_flash;
     int last;                               // Указыват на элемент за последним действительным. Если last == 0, то массив пуст
     void Update();
     bool IsEmpty()  { return (last == 0); }
@@ -123,6 +127,12 @@ void Display::Warnings::Show(const String &ru, const String &en)
 }
 
 
+void Display::Warnings::ShowFlash(const pchar &ru, const pchar &en)
+{
+    warnings.AppendFlash(LANG_IS_RU ? String(ru) : String(en));
+}
+
+
 void Display::Warnings::Show(pchar ru, pchar en)
 {
     Show(String(ru), String(en));
@@ -147,6 +157,18 @@ void Warnings::Append(const String &warning)
 }
 
 
+void Warnings::AppendFlash(const String &warning)
+{
+    warning_flash = warning;
+}
+
+
+void Warnings::ClearFlash()
+{
+    warning_flash.Free();
+}
+
+
 void Warnings::Show()
 {
     Update();
@@ -160,6 +182,13 @@ void Warnings::Show()
         Rectangle(Width(), 11).DrawFilled(X0(), y, ColorBackground(), Color::FILL);
         warnings[i].message->Draw(X0() + 2, y + 1, ColorText());
         y += 11;
+    }
+
+    if (warning_flash.Size())
+    {
+        int width = warning_flash.Width();
+        Rectangle(width + 2, 11).DrawFilled(0, 0, Color::FLASH_01, Color::WHITE);
+        warning_flash.Draw(2, 1, Color::FLASH_10);
     }
 }
 

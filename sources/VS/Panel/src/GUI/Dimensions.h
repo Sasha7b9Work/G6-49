@@ -4,8 +4,6 @@
 
 namespace Size
 {
-    bool IsBig();
-
     namespace Client
     {
         int Width();

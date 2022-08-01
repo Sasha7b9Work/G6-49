@@ -17,15 +17,6 @@ namespace Size
 }
 
 
-bool Size::IsBig()
-{
-#ifdef BIG_SIZE
-    return true;
-#else
-    return false;
-#endif
-}
-
 int Size::Client::Width()
 {
 #ifdef BIG_SIZE

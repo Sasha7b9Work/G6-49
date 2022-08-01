@@ -1,3 +1,4 @@
+// 2022/8/1 11:34:28 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Display/DisplayTypes.h"
 #include "Display/Text.h"
@@ -34,5 +35,8 @@ namespace Display
         static void Show(const String &ru, const String &en);
         static void Show(pchar ru, pchar en);
         static void Clear();
+
+        static void ShowFlash(const pchar &ru, const pchar &en);
+        static void ClearFlash();
     };
 };

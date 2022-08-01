@@ -1,3 +1,4 @@
+// 2022/8/1 11:34:42 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #undef CRC
 
@@ -249,14 +250,7 @@ void Color::SetAsCurrent() const
 void Primitives::VLine::Draw(int x, int y0, int y1, Color color)
 {
     color.SetAsCurrent();
-    if (Size::IsBig())
-    {
-
-    }
-    else
-    {
-        memDC.DrawLine({ x, y0 }, { x, y1 });
-    }
+    memDC.DrawLine({ x, y0 }, { x, y1 });
 }
 
 

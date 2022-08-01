@@ -29,6 +29,8 @@ void init()
     Menu::Init();
 
     Locale::FindSeparator();
+
+    Display::Warnings::ShowFlash("T≈—“Œ¬¿ﬂ Ã»√¿ﬁŸ¿ﬂ —“–Œ ¿", "TEST FLASH STRING");
 }
 
 

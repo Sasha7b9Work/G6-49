@@ -1,3 +1,4 @@
+// 2022/8/1 11:34:57 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #undef CRC
 #include "Application.h"
