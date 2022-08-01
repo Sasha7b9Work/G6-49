@@ -4,12 +4,15 @@
 
 namespace Size
 {
-    namespace Frame
+    namespace Client
     {
-        namespace Client
-        {
-            int Width();
-            int Height();
-        }
+        int Width();
+        int Height();
+    }
+
+    namespace Screen
+    {
+        int Width();
+        int Height();
     }
 }

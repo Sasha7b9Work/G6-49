@@ -69,7 +69,7 @@ class Screen : public wxPanel
 public:
     Screen(wxWindow *parent) : wxPanel(parent, 320)
     {
-        SetMinSize({ 320, 240 });
+        SetMinSize({ Size::Screen::Width(), Size::Screen::Height() });
         SetDoubleBuffered(true);
         Bind(wxEVT_PAINT, &Screen::OnPaint, this);
     }
@@ -114,7 +114,7 @@ void Painter::EndScene()
 
 static void SetSizeAndPosition(Frame *frame)
 {
-    wxSize size = { Size::Frame::Client::Width(), Size::Frame::Client::Height() };
+    wxSize size = { Size::Client::Width(), Size::Client::Height() };
 
     frame->SetMinClientSize(size);
     frame->SetMaxClientSize(size);

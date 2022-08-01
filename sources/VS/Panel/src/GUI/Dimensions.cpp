@@ -18,13 +18,25 @@ namespace Size
 
 
 
-int Size::Frame::Client::Width()
+int Size::Client::Width()
 {
     return 680 * d;
 }
 
 
-int Size::Frame::Client::Height()
+int Size::Client::Height()
+{
+    return 240 * d;
+}
+
+
+int Size::Screen::Width()
+{
+    return 320 * d;
+}
+
+
+int Size::Screen::Height()
 {
     return 240 * d;
 }
