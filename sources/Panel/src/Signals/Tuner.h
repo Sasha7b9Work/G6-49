@@ -44,11 +44,11 @@ class Indicator
 
 public:
 
-    Indicator(DisplayCorrection *display);
+    Indicator(DisplayCorrection *);
 
     int Draw(int x, int y, int width, const pString units) const;
 
-    bool OnControlKey(const Control control);
+    bool OnControlKey(const Control &);
 
     // Возвращает строку символов
     char *GetStringDigits() const;

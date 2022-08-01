@@ -459,7 +459,7 @@ int Indicator::IndexHighlightReal() const
 }
 
 
-bool Indicator::OnControlKey(const Control control) //-V801
+bool Indicator::OnControlKey(const Control &control) //-V801
 {
     if (control.IsRotate() || control.IsCursors())
     {
