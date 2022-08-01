@@ -113,11 +113,10 @@ void Painter::EndScene()
 
 static void SetSizeAndPosition(Frame *frame)
 {
-    wxSize size = { 680, 307 };
-    
-    frame->SetSize(size);
-    frame->SetMinSize(size);
-    frame->SetMaxSize(size);
+    wxSize size = { 680, 240 };
+
+    frame->SetMinClientSize(size);
+    frame->SetMaxClientSize(size);
 
     wxRect rect = GetMaxDisplay();
 
