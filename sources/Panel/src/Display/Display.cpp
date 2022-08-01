@@ -128,6 +128,12 @@ void Display::Warnings::Show(const String &ru, const String &en)
 }
 
 
+void Display::Warnings::ShowFlash(const String &warning)
+{
+    warnings.AppendFlash(warning);
+}
+
+
 void Display::Warnings::ShowFlash(const pchar &ru, const pchar &en)
 {
     warnings.AppendFlash(LANG_RU ? String(ru) : String(en));
@@ -231,6 +237,12 @@ void Warnings::Clear()
 void Display::Warnings::Clear()
 {
     warnings.Clear();
+}
+
+
+void Display::Warnings::ClearFlash()
+{
+    warnings.ClearFlash();
 }
 
 

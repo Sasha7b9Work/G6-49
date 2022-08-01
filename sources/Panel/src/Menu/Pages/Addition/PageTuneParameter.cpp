@@ -93,6 +93,17 @@ static void Draw_Enter(int x, int y)
 static void OnPress_Enter()
 {
     Tuner::Current()->OnButtonApply();
+
+    String invalid_parameters = CURRENT_FORM->InvalidParameters();
+
+    if (invalid_parameters.Size())
+    {
+        Display::Warnings::ShowFlash(invalid_parameters);
+    }
+    else
+    {
+        Display::Warnings::ClearFlash();
+    }
 }
 
 DEF_GRAPH_BUTTON(sbEnter,
