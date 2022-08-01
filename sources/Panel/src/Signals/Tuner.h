@@ -137,25 +137,23 @@ private:
 
 
 // Класс для ввода и отображения параметра
-class DisplayEntering
+namespace DisplayEntering
 {
-public:
-    
     // Обработка нажатия клавиши набора цифрового значения
-    static bool OnEnteringKey(const Control &control);
+    bool OnEnteringKey(const Control &control);
 
-    static void Draw(int x, int y, int width);
+    void Draw(int x, int y, int width);
 
     // Обработчик нажатия кнопки "Увеличить порядок"
-    static void OnButtonOrderMore();
+    void OnButtonOrderMore();
 
     // Обработчик нажатия кнопки "Уменьшить порядок"
-    static void OnButtonOrderLess();
+    void OnButtonOrderLess();
 
-    static void Init();
+    void Init();
 
     // Возвращает значение, которое хранится сейчас в DisplayEntering ( c учётом порядка )
-    static Value ToValue();
+    Value ToValue();
 
     // Класс для хранения вводимых данных в режиме непосредственного ввода
     class EnterBuffer
@@ -192,26 +190,6 @@ public:
     private:
         uint timeInit;
     };
-
-private:
-
-    static Cursor cursor;               // Мигающий курсор для режима непосредственного ввода
-
-    static EnterBuffer buffer;          // Здесь будем хранить нажатые кнопки в режиме ввода
-
-    static Order::E order;              // Текущий порядок вводимого значения
-
-    static bool noVerifiForValid;       // Не проверять на валидность величины значения
-
-    static int DrawValue(int x, int y);
-
-    static void DrawUnits(int x, int y, int width);
-
-    // Попытка добавить в буфер новый символ, соотвествующий нажатой кнопке
-    static void TryToAddSymbol(Key::E key);
-
-    // Хранимое значение находится в границах, ограниченных минимальным и максимальным значениями ParameterDouble
-    static bool ValueInBoundaries();
 };
 
 

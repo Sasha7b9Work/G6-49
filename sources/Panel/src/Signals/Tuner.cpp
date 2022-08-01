@@ -20,12 +20,29 @@ using namespace Primitives;
 
 Tuner::ModeTuning::E Tuner::mode = ModeTuning::Correction;
 
-DisplayEntering::Cursor      DisplayEntering::cursor;
-DisplayEntering::EnterBuffer DisplayEntering::buffer;
-bool                         DisplayEntering::noVerifiForValid = true;
-Order::E                     DisplayEntering::order = Order::Count;
-
 Tuner *Tuner::current = nullptr;
+
+
+namespace DisplayEntering
+{
+    static Cursor cursor;                   // Мигающий курсор для режима непосредственного ввода
+
+    static EnterBuffer buffer;              // Здесь будем хранить нажатые кнопки в режиме ввода
+
+    static Order::E order = Order::Count;   // Текущий порядок вводимого значения
+
+    static bool noVerifiForValid = true;    // Не проверять на валидность величины значения
+
+    static int DrawValue(int x, int y);
+
+    static void DrawUnits(int x, int y, int width);
+
+    // Попытка добавить в буфер новый символ, соотвествующий нажатой кнопке
+    static void TryToAddSymbol(Key::E key);
+
+    // Хранимое значение находится в границах, ограниченных минимальным и максимальным значениями ParameterDouble
+    static bool ValueInBoundaries();
+}
 
 
 void DisplayEntering::EnterBuffer::Push(Key::E key)
