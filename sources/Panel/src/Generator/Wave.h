@@ -83,23 +83,23 @@ public:
     static uint8 *GetFormFlash(const Chan &);
     
     // Получить смещение сигнала
-    double GetOffset();
+    double GetOffset() const;
     
     // Получить размах сигнала
-    double GetAmplitude();
+    double GetAmplitude() const;
 
-    operator TypeForm::E() { return value; }
+    operator TypeForm::E() const { return value; }
     
     // Находит требуемый параметр. Возвращает 0, если такого параметра нет
-    ParameterDouble *FindParameter(ParameterDoubleType::E p);
-    ParameterChoice *FindParameter(ParameterChoiceType::E p);
-    ParameterInteger *FindParameter(ParameterIntegerType::E p);
-    ParameterComposite *FindParameter(ParameterCompositeType::E p);
+    ParameterDouble *FindParameter(ParameterDoubleType::E p) const;
+    ParameterChoice *FindParameter(ParameterChoiceType::E p) const;
+    ParameterInteger *FindParameter(ParameterIntegerType::E p) const;
+    ParameterComposite *FindParameter(ParameterCompositeType::E p) const;
     
     // Засылает параметр в генератор
-    void SendParameterToGenerator(ParameterDoubleType::E p);
-    void SendParameterToGenerator(ParameterChoiceType::E p);
-    void SendParameterToGenerator(ParameterIntegerType::E p);
+    void SendParameterToGenerator(ParameterDoubleType::E p) const;
+    void SendParameterToGenerator(ParameterChoiceType::E p) const;
+    void SendParameterToGenerator(ParameterIntegerType::E p) const;
 
     // Раскрывает составной параметр
     void OpenCompositeParameter();
@@ -113,6 +113,9 @@ public:
 
     // Восстановить ранее сохранённое состояние
     void RestoreState();
+
+    // Возвращает строку недопустимых параметров, если таковые имеются
+    String InvalidParameters() const;
 
 private:
     
@@ -154,6 +157,16 @@ private:
         Old() : params(nullptr), numParams(0), currentParam(0) { }
         void Init(Parameter **parameters, int num, int current) { params = parameters; numParams = num; currentParam = current; }
     } old;
+
+    struct CheckerParameters
+    {
+        CheckerParameters(const Form *_form);
+
+        // Проверить длительность импульса
+        bool CheckDurationImpulse() const;
+
+        const Form *form;
+    };
 };
 
 

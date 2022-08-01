@@ -15,7 +15,6 @@ using namespace Primitives;
 static uint8 formFlash[Chan::Count][POINTS_IN_FORM];
 
 
-
 pString Form::Name(uint lang) const
 {
     if (lang == static_cast<uint>(-1))
@@ -278,7 +277,7 @@ void Form::TuneGenerator()
 }
 
 
-ParameterDouble *Form::FindParameter(ParameterDoubleType::E p)
+ParameterDouble *Form::FindParameter(ParameterDoubleType::E p) const
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -310,7 +309,7 @@ ParameterDouble *Form::FindParameter(ParameterDoubleType::E p)
 }
 
 
-ParameterChoice *Form::FindParameter(ParameterChoiceType::E p)
+ParameterChoice *Form::FindParameter(ParameterChoiceType::E p) const
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -343,7 +342,7 @@ ParameterChoice *Form::FindParameter(ParameterChoiceType::E p)
 }
 
 
-ParameterComposite *Form::FindParameter(ParameterCompositeType::E t)
+ParameterComposite *Form::FindParameter(ParameterCompositeType::E t) const
 {
     for (int i = 0; i < numParams; i++)
     {
@@ -382,7 +381,7 @@ ParameterComposite *Form::FindParameter(ParameterCompositeType::E t)
 }
 
 
-ParameterInteger *Form::FindParameter(ParameterIntegerType::E t)
+ParameterInteger *Form::FindParameter(ParameterIntegerType::E t) const
 {
     for (int i = 0; i < numParams; i++)
     {
@@ -403,7 +402,7 @@ ParameterInteger *Form::FindParameter(ParameterIntegerType::E t)
 }
 
 
-void Form::SendParameterToGenerator(ParameterDoubleType::E p)
+void Form::SendParameterToGenerator(ParameterDoubleType::E p) const
 {
     Parameter *param = FindParameter(p);
 
@@ -414,7 +413,7 @@ void Form::SendParameterToGenerator(ParameterDoubleType::E p)
 }
 
 
-void Form::SendParameterToGenerator(ParameterChoiceType::E p)
+void Form::SendParameterToGenerator(ParameterChoiceType::E p) const
 {
     Parameter *param = FindParameter(p);
 
@@ -425,7 +424,7 @@ void Form::SendParameterToGenerator(ParameterChoiceType::E p)
 }
 
 
-void Form::SendParameterToGenerator(ParameterIntegerType::E p)
+void Form::SendParameterToGenerator(ParameterIntegerType::E p) const
 {
     Parameter *param = FindParameter(p);
 
@@ -729,7 +728,7 @@ uint8 *Form::GetFormFlash(const Chan &ch)
 }
 
 
-double Form::GetOffset()
+double Form::GetOffset() const
 {
     ParameterDouble *parameter = FindParameter(ParameterDoubleType::Offset);
 
@@ -737,7 +736,7 @@ double Form::GetOffset()
 }
 
 
-double Form::GetAmplitude()
+double Form::GetAmplitude() const
 {
     ParameterDouble *parameter = FindParameter(ParameterDoubleType::Amplitude);
 
@@ -783,4 +782,21 @@ void Wave::SetForm(Form *form)
             break;
         }
     }
+}
+
+
+String Form::InvalidParameters() const
+{
+    CheckerParameters checker(this);
+
+    return String("");
+}
+
+
+Form::CheckerParameters::CheckerParameters(const Form *_form) : form(_form) { }
+
+
+bool Form::CheckerParameters::CheckDurationImpulse() const
+{
+    return true;
 }
