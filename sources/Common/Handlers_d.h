@@ -3,7 +3,7 @@
 #include "common/Messages.h"
 
 
-struct DHandlers
+namespace DHandlers
 {
-    static void Processing(SimpleMessage *message);
+    void Processing(SimpleMessage *message);
 };
