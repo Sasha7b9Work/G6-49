@@ -2,11 +2,13 @@
 #pragma once
 
 
-struct Memory
+namespace Memory
 {
-    static void Init();
+    void Init();
+
     // Выделяет участок памяти размером size байт и возращает указатель на него
-    static void *Allocate(uint size);
+    void *Allocate(uint size);
+
     // Освобождает ранее выделенный участок памяти
-    static void Free(void *address);
+    void Free(void *address);
 };
