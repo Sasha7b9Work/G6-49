@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "common/CommonTypes.h"
-#include "Generator/Wave.h"
+#include "Signals/Wave.h"
 #include "SCPI/MacrosesSCPI.h"
 
 /*

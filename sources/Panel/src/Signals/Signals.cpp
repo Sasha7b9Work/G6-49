@@ -2,8 +2,8 @@
 #include "defines.h"
 #include "Display/Painter.h"
 #include "Display/Symbols.h"
-#include "Generator/Signals.h"
-#include "Generator/Parameters.h"
+#include "Signals/Signals.h"
+#include "Signals/Parameters.h"
 #include "Menu/Pages/Pages.h"
 
 

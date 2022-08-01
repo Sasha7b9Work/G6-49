@@ -3,7 +3,7 @@
 #include "Menu/Hint.h"
 #include "Menu/MenuItems.h"
 #include "FDrive/FDrive_p.h"
-#include "Generator/Signals.h"
+#include "Signals/Signals.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Keyboard/Keyboard.h"

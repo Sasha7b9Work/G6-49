@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "common/Common.h"
-#include "Generator/MathSupport.h"
+#include "Signals/MathSupport.h"
 #include "Settings/Settings.h"
 #include <cstring>
 

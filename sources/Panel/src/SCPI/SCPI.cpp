@@ -3,7 +3,7 @@
 #include "common/Messages.h"
 #include "Display/Symbols.h"
 #include "Hardware/VCP_p.h"
-#include "Generator/Signals.h"
+#include "Signals/Signals.h"
 #include "SCPI/HeadSCPI.h"
 #include "SCPI/SCPI.h"
 #include "Utils/Buffer.h"

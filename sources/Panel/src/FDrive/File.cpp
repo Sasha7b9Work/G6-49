@@ -5,7 +5,7 @@
 #include "common/Interface_p.h"
 #include "common/Command.h"
 #include "Display/Painter.h"
-#include "Generator/Signals.h"
+#include "Signals/Signals.h"
 #include "Settings/Settings.h"
 #include <cstring>
 

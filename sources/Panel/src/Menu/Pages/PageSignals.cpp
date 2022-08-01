@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Display/Painter.h"
-#include "Generator/Signals.h"
+#include "Signals/Signals.h"
 #include "Generator/Generator_p.h"
 #include "Menu/Menu.h"
 #include "Menu/MenuItems.h"

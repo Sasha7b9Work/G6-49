@@ -2002,46 +2002,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\Generator\Generator_p.cpp</FilePath>
             </File>
-            <File>
-              <FileName>MathSupport.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\MathSupport.h</FilePath>
-            </File>
-            <File>
-              <FileName>MathSupport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\MathSupport.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Parameters.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Parameters.h</FilePath>
-            </File>
-            <File>
-              <FileName>Parameters.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Parameters.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Signals.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Signals.h</FilePath>
-            </File>
-            <File>
-              <FileName>Signals.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Signals.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Wave.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\Wave.h</FilePath>
-            </File>
-            <File>
-              <FileName>Wave.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\Wave.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -2315,6 +2275,71 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Signals</GroupName>
+          <Files>
+            <File>
+              <FileName>Tuner.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Signals\Tuner.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Tuner.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Signals\Tuner.h</FilePath>
+            </File>
+            <File>
+              <FileName>Viewer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Signals\Viewer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Viewer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Signals\Viewer.h</FilePath>
+            </File>
+            <File>
+              <FileName>MathSupport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Signals\MathSupport.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MathSupport.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Signals\MathSupport.h</FilePath>
+            </File>
+            <File>
+              <FileName>Parameters.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Signals\Parameters.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Parameters.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Signals\Parameters.h</FilePath>
+            </File>
+            <File>
+              <FileName>Signals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Signals\Signals.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Signals.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Signals\Signals.h</FilePath>
+            </File>
+            <File>
+              <FileName>Wave.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Signals\Wave.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Wave.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Signals\Wave.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Tests</GroupName>
           <Files>
             <File>
@@ -2434,31 +2459,6 @@
             </File>
           </Files>
         </Group>
-        <Group>
-          <GroupName>Signals</GroupName>
-          <Files>
-            <File>
-              <FileName>Tuner.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Signals\Tuner.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Tuner.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Signals\Tuner.h</FilePath>
-            </File>
-            <File>
-              <FileName>Viewer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Signals\Viewer.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Viewer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Signals\Viewer.h</FilePath>
-            </File>
-          </Files>
-        </Group>
       </Groups>
     </Target>
   </Targets>
@@ -2468,5 +2468,14 @@
     <components/>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>Panel</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>

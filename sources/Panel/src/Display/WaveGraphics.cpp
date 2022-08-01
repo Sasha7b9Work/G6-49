@@ -3,7 +3,7 @@
 #include "Display/Text.h"
 #include "Signals/Viewer.h"
 #include "Display/WaveGraphics.h"
-#include "Generator/Signals.h"
+#include "Signals/Signals.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 

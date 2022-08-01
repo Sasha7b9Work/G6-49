@@ -87,11 +87,11 @@ static bool RequestPictureDDSfromStorage(SimpleMessage *message)
 {
     Chan ch(message->TakeUINT8());
 
-    uint8 picture[240];
+    uint8 pic[240];
 
-    message->TakeRemainigData(picture);
+    message->TakeRemainigData(pic);
 
-    Form::SetFormFlash(ch, picture);
+    Form::SetFormFlash(ch, pic);
 
     return true;
 }

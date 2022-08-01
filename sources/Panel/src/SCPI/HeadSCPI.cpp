@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Generator/Signals.h"
-#include "Generator/Wave.h"
+#include "Signals/Signals.h"
+#include "Signals/Wave.h"
 #include "Menu/Pages/Pages.h"
 #include "SCPI/FreqMeterSCPI.h"
 #include "SCPI/KeySCPI.h"

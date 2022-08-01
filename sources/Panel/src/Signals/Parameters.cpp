@@ -1,9 +1,9 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Generator/Generator_p.h"
-#include "Generator/MathSupport.h"
-#include "Generator/Parameters.h"
-#include "Generator/Signals.h"
+#include "Signals/MathSupport.h"
+#include "Signals/Parameters.h"
+#include "Signals/Signals.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"

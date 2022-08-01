@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Generator/Wave.h"
+#include "Signals/Wave.h"
 #include "common/Command.h"
 
 

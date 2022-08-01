@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "common/Common.h"
-#include "Generator/Parameters.h"
+#include "Signals/Parameters.h"
 #include "Settings/SettingsTypes.h"
 #include <cstring>
 #include <limits>

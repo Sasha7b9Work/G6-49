@@ -10,8 +10,8 @@
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
-#include "Generator/Wave.h"
-#include "Generator/Signals.h"
+#include "Signals/Wave.h"
+#include "Signals/Signals.h"
 #include <string.h>
 
 

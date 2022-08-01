@@ -3,8 +3,8 @@
 #include "common/Command.h"
 #include "Display/Painter.h"
 #include "Generator/Generator_p.h"
-#include "Generator/Signals.h"
-#include "Generator/Wave.h"
+#include "Signals/Signals.h"
+#include "Signals/Wave.h"
 #include <cmath>
 #include <cstdlib>
 
