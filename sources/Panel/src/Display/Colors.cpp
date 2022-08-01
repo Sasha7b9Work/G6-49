@@ -260,16 +260,14 @@ Color Color::GetCurrent()
 {
     uint8 val = current.value;
 
-    static Color white(COLOR_WHITE);
-    static Color black(COLOR_BLACK);
+    if (val == COLOR_FLASH_01 || val == COLOR_FLASH_10)
+    {
+        static Color white(COLOR_WHITE);
+        static Color black(COLOR_BLACK);
 
-    if (val == COLOR_FLASH_01)
-    {
-        return ((_TIME_MS / 500) % 2) ? white : black;
-    }
-    else if (val == COLOR_FLASH_10)
-    {
-        return ((_TIME_MS / 500) % 2) ? black : white;
+        uint time = _TIME_MS + ((val == COLOR_FLASH_01) ? 0 : 500);
+
+        return ((time / 500) % 2) ? white : black;
     }
 
     return current;

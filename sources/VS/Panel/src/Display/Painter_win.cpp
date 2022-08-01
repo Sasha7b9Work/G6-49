@@ -4,6 +4,7 @@
 #include "GUI/Application.h"
 #include "GUI/GovernorGUI.h"
 #include "GUI/Dimensions.h"
+#include "Hardware/Timer.h"
 
 
 #define uint    unsigned int
@@ -226,6 +227,14 @@ void Color::SetAsCurrent() const
     if(value != COLOR_NUMBER)
     {
         uint color = COLOR(value);
+
+        if (value == COLOR_FLASH_01 || value == COLOR_FLASH_10)
+        {
+            uint time = _TIME_MS + ((value == COLOR_FLASH_01) ? 0 : 500);
+
+            color = ((time / 500) % 2) ? COLOR(COLOR_WHITE) : COLOR(COLOR_BLACK);
+        }
+
         uint8 b = static_cast<uint8>(color);
         uint8 g = static_cast<uint8>(color >> 8);
         uint8 r = static_cast<uint8>(color >> 16);
