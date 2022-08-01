@@ -237,7 +237,14 @@ void Color::SetAsCurrent() const
 void Primitives::VLine::Draw(int x, int y0, int y1, Color color)
 {
     color.SetAsCurrent();
-    memDC.DrawLine({ x, y0 }, { x, y1 });
+    if (Size::IsBig())
+    {
+
+    }
+    else
+    {
+        memDC.DrawLine({ x, y0 }, { x, y1 });
+    }
 }
 
 

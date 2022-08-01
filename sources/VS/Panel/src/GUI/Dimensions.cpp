@@ -4,7 +4,7 @@
 
 
 // ≈сли это определено - увеличенный размер
-#define BIG_SIZE
+//#define BIG_SIZE
 
 
 namespace Size
@@ -17,6 +17,14 @@ namespace Size
 }
 
 
+bool Size::IsBig()
+{
+#ifdef BIG_SIZE
+    return true;
+#else
+    return false;
+#endif
+}
 
 int Size::Client::Width()
 {
