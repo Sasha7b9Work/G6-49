@@ -19,6 +19,32 @@ extern const ButtonBase bTuneParameter;
 static int numForm = 0;
 
 
+void PageSignals::Init()
+{
+    OnPress_Channel(true);
+}
+
+
+void PageSignals::SCPI_SetForm(TypeForm::E form)
+{
+    if (form == TypeForm::Packet && CURRENT_CHANNEL.IsB())
+    {
+        SCPI::SendAnswer("Can not set form \"packet\" on channel B");
+        return;
+    }
+
+    numForm = (form == TypeForm::Free && CURRENT_CHANNEL.IsB()) ? (form - 1) : form;
+    OnChanged_Form();
+}
+
+
+void PageSignals::SetCurrentChanenl(const Chan &ch)
+{
+    set.cur_chan = ch;
+    OnPress_Channel(true);
+}
+
+
 static bool IsActive_Channel()
 {
     return !(CURRENT_CHANNEL.IsA() && CURRENT_FORM->Is(TypeForm::Packet));
@@ -203,29 +229,3 @@ DEF_PAGE_4( pageSignals,   //-V641
 )
 
 Page *PageSignals::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageSignals));
-
-
-void PageSignals::Init()
-{
-    OnPress_Channel(true);
-}
-
-
-void PageSignals::SCPI_SetForm(TypeForm::E form)
-{
-    if(form == TypeForm::Packet && CURRENT_CHANNEL.IsB())
-    {
-        SCPI::SendAnswer("Can not set form \"packet\" on channel B");
-        return;
-    }
-   
-    numForm = (form == TypeForm::Free && CURRENT_CHANNEL.IsB()) ? (form - 1) : form;
-    OnChanged_Form();
-}
-
-
-void PageSignals::SetCurrentChanenl(const Chan &ch)
-{
-    set.cur_chan = ch;
-    OnPress_Channel(true);
-}
