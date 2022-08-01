@@ -53,7 +53,7 @@ public:
     int NumParameters() const;
     
     // Возвращает ссылку на i-ый параметр из массива params
-    Parameter *GetParameter(int i);
+    Parameter *GetParameter(int i) const;
     
     // Установить текущим следующй параметр
     void SetNextParameter();
@@ -71,10 +71,10 @@ public:
     bool IsDDS() const;
     
     // Возвращает указатель на родительский Wave
-    Wave *GetWave() { return wave; };
+    Wave *GetWave() const { return wave; };
   
     // Нарисовать изображение сигнала
-    void DrawUGO(const Chan &, int y0);
+    void DrawUGO(const Chan &, int y0) const;
     
     // Установить данные произвольного сигнала для отрисовки
     static void SetFormFlash(const Chan &, const uint8 data[POINTS_IN_FORM]);

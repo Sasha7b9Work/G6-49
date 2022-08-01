@@ -154,7 +154,7 @@ int Form::NumParameters() const
 }
 
 
-Parameter *Form::GetParameter(int i)
+Parameter *Form::GetParameter(int i) const
 {
     if(i < numParams)
     {
@@ -494,7 +494,7 @@ bool Form::IsDDS() const
 }
 
 
-void Form::DrawUGO(const Chan &ch, int y0)
+void Form::DrawUGO(const Chan &ch, int y0) const
 {
     y0 += 30;
     int height = 50;
