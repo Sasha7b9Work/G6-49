@@ -3,15 +3,15 @@
 #include "common/CommonTypes.h"
 
 
-struct DFreqMeter
+namespace DFreqMeter
 {
-    static void Init();
+    void Init();
 
-    static void Update();
+    void Update();
 
-    static void SetResist(FreqResist resist);
+    void SetResist(FreqResist resist);
 
-    static void SetCouple(FreqCouple couple);
+    void SetCouple(FreqCouple couple);
 
-    static void SetFiltr(FreqFiltr filtr);
+    void SetFiltr(FreqFiltr filtr);
 };
