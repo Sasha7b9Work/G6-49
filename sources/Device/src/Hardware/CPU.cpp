@@ -8,8 +8,13 @@
 #include <cstring>
 
 
-// ¬рем€ последней установки состо€ни€ "зан€то"
-static uint timeBusy = 0;
+namespace CPU
+{
+    static void InitGPIOS();
+
+    // ¬рем€ последней установки состо€ни€ "зан€то"
+    static uint timeBusy = 0;
+}
 
 
 void CPU::Init()

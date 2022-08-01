@@ -2,15 +2,13 @@
 #pragma once
 
 
-struct CPU
+namespace CPU
 {
-    static void Init();
+    void Init();
+
     // Установить на PA2 признак того, что процессор занят
-    static void SetBusy();
+    void SetBusy();
+
     // Установить на PA2 признак того, что процессор свободен
-    static void SetReady();
-
-private:
-
-    static void InitGPIOS();
+    void SetReady();
 };
