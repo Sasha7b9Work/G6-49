@@ -61,46 +61,31 @@ struct Attenuation
 };
 
 
-class Amplifier
+namespace Amplifier
 {
-public:
-    
-    static void Init();
+    void Init();
     
     // Настроить усилитель в соответствии с текущими настройками
-    static void Tune(const Chan &);
+    void Tune(const Chan &);
 
-    static void Tune(const Chan &, int range);
+    void Tune(const Chan &, int range);
     
     // Возвращает коэффициент усиления в разах всего тракта, включая аттенюатор и усилитель. Усилитель даёт усиление 10 раз, за каждые 10 Дб нужно разделить на 3.16
-    static double GetAmplification(const Chan &);
+    double GetAmplification(const Chan &);
 
     // Установить заданные настройки и заблокировать
-    static void TuneAndLock(const Chan &, bool enabled, Attenuation::E attenuation);
+    void TuneAndLock(const Chan &, bool enabled, Attenuation::E attenuation);
 
-    static void Lock();
+    void Lock();
 
     // Разблокировать
-    static void Unlock();
+    void Unlock();
    
     // Возвращает true, если на данном канале включён усилитель
-    static bool IsEnabled(const Chan &ch) { return isEnabled[ch]; }
+    bool IsEnabled(const Chan &);
 
     // Включить/выключить аппаратный усилитель усилитель
-    static void Enable(const Chan &, bool enable);
-
-//    static void LogState();
-
-private:
-    
-    static void SetAttenuation(const Chan &, Attenuation::E attenuation);
-
-    static Attenuation::E attenuation[Chan::Count];
-  
-    // true, если усилитель соотвествующего канала включён
-    static bool isEnabled[Chan::Count];
-
-    static bool locked;
+    void Enable(const Chan &, bool enable);
 };
 
 

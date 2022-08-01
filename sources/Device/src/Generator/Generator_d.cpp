@@ -10,9 +10,25 @@ bool SettingsGenerator::waveIsSine[Chan::Count] = { true, true };
 Value SettingsGenerator::amplitude[Chan::Count] = { Value("10", Order::One), Value("10", Order::One) };
 Value SettingsGenerator::frequency[Chan::Count] = { Value("1000", Order::One), Value("1000", Order::One) };
 Value SettingsGenerator::offset[Chan::Count] = { Value("0", Order::One), Value("0", Order::One) };
-Attenuation::E Amplifier::attenuation[Chan::Count] = { Attenuation::_0Db, Attenuation::_0Db };
-bool Amplifier::isEnabled[Chan::Count] = { false, false };
-bool Amplifier::locked = false;
+
+
+namespace Amplifier
+{
+    static void SetAttenuation(const Chan &, Attenuation::E attenuation);
+
+    static Attenuation::E attenuation[Chan::Count] = { Attenuation::_0Db, Attenuation::_0Db };
+
+    // true, если усилитель соотвествующего канала включён
+    static bool isEnabled[Chan::Count] = { false, false };
+
+    static bool locked = false;
+}
+
+
+bool Amplifier::IsEnabled(const Chan &ch)
+{
+    return isEnabled[ch];
+}
 
 
 struct Filtr
