@@ -4,51 +4,30 @@
 #include "common/CommonTypes.h"
 
 
-struct Calibrator
+namespace Calibrator
 {
     // Устанавливает коэффициент калибровки, одновременно устанавливая необоходимые для этого коэффициента настройки
     // param : 0 - амплитуда
     //         1 - +2.5В / +5В
     //         2 - 0В
     //         3 - -2.5В / -5В
-    static void SetK(uint8 channel, uint8 signal, uint8 range, uint8 param, int16 k);
+    void SetK(uint8 channel, uint8 signal, uint8 range, uint8 param, int16 k);
     
     // Возвращает коэффициент калибровки амплитуды
-    static float GetAmplitudeK(const Chan &);
+    float GetAmplitudeK(const Chan &);
     
     // Возвращает калибровочный коэффициент смещения для 0В
-    static float GetOffsetK_Zero(const Chan &);
+    float GetOffsetK_Zero(const Chan &);
     
     // Возвращает калибровочный коэффициент смещения для -5В
-    static double GetOffsetK_Negative(const Chan &);
+    double GetOffsetK_Negative(const Chan &);
     
     // Возвращает калбировочный коэффициент смещения для +5В
-    static double GetOffsetK_Positive(const Chan &);
+    double GetOffsetK_Positive(const Chan &);
     
     // Установка калибровочного коэффицинета уровня синхронизации частотомера
-    static void SetFreqMeterK_Trig(int16 k);
+    void SetFreqMeterK_Trig(int16 k);
 
     // Возвращает калибровочный коэффициент уровня синхронизации частотомера
-    static float GetFreqMeterK_Trig();
-
-private:
-    static uint8 CalculateRange(const Chan &);
-    
-    // Устанавливает форму сигнала для соотвествующей формы сигнала
-    static void SetFormWave(const Chan &, uint8 signal);
-    
-    // Установить амплитуду для заданного диапазона
-    static void SetAmplitude(const Chan &, bool zeroAmplitude);
-    
-    // Установить смещение для заданного параметра
-    static void SetOffset(const Chan &, uint8 param);
-    
-    // Если true, то мы находимся в режиме калибровки, и диапазон нужно не рассчитывать, исходя из установленного значения, а брать тот, который сейчас калибруется
-    static bool inModeCalibration;
-    
-    // Для этого диапазона сейчас происходит калибровка
-    static uint8 range[Chan::Count];
-    
-    // Для этой формы сигнала происходит калибровка. 0 - синус, 1 - произвольный
-    static uint8 signal[Chan::Count];
+    float GetFreqMeterK_Trig();
 };
