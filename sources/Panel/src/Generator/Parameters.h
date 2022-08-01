@@ -285,8 +285,8 @@ class ParameterChoice : public Parameter
 {
 public:
 
-    ParameterChoice(ParameterChoiceType::E t, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
-        Parameter(ParameterKind::Choice, Parameter::FuncActive, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
+    ParameterChoice(ParameterChoiceType::E t, pFuncBV funcActive, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
+        Parameter(ParameterKind::Choice, funcActive, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
 
     ParameterChoiceType::E GetType() { return type; }
 
@@ -490,14 +490,14 @@ public:
 class ParameterModeStart : public ParameterChoice
 {
 public:
-    ParameterModeStart(pchar *names) : ParameterChoice(ParameterChoiceType::ModeStart, "Запуск", "Start", names) { }
+    ParameterModeStart(pchar *names) : ParameterChoice(ParameterChoiceType::ModeStart, Parameter::FuncActive, "Запуск", "Start", names) { }
 };
 
 
 class ParameterModeStartStop : public ParameterChoice
 {
 public:
-    ParameterModeStartStop(pchar *names) : ParameterChoice(ParameterChoiceType::ModeStartStop, "А-Старт,В-Стоп", "A-Start,B-Stop", names) { }
+    ParameterModeStartStop(pFuncBV funcActive, pchar *names) : ParameterChoice(ParameterChoiceType::ModeStartStop, funcActive, "А-Старт,В-Стоп", "A-Start,B-Stop", names) { }
 };
 
 
@@ -505,7 +505,7 @@ class ParameterManipulationEnabled : public ParameterChoice
 {
 public:
     ParameterManipulationEnabled(pchar *names) : 
-        ParameterChoice(ParameterChoiceType::ManipulationEnabled, "Манип", "Manip", names) { }
+        ParameterChoice(ParameterChoiceType::ManipulationEnabled, Parameter::FuncActive, "Манип", "Manip", names) { }
 
 };
 
@@ -513,7 +513,7 @@ public:
 class ParameterPolarity : public ParameterChoice
 {
 public:
-    ParameterPolarity(pchar *names) : ParameterChoice(ParameterChoiceType::Polarity, "Полярность", "Polarity", names) { }
+    ParameterPolarity(pchar *names) : ParameterChoice(ParameterChoiceType::Polarity, Parameter::FuncActive, "Полярность", "Polarity", names) { }
 };
 
 
