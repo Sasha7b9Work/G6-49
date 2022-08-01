@@ -6,29 +6,16 @@
 #include "Hardware/HAL/HAL_PIO.h"
 
 
-struct AD5697
+namespace AD5697
 {
-    static void Init();
+    void Init();
 
-    static void SetOffset(const Chan &);
+    void SetOffset(const Chan &);
 
-    static void SetFreqLevel(double level);
+    void SetFreqLevel(double level);
 
-    static void SetFreqHysteresys(double hyst);
+    void SetFreqHysteresys(double hyst);
 
     // Включает/отключает режим калибровки
-    static void EnabledCalibrateMode(bool enable) { calibrateMode = enable; };
-
-private:
-    static void Reset(const Chan &);
-
-    // Записать три байта данных по данному адресу
-    static void WriteParameter(uint8 address, uint8 data[3], HPort::E port, uint16 pin);
-
-    static StructPIN PinLDAC(const Chan &);
-
-    // Рассчитать код смещения для смещения offset
-    static double CalculateCodeOffset(const Chan &);
-
-    static bool calibrateMode;
+    void EnabledCalibrateMode(bool enable);
 };

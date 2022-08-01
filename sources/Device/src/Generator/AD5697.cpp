@@ -15,7 +15,26 @@
 #endif
 
 
-bool AD5697::calibrateMode = false;
+namespace AD5697
+{
+    static void Reset(const Chan &);
+
+    // «аписать три байта данных по данному адресу
+    static void WriteParameter(uint8 address, uint8 data[3], HPort::E port, uint16 pin);
+
+    static StructPIN PinLDAC(const Chan &);
+
+    // –ассчитать код смещени€ дл€ смещени€ offset
+    static double CalculateCodeOffset(const Chan &);
+
+    static bool calibrateMode = false;
+}
+
+
+void AD5697::EnabledCalibrateMode(bool enable)
+{
+    calibrateMode = enable;
+};
 
 
 void AD5697::Init()
