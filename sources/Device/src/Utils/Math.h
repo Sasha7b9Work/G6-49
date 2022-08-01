@@ -2,22 +2,22 @@
 #pragma once
 
 
-struct Bit
+namespace Bit
 {
     template<typename T>
-    static bool Get(T value, int bit)
+    bool Get(T value, int bit)
     {
         return ((value >> bit) & 0x01) != 0;
     }
 
     template<typename T>
-    static void Set(T &value, int bit)
+    void Set(T &value, int bit)
     {
         value |= 1 << bit;
     }
 
     template<typename T>
-    static void Clear(T &value, int bit)
+    void Clear(T &value, int bit)
     {
         value &= ~(1 << bit);
     }
