@@ -8,10 +8,44 @@
 
 
 bool AD9952::Manipulation::enabled[Chan::Count] = { false, false };
-double AD9952::phase[Chan::Count] = { 0.0, 0.0 };
 
-// Последнее записанное в ASF регистр значение. Используется для того, чтобы меандр при установленной амплитуде синусоиды "0" существовал
-volatile uint lastASF[Chan::Count] = { 100, 100 };
+
+namespace AD9952
+{
+    struct Register
+    {
+        enum E
+        {
+            CFR1,
+            CFR2,
+            ASF,
+            ARR,
+            FTW0,
+            POW,
+            Number
+        } value;
+        Register(E v) : value(v) { };
+        operator uint8() const { return static_cast<uint8>(value); };
+        pString Name() const;
+        bool Is(E v) const { return value == v; };
+    };
+
+    static void WriteToHardware(const Chan &, Register::E reg, uint value);
+    static StructPIN ChipSelect(const Chan &);
+    static void Reset();
+    static void WriteRegister(const Chan &, Register::E reg);
+    static void WriteCFR1(const Chan &);
+    static void WriteCFR2(const Chan &);
+    static void WriteARR(const Chan &);
+    static void WriteASF(const Chan &);
+    static void WriteFTW0(const Chan &);
+    static void WritePOW(const Chan &);
+
+    static double phase[Chan::Count] = { 0.0, 0.0 };
+
+    // Последнее записанное в ASF регистр значение. Используется для того, чтобы меандр при установленной амплитуде синусоиды "0" существовал
+    volatile uint lastASF[Chan::Count] = { 100, 100 };
+}
 
 
 void AD9952::Init()
