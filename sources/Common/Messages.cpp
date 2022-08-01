@@ -391,7 +391,7 @@ Message::FDrive::FileName::FileName(uint8 numFile, char *name) : SimpleMessage()
 }
 
 
-Message::FDrive::CreateFile::CreateFile(pchar name) : SimpleMessage()
+Message::FDrive::CreateFFile::CreateFFile(pchar name) : SimpleMessage()
 {
     int size = 1 + static_cast<int>(std::strlen(name)) + 1;
     AllocateMemory(size);

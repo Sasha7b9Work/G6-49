@@ -63,7 +63,7 @@ void FDrive::Draw()
     int width = WaveGraphics::Width() - 2;
     int height = WaveGraphics::Height() * 2;
 
-    Rectangle(width, height).Fill(x, y, Color::BACK);
+    Primitives::Rectangle(width, height).Fill(x, y, Color::BACK);
 
     if(mounted == Disconnect)
     {
@@ -95,7 +95,7 @@ void FDrive::Draw()
         x = (Display::WIDTH - width) / 2;
         y = (Display::HEIGHT - height) / 2;
 
-        Rectangle(width, height).DrawFilled(x, y, Color::BACK, Color::FILL);
+        Primitives::Rectangle(width, height).DrawFilled(x, y, Color::BACK, Color::FILL);
 
         String(LANG_RU ? "Сигнал загружается" : "Signal loaded").Draw(x + 10, y + 10, Color::FILL);
     }
@@ -294,7 +294,7 @@ void FDrive::SaveScreenToFlash()
 
     CreateFileName(fileName);
 
-    Message::FDrive::CreateFile(fileName).Transmit();
+    Message::FDrive::CreateFFile(fileName).Transmit();
 
     Message::FDrive::WriteToFile(&bmFH, 14).Transmit();
 
@@ -302,15 +302,15 @@ void FDrive::SaveScreenToFlash()
 
     uint8 buffer[320 * 3] = { 0 };
 
-    typedef struct tagRGBQUAD
+    struct STM32tagRGBQUAD
     {
         uint8    blue;
         uint8    green;
         uint8    red;
         uint8    rgbReserved;
-    } RGBQUAD;
+    };
 
-    RGBQUAD colorStruct;
+    STM32tagRGBQUAD colorStruct;
 
     for (int i = 0; i < 32; i++)
     {
@@ -319,7 +319,7 @@ void FDrive::SaveScreenToFlash()
         colorStruct.green = (uint8)((float)G_FROM_COLOR(color));
         colorStruct.red = (uint8)((float)R_FROM_COLOR(color));
         colorStruct.rgbReserved = 0;
-        (reinterpret_cast<RGBQUAD *>(buffer))[i] = colorStruct;
+        (reinterpret_cast<STM32tagRGBQUAD *>(buffer))[i] = colorStruct;
     }
 
     for (int i = 0; i < 4; i++)

@@ -238,10 +238,10 @@ namespace Message
         };
 
 
-        class CreateFile : public SimpleMessage
+        class CreateFFile : public SimpleMessage
         {
         public:
-            CreateFile(pchar name);
+            CreateFFile(pchar name);
         };
 
         class WriteToFile : public SimpleMessage
