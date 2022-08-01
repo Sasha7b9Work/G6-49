@@ -6,42 +6,41 @@
 #include "common/Command.h"
 
 
-class DGenerator
+namespace DGenerator
 {
-public:
     static const int DDS_NUM_POINTS = 8 * 1024;
 
-    static void Init();
+    void Init();
 
-    static void EnableChannel(const Chan &, bool enable);
+    void EnableChannel(const Chan &, bool enable);
 
-    static void SingleStart();
+    void SingleStart();
 
-    static void SetFormWave(const Chan &, TypeForm::E form);
+    void SetFormWave(const Chan &, TypeForm::E form);
 
-    static void SetOffset(const Chan &, Value offset);
+    void SetOffset(const Chan &, Value offset);
 
-    static void SetFrequency(const Chan &, Value frequency);
+    void SetFrequency(const Chan &, Value frequency);
 
-    static void SetAmplitude(const Chan &, Value amplitude);
+    void SetAmplitude(const Chan &, Value amplitude);
 
-    static void SetDuration(const Chan &, Value duration);
+    void SetDuration(const Chan &, Value duration);
 
-    static void SetDutyRatio(const Chan &, Value dutyRatio);
+    void SetDutyRatio(const Chan &, Value dutyRatio);
 
-    static void SetPhase(const Chan &, Value phase);
+    void SetPhase(const Chan &, Value phase);
 
-    static void SetDelay(const Chan &, Value duration);
+    void SetDelay(const Chan &, Value duration);
 
-    static void SetManipulationDuration(const Chan &, Value duration);
+    void SetManipulationDuration(const Chan &, Value duration);
 
-    static void SetManipulationPeriod(const Chan &, Value period);
+    void SetManipulationPeriod(const Chan &, Value period);
 
-    static void SetPacketPeriod(const Chan &, Value duration);
+    void SetPacketPeriod(const Chan &, Value duration);
 
-    static void SetPacketNumber(const Chan &, Value number);
+    void SetPacketNumber(const Chan &, Value number);
 
-    static void SetPeriod(const Chan &, Value period);
+    void SetPeriod(const Chan &, Value period);
 };
 
 
@@ -107,7 +106,6 @@ private:
 
 struct SettingsGenerator
 {
-    friend class DGenerator;
 public:
     // Возвращает установленную на канале амплитуду. Амплитуда возвращается без учёта аттёнюатора
     static double Amplitude(const Chan &ch)     { return amplitude[ch].ToDouble(); }
@@ -119,13 +117,12 @@ public:
     static double Frequency(const Chan &ch) { return frequency[ch].ToDouble(); }
     // Возвращает true, если на канале ch установлена синусоидальная форма сигнала
     static bool FormIsSine(const Chan &ch) { return waveIsSine[ch]; }
-private:
     // true, если на канале установлена форма сигнала "синусоида"
     static bool waveIsSine[Chan::Count];
+    // Текущая частота на канале
+    static Value frequency[Chan::Count];
     // Текущая установленная амплитуда на канале
     static Value amplitude[Chan::Count];
     // Текущая установленное смещение на кнаале
     static Value offset[Chan::Count];
-    // Текущая частота на канале
-    static Value frequency[Chan::Count];
 };
