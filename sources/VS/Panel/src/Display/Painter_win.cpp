@@ -173,8 +173,8 @@ static void CreateButtons(Frame *frame)
         {Key::F1,   Key::_1,         Key::_2,        Key::_3,          Key::Esc},
         {Key::F2,   Key::_4,         Key::_5,        Key::_6,          Key::Left},
         {Key::F3,   Key::_7,         Key::_8,        Key::_9,          Key::Right},
-        {Key::F4,   Key::Comma,        Key::_0,        Key::Minus,       Key::On1},
-        {Key::None, Key::RotateLeft, Key::RegButton, Key::RotateRight, Key::On2}
+        {Key::F4,   Key::Comma,      Key::_0,        Key::Minus,       Key::None},
+        {Key::None, Key::RotateLeft, Key::RegButton, Key::RotateRight, Key::None}
     };
 
     int x0 = Size::Buttons::X0();
@@ -196,7 +196,10 @@ static void CreateButtons(Frame *frame)
         }
     }
 
-    governor = new GovernorGUI(frame, { 450, 170 });
+    governor = new GovernorGUI(frame, { 477, 170 });
+
+    CreateButton(Key::On1, frame, { x0, 180 }, size);
+    CreateButton(Key::On2, frame, { x0 + width + dX, 180 }, size);
 }
 
 
