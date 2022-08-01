@@ -6,40 +6,43 @@
 #include "usbh_diskio.h"
 
 
-static USBH_HandleTypeDef USB_host;
-void *DDrive::handle = &USB_host;
-
-static FATFS FatFS;
-
-static char USBDISKPath[4];
-// true, если флешка подключена
-volatile static bool isConnected = false;
-
-struct State
+namespace DDrive
 {
-    enum E
+    struct State
     {
-        Disconnected,   // Начальное значение после старта
-        NeedMount,      // Обнаружена подключенная флешка, требуется монтирование
-        Connected,      // Флешка подсоединена и примонтирована
-        NeedUnmount     // Требуется отмонтировать
-    } value;
-};
+        enum E
+        {
+            Disconnected,   // Начальное значение после старта
+            NeedMount,      // Обнаружена подключенная флешка, требуется монтирование
+            Connected,      // Флешка подсоединена и примонтирована
+            NeedUnmount     // Требуется отмонтировать
+        } value;
+    };
 
-static State::E state = State::Disconnected;
-// Здесь хранится обрабатываемая команда
-static Command command = Command::Count;
+    static USBH_HandleTypeDef USB_host;
+
+    void *DDrive::handle = &USB_host;
+
+    static State::E state = State::Disconnected;
+
+    // Здесь хранится обрабатываемая команда
+    static Command command = Command::Count;
+
+    static FATFS FatFS;
+
+    static char USBDISKPath[4];
+
+    // true, если флешка подключена
+    volatile static bool isConnected = false;
+
+    // В эту функцию попадаем при каждом событии на OTG FS
+    static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id);
+}
 
 
 
-// В эту функцию попадаем при каждом событии на OTG FS
-static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id);
-// Получить имя numDir-го каталога из каталога fullPath
-//static bool GetNameDir(const char *fullPath, int numDir, char *nameDirOut, StructForReadDir *s);
 
-
-
-static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
+static void DDrive::USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
 {
     switch(id)
     {

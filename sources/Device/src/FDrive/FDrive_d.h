@@ -3,13 +3,13 @@
 #include "common/Messages.h"
 
 
-struct DDrive
+namespace DDrive
 {
-    static void Init();
+    void Init();
 
-    static void Update();
+    void Update();
 
-    static void *handle;
+    extern void *handle;
 
     struct Handler
     {
