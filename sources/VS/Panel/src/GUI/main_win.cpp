@@ -29,6 +29,10 @@ void init()
     Menu::Init();
 
     Locale::FindSeparator();
+
+    PGenerator::EnableChannel(ChA, true);
+
+    PGenerator::EnableChannel(ChB, true);
 }
 
 

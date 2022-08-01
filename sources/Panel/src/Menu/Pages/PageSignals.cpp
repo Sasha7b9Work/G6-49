@@ -172,6 +172,11 @@ DEF_CHOICE_7( cFormB,                                                           
 
 static void OnPress_TuneParameter()
 {
+    if (!CURRENT_PARAM->funcOfActive())
+    {
+        return;
+    }
+
     if (CURRENT_PARAM->IsDouble())
     {
         ParameterDouble *param = reinterpret_cast<ParameterDouble *>(CURRENT_PARAM);
@@ -204,10 +209,16 @@ static void OnDraw_TuneParameter(int x, int y)
 }
 
 
+static bool IsActive_TuneParameter()
+{
+    return CURRENT_PARAM->funcOfActive();
+}
+
+
 DEF_BUTTON( bTuneParameter,                                                                                                        //--- НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра ---
     "Изменить", "Change",
     "Открывает окно ввода параметра", "Opens the parameter input window",
-    *PageSignals::self, Item::FuncActive, OnPress_TuneParameter, OnDraw_TuneParameter
+    *PageSignals::self, IsActive_TuneParameter, OnPress_TuneParameter, OnDraw_TuneParameter
 )
 
 

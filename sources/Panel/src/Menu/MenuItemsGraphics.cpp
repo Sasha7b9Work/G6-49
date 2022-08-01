@@ -51,7 +51,7 @@ void Item::DrawTitle(int x, int y) const
 
     String string = GetTitle();
 
-    Color((IsPressed() || IsOpened()) ? Color::BACK : (IsShade() ? Color::GRAY_25 : Color::FILL)).SetAsCurrent();
+    Color((IsPressed() || IsOpened()) ? Color::BACK : ((IsShade() || !funcOfActive()) ? Color::GRAY_25 : Color::FILL)).SetAsCurrent();
 
     if (string.NumberWords() != 1 && GetType() == TypeItem::Page)
     {
