@@ -56,6 +56,8 @@ static void SetPacketNumber(SimpleMessage *);
 
 static void SetStartMode(SimpleMessage *);
 
+static void SetStartStopMode(SimpleMessage *);
+
 static void SetPeriod(SimpleMessage *);
 
 static void SetPolarity(SimpleMessage *);
@@ -120,10 +122,11 @@ void DHandlers::Processing(SimpleMessage *msg)
     case Command::CalibrationLoad:              func = CalibrationLoad;              break;
     case Command::CalibrationSet:               func = CalibrationSet;               break;
     case Command::SCPI_Data:                    func = DVCP::Handler::Processing;    break;
-    case Command::Debug:                        func = FDebug;                        break;
+    case Command::Debug:                        func = FDebug;                       break;
     case Command::SetFreqMeterTrigK:            func = SetFreqMeterTrigK;            break;
     case Command::RequestPictureDDSfromStorage: func = RequestPictureDDSfromStorage; break;
     case Command::LoadDDSfromStorage:           func = LoadDDSfromStorage;           break;
+    case Command::StartStopMode:                func = SetStartStopMode;             break;
 
     case Command::FDrive_NumDirsAndFiles:
     case Command::FDrive_Mount:
@@ -300,6 +303,12 @@ static void SetStartMode(SimpleMessage *msg)
     StartMode mode = static_cast<StartMode>(msg->TakeUINT8());
 
     FPGA::SetStartMode(ch, static_cast<uint8>((firstByte & 2) >> 1), mode);
+}
+
+
+static void SetStartStopMode(SimpleMessage *msg)
+{
+
 }
 
 
