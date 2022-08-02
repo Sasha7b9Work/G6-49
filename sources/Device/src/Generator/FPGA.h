@@ -63,17 +63,6 @@ namespace FPGA
         };
     };
 
-    struct ClockFrequencyAD992
-    {
-        enum E
-        {
-            _100MHz,
-            _1MHz
-        };
-    };
-
-    void SetClockAD992(ClockFrequencyAD992::E);
-
     // Возвращает указатель на точки сигнала, загружаемого из флешки
     uint8 *DataFreeSignal(const Chan &);
 
@@ -83,12 +72,35 @@ namespace FPGA
     // Возвращает указатель на точки произвольного сигнала (программно определёного)
     uint8 *DataDDS(const Chan &);
 
-    extern ClockFrequencyAD992::E clockAD992;
-
     // Режим работы ПЛИС
     extern ModeWork::E modeWork[Chan::Count];
 
     static inline ModeWork::E CurrentMode(const Chan &ch) { return modeWork[ch]; }
+
+    // Тактовая частота формирователя произвольных сигналов
+    struct ClockFrequencyAD992
+    {
+        enum E
+        {
+            _100MHz,
+            _1MHz
+        };
+    };
+    
+    // Тактовая частота формирователя импульсов
+    struct ClockFrequencyImpulse
+    {
+        enum E
+        {
+            _100MHz,
+            _1MHz
+        };
+    };
+    
+    extern ClockFrequencyImpulse::E clockImpulse;
+    extern ClockFrequencyAD992::E clockAD992;
+
+    void SetClockAD992(ClockFrequencyAD992::E);
 
     namespace Register
     {
