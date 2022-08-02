@@ -85,7 +85,7 @@ namespace FPGA
     static void SendDataChannel(const Chan &);
 
     // Установить на A0_RG...A3_RG адрес, соответсвующй регистру
-    static void WriteAddress(RG::E reg);
+    static void WriteAddress(Register::E reg);
 
     // Запись управляющего регистра
     static void WriteControlRegister();
@@ -103,7 +103,7 @@ namespace FPGA
     // Режим запуска для произвольного сигнала (0) и для импульсного сигнала (1)
     static StartMode startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
 
-    uint64 registers[RG::Count] = { 0 };     // Здесь хранятся записанные в регистры значения
+    uint64 registers[Register::Count] = { 0 };     // Здесь хранятся записанные в регистры значения
 
     ModeWork::E       modeWork[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
     ClockFrequency::E clock = FPGA::ClockFrequency::_100MHz;
@@ -172,7 +172,7 @@ void FPGA::WriteMaxAmplitude(const Chan &ch)
 
     uint64 data = (static_cast<uint64>(16383) << 14) + (8191);
 
-    static const RG::E regs[Chan::Count] = { RG::_3_RectA, RG::_4_RectB };
+    static const Register::E regs[Chan::Count] = { Register::_3_RectA, Register::_4_RectB };
 
     Register::Write(regs[ch], data);
 }
@@ -219,7 +219,7 @@ void FPGA::SetFormPackedImpulse(const Chan &)
 
     uint64 data = (16383 << 14) + 8191;
 
-    Register::Write(RG::_3_RectA, data);
+    Register::Write(Register::_3_RectA, data);
 
     SetPolarity(ChA, 0);
 }
@@ -234,7 +234,7 @@ void FPGA::SetPolarity(const Chan &ch, uint8 polarity)
         data = (16383 << 14) + 8191;        // Отрицательная полярность
     }
 
-    static const RG::E regs[Chan::Count] = {RG::_3_RectA, RG::_4_RectB};
+    static const Register::E regs[Chan::Count] = { Register::_3_RectA, Register::_4_RectB };
 
     Register::Write(regs[ch], data);
 }
@@ -262,7 +262,7 @@ void FPGA::SetFrequency(const Chan &ch)
     else if (InModeDDS(ch))
     {
         uint64 N = static_cast<uint64>((frequency * (static_cast<uint64>(1) << 40)) / 1E8F);
-        Register::Write(RG::_1_Freq, N);
+        Register::Write(Register::_1_Freq, N);
     }
     else if(modeWork[ch] == ModeWork::Impulse || modeWork[ch] == ModeWork::Impulse2)
     {
@@ -272,7 +272,7 @@ void FPGA::SetFrequency(const Chan &ch)
             WriteControlRegister();
         }
         uint N = static_cast<uint>(1E8F / frequency + 0.5F);
-        Register::Write(ch.IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB, N);
+        Register::Write(ch.IsA() ? Register::_5_PeriodImpulseA : Register::_7_PeriodImpulseB, N);
     }
 }
 
@@ -281,11 +281,11 @@ void FPGA::SetDurationImpulse(const Chan &ch, Value duration)
 {
     PacketImpulse::durationImpulse = duration;
 
-    RG::E reg = ch.IsA() ? RG::_6_DurationImpulseA : RG::_8_DurationImpulseB;
+    Register::E reg = ch.IsA() ? Register::_6_DurationImpulseA : Register::_8_DurationImpulseB;
 
     if(ch.IsA() && (modeWork[Chan::A] == ModeWork::PackedImpulse))
     {
-        reg = RG::_8_DurationImpulseB;
+        reg = Register::_8_DurationImpulseB;
     }
 
     uint64 value = duration.ToUINT64() / 10;
@@ -298,7 +298,7 @@ void FPGA::PacketImpulse::SetPeriodPacket(Value period)
 {
     uint64 value = period.ToUINT64() / 10 - 2;
 
-    Register::Write(RG::_5_PeriodImpulseA, value);
+    Register::Write(Register::_5_PeriodImpulseA, value);
 }
 
 
@@ -306,7 +306,7 @@ void FPGA::PacketImpulse::SetNumberImpules(uint value)
 {
     uint64 n = static_cast<uint64>(((value - 1) * periodImpulse.ToDouble() + durationImpulse.ToDouble()) / 10E-9);
 
-    Register::Write(RG::_6_DurationImpulseA, n);
+    Register::Write(Register::_6_DurationImpulseA, n);
 }
 
 
@@ -317,11 +317,11 @@ void FPGA::SetPeriodImpulse(const Chan &ch, Value period)
 
     PacketImpulse::periodImpulse = period;
 
-    RG::E reg = ch.IsA() ? RG::_5_PeriodImpulseA : RG::_7_PeriodImpulseB;
+    Register::E reg = ch.IsA() ? Register::_5_PeriodImpulseA : Register::_7_PeriodImpulseB;
 
     if(ch.IsA() && (modeWork[Chan::A] == ModeWork::PackedImpulse))
     {
-        reg = RG::_7_PeriodImpulseB;
+        reg = Register::_7_PeriodImpulseB;
     }
 
     uint64 value = period.ToUINT64() / 10 - 2;
@@ -396,7 +396,7 @@ void FPGA::WriteControlRegister()
     char buffer[33];
     LOG_WRITE("%s", SU::Bin2StringN(data, buffer, 16));
 
-    Register::Write(RG::_0_Control, data);
+    Register::Write(Register::_0_Control, data);
 }
 
 
@@ -448,7 +448,7 @@ void FPGA::SetBitsStartMode(uint16 &data)
 
 void FPGA::SingleStart()
 {
-    Register::Write(RG::_11_Start, 2);
+    Register::Write(Register::_11_Start, 2);
 }
 
 
@@ -464,12 +464,12 @@ void FPGA::SendData()
     */
 
 
-    Register::Write(RG::_0_Control, 0);
+    Register::Write(Register::_0_Control, 0);
     
     SendDataChannel(ChA);
     SendDataChannel(ChB);
 
-    Register::Write(RG::_0_Control, 1);
+    Register::Write(Register::_0_Control, 1);
 }
 
 
@@ -493,9 +493,9 @@ void FPGA::SendDataChannel(const Chan &ch)
 }
 
 
-void FPGA::Register::Write(RG::E reg, uint64 value)
+void FPGA::Register::Write(Register::E reg, uint64 value)
 {
-    static const int numBits[RG::Count] =
+    static const int numBits[Register::Count] =
     {
         16, // _0_Control,
         40, // _1_Freq,
@@ -533,7 +533,7 @@ void FPGA::Register::Write(RG::E reg, uint64 value)
 }
 
 
-void FPGA::WriteAddress(RG::E reg)
+void FPGA::WriteAddress(Register::E reg)
 {
     HAL_PIO::Write(WR_FPGA_A0_RG, Bit::Get(reg, 0));
     HAL_PIO::Write(WR_FPGA_A1_RG, Bit::Get(reg, 1));
@@ -560,7 +560,7 @@ void FPGA::SetAmplitude()
     uint nA = CalculateCodeAmplitude(ChA);
     uint nB = CalculateCodeAmplitude(ChB);
 
-    Register::Write(RG::_2_Amplitude, nA + (nB << 10));
+    Register::Write(Register::_2_Amplitude, nA + (nB << 10));
 }
 
 
