@@ -147,9 +147,9 @@ void Display::Warnings::ShowAllTheTime(const pchar &ru, const pchar &en)
 }
 
 
-void Display::Warnings::ShowTemp(pchar ru, pchar en)
+void Display::Warnings::Show(pchar ru, pchar en, bool auto_delete)
 {
-    Show(String(ru), String(en), true);
+    Show(String(ru), String(en), auto_delete);
 }
 
 

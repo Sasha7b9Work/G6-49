@@ -231,7 +231,7 @@ void FDrive::SaveScreenToFlash()
 {
     if (mounted != Mounted)
     {
-        Display::Warnings::ShowTemp("Флешка не подключена", "Flash drive not connected");
+        Display::Warnings::Show("Флешка не подключена", "Flash drive not connected", true);
         return;
     }
 
@@ -334,5 +334,5 @@ void FDrive::SaveScreenToFlash()
 
     Message::FDrive::CloseFile().Transmit();
 
-    Display::Warnings::ShowTemp("Снимок сохранён", "Snapshot saved");
+    Display::Warnings::Show("Снимок сохранён", "Snapshot saved", true);
 }

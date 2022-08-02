@@ -34,9 +34,7 @@ namespace Display
     {
         // Вывести временно
         static void Show(const String &ru, const String &en, bool auto_delete);
-
-//        static void ShowTemp(const String &ru, const String &en);
-        static void ShowTemp(pchar ru, pchar en);
+        static void Show(pchar ru, pchar en, bool auto_delete);
 
         // Вывести на постоянно
         static void ShowAllTheTime(const String &);

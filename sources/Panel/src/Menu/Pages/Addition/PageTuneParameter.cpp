@@ -134,7 +134,7 @@ bool PageTuneParameter::VerifyForPossiblyChangesAmplitude(const Control &control
                     {
                         if (std::fabs(offset->GetValue().ToDouble()) > 2.5)
                         {
-                            Display::Warnings::ShowTemp("Смещение не более +/- 2.5В", "Offset no more than +/- 2.5V");
+                            Display::Warnings::Show("Смещение не более +/- 2.5В", "Offset no more than +/- 2.5V", true);
 
                             return false;
                         }
