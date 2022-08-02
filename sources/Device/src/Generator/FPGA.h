@@ -72,8 +72,6 @@ namespace FPGA
     // Возвращает указатель на точки произвольного сигнала (программно определёного)
     uint8 *DataDDS(const Chan &);
 
-    //static inline ModeWork::E CurrentMode(const Chan &ch) { return modeWork[ch]; }
-
     // Тактовая частота формирователя произвольных сигналов
     namespace ClockFrequencyAD992
     {

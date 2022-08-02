@@ -116,7 +116,7 @@ namespace FPGA
 
     namespace ClockFrequencyImpulse
     {
-        static E value = _100MHz;
+        E value = _100MHz;
     }
 
     namespace Register
