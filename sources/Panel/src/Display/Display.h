@@ -35,10 +35,9 @@ namespace Display
         // Вывести временно
         static void Show(const String &ru, const String &en, bool auto_delete);
         static void Show(pchar ru, pchar en, bool auto_delete);
+        static void Show(const String &, bool auto_delete);
 
         // Вывести на постоянно
-        static void ShowAllTheTime(const String &);
-        static void ShowAllTheTime(const pchar &ru, const pchar &en);
         static void ClearAllTheTime();
 
         static void ClearAll();

@@ -135,15 +135,16 @@ void Display::Warnings::Show(const String &ru, const String &en, bool auto_delet
 }
 
 
-void Display::Warnings::ShowAllTheTime(const String &warning)
+void Display::Warnings::Show(const String &warning, bool auto_delete)
 {
-    warnings.AppendAllTheTime(warning);
-}
-
-
-void Display::Warnings::ShowAllTheTime(const pchar &ru, const pchar &en)
-{
-    warnings.AppendAllTheTime(LANG_RU ? String(ru) : String(en));
+    if (auto_delete)
+    {
+        warnings.AppendTemp(warning);
+    }
+    else
+    {
+        warnings.AppendAllTheTime(warning);
+    }
 }
 
 
