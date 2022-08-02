@@ -103,11 +103,11 @@ namespace FPGA
     // Режим запуска для произвольного сигнала (0) и для импульсного сигнала (1)
     static StartMode::E startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
 
-    ModeWork::E            modeWork[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
+    ModeWork::E         modeWork[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
 
     namespace ClockFrequencyAD992
     {
-        E value = _100MHz;
+        static E value = _100MHz;
     }
 
     namespace Register
@@ -364,6 +364,12 @@ void FPGA::ClockFrequencyAD992::Set(ClockFrequencyAD992::E _clock)
 {
     value = _clock;
     WriteControlRegister();
+}
+
+
+FPGA::ClockFrequencyAD992::E FPGA::ClockFrequencyAD992::Get()
+{
+    return value;
 }
 
 

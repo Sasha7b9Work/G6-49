@@ -86,9 +86,9 @@ namespace FPGA
             _1MHz
         };
 
-        extern E value;
-
         void Set(E);
+
+        E Get();
     };
     
     // Тактовая частота формирователя импульсов
