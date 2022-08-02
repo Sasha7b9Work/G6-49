@@ -37,6 +37,8 @@ namespace Display
         WarningsDisplay() : last(0) { }
         void Show();
         void AppendTemp(const String &);
+        // Добавить две строки
+        void AppendTemp2(const String &, const String &);
         void ClearTemp();
         void AppendAllTheTime(const String &);
         void ClearAllTheTime();
@@ -138,6 +140,12 @@ void Display::Warnings::Show(const String &ru, const String &en, bool auto_delet
 }
 
 
+void Display::Warnings::Show2Strings(const String &ru1, const String &ru2, const String &en1, const String &en2)
+{
+    warnings.AppendTemp2(LANG_RU ? ru1 : en1, LANG_RU ? ru2 : en2);
+}
+
+
 void Display::Warnings::Show(const String &warning, bool auto_delete)
 {
     if (auto_delete)
@@ -176,6 +184,9 @@ void Display::WarningsDisplay::AppendTemp(const String &warning)
         }
     }
 }
+
+
+void Display::WarningsDisplay::AppendTemp2(const String &)
 
 
 void Display::WarningsDisplay::AppendAllTheTime(const String &warning)
