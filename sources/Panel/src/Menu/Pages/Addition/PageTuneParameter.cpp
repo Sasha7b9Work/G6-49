@@ -102,7 +102,7 @@ static void OnPress_Enter()
     }
     else
     {
-        Display::Warnings::ClearFlash();
+        Display::Warnings::ClearAllTheTime();
     }
 }
 

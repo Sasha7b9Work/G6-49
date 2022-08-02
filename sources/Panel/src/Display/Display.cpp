@@ -36,7 +36,7 @@ struct Warnings
     void AppendTemp(const String &);
     void Clear();
     void AppendAllTheTime(const String &);
-    void ClearFlash();
+    void ClearAllTheTime();
 
 private:
     static const int NUM_WARNINGS = 10;
@@ -170,7 +170,7 @@ void Warnings::AppendAllTheTime(const String &warning)
 }
 
 
-void Warnings::ClearFlash()
+void Warnings::ClearAllTheTime()
 {
     warning_flash.Free();
 }
@@ -234,15 +234,15 @@ void Warnings::Clear()
 }
 
 
-void Display::Warnings::ClearTemp()
+void Display::Warnings::ClearAll()
 {
     warnings.Clear();
 }
 
 
-void Display::Warnings::ClearFlash()
+void Display::Warnings::ClearAllTheTime()
 {
-    warnings.ClearFlash();
+    warnings.ClearAllTheTime();
 }
 
 

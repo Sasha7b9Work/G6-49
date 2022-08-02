@@ -33,13 +33,16 @@ namespace Display
     struct Warnings
     {
         // Вывести временно
+//        static void Show(const String &ru, const String &en, bool auto_delete);
+
         static void ShowTemp(const String &ru, const String &en);
         static void ShowTemp(pchar ru, pchar en);
-        static void ClearTemp();
 
         // Вывести на постоянно
         static void ShowAllTheTime(const String &);
         static void ShowAllTheTime(const pchar &ru, const pchar &en);
-        static void ClearFlash();
+        static void ClearAllTheTime();
+
+        static void ClearAll();
     };
 };
