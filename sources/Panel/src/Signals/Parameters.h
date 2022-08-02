@@ -294,8 +294,6 @@ public:
 
     void NextChoice();
 
-//    void TuneCurrentChoice();
-
     bool SetAndLoadChoice(int ch);
 
     virtual String ToString(String &units) const;
@@ -314,9 +312,6 @@ private:
     
     // Количество вариантов выбора
     int NumChoices() const;
-
-    // Эта функция вызывается дл установки режима запуска произвольного сигнала
-    void NextChoiceModeStart();
 };
 
 

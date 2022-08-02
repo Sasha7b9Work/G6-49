@@ -119,6 +119,13 @@ namespace Message
     };
 
 
+    // Режим Старт/Стоп импульсного сигнала
+    class StartStopMode : public SimpleMessage
+    {
+    public:
+        StartStopMode(uint8 ch, uint8 mode);
+    };
+
     // Запись в регистр
     class WriteRegister : public SimpleMessage
     {

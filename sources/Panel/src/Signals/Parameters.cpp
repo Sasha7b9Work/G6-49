@@ -372,7 +372,17 @@ void ParameterChoice::NextChoice()
 {
     if (type == ParameterChoiceType::ModeStart)
     {
-        NextChoiceModeStart();
+        if (form->IsDDS())
+        {
+            Math::CircleIncrease(&choiceModeStartFree, 0, NumChoices() - 1);
+        }
+        else
+        {
+            Math::CircleIncrease(&choice, 0, NumChoices() - 1);
+        }
+
+        PGenerator::LoadStartMode(form->GetWave()->GetChannel(), form->IsDDS() ? 0 : 1, GetChoice());
+        PGenerator::TuneChannel(form->GetWave()->GetChannel());
     }
     else
     {
@@ -382,22 +392,6 @@ void ParameterChoice::NextChoice()
 
         PGenerator::TuneChannel(ch);
     }
-}
-
-
-void ParameterChoice::NextChoiceModeStart()
-{
-    if (form->IsDDS())
-    {
-        Math::CircleIncrease(&choiceModeStartFree, 0, NumChoices() - 1);
-    }
-    else
-    {
-        Math::CircleIncrease(&choice, 0, NumChoices() - 1);
-    }
-
-    PGenerator::LoadStartMode(form->GetWave()->GetChannel(), form->IsDDS() ? 0 : 1, GetChoice());
-    PGenerator::TuneChannel(form->GetWave()->GetChannel());
 }
 
 
