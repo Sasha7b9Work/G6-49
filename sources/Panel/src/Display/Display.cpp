@@ -33,7 +33,7 @@ struct Warnings
 {
     Warnings() : last(0) { }
     void Show();
-    void Append(const String &);
+    void AppendTemp(const String &);
     void Clear();
     void AppendFlash(const String &);
     void ClearFlash();
@@ -122,9 +122,9 @@ void Display::Update()
 }
 
 
-void Display::Warnings::ShowCenter(const String &ru, const String &en)
+void Display::Warnings::ShowTemp(const String &ru, const String &en)
 {
-    warnings.Append(LANG_RU ? ru : en);
+    warnings.AppendTemp(LANG_RU ? ru : en);
 }
 
 
@@ -142,11 +142,11 @@ void Display::Warnings::ShowFlash(const pchar &ru, const pchar &en)
 
 void Display::Warnings::ShowCenter(pchar ru, pchar en)
 {
-    ShowCenter(String(ru), String(en));
+    ShowTemp(String(ru), String(en));
 }
 
 
-void Warnings::Append(const String &warning)
+void Warnings::AppendTemp(const String &warning)
 {
     if (!IsEmpty() && Last().IsEqual(warning))
     {

@@ -32,10 +32,12 @@ namespace Display
 
     struct Warnings
     {
-        static void ShowCenter(const String &ru, const String &en);
+        // Вывести временно
+        static void ShowTemp(const String &ru, const String &en);
         static void ShowCenter(pchar ru, pchar en);
         static void ShowCenter();
 
+        // Вывести на постоянно
         static void ShowTop(const String &);
         static void ShowFlash(const pchar &ru, const pchar &en);
         static void ClearFlash();
