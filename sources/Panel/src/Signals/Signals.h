@@ -24,8 +24,9 @@ namespace Signals
 {
     struct A
     {
-        static Form *impulse;
-        static Form *packet;
+        static Form                   *impulse;
+        static ParameterModeStartStop *impulse_start_stop;
+        static Form                   *packet;
     };
 
     struct B

@@ -204,24 +204,35 @@ DEF_CHOICE_7( cFormB,                                                           
 )
 
 
+static bool IsActive_TuneParameter()
+{
+    return CURRENT_PARAM->funcOfActive();
+}
+
+
 static void OnPress_TuneParameter()
 {
-    if (!CURRENT_PARAM->funcOfActive())
+    if (IsActive_TuneParameter())
     {
-        return;
-    }
-
-    if (CURRENT_PARAM->IsDouble())
-    {
-        ParameterDouble *param = reinterpret_cast<ParameterDouble *>(CURRENT_PARAM);
-
-        if (param->GetType() == ParameterDoubleType::ManipulationDuration || param->GetType() == ParameterDoubleType::ManipulationPeriod)
+        if (CURRENT_PARAM->IsDouble())
         {
-            return;
+            ParameterDouble *param = reinterpret_cast<ParameterDouble *>(CURRENT_PARAM);
+
+            if (param->GetType() == ParameterDoubleType::ManipulationDuration || param->GetType() == ParameterDoubleType::ManipulationPeriod)
+            {
+                return;
+            }
+        }
+
+        CURRENT_PARAM->OnPressButtonTune();
+    }
+    else
+    {
+        if (CURRENT_PARAM == Signals::A::impulse_start_stop)
+        {
+            Display::Warnings::Show("Âûבונטעו םא ךאםאכו Â פמנלף ÈÌÏÓËÜÑ", "Select on the channel To form IMPULSE", true);
         }
     }
-
-    CURRENT_PARAM->OnPressButtonTune();
 }
 
 
@@ -240,12 +251,6 @@ static void OnDraw_TuneParameter(int x, int y)
             Primitives::Rectangle(Item::WIDTH - 5, Item::HEIGHT - 4).Fill(x + 2, y + 2, isShade ? Color::MENU_ITEM_SHADE : Color::GREEN_10);
         }
     }
-}
-
-
-static bool IsActive_TuneParameter()
-{
-    return CURRENT_PARAM->funcOfActive();
 }
 
 

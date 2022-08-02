@@ -449,6 +449,7 @@ Wave waves[Chan::Count] =
 };
 
 
-Form *Signals::A::impulse = &formImpulseA;
-Form *Signals::A::packet = &formPacketImpulseA;
-Form *Signals::B::impulse = &formImpulseB;
+Form                   *Signals::A::impulse = &formImpulseA;
+ParameterModeStartStop *Signals::A::impulse_start_stop = &impulseA_Output;
+Form                   *Signals::A::packet = &formPacketImpulseA;
+Form                   *Signals::B::impulse = &formImpulseB;
