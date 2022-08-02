@@ -30,9 +30,9 @@ struct WarningMessage
 };
 
 
-struct Warnings
+struct WarningsDisplay
 {
-    Warnings() : last(0) { }
+    WarningsDisplay() : last(0) { }
     void Show();
     void AppendTemp(const String &);
     void ClearTemp();
@@ -59,7 +59,7 @@ private:
 
 namespace Display
 {
-    static ::Warnings warnings;
+    static WarningsDisplay warnings;
 
     uint8 frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
 
@@ -159,7 +159,7 @@ void Display::Warnings::Show(pchar ru, pchar en, bool auto_delete)
 }
 
 
-void Warnings::AppendTemp(const String &warning)
+void WarningsDisplay::AppendTemp(const String &warning)
 {
     if (!IsEmpty() && Last().IsEqual(warning))
     {
@@ -177,19 +177,19 @@ void Warnings::AppendTemp(const String &warning)
 }
 
 
-void Warnings::AppendAllTheTime(const String &warning)
+void WarningsDisplay::AppendAllTheTime(const String &warning)
 {
     warning_flash = warning;
 }
 
 
-void Warnings::ClearAllTheTime()
+void WarningsDisplay::ClearAllTheTime()
 {
     warning_flash.Free();
 }
 
 
-void Warnings::Show()
+void WarningsDisplay::Show()
 {
     Update();
 
@@ -212,7 +212,7 @@ void Warnings::Show()
 }
 
 
-void Warnings::Update()
+void WarningsDisplay::Update()
 {
     while ((last != 0) && (warnings[0].timeStart + 5000 < _TIME_MS))
     {
@@ -233,7 +233,7 @@ void Warnings::Update()
 }
 
 
-void Warnings::ClearTemp()
+void WarningsDisplay::ClearTemp()
 {
     if (last != 0)
     {
@@ -260,7 +260,7 @@ void Display::Warnings::ClearAllTheTime()
 }
 
 
-void Warnings::DeleteFirst()
+void WarningsDisplay::DeleteFirst()
 {
     warnings[0].Delete();
 
@@ -273,31 +273,31 @@ void Warnings::DeleteFirst()
 }
 
 
-Color Warnings::ColorText() const
+Color WarningsDisplay::ColorText() const
 {
     return (_TIME_MS % 1000) < 500 ? Color::FILL : Color::BACK;
 }
 
 
-Color Warnings::ColorBackground() const
+Color WarningsDisplay::ColorBackground() const
 {
     return (ColorText().value == Color::FILL.value) ? Color::BACK : Color::FILL;
 }
 
 
-int Warnings::X0() const
+int WarningsDisplay::X0() const
 {
     return (Display::WIDTH - Width()) / 2;
 }
 
 
-int Warnings::Y0() const
+int WarningsDisplay::Y0() const
 {
     return Display::HEIGHT / 2 - last * 11 / 2;
 }
 
 
-int Warnings::Width() const
+int WarningsDisplay::Width() const
 {
     int width = 0;
 
