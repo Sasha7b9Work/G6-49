@@ -392,6 +392,24 @@ void ParameterChoice::NextChoice()
 
         PGenerator::TuneChannel(ch);
     }
+
+    EnableModeStartStopIfNeed();
+}
+
+
+void ParameterChoice::EnableModeStartStopIfNeed()
+{
+    if (FORM_A == Signals::A::impulse && FORM_B == Signals::B::impulse)
+    {
+        ParameterChoice *start_stop = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
+
+        if (start_stop->GetChoice() == 1)
+        {
+            ParameterChoice *start_mode = FORM_A->FindParameter(ParameterChoiceType::ModeStart);
+
+            PGenerator::EnableStartStopMode(start_mode->GetChoice());
+        }
+    }
 }
 
 

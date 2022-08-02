@@ -123,7 +123,9 @@ namespace Message
     class StartStopMode : public SimpleMessage
     {
     public:
-        StartStopMode(uint8 ch, uint8 mode);
+        // mode : 0 - автоматический режим
+        //        1 - ручной режим
+        StartStopMode(int mode);
     };
 
     // Запись в регистр

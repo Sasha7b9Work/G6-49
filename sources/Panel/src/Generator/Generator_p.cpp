@@ -45,9 +45,15 @@ void PGenerator::SingleStart()
 
 void PGenerator::LoadStartMode(const Chan &ch, int signal, int mode)
 {
-    int firstByte = static_cast<uint8>(ch) + (signal << 1);
+    int firstByte = (uint8)ch + (signal << 1);
 
-    Message::StartMode(static_cast<uint8>(firstByte), static_cast<uint8>(mode)).Transmit();
+    Message::StartMode((uint8)firstByte, (uint8)mode).Transmit();
+}
+
+
+void PGenerator::EnableStartStopMode(int mode_hand)
+{
+    Message::StartStopMode(mode_hand).Transmit();
 }
 
 

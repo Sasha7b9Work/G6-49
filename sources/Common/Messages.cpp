@@ -450,6 +450,12 @@ Message::StartMode::StartMode(uint8 ch, uint8 mode) : SimpleMessage(3, Command::
 }
 
 
+Message::StartStopMode::StartStopMode(int mode) : SimpleMessage(2, Command::StartStopMode)
+{
+    PutUINT8((uint8)mode);
+}
+
+
 Message::WriteRegister::WriteRegister(uint8 reg, uint64 data) : SimpleMessage(10, Command::WriteRegister)
 {
     PutUINT8(reg);

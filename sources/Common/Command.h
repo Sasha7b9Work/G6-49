@@ -102,6 +102,7 @@ struct Command
             FDrive_WriteToFile,
             FDrive_CloseFile,
             SingleStart,                    // Даёт однократный запускф
+            StartStopMode,                  // Режим старт/стоп для импульсного сигнала
             Count
     } value;
     Command(E v) : value(v) {};
