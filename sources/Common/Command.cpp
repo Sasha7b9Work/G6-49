@@ -20,7 +20,6 @@ pString Command::Name() const
         "SetDuration",
         "SetDutyRatio",
         "SetPhase",
-        "RunReset",
         "ModeDebug",
         "SetDelay",
         "WriteRegister",
@@ -36,7 +35,6 @@ pString Command::Name() const
         "SetStartMode",
         "SetPeriod",
         "SetPolarity",
-        "SetModeManipulation",
         "LoadFormDDS",
         "FreqMeasure",
         "Log",
@@ -45,14 +43,31 @@ pString Command::Name() const
         "FDrive_RequestDir",
         "FDrive_RequestFile",
         "Test",
-        "SetKoeffCalibration",
-        "GetKoeffCalibration",
         "FDrive_RequestFileSize",
         "FDrive_RequestFileString",
-        "FDrive_LoadFromExtStorage",
-        "FDrive_GetPictureDDS",
-        "SCPI_Data"
+        "FDrive_LoadDDSfromFile",
+        "FDrive_RequestPictureDDSfromFile",
+        "SCPI_Data",
+        "PortCPU",
+        "CalibrationLoad",
+        "CalibrationSet",
+        "StartApplication",
+        "RequestUpgrade",
+        "PortionUpgradeDevice",
+        "AnswerUpgradePanel",
+        "RequestPortionUpgradePanel",
+        "AnswerPortionUpgradePanel",
+        "Debug",
+        "SetFreqMeterTrigK",
+        "RequestPictureDDSfromStorage",
+        "LoadDDSfromStorage",
+        "FDrive_CreateFile",
+        "FDrive_WriteToFile",
+        "FDrive_CloseFile",
+        "SingleStart",
+        "StartStopMode"
     };
+
     if(value < Count)
     {
         return names[value];
