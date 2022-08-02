@@ -93,8 +93,7 @@ namespace FPGA
             _10_Offset,
             _11_Start,
             Count
-        } value;
-        explicit RG(E v) : value(v) { };
+        };
     };
 
     void SetClockAD992(ClockFrequency::E clock);
