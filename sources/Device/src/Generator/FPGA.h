@@ -60,8 +60,7 @@ namespace FPGA
             Sine,
             Free,
             Count
-        } value;
-        explicit ModeWork(E v) : value(v) {};
+        };
     };
 
     struct ClockFrequency
@@ -70,8 +69,7 @@ namespace FPGA
         {
             _100MHz,
             _1MHz
-        } value;
-        explicit ClockFrequency(E v) : value(v) {};
+        };
     };
 
     void SetClockAD992(ClockFrequency::E clock);
