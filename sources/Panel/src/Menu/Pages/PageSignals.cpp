@@ -157,6 +157,22 @@ void PageSignals::OnChanged_Form(bool)
 }
 
 
+static bool IsActive_Form()
+{
+    if (FORM(ChA)->Is(TypeForm::Impulse) && FORM(ChB)->Is(TypeForm::Impulse))
+    {
+        ParameterChoice *parameter = Signals::A::impulse->FindParameter(ParameterChoiceType::ModeStartStop);
+
+        if (parameter->GetChoice() == 1)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
 DEF_CHOICE_8( cFormA,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
     "ФОРМА", "FORM",
     "Выбор формы сигнала", "Waveform selection",
@@ -168,7 +184,7 @@ DEF_CHOICE_8( cFormA,                                                           
     FORM_RU(TypeForm::Impulse),     FORM_EN(TypeForm::Impulse),     "Импульсы",         "Impulse",
     FORM_RU(TypeForm::Packet),      FORM_EN(TypeForm::Packet),      "Пакеты",           "Packets",
     FORM_RU(TypeForm::Free),        FORM_EN(TypeForm::Free),        "Произвольный",     "Free",
-    numForm, *PageSignals::self, Item::FuncActive, PageSignals::OnChanged_Form, FuncDraw
+    numForm, *PageSignals::self, IsActive_Form, PageSignals::OnChanged_Form, FuncDraw
 )
 
 DEF_CHOICE_7( cFormB,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
@@ -181,7 +197,7 @@ DEF_CHOICE_7( cFormB,                                                           
     FORM_RU(TypeForm::Meander),   FORM_RU(TypeForm::Meander),   "Меандр",           "Meander",
     FORM_RU(TypeForm::Impulse),   FORM_RU(TypeForm::Impulse),   "Импульсы",         "Impulse",
     FORM_RU(TypeForm::Free),      FORM_RU(TypeForm::Free),      "Произвольный",     "Free",
-    numForm, *PageSignals::self, Item::FuncActive, PageSignals::OnChanged_Form, FuncDraw
+    numForm, *PageSignals::self, IsActive_Form, PageSignals::OnChanged_Form, FuncDraw
 )
 
 
