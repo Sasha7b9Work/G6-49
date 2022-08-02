@@ -49,7 +49,7 @@ DEF_CHOICE_2(cLanguage,
 )
 
 
-void PageService::OnChange_Volume(bool active, bool)
+void PageService::OnChange_Volume(bool active)
 {
     if (active)
     {

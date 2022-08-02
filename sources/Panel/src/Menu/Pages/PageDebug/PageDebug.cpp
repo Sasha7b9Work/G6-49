@@ -409,7 +409,7 @@ static void DrawValue(int x, int y, uint8 i)
 }
 
 
-static void OnPress_DebugMode(bool active, bool)
+static void OnPress_DebugMode(bool active)
 {
     if (active)
     {

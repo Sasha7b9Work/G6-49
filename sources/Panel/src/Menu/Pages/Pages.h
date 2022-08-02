@@ -19,12 +19,12 @@ struct PageSignals
 
     static void Init();
 
-    static void OnPress_Channel(bool, bool);
+    static void OnPress_Channel(bool);
 
     static void SetCurrentChanenl(const Chan &);
 
     // Ёта функци€ должна вызыватьс€ после выбора формы сигнала - по еЄ нажатию происходит загрузка формы в прибор
-    static void OnChanged_Form(bool = true, bool = true);
+    static void OnChanged_Form(bool = true);
 
     static void SCPI_SetForm(TypeForm::E form);
 };
@@ -36,21 +36,21 @@ public:
     // —формировать содержимое регистра управлени€ частотомером в соответствии с настройками
     static void WriteRegisterRG9();
 
-    static void OnPress_Measure(bool, bool);
+    static void OnPress_Measure(bool);
 
-    static void OnPress_BillingTime(bool, bool);
+    static void OnPress_BillingTime(bool);
 
-    static void OnPress_Resist(bool, bool);
+    static void OnPress_Resist(bool);
 
-    static void OnPress_TimeStamps(bool, bool);
+    static void OnPress_TimeStamps(bool);
 
-    static void OnPress_AvePeriod(bool, bool);
+    static void OnPress_AvePeriod(bool);
 
-    static void OnPress_Couple(bool, bool);
+    static void OnPress_Couple(bool);
 
-    static void OnPress_Filtr(bool, bool);
+    static void OnPress_Filtr(bool);
 
-    static void OnPress_Test(bool, bool);
+    static void OnPress_Test(bool);
 
     static void OnChange_FreqLevel();
 
@@ -64,7 +64,7 @@ public:
 
     static void OnPress_Reset();
 
-    static void OnChange_Volume(bool, bool);
+    static void OnChange_Volume(bool);
 
     static Page *self;
 };

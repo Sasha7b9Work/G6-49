@@ -21,7 +21,7 @@ static int numForm = 0;
 
 void PageSignals::Init()
 {
-    OnPress_Channel(true, true);
+    OnPress_Channel(true);
 }
 
 
@@ -41,7 +41,7 @@ void PageSignals::SCPI_SetForm(TypeForm::E form)
 void PageSignals::SetCurrentChanenl(const Chan &ch)
 {
     set.cur_chan = ch;
-    OnPress_Channel(true, true);
+    OnPress_Channel(true);
 }
 
 
@@ -56,7 +56,7 @@ static bool IsActive_Channel()
 }
 
 
-void PageSignals::OnPress_Channel(bool active, bool)
+void PageSignals::OnPress_Channel(bool active)
 {
     if (active)
     {
@@ -119,7 +119,7 @@ static void WriteParametersImpulseFromPacket(Form *formImpulse, Form *formPacket
 }
 
 
-void PageSignals::OnChanged_Form(bool active, bool)
+void PageSignals::OnChanged_Form(bool active)
 {
     if (active)
     {

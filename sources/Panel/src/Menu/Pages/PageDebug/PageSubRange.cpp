@@ -5,7 +5,7 @@
 #include "Settings/Settings.h"
 
 
-static void OnPress_PE15(bool active, bool)
+static void OnPress_PE15(bool active)
 {
     if (active)
     {
@@ -22,7 +22,7 @@ DEF_CHOICE_2( cPE15,
 )
 
 
-static void OnPress_PB10(bool active, bool)
+static void OnPress_PB10(bool active)
 {
     if (active)
     {
@@ -39,7 +39,7 @@ DEF_CHOICE_2( cPB10,
 )
 
 
-static void OnPress_PF0(bool active, bool)
+static void OnPress_PF0(bool active)
 {
     if (active)
     {
@@ -56,7 +56,7 @@ DEF_CHOICE_2( cPF0,
 )
 
 
-static void OnPress_PF5(bool active, bool)
+static void OnPress_PF5(bool active)
 {
     if (active)
     {
@@ -73,7 +73,7 @@ DEF_CHOICE_2( cPF5,
 )
 
 
-static void OnPress_PC13(bool active, bool)
+static void OnPress_PC13(bool active)
 {
     if (active)
     {
@@ -90,7 +90,7 @@ DEF_CHOICE_2( cPC13,
 )
 
 
-static void OnPress_PC14(bool active, bool)
+static void OnPress_PC14(bool active)
 {
     if (active)
     {

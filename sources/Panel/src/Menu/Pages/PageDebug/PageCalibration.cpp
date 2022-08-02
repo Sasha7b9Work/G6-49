@@ -75,7 +75,7 @@ static void SendMessage()
 
 
 // Вызывается при изменении калибруемого параметра
-static void OnChange_Parameters(bool active, bool)
+static void OnChange_Parameters(bool active)
 {
     if (active)
     {
@@ -93,7 +93,7 @@ static void OnChange_Parameters(bool active, bool)
 }
 
 // Вызывается при изменении источника сигнал
-static void OnChange_Source(bool active, bool)
+static void OnChange_Source(bool active)
 {
     if (active)
     {
@@ -104,7 +104,7 @@ static void OnChange_Source(bool active, bool)
 
         TuneControls();
         LoadK();
-        OnChange_Parameters(true, true);
+        OnChange_Parameters(true);
         SendMessage();
     }
 }
@@ -184,7 +184,7 @@ static bool FuncOnControlKeyPage(const Control &control)
     if(control.Is(Key::RegButton, Action::Down))
     {
         Math::CircleIncrease<uint8>(&range, 0, 4);
-        OnChange_Parameters(true, true);
+        OnChange_Parameters(true);
         return true;
     }
     else if(control.IsRotate())

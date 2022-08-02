@@ -12,7 +12,7 @@ Page *PageFrequencyCounter::self = reinterpret_cast<Page *>(const_cast<PageBase 
 static void Tune_Page();
 
 
-void PageFrequencyCounter::OnPress_Measure(bool active, bool)
+void PageFrequencyCounter::OnPress_Measure(bool active)
 {
     if (active)
     {
@@ -31,7 +31,7 @@ DEF_CHOICE_3( cMeasure,                                                         
 )
 
 
-static void OnPress_Interval(bool active, bool)
+static void OnPress_Interval(bool active)
 {
     if (active)
     {
@@ -51,7 +51,7 @@ DEF_CHOICE_2( cInterval,                                                        
 volatile const ChoiceBase *pcInterval = &cInterval;
 
 
-void PageFrequencyCounter::OnPress_BillingTime(bool active, bool)
+void PageFrequencyCounter::OnPress_BillingTime(bool active)
 {
     if (active)
     {
@@ -80,7 +80,7 @@ DEF_CHOICE_2(cResist,                                                           
     set.freq.resist, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_Resist, FuncDraw
 )
 
-void PageFrequencyCounter::OnPress_Resist(bool active, bool)
+void PageFrequencyCounter::OnPress_Resist(bool active)
 {
     if (active)
     {
@@ -97,7 +97,7 @@ DEF_CHOICE_2(cCouple,                                                           
     set.freq.couple, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_Couple, FuncDraw
 )
 
-void PageFrequencyCounter::OnPress_Couple(bool active, bool)
+void PageFrequencyCounter::OnPress_Couple(bool active)
 {
     if (active)
     {
@@ -114,7 +114,7 @@ DEF_CHOICE_2(cFiltr,                                                            
     set.freq.filtr, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_Filtr, FuncDraw
 )
 
-void PageFrequencyCounter::OnPress_Filtr(bool active, bool)
+void PageFrequencyCounter::OnPress_Filtr(bool active)
 {
     if (active)
     {
@@ -133,7 +133,7 @@ DEF_CHOICE_5(cAvePeriod,                                                        
     set.freq.avePeriod, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_AvePeriod, FuncDraw
 )
 
-void PageFrequencyCounter::OnPress_AvePeriod(bool active, bool)
+void PageFrequencyCounter::OnPress_AvePeriod(bool active)
 {
     if (active)
     {
@@ -153,7 +153,7 @@ DEF_CHOICE_5(cTimeStamps,                                                       
     set.freq.timeStamps, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_TimeStamps, FuncDraw
 )
 
-void PageFrequencyCounter::OnPress_TimeStamps(bool active, bool)
+void PageFrequencyCounter::OnPress_TimeStamps(bool active)
 {
     if (active)
     {
@@ -170,7 +170,7 @@ DEF_CHOICE_2(cTest,                                                             
     set.freq.test, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_Test, FuncDraw
 )
 
-void PageFrequencyCounter::OnPress_Test(bool active, bool)
+void PageFrequencyCounter::OnPress_Test(bool active)
 {
     if (active)
     {

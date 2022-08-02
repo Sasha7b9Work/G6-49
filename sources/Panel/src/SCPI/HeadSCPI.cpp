@@ -398,7 +398,7 @@ static pchar FuncSound(pchar buffer)
             SCPI_PROLOG(end)
 
             setCal.soundVolume = static_cast<uint8>(i);
-            PageService::OnChange_Volume(true, true);
+            PageService::OnChange_Volume(true);
 
             SCPI_EPILOG(end)
         }

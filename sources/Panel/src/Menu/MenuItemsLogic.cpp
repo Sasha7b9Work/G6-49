@@ -58,7 +58,7 @@ void Choice::StartChange(int delta) const
         *cell = index;
     }
 
-    funcOnChanged(funcOfActive(), false);
+    funcOnChanged(funcOfActive());
 }
 
 
@@ -97,7 +97,7 @@ float Choice::Step()
 
         tsChoice.address = 0;
 
-        funcOnChanged(funcOfActive(), false);
+        funcOnChanged(funcOfActive());
 
         tsChoice.dir = NONE;
         return 0.0F;
