@@ -20,45 +20,43 @@
 using namespace Primitives;
 
 
-struct WarningMessage
-{
-    WarningMessage(pString msg = "") : timeStart(_TIME_MS) { if (msg[0] != '\0') { message = new String(msg); } else { message = nullptr; } };
-    void Delete() { if (message) { delete message; message = nullptr; } }
-    bool IsEqual(const String &msg);
-    uint timeStart;
-    String *message;
-};
-
-
-struct WarningsDisplay
-{
-    WarningsDisplay() : last(0) { }
-    void Show();
-    void AppendTemp(const String &);
-    void ClearTemp();
-    void AppendAllTheTime(const String &);
-    void ClearAllTheTime();
-
-private:
-    static const int NUM_WARNINGS = 10;
-    WarningMessage warnings[NUM_WARNINGS];
-    String warning_flash;
-    int last;                               // Указыват на элемент за последним действительным. Если last == 0, то массив пуст
-    void Update();
-    bool IsEmpty() { return (last == 0); }
-    WarningMessage &Last() { return warnings[last - 1]; }
-    Color ColorText() const;
-    Color ColorBackground() const;
-    void DeleteFirst();
-    int X0() const;
-    int Y0() const;
-    int Width() const;
-};
-
-
-
 namespace Display
 {
+    struct WarningMessage
+    {
+        WarningMessage(pString msg = "") : timeStart(_TIME_MS) { if (msg[0] != '\0') { message = new String(msg); } else { message = nullptr; } };
+        void Delete() { if (message) { delete message; message = nullptr; } }
+        bool IsEqual(const String &msg);
+        uint timeStart;
+        String *message;
+    };
+
+
+    struct WarningsDisplay
+    {
+        WarningsDisplay() : last(0) { }
+        void Show();
+        void AppendTemp(const String &);
+        void ClearTemp();
+        void AppendAllTheTime(const String &);
+        void ClearAllTheTime();
+
+    private:
+        static const int NUM_WARNINGS = 10;
+        WarningMessage warnings[NUM_WARNINGS];
+        String warning_flash;
+        int last;                               // Указыват на элемент за последним действительным. Если last == 0, то массив пуст
+        void Update();
+        bool IsEmpty() { return (last == 0); }
+        WarningMessage &Last() { return warnings[last - 1]; }
+        Color ColorText() const;
+        Color ColorBackground() const;
+        void DeleteFirst();
+        int X0() const;
+        int Y0() const;
+        int Width() const;
+    };
+
     static WarningsDisplay warnings;
 
     uint8 frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
@@ -159,7 +157,7 @@ void Display::Warnings::Show(pchar ru, pchar en, bool auto_delete)
 }
 
 
-void WarningsDisplay::AppendTemp(const String &warning)
+void Display::WarningsDisplay::AppendTemp(const String &warning)
 {
     if (!IsEmpty() && Last().IsEqual(warning))
     {
@@ -172,24 +170,27 @@ void WarningsDisplay::AppendTemp(const String &warning)
             DeleteFirst();
         }
 
-        warnings[last++] = WarningMessage(warning.c_str());
+        if (last < NUM_WARNINGS)
+        {
+            warnings[last++] = WarningMessage(warning.c_str());
+        }
     }
 }
 
 
-void WarningsDisplay::AppendAllTheTime(const String &warning)
+void Display::WarningsDisplay::AppendAllTheTime(const String &warning)
 {
     warning_flash = warning;
 }
 
 
-void WarningsDisplay::ClearAllTheTime()
+void Display::WarningsDisplay::ClearAllTheTime()
 {
     warning_flash.Free();
 }
 
 
-void WarningsDisplay::Show()
+void Display::WarningsDisplay::Show()
 {
     Update();
 
@@ -212,9 +213,9 @@ void WarningsDisplay::Show()
 }
 
 
-void WarningsDisplay::Update()
+void Display::WarningsDisplay::Update()
 {
-    while ((last != 0) && (warnings[0].timeStart + 5000 < _TIME_MS))
+    if ((last != 0) && (warnings[0].timeStart + 5000 < _TIME_MS))
     {
         warnings[0].Delete();
 
@@ -233,7 +234,7 @@ void WarningsDisplay::Update()
 }
 
 
-void WarningsDisplay::ClearTemp()
+void Display::WarningsDisplay::ClearTemp()
 {
     if (last != 0)
     {
@@ -260,7 +261,7 @@ void Display::Warnings::ClearAllTheTime()
 }
 
 
-void WarningsDisplay::DeleteFirst()
+void Display::WarningsDisplay::DeleteFirst()
 {
     warnings[0].Delete();
 
@@ -273,31 +274,31 @@ void WarningsDisplay::DeleteFirst()
 }
 
 
-Color WarningsDisplay::ColorText() const
+Color Display::WarningsDisplay::ColorText() const
 {
     return (_TIME_MS % 1000) < 500 ? Color::FILL : Color::BACK;
 }
 
 
-Color WarningsDisplay::ColorBackground() const
+Color Display::WarningsDisplay::ColorBackground() const
 {
     return (ColorText().value == Color::FILL.value) ? Color::BACK : Color::FILL;
 }
 
 
-int WarningsDisplay::X0() const
+int Display::WarningsDisplay::X0() const
 {
     return (Display::WIDTH - Width()) / 2;
 }
 
 
-int WarningsDisplay::Y0() const
+int Display::WarningsDisplay::Y0() const
 {
     return Display::HEIGHT / 2 - last * 11 / 2;
 }
 
 
-int WarningsDisplay::Width() const
+int Display::WarningsDisplay::Width() const
 {
     int width = 0;
 
@@ -313,7 +314,7 @@ int WarningsDisplay::Width() const
 }
 
 
-bool WarningMessage::IsEqual(const String &msg)
+bool Display::WarningMessage::IsEqual(const String &msg)
 {
     return std::strcmp(msg.c_str(), message->c_str()) == 0;
 }

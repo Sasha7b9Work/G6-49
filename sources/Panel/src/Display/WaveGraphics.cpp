@@ -113,9 +113,9 @@ Parameter *WaveGraphics::GetParameterForDraw(const Chan &ch, int i)
 {
     Parameter *parameter = FORM(ch)->GetParameter(i);
 
-    if (FORM(ChA)->IsDDS() && FORM(ChB)->IsDDS())               // Если установлены произвольные сигналы на обоих каналах и выводим нетекущий канал,
+    if (FORM_A->IsDDS() && FORM_B->IsDDS())               // Если установлены произвольные сигналы на обоих каналах и выводим нетекущий канал,
     {                                                                   // то значение частоты будем брать из текущего канала (особенность работы аппаратной части прибора)
-        if(FORM(ChA)->IsDDS() && FORM(ChB)->IsDDS())
+        if(FORM_A->IsDDS() && FORM_B->IsDDS())
         {
             if (parameter->IsDouble())
             {

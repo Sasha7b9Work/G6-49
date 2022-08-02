@@ -52,28 +52,28 @@ static bool IsActive_Channel()
         return false;
     }
 
-    if (FORM(ChA)->Is(TypeForm::Impulse) && FORM(ChB)->Is(TypeForm::Impulse))
-    {
-        ParameterChoice *parameter = Signals::A::impulse->FindParameter(ParameterChoiceType::ModeStartStop);
-
-        if (parameter->GetChoice() == 1)
-        {
-            return false;
-        }
-    }
-
     return true;
 }
 
 
-void PageSignals::OnPress_Channel(bool)
+void PageSignals::OnPress_Channel(bool active)
 {
-    cParameters.form = CURRENT_FORM;
-    numForm = CURRENT_FORM->value;
+    if (active)
+    {
+        cParameters.form = CURRENT_FORM;
+        numForm = CURRENT_FORM->value;
 
-    pageSignals.items[1] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB));
+        pageSignals.items[1] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB));
 
-    PGenerator::TuneChannel(CURRENT_CHANNEL);
+        PGenerator::TuneChannel(CURRENT_CHANNEL);
+    }
+    else
+    {
+        if (CURRENT_CHANNEL.IsA() && CURRENT_FORM->Is(TypeForm::Packet))
+        {
+            Display::Warnings::Show("В режиме ПАКЕТ выбор канала В невозможен", "Channel B cannot be selected in PACKET mode", true);
+        }
+    }
 }
 
 
@@ -159,7 +159,7 @@ void PageSignals::OnChanged_Form(bool)
 
 static bool IsActive_Form()
 {
-    if (FORM(ChA)->Is(TypeForm::Impulse) && FORM(ChB)->Is(TypeForm::Impulse))
+    if (FORM_A->Is(TypeForm::Impulse) && FORM_B->Is(TypeForm::Impulse))
     {
         ParameterChoice *parameter = Signals::A::impulse->FindParameter(ParameterChoiceType::ModeStartStop);
 
