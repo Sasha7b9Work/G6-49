@@ -47,7 +47,22 @@ void PageSignals::SetCurrentChanenl(const Chan &ch)
 
 static bool IsActive_Channel()
 {
-    return !(CURRENT_CHANNEL.IsA() && CURRENT_FORM->Is(TypeForm::Packet));
+    if (CURRENT_CHANNEL.IsA() && CURRENT_FORM->Is(TypeForm::Packet))
+    {
+        return false;
+    }
+
+    if (FORM(ChA)->Is(TypeForm::Impulse) && FORM(ChB)->Is(TypeForm::Impulse))
+    {
+        ParameterChoice *parameter = Signals::A::impulse->FindParameter(ParameterChoiceType::ModeStartStop);
+
+        if (parameter->GetChoice() == 1)
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 
