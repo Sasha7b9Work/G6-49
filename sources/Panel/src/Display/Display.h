@@ -38,8 +38,8 @@ namespace Display
         static void ClearTemp();
 
         // Вывести на постоянно
-        static void ShowTop(const String &);
-        static void ShowFlash(const pchar &ru, const pchar &en);
+        static void ShowAllTheTime(const String &);
+        static void ShowAllTheTime(const pchar &ru, const pchar &en);
         static void ClearFlash();
     };
 };

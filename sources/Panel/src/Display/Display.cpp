@@ -35,7 +35,7 @@ struct Warnings
     void Show();
     void AppendTemp(const String &);
     void Clear();
-    void AppendFlash(const String &);
+    void AppendAllTheTime(const String &);
     void ClearFlash();
 
 private:
@@ -128,15 +128,15 @@ void Display::Warnings::ShowTemp(const String &ru, const String &en)
 }
 
 
-void Display::Warnings::ShowTop(const String &warning)
+void Display::Warnings::ShowAllTheTime(const String &warning)
 {
-    warnings.AppendFlash(warning);
+    warnings.AppendAllTheTime(warning);
 }
 
 
-void Display::Warnings::ShowFlash(const pchar &ru, const pchar &en)
+void Display::Warnings::ShowAllTheTime(const pchar &ru, const pchar &en)
 {
-    warnings.AppendFlash(LANG_RU ? String(ru) : String(en));
+    warnings.AppendAllTheTime(LANG_RU ? String(ru) : String(en));
 }
 
 
@@ -164,7 +164,7 @@ void Warnings::AppendTemp(const String &warning)
 }
 
 
-void Warnings::AppendFlash(const String &warning)
+void Warnings::AppendAllTheTime(const String &warning)
 {
     warning_flash = warning;
 }

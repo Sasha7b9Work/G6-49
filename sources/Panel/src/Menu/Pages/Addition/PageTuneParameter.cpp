@@ -98,7 +98,7 @@ static void OnPress_Enter()
 
     if (invalid_parameters.Size())
     {
-        Display::Warnings::ShowTop(invalid_parameters);
+        Display::Warnings::ShowAllTheTime(invalid_parameters);
     }
     else
     {
