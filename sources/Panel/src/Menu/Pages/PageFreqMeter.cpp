@@ -10,13 +10,15 @@ Page *PageFrequencyCounter::self = reinterpret_cast<Page *>(const_cast<PageBase 
 
 // Настроить вид страницы в соответствии с режимом измерения
 static void Tune_Page();
-static void OnPress_Interval(bool);
 
 
-void PageFrequencyCounter::OnPress_Measure(bool)
+void PageFrequencyCounter::OnPress_Measure(bool active, bool)
 {
-    Tune_Page();
-    PageFrequencyCounter::WriteRegisterRG9();
+    if (active)
+    {
+        Tune_Page();
+        PageFrequencyCounter::WriteRegisterRG9();
+    }
 }
 
 DEF_CHOICE_3( cMeasure,                                                                                                                                      //--- ЧАСТОТОМЕР - Измерение ---
@@ -29,6 +31,15 @@ DEF_CHOICE_3( cMeasure,                                                         
 )
 
 
+static void OnPress_Interval(bool active, bool)
+{
+    if (active)
+    {
+        PageFrequencyCounter::WriteRegisterRG9();
+    }
+}
+
+
 DEF_CHOICE_2( cInterval,                                                                                                                              //--- ЧАСТОТОМЕР - Интервал запуска ---
     "Интервал запуска", "Launch interval",
     "Выбор интервала запуска измерений частоты", "Frequency start interval selection",
@@ -39,9 +50,13 @@ DEF_CHOICE_2( cInterval,                                                        
 
 volatile const ChoiceBase *pcInterval = &cInterval;
 
-static void OnPress_Interval(bool)
+
+void PageFrequencyCounter::OnPress_BillingTime(bool active, bool)
 {
-    PageFrequencyCounter::WriteRegisterRG9();
+    if (active)
+    {
+        PageFrequencyCounter::WriteRegisterRG9();
+    }
 }
 
 
@@ -56,11 +71,6 @@ DEF_CHOICE_5( cBillingTime,                                                     
     set.freq.billingTime, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_BillingTime, FuncDraw
 )
 
-void PageFrequencyCounter::OnPress_BillingTime(bool)
-{
-    PageFrequencyCounter::WriteRegisterRG9();
-}
-
 
 DEF_CHOICE_2(cResist,                                                                                                                              //--- ЧАСТОТОМЕР - Сопротивление входа ---
     "R вх", "R in",
@@ -70,9 +80,12 @@ DEF_CHOICE_2(cResist,                                                           
     set.freq.resist, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_Resist, FuncDraw
 )
 
-void PageFrequencyCounter::OnPress_Resist(bool)
+void PageFrequencyCounter::OnPress_Resist(bool active, bool)
 {
-    PGenerator::LoadRegister(Register::FreqMeter_Resist, static_cast<uint>(set.freq.resist));
+    if (active)
+    {
+        PGenerator::LoadRegister(Register::FreqMeter_Resist, static_cast<uint>(set.freq.resist));
+    }
 }
 
 
@@ -84,9 +97,12 @@ DEF_CHOICE_2(cCouple,                                                           
     set.freq.couple, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_Couple, FuncDraw
 )
 
-void PageFrequencyCounter::OnPress_Couple(bool)
+void PageFrequencyCounter::OnPress_Couple(bool active, bool)
 {
-    PGenerator::LoadRegister(Register::FreqMeter_Couple, static_cast<uint>(set.freq.couple));
+    if (active)
+    {
+        PGenerator::LoadRegister(Register::FreqMeter_Couple, static_cast<uint>(set.freq.couple));
+    }
 }
 
 
@@ -98,9 +114,12 @@ DEF_CHOICE_2(cFiltr,                                                            
     set.freq.filtr, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_Filtr, FuncDraw
 )
 
-void PageFrequencyCounter::OnPress_Filtr(bool)
+void PageFrequencyCounter::OnPress_Filtr(bool active, bool)
 {
-    PGenerator::LoadRegister(Register::FreqMeter_Filtr, static_cast<uint>(set.freq.filtr));
+    if (active)
+    {
+        PGenerator::LoadRegister(Register::FreqMeter_Filtr, static_cast<uint>(set.freq.filtr));
+    }
 }
 
 DEF_CHOICE_5(cAvePeriod,                                                                                                                                //--- ЧАСТОТОМЕР - ЧИСЛО ПЕРИОДОВ ---
@@ -114,9 +133,12 @@ DEF_CHOICE_5(cAvePeriod,                                                        
     set.freq.avePeriod, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_AvePeriod, FuncDraw
 )
 
-void PageFrequencyCounter::OnPress_AvePeriod(bool)
+void PageFrequencyCounter::OnPress_AvePeriod(bool active, bool)
 {
-    PageFrequencyCounter::WriteRegisterRG9();
+    if (active)
+    {
+        PageFrequencyCounter::WriteRegisterRG9();
+    }
 }
 
 
@@ -131,9 +153,12 @@ DEF_CHOICE_5(cTimeStamps,                                                       
     set.freq.timeStamps, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_TimeStamps, FuncDraw
 )
 
-void PageFrequencyCounter::OnPress_TimeStamps(bool)
+void PageFrequencyCounter::OnPress_TimeStamps(bool active, bool)
 {
-    PageFrequencyCounter::WriteRegisterRG9();
+    if (active)
+    {
+        PageFrequencyCounter::WriteRegisterRG9();
+    }
 }
 
 
@@ -145,9 +170,12 @@ DEF_CHOICE_2(cTest,                                                             
     set.freq.test, pFrequencyCounter, Item::FuncActive, PageFrequencyCounter::OnPress_Test, FuncDraw
 )
 
-void PageFrequencyCounter::OnPress_Test(bool)
+void PageFrequencyCounter::OnPress_Test(bool active, bool)
 {
-    PageFrequencyCounter::WriteRegisterRG9();
+    if (active)
+    {
+        PageFrequencyCounter::WriteRegisterRG9();
+    }
 }
 
 

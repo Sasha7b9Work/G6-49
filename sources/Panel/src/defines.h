@@ -47,6 +47,7 @@ typedef void (*pFuncVII)(int, int);
 typedef void (*pFuncVI)(int);
 typedef bool (*pFuncBV)();
 typedef void (*pFuncVB)(bool);
+typedef void (*pFuncVBB)(bool, bool);
 
 // Для определения задания буферов лучше пользоваться этими макросами, чтобы потом легче было отследить, где можно памяти освободить
 #define CHAR_BUF(name, size)            char name[size]

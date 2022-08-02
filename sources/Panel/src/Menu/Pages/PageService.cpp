@@ -49,10 +49,13 @@ DEF_CHOICE_2(cLanguage,
 )
 
 
-void PageService::OnChange_Volume(bool)
+void PageService::OnChange_Volume(bool active, bool)
 {
-    Beeper::Init();
-    setCal.Save();
+    if (active)
+    {
+        Beeper::Init();
+        setCal.Save();
+    }
 }
 
 

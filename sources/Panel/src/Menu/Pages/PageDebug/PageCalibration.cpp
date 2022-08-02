@@ -75,32 +75,38 @@ static void SendMessage()
 
 
 // Вызывается при изменении калибруемого параметра
-static void OnChange_Parameters(bool)
+static void OnChange_Parameters(bool active, bool)
 {
-    if(!ChannelIsValid())
+    if (active)
     {
-        return;
+        if (!ChannelIsValid())
+        {
+            return;
+        }
+
+        TuneControls();
+
+        LoadK();
+
+        SendMessage();
     }
-
-    TuneControls();
-
-    LoadK();
-
-    SendMessage();
 }
 
 // Вызывается при изменении источника сигнал
-static void OnChange_Source(bool)
+static void OnChange_Source(bool active, bool)
 {
-    if(!ChannelIsValid())
+    if (active)
     {
-        return;
-    }
+        if (!ChannelIsValid())
+        {
+            return;
+        }
 
-    TuneControls();
-    LoadK();
-    OnChange_Parameters(true);
-    SendMessage();
+        TuneControls();
+        LoadK();
+        OnChange_Parameters(true, true);
+        SendMessage();
+    }
 }
 
 DEF_CHOICE_3(cChannelCal,
@@ -178,7 +184,7 @@ static bool FuncOnControlKeyPage(const Control &control)
     if(control.Is(Key::RegButton, Action::Down))
     {
         Math::CircleIncrease<uint8>(&range, 0, 4);
-        OnChange_Parameters(true);
+        OnChange_Parameters(true, true);
         return true;
     }
     else if(control.IsRotate())

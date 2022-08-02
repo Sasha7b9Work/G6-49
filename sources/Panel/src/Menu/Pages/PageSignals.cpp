@@ -21,7 +21,7 @@ static int numForm = 0;
 
 void PageSignals::Init()
 {
-    OnPress_Channel(true);
+    OnPress_Channel(true, true);
 }
 
 
@@ -41,7 +41,7 @@ void PageSignals::SCPI_SetForm(TypeForm::E form)
 void PageSignals::SetCurrentChanenl(const Chan &ch)
 {
     set.cur_chan = ch;
-    OnPress_Channel(true);
+    OnPress_Channel(true, true);
 }
 
 
@@ -56,7 +56,7 @@ static bool IsActive_Channel()
 }
 
 
-void PageSignals::OnPress_Channel(bool active)
+void PageSignals::OnPress_Channel(bool active, bool)
 {
     if (active)
     {
@@ -119,39 +119,42 @@ static void WriteParametersImpulseFromPacket(Form *formImpulse, Form *formPacket
 }
 
 
-void PageSignals::OnChanged_Form(bool)
+void PageSignals::OnChanged_Form(bool active, bool)
 {
-    ChangedForm();
-
-    if (CURRENT_CHANNEL.IsA())
+    if (active)
     {
-        if (CURRENT_FORM->Is(TypeForm::Packet))            // Вошли в пакетный режим
+        ChangedForm();
+
+        if (CURRENT_CHANNEL.IsA())
         {
-            Signals::B::impulse->StoreState();               // Сохраняем параметры импульсов на втором канале
+            if (CURRENT_FORM->Is(TypeForm::Packet))            // Вошли в пакетный режим
+            {
+                Signals::B::impulse->StoreState();               // Сохраняем параметры импульсов на втором канале
 
-            WAVE_B.StoreIndexCurrentForm();
+                WAVE_B.StoreIndexCurrentForm();
 
-            WAVE_B.SetForm(Signals::B::impulse);         // Устанавливаем форму импульса на втором канале
+                WAVE_B.SetForm(Signals::B::impulse);         // Устанавливаем форму импульса на втором канале
 
-            WriteParametersImpulseFromPacket(Signals::B::impulse, Signals::A::packet);
+                WriteParametersImpulseFromPacket(Signals::B::impulse, Signals::A::packet);
 
-            SetCurrentChanenl(ChB);
+                SetCurrentChanenl(ChB);
 
-            OnChanged_Form(true);
+                OnChanged_Form(true);
 
-            SetCurrentChanenl(ChA);
-        }
-        else if (CURRENT_FORM->Is(TypeForm::Free))          // Вышли из пакетного режима
-        {
-            FORM_B->RestoreState();
+                SetCurrentChanenl(ChA);
+            }
+            else if (CURRENT_FORM->Is(TypeForm::Free))          // Вышли из пакетного режима
+            {
+                FORM_B->RestoreState();
 
-            WAVE_B.RestoreIndexCurrentForm();
+                WAVE_B.RestoreIndexCurrentForm();
 
-            SetCurrentChanenl(ChB);
+                SetCurrentChanenl(ChB);
 
-            OnChanged_Form(true);
+                OnChanged_Form(true);
 
-            SetCurrentChanenl(ChA);
+                SetCurrentChanenl(ChA);
+            }
         }
     }
 }

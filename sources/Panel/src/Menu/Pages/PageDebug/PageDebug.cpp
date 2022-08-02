@@ -409,9 +409,12 @@ static void DrawValue(int x, int y, uint8 i)
 }
 
 
-static void OnPress_DebugMode(bool)
+static void OnPress_DebugMode(bool active, bool)
 {
-    PGenerator::SetDebugMode(set.dbg.modeEnabled != 0);
+    if (active)
+    {
+        PGenerator::SetDebugMode(set.dbg.modeEnabled != 0);
+    }
 }
 
 DEF_CHOICE_2(cConsole,                                                                                                                                           //--- Œ“À¿ƒ ¿ -  ŒÕ—ŒÀ‹ ---

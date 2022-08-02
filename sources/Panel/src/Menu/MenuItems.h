@@ -339,7 +339,7 @@ public:
     pString *namesEN;
     pString *hintsRU;       // Подсказки для каждого варианта на русском языке
     pString *hintsEN;
-    pFuncVB	 funcOnChanged; // Функция должна вызываться после изменения значения элемента.
+    pFuncVBB funcOnChanged; // Функция должна вызываться после изменения значения элемента.
     pFuncVII funcForDraw;   // Функция вызывается после отрисовки элемента. 
 
     int8 CurrentIndex() const;
@@ -354,7 +354,7 @@ public:
     pString *namesEN;
     pString *hintsRU;       // Подсказки для каждого варианта на русском языке
     pString *hintsEN;
-    pFuncVB	 funcOnChanged; // Функция должна вызываться после изменения значения элемента.
+    pFuncVBB funcOnChanged; // Функция должна вызываться после изменения значения элемента.
     pFuncVII funcForDraw;   // Функция вызывается после отрисовки элемента. 
 
     void StartChange(int delta) const;

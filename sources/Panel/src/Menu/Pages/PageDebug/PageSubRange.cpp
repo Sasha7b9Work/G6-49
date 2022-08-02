@@ -5,9 +5,12 @@
 #include "Settings/Settings.h"
 
 
-static void OnPress_PE15(bool)
+static void OnPress_PE15(bool active, bool)
 {
-    Message::RegCPU(4, 15, set.reg.PE15).Transmit();
+    if (active)
+    {
+        Message::RegCPU(4, 15, set.reg.PE15).Transmit();
+    }
 }
 
 DEF_CHOICE_2( cPE15,
@@ -19,9 +22,12 @@ DEF_CHOICE_2( cPE15,
 )
 
 
-static void OnPress_PB10(bool)
+static void OnPress_PB10(bool active, bool)
 {
-    Message::RegCPU(1, 10, set.reg.PB10).Transmit();
+    if (active)
+    {
+        Message::RegCPU(1, 10, set.reg.PB10).Transmit();
+    }
 }
 
 DEF_CHOICE_2( cPB10,
@@ -33,9 +39,12 @@ DEF_CHOICE_2( cPB10,
 )
 
 
-static void OnPress_PF0(bool)
+static void OnPress_PF0(bool active, bool)
 {
-    Message::RegCPU(5, 0, set.reg.PF0).Transmit();
+    if (active)
+    {
+        Message::RegCPU(5, 0, set.reg.PF0).Transmit();
+    }
 }
 
 DEF_CHOICE_2( cPF0,
@@ -47,9 +56,12 @@ DEF_CHOICE_2( cPF0,
 )
 
 
-static void OnPress_PF5(bool)
+static void OnPress_PF5(bool active, bool)
 {
-    Message::RegCPU(5, 5, set.reg.PF5).Transmit();
+    if (active)
+    {
+        Message::RegCPU(5, 5, set.reg.PF5).Transmit();
+    }
 }
 
 DEF_CHOICE_2( cPF5,
@@ -61,9 +73,12 @@ DEF_CHOICE_2( cPF5,
 )
 
 
-static void OnPress_PC13(bool)
+static void OnPress_PC13(bool active, bool)
 {
-    Message::RegCPU(2, 15, set.reg.PC13).Transmit();
+    if (active)
+    {
+        Message::RegCPU(2, 15, set.reg.PC13).Transmit();
+    }
 }
 
 DEF_CHOICE_2( cPC13,
@@ -75,9 +90,12 @@ DEF_CHOICE_2( cPC13,
 )
 
 
-static void OnPress_PC14(bool)
+static void OnPress_PC14(bool active, bool)
 {
-    Message::RegCPU(2, 14, set.reg.PC14).Transmit();
+    if (active)
+    {
+        Message::RegCPU(2, 14, set.reg.PC14).Transmit();
+    }
 }
 
 DEF_CHOICE_2(cPC14,
