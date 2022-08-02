@@ -20,9 +20,9 @@
 using namespace Primitives;
 
 
-struct Warning
+struct DWarning
 {
-    Warning(pString msg = "") : timeStart(_TIME_MS) { if (msg[0] != '\0') { message = new String(msg); } else { message = nullptr; } };
+    DWarning(pString msg = "") : timeStart(_TIME_MS) { if (msg[0] != '\0') { message = new String(msg); } else { message = nullptr; } };
     void Delete() { if (message) { delete message; message = nullptr; } }
     bool IsEqual(const String &msg);
     uint timeStart;
@@ -41,12 +41,12 @@ struct Warnings
 
 private:
     static const int NUM_WARNINGS = 10;
-    Warning warnings[NUM_WARNINGS];
+    DWarning warnings[NUM_WARNINGS];
     String warning_flash;
     int last;                               // Óêàçûâàò íà ıëåìåíò çà ïîñëåäíèì äåéñòâèòåëüíûì. Åñëè last == 0, òî ìàññèâ ïóñò
     void Update();
     bool IsEmpty() { return (last == 0); }
-    Warning &Last() { return warnings[last - 1]; }
+    DWarning &Last() { return warnings[last - 1]; }
     Color ColorText() const;
     Color ColorBackground() const;
     void DeleteFirst();
@@ -172,7 +172,7 @@ void Warnings::AppendTemp(const String &warning)
             DeleteFirst();
         }
 
-        warnings[last++] = Warning(warning.c_str());
+        warnings[last++] = DWarning(warning.c_str());
     }
 }
 
@@ -313,7 +313,7 @@ int Warnings::Width() const
 }
 
 
-bool Warning::IsEqual(const String &msg)
+bool DWarning::IsEqual(const String &msg)
 {
     return std::strcmp(msg.c_str(), message->c_str()) == 0;
 }
