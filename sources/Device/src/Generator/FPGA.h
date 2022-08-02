@@ -63,7 +63,7 @@ namespace FPGA
         };
     };
 
-    struct ClockFrequency
+    struct ClockFrequencyAD992
     {
         enum E
         {
@@ -72,7 +72,7 @@ namespace FPGA
         };
     };
 
-    void SetClockAD992(ClockFrequency::E);
+    void SetClockAD992(ClockFrequencyAD992::E);
 
     // Возвращает указатель на точки сигнала, загружаемого из флешки
     uint8 *DataFreeSignal(const Chan &);
@@ -83,7 +83,7 @@ namespace FPGA
     // Возвращает указатель на точки произвольного сигнала (программно определёного)
     uint8 *DataDDS(const Chan &);
 
-    extern ClockFrequency::E clock;
+    extern ClockFrequencyAD992::E clockAD992;
 
     // Режим работы ПЛИС
     extern ModeWork::E modeWork[Chan::Count];

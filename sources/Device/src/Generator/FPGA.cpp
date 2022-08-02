@@ -103,8 +103,8 @@ namespace FPGA
     // Режим запуска для произвольного сигнала (0) и для импульсного сигнала (1)
     static StartMode::E startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
 
-    ModeWork::E       modeWork[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
-    ClockFrequency::E clock = FPGA::ClockFrequency::_100MHz;
+    ModeWork::E            modeWork[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
+    ClockFrequencyAD992::E clockAD992 = ClockFrequencyAD992::_100MHz;
 
     namespace Register
     {
@@ -356,9 +356,9 @@ void FPGA::EnableStartStopMode(StartStopMode::E mode)
 }
 
 
-void FPGA::SetClockAD992(ClockFrequency::E _clock)
+void FPGA::SetClockAD992(ClockFrequencyAD992::E _clock)
 {
-    clock = _clock;
+    clockAD992 = _clock;
     WriteControlRegister();
 }
 
@@ -400,7 +400,7 @@ void FPGA::WriteControlRegister()
             break;
     }
 
-    if(FPGA::clock == FPGA::ClockFrequency::_1MHz)
+    if(FPGA::clockAD992 == ClockFrequencyAD992::_1MHz)
     {
         Bit::Set(data, RG0::_7_Freq_MHz);
     }

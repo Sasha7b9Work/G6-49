@@ -76,7 +76,7 @@ void AD9952::Manipulation::SetEnabled(const Chan &ch, bool enable)
 
 void AD9952::SetFrequency(const Chan &ch)
 {
-    FPGA::SetClockAD992(SettingsGenerator::Frequency(ch) < 0.2F ? FPGA::ClockFrequency::_1MHz : FPGA::ClockFrequency::_100MHz);
+    FPGA::SetClockAD992(SettingsGenerator::Frequency(ch) < 0.2F ? FPGA::ClockFrequencyAD992::_1MHz : FPGA::ClockFrequencyAD992::_100MHz);
 
     WriteRegister(ch, Register::FTW0);
 
@@ -141,7 +141,7 @@ void AD9952::WriteCFR1(const Chan &ch)
 void AD9952::WriteCFR2(const Chan &ch)
 {
     uint value = 0;
-    if (FPGA::clock == FPGA::ClockFrequency::_100MHz)
+    if (FPGA::clockAD992 == FPGA::ClockFrequencyAD992::_100MHz)
     {
         Bit::Set(value, 3);
         Bit::Set(value, 5);
@@ -184,7 +184,7 @@ void AD9952::SetAmplitudeForMeander(const Chan &ch)
 
 void AD9952::WriteFTW0(const Chan &ch)
 {
-    double FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::clock == FPGA::ClockFrequency::_100MHz ? 1e8F : 1e6F)) * std::powf(2.0F, 32.0F);
+    double FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::clockAD992 == FPGA::ClockFrequencyAD992::_100MHz ? 1e8F : 1e6F)) * std::powf(2.0F, 32.0F);
 
     WriteToHardware(ch, Register::FTW0, static_cast<uint>(FTWf + 0.5F));
 }
