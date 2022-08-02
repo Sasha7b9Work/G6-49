@@ -86,6 +86,8 @@ namespace FPGA
             _1MHz
         };
 
+        extern E value;
+
         void Set(E);
     };
     
@@ -100,7 +102,6 @@ namespace FPGA
     };
     
     extern ClockFrequencyImpulse::E clockImpulse;
-    extern ClockFrequencyAD992::E clockAD992;
 
     namespace Register
     {

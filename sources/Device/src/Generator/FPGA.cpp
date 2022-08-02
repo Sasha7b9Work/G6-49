@@ -104,7 +104,11 @@ namespace FPGA
     static StartMode::E startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
 
     ModeWork::E            modeWork[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
-    ClockFrequencyAD992::E clockAD992 = ClockFrequencyAD992::_100MHz;
+
+    namespace ClockFrequencyAD992
+    {
+        E value = _100MHz;
+    }
 
     namespace Register
     {
@@ -358,7 +362,7 @@ void FPGA::EnableStartStopMode(StartStopMode::E mode)
 
 void FPGA::ClockFrequencyAD992::Set(ClockFrequencyAD992::E _clock)
 {
-    clockAD992 = _clock;
+    value = _clock;
     WriteControlRegister();
 }
 
@@ -400,7 +404,7 @@ void FPGA::WriteControlRegister()
             break;
     }
 
-    if(FPGA::clockAD992 == ClockFrequencyAD992::_1MHz)
+    if(ClockFrequencyAD992::value == ClockFrequencyAD992::_1MHz)
     {
         Bit::Set(data, RG0::_7_Freq_MHz);
     }
