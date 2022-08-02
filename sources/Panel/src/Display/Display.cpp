@@ -122,7 +122,7 @@ void Display::Update()
 }
 
 
-void Display::Warnings::Show(const String &ru, const String &en)
+void Display::Warnings::ShowCenter(const String &ru, const String &en)
 {
     warnings.Append(LANG_RU ? ru : en);
 }
@@ -140,9 +140,9 @@ void Display::Warnings::ShowFlash(const pchar &ru, const pchar &en)
 }
 
 
-void Display::Warnings::Show(pchar ru, pchar en)
+void Display::Warnings::ShowCenter(pchar ru, pchar en)
 {
-    Show(String(ru), String(en));
+    ShowCenter(String(ru), String(en));
 }
 
 
@@ -234,7 +234,7 @@ void Warnings::Clear()
 }
 
 
-void Display::Warnings::Clear()
+void Display::Warnings::ShowCenter()
 {
     warnings.Clear();
 }

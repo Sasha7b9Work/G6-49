@@ -32,9 +32,9 @@ namespace Display
 
     struct Warnings
     {
-        static void Show(const String &ru, const String &en);
-        static void Show(pchar ru, pchar en);
-        static void Clear();
+        static void ShowCenter(const String &ru, const String &en);
+        static void ShowCenter(pchar ru, pchar en);
+        static void ShowCenter();
 
         static void ShowFlash(const String &);
         static void ShowFlash(const pchar &ru, const pchar &en);
