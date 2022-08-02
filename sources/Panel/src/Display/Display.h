@@ -36,7 +36,7 @@ namespace Display
         static void ShowCenter(pchar ru, pchar en);
         static void ShowCenter();
 
-        static void ShowFlash(const String &);
+        static void ShowTop(const String &);
         static void ShowFlash(const pchar &ru, const pchar &en);
         static void ClearFlash();
     };

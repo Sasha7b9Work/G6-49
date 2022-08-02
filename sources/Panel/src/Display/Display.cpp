@@ -128,7 +128,7 @@ void Display::Warnings::ShowCenter(const String &ru, const String &en)
 }
 
 
-void Display::Warnings::ShowFlash(const String &warning)
+void Display::Warnings::ShowTop(const String &warning)
 {
     warnings.AppendFlash(warning);
 }
