@@ -61,9 +61,9 @@ namespace Display
 {
     static ::Warnings warnings;
 
-    uint8 Display::frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
+    uint8 frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
 
-    uint8 Display::backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
+    uint8 backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
 }
 
 
