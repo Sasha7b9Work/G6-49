@@ -23,11 +23,12 @@ using namespace Primitives;
 struct Warning
 {
     Warning(pString msg = "") : timeStart(_TIME_MS) { if (msg[0] != '\0') { message = new String(msg); } else { message = nullptr; } };
-    void Delete()   { if (message) { delete message; message = nullptr; } }
+    void Delete() { if (message) { delete message; message = nullptr; } }
     bool IsEqual(const String &msg);
     uint timeStart;
     String *message;
 };
+
 
 struct Warnings
 {
@@ -44,7 +45,7 @@ private:
     String warning_flash;
     int last;                               // Указыват на элемент за последним действительным. Если last == 0, то массив пуст
     void Update();
-    bool IsEmpty()  { return (last == 0); }
+    bool IsEmpty() { return (last == 0); }
     Warning &Last() { return warnings[last - 1]; }
     Color ColorText() const;
     Color ColorBackground() const;
@@ -55,11 +56,15 @@ private:
 };
 
 
-static Warnings warnings;
 
-uint8 Display::frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
+namespace Display
+{
+    static ::Warnings warnings;
 
-uint8 Display::backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
+    uint8 Display::frontBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
+
+    uint8 Display::backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
+}
 
 
 uint8 *Display::GetBuffer()
