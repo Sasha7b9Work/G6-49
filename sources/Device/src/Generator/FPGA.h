@@ -108,13 +108,16 @@ namespace FPGA
     // Возвращает указатель на точки произвольного сигнала (программно определёного)
     uint8 *DataDDS(const Chan &);
 
-    // Записать значение в регистр
-    void WriteRegister(RG::E reg, uint64 value);
-
     extern ClockFrequency::E clock;
 
     // Режим работы ПЛИС
     extern ModeWork::E modeWork[Chan::Count];
 
     static inline ModeWork::E CurrentMode(const Chan &ch) { return modeWork[ch]; }
+
+    namespace Register
+    {
+        // Записать значение в регистр
+        void Write(RG::E reg, uint64 value);
+    }
 };

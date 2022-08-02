@@ -411,48 +411,48 @@ static void WriteRegister(SimpleMessage *msg)
         break;
 
     case Register::FPGA_RG0_Control:
-        FPGA::WriteRegister(FPGA::RG::_0_Control, value.ToUINT64());
+        FPGA::Register::Write(FPGA::RG::_0_Control, value.ToUINT64());
         break;
 
     case Register::FPGA_RG1_Freq:
-        FPGA::WriteRegister(FPGA::RG::_1_Freq, value.ToUINT64());
+        FPGA::Register::Write(FPGA::RG::_1_Freq, value.ToUINT64());
         break;
 
     case Register::FPGA_RG2_Amplitude:
-        FPGA::WriteRegister(FPGA::RG::_2_Amplitude, value.ToUINT64());
+        FPGA::Register::Write(FPGA::RG::_2_Amplitude, value.ToUINT64());
         break;
 
     case Register::FPGA_RG3_RectA:
-        FPGA::WriteRegister(FPGA::RG::_3_RectA, value.ToUINT64());
+        FPGA::Register::Write(FPGA::RG::_3_RectA, value.ToUINT64());
         break;
 
     case Register::FPGA_RG4_RectB:
-        FPGA::WriteRegister(FPGA::RG::_4_RectB, value.ToUINT64());
+        FPGA::Register::Write(FPGA::RG::_4_RectB, value.ToUINT64());
         break;
 
     case Register::FPGA_RG5_PeriodImpulseA:
-        FPGA::WriteRegister(FPGA::RG::_5_PeriodImpulseA, value.ToUINT64());
+        FPGA::Register::Write(FPGA::RG::_5_PeriodImpulseA, value.ToUINT64());
         break;
 
     case Register::FPGA_RG6_DurationImpulseA:
-        FPGA::WriteRegister(FPGA::RG::_6_DurationImpulseA, value.ToUINT64());
+        FPGA::Register::Write(FPGA::RG::_6_DurationImpulseA, value.ToUINT64());
         break;
 
     case Register::FPGA_RG7_PeriodImpulseB:
-        FPGA::WriteRegister(FPGA::RG::_7_PeriodImpulseB, value.ToUINT64());
+        FPGA::Register::Write(FPGA::RG::_7_PeriodImpulseB, value.ToUINT64());
         break;
 
     case Register::FPGA_RG8_DurationImpulseB:
-        FPGA::WriteRegister(FPGA::RG::_8_DurationImpulseB, value.ToUINT64());
+        FPGA::Register::Write(FPGA::RG::_8_DurationImpulseB, value.ToUINT64());
         break;
 
     case Register::FPGA_RG9_FreqMeter:
-        FPGA::WriteRegister(FPGA::RG::_9_FreqMeter, value.ToUINT64());
+        FPGA::Register::Write(FPGA::RG::_9_FreqMeter, value.ToUINT64());
         DInterface::ResetFreqForSend();
         break;
 
     case Register::FPGA_RG10_Offset:
-        FPGA::WriteRegister(FPGA::RG::_10_Offset, value.ToUINT64());
+        FPGA::Register::Write(FPGA::RG::_10_Offset, value.ToUINT64());
         break;
 
     case Register::FreqMeter_Resist:
