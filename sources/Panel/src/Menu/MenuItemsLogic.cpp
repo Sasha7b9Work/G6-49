@@ -42,7 +42,7 @@ int8 gCurDigit = 0;
 
 void Choice::StartChange(int delta) const
 {
-    if (IsActive())
+    if (funcOfActive())
     {
         int8 index = CurrentIndex();
 
@@ -58,7 +58,7 @@ void Choice::StartChange(int delta) const
         *cell = index;
     }
 
-    funcOnChanged(IsActive());
+    funcOnChanged(funcOfActive());
 }
 
 
@@ -97,7 +97,7 @@ float Choice::Step()
 
         tsChoice.address = 0;
 
-        funcOnChanged(IsActive());
+        funcOnChanged(funcOfActive());
 
         tsChoice.dir = NONE;
         return 0.0F;

@@ -85,8 +85,6 @@ public:
 
     Page *Keeper() const { return const_cast<Page *>(reinterpret_cast<const Page *>(keeper)); }; //-V2567
 
-    bool IsActive() const { return funcOfActive(); };
-
     static const int WIDTH = 69;
 
     static const int HEIGHT = 55;
