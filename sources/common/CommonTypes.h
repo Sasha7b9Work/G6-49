@@ -76,12 +76,19 @@ struct StartMode
         Single,         ///< Однократный запуск по нажатию кнопки
         ComparatorA,    ///< Компаратор канала A (в момент перехода из нуля в плюс выхода AD9952 канала A
         ShaperB         ///< Формирователь импульсов канала B (режим "Импульсный сигнал")
-    } value;
-
-    StartMode(float v) : value(static_cast<E>(static_cast<int>(v + 0.5F))) {};
-    operator uint8() const { return static_cast<uint8>(value); };
-    bool Is(StartMode start) const { return start.value == value; };
+    };
 };
+
+
+struct StartStopMode
+{
+    enum E
+    {
+        Auto,
+        Single
+    };
+};
+
 
 struct KoeffCal
 {

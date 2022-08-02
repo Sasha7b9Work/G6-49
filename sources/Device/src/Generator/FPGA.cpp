@@ -18,8 +18,8 @@
 #define MIN_VALUE (0)
 
 
-Value                   FPGA::PacketImpulse::periodImpulse("0", Order::One);
-Value                   FPGA::PacketImpulse::durationImpulse("0", Order::One);
+Value  FPGA::PacketImpulse::periodImpulse("0", Order::One);
+Value  FPGA::PacketImpulse::durationImpulse("0", Order::One);
 
 
 // \brief Здесь хранятся значения, предназначенные непосредственно для засылки в ПЛИС. Сначала идут младшие 8 бит, а потом старшие 6 бит
@@ -101,12 +101,15 @@ namespace FPGA
     static bool InModeDDS(const Chan &);
 
     // Режим запуска для произвольного сигнала (0) и для импульсного сигнала (1)
-    static StartMode startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
-
-    uint64 registers[Register::Count] = { 0 };     // Здесь хранятся записанные в регистры значения
+    static StartMode::E startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
 
     ModeWork::E       modeWork[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
     ClockFrequency::E clock = FPGA::ClockFrequency::_100MHz;
+
+    namespace Register
+    {
+        static uint64 values[Count] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    }
 }
 
 
@@ -330,10 +333,26 @@ void FPGA::SetPeriodImpulse(const Chan &ch, Value period)
 }
 
 
-void FPGA::SetStartMode(const Chan &ch, uint8 signal, StartMode mode)
+void FPGA::SetStartMode(const Chan &ch, uint8 signal, StartMode::E mode)
 {
     startMode[ch][signal] = mode;
     WriteControlRegister();
+}
+
+
+void FPGA::EnableStartStopMode(StartStopMode::E mode)
+{
+    uint64 value = Register::Read(Register::_0_Control);
+
+    _SET_BIT(value, 10);
+    _SET_BIT(value, 11);
+
+    if (mode == StartStopMode::Single)
+    {
+        _SET_BIT(value, 12);
+    }
+
+    Register::Write(Register::_0_Control, value);
 }
 
 
@@ -412,7 +431,7 @@ void FPGA::SetBitsStartMode(const Chan &ch, uint16 &data)
 
     if (mode == ModeWork::Impulse || mode == ModeWork::PackedImpulse)
     {
-        if (startMode[ch][1].Is(StartMode::Single))
+        if (startMode[ch][1] == StartMode::Single)
         {
             Bit::Set(data, ch.IsA() ? RG0::_10_HandStartA : RG0::_11_HandStartB);
         }
@@ -420,17 +439,17 @@ void FPGA::SetBitsStartMode(const Chan &ch, uint16 &data)
 
     if (InModeDDS(ch))
     {
-        StartMode start = startMode[ch][0];
+        StartMode::E start = startMode[ch][0];
 
-        if (start.Is(StartMode::ComparatorA))
+        if (start == StartMode::ComparatorA)
         {
             Bit::Set(data, RG0::_13_StartMode0);
         }
-        else if (start.Is(StartMode::ShaperB))
+        else if (start == StartMode::ShaperB)
         {
             Bit::Set(data, RG0::_14_StartMode1);
         }
-        else if (start.Is(StartMode::Single))
+        else if (start == StartMode::Single)
         {
             Bit::Set(data, RG0::_13_StartMode0);
             Bit::Set(data, RG0::_14_StartMode1);
@@ -493,7 +512,7 @@ void FPGA::SendDataChannel(const Chan &ch)
 }
 
 
-void FPGA::Register::Write(Register::E reg, uint64 value)
+void FPGA::Register::Write(E reg, uint64 value)
 {
     static const int numBits[Register::Count] =
     {
@@ -513,7 +532,7 @@ void FPGA::Register::Write(Register::E reg, uint64 value)
 
     LOG_WRITE("%d : %d", static_cast<int>(reg), value);
 
-    registers[reg] = value;
+    values[reg] = value;
 
     WriteAddress(reg);
 
@@ -530,6 +549,12 @@ void FPGA::Register::Write(Register::E reg, uint64 value)
     HAL_PIO::Set(WR_FPGA_WR_RG);                                    // Теперь переписываем данные из сдвиговоого регистра в FPGA
     HAL_PIO::Reset(WR_FPGA_WR_RG);
     HAL_TIM::Delay(10);                                         // Ждём 10 миллисекунд, пока данные перепишутся в FPGA
+}
+
+
+uint64 FPGA::Register::Read(E reg)
+{
+    return values[reg];
 }
 
 

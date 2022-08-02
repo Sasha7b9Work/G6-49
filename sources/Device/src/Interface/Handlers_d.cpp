@@ -300,7 +300,7 @@ static void SetStartMode(SimpleMessage *msg)
 
     Chan ch((uint8)(firstByte & 1));
 
-    StartMode mode = static_cast<StartMode>(msg->TakeUINT8());
+    StartMode::E mode = (StartMode::E)msg->TakeUINT8();
 
     FPGA::SetStartMode(ch, static_cast<uint8>((firstByte & 2) >> 1), mode);
 }
@@ -308,7 +308,9 @@ static void SetStartMode(SimpleMessage *msg)
 
 static void SetStartStopMode(SimpleMessage *msg)
 {
+    StartStopMode::E mode = (StartStopMode::E)msg->TakeUINT8();
 
+    FPGA::EnableStartStopMode(mode);
 }
 
 
