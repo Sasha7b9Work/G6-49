@@ -161,7 +161,9 @@ void PageSignals::OnChanged_Form(bool active)
     {
         if (FORM_A == Signals::A::impulse && FORM_B == Signals::B::impulse)
         {
-            if (Signals::A::impulse_start_stop->GetChoice() == 1)
+            ParameterChoice *parameter = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
+
+            if (parameter->GetChoice() == 1)
             {
                 Display::Warnings::Show("Отключите режим А-СТАРТ,В-СТОП",
                                         "Disable the A-START,B-STOP mode", true);
@@ -239,9 +241,14 @@ static void OnPress_TuneParameter()
     }
     else
     {
-        if (CURRENT_PARAM == Signals::A::impulse_start_stop)
+        if (CURRENT_CHANNEL.IsA() && FORM_A == Signals::A::impulse)
         {
-            Display::Warnings::Show("Выберите на канале В форму ИМПУЛЬС", "Select on the channel To form IMPULSE", true);
+            ParameterChoice *parameter = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
+
+            if (CURRENT_PARAM == parameter)
+            {
+                Display::Warnings::Show("Выберите на канале В форму ИМПУЛЬС", "Select on the channel To form IMPULSE", true);
+            }
         }
     }
 }
