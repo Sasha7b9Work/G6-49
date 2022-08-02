@@ -46,7 +46,7 @@ namespace FPGA
         static Value durationImpulse;
     };
 
-    struct ModeWork
+    namespace ModeWork
     {
         enum E
         {
@@ -72,10 +72,7 @@ namespace FPGA
     // Возвращает указатель на точки произвольного сигнала (программно определёного)
     uint8 *DataDDS(const Chan &);
 
-    // Режим работы ПЛИС
-    extern ModeWork::E modeWork[Chan::Count];
-
-    static inline ModeWork::E CurrentMode(const Chan &ch) { return modeWork[ch]; }
+    //static inline ModeWork::E CurrentMode(const Chan &ch) { return modeWork[ch]; }
 
     // Тактовая частота формирователя произвольных сигналов
     namespace ClockFrequencyAD992
@@ -92,7 +89,7 @@ namespace FPGA
     };
     
     // Тактовая частота формирователя импульсов
-    struct ClockFrequencyImpulse
+    namespace ClockFrequencyImpulse
     {
         enum E
         {
@@ -101,7 +98,6 @@ namespace FPGA
         };
     };
     
-    extern ClockFrequencyImpulse::E clockImpulse;
 
     namespace Register
     {
