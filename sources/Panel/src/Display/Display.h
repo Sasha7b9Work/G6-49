@@ -33,9 +33,9 @@ namespace Display
     struct Warnings
     {
         // Вывести временно
-//        static void Show(const String &ru, const String &en, bool auto_delete);
+        static void Show(const String &ru, const String &en, bool auto_delete);
 
-        static void ShowTemp(const String &ru, const String &en);
+//        static void ShowTemp(const String &ru, const String &en);
         static void ShowTemp(pchar ru, pchar en);
 
         // Вывести на постоянно

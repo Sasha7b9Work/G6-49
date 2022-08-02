@@ -122,9 +122,16 @@ void Display::Update()
 }
 
 
-void Display::Warnings::ShowTemp(const String &ru, const String &en)
+void Display::Warnings::Show(const String &ru, const String &en, bool auto_delete)
 {
-    warnings.AppendTemp(LANG_RU ? ru : en);
+    if (auto_delete)
+    {
+        warnings.AppendTemp(LANG_RU ? ru : en);
+    }
+    else
+    {
+        warnings.AppendAllTheTime(LANG_RU ? ru : en);
+    }
 }
 
 
@@ -142,7 +149,7 @@ void Display::Warnings::ShowAllTheTime(const pchar &ru, const pchar &en)
 
 void Display::Warnings::ShowTemp(pchar ru, pchar en)
 {
-    ShowTemp(String(ru), String(en));
+    Show(String(ru), String(en), true);
 }
 
 
