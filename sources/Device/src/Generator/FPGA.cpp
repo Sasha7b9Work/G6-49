@@ -18,10 +18,6 @@
 #define MIN_VALUE (0)
 
 
-Value  FPGA::PacketImpulse::periodImpulse("0", Order::One);
-Value  FPGA::PacketImpulse::durationImpulse("0", Order::One);
-
-
 // \brief Здесь хранятся значения, предназначенные непосредственно для засылки в ПЛИС. Сначала идут младшие 8 бит, а потом старшие 6 бит
 // Данные должны быть записаны в прямом коде - 0 в старшем разряде обозначает положительное число, а 1 - отрицательное
 static uint8 dataDDS[Chan::Count][FPGA::NUM_POINTS * 2] __attribute__((section("CCM_DATA")));
@@ -102,6 +98,12 @@ namespace FPGA
 
     // Режим запуска для произвольного сигнала (0) и для импульсного сигнала (1)
     static StartMode::E startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
+
+    namespace PacketImpulse
+    {
+        Value PacketImpulse::periodImpulse("0", Order::One);
+        Value PacketImpulse::durationImpulse("0", Order::One);
+    }
 
     namespace ModeWork
     {

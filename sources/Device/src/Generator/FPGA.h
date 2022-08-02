@@ -33,17 +33,17 @@ namespace FPGA
 
     void TransformCodeToData(const uint8 codeIn[FPGA::NUM_POINTS * 2], float dataOut[FPGA::NUM_POINTS]);
 
-    struct PacketImpulse
+    namespace PacketImpulse
     {
         // Устанавливает число импульсов в пачке
-        static void SetNumberImpules(uint n);
+        void SetNumberImpules(uint n);
 
         // Устанавливает период следования пачки
-        static void SetPeriodPacket(Value period);
+        void SetPeriodPacket(Value period);
 
-        static Value periodImpulse;
+        extern Value periodImpulse;
 
-        static Value durationImpulse;
+        extern Value durationImpulse;
     };
 
     namespace ModeWork
