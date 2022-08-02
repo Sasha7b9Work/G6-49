@@ -274,6 +274,7 @@ struct ParameterChoiceType
         ModeStart,              // Режим запуска сигналов DDS и импульсных
         ManipulationEnabled,    // Включен или выключен режим манипуляции
         ModeStartStop,          // Режим А-Старт/В-Стоп
+        ClockImpulse,           // Тактовая частота в режиме импульсов и пакетов
         Count
     };
 
@@ -512,6 +513,13 @@ class ParameterPolarity : public ParameterChoice
 {
 public:
     ParameterPolarity(pchar *names) : ParameterChoice(ParameterChoiceType::Polarity, Parameter::FuncActive, "Полярность", "Polarity", names) { }
+};
+
+
+class ParameterClockImpulse : public ParameterChoice
+{
+public:
+    ParameterClockImpulse(pchar *names) : ParameterChoice(ParameterChoiceType::ClockImpulse, Parameter::FuncActive, "Оп. частота", "Clock", names) { }
 };
 
 

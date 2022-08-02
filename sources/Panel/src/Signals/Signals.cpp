@@ -90,6 +90,14 @@ static pchar namesModeStartStopImpulse[] =  // Включение режима "А-Старт,В-Стоп"
 };
 
 
+static pchar namesClockImpulse[] =
+{
+    "100 МГц", "100 MHz",
+    "1 МГц", "1 MHz",
+    nullptr
+};
+
+
 static ParameterFrequency  rampPlusA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude  rampPlusA_Amplitude;
 static ParameterOffset     rampPlusA_Offset;
@@ -207,6 +215,7 @@ static ParameterOffset        impulseA_Offset;
 static ParameterPolarity      impulseA_Polarity(namesPolarity);
 static ParameterModeStart     impulseA_ModeStart(namesModeStartImpulse);
 static ParameterModeStartStop impulseA_Output(FuncActive_ModeStartStopImpulseA, namesModeStartStopImpulse);
+static ParameterClockImpulse  impulse_Clock(namesClockImpulse);
 
 static Parameter *params_ImpulseA[] =
 {
@@ -217,6 +226,7 @@ static Parameter *params_ImpulseA[] =
     &impulseA_Polarity,
     &impulseA_ModeStart,
     &impulseA_Output,
+    &impulse_Clock,
     nullptr
 };
 
@@ -250,6 +260,7 @@ static Parameter *params_PacketA[] =
     &packetA_Offset,
     &packetA_Polarity,
     &packetA_ModeStart,
+    &impulse_Clock,
     nullptr
 };
 
@@ -419,6 +430,7 @@ static Parameter *params_ImpulseB[] =
     &impulseB_Offset,
     &impulseB_Polarity,
     &impulseB_ModeStart,
+    &impulse_Clock,
     nullptr
 };
 
