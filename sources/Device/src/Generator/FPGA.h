@@ -72,7 +72,7 @@ namespace FPGA
         };
     };
 
-    void SetClockAD992(ClockFrequency::E clock);
+    void SetClockAD992(ClockFrequency::E);
 
     // Возвращает указатель на точки сигнала, загружаемого из флешки
     uint8 *DataFreeSignal(const Chan &);

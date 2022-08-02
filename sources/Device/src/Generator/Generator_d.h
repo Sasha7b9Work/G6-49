@@ -18,29 +18,29 @@ namespace DGenerator
 
     void SetFormWave(const Chan &, TypeForm::E form);
 
-    void SetOffset(const Chan &, Value offset);
+    void SetOffset(const Chan &, const Value &offset);
 
-    void SetFrequency(const Chan &, Value frequency);
+    void SetFrequency(const Chan &, const Value &frequency);
 
-    void SetAmplitude(const Chan &, Value amplitude);
+    void SetAmplitude(const Chan &, const Value &amplitude);
 
-    void SetDuration(const Chan &, Value duration);
+    void SetDuration(const Chan &, const Value &duration);
 
-    void SetDutyRatio(const Chan &, Value dutyRatio);
+    void SetDutyRatio(const Chan &, const Value &dutyRatio);
 
-    void SetPhase(const Chan &, Value phase);
+    void SetPhase(const Chan &, const Value &phase);
 
-    void SetDelay(const Chan &, Value duration);
+    void SetDelay(const Chan &, const Value &duration);
 
-    void SetManipulationDuration(const Chan &, Value duration);
+    void SetManipulationDuration(const Chan &, const Value &duration);
 
-    void SetManipulationPeriod(const Chan &, Value period);
+    void SetManipulationPeriod(const Chan &, const Value &period);
 
-    void SetPacketPeriod(const Chan &, Value duration);
+    void SetPacketPeriod(const Chan &, const Value &duration);
 
-    void SetPacketNumber(const Chan &, Value number);
+    void SetPacketNumber(const Chan &, const Value &number);
 
-    void SetPeriod(const Chan &, Value period);
+    void SetPeriod(const Chan &, const Value &period);
 };
 
 

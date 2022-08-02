@@ -203,7 +203,7 @@ static void SetFormWave(SimpleMessage *msg)
 }
 
 
-static void SetGeneratorParameter(SimpleMessage *msg, void(*func)(const Chan &, Value))
+static void SetGeneratorParameter(SimpleMessage *msg, void(*func)(const Chan &, const Value &))
 {
     Chan ch(msg->TakeUINT8());
 

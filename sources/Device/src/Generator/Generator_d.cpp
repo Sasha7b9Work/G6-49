@@ -146,7 +146,7 @@ void DGenerator::SetFormWave(const Chan &ch, TypeForm::E form)
 }
 
 
-void DGenerator::SetFrequency(const Chan &ch, Value freq)
+void DGenerator::SetFrequency(const Chan &ch, const Value &freq)
 {
     SettingsGenerator::frequency[ch] = freq;
 
@@ -161,27 +161,27 @@ void DGenerator::SetFrequency(const Chan &ch, Value freq)
 }
 
 
-void DGenerator::SetManipulationPeriod(const Chan &ch, Value period)
+void DGenerator::SetManipulationPeriod(const Chan &ch, const Value &period)
 {
     FPGA::SetPolarity(ch, 0);
     FPGA::SetPeriodImpulse(ch, period);
 }
 
 
-void DGenerator::SetManipulationDuration(const Chan &ch, Value duration)
+void DGenerator::SetManipulationDuration(const Chan &ch, const Value &duration)
 {
     FPGA::SetPolarity(ch, 0);
     FPGA::SetDurationImpulse(ch, duration);
 }
 
 
-void DGenerator::SetPeriod(const Chan &ch, Value period)
+void DGenerator::SetPeriod(const Chan &ch, const Value &period)
 {
     FPGA::SetPeriodImpulse(ch, period);
 }
 
 
-void DGenerator::SetAmplitude(const Chan &ch, Value ampl)
+void DGenerator::SetAmplitude(const Chan &ch, const Value &ampl)
 {
     SettingsGenerator::amplitude[ch] = ampl;
 
@@ -200,7 +200,7 @@ void DGenerator::SetAmplitude(const Chan &ch, Value ampl)
 }
 
 
-void DGenerator::SetOffset(const Chan &ch, Value off)
+void DGenerator::SetOffset(const Chan &ch, const Value &off)
 {
     SettingsGenerator::offset[ch] = off;
 
@@ -210,37 +210,37 @@ void DGenerator::SetOffset(const Chan &ch, Value off)
 }
 
 
-void DGenerator::SetPhase(const Chan &ch, Value phase)
+void DGenerator::SetPhase(const Chan &ch, const Value &phase)
 {
     AD9952::SetPhase(ch, phase);
 }
 
 
-void DGenerator::SetPacketNumber(const Chan &, Value number)
+void DGenerator::SetPacketNumber(const Chan &, const Value &number)
 {
     FPGA::PacketImpulse::SetNumberImpules(static_cast<uint>(number.ToDouble() + 0.5));
 }
 
 
-void DGenerator::SetPacketPeriod(const Chan &, Value period)
+void DGenerator::SetPacketPeriod(const Chan &, const Value &period)
 {
     FPGA::PacketImpulse::SetPeriodPacket(period);
 }
 
 
-void DGenerator::SetDutyRatio(const Chan &, Value)
+void DGenerator::SetDutyRatio(const Chan &, const Value &)
 {
 
 }
 
 
-void DGenerator::SetDuration(const Chan &ch, Value value)
+void DGenerator::SetDuration(const Chan &ch, const Value &value)
 {
     FPGA::SetDurationImpulse(ch, value);
 }
 
 
-void DGenerator::SetDelay(const Chan &, Value)
+void DGenerator::SetDelay(const Chan &, const Value &)
 {
 }
 
