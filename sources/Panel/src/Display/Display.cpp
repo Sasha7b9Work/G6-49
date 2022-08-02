@@ -140,7 +140,7 @@ void Display::Warnings::ShowFlash(const pchar &ru, const pchar &en)
 }
 
 
-void Display::Warnings::ShowCenter(pchar ru, pchar en)
+void Display::Warnings::ShowTemp(pchar ru, pchar en)
 {
     ShowTemp(String(ru), String(en));
 }
