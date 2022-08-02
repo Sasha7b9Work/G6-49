@@ -5,7 +5,7 @@ call build.bat all
 cd ..
 
 cd vs_keil
-call build.bat
+call assembly.bat build
 cd ..
 
 cd vs_win
