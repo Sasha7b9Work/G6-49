@@ -234,7 +234,7 @@ void Warnings::Clear()
 }
 
 
-void Display::Warnings::ShowCenter()
+void Display::Warnings::ClearTemp()
 {
     warnings.Clear();
 }

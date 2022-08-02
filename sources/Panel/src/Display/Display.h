@@ -35,7 +35,7 @@ namespace Display
         // Вывести временно
         static void ShowTemp(const String &ru, const String &en);
         static void ShowTemp(pchar ru, pchar en);
-        static void ShowCenter();
+        static void ClearTemp();
 
         // Вывести на постоянно
         static void ShowTop(const String &);
