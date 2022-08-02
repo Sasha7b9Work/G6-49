@@ -34,7 +34,7 @@ struct Warnings
     Warnings() : last(0) { }
     void Show();
     void AppendTemp(const String &);
-    void Clear();
+    void ClearTemp();
     void AppendAllTheTime(const String &);
     void ClearAllTheTime();
 
@@ -220,7 +220,7 @@ void Warnings::Update()
 }
 
 
-void Warnings::Clear()
+void Warnings::ClearTemp()
 {
     if (last != 0)
     {
@@ -236,7 +236,8 @@ void Warnings::Clear()
 
 void Display::Warnings::ClearAll()
 {
-    warnings.Clear();
+    warnings.ClearTemp();
+    warnings.ClearAllTheTime();
 }
 
 
