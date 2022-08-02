@@ -16,9 +16,9 @@ namespace FPGA
 
     void SetAmplitude();
 
-    void SetDurationImpulse(const Chan &, Value duration);
+    void SetDurationImpulse(const Chan &, const Value &duration);
 
-    void SetPeriodImpulse(const Chan &, Value period);
+    void SetPeriodImpulse(const Chan &, const Value &period);
 
     // 1 - положительна€ пол€рность, 0 - отрицательна€ пол€рность
     void SetPolarity(const Chan &, uint8 polarity);

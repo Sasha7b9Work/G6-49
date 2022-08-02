@@ -280,7 +280,7 @@ void FPGA::SetFrequency(const Chan &ch)
 }
 
 
-void FPGA::SetDurationImpulse(const Chan &ch, Value duration)
+void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
 {
     PacketImpulse::durationImpulse = duration;
 
@@ -313,7 +313,7 @@ void FPGA::PacketImpulse::SetNumberImpules(uint value)
 }
 
 
-void FPGA::SetPeriodImpulse(const Chan &ch, Value period)
+void FPGA::SetPeriodImpulse(const Chan &ch, const Value &period)
 {
     // Для пакетного и одиночного импульсных режимов период задаётся здесь. Поэтому сохраняем значение периода импульсов, чтобы использовать его
     // в пакетном режиме при необходимости
