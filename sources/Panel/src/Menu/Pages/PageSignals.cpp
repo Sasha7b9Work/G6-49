@@ -157,6 +157,17 @@ void PageSignals::OnChanged_Form(bool active)
             }
         }
     }
+    else
+    {
+        if (FORM_A == Signals::A::impulse && FORM_B == Signals::B::impulse)
+        {
+            if (Signals::A::impulse_start_stop->GetChoice() == 1)
+            {
+                Display::Warnings::Show("Отключите режим А-СТАРТ,В-СТОП",
+                                        "Disable the A-START,B-STOP mode", true);
+            }
+        }
+    }
 }
 
 
