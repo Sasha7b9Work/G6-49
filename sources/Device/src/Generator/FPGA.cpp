@@ -356,7 +356,7 @@ void FPGA::EnableStartStopMode(StartStopMode::E mode)
 }
 
 
-void FPGA::SetClockAD992(ClockFrequencyAD992::E _clock)
+void FPGA::ClockFrequencyAD992::Set(ClockFrequencyAD992::E _clock)
 {
     clockAD992 = _clock;
     WriteControlRegister();

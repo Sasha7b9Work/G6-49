@@ -78,13 +78,15 @@ namespace FPGA
     static inline ModeWork::E CurrentMode(const Chan &ch) { return modeWork[ch]; }
 
     // Тактовая частота формирователя произвольных сигналов
-    struct ClockFrequencyAD992
+    namespace ClockFrequencyAD992
     {
         enum E
         {
             _100MHz,
             _1MHz
         };
+
+        void Set(E);
     };
     
     // Тактовая частота формирователя импульсов
@@ -99,8 +101,6 @@ namespace FPGA
     
     extern ClockFrequencyImpulse::E clockImpulse;
     extern ClockFrequencyAD992::E clockAD992;
-
-    void SetClockAD992(ClockFrequencyAD992::E);
 
     namespace Register
     {

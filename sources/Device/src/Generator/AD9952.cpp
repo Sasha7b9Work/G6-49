@@ -76,7 +76,7 @@ void AD9952::Manipulation::SetEnabled(const Chan &ch, bool enable)
 
 void AD9952::SetFrequency(const Chan &ch)
 {
-    FPGA::SetClockAD992(SettingsGenerator::Frequency(ch) < 0.2F ? FPGA::ClockFrequencyAD992::_1MHz : FPGA::ClockFrequencyAD992::_100MHz);
+    FPGA::ClockFrequencyAD992::Set(SettingsGenerator::Frequency(ch) < 0.2F ? FPGA::ClockFrequencyAD992::_1MHz : FPGA::ClockFrequencyAD992::_100MHz);
 
     WriteRegister(ch, Register::FTW0);
 
