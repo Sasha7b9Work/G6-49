@@ -312,11 +312,6 @@ int Page::NumItems() const
 
 void Item::Press(const Control &control) //-V801
 {
-    if (!funcOfActive())
-    {
-        return;
-    }
-
     if(control.IsLong())
     {
         if (IsOpened() || control.Is(Key::RegButton) || control.Is(Key::Esc))
@@ -337,19 +332,19 @@ void Item::Press(const Control &control) //-V801
 
         if (type == TypeItem::Choice)
         {
-            static_cast<Choice *>(this)->Press(control);
+            ReinterpretToChoice()->Press(control);
         }
         else if (type == TypeItem::Button)
         {
-            static_cast<Button *>(this)->Press(control.action);
+            ReinterpretToButton()->Press(control.action);
         }
         else if (type == TypeItem::ChoiceParameter)
         {
-            static_cast<ChoiceParameter *>(this)->Press(control);
+            ReinterpretToChoiceParameter()->Press(control);
         }
         else if (type == TypeItem::SmallButton)
         {
-            static_cast<SButton *>(this)->Press(control.action);
+            ReinterpretToSButton()->Press(control.action);
         }
         else if(type == TypeItem::Page)
         {

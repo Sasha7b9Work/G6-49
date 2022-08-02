@@ -10,6 +10,12 @@
 
 typedef bool (*pFuncBKey)(const Control &);
 
+class Button;
+class Choice;
+class ChoiceParameter;
+class Page;
+class SButton;
+
 
 // Общая часть для всех типов элементов меню
 #define COMMON_PART_MENU_ITEM                                                                                                               \
@@ -98,6 +104,12 @@ public:
 
     static Item emptyDark;
     static Item emptyLight;
+
+    Button          *ReinterpretToButton()          { return (Button *)this; }
+    Choice          *ReinterpretToChoice()          { return (Choice *)this; }
+    ChoiceParameter *ReinterpretToChoiceParameter() { return (ChoiceParameter *)this; }
+    Page            *ReinterpretToPage()            { return (Page *)this; }
+    SButton         *ReinterpretToSButton()         { return (SButton *)this; }
 };
 
 
@@ -109,9 +121,9 @@ class PageBase
 public:
     COMMON_PART_MENU_ITEM;
     
-    Item **items;           // Здесь указатели на пункты этой страницы (в обычной странице) для страницы малых кнопок  здесь хранятся 6 указателей на SButton : 0 - B_Menu, 1...5 - B_F1...B_F5
-    pFuncVB funcEnter;      // Будет вызываться при нажатии на свёрнутую страницу
-    pFuncVV funcOnDraw;     // Будет вызываться после отрисовки кнопок
+    Item    **items;        // Здесь указатели на пункты этой страницы (в обычной странице) для страницы малых кнопок  здесь хранятся 6 указателей на SButton : 0 - B_Menu, 1...5 - B_F1...B_F5
+    pFuncVB   funcEnter;    // Будет вызываться при нажатии на свёрнутую страницу
+    pFuncVV   funcOnDraw;   // Будет вызываться после отрисовки кнопок
     pFuncBKey funcOnKey;
 
     bool CurrentItemIsOpened() const;
