@@ -264,6 +264,14 @@ static void OnPress_TuneParameter()
                         }
                     }
                 }
+
+                if (CURRENT_PARAM == B::Impulse::period || CURRENT_PARAM == B::Impulse::mode_start)
+                {
+                    if (A::Impulse::start_stop->GetChoice() == 1)
+                    {
+                        Display::Warnings::Show("Недоступно в режиме А-СТАРТ, В-СТОП", "Not available in A-START, B-STOP mode", true);
+                    }
+                }
             }
         }
     }
