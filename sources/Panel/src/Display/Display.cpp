@@ -38,7 +38,7 @@ namespace Display
         void Show();
         void AppendTemp(const String &);
         // Добавить две строки
-        void AppendTemp2(const String &, const String &);
+        void AppendTemp2Strings(const String &, const String &);
         void ClearTemp();
         void AppendAllTheTime(const String &);
         void ClearAllTheTime();
@@ -142,7 +142,7 @@ void Display::Warnings::Show(const String &ru, const String &en, bool auto_delet
 
 void Display::Warnings::Show2Strings(const String &ru1, const String &ru2, const String &en1, const String &en2)
 {
-    warnings.AppendTemp2(LANG_RU ? ru1 : en1, LANG_RU ? ru2 : en2);
+    warnings.AppendTemp2Strings(LANG_RU ? ru1 : en1, LANG_RU ? ru2 : en2);
 }
 
 
@@ -178,15 +178,30 @@ void Display::WarningsDisplay::AppendTemp(const String &warning)
             DeleteFirst();
         }
 
-        if (last < NUM_WARNINGS)
-        {
-            warnings[last++] = WarningMessage(warning.c_str());
-        }
+        warnings[last++] = WarningMessage(warning.c_str());
     }
 }
 
 
-void Display::WarningsDisplay::AppendTemp2(const String &)
+void Display::WarningsDisplay::AppendTemp2Strings(const String &str1, const String &str2)
+{
+    if (last >= 2 && (warnings[last - 1].IsEqual(str2) && warnings[last - 2].IsEqual(str1)))
+    {
+        uint time = _TIME_MS;
+        warnings[last - 1].timeStart = time;
+        warnings[last - 2].timeStart = time;
+    }
+    else
+    {
+        while (last >= NUM_WARNINGS - 1)
+        {
+            DeleteFirst();
+        }
+
+        warnings[last++] = WarningMessage(str1.c_str());
+        warnings[last++] = WarningMessage(str2.c_str());
+    }
+}
 
 
 void Display::WarningsDisplay::AppendAllTheTime(const String &warning)

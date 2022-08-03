@@ -533,7 +533,7 @@ void FPGA::SendDataChannel(const Chan &ch)
 }
 
 
-void FPGA::Register::Write(E reg, uint64 value)
+void FPGA::Register::Write(E reg, uint64 _value)
 {
     static const int numBits[Register::Count] =
     {
@@ -551,9 +551,9 @@ void FPGA::Register::Write(E reg, uint64 value)
         2   // _11_Start
     };
 
-    LOG_WRITE("%d : %d", static_cast<int>(reg), value);
+    LOG_WRITE("%d : %d", static_cast<int>(reg), _value);
 
-    values[reg] = value;
+    values[reg] = _value;
 
     WriteAddress(reg);
 
@@ -561,7 +561,7 @@ void FPGA::Register::Write(E reg, uint64 value)
     {
         for (int bit = numBits[reg] - 1; bit >= 0; bit--)
         {
-            HAL_PIO::Write(WR_FPGA_DT_RG, Bit::Get(value, bit));    // Устанавливаем или сбрасываем соответствующий бит
+            HAL_PIO::Write(WR_FPGA_DT_RG, Bit::Get(_value, bit));    // Устанавливаем или сбрасываем соответствующий бит
             HAL_PIO::Set(WR_FPGA_CLK_RG);                           // И записываем его в ПЛИС
             HAL_PIO::Reset(WR_FPGA_CLK_RG);
         }
