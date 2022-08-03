@@ -472,7 +472,7 @@ struct ParameterManipulationPeriod : public ParameterTime
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
 struct ParameterModeStart : public ParameterChoice
 {
-    ParameterModeStart(pchar *names) : ParameterChoice(ParameterChoiceType::ModeStart, Parameter::FuncActive, "Запуск", "Start", names) { }
+    ParameterModeStart(pFuncBV funcActive, pchar *names) : ParameterChoice(ParameterChoiceType::ModeStart, funcActive, "Запуск", "Start", names) { }
 };
 
 
