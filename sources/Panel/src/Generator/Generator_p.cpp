@@ -53,7 +53,7 @@ void PGenerator::LoadStartMode(const Chan &ch, int signal, int mode)
 
 void PGenerator::EnableStartStopMode(int mode_hand)
 {
-    Message::StartStopMode(mode_hand).Transmit();
+    Message::SetStartStopMode(mode_hand).Transmit();
 }
 
 

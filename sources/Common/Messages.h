@@ -116,11 +116,11 @@ namespace Message
 
 
     // Режим Старт/Стоп импульсного сигнала
-    struct StartStopMode : public SimpleMessage
+    struct SetStartStopMode : public SimpleMessage
     {
         // mode : 0 - автоматический режим
         //        1 - ручной режим
-        StartStopMode(int mode);
+        SetStartStopMode(int mode);
     };
 
     // Установка тактовой частоты формирователя импульсов
