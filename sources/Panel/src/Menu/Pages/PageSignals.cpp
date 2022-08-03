@@ -127,11 +127,11 @@ void PageSignals::OnChanged_Form(bool active)
         {
             if (CURRENT_FORM->Is(TypeForm::Packet))         // Вошли в пакетный режим
             {
-                B::Impulse::self->StoreState();             // Сохраняем параметры импульсов на втором канале
+                B::Impulse::form->StoreState();             // Сохраняем параметры импульсов на втором канале
 
                 WAVE_B.StoreIndexCurrentForm();
 
-                WAVE_B.SetForm(B::Impulse::self);           // Устанавливаем форму импульса на втором канале
+                WAVE_B.SetForm(B::Impulse::form);           // Устанавливаем форму импульса на втором канале
 
                 WriteParametersImpulseBFromPacketA();
 
@@ -157,7 +157,7 @@ void PageSignals::OnChanged_Form(bool active)
     }
     else
     {
-        if (FORM_A == A::Impulse::self && FORM_B == B::Impulse::self)
+        if (FORM_A == A::Impulse::form && FORM_B == B::Impulse::form)
         {
             if (A::Impulse::start_stop->GetChoice() == 1)
             {
@@ -237,17 +237,22 @@ static void OnPress_TuneParameter()
     {
         if (CURRENT_CHANNEL.IsA())
         {
-            if (FORM_A == A::Impulse::self)
+            if (FORM_A == A::Impulse::form)
             {
                 if (CURRENT_PARAM == A::Impulse::start_stop || CURRENT_PARAM == A::Impulse::delay)
                 {
                     Display::Warnings::Show("Выберите на канале В форму ИМПУЛЬС", "Select on the channel To form IMPULSE", true);
                 }
+
+                if (CURRENT_PARAM == A::Impulse::period)
+                {
+                    Display::Warnings::Show("Недоступно при однократном запуске", "Not available on single launch", true);
+                }
             }
         }
         else if(CURRENT_CHANNEL.IsB())
         {
-            if (FORM_B == B::Impulse::self)
+            if (FORM_B == B::Impulse::form)
             {
                 if (CURRENT_PARAM == B::Impulse::period)
                 {

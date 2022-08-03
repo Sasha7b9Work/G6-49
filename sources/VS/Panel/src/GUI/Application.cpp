@@ -32,6 +32,10 @@ wxIMPLEMENT_APP_NO_MAIN(Application);
 
 int main(int argc, char **argv)
 {
+    HWND myConsole = GetConsoleWindow();
+
+    ShowWindow(myConsole, 0);
+
     setlocale(LC_ALL, "Russian");
 
     return wxEntry(argc, argv);

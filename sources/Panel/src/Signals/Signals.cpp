@@ -205,13 +205,13 @@ static bool FuncActive_PeriodImpulseA()
 
 static bool FuncActive_ModeStartStopImpulseA()
 {
-    return (WAVE_B.GetCurrentForm() == B::Impulse::self);
+    return (WAVE_B.GetCurrentForm() == B::Impulse::form);
 }
 
 
 static bool FuncActive_DelayImpulseA()
 {
-    return (WAVE_B.GetCurrentForm() == B::Impulse::self);
+    return (WAVE_B.GetCurrentForm() == B::Impulse::form);
 }
 
 
@@ -225,6 +225,8 @@ static ParameterClockImpulse  impulse_Clock(namesClockImpulse);
 static ParameterModeStartStop impulseA_StartStop(FuncActive_ModeStartStopImpulseA, namesModeStartStopImpulse);
 static ParameterDelay         impulseA_Delay(FuncActive_DelayImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
 
+ParameterPeriod        *A::Impulse::period     = &impulseA_Period;
+ParameterDelay         *A::Impulse::delay      = &impulseA_Delay;
 ParameterModeStartStop *A::Impulse::start_stop = &impulseA_StartStop;
 ParameterModeStart     *A::Impulse::mode_start = &impulseA_ModeStart;
 
@@ -428,7 +430,7 @@ static Form formMeanderB(TypeForm::Meander, params_MeanderB, &waves[Chan::B]);
 
 static bool FuncActive_PeriodImpulseB()
 {
-    if (FORM_A == A::Impulse::self)
+    if (FORM_A == A::Impulse::form)
     {
         if (A::Impulse::start_stop->GetChoice() == 1)
         {
@@ -441,7 +443,7 @@ static bool FuncActive_PeriodImpulseB()
 
 static bool FuncActive_ModeStartImpulseB()
 {
-    if (FORM_A == A::Impulse::self)
+    if (FORM_A == A::Impulse::form)
     {
         if (A::Impulse::start_stop->GetChoice() == 1)
         {
@@ -501,12 +503,11 @@ Wave waves[Chan::Count] =
 };
 
 
-Form                   *A::Impulse::self = &formImpulseA;
-ParameterDelay         *A::Impulse::delay = &impulseA_Delay;
+Form                   *A::Impulse::form = &formImpulseA;
 
-Form                   *A::Packet::self = &formPacketImpulseA;
+Form                   *A::Packet::form = &formPacketImpulseA;
 ParameterPacketPeriod  *A::Packet::period_packet = &packetA_PacketPeriod;
 
-Form                   *B::Impulse::self = &formImpulseB;
+Form                   *B::Impulse::form = &formImpulseB;
 ParameterPeriod        *B::Impulse::period = &impulseB_Period;
 ParameterModeStart     *B::Impulse::mode_start = &impulseB_ModeStart;

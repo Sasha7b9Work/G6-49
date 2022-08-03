@@ -410,7 +410,7 @@ void ParameterChoice::NextChoice()
 
 void ParameterChoice::EnableModeStartStopIfNeed()
 {
-    if (FORM_A == A::Impulse::self && FORM_B == B::Impulse::self)
+    if (FORM_A == A::Impulse::form && FORM_B == B::Impulse::form)
     {
         if (A::Impulse::start_stop->GetChoice() == 1)
         {

@@ -15,8 +15,6 @@
 
 void init()
 {
-    FreeConsole();
-
     CPU::Init();
 
     Timer::Init();

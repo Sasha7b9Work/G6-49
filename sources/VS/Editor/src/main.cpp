@@ -7,8 +7,6 @@
 
 void init()
 {
-    FreeConsole();
-
     Frame *frame = new Frame("Редактор сигналов Г6-49");
 
     TheCanvas = new Canvas(frame);
