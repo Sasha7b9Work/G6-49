@@ -243,9 +243,10 @@ static void OnPress_TuneParameter()
     {
         if (CURRENT_CHANNEL.IsA() && FORM_A == Signals::A::impulse)
         {
-            ParameterChoice *parameter = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
+            ParameterChoice *start_stop = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
+            ParameterDouble *delay = FORM_A->FindParameter(ParameterDoubleType::Delay);
 
-            if (CURRENT_PARAM == parameter)
+            if (CURRENT_PARAM == start_stop || CURRENT_PARAM == delay)
             {
                 Display::Warnings::Show("Âûבונטעו םא ךאםאכו Â פמנלף ÈÌÏÓËÜÑ", "Select on the channel To form IMPULSE", true);
             }
