@@ -276,10 +276,8 @@ struct ParameterChoiceType
 };
 
 
-class ParameterChoice : public Parameter
+struct ParameterChoice : public Parameter
 {
-public:
-
     ParameterChoice(ParameterChoiceType::E t, pFuncBV funcActive, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
         Parameter(ParameterKind::Choice, funcActive, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
 
@@ -323,10 +321,8 @@ struct ParameterCompositeType
 };
 
 
-class ParameterComposite : public Parameter
+struct ParameterComposite : public Parameter
 {
-public:
-
     ParameterComposite(ParameterCompositeType::E v, pchar nameRU, pchar nameEN, Parameter **parameters) :
         Parameter(ParameterKind::Composite, Parameter::FuncActive, nameRU, nameEN), params(parameters), type(v) { }
 
@@ -355,10 +351,8 @@ private:
 };
 
 
-class ParameterButton : public Parameter
+struct ParameterButton : public Parameter
 {
-public:
-
     ParameterButton(pchar titleRU, pchar titleEN, pFuncVV f) :
         Parameter(ParameterKind::Button, Parameter::FuncActive, titleRU, titleEN), func(f) {};
 
@@ -377,17 +371,15 @@ private:
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Value ///
-class ParameterVoltage : public ParameterDouble
+struct ParameterVoltage : public ParameterDouble
 {
-public:
     ParameterVoltage(ParameterDoubleType::E type, pchar nameRU, pchar nameEN, const Value &min, const Value &max, const Value &value) :
         ParameterDouble(type, Parameter::FuncActive, nameRU, nameEN, min, max, value) { }
 };
 
 
-class ParameterAmplitude : public ParameterVoltage
+struct ParameterAmplitude : public ParameterVoltage
 {
-public:
     ParameterAmplitude(const Value &min = Value("0", Order::One), const Value &max = Value("10", Order::One), const Value &value = DEFAULT_AMPLITUDE) :
         ParameterVoltage(ParameterDoubleType::Amplitude, "Размах", "Amplitude", min, max, value) { }
 
@@ -395,9 +387,8 @@ public:
 };
 
 
-class ParameterOffset : public ParameterVoltage
+struct ParameterOffset : public ParameterVoltage
 {
-public:
     ParameterOffset(const Value &min = Value("-5", Order::One), const Value &max = Value("5", Order::One), const Value &value = Value("0", Order::One)) :
         ParameterVoltage(ParameterDoubleType::Offset, "Смещение", "Offset", min, max, value) { }
 
@@ -406,33 +397,29 @@ public:
 };
 
 
-class ParameterFrequency : public ParameterDouble
+struct ParameterFrequency : public ParameterDouble
 {
-public:
     ParameterFrequency(const Value &min, const Value &max, const Value &value = Value("1", Order::Kilo)) :
         ParameterDouble(ParameterDoubleType::Frequency, Parameter::FuncActive, "Частота", "Frequency", min, max, value) { }
 };
 
 
-class ParameterTime : public ParameterDouble
+struct ParameterTime : public ParameterDouble
 {
-public:
     ParameterTime(ParameterDoubleType::E t, pFuncBV funcActive, pchar nameRU, pchar  const nameEN, const Value &min,
         const Value &max, const Value &value) : ParameterDouble(t, funcActive, nameRU, nameEN, min, max, value) { }
 };
 
 
-class ParameterPhase : public ParameterDouble
+struct ParameterPhase : public ParameterDouble
 {
-public:
     ParameterPhase() : ParameterDouble(ParameterDoubleType::Phase, Parameter::FuncActive, "Фаза", "Phase", Value("0", Order::One),
         Value("360", Order::One), Value("0", Order::One)) { }
 };
 
 
-class ParameterPacketPeriod : public ParameterTime
+struct ParameterPacketPeriod : public ParameterTime
 {
-public:
     ParameterPacketPeriod(const Value &max, const Value &value) :
         ParameterTime(ParameterDoubleType::PacketPeriod, Parameter::FuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, value) { }
 
@@ -447,80 +434,70 @@ public:
 };
 
 
-class ParameterPeriod : public ParameterTime
+struct ParameterPeriod : public ParameterTime
 {
-public:
     ParameterPeriod(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
         ParameterTime(ParameterDoubleType::Period, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, value) { }
 };
 
 
-class ParameterDuration : public ParameterTime
+struct ParameterDuration : public ParameterTime
 {
-public:
     ParameterDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
         ParameterTime(ParameterDoubleType::Duration, Parameter::FuncActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, value) { }
 };
 
 
-class ParameterManipulationDuration : public ParameterTime
+struct ParameterManipulationDuration : public ParameterTime
 {
-public:
     ParameterManipulationDuration(const Value &min, const Value &max, const Value &value) :
         ParameterTime(ParameterDoubleType::ManipulationDuration, Parameter::FuncActive, "Длит", "Duration", min, max, value) { }
 };
 
 
-class ParameterManipulationPeriod : public ParameterTime
+struct ParameterManipulationPeriod : public ParameterTime
 {
-public:
     ParameterManipulationPeriod(const Value &min, const Value &max, const Value &value) :
         ParameterTime(ParameterDoubleType::ManipulationPeriod, Parameter::FuncActive, "Период", "Period", min, max, value) { }
 };
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
-class ParameterModeStart : public ParameterChoice
+struct ParameterModeStart : public ParameterChoice
 {
-public:
     ParameterModeStart(pchar *names) : ParameterChoice(ParameterChoiceType::ModeStart, Parameter::FuncActive, "Запуск", "Start", names) { }
 };
 
 
-class ParameterModeStartStop : public ParameterChoice
+struct ParameterModeStartStop : public ParameterChoice
 {
-public:
     ParameterModeStartStop(pFuncBV funcActive, pchar *names) : ParameterChoice(ParameterChoiceType::ModeStartStop, funcActive, "А-Старт,В-Стоп", "A-Start,B-Stop", names) { }
 };
 
 
-class ParameterManipulationEnabled : public ParameterChoice
+struct ParameterManipulationEnabled : public ParameterChoice
 {
-public:
     ParameterManipulationEnabled(pchar *names) : 
         ParameterChoice(ParameterChoiceType::ManipulationEnabled, Parameter::FuncActive, "Манип", "Manip", names) { }
 
 };
 
 
-class ParameterPolarity : public ParameterChoice
+struct ParameterPolarity : public ParameterChoice
 {
-public:
     ParameterPolarity(pchar *names) : ParameterChoice(ParameterChoiceType::Polarity, Parameter::FuncActive, "Полярность", "Polarity", names) { }
 };
 
 
-class ParameterClockImpulse : public ParameterChoice
+struct ParameterClockImpulse : public ParameterChoice
 {
-public:
     ParameterClockImpulse(pchar *names) : ParameterChoice(ParameterChoiceType::ClockImpulse, Parameter::FuncActive, "Оп. частота", "Clock", names) { }
 };
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Complex ///
-class ParameterManipulation : public ParameterComposite
+struct ParameterManipulation : public ParameterComposite
 {
-public:
     ParameterManipulation(Parameter **paramaters);
 };
 
