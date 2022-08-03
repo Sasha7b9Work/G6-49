@@ -159,9 +159,7 @@ void PageSignals::OnChanged_Form(bool active)
     {
         if (FORM_A == A::Impulse::self && FORM_B == B::Impulse::self)
         {
-            ParameterChoice *parameter = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
-
-            if (parameter->GetChoice() == 1)
+            if (A::Impulse::start_stop->GetChoice() == 1)
             {
                 Display::Warnings::Show("Отключите режим А-СТАРТ,В-СТОП",
                                         "Disable the A-START,B-STOP mode", true);
