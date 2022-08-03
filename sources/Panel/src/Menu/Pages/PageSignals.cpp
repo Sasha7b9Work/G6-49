@@ -173,9 +173,7 @@ static bool IsActive_Form()
 {
     if (FORM_A->Is(TypeForm::Impulse) && FORM_B->Is(TypeForm::Impulse))
     {
-        ParameterChoice *parameter = A::Impulse::self->FindParameter(ParameterChoiceType::ModeStartStop);
-
-        if (parameter->GetChoice() == 1)
+        if (A::Impulse::start_stop->GetChoice() == 1)
         {
             return false;
         }
