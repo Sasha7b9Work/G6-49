@@ -135,7 +135,7 @@ void PageSignals::OnChanged_Form(bool active)
 
                 WAVE_B.SetForm(B::impulse);         // Устанавливаем форму импульса на втором канале
 
-                WriteParametersImpulseFromPacket(B::impulse, S::A::packet);
+                WriteParametersImpulseFromPacket(B::impulse, A::packet);
 
                 SetCurrentChanenl(ChB);
 
@@ -159,7 +159,7 @@ void PageSignals::OnChanged_Form(bool active)
     }
     else
     {
-        if (FORM_A == S::A::Impulse::self && FORM_B == B::impulse)
+        if (FORM_A == A::Impulse::self && FORM_B == B::impulse)
         {
             ParameterChoice *parameter = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
 
@@ -177,7 +177,7 @@ static bool IsActive_Form()
 {
     if (FORM_A->Is(TypeForm::Impulse) && FORM_B->Is(TypeForm::Impulse))
     {
-        ParameterChoice *parameter = S::A::Impulse::self->FindParameter(ParameterChoiceType::ModeStartStop);
+        ParameterChoice *parameter = A::Impulse::self->FindParameter(ParameterChoiceType::ModeStartStop);
 
         if (parameter->GetChoice() == 1)
         {
@@ -243,7 +243,7 @@ static void OnPress_TuneParameter()
     {
         if (CURRENT_CHANNEL.IsA())
         {
-            if (FORM_A == S::A::Impulse::self)
+            if (FORM_A == A::Impulse::self)
             {
                 ParameterChoice *start_stop = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
                 ParameterDouble *delay = FORM_A->FindParameter(ParameterDoubleType::Delay);

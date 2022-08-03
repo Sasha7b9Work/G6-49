@@ -20,17 +20,14 @@
 extern Wave waves[Chan::Count];
 
 
-namespace S
+namespace A
 {
-    namespace A
+    namespace Impulse
     {
-        namespace Impulse
-        {
-            extern Form *self;
-        }
-        extern Form *packet;
-    };
-}
+        extern Form *self;
+    }
+    extern Form *packet;
+};
 
 
 namespace B
