@@ -15,7 +15,7 @@
 
 class Form;
 struct Key;
-class Parameter;
+struct Parameter;
 
 
 struct ParameterKind
@@ -32,10 +32,8 @@ struct ParameterKind
 };
 
 
-class Parameter
+struct Parameter
 {
-public:
-
     Parameter(ParameterKind::E k, pFuncBV funcActive, pchar nRU, pchar nEN);
 
     virtual ~Parameter() { }
@@ -110,7 +108,7 @@ struct ParameterDoubleType
         Duration,               // Длительность
         DutyRatio,              // Скважность
         Phase,                  // Сдвиг фазы
-        Delay,                  // Задержка
+        Delay,                  // Задержка между каналами А и В при включённом режиме СТАРТ/СТОП
         DurationRise,           // Длительность нарастания
         DurationFall,           // Длительность спада
         DurationStady,          // Длительность установившего значения
@@ -123,13 +121,11 @@ struct ParameterDoubleType
 };
 
 
-class ParameterDouble : public Parameter
+struct ParameterDouble : public Parameter
 {
     friend struct LogicFloatValue;
     friend class Tuner;
     friend class TunerDisplay;
-
-public:
 
     ParameterDouble(ParameterDoubleType::E t, pFuncBV funcActive, pchar const nameRU, pchar const nameEN,
         const Value &_min, const Value &_max, const Value &_value);
@@ -223,10 +219,8 @@ struct ParameterIntegerType
 };
 
 
-class ParameterInteger : public Parameter
+struct ParameterInteger : public Parameter
 {
-public:
-
     ParameterInteger(ParameterIntegerType::E t, pchar  const nameRU, pchar  const nameEN, const Value &min, const Value &max, const Value &value);
 
     virtual void Reset() { SetAndLoadValue(resetValue); }

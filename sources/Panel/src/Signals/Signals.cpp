@@ -214,8 +214,8 @@ static ParameterAmplitude     impulseA_Amplitude;
 static ParameterOffset        impulseA_Offset;
 static ParameterPolarity      impulseA_Polarity(namesPolarity);
 static ParameterModeStart     impulseA_ModeStart(namesModeStartImpulse);
-static ParameterModeStartStop impulseA_Output(FuncActive_ModeStartStopImpulseA, namesModeStartStopImpulse);
 static ParameterClockImpulse  impulse_Clock(namesClockImpulse);
+static ParameterModeStartStop impulseA_StartStop(FuncActive_ModeStartStopImpulseA, namesModeStartStopImpulse);
 
 static Parameter *params_ImpulseA[] =
 {
@@ -225,8 +225,8 @@ static Parameter *params_ImpulseA[] =
     &impulseA_Offset,
     &impulseA_Polarity,
     &impulseA_ModeStart,
-    &impulseA_Output,
     &impulse_Clock,
+    &impulseA_StartStop,
     nullptr
 };
 

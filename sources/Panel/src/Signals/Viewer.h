@@ -6,7 +6,7 @@
 */
 
 
-class Parameter;
+struct Parameter;
 
 
 class Viewer

@@ -4,7 +4,7 @@
 #include "Menu/MenuItems.h"
 
 
-class Parameter;
+struct Parameter;
 
 
 struct PageMain

@@ -6,9 +6,9 @@
 
 
 class DisplayCorrection;
-class Parameter;
-class ParameterDouble;
-class ParameterInteger;
+struct Parameter;
+struct ParameterDouble;
+struct ParameterInteger;
 class Tuner;
 
 

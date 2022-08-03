@@ -210,10 +210,10 @@ void PGenerator::SetParameterDouble(ParameterDouble *param)
     static const Command::E commands[ParameterDoubleType::Count] =
     {
         Command::SetFrequency,
-        Command::SetPeriod,                     // 
+        Command::SetPeriod,
         Command::SetAmplitude,
         Command::SetOffset,
-        Command::SetDuration,                   // 
+        Command::SetDuration,
         Command::SetDutyRatio,
         Command::SetPhase,
         Command::SetDelay,

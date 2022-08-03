@@ -12,7 +12,7 @@
     4. Команда должна заканчиваться символом с кодом 0x0D.
 */
 
-class ParameterDouble;
+struct ParameterDouble;
 class String;
 struct SimpleMessage;
 

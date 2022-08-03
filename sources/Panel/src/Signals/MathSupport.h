@@ -4,8 +4,8 @@
 
 
 struct Value;
-class ParameterDouble;
-class ParameterInteger;
+struct ParameterDouble;
+struct ParameterInteger;
 
 
 namespace MathDouble

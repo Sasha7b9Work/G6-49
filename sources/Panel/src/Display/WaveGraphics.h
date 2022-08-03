@@ -2,7 +2,8 @@
 #pragma once
 #include "Settings/SettingsTypes.h"
 
-class Parameter;
+
+struct Parameter;
 
 
 namespace WaveGraphics
