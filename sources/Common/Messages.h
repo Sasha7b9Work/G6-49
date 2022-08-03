@@ -123,6 +123,13 @@ namespace Message
         StartStopMode(int mode);
     };
 
+    // Установка тактовой частоты формирователя импульсов
+    struct SetClockImpulse : public SimpleMessage
+    {
+        // 0 - 100 МГц, 1 - 1 МГц
+        SetClockImpulse(int clock);
+    };
+
     // Запись в регистр
     struct WriteRegister : public SimpleMessage
     {
