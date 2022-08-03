@@ -427,7 +427,7 @@ static bool FuncActive_PeriodImpulseB()
 {
     if (FORM_A == A::Impulse::self)
     {
-        if (FORM_A->FindParameter(ParameterChoiceType::ModeStartStop)->GetChoice() == 1)
+        if (A::Impulse::start_stop->GetChoice() == 1)
         {
             return false;
         }
@@ -440,7 +440,7 @@ static bool FuncActive_ModeStartImpulseB()
 {
     if (FORM_A == A::Impulse::self)
     {
-        if (FORM_A->FindParameter(ParameterChoiceType::ModeStartStop)->GetChoice() == 1)
+        if (A::Impulse::start_stop->GetChoice() == 1)
         {
             return false;
         }
