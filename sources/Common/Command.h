@@ -103,6 +103,7 @@ struct Command
             FDrive_CloseFile,
             SingleStart,                    // Даёт однократный запускф
             StartStopMode,                  // Режим старт/стоп для импульсного сигнала
+            SetClockImpulse,                // Установка тактовой частоты формирователя импульсов
             Count
     } value;
     Command(E v) : value(v) {};

@@ -14,7 +14,7 @@
 
 class ParameterDouble;
 class String;
-class SimpleMessage;
+struct SimpleMessage;
 
 typedef pchar (*FuncSCPI)(pchar);
 typedef bool (*FuncTestSCPI)();

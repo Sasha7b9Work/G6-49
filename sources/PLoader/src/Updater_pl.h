@@ -2,16 +2,14 @@
 #pragma once
 
 
-class SimpleMessage;
+struct SimpleMessage;
 
 
-class Updater
+namespace Updater
 {
-public:
+    const int MAIN_PROGRAM_START_ADDRESS = 0x8020000;
 
-    static const int MAIN_PROGRAM_START_ADDRESS = 0x8020000;
+    void Update();
 
-    static void Update();
-
-    static bool Handler(SimpleMessage *);
+    bool Handler(SimpleMessage *);
 };

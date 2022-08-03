@@ -10,8 +10,6 @@
 #define START_MODE_A_IS_SINGLE  (START_MODE_A == StartMode::Single)
 #define START_MODE_B_IS_SINGLE  (START_MODE_B == StartMode::Single)
 
-class SimpleMessage;
-
 
 namespace PGenerator
 {

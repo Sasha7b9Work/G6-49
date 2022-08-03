@@ -13,9 +13,8 @@
 #endif
 
 
-class SimpleMessage  // -V690
+struct SimpleMessage  // -V690
 {
-public:
     explicit SimpleMessage();
     explicit SimpleMessage(int size, uint8);
  
@@ -96,89 +95,77 @@ namespace Message
 {
 
     // Служебное сообщение - для обмена между процессорами
-    class RequestData : public SimpleMessage
+    struct RequestData : public SimpleMessage
     {
-    public:
         RequestData();
     };
 
 
     // Сообщение в консоль
-    class Log : public SimpleMessage
+    struct Log : public SimpleMessage
     {
-    public:
         Log(char *string);
     };
 
 
     // Установка режима запуска
-    class StartMode : public SimpleMessage
+    struct StartMode : public SimpleMessage
     {
-    public:
         StartMode(uint8 ch, uint8 mode);
     };
 
 
     // Режим Старт/Стоп импульсного сигнала
-    class StartStopMode : public SimpleMessage
+    struct StartStopMode : public SimpleMessage
     {
-    public:
         // mode : 0 - автоматический режим
         //        1 - ручной режим
         StartStopMode(int mode);
     };
 
     // Запись в регистр
-    class WriteRegister : public SimpleMessage
+    struct WriteRegister : public SimpleMessage
     {
-    public:
         WriteRegister(uint8 reg, uint64 data);
     };
 
 
     // Установка отладочного режима
-    class DebugMode : public SimpleMessage
+    struct DebugMode : public SimpleMessage
     {
-    public:
         // mode == 1/0 - включить/отключить режим отладки
         DebugMode(uint8 mode);
     };
 
 
     // Включить/выключить канал
-    class EnableChannel : public SimpleMessage
+    struct EnableChannel : public SimpleMessage
     {
-    public:
         // ch : 0 - A, 1 - B
         // enable : 0 - выключено, 1 - включено
         EnableChannel(uint8 ch, uint8 enable);
     };
 
-    class SingleStart : public SimpleMessage
+    struct SingleStart : public SimpleMessage
     {
-    public:
         SingleStart();
     };
 
     // Выставить порт регистра
-    class RegCPU : public SimpleMessage
+    struct RegCPU : public SimpleMessage
     {
-    public:
         RegCPU(uint8 port, uint8 pin, uint8 state);
     };
 
 
-    class Debug : public SimpleMessage
+    struct Debug : public SimpleMessage
     {
-    public:
-
         Debug();
     };
 
 
-    class SetFreqMeterTrigK : public SimpleMessage
+    struct SetFreqMeterTrigK : public SimpleMessage
     {
-    public:
         SetFreqMeterTrigK(int16 k);
     };
 
@@ -186,33 +173,29 @@ namespace Message
     namespace FDrive
     {
         // Запрос имени файла
-        class FileName : public SimpleMessage
+        struct FileName : public SimpleMessage
         {
-        public:
             FileName(uint8 numFile, char *name);
         };
 
 
-        class FileString : public SimpleMessage
+        struct FileString : public SimpleMessage
         {
-        public:
             FileString(uint numString, char *nameFile);
         };
 
 
         // Число каталогов и файлов в текущем каталоге
-        class NumDirsAndFiles : public SimpleMessage
+        struct NumDirsAndFiles : public SimpleMessage
         {
-        public:
             NumDirsAndFiles(uint numDirs, uint numFiles);
             NumDirsAndFiles(char *directory);
         };
 
 
         // Сообщение о примонтировании/отмонтировании диска
-        class Mount : public SimpleMessage
+        struct Mount : public SimpleMessage
         {
-        public:
             // mount :
             // 0 - флешка отмонтирована;
             // 1 - флешка удачно примонтирована
@@ -222,16 +205,14 @@ namespace Message
 
 
         // Запрос размера файла
-        class FileSize : public SimpleMessage
+        struct FileSize : public SimpleMessage
         {
-        public:
             FileSize(uint8 numFile, uint size);
         };
 
 
-        class RequestPictureDDSfromFile : public SimpleMessage
+        struct RequestPictureDDSfromFile : public SimpleMessage
         {
-        public:
             // Запрос картинки с изображением из файла numberFile
             RequestPictureDDSfromFile(uint8 numberFile);
 
@@ -240,28 +221,24 @@ namespace Message
         };
 
         // Загрузить выбранный файл в FPGA
-        class LoadDDSfromFile : public SimpleMessage
+        struct LoadDDSfromFile : public SimpleMessage
         {
-        public:
             LoadDDSfromFile(uint8 ch, uint8 numFile, char *directory);
         };
 
 
-        class CreateFFile : public SimpleMessage
+        struct CreateFFile : public SimpleMessage
         {
-        public:
             CreateFFile(pchar name);
         };
 
-        class WriteToFile : public SimpleMessage
+        struct WriteToFile : public SimpleMessage
         {
-        public:
             WriteToFile(void *data, int size);
         };
 
-        class CloseFile : public SimpleMessage
+        struct CloseFile : public SimpleMessage
         {
-        public:
             CloseFile();
         };
     }
@@ -269,9 +246,8 @@ namespace Message
 
     namespace Storage
     {
-        class RequestPictureDDS : public SimpleMessage
+        struct RequestPictureDDS : public SimpleMessage
         {
-        public:
             // Запрос изображения произвольного сигнала из ППЗУ
             RequestPictureDDS(uint8 ch);
 
@@ -279,9 +255,8 @@ namespace Message
             RequestPictureDDS(uint8 ch, uint8 data[240]);
         };
 
-        class LoadDDS : public SimpleMessage
+        struct LoadDDS : public SimpleMessage
         {
-        public:
             LoadDDS();
         };
     }
@@ -290,33 +265,29 @@ namespace Message
     {
 
         // Установка формы сигнала
-        class FormWave : public SimpleMessage
+        struct FormWave : public SimpleMessage
         {
-        public:
             FormWave(uint8 ch, uint8 form);
         };
 
 
         // Установка амплитуды
-        class Amplitude : public SimpleMessage
+        struct Amplitude : public SimpleMessage
         {
-        public:
             Amplitude(uint8 ch, uint64 amplitude);
         };
 
 
         // Установка смещения сигнала на канале
-        class Offset : public SimpleMessage
+        struct Offset : public SimpleMessage
         {
-        public:
             Offset(uint8 ch, uint64 offset);
         };
 
 
         // Универсальное сособщение для засылки параметра
-        class Parameter : public SimpleMessage
+        struct Parameter : public SimpleMessage
         {
-        public:
             Parameter(Command::E param, uint8 ch, uint64 value);
             Parameter(Command::E param, uint8 ch, uint8 choice);
         };
@@ -326,9 +297,8 @@ namespace Message
     {
 
         // Сообщение измерения частотомера
-        class Measure : public SimpleMessage
+        struct Measure : public SimpleMessage
         {
-        public:
             Measure(uint frequency);
         };
     }
@@ -336,24 +306,21 @@ namespace Message
     namespace SCPI
     {
         // Данные SCPI
-        class Data : public SimpleMessage
+        struct Data : public SimpleMessage
         {
-        public:
             Data(uint8 *data, int length);
         };
     }
 
     // Засылка калибровочного коэффициента и установка соотвествующих настроек генератора
-    class CalibrateSet : public SimpleMessage
+    struct CalibrateSet : public SimpleMessage
     {
-    public:
         CalibrateSet(uint8 ch, uint8 signal, uint8 range, uint8 parameter);
     };
 
     // Засылка калибровочного коэффициента
-    class CalibrateLoad : public SimpleMessage
+    struct CalibrateLoad : public SimpleMessage
     {
-    public:
         CalibrateLoad(uint8 ch, uint8 signal, uint8 range, uint8 parameter);
     };
 }

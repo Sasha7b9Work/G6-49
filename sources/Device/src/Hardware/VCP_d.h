@@ -2,7 +2,7 @@
 #pragma once
 
 
-class SimpleMessage;
+struct SimpleMessage;
 
 
 namespace DVCP
