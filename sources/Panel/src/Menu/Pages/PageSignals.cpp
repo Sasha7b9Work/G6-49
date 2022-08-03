@@ -103,9 +103,9 @@ static void ChangedForm()
 
 
 // Записать параметры импульсного сигнала канала В соответствии с параметрами пакета импульсов из канала А
-static void WriteParametersImpulseFromPacketA(Form *formImpulse)
+static void WriteParametersImpulseBFromPacketA()
 {
-    formImpulse->FindParameter(ParameterDoubleType::Period)->SetValue(A::Packet::period_packet->GetValue());
+    B::Impulse::period->SetValue(A::Packet::period_packet->GetValue());
 
     Value period_impulse = A::Packet::period_impulse->GetValue();
     Value duration_impulse = A::Packet::duration->GetValue();
@@ -113,7 +113,7 @@ static void WriteParametersImpulseFromPacketA(Form *formImpulse)
 
     double duration = (number_impulse.ToDouble() - 1.0) * period_impulse.ToDouble() + duration_impulse.ToDouble();
 
-    formImpulse->FindParameter(ParameterDoubleType::Duration)->SetValue(Value(duration));
+    B::Impulse::duration->SetValue(Value(duration));
 }
 
 
@@ -133,7 +133,7 @@ void PageSignals::OnChanged_Form(bool active)
 
                 WAVE_B.SetForm(B::Impulse::self);           // Устанавливаем форму импульса на втором канале
 
-                WriteParametersImpulseFromPacketA(B::Impulse::self);
+                WriteParametersImpulseBFromPacketA();
 
                 SetCurrentChanenl(ChB);
 

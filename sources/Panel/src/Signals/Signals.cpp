@@ -457,6 +457,8 @@ static ParameterOffset    impulseB_Offset;
 static ParameterPolarity  impulseB_Polarity(namesPolarity);
 static ParameterModeStart impulseB_ModeStart(FuncActive_ModeStartImpulseB, namesModeStartImpulse);
 
+ParameterDuration  *B::Impulse::duration = &impulseB_Duration;
+
 static Parameter *params_ImpulseB[] =
 {
     &impulseB_Period,

@@ -46,6 +46,7 @@ namespace B
     {
         extern Form *self;
         extern ParameterPeriod    *period;
+        extern ParameterDuration  *duration;
         extern ParameterModeStart *mode_start;
     }
 };
