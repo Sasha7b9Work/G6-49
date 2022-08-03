@@ -73,7 +73,7 @@ namespace FPGA
     uint8 *DataDDS(const Chan &);
 
     // Тактовая частота формирователя произвольных сигналов
-    namespace ClockFrequencyAD992
+    namespace ClockAD992
     {
         enum E
         {
@@ -94,6 +94,10 @@ namespace FPGA
             _100MHz,
             _1MHz
         };
+
+        void Set(E);
+
+        E Get();
     };
     
 

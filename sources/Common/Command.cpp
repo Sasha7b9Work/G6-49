@@ -69,7 +69,7 @@ pString Command::Name() const
         "SetClockImpulse"
     };
 
-    if(value >= 0 && value < Count)
+    if((int)value >= 0 && value < Count)
     {
         return names[value];
     }

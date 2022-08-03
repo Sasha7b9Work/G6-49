@@ -111,7 +111,7 @@ namespace FPGA
         static E value[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
     }
 
-    namespace ClockFrequencyAD992
+    namespace ClockAD992
     {
         static E value = _100MHz;
     }
@@ -371,14 +371,14 @@ void FPGA::EnableStartStopMode(StartStopMode::E mode)
 }
 
 
-void FPGA::ClockFrequencyAD992::Set(ClockFrequencyAD992::E _clock)
+void FPGA::ClockAD992::Set(ClockAD992::E _clock)
 {
     value = _clock;
     WriteControlRegister();
 }
 
 
-FPGA::ClockFrequencyAD992::E FPGA::ClockFrequencyAD992::Get()
+FPGA::ClockAD992::E FPGA::ClockAD992::Get()
 {
     return value;
 }
@@ -421,7 +421,7 @@ void FPGA::WriteControlRegister()
             break;
     }
 
-    if(ClockFrequencyAD992::value == ClockFrequencyAD992::_1MHz)
+    if(ClockAD992::value == ClockAD992::_1MHz)
     {
         Bit::Set(data, RG0::_7_Freq_MHz);
     }
@@ -645,7 +645,16 @@ void FPGA::TransformCodeToData(const uint8 codeIn[FPGA::NUM_POINTS * 2], float d
 }
 
 
+void FPGA::ClockFrequencyImpulse::Set(FPGA::ClockFrequencyImpulse::E clock)
+{
+    value = clock;
+}
 
+
+FPGA::ClockFrequencyImpulse::E FPGA::ClockFrequencyImpulse::Get()
+{
+    return value;
+}
 
 
 #ifdef WIN32
