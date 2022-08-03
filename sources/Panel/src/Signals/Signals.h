@@ -30,9 +30,10 @@ namespace S
         }
         extern Form *packet;
     };
-
-    namespace B
-    {
-        extern Form *impulse;
-    };
 }
+
+
+namespace B
+{
+    extern Form *impulse;
+};
