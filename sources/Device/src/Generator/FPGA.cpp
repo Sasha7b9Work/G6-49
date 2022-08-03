@@ -648,6 +648,19 @@ void FPGA::TransformCodeToData(const uint8 codeIn[FPGA::NUM_POINTS * 2], float d
 void FPGA::ClockImpulse::Set(FPGA::ClockImpulse::E clock)
 {
     value = clock;
+
+    uint64 reg = Register::Read(Register::_0_Control);
+
+    if (value == _100MHz)
+    {
+        _CLEAR_BIT(reg, RG0::_4_ClockImpulse);
+    }
+    else
+    {
+        _SET_BIT(reg, RG0::_4_ClockImpulse);
+    }
+
+    Register::Write(Register::_0_Control, reg);
 }
 
 

@@ -80,17 +80,14 @@ static void RequestPictureDDSfromStorage(SimpleMessage *);
 
 static void LoadDDSfromStorage(SimpleMessage *);
 
+static void SetClockImpulse(SimpleMessage *);
+
 
 void DHandlers::Processing(SimpleMessage *msg)
 {
     typedef void(*pFuncInterfaceVpM)(SimpleMessage *);
 
     uint8 com = msg->TakeUINT8();
-
-//    if (com != 0)
-//    {
-//        LOG_TRACE("%d", com);
-//    }
 
     pFuncInterfaceVpM func = E;
 
@@ -127,6 +124,7 @@ void DHandlers::Processing(SimpleMessage *msg)
     case Command::RequestPictureDDSfromStorage: func = RequestPictureDDSfromStorage; break;
     case Command::LoadDDSfromStorage:           func = LoadDDSfromStorage;           break;
     case Command::SetStartStopMode:             func = SetStartStopMode;             break;
+    case Command::SetClockImpulse:              func = SetClockImpulse;              break;
 
     case Command::FDrive_NumDirsAndFiles:
     case Command::FDrive_Mount:
@@ -311,6 +309,14 @@ static void SetStartStopMode(SimpleMessage *msg)
     StartStopMode::E mode = (StartStopMode::E)msg->TakeUINT8();
 
     FPGA::EnableStartStopMode(mode);
+}
+
+
+static void SetClockImpulse(SimpleMessage *msg)
+{
+    uint8 clock = msg->TakeUINT8();
+
+    FPGA::ClockImpulse::Set((FPGA::ClockImpulse::E)clock);
 }
 
 
