@@ -205,13 +205,13 @@ static bool FuncActive_PeriodImpulseA()
 
 static bool FuncActive_ModeStartStopImpulseA()
 {
-    return (WAVE_B.GetCurrentForm() == B::impulse);
+    return (WAVE_B.GetCurrentForm() == B::Impulse::self);
 }
 
 
 static bool FuncActive_DelayImpulseA()
 {
-    return (WAVE_B.GetCurrentForm() == B::impulse);
+    return (WAVE_B.GetCurrentForm() == B::Impulse::self);
 }
 
 
@@ -493,5 +493,5 @@ Wave waves[Chan::Count] =
 
 
 Form *A::Impulse::self = &formImpulseA;
-Form *A::packet = &formPacketImpulseA;
-Form *B::impulse = &formImpulseB;
+Form *A::Packet::self = &formPacketImpulseA;
+Form *B::Impulse::self = &formImpulseB;

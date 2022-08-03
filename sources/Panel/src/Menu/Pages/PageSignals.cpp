@@ -129,13 +129,13 @@ void PageSignals::OnChanged_Form(bool active)
         {
             if (CURRENT_FORM->Is(TypeForm::Packet))            // Вошли в пакетный режим
             {
-                B::impulse->StoreState();               // Сохраняем параметры импульсов на втором канале
+                B::Impulse::self->StoreState();               // Сохраняем параметры импульсов на втором канале
 
                 WAVE_B.StoreIndexCurrentForm();
 
-                WAVE_B.SetForm(B::impulse);         // Устанавливаем форму импульса на втором канале
+                WAVE_B.SetForm(B::Impulse::self);         // Устанавливаем форму импульса на втором канале
 
-                WriteParametersImpulseFromPacket(B::impulse, A::packet);
+                WriteParametersImpulseFromPacket(B::Impulse::self, A::Packet::self);
 
                 SetCurrentChanenl(ChB);
 
@@ -159,7 +159,7 @@ void PageSignals::OnChanged_Form(bool active)
     }
     else
     {
-        if (FORM_A == A::Impulse::self && FORM_B == B::impulse)
+        if (FORM_A == A::Impulse::self && FORM_B == B::Impulse::self)
         {
             ParameterChoice *parameter = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
 
@@ -256,7 +256,7 @@ static void OnPress_TuneParameter()
         }
         else if(CURRENT_CHANNEL.IsB())
         {
-            if (FORM_B == B::impulse)
+            if (FORM_B == B::Impulse::self)
             {
                 if (CURRENT_PARAM == FORM_B->FindParameter(ParameterDoubleType::Period))
                 {

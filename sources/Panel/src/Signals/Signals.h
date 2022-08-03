@@ -26,11 +26,18 @@ namespace A
     {
         extern Form *self;
     }
-    extern Form *packet;
+
+    namespace Packet
+    {
+        extern Form *self;
+    }
 };
 
 
 namespace B
 {
-    extern Form *impulse;
+    namespace Impulse
+    {
+        extern Form *self;
+    }
 };
