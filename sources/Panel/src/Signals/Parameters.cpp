@@ -3,6 +3,7 @@
 #include "Generator/Generator_p.h"
 #include "Signals/MathSupport.h"
 #include "Signals/Parameters.h"
+#include "Interface/Messages_p.h"
 #include "Signals/Signals.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Pages.h"
@@ -383,6 +384,10 @@ void ParameterChoice::NextChoice()
 
         PGenerator::LoadStartMode(form->GetWave()->GetChannel(), form->IsDDS() ? 0 : 1, GetChoice());
         PGenerator::TuneChannel(form->GetWave()->GetChannel());
+    }
+    else if (type == ParameterChoiceType::ClockImpulse)
+    {
+        Message::SetClockImpulse(GetChoice()).Transmit();
     }
     else
     {
