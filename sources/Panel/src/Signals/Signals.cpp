@@ -249,10 +249,8 @@ static bool FuncActive_PeriodPacketA()
 
 static ParameterPeriod       packetA_Period        (FuncActive_PeriodPacketA, Value("100", Order::Kilo), Value("200", Order::Micro),
     "Период имп", "Period imp");
-ParameterPeriod *A::Packet::period_impulse = &packetA_Period;
 static ParameterDuration     packetA_Duration      (Value("100", Order::Kilo), Value("10", Order::Micro),  "Длит имп",
     "Dur imp");
-ParameterDuration *A::Packet::duration = &packetA_Duration;
 static ParameterInteger      packetA_PacketNumber  (ParameterIntegerType::PacketNumber,
     "Кол-во имп", "Count imp", Value("1", Order::One), Value("1000000000", Order::One), Value("3", Order::One));
 static ParameterPacketPeriod packetA_PacketPeriod  (Value("100", Order::Kilo), Value("0.1", Order::One));
@@ -260,6 +258,10 @@ static ParameterAmplitude    packetA_Amplitude;
 static ParameterOffset       packetA_Offset;
 static ParameterPolarity     packetA_Polarity(namesPolarity);
 static ParameterModeStart    packetA_ModeStart(Parameter::FuncActive, namesModeStartImpulse);
+
+ParameterPeriod *A::Packet::period_impulse = &packetA_Period;
+ParameterDuration *A::Packet::duration = &packetA_Duration;
+ParameterInteger *A::Packet::number = &packetA_PacketNumber;
 
 static Parameter *params_PacketA[] =
 {

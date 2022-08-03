@@ -103,13 +103,13 @@ static void ChangedForm()
 
 
 // Записать параметры импульсного сигнала канала В соответствии с параметрами пакета импульсов из канала А
-static void WriteParametersImpulseFromPacket(Form *formImpulse, Form *formPacket)
+static void WriteParametersImpulseFromPacketA(Form *formImpulse)
 {
     formImpulse->FindParameter(ParameterDoubleType::Period)->SetValue(A::Packet::period_packet->GetValue());
 
     Value period_impulse = A::Packet::period_impulse->GetValue();
     Value duration_impulse = A::Packet::duration->GetValue();
-    Value number_impulse = formPacket->FindParameter(ParameterIntegerType::PacketNumber)->GetValue();
+    Value number_impulse = A::Packet::number->GetValue();
 
     double duration = (number_impulse.ToDouble() - 1.0) * period_impulse.ToDouble() + duration_impulse.ToDouble();
 
@@ -125,15 +125,15 @@ void PageSignals::OnChanged_Form(bool active)
 
         if (CURRENT_CHANNEL.IsA())
         {
-            if (CURRENT_FORM->Is(TypeForm::Packet))            // Вошли в пакетный режим
+            if (CURRENT_FORM->Is(TypeForm::Packet))         // Вошли в пакетный режим
             {
-                B::Impulse::self->StoreState();               // Сохраняем параметры импульсов на втором канале
+                B::Impulse::self->StoreState();             // Сохраняем параметры импульсов на втором канале
 
                 WAVE_B.StoreIndexCurrentForm();
 
-                WAVE_B.SetForm(B::Impulse::self);         // Устанавливаем форму импульса на втором канале
+                WAVE_B.SetForm(B::Impulse::self);           // Устанавливаем форму импульса на втором канале
 
-                WriteParametersImpulseFromPacket(B::Impulse::self, A::Packet::self);
+                WriteParametersImpulseFromPacketA(B::Impulse::self);
 
                 SetCurrentChanenl(ChB);
 
@@ -141,7 +141,7 @@ void PageSignals::OnChanged_Form(bool active)
 
                 SetCurrentChanenl(ChA);
             }
-            else if (CURRENT_FORM->Is(TypeForm::Free))          // Вышли из пакетного режима
+            else if (CURRENT_FORM->Is(TypeForm::Free))      // Вышли из пакетного режима
             {
                 FORM_B->RestoreState();
 
