@@ -202,7 +202,14 @@ static bool FuncActive_PeriodImpulseA()
     return (impulseA_ModeStart.GetChoice() == 0);
 }
 
+
 static bool FuncActive_ModeStartStopImpulseA()
+{
+    return (WAVE_B.GetCurrentForm() == Signals::B::impulse);
+}
+
+
+static bool FuncActive_DelayImpulseA()
 {
     return (WAVE_B.GetCurrentForm() == Signals::B::impulse);
 }
@@ -216,6 +223,7 @@ static ParameterPolarity      impulseA_Polarity(namesPolarity);
 static ParameterModeStart     impulseA_ModeStart(namesModeStartImpulse);
 static ParameterClockImpulse  impulse_Clock(namesClockImpulse);
 static ParameterModeStartStop impulseA_StartStop(FuncActive_ModeStartStopImpulseA, namesModeStartStopImpulse);
+static ParameterDelay         impulseA_Delay(FuncActive_DelayImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
 
 static Parameter *params_ImpulseA[] =
 {
@@ -227,6 +235,7 @@ static Parameter *params_ImpulseA[] =
     &impulseA_ModeStart,
     &impulse_Clock,
     &impulseA_StartStop,
+    &impulseA_Delay,
     nullptr
 };
 
