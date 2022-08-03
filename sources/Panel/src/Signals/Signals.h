@@ -32,6 +32,7 @@ namespace A
     namespace Packet
     {
         extern Form *self;
+        extern ParameterPacketPeriod *period_packet;
     }
 };
 

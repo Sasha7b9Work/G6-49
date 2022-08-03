@@ -497,6 +497,7 @@ ParameterModeStartStop *A::Impulse::start_stop = &impulseA_StartStop;
 ParameterDelay         *A::Impulse::delay = &impulseA_Delay;
 
 Form                   *A::Packet::self = &formPacketImpulseA;
+ParameterPacketPeriod  *A::Packet::period_packet = &packetA_PacketPeriod;
 
 Form                   *B::Impulse::self = &formImpulseB;
 ParameterPeriod        *B::Impulse::period = &impulseB_Period;

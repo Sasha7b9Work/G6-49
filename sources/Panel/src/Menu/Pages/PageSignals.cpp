@@ -105,9 +105,7 @@ static void ChangedForm()
 // Записать параметры импульсного сигнала канала В соответствии с параметрами пакета импульсов из канала А
 static void WriteParametersImpulseFromPacket(Form *formImpulse, Form *formPacket)
 {
-    ParameterDouble *period_packet = formPacket->FindParameter(ParameterDoubleType::PacketPeriod);
-
-    formImpulse->FindParameter(ParameterDoubleType::Period)->SetValue(period_packet->GetValue());
+    formImpulse->FindParameter(ParameterDoubleType::Period)->SetValue(A::Packet::period_packet->GetValue());
 
     Value period_impulse = formPacket->FindParameter(ParameterDoubleType::Period)->GetValue();
     Value duration_impulse = formPacket->FindParameter(ParameterDoubleType::Duration)->GetValue();
