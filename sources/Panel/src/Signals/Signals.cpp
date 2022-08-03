@@ -249,6 +249,7 @@ static bool FuncActive_PeriodPacketA()
 
 static ParameterPeriod       packetA_Period        (FuncActive_PeriodPacketA, Value("100", Order::Kilo), Value("200", Order::Micro),
     "Период имп", "Period imp");
+extern ParameterPeriod *A::Packet::period_impulse = &packetA_Period;
 static ParameterDuration     packetA_Duration      (Value("100", Order::Kilo), Value("10", Order::Micro),  "Длит имп",
     "Dur imp");
 static ParameterInteger      packetA_PacketNumber  (ParameterIntegerType::PacketNumber,
