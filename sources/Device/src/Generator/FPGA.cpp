@@ -43,7 +43,7 @@ namespace FPGA
             _4_ClockFrequencyImpulse,   // Тактовая частота для импульсов : 0 - 100МГц (такты 10 нс), 1 - 1МГц (такты 1 мкс)
             _5_ManipulationOSK1,        // Здесь 0, если синус канала 2 должен манипулироваться сигналом OSK1 ("пилой" от AD9952 первого канала)
             _del_6_ManipulationFPGA2,   // Здесь 0, есил синус канала 2 должен манипулироваться формирователем импульсов канала 2
-            _7_Freq_MHz,                // 1, если тактовая частота 1МГц
+            _7_ClockAD9952,             // 0 - тактовая частота 100 МГц, 1 - тактовая частота 1 МГц
             _8_MeanderA,                // 1, если меандр по каналу A
             _9_MeanderB,                // 1, если меандр по каналу B
             _10_HandStartA,             // Если бит установлен в 1, то ручной запуск канала А
@@ -423,7 +423,7 @@ void FPGA::WriteControlRegister()
 
     if(ClockAD992::value == ClockAD992::_1MHz)
     {
-        Bit::Set(data, RG0::_7_Freq_MHz);
+        Bit::Set(data, RG0::_7_ClockAD9952);
     }
 
     if (ModeWork::value[Chan::A] == ModeWork::PackedImpulse)
