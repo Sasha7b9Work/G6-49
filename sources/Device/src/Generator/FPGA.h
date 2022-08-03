@@ -33,6 +33,15 @@ namespace FPGA
 
     void TransformCodeToData(const uint8 codeIn[FPGA::NUM_POINTS * 2], float dataOut[FPGA::NUM_POINTS]);
 
+    // Возвращает указатель на точки сигнала, загружаемого из флешки
+    uint8 *DataFreeSignal(const Chan &);
+
+    // Сохранить данные сигнала, загруженного с флешки
+    void SaveExtSignal(const Chan &, uint8 *data);
+
+    // Возвращает указатель на точки произвольного сигнала (программно определёного)
+    uint8 *DataDDS(const Chan &);
+
     namespace PacketImpulse
     {
         // Устанавливает число импульсов в пачке
@@ -63,15 +72,6 @@ namespace FPGA
         };
     };
 
-    // Возвращает указатель на точки сигнала, загружаемого из флешки
-    uint8 *DataFreeSignal(const Chan &);
-
-    // Сохранить данные сигнала, загруженного с флешки
-    void SaveExtSignal(const Chan &, uint8 *data);
-
-    // Возвращает указатель на точки произвольного сигнала (программно определёного)
-    uint8 *DataDDS(const Chan &);
-
     // Тактовая частота формирователя произвольных сигналов
     namespace ClockAD992
     {
@@ -85,7 +85,7 @@ namespace FPGA
 
         E Get();
     };
-    
+
     // Тактовая частота формирователя импульсов
     namespace ClockImpulse
     {
@@ -99,7 +99,7 @@ namespace FPGA
 
         E Get();
     };
-    
+
 
     namespace Register
     {
