@@ -373,6 +373,8 @@ void ParameterChoice::NextChoice()
 {
     if (type == ParameterChoiceType::ModeStartStop)
     {
+        Math::CircleIncrease(&choice, 0, NumChoices() - 1);
+
         Message::SetStartStopMode(GetChoice()).Transmit();
 
         return;

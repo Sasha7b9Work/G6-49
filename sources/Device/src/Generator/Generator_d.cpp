@@ -242,6 +242,7 @@ void DGenerator::SetDuration(const Chan &ch, const Value &value)
 
 void DGenerator::SetDelay(const Chan &, const Value &)
 {
+
 }
 
 
