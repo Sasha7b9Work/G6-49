@@ -225,6 +225,9 @@ static ParameterClockImpulse  impulse_Clock(namesClockImpulse);
 static ParameterModeStartStop impulseA_StartStop(FuncActive_ModeStartStopImpulseA, namesModeStartStopImpulse);
 static ParameterDelay         impulseA_Delay(FuncActive_DelayImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
 
+ParameterModeStartStop *A::Impulse::start_stop = &impulseA_StartStop;
+ParameterModeStart     *A::Impulse::mode_start = &impulseA_ModeStart;
+
 static Parameter *params_ImpulseA[] =
 {
     &impulseA_Period,
@@ -499,7 +502,6 @@ Wave waves[Chan::Count] =
 
 
 Form                   *A::Impulse::self = &formImpulseA;
-ParameterModeStartStop *A::Impulse::start_stop = &impulseA_StartStop;
 ParameterDelay         *A::Impulse::delay = &impulseA_Delay;
 
 Form                   *A::Packet::self = &formPacketImpulseA;

@@ -27,6 +27,7 @@ namespace A
         extern Form *self;
         extern ParameterModeStartStop *start_stop;
         extern ParameterDelay         *delay;
+        extern ParameterModeStart     *mode_start;
     }
 
     namespace Packet

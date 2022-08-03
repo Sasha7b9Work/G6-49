@@ -412,13 +412,9 @@ void ParameterChoice::EnableModeStartStopIfNeed()
 {
     if (FORM_A == A::Impulse::self && FORM_B == B::Impulse::self)
     {
-        ParameterChoice *start_stop = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
-
-        if (start_stop->GetChoice() == 1)
+        if (A::Impulse::start_stop->GetChoice() == 1)
         {
-            ParameterChoice *start_mode = FORM_A->FindParameter(ParameterChoiceType::ModeStart);
-
-            PGenerator::EnableStartStopMode(start_mode->GetChoice());
+            PGenerator::EnableStartStopMode(A::Impulse::mode_start->GetChoice());
         }
     }
 }
