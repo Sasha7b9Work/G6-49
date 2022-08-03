@@ -24,7 +24,10 @@ namespace S
 {
     namespace A
     {
-        extern Form *impulse;
+        namespace Impulse
+        {
+            extern Form *self;
+        }
         extern Form *packet;
     };
 

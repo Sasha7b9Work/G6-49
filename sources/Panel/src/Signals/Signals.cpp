@@ -421,7 +421,7 @@ static Form formMeanderB(TypeForm::Meander, params_MeanderB, &waves[Chan::B]);
 
 static bool FuncActive_PeriodImpulseB()
 {
-    if (FORM_A == S::A::impulse)
+    if (FORM_A == S::A::Impulse::self)
     {
         if (FORM_A->FindParameter(ParameterChoiceType::ModeStartStop)->GetChoice() == 1)
         {
@@ -434,7 +434,7 @@ static bool FuncActive_PeriodImpulseB()
 
 static bool FuncActive_ModeStartImpulseB()
 {
-    if (FORM_A == S::A::impulse)
+    if (FORM_A == S::A::Impulse::self)
     {
         if (FORM_A->FindParameter(ParameterChoiceType::ModeStartStop)->GetChoice() == 1)
         {
@@ -492,6 +492,6 @@ Wave waves[Chan::Count] =
 };
 
 
-Form *S::A::impulse = &formImpulseA;
+Form *S::A::Impulse::self = &formImpulseA;
 Form *S::A::packet = &formPacketImpulseA;
 Form *S::B::impulse = &formImpulseB;

@@ -159,7 +159,7 @@ void PageSignals::OnChanged_Form(bool active)
     }
     else
     {
-        if (FORM_A == S::A::impulse && FORM_B == S::B::impulse)
+        if (FORM_A == S::A::Impulse::self && FORM_B == S::B::impulse)
         {
             ParameterChoice *parameter = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
 
@@ -177,7 +177,7 @@ static bool IsActive_Form()
 {
     if (FORM_A->Is(TypeForm::Impulse) && FORM_B->Is(TypeForm::Impulse))
     {
-        ParameterChoice *parameter = S::A::impulse->FindParameter(ParameterChoiceType::ModeStartStop);
+        ParameterChoice *parameter = S::A::Impulse::self->FindParameter(ParameterChoiceType::ModeStartStop);
 
         if (parameter->GetChoice() == 1)
         {
@@ -243,7 +243,7 @@ static void OnPress_TuneParameter()
     {
         if (CURRENT_CHANNEL.IsA())
         {
-            if (FORM_A == S::A::impulse)
+            if (FORM_A == S::A::Impulse::self)
             {
                 ParameterChoice *start_stop = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
                 ParameterDouble *delay = FORM_A->FindParameter(ParameterDoubleType::Delay);
