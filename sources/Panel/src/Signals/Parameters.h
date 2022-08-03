@@ -448,6 +448,13 @@ struct ParameterDuration : public ParameterTime
 };
 
 
+struct ParameterDelay : public ParameterTime
+{
+    ParameterDelay(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") :
+        ParameterTime(ParameterDoubleType::Delay, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, value) { }
+};
+
+
 struct ParameterManipulationDuration : public ParameterTime
 {
     ParameterManipulationDuration(const Value &min, const Value &max, const Value &value) :
