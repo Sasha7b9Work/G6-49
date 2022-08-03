@@ -46,11 +46,6 @@ namespace PGenerator
     // Загружает режим запуска из set в аппаратуру для произвольного (signal == 0) или импульсного (signal == 1) сигнала
     void LoadStartMode(const Chan &, int signal, int mode);
 
-    // Включить режим старт/стоп для импульсного сигнала
-    // mode_auto : 0 - автоматический режим запуска
-    //             1 - ручной режим запуска
-    void EnableStartStopMode(int mode_hand);
-
     // Загружает изображение произвольного сигнала, хранящееся в ППЗУ
     void LoadPictureDDSfromStorage(const Chan &);
 

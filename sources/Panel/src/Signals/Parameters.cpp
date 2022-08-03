@@ -371,6 +371,13 @@ int ParameterChoice::GetChoice() const
 
 void ParameterChoice::NextChoice()
 {
+    if (type == ParameterChoiceType::ModeStartStop)
+    {
+        Message::SetStartStopMode(GetChoice()).Transmit();
+
+        return;
+    }
+
     if (type == ParameterChoiceType::ModeStart)
     {
         if (form->IsDDS())
@@ -398,24 +405,10 @@ void ParameterChoice::NextChoice()
         PGenerator::TuneChannel(ch);
     }
 
-    EnableModeStartStopIfNeed();
-
     if (type == ParameterChoiceType::ClockImpulse)
     {
         Display::Warnings::Show2Strings(String("100ћ√ц - длит./период 10нс...40сек"), String("1ћ√ц - длит./период 1мкс...4000сек"),
                                         String("100MHz - dur./period from 10ns...40sec"), String("1MHz - dur. / period 1us...4000sec"));
-    }
-}
-
-
-void ParameterChoice::EnableModeStartStopIfNeed()
-{
-    if (FORM_A == A::Impulse::form && FORM_B == B::Impulse::form)
-    {
-        if (A::Impulse::start_stop->GetChoice() == 1)
-        {
-            PGenerator::EnableStartStopMode(A::Impulse::mode_start->GetChoice());
-        }
     }
 }
 

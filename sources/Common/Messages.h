@@ -118,8 +118,8 @@ namespace Message
     // Режим Старт/Стоп импульсного сигнала
     struct SetStartStopMode : public SimpleMessage
     {
-        // mode : 0 - автоматический режим
-        //        1 - ручной режим
+        // mode : 0 - выключено
+        //        1 - вкючено
         SetStartStopMode(int mode);
     };
 

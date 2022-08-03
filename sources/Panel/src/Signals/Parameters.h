@@ -305,9 +305,6 @@ private:
     
     // Количество вариантов выбора
     int NumChoices() const;
-
-    // Включить режим старт/стоп, если необходимо
-    void EnableModeStartStopIfNeed();
 };
 
 

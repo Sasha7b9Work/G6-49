@@ -51,12 +51,6 @@ void PGenerator::LoadStartMode(const Chan &ch, int signal, int mode)
 }
 
 
-void PGenerator::EnableStartStopMode(int mode_hand)
-{
-    Message::SetStartStopMode(mode_hand).Transmit();
-}
-
-
 void PGenerator::LoadRegister(Register::E reg, uint64 value)
 {
     Message::WriteRegister(static_cast<uint8>(reg), value).Transmit();

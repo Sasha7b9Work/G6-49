@@ -84,8 +84,8 @@ struct StartStopMode
 {
     enum E
     {
-        Auto,
-        Single
+        Disable,
+        Enable
     };
 };
 

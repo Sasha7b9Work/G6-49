@@ -99,6 +99,9 @@ namespace FPGA
     // Режим запуска для произвольного сигнала (0) и для импульсного сигнала (1)
     static StartMode::E startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
 
+    // Режим СтартА/СтопВ - вкл/откл
+    static StartStopMode::E startStopMode = StartStopMode::Disable;
+
     namespace PacketImpulse
     {
         Value PacketImpulse::periodImpulse("0", Order::One);
@@ -357,17 +360,8 @@ void FPGA::SetStartMode(const Chan &ch, uint8 signal, StartMode::E mode)
 
 void FPGA::EnableStartStopMode(StartStopMode::E mode)
 {
-    uint64 value = Register::Read(Register::_0_Control);
-
-    _SET_BIT(value, 10);
-    _SET_BIT(value, 11);
-
-    if (mode == StartStopMode::Single)
-    {
-        _SET_BIT(value, 12);
-    }
-
-    Register::Write(Register::_0_Control, value);
+    startStopMode = mode;
+    WriteControlRegister();
 }
 
 
@@ -432,6 +426,21 @@ void FPGA::WriteControlRegister()
     }
 
     SetBitsStartMode(data);
+
+    if (startStopMode == StartStopMode::Enable)
+    {
+        _SET_BIT(data, 10);
+        _SET_BIT(data, 11);
+
+        if (startMode[ChA][1] == StartMode::Auto)
+        {
+            _CLEAR_BIT(data, 12);
+        }
+        else
+        {
+            _SET_BIT(data, 12);
+        }
+    }
 
     Register::Write(Register::_0_Control, data);
 }
