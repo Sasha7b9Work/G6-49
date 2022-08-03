@@ -450,7 +450,7 @@ Message::StartMode::StartMode(uint8 ch, uint8 mode) : SimpleMessage(3, Command::
 }
 
 
-Message::StartStopMode::StartStopMode(int mode) : SimpleMessage(2, Command::StartStopMode)
+Message::StartStopMode::StartStopMode(int mode) : SimpleMessage(2, Command::SetStartStopMode)
 {
     PutUINT8((uint8)mode);
 }

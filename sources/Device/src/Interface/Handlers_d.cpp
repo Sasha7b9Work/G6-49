@@ -126,7 +126,7 @@ void DHandlers::Processing(SimpleMessage *msg)
     case Command::SetFreqMeterTrigK:            func = SetFreqMeterTrigK;            break;
     case Command::RequestPictureDDSfromStorage: func = RequestPictureDDSfromStorage; break;
     case Command::LoadDDSfromStorage:           func = LoadDDSfromStorage;           break;
-    case Command::StartStopMode:                func = SetStartStopMode;             break;
+    case Command::SetStartStopMode:             func = SetStartStopMode;             break;
 
     case Command::FDrive_NumDirsAndFiles:
     case Command::FDrive_Mount:
