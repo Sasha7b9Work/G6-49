@@ -50,7 +50,7 @@ String::String(const char *format, ...)
 
     if (numSymbols < 0 || numSymbols > SIZE)
     {
-        LOG_ERROR_FINALIZE("Буфер слишком мал");
+//        LOG_ERROR_FINALIZE("Буфер слишком мал");
     }
 
     if (Allocate(std::strlen(buf) + 1))
@@ -91,10 +91,6 @@ bool String::Allocate(uint size)
     if (buffer)
     {
         return true;
-    }
-    else
-    {
-        LOG_ERROR("Не хватает памяти");
     }
 
     return false;

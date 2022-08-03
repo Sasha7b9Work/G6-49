@@ -14,6 +14,7 @@
 #include "Hardware/VCP_d.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/CalibrationSettings.h"
+#include "Log.h"
 
 
 static void E(SimpleMessage *);

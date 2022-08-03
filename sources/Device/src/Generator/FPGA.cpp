@@ -433,9 +433,6 @@ void FPGA::WriteControlRegister()
 
     SetBitsStartMode(data);
 
-    char buffer[33];
-    LOG_WRITE("%s", SU::Bin2StringN(data, buffer, 16));
-
     Register::Write(Register::_0_Control, data);
 }
 
@@ -550,8 +547,6 @@ void FPGA::Register::Write(E reg, uint64 _value)
         28, // _10_Offset
         2   // _11_Start
     };
-
-    LOG_WRITE("%d : %d", static_cast<int>(reg), _value);
 
     values[reg] = _value;
 

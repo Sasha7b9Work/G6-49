@@ -116,7 +116,7 @@ namespace FPGA
             _4_RectB,               // Аналог _3_RectA для канала B
             _5_PeriodImpulseA,      // Период импульсов канала А
             _6_DurationImpulseA,    // Длительность импульсов канала А
-            _7_PeriodImpulseB,      // Период импульсов канала В
+            _7_PeriodImpulseB,      // Период импульсов канала В. В режиме СтартА-СтопВ - задержка между первым и вторым каналом
             _8_DurationImpulseB,    // Длительность импульсов канала В
             _9_FreqMeter,
             _10_Offset,
