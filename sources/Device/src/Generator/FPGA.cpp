@@ -116,7 +116,7 @@ namespace FPGA
         static E value = _100MHz;
     }
 
-    namespace ClockFrequencyImpulse
+    namespace ClockImpulse
     {
         E value = _100MHz;
     }
@@ -645,13 +645,13 @@ void FPGA::TransformCodeToData(const uint8 codeIn[FPGA::NUM_POINTS * 2], float d
 }
 
 
-void FPGA::ClockFrequencyImpulse::Set(FPGA::ClockFrequencyImpulse::E clock)
+void FPGA::ClockImpulse::Set(FPGA::ClockImpulse::E clock)
 {
     value = clock;
 }
 
 
-FPGA::ClockFrequencyImpulse::E FPGA::ClockFrequencyImpulse::Get()
+FPGA::ClockImpulse::E FPGA::ClockImpulse::Get()
 {
     return value;
 }

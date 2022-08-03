@@ -87,7 +87,7 @@ namespace FPGA
     };
     
     // Тактовая частота формирователя импульсов
-    namespace ClockFrequencyImpulse
+    namespace ClockImpulse
     {
         enum E
         {
