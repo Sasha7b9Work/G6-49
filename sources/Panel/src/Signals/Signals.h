@@ -22,14 +22,14 @@ extern Wave waves[Chan::Count];
 
 namespace Signals
 {
-    struct A
+    namespace A
     {
-        static Form *impulse;
-        static Form *packet;
+        extern Form *impulse;
+        extern Form *packet;
     };
 
-    struct B
+    namespace B
     {
-        static Form *impulse;
+        extern Form *impulse;
     };
 }

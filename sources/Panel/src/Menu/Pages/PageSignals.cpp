@@ -241,14 +241,33 @@ static void OnPress_TuneParameter()
     }
     else
     {
-        if (CURRENT_CHANNEL.IsA() && FORM_A == Signals::A::impulse)
+        if (CURRENT_CHANNEL.IsA())
         {
-            ParameterChoice *start_stop = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
-            ParameterDouble *delay = FORM_A->FindParameter(ParameterDoubleType::Delay);
-
-            if (CURRENT_PARAM == start_stop || CURRENT_PARAM == delay)
+            if (FORM_A == Signals::A::impulse)
             {
-                Display::Warnings::Show("Выберите на канале В форму ИМПУЛЬС", "Select on the channel To form IMPULSE", true);
+                ParameterChoice *start_stop = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
+                ParameterDouble *delay = FORM_A->FindParameter(ParameterDoubleType::Delay);
+
+                if (CURRENT_PARAM == start_stop || CURRENT_PARAM == delay)
+                {
+                    Display::Warnings::Show("Выберите на канале В форму ИМПУЛЬС", "Select on the channel To form IMPULSE", true);
+                }
+            }
+        }
+        else if(CURRENT_CHANNEL.IsB())
+        {
+            if (FORM_B == Signals::B::impulse)
+            {
+                if (CURRENT_PARAM == FORM_B->FindParameter(ParameterDoubleType::Period))
+                {
+                    if (FORM_A->FindParameter(ParameterChoiceType::ModeStartStop)->GetChoice() == 0)
+                    {
+                        if (FORM_B->FindParameter(ParameterChoiceType::ModeStart)->GetChoice() == 1)
+                        {
+                            Display::Warnings::Show("Недоступно при однократном запуске", "Not available on single launch", true);
+                        }
+                    }
+                }
             }
         }
     }
