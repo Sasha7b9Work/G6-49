@@ -34,6 +34,7 @@ namespace A
         extern Form *self;
         extern ParameterPacketPeriod *period_packet;
         extern ParameterPeriod       *period_impulse;
+        extern ParameterDuration     *duration;
     }
 };
 

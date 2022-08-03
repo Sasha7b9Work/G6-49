@@ -108,7 +108,7 @@ static void WriteParametersImpulseFromPacket(Form *formImpulse, Form *formPacket
     formImpulse->FindParameter(ParameterDoubleType::Period)->SetValue(A::Packet::period_packet->GetValue());
 
     Value period_impulse = A::Packet::period_impulse->GetValue();
-    Value duration_impulse = formPacket->FindParameter(ParameterDoubleType::Duration)->GetValue();
+    Value duration_impulse = A::Packet::duration->GetValue();
     Value number_impulse = formPacket->FindParameter(ParameterIntegerType::PacketNumber)->GetValue();
 
     double duration = (number_impulse.ToDouble() - 1.0) * period_impulse.ToDouble() + duration_impulse.ToDouble();
