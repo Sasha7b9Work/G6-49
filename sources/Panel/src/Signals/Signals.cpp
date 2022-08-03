@@ -205,13 +205,13 @@ static bool FuncActive_PeriodImpulseA()
 
 static bool FuncActive_ModeStartStopImpulseA()
 {
-    return (WAVE_B.GetCurrentForm() == Signals::B::impulse);
+    return (WAVE_B.GetCurrentForm() == S::B::impulse);
 }
 
 
 static bool FuncActive_DelayImpulseA()
 {
-    return (WAVE_B.GetCurrentForm() == Signals::B::impulse);
+    return (WAVE_B.GetCurrentForm() == S::B::impulse);
 }
 
 
@@ -421,7 +421,7 @@ static Form formMeanderB(TypeForm::Meander, params_MeanderB, &waves[Chan::B]);
 
 static bool FuncActive_PeriodImpulseB()
 {
-    if (FORM_A == Signals::A::impulse)
+    if (FORM_A == S::A::impulse)
     {
         if (FORM_A->FindParameter(ParameterChoiceType::ModeStartStop)->GetChoice() == 1)
         {
@@ -434,7 +434,7 @@ static bool FuncActive_PeriodImpulseB()
 
 static bool FuncActive_ModeStartImpulseB()
 {
-    if (FORM_A == Signals::A::impulse)
+    if (FORM_A == S::A::impulse)
     {
         if (FORM_A->FindParameter(ParameterChoiceType::ModeStartStop)->GetChoice() == 1)
         {
@@ -492,6 +492,6 @@ Wave waves[Chan::Count] =
 };
 
 
-Form *Signals::A::impulse = &formImpulseA;
-Form *Signals::A::packet = &formPacketImpulseA;
-Form *Signals::B::impulse = &formImpulseB;
+Form *S::A::impulse = &formImpulseA;
+Form *S::A::packet = &formPacketImpulseA;
+Form *S::B::impulse = &formImpulseB;

@@ -20,7 +20,7 @@
 extern Wave waves[Chan::Count];
 
 
-namespace Signals
+namespace S
 {
     namespace A
     {

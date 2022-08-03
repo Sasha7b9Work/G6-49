@@ -129,13 +129,13 @@ void PageSignals::OnChanged_Form(bool active)
         {
             if (CURRENT_FORM->Is(TypeForm::Packet))            // Вошли в пакетный режим
             {
-                Signals::B::impulse->StoreState();               // Сохраняем параметры импульсов на втором канале
+                S::B::impulse->StoreState();               // Сохраняем параметры импульсов на втором канале
 
                 WAVE_B.StoreIndexCurrentForm();
 
-                WAVE_B.SetForm(Signals::B::impulse);         // Устанавливаем форму импульса на втором канале
+                WAVE_B.SetForm(S::B::impulse);         // Устанавливаем форму импульса на втором канале
 
-                WriteParametersImpulseFromPacket(Signals::B::impulse, Signals::A::packet);
+                WriteParametersImpulseFromPacket(S::B::impulse, S::A::packet);
 
                 SetCurrentChanenl(ChB);
 
@@ -159,7 +159,7 @@ void PageSignals::OnChanged_Form(bool active)
     }
     else
     {
-        if (FORM_A == Signals::A::impulse && FORM_B == Signals::B::impulse)
+        if (FORM_A == S::A::impulse && FORM_B == S::B::impulse)
         {
             ParameterChoice *parameter = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
 
@@ -177,7 +177,7 @@ static bool IsActive_Form()
 {
     if (FORM_A->Is(TypeForm::Impulse) && FORM_B->Is(TypeForm::Impulse))
     {
-        ParameterChoice *parameter = Signals::A::impulse->FindParameter(ParameterChoiceType::ModeStartStop);
+        ParameterChoice *parameter = S::A::impulse->FindParameter(ParameterChoiceType::ModeStartStop);
 
         if (parameter->GetChoice() == 1)
         {
@@ -243,7 +243,7 @@ static void OnPress_TuneParameter()
     {
         if (CURRENT_CHANNEL.IsA())
         {
-            if (FORM_A == Signals::A::impulse)
+            if (FORM_A == S::A::impulse)
             {
                 ParameterChoice *start_stop = FORM_A->FindParameter(ParameterChoiceType::ModeStartStop);
                 ParameterDouble *delay = FORM_A->FindParameter(ParameterDoubleType::Delay);
@@ -256,7 +256,7 @@ static void OnPress_TuneParameter()
         }
         else if(CURRENT_CHANNEL.IsB())
         {
-            if (FORM_B == Signals::B::impulse)
+            if (FORM_B == S::B::impulse)
             {
                 if (CURRENT_PARAM == FORM_B->FindParameter(ParameterDoubleType::Period))
                 {
