@@ -25,6 +25,7 @@ namespace A
     namespace Impulse
     {
         extern Form *self;
+        extern ParameterModeStartStop *start_stop;
     }
 
     namespace Packet
@@ -39,5 +40,7 @@ namespace B
     namespace Impulse
     {
         extern Form *self;
+        extern ParameterPeriod    *period;
+        extern ParameterModeStart *mode_start;
     }
 };

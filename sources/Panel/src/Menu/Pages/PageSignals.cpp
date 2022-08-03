@@ -258,11 +258,11 @@ static void OnPress_TuneParameter()
         {
             if (FORM_B == B::Impulse::self)
             {
-                if (CURRENT_PARAM == FORM_B->FindParameter(ParameterDoubleType::Period))
+                if (CURRENT_PARAM == B::Impulse::period)
                 {
-                    if (FORM_A->FindParameter(ParameterChoiceType::ModeStartStop)->GetChoice() == 0)
+                    if (A::Impulse::start_stop->GetChoice() == 0)
                     {
-                        if (FORM_B->FindParameter(ParameterChoiceType::ModeStart)->GetChoice() == 1)
+                        if (B::Impulse::mode_start->GetChoice() == 1)
                         {
                             Display::Warnings::Show("Ќедоступно при однократном запуске", "Not available on single launch", true);
                         }
