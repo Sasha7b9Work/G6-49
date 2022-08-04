@@ -429,17 +429,8 @@ void FPGA::WriteControlRegister()
 
     if (startStopMode == StartStopMode::Enable)
     {
-        _SET_BIT(data, 10);
         _SET_BIT(data, 11);
-
-        if (startMode[ChA][1] == StartMode::Auto)
-        {
-            _CLEAR_BIT(data, 12);
-        }
-        else
-        {
-            _SET_BIT(data, 12);
-        }
+        _SET_BIT(data, 12);
     }
 
     Register::Write(Register::_0_Control, data);
