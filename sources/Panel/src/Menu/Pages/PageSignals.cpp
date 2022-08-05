@@ -219,7 +219,7 @@ static bool IsActive_TuneParameter()
 
 static void OnPress_TuneParameter()
 {
-    if (IsActive_TuneParameter())
+    if (CURRENT_PARAM->funcOfActive())
     {
         if (CURRENT_PARAM->IsDouble())
         {

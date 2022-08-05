@@ -789,7 +789,7 @@ String Form::InvalidParameters() const
 {
     CheckerParameters checker(this);
 
-    if (!checker.CheckDurationImpulse())
+    if (!checker.InvalidDurationImpulse())
     {
         if (Is(TypeForm::Impulse))
         {
@@ -822,7 +822,7 @@ String Form::InvalidParameters() const
 Form::CheckerParameters::CheckerParameters(const Form *_form) : form(_form) { }
 
 
-bool Form::CheckerParameters::CheckDurationImpulse() const
+bool Form::CheckerParameters::InvalidDurationImpulse() const
 {
     if (form->Is(TypeForm::Impulse))
     {

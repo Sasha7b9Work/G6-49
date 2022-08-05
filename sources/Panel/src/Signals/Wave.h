@@ -163,7 +163,7 @@ private:
         CheckerParameters(const Form *_form);
 
         // Проверить длительность импульса
-        bool CheckDurationImpulse() const;
+        bool InvalidDurationImpulse() const;
 
         const Form *form;
     };
