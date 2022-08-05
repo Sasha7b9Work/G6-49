@@ -84,13 +84,13 @@ DEF_GRAPH_BUTTON(sbCancel,
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-static void Draw_Enter(int x, int y)
+static void Draw_Apply(int x, int y)
 {
     String(LANG_RU ? "Применить" : "Apply").DrawInCenterRect(x, y, 70, 30);
     Char(Ideograph::_8::Save).Draw4InRect(x + 25, y + 28);
 }
 
-static void OnPress_Enter()
+void PageTuneParameter::OnPress_Apply()
 {
     Tuner::Current()->OnButtonApply();
 
@@ -109,7 +109,7 @@ static void OnPress_Enter()
 DEF_GRAPH_BUTTON(sbEnter,
     "Применить", "Apply",
     "Подтвердить ввод нового значения", "Confirm new value entry",
-    *PageTuneParameter::self, Item::FuncActive, OnPress_Enter, Draw_Enter
+    *PageTuneParameter::self, Item::FuncActive, PageTuneParameter::OnPress_Apply, Draw_Apply
 )
 
 
@@ -160,7 +160,7 @@ static bool OnControl_TuneParameter(const Control &control)
     {
         if(control.Is(Key::RegButton))
         {
-            OnPress_Enter();
+            PageTuneParameter::OnPress_Apply();
             return true;
         }
         else

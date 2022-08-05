@@ -102,6 +102,9 @@ struct PageTuneParameter
 
     // Проверка на возможность изменения размаха. Возвращает false, если изменение невозможно
     static bool VerifyForPossiblyChangesAmplitude(const Control &);
+
+    // Нажатие на кнопку "Применить"
+    static void OnPress_Apply();
 };
 
 
