@@ -381,6 +381,10 @@ void ParameterChoice::NextChoice()
         {
             PGenerator::TuneChannel(ChB);
         }
+        else
+        {
+            PGenerator::SetParameterDouble(A::Impulse::delay);
+        }
 
         return;
     }
