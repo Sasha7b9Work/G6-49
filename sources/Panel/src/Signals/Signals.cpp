@@ -203,13 +203,7 @@ static bool FuncActive_PeriodImpulseA()
 }
 
 
-static bool FuncActive_ModeStartStopImpulseA()
-{
-    return (WAVE_B.GetCurrentForm() == B::Impulse::form);
-}
-
-
-static bool FuncActive_DelayImpulseA()
+static bool FuncActive_ModeStartStopAndDelayImpulseA()
 {
     return (WAVE_B.GetCurrentForm() == B::Impulse::form);
 }
@@ -222,8 +216,8 @@ static ParameterOffset        impulseA_Offset;
 static ParameterPolarity      impulseA_Polarity(namesPolarity);
 static ParameterModeStart     impulseA_ModeStart(Parameter::FuncActive, namesModeStartImpulse);
 static ParameterClockImpulse  impulse_Clock(namesClockImpulse);
-static ParameterModeStartStop impulseA_StartStop(FuncActive_ModeStartStopImpulseA, namesModeStartStopImpulse);
-static ParameterDelay         impulseA_Delay(FuncActive_DelayImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
+static ParameterModeStartStop impulseA_StartStop(FuncActive_ModeStartStopAndDelayImpulseA, namesModeStartStopImpulse);
+static ParameterDelay         impulseA_Delay(FuncActive_ModeStartStopAndDelayImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
 
 ParameterPeriod        *A::Impulse::period     = &impulseA_Period;
 ParameterDelay         *A::Impulse::delay      = &impulseA_Delay;
