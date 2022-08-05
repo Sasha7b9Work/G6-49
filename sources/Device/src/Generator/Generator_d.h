@@ -30,7 +30,7 @@ namespace DGenerator
 
     void SetPhase(const Chan &, const Value &phase);
 
-    void SetDelay(const Chan &, const Value &duration);
+    void SetDelayStartStop(const Chan &, const Value &delay);
 
     void SetManipulationDuration(const Chan &, const Value &duration);
 

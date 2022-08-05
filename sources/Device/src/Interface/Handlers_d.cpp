@@ -41,7 +41,7 @@ static void SetPhase(SimpleMessage *);
 
 static void ModeDebug(SimpleMessage *);
 
-static void SetDelay(SimpleMessage *);
+static void SetDelayStartStop(SimpleMessage *);
 
 static void WriteRegister(SimpleMessage *);
 
@@ -104,7 +104,7 @@ void DHandlers::Processing(SimpleMessage *msg)
     case Command::SetDutyRatio:                 func = SetDutyRatio;                 break;
     case Command::SetPhase:                     func = SetPhase;                     break;
     case Command::ModeDebug:                    func = ModeDebug;                    break;
-    case Command::SetDelay:                     func = SetDelay;                     break;
+    case Command::SetDelay:                     func = SetDelayStartStop;            break;
     case Command::WriteRegister:                func = WriteRegister;                break;
     case Command::SetManipulation:              func = SetManipulation;              break;
     case Command::SetManipulationDuration:      func = SetManipulationDuration;      break;
@@ -255,9 +255,9 @@ static void SetPhase(SimpleMessage *msg)
 }
 
 
-static void SetDelay(SimpleMessage *msg)
+static void SetDelayStartStop(SimpleMessage *msg)
 {
-    SetGeneratorParameter(msg, DGenerator::SetDelay);
+    SetGeneratorParameter(msg, DGenerator::SetDelayStartStop);
 }
 
 

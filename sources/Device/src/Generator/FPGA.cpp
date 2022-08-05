@@ -351,6 +351,16 @@ void FPGA::SetPeriodImpulse(const Chan &ch, const Value &period)
 }
 
 
+void FPGA::SetDelayStartStop(const Value &delay)
+{
+    Register::E reg = Register::_7_PeriodImpulseB;
+
+    uint64 value = delay.ToUINT64() / 10 - 2;
+
+    Register::Write(reg, value);
+}
+
+
 void FPGA::SetStartMode(const Chan &ch, uint8 signal, StartMode::E mode)
 {
     startMode[ch][signal] = mode;

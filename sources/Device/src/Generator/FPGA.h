@@ -20,6 +20,9 @@ namespace FPGA
 
     void SetPeriodImpulse(const Chan &, const Value &period);
 
+    // «адержка между импульсами на выходах первого и второго каналов
+    void SetDelayStartStop(const Value &delay);
+
     // 1 - положительна€ пол€рность, 0 - отрицательна€ пол€рность
     void SetPolarity(const Chan &, uint8 polarity);
 
