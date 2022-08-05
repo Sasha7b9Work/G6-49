@@ -79,32 +79,32 @@ public:
 };
 
 
-struct PageTuneParameter
+namespace PageTuneParameter
 {
-    static Page *self;
+    extern Page *self;
 
     // Устанавливает параметр для редактирования
-    static void SetParameter(Parameter *);
+    void SetParameter(Parameter *);
 
     // Установить режим ввода значения
-    static void SetModeEntering();
+    void SetModeEntering();
 
     // Сбросить режим ввода значения
-    static void ResetModeEntering();
+    void ResetModeEntering();
 
     // Эту функцию будет вызывать Tuner при нажатии кнопки "Отменить"
-    static void CallbackOnButtonCancel();
+    void CallbackOnButtonCancel();
 
     // Эту функцию будет вызывать Tuner при нажатии кнопки "Применить"
-    static void CallbackOnButtonApply();
+    void CallbackOnButtonApply();
 
-    static bool IsOpened();
+    bool IsOpened();
 
     // Проверка на возможность изменения размаха. Возвращает false, если изменение невозможно
-    static bool VerifyForPossiblyChangesAmplitude(const Control &);
+    bool VerifyForPossiblyChangesAmplitude(const Control &);
 
     // Нажатие на кнопку "Применить"
-    static void OnPress_Apply();
+    void OnPress_Apply();
 };
 
 
