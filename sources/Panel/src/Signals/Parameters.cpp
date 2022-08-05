@@ -377,6 +377,11 @@ void ParameterChoice::NextChoice()
 
         Message::SetStartStopMode(GetChoice()).Transmit();
 
+        if (GetChoice() == 0)
+        {
+            PGenerator::TuneChannel(ChB);
+        }
+
         return;
     }
 
@@ -397,6 +402,9 @@ void ParameterChoice::NextChoice()
     else if (type == ParameterChoiceType::ClockImpulse)
     {
         Message::SetClockImpulse(GetChoice()).Transmit();
+
+        Display::Warnings::Show2Strings(String("100ћ√ц - длит./период 10нс...40сек"), String("1ћ√ц - длит./период 1мкс...4000сек"),
+            String("100MHz - dur./period from 10ns...40sec"), String("1MHz - dur. / period 1us...4000sec"));
     }
     else
     {
@@ -405,12 +413,6 @@ void ParameterChoice::NextChoice()
         Chan ch = form->GetWave()->GetChannel();
 
         PGenerator::TuneChannel(ch);
-    }
-
-    if (type == ParameterChoiceType::ClockImpulse)
-    {
-        Display::Warnings::Show2Strings(String("100ћ√ц - длит./период 10нс...40сек"), String("1ћ√ц - длит./период 1мкс...4000сек"),
-                                        String("100MHz - dur./period from 10ns...40sec"), String("1MHz - dur. / period 1us...4000sec"));
     }
 }
 
