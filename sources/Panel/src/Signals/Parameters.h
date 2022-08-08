@@ -202,6 +202,7 @@ private:
     Tuner tuner;        // Используется для настройки 
     const ParameterDoubleType::E type;
     Value        min;
+    Value        max;
     pFuncInRange funcInRange;
     Value        value;
     Value        resetValue;
@@ -212,11 +213,6 @@ private:
 
     // Для пакета импульсов после изменения периода или длительности импульсов нужно заслать ещё и число импульсов
     void LoadNumberImpulsesIfNeed();
-
-protected:
-    Value max;
-
-private:
 
     struct Stored
     {

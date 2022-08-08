@@ -482,15 +482,15 @@ ParameterDouble::ParameterDouble(ParameterDoubleType::E t, pFuncBV funcActive, p
     pFuncInRange _funcInRange,
     const Value &_value
     ) :
-    Parameter(ParameterKind::Double, funcActive, nameRU, nameEN), tuner(this), type(t), min(_min_), funcInRange(_funcInRange),
-    value(_value), resetValue(_value), max(_max), stored(_value)
+    Parameter(ParameterKind::Double, funcActive, nameRU, nameEN), tuner(this), type(t), min(_min_), max(_max), funcInRange(_funcInRange),
+    value(_value), resetValue(_value), stored(_value)
 {
 }
 
 
 ParameterDouble::ParameterDouble(const ParameterDouble &rhs) :
     Parameter(ParameterKind::Double, Parameter::FuncActive, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
-    min(rhs.min), value(rhs.value), resetValue(rhs.resetValue), max(rhs.max), stored(rhs.stored)
+    min(rhs.min), max(rhs.max), value(rhs.value), resetValue(rhs.resetValue), stored(rhs.stored)
 {
 }
 
@@ -605,7 +605,7 @@ Value ParameterAmplitude::GetMax() const
     offset.SetSign(1);
     offset.Mul(2);
 
-    Value result = max;
+    Value result = ParameterDouble::GetMax();
     result.Sub(offset);
 
     return result;
@@ -620,11 +620,11 @@ Value ParameterOffset::GetMax() const
 
     Value amplitude = form->FindParameter(ParameterDoubleType::Amplitude)->GetValue();
 
-    Value result = max;
+    Value result = ParameterDouble::GetMax();
 
     if (amplitude.Abs() == 0)
     {
-        return max;
+        return ParameterDouble::GetMax();
     }
     else if (amplitude.ToDouble() <= 1.0F)
     {
