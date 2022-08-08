@@ -479,11 +479,10 @@ int ParameterChoice::NumChoices() const
 ParameterDouble::ParameterDouble(ParameterDoubleType::E t, pFuncBV funcActive, pchar nameRU, pchar const nameEN,
     const Value &_min_,
     const Value &_max,
-    pFuncBV _funcMin,
-    pFuncBV _funcMax,
+    pFuncInRange _funcInRange,
     const Value &_value
     ) :
-    Parameter(ParameterKind::Double, funcActive, nameRU, nameEN), tuner(this), type(t), min(_min_), funcMin(_funcMin), funcMax(_funcMax),
+    Parameter(ParameterKind::Double, funcActive, nameRU, nameEN), tuner(this), type(t), min(_min_), funcInRange(_funcInRange),
     value(_value), resetValue(_value), max(_max), stored(_value)
 {
 }
@@ -556,9 +555,9 @@ String ParameterInteger::ToString(Value val) const
 
 
 ParameterInteger::ParameterInteger(ParameterIntegerType::E t, pchar nameRU, pchar nameEN,
-    const Value &_min, const Value &_max, pFuncBV _funcMin, pFuncBV _funcMax, const Value &_value) :
+    const Value &_min, const Value &_max, pFuncInRange _funcInRange, const Value &_value) :
     Parameter(ParameterKind::Integer, Parameter::FuncActive, nameRU, nameEN), tuner(this), type(t),
-    min(_min), max(_max), funcMin(_funcMin), funcMax(_funcMax), value(_value), resetValue(_value)
+    min(_min), max(_max), funcInRange(_funcInRange), value(_value), resetValue(_value)
 {
 }
 
