@@ -231,7 +231,8 @@ struct ParameterIntegerType
 
 struct ParameterInteger : public Parameter
 {
-    ParameterInteger(ParameterIntegerType::E t, pchar  const nameRU, pchar  const nameEN, const Value &min, const Value &max, const Value &value);
+    ParameterInteger(ParameterIntegerType::E t, pchar  const nameRU, pchar  const nameEN,
+        const Value &min, const Value &max, pFuncBV funcMin, pFuncBV funcMax, const Value &value);
 
     virtual void Reset() { SetAndLoadValue(resetValue); }
 
@@ -239,17 +240,17 @@ struct ParameterInteger : public Parameter
 
     virtual void OnPressButtonTune();
 
-    virtual Tuner *GetTuner()  { return &tuner; }
+    virtual Tuner *GetTuner()           { return &tuner; }
 
-    virtual Value GetValue() const { return value; }
+    virtual Value GetValue() const      { return value; }
                                
-    virtual Value GetMax() const         { return max;   }
+    virtual Value GetMax() const        { return max;   }
                                
-    virtual Value GetMin() const         { return min;   }
+    virtual Value GetMin() const        { return min;   }
 
     virtual String ToString(Value value) const;
 
-    ParameterIntegerType::E GetType() { return type; }
+    ParameterIntegerType::E GetType()   { return type; }
 
     bool SetAndLoadValue(Value val);
 
@@ -265,6 +266,8 @@ private:
     ParameterIntegerType::E type;
     Value min;
     Value max;
+    pFuncBV funcMin;
+    pFuncBV funcMax;
     Value value;
     Value resetValue;
 };

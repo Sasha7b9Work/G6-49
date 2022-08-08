@@ -252,8 +252,12 @@ static ParameterPeriod       packetA_Period        (FuncActive_PeriodPacketA, Va
     "Период имп", "Period imp");
 static ParameterDuration     packetA_Duration      (Value("100", Order::Kilo), Value("10", Order::Micro),  "Длит имп",
     "Dur imp");
-static ParameterInteger      packetA_PacketNumber  (ParameterIntegerType::PacketNumber,
-    "Кол-во имп", "Count imp", Value("1", Order::One), Value("1000000000", Order::One), Value("3", Order::One));
+static ParameterInteger      packetA_PacketNumber  (ParameterIntegerType::PacketNumber, "Кол-во имп", "Count imp",
+                                                    Value("1", Order::One),
+                                                    Value("1000000000", Order::One),
+                                                    FuncMin,
+                                                    FuncMax,
+                                                    Value("3", Order::One));
 static ParameterPacketPeriod packetA_PacketPeriod  (Value("100", Order::Kilo), Value("0.1", Order::One));
 static ParameterAmplitude    packetA_Amplitude;
 static ParameterOffset       packetA_Offset;

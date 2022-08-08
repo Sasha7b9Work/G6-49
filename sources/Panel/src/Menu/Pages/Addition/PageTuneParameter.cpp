@@ -15,7 +15,11 @@ static ParameterDouble storedDouble = ParameterAmplitude(); //-V1054 Здесь ошибк
                                                             // классах нет данных
 
 static ParameterInteger storedInteger = ParameterInteger(ParameterIntegerType::PacketNumber, "", "", //-V810
-                Value("0", Order::One), Value("100", Order::One), Value("0", Order::One));
+                Value("0", Order::One),
+                Value("100", Order::One),
+                FuncMin,
+                FuncMax,
+                Value("0", Order::One));
 
 static Parameter *tuned = nullptr;     // Настраиваемый параметр
 

@@ -555,8 +555,10 @@ String ParameterInteger::ToString(Value val) const
 }
 
 
-ParameterInteger::ParameterInteger(ParameterIntegerType::E t, pchar nameRU, pchar nameEN, const Value &_min, const Value &_max, const Value &_value) :
-    Parameter(ParameterKind::Integer, Parameter::FuncActive, nameRU, nameEN), tuner(this), type(t), min(_min), max(_max), value(_value), resetValue(_value)
+ParameterInteger::ParameterInteger(ParameterIntegerType::E t, pchar nameRU, pchar nameEN,
+    const Value &_min, const Value &_max, pFuncBV _funcMin, pFuncBV _funcMax, const Value &_value) :
+    Parameter(ParameterKind::Integer, Parameter::FuncActive, nameRU, nameEN), tuner(this), type(t),
+    min(_min), max(_max), funcMin(_funcMin), funcMax(_funcMax), value(_value), resetValue(_value)
 {
 }
 
