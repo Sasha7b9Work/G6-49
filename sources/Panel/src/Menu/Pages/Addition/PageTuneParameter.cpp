@@ -17,7 +17,7 @@ static ParameterDouble storedDouble = ParameterAmplitude(); //-V1054 Здесь ошибк
 static ParameterInteger storedInteger = ParameterInteger(ParameterIntegerType::PacketNumber, "", "", //-V810
                 Value("0", Order::One),
                 Value("100", Order::One),
-                FuncInRange,
+                EFuncInRange,
                 Value("0", Order::One));
 
 static Parameter *tuned = nullptr;     // Настраиваемый параметр

@@ -17,7 +17,7 @@ struct StructMinMax
 
 typedef StructMinMax (*pFuncInRange)();
 
-inline StructMinMax FuncInRange() { return StructMinMax(); }
+inline StructMinMax EFuncInRange() { return StructMinMax(); }
 
 
 #define DEFAULT_AMPLITUDE Value("1", Order::One)
@@ -399,7 +399,7 @@ struct ParameterAmplitude : public ParameterVoltage
     ParameterAmplitude(const Value &min = Value("0", Order::One),
                        const Value &max = Value("10", Order::One),
                        const Value &value = DEFAULT_AMPLITUDE,
-                       pFuncInRange funcInRange = FuncInRange) :
+                       pFuncInRange funcInRange = EFuncInRange) :
         ParameterVoltage(ParameterDoubleType::Amplitude, "Размах", "Amplitude", min, max, funcInRange, value) { }
 
     virtual Value GetMax() const;
@@ -410,7 +410,7 @@ struct ParameterOffset : public ParameterVoltage
 {
     ParameterOffset(const Value &min = Value("-5", Order::One),
                     const Value &max = Value("5", Order::One),
-                    pFuncInRange funcInRange = FuncInRange,
+                    pFuncInRange funcInRange = EFuncInRange,
                     const Value &value = Value("0", Order::One)) :
         ParameterVoltage(ParameterDoubleType::Offset, "Смещение", "Offset", min, max, funcInRange, value) { }
 
@@ -423,7 +423,7 @@ struct ParameterFrequency : public ParameterDouble
 {
     ParameterFrequency(const Value &min,
                        const Value &max,
-                       pFuncInRange funcInRange = FuncInRange,
+                       pFuncInRange funcInRange = EFuncInRange,
                        const Value &value = Value("1", Order::Kilo)) :
         ParameterDouble(ParameterDoubleType::Frequency, Parameter::FuncActive, "Частота", "Frequency", min, max, funcInRange, value) { }
 };
@@ -444,7 +444,7 @@ struct ParameterPhase : public ParameterDouble
     ParameterPhase() : ParameterDouble(ParameterDoubleType::Phase, Parameter::FuncActive, "Фаза", "Phase",
                                        Value("0", Order::One),
                                        Value("360", Order::One),
-                                       FuncInRange,
+                                       EFuncInRange,
                                        Value("0", Order::One)) { }
 };
 
@@ -452,7 +452,7 @@ struct ParameterPhase : public ParameterDouble
 struct ParameterPacketPeriod : public ParameterTime
 {
     ParameterPacketPeriod(const Value &max, const Value &value) :
-        ParameterTime(ParameterDoubleType::PacketPeriod, Parameter::FuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, FuncInRange, value) { }
+        ParameterTime(ParameterDoubleType::PacketPeriod, Parameter::FuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, EFuncInRange, value) { }
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
     // Возвращает true, если значение изменилось
@@ -468,21 +468,21 @@ struct ParameterPacketPeriod : public ParameterTime
 struct ParameterPeriod : public ParameterTime
 {
     ParameterPeriod(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
-        ParameterTime(ParameterDoubleType::Period, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, FuncInRange, value) { }
+        ParameterTime(ParameterDoubleType::Period, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EFuncInRange, value) { }
 };
 
 
 struct ParameterDuration : public ParameterTime
 {
     ParameterDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
-        ParameterTime(ParameterDoubleType::Duration, Parameter::FuncActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, FuncInRange, value) { }
+        ParameterTime(ParameterDoubleType::Duration, Parameter::FuncActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EFuncInRange, value) { }
 };
 
 
 struct ParameterDelay : public ParameterTime
 {
     ParameterDelay(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") :
-        ParameterTime(ParameterDoubleType::Delay, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, FuncInRange, value) { }
+        ParameterTime(ParameterDoubleType::Delay, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EFuncInRange, value) { }
 };
 
 
