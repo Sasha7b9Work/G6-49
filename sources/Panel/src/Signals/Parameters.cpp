@@ -490,7 +490,7 @@ ParameterDouble::ParameterDouble(ParameterDoubleType::E t, pFuncBV funcActive, p
 
 ParameterDouble::ParameterDouble(const ParameterDouble &rhs) :
     Parameter(ParameterKind::Double, Parameter::FuncActive, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
-    min(rhs.min), max(rhs.max), value(rhs.value), resetValue(rhs.resetValue), stored(rhs.stored)
+    min(rhs.min), max(rhs.max), valueInRange(EValueInRange), value(rhs.value), resetValue(rhs.resetValue), stored(rhs.stored)
 {
 }
 

@@ -85,6 +85,8 @@ struct Parameter
 
     virtual Value GetMin() const { return Value("0", Order::One); }
 
+    virtual StructMinMax ValueInRange() const { return EValueInRange(); }
+
     virtual Value GetValue() const { return Value("1", Order::One); } //-V524
 
     virtual String ToString(String &) const { return String(""); };
