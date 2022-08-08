@@ -480,8 +480,7 @@ ParameterDouble::ParameterDouble(ParameterDoubleType::E t, pFuncBV funcActive, p
     const Value &_min_,
     const Value &_max,
     pValueInRange _valueInRange,
-    const Value &_value
-    ) :
+    const Value &_value) :
     Parameter(ParameterKind::Double, funcActive, nameRU, nameEN), tuner(this), type(t), min(_min_), max(_max), valueInRange(_valueInRange),
     value(_value), resetValue(_value), stored(_value)
 {

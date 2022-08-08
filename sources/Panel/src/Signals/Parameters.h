@@ -185,6 +185,8 @@ struct ParameterDouble : public Parameter
     // Возвращает минимальное значение, которое может иметь параметр
     virtual Value GetMin() const { return min; }
 
+    virtual StructMinMax ValueInRange() const { return valueInRange(); }
+
     virtual Tuner *GetTuner()   { return &tuner; };
 
     // Возвращает текущее значение параметра
@@ -245,13 +247,15 @@ struct ParameterInteger : public Parameter
 
     virtual void OnPressButtonTune();
 
-    virtual Tuner *GetTuner()           { return &tuner; }
+    virtual Tuner *GetTuner()                 { return &tuner; }
 
-    virtual Value GetValue() const      { return value; }
+    virtual Value GetValue() const            { return value; }
                                
-    virtual Value GetMax() const        { return max;   }
+    virtual Value GetMax() const              { return max;   }
                                
-    virtual Value GetMin() const        { return min;   }
+    virtual Value GetMin() const              { return min;   }
+
+    virtual StructMinMax ValueInRange() const { return valueInRange(); }
 
     virtual String ToString(Value value) const;
 
@@ -269,11 +273,11 @@ private:
 
     Tuner tuner;
     ParameterIntegerType::E type;
-    Value        min;
-    Value        max;
+    Value         min;
+    Value         max;
     pValueInRange valueInRange;
-    Value        value;
-    Value        resetValue;
+    Value         value;
+    Value         resetValue;
 };
 
 
