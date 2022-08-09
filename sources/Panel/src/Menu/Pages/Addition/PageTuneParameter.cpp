@@ -14,7 +14,7 @@
 static DParam storedDouble = ParameterAmplitude(); //-V1054 Здесь ошибки не случится, потому что в наследуемых от DParam
                                                             // классах нет данных
 
-static ParameterInteger storedInteger = ParameterInteger(ParameterIntegerType::PacketNumber, "", "", //-V810
+static ParameterInteger storedInteger = ParameterInteger(TypeIParam::PacketNumber, "", "", //-V810
                 Value("0", Order::One),
                 Value("100", Order::One),
                 EValueInRange,

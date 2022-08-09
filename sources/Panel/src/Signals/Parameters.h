@@ -235,7 +235,7 @@ private:
 };
 
 
-struct ParameterIntegerType
+struct TypeIParam
 {
     enum E
     {
@@ -247,7 +247,7 @@ struct ParameterIntegerType
 
 struct ParameterInteger : public Param
 {
-    ParameterInteger(ParameterIntegerType::E t, pchar  const nameRU, pchar const nameEN,
+    ParameterInteger(TypeIParam::E t, pchar  const nameRU, pchar const nameEN,
         const Value &min, const Value &max, pValueInRange, const Value &);
 
     virtual void Reset() { SetAndLoadValue(resetValue); }
@@ -272,7 +272,7 @@ struct ParameterInteger : public Param
 
     virtual String ToString(Value value) const;
 
-    ParameterIntegerType::E GetType()   { return type; }
+    TypeIParam::E GetType()   { return type; }
 
     bool SetAndLoadValue(Value val);
 
@@ -285,7 +285,7 @@ struct ParameterInteger : public Param
 private:
 
     Tuner tuner;
-    ParameterIntegerType::E type;
+    TypeIParam::E type;
     Value         min;
     Value         max;
     pValueInRange valueInRange;

@@ -299,7 +299,7 @@ static void HintPolarity(String *message)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pchar FuncNumberImpulse(pchar buffer)
 {
-    return SCPI::ProcessParameterInteger(buffer, ParameterIntegerType::PacketNumber);
+    return SCPI::ProcessParameterInteger(buffer, TypeIParam::PacketNumber);
 }
 
 

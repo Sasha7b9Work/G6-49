@@ -192,7 +192,7 @@ cstr DParam::GetUnits(Order::E order) const
 
 void DParam::LoadNumberImpulsesIfNeed()
 {
-    ParameterInteger *parameter = CURRENT_FORM->FindParameter(ParameterIntegerType::PacketNumber);
+    ParameterInteger *parameter = CURRENT_FORM->FindParameter(TypeIParam::PacketNumber);
 
     if (parameter)
     {
@@ -553,7 +553,7 @@ String ParameterInteger::ToString(Value val) const
 }
 
 
-ParameterInteger::ParameterInteger(ParameterIntegerType::E t, pchar nameRU, pchar nameEN,
+ParameterInteger::ParameterInteger(TypeIParam::E t, pchar nameRU, pchar nameEN,
     const Value &_min, const Value &_max, pValueInRange _valueInRange, const Value &_value) :
     Param(KindParam::Integer, Param::FuncActive, nameRU, nameEN), tuner(this), type(t),
     min(_min), max(_max), valueInRange(_valueInRange), value(_value), resetValue(_value)
@@ -629,7 +629,7 @@ Value ParameterPacketPeriod::CalculateMinValue() const
     // «начение периода не может быть меньше (N - 1) * Tи + tи + 10нс
 
     ParameterPeriod *par_period = (ParameterPeriod *)form->FindParameter(TypeDParam::Period);
-    ParameterInteger *par_number = form->FindParameter(ParameterIntegerType::PacketNumber);
+    ParameterInteger *par_number = form->FindParameter(TypeIParam::PacketNumber);
     ParameterDuration *par_duration = (ParameterDuration *)form->FindParameter(TypeDParam::Duration);
 
     if (par_period && par_number && par_duration)

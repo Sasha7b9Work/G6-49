@@ -93,13 +93,13 @@ public:
     // Находит требуемый параметр. Возвращает 0, если такого параметра нет
     DParam *FindParameter(TypeDParam::E p) const;
     ParameterChoice *FindParameter(ParameterChoiceType::E p) const;
-    ParameterInteger *FindParameter(ParameterIntegerType::E p) const;
+    ParameterInteger *FindParameter(TypeIParam::E p) const;
     ParameterComposite *FindParameter(ParameterCompositeType::E p) const;
     
     // Засылает параметр в генератор
     void SendParameterToGenerator(TypeDParam::E p) const;
     void SendParameterToGenerator(ParameterChoiceType::E p) const;
-    void SendParameterToGenerator(ParameterIntegerType::E p) const;
+    void SendParameterToGenerator(TypeIParam::E p) const;
 
     // Раскрывает составной параметр
     void OpenCompositeParameter();

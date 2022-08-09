@@ -270,7 +270,7 @@ void Form::TuneGenerator()
         SendParameterToGenerator(TypeDParam::Offset);
         SendParameterToGenerator(TypeDParam::Period);
         SendParameterToGenerator(TypeDParam::Duration);
-        SendParameterToGenerator(ParameterIntegerType::PacketNumber);
+        SendParameterToGenerator(TypeIParam::PacketNumber);
         SendParameterToGenerator(TypeDParam::PacketPeriod);
         SendParameterToGenerator(ParameterChoiceType::Polarity);
     }
@@ -381,7 +381,7 @@ ParameterComposite *Form::FindParameter(ParameterCompositeType::E t) const
 }
 
 
-ParameterInteger *Form::FindParameter(ParameterIntegerType::E t) const
+ParameterInteger *Form::FindParameter(TypeIParam::E t) const
 {
     for (int i = 0; i < numParams; i++)
     {
@@ -424,7 +424,7 @@ void Form::SendParameterToGenerator(ParameterChoiceType::E p) const
 }
 
 
-void Form::SendParameterToGenerator(ParameterIntegerType::E p) const
+void Form::SendParameterToGenerator(TypeIParam::E p) const
 {
     Param *param = FindParameter(p);
 
@@ -837,7 +837,7 @@ bool Form::CheckerParameters::InvalidDurationImpulse() const
 
     if (form->Is(TypeForm::Packet))
     {
-        uint64 number = form->FindParameter(ParameterIntegerType::PacketNumber)->GetValue().ToUINT64();
+        uint64 number = form->FindParameter(TypeIParam::PacketNumber)->GetValue().ToUINT64();
         double duration_impulse = form->FindParameter(TypeDParam::Duration)->GetValue().ToDouble();
         double period_impulse = form->FindParameter(TypeDParam::Period)->GetValue().ToDouble();
         double period_packet = form->FindParameter(TypeDParam::PacketPeriod)->GetValue().ToDouble();

@@ -232,7 +232,7 @@ void PGenerator::SetParameterDouble(DParam *param)
 
 void PGenerator::SetParameterInteger(ParameterInteger *param)
 {
-    static const Command::E commands[ParameterIntegerType::Count] =
+    static const Command::E commands[TypeIParam::Count] =
     {
         Command::SetPacketNumber
     };

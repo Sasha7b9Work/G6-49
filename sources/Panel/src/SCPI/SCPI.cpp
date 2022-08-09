@@ -282,7 +282,7 @@ pchar SCPI::ProcessParameterDouble(pchar buffer, TypeDParam::E value)
 }
 
 
-pchar SCPI::ProcessParameterInteger(pchar buffer, ParameterIntegerType::E type)
+pchar SCPI::ProcessParameterInteger(pchar buffer, TypeIParam::E type)
 {
     ParameterInteger *param = CURRENT_FORM->FindParameter(type);
 

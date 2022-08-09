@@ -68,7 +68,7 @@ namespace SCPI
 
     pchar ProcessParameterDouble(pchar buffer, TypeDParam::E value);
 
-    pchar ProcessParameterInteger(pchar buffer, ParameterIntegerType::E value);
+    pchar ProcessParameterInteger(pchar buffer, TypeIParam::E value);
 
     pchar ProcessParameterChoice(pchar buffer, ParameterChoiceType::E choice, cstr *names);
 
