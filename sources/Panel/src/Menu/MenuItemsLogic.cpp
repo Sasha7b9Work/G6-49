@@ -378,7 +378,7 @@ int8 Choice::CurrentIndex() const
 
         Form *form = param->form;
 
-        retValue = static_cast<int8>(static_cast<const ParameterDouble *>(form->CurrentParameter())->GetType());
+        retValue = static_cast<int8>(static_cast<const DParam *>(form->CurrentParameter())->GetType());
     }
 
     return retValue;
@@ -522,7 +522,7 @@ Item *Button::Press(Action::E action)
 
 cstr ChoiceParameter::NameSubItem(int number) const
 {
-    return static_cast<ParameterDouble *>(form->GetParameter(number))->Name();
+    return static_cast<DParam *>(form->GetParameter(number))->Name();
 }
 
 

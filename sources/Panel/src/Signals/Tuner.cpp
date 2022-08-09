@@ -41,14 +41,14 @@ namespace DisplayEntering
     // ѕопытка добавить в буфер новый символ, соотвествующий нажатой кнопке
     static void TryToAddSymbol(Key::E key);
 
-    // ’ранимое значение находитс€ в границах, ограниченных минимальным и максимальным значени€ми ParameterDouble
+    // ’ранимое значение находитс€ в границах, ограниченных минимальным и максимальным значени€ми DParam
     static bool ValueInBoundaries();
 }
 
 
 void DisplayEntering::EnterBuffer::Push(Key::E key)
 {
-    ParameterDouble *p = Tuner::Current()->ReinterpretToDouble();
+    DParam *p = Tuner::Current()->ReinterpretToDouble();
 
     if (p && p->IsNotOrdered() && (NumDigitsAfterComma() == 3))
     {
@@ -97,7 +97,7 @@ char DisplayEntering::EnterBuffer::At(const int i) const
 }
 
 
-void DisplayEntering::EnterBuffer::Prepare(ParameterDouble *parameter)
+void DisplayEntering::EnterBuffer::Prepare(DParam *parameter)
 {
     stack.Clear();
     param = parameter;
@@ -509,7 +509,7 @@ void Indicator::IncreaseInPosition(int pos)
 
 void Indicator::IncreaseInPositionDouble(int pos)
 {
-    ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
+    DParam *param = Tuner::Current()->ReinterpretToDouble();
 
     Value value = param->GetValue();
 
@@ -622,7 +622,7 @@ int Indicator::NumberHighligthingDigits() const
 
     if (Tuner::Current()->GetParameter()->IsDouble())
     {
-        ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
+        DParam *param = Tuner::Current()->ReinterpretToDouble();
 
         TypeDParam::E type = param->GetType();
 
@@ -875,7 +875,7 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
 
             if (Tuner::Current()->GetParameter()->IsDouble())
             {
-                ParameterDouble *p = Tuner::Current()->ReinterpretToDouble();
+                DParam *p = Tuner::Current()->ReinterpretToDouble();
 
                 if (p->IsNotOrdered())
                 {
@@ -1066,7 +1066,7 @@ Order::E DisplayCorrection::CalculateOrderForIndication()
 {
     if (Tuner::Current()->GetParameter()->IsDouble())
     {
-        ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
+        DParam *param = Tuner::Current()->ReinterpretToDouble();
 
         return param->IsNotOrdered() ? Order::One : param->GetValue().GetOrder();
     }
@@ -1080,7 +1080,7 @@ void DisplayCorrection::FillDigitsIntegerPartForDouble()
     Order::E order = CalculateOrderForIndication();
 
     int before = MathParameterDouble::GetNumberDigitsBeforeComma(order);
-    ParameterDouble *param = tuner->ReinterpretToDouble();
+    DParam *param = tuner->ReinterpretToDouble();
     Value value = param->GetValue();
 
     int pos = before - 1;                               // –азр€д в этой позиции будем заполн€ть значени€ми целых
@@ -1227,7 +1227,7 @@ void Tuner::OnButtonApply()
     {
         if (Current()->ParameterIsDouble())
         {
-            ParameterDouble *paramDouble = Current()->ReinterpretToDouble();
+            DParam *paramDouble = Current()->ReinterpretToDouble();
 
             TypeDParam::E type = paramDouble->GetType();
 
@@ -1278,7 +1278,7 @@ void Tuner::SetModeEntering()
 
 bool Tuner::ParameterIsOffset()
 {
-    ParameterDouble *offset = ReinterpretToDouble();
+    DParam *offset = ReinterpretToDouble();
 
     return (offset == nullptr) ? false : (offset->GetType() == TypeDParam::Offset);
 
@@ -1287,15 +1287,15 @@ bool Tuner::ParameterIsOffset()
 
 bool Tuner::ParameterIsNotOrdered()
 {
-    ParameterDouble *voltage = ReinterpretToDouble();
+    DParam *voltage = ReinterpretToDouble();
 
     return (voltage == nullptr) ? false : voltage->IsNotOrdered();
 }
 
 
-ParameterDouble *Tuner::ReinterpretToDouble()
+DParam *Tuner::ReinterpretToDouble()
 {
-    return param->IsDouble() ? reinterpret_cast<ParameterDouble *>(param) : nullptr;
+    return param->IsDouble() ? reinterpret_cast<DParam *>(param) : nullptr;
 }
 
 

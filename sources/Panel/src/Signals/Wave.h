@@ -91,7 +91,7 @@ public:
     operator TypeForm::E() const { return value; }
     
     // Находит требуемый параметр. Возвращает 0, если такого параметра нет
-    ParameterDouble *FindParameter(TypeDParam::E p) const;
+    DParam *FindParameter(TypeDParam::E p) const;
     ParameterChoice *FindParameter(ParameterChoiceType::E p) const;
     ParameterInteger *FindParameter(ParameterIntegerType::E p) const;
     ParameterComposite *FindParameter(ParameterCompositeType::E p) const;

@@ -103,7 +103,7 @@ struct Param
 
     static bool FuncActive() { return true; }
 
-    ParameterDouble *ReinterpretToDouble() { return (ParameterDouble *)this; }
+    DParam *ReinterpretToDouble() { return (DParam *)this; }
 
     pFuncBV          funcOfActive;  // Активен ли данный параметр
 
@@ -140,19 +140,19 @@ struct TypeDParam
 };
 
 
-struct ParameterDouble : public Param
+struct DParam : public Param
 {
     friend struct LogicFloatValue;
     friend class Tuner;
     friend class TunerDisplay;
 
-    ParameterDouble(TypeDParam::E t, pFuncBV funcActive, pchar const nameRU, pchar const nameEN,
+    DParam(TypeDParam::E t, pFuncBV funcActive, pchar const nameRU, pchar const nameEN,
                     const Value  &min,
                     const Value  &max,
                     pValueInRange valueInRange,
                     const Value  &value);
 
-    ParameterDouble(const ParameterDouble &);
+    DParam(const DParam &);
 
     virtual void Reset();
 
@@ -207,7 +207,7 @@ struct ParameterDouble : public Param
 
     virtual void RestoreState();
 
-    ParameterDouble &operator=(const ParameterDouble &);
+    DParam &operator=(const DParam &);
 
     bool IsAmplitude() const { return type == TypeDParam::Amplitude; }
 
@@ -364,7 +364,7 @@ struct ParameterComposite : public Param
     int NumParameters() const;
     Param **Parameters() { return params; }
 
-    ParameterDouble *FindParameter(TypeDParam::E p);
+    DParam *FindParameter(TypeDParam::E p);
     ParameterChoice *FindParameter(ParameterChoiceType::E p);
 
     virtual String ToString(String &units) const;
@@ -402,14 +402,14 @@ private:
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Value ///
-struct ParameterVoltage : public ParameterDouble
+struct ParameterVoltage : public DParam
 {
     ParameterVoltage(TypeDParam::E type, pchar nameRU, pchar nameEN,
                      const Value &min,
                      const Value &max,
                      pValueInRange valueInRange,
                      const Value &value) :
-        ParameterDouble(type, Param::FuncActive, nameRU, nameEN, min, max, valueInRange, value) { }
+        DParam(type, Param::FuncActive, nameRU, nameEN, min, max, valueInRange, value) { }
 };
 
 
@@ -435,29 +435,29 @@ struct ParameterOffset : public ParameterVoltage
 };
 
 
-struct ParameterFrequency : public ParameterDouble
+struct ParameterFrequency : public DParam
 {
     ParameterFrequency(const Value &min,
                        const Value &max,
                        pValueInRange valueInRange = EValueInRange,
                        const Value &value = Value("1", Order::Kilo)) :
-        ParameterDouble(TypeDParam::Frequency, Param::FuncActive, "Частота", "Frequency", min, max, valueInRange, value) { }
+        DParam(TypeDParam::Frequency, Param::FuncActive, "Частота", "Frequency", min, max, valueInRange, value) { }
 };
 
 
-struct ParameterTime : public ParameterDouble
+struct ParameterTime : public DParam
 {
     ParameterTime(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar  const nameEN,
                   const Value &min,
                   const Value &max,
                   pValueInRange valueInRange,
-                  const Value &value) : ParameterDouble(t, funcActive, nameRU, nameEN, min, max, valueInRange, value) { }
+                  const Value &value) : DParam(t, funcActive, nameRU, nameEN, min, max, valueInRange, value) { }
 };
 
 
-struct ParameterPhase : public ParameterDouble
+struct ParameterPhase : public DParam
 {
-    ParameterPhase() : ParameterDouble(TypeDParam::Phase, Param::FuncActive, "Фаза", "Phase",
+    ParameterPhase() : DParam(TypeDParam::Phase, Param::FuncActive, "Фаза", "Phase",
                                        Value("0", Order::One),
                                        Value("360", Order::One),
                                        EValueInRange,

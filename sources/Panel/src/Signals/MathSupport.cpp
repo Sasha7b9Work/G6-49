@@ -11,20 +11,20 @@
 namespace MathParameterDouble
 {
     // Собственно параметр, по которому будут производится вычислеиня
-    static ParameterDouble *param = nullptr;
+    static DParam *param = nullptr;
 }
 
 
 namespace MathDouble
 {
-    static Order::E CalculateOrder(const ParameterDouble* param)
+    static Order::E CalculateOrder(const DParam* param)
     {
         return param->IsNotOrdered() ? Order::One : Order::Count;
     }
 }
 
 
-void MathParameterDouble::SetParameterDouble(ParameterDouble* parameter)
+void MathParameterDouble::SetParameterDouble(DParam* parameter)
 {
     param = parameter;
 }
@@ -88,7 +88,7 @@ static void RepayEmptySymbols(char *buffer)
 }
 
 
-static cstr ZeroValue(const ParameterDouble *param)
+static cstr ZeroValue(const DParam *param)
 {
     TypeDParam::E type = param->GetType();
 
@@ -105,7 +105,7 @@ static cstr ZeroValue(const ParameterDouble *param)
 }
 
 
-cstr MathDouble::GetIndicatedValue(const ParameterDouble *param)
+cstr MathDouble::GetIndicatedValue(const DParam *param)
 {
     static const int NUM_DIGITS = 6;
     static const int LENGTH_BUFFER = NUM_DIGITS + 2;
@@ -158,7 +158,7 @@ cstr MathDouble::GetIndicatedValue(const ParameterDouble *param)
 }
 
 
-int MathDouble::GetPositionFirstDigit(const ParameterDouble *param, Order::E order)
+int MathDouble::GetPositionFirstDigit(const DParam *param, Order::E order)
 {
     if (param->IsPhase())
     {

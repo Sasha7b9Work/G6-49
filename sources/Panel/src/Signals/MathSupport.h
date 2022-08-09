@@ -4,17 +4,17 @@
 
 
 struct Value;
-struct ParameterDouble;
+struct DParam;
 struct ParameterInteger;
 
 
 namespace MathDouble
 {
     // Возвращает числовое представление Value с numDigits значащими цифрами и запятой.
-    cstr GetIndicatedValue(const ParameterDouble *param);
+    cstr GetIndicatedValue(const DParam *param);
 
     // Возвращает позицию первого ненулевого символа "1" - десятки (1e1), "0" - единицы (1e0), "-1" - десятые (1e-1), "-2" - сотые (1e-2)
-    int GetPositionFirstDigit(const ParameterDouble *param, Order::E order = Order::Count);
+    int GetPositionFirstDigit(const DParam *param, Order::E order = Order::Count);
 
     int GetPositionFirstDigit(const Value &value, Order::E order);
 
@@ -30,7 +30,7 @@ namespace MathDouble
 
 namespace MathParameterDouble
 {
-    void SetParameterDouble(ParameterDouble *);
+    void SetParameterDouble(DParam *);
 
     // Возвращает количество значащих знакомест перед запятой (исключая знаковый разряд). В предположении, что значение приведено к порядку order
     int GetNumberDigitsBeforeComma(Order::E order = Order::Count);

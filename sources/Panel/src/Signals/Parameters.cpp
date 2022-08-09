@@ -128,7 +128,7 @@ ParameterChoice *ParameterComposite::FindParameter(ParameterChoiceType::E p)
 }
 
 
-ParameterDouble *ParameterComposite::FindParameter(TypeDParam::E p)
+DParam *ParameterComposite::FindParameter(TypeDParam::E p)
 {
     for(int i = 0; i < NumParameters(); i++)
     {
@@ -136,7 +136,7 @@ ParameterDouble *ParameterComposite::FindParameter(TypeDParam::E p)
 
         if(param->IsDouble())
         {
-            ParameterDouble *parameter = static_cast<ParameterDouble *>(param);
+            DParam *parameter = static_cast<DParam *>(param);
 
             if(parameter->GetType() == p)
             {
@@ -149,7 +149,7 @@ ParameterDouble *ParameterComposite::FindParameter(TypeDParam::E p)
 }
 
 
-cstr ParameterDouble::GetMainUnits() const
+cstr DParam::GetMainUnits() const
 {
     static const cstr units[TypeDParam::Count][2] =
     {
@@ -174,7 +174,7 @@ cstr ParameterDouble::GetMainUnits() const
 }
 
 
-cstr ParameterDouble::GetUnits(Order::E order) const
+cstr DParam::GetUnits(Order::E order) const
 {
     if (order == Order::Count)
     {
@@ -190,7 +190,7 @@ cstr ParameterDouble::GetUnits(Order::E order) const
 }
 
 
-void ParameterDouble::LoadNumberImpulsesIfNeed()
+void DParam::LoadNumberImpulsesIfNeed()
 {
     ParameterInteger *parameter = CURRENT_FORM->FindParameter(ParameterIntegerType::PacketNumber);
 
@@ -204,7 +204,7 @@ void ParameterDouble::LoadNumberImpulsesIfNeed()
 }
 
 
-bool ParameterDouble::SetAndLoadValue(double val)
+bool DParam::SetAndLoadValue(double val)
 {
     if(!InRange(val))
     {
@@ -221,7 +221,7 @@ bool ParameterDouble::SetAndLoadValue(double val)
 }
 
 
-bool ParameterDouble::SetAndLoadValue(Value val)
+bool DParam::SetAndLoadValue(Value val)
 {
     if (!InRange(val))
     {
@@ -238,13 +238,13 @@ bool ParameterDouble::SetAndLoadValue(Value val)
 }
 
 
-void ParameterDouble::StoreState()
+void DParam::StoreState()
 {
     stored.value = value;
 }
 
 
-void ParameterDouble::RestoreState()
+void DParam::RestoreState()
 {
     value = stored.value;
 }
@@ -285,19 +285,19 @@ void ParameterInteger::LoadValue()
 }
 
 
-bool ParameterDouble::IsNotOrdered() const
+bool DParam::IsNotOrdered() const
 {
     return (type == TypeDParam::Amplitude) || (type == TypeDParam::Offset) || (type == TypeDParam::Phase);
 }
 
 
-bool ParameterDouble::IsPhase() const
+bool DParam::IsPhase() const
 {
     return (type == TypeDParam::Phase);
 }
 
 
-bool ParameterDouble::IsTime() const
+bool DParam::IsTime() const
 {
     static const bool isTime[TypeDParam::Count] =
     {
@@ -442,13 +442,13 @@ ParameterManipulation::ParameterManipulation(Param **parameters) : ParameterComp
 }
 
 
-bool ParameterDouble::InRange(double val) const
+bool DParam::InRange(double val) const
 {
     return (val >= GetMin().ToDouble()) && (val <= GetMax().ToDouble());
 }
 
 
-bool ParameterDouble::InRange(Value val) const
+bool DParam::InRange(Value val) const
 {
     return (val >= GetMin() && val <= GetMax());
 }
@@ -476,7 +476,7 @@ int ParameterChoice::NumChoices() const
 }
 
 
-ParameterDouble::ParameterDouble(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar const nameEN,
+DParam::DParam(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar const nameEN,
     const Value &_min_,
     const Value &_max,
     pValueInRange _valueInRange,
@@ -487,14 +487,14 @@ ParameterDouble::ParameterDouble(TypeDParam::E t, pFuncBV funcActive, pchar name
 }
 
 
-ParameterDouble::ParameterDouble(const ParameterDouble &rhs) :
+DParam::DParam(const DParam &rhs) :
     Param(KindParam::Double, Param::FuncActive, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
     min(rhs.min), max(rhs.max), valueInRange(EValueInRange), value(rhs.value), resetValue(rhs.resetValue), stored(rhs.stored)
 {
 }
 
 
-ParameterDouble &ParameterDouble::operator=(const ParameterDouble &rhs)
+DParam &DParam::operator=(const DParam &rhs)
 {
     form = rhs.form;
     parent = rhs.parent;
@@ -515,19 +515,19 @@ ParameterDouble &ParameterDouble::operator=(const ParameterDouble &rhs)
 }
 
 
-void ParameterDouble::Reset()
+void DParam::Reset()
 {
     SetAndLoadValue(resetValue);
 }
 
 
-static Order::E CalculateOrder(const ParameterDouble *param)
+static Order::E CalculateOrder(const DParam *param)
 {
     return param->IsNotOrdered() ? Order::One : param->GetValue().GetOrder();
 }
 
 
-String ParameterDouble::ToString(String &units) const
+String DParam::ToString(String &units) const
 {
     String result(MathDouble::GetIndicatedValue(this));
 
@@ -537,7 +537,7 @@ String ParameterDouble::ToString(String &units) const
 }
 
 
-String ParameterDouble::ToString(Value val) const
+String DParam::ToString(Value val) const
 {
     String string(val.ToString(IsSigned()));
     string.Append(" ");
@@ -583,7 +583,7 @@ void ParameterChoice::OnPressButtonTune()
 }
 
 
-void ParameterDouble::OnPressButtonTune()
+void DParam::OnPressButtonTune()
 {
     PageTuneParameter::SetParameter(this);
     Menu::SetAdditionPage(PageTuneParameter::self);
@@ -604,7 +604,7 @@ Value ParameterAmplitude::GetMax() const
     offset.SetSign(1);
     offset.Mul(2);
 
-    Value result = ParameterDouble::GetMax();
+    Value result = DParam::GetMax();
     result.Sub(offset);
 
     return result;

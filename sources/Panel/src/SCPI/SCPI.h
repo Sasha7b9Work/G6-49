@@ -12,7 +12,7 @@
     4. Команда должна заканчиваться символом с кодом 0x0D.
 */
 
-struct ParameterDouble;
+struct DParam;
 class String;
 struct SimpleMessage;
 
@@ -62,7 +62,7 @@ namespace SCPI
 
     void ProcessHint(String *message, cstr names[]); //-V2504
 
-    void ProcessRequestParameterValue(const ParameterDouble *param);
+    void ProcessRequestParameterValue(const DParam *param);
 
     void ProcessRequestParameterValue(const ParameterInteger *param);
 

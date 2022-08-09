@@ -119,7 +119,7 @@ Param *WaveGraphics::GetParameterForDraw(const Chan &ch, int i)
         {
             if (parameter->IsDouble())
             {
-                ParameterDouble *paramDouble = reinterpret_cast<ParameterDouble *>(parameter);
+                DParam *paramDouble = reinterpret_cast<DParam *>(parameter);
             
                 if (paramDouble->GetType() == TypeDParam::Frequency)
                 {

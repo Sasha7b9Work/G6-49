@@ -59,7 +59,7 @@ static SMinMax OffstInRange(Form *form)
     // Ампл > 1В  | [0 ... 5],   ампл / 2 + fabs(см) <= 5
 
     Value amplitude = form->FindParameter(TypeDParam::Amplitude)->GetValue();
-    ParameterDouble *param_offset = form->FindParameter(TypeDParam::Offset);
+    DParam *param_offset = form->FindParameter(TypeDParam::Offset);
 
     SMinMax result;
     result.max = param_offset->Max();

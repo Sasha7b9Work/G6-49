@@ -8,7 +8,7 @@
 
 class DisplayCorrection;
 struct Param;
-struct ParameterDouble;
+struct DParam;
 struct ParameterInteger;
 class Tuner;
 
@@ -161,7 +161,7 @@ namespace DisplayEntering
     {
     public:
         EnterBuffer() : stack(30), param(nullptr) { }
-        void Prepare(ParameterDouble *parameter);
+        void Prepare(DParam *parameter);
         void Push(const Key::E key);
         // Удалить последний добавленный символ
         void Pop();
@@ -179,7 +179,7 @@ namespace DisplayEntering
 
     private:
         Stack<char> stack;
-        ParameterDouble *param;
+        DParam *param;
     };
 
     class Cursor
@@ -247,7 +247,7 @@ private:
 };
 
 
-// Используется для визуальной настройки параметра. Является принадлежностью каждог ParameterDouble
+// Используется для визуальной настройки параметра. Является принадлежностью каждог DParam
 class Tuner
 {
 public:
@@ -293,8 +293,8 @@ public:
 
     static bool ParameterIsDouble() { return Current()->ReinterpretToDouble() != nullptr; };
 
-    // Возвращает указатеь на ParameterDouble, если param имеет тип Double и nullptr в ином случае
-    ParameterDouble *ReinterpretToDouble();
+    // Возвращает указатеь на DParam, если param имеет тип Double и nullptr в ином случае
+    DParam *ReinterpretToDouble();
 
     ParameterInteger *ReinterpretToInteger();
 

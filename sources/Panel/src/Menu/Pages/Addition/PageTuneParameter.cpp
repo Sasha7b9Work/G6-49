@@ -11,7 +11,7 @@
 
 
 // Здесь будем сохранять настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости
-static ParameterDouble storedDouble = ParameterAmplitude(); //-V1054 Здесь ошибки не случится, потому что в наследуемых от ParameterDouble
+static DParam storedDouble = ParameterAmplitude(); //-V1054 Здесь ошибки не случится, потому что в наследуемых от DParam
                                                             // классах нет данных
 
 static ParameterInteger storedInteger = ParameterInteger(ParameterIntegerType::PacketNumber, "", "", //-V810
@@ -27,7 +27,7 @@ void PageTuneParameter::SetParameter(Param *parameter)
 {
     if(parameter->IsDouble())
     {
-        storedDouble = *reinterpret_cast<ParameterDouble *>(parameter);
+        storedDouble = *reinterpret_cast<DParam *>(parameter);
         tuned = parameter;
     }
     else if (parameter->IsInteger())
@@ -123,11 +123,11 @@ bool PageTuneParameter::VerifyForPossiblyChangesAmplitude(const Control &control
     {
         if (Tuner::Current()->GetParameter()->IsDouble())
         {
-            ParameterDouble *param = Tuner::Current()->GetParameter()->ReinterpretToDouble();
+            DParam *param = Tuner::Current()->GetParameter()->ReinterpretToDouble();
 
             if (param->IsAmplitude() && (param->GetValue().Abs() == 0))
             {
-                ParameterDouble *param_offset = CURRENT_FORM->FindParameter(TypeDParam::Offset);
+                DParam *param_offset = CURRENT_FORM->FindParameter(TypeDParam::Offset);
 
                 if (param_offset)
                 {
@@ -240,7 +240,7 @@ void PageTuneParameter::CallbackOnButtonCancel()
 
     if (parameter->IsDouble())
     {
-        *reinterpret_cast<ParameterDouble *>(parameter) = storedDouble;
+        *reinterpret_cast<DParam *>(parameter) = storedDouble;
     }
     else if (parameter->IsInteger())
     {

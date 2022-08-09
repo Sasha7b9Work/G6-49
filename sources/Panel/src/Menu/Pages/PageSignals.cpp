@@ -223,7 +223,7 @@ static void OnPress_TuneParameter()
     {
         if (CURRENT_PARAM->IsDouble())
         {
-            ParameterDouble *param = reinterpret_cast<ParameterDouble *>(CURRENT_PARAM);
+            DParam *param = reinterpret_cast<DParam *>(CURRENT_PARAM);
 
             if (param->GetType() == TypeDParam::ManipulationDuration || param->GetType() == TypeDParam::ManipulationPeriod)
             {
@@ -282,7 +282,7 @@ static void OnDraw_TuneParameter(int x, int y)
 {
     if (CURRENT_PARAM->IsDouble())
     {
-        ParameterDouble *param = reinterpret_cast<ParameterDouble *>(CURRENT_PARAM);
+        DParam *param = reinterpret_cast<DParam *>(CURRENT_PARAM);
 
         if (param->GetType() == TypeDParam::ManipulationDuration || param->GetType() == TypeDParam::ManipulationPeriod)
         {

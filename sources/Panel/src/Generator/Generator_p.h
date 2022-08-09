@@ -23,7 +23,7 @@ namespace PGenerator
 
     void SetFormWave(const Chan &, TypeForm::E form);
 
-    void SetParameterDouble(ParameterDouble *param);
+    void SetParameterDouble(DParam *param);
 
     void SetParameterChoice(ParameterChoice *param);
 
