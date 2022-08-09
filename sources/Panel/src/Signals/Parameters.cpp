@@ -326,7 +326,7 @@ String ParameterComposite::ToString(String &units) const
 {
     units.Free();
 
-    if(type == ParameterCompositeType::Manipulation)
+    if(type == TypeCMSParam::Manipulation)
     {
         static pchar valuesRU[2] =
         {
@@ -436,7 +436,7 @@ bool CParam::SetAndLoadChoice(int ch)
 }
 
 
-ParameterManipulation::ParameterManipulation(Param **parameters) : ParameterComposite(ParameterCompositeType::Manipulation, "Манип", "Manip", parameters)
+ParameterManipulation::ParameterManipulation(Param **parameters) : ParameterComposite(TypeCMSParam::Manipulation, "Манип", "Manip", parameters)
 {
 
 }

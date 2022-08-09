@@ -342,7 +342,7 @@ private:
 };
 
 
-struct ParameterCompositeType
+struct TypeCMSParam
 {
     enum E
     {
@@ -354,7 +354,7 @@ struct ParameterCompositeType
 
 struct ParameterComposite : public Param
 {
-    ParameterComposite(ParameterCompositeType::E v, pchar nameRU, pchar nameEN, Param **parameters) :
+    ParameterComposite(TypeCMSParam::E v, pchar nameRU, pchar nameEN, Param **parameters) :
         Param(KindParam::Composite, Param::FuncActive, nameRU, nameEN), params(parameters), type(v) { }
 
     virtual void SetForm(Form *form);
@@ -373,12 +373,12 @@ struct ParameterComposite : public Param
 
     virtual void OnPressButtonTune();
 
-    ParameterCompositeType::E GetType() { return type; }
+    TypeCMSParam::E GetType() { return type; }
 
 private:
     
     Param **params; // Здесь находятся дополнительные параметры в случае, если они требуются
-    ParameterCompositeType::E type;
+    TypeCMSParam::E type;
 };
 
 

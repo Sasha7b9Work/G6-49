@@ -342,7 +342,7 @@ CParam *Form::FindParameter(TypeCParam::E p) const
 }
 
 
-ParameterComposite *Form::FindParameter(ParameterCompositeType::E t) const
+ParameterComposite *Form::FindParameter(TypeCMSParam::E t) const
 {
     for (int i = 0; i < numParams; i++)
     {
@@ -546,7 +546,7 @@ void Form::DrawUGO(const Chan &ch, int y0) const
 
 void Form::DrawSine(const Chan &ch, int x0, int y0, int width, int height)
 {
-    ParameterComposite *param = FORM(ch)->FindParameter(ParameterCompositeType::Manipulation);
+    ParameterComposite *param = FORM(ch)->FindParameter(TypeCMSParam::Manipulation);
 
     if (param)
     {
