@@ -294,7 +294,7 @@ DParam *Form::FindParameter(TypeDParam::E p) const
         }
         else if(param->IsComposite())
         {
-            ParameterComposite *parameter = static_cast<ParameterComposite *>(param);
+            CMSParam *parameter = static_cast<CMSParam *>(param);
 
             DParam *val = parameter->FindParameter(p);
 
@@ -327,7 +327,7 @@ CParam *Form::FindParameter(TypeCParam::E p) const
         
         if(param->IsComposite())
         {
-            ParameterComposite *complex = reinterpret_cast<ParameterComposite *>(param);
+            CMSParam *complex = reinterpret_cast<CMSParam *>(param);
 
             CParam *choice = complex->FindParameter(p);
 
@@ -342,7 +342,7 @@ CParam *Form::FindParameter(TypeCParam::E p) const
 }
 
 
-ParameterComposite *Form::FindParameter(TypeCMSParam::E t) const
+CMSParam *Form::FindParameter(TypeCMSParam::E t) const
 {
     for (int i = 0; i < numParams; i++)
     {
@@ -350,7 +350,7 @@ ParameterComposite *Form::FindParameter(TypeCMSParam::E t) const
 
         if (param->IsComposite())
         {
-            ParameterComposite *composite = static_cast<ParameterComposite *>(param);
+            CMSParam *composite = static_cast<CMSParam *>(param);
 
             if (composite->GetType() == t)
             {
@@ -367,7 +367,7 @@ ParameterComposite *Form::FindParameter(TypeCMSParam::E t) const
 
             if (param->IsComposite())
             {
-                ParameterComposite *composite = static_cast<ParameterComposite *>(param);
+                CMSParam *composite = static_cast<CMSParam *>(param);
 
                 if (composite->GetType() == t)
                 {
@@ -444,7 +444,7 @@ void Form::OpenCompositeParameter()
 
     old.Init(params, numParams, currentParam);
 
-    ParameterComposite *parent = static_cast<ParameterComposite *>(CurrentParameter());
+    CMSParam *parent = static_cast<CMSParam *>(CurrentParameter());
 
     numParams = parent->NumParameters();
     params = parent->Parameters();
@@ -546,7 +546,7 @@ void Form::DrawUGO(const Chan &ch, int y0) const
 
 void Form::DrawSine(const Chan &ch, int x0, int y0, int width, int height)
 {
-    ParameterComposite *param = FORM(ch)->FindParameter(TypeCMSParam::Manipulation);
+    CMSParam *param = FORM(ch)->FindParameter(TypeCMSParam::Manipulation);
 
     if (param)
     {

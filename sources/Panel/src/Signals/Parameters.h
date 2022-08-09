@@ -352,9 +352,9 @@ struct TypeCMSParam
 };
 
 
-struct ParameterComposite : public Param
+struct CMSParam : public Param
 {
-    ParameterComposite(TypeCMSParam::E v, pchar nameRU, pchar nameEN, Param **parameters) :
+    CMSParam(TypeCMSParam::E v, pchar nameRU, pchar nameEN, Param **parameters) :
         Param(KindParam::Composite, Param::FuncActive, nameRU, nameEN), params(parameters), type(v) { }
 
     virtual void SetForm(Form *form);
@@ -556,7 +556,7 @@ struct ParameterClockImpulse : public CParam
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Complex ///
-struct ParameterManipulation : public ParameterComposite
+struct ParameterManipulation : public CMSParam
 {
     ParameterManipulation(Param **paramaters);
 };

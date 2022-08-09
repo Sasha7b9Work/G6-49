@@ -83,7 +83,7 @@ Form *Param::GetForm()
 }
 
 
-void ParameterComposite::SetForm(Form *f)
+void CMSParam::SetForm(Form *f)
 {
     Param::SetForm(f);
 
@@ -94,7 +94,7 @@ void ParameterComposite::SetForm(Form *f)
 }
 
 
-int ParameterComposite::NumParameters() const
+int CMSParam::NumParameters() const
 {
     int counter = 0;
 
@@ -107,7 +107,7 @@ int ParameterComposite::NumParameters() const
 }
 
 
-CParam *ParameterComposite::FindParameter(TypeCParam::E p)
+CParam *CMSParam::FindParameter(TypeCParam::E p)
 {
     for(int i = 0; i < NumParameters(); i++)
     {
@@ -128,7 +128,7 @@ CParam *ParameterComposite::FindParameter(TypeCParam::E p)
 }
 
 
-DParam *ParameterComposite::FindParameter(TypeDParam::E p)
+DParam *CMSParam::FindParameter(TypeDParam::E p)
 {
     for(int i = 0; i < NumParameters(); i++)
     {
@@ -322,7 +322,7 @@ bool DParam::IsTime() const
 }
 
 
-String ParameterComposite::ToString(String &units) const
+String CMSParam::ToString(String &units) const
 {
     units.Free();
 
@@ -338,7 +338,7 @@ String ParameterComposite::ToString(String &units) const
             "Off", "On"
         };
 
-        CParam *enabled = const_cast<ParameterComposite *>(this)->FindParameter(TypeCParam::ManipulationEnabled);
+        CParam *enabled = const_cast<CMSParam *>(this)->FindParameter(TypeCParam::ManipulationEnabled);
 
         return String(LANG_RU ? valuesRU[enabled->GetChoice()] : valuesEN[enabled->GetChoice()]);
     }
@@ -436,7 +436,7 @@ bool CParam::SetAndLoadChoice(int ch)
 }
 
 
-ParameterManipulation::ParameterManipulation(Param **parameters) : ParameterComposite(TypeCMSParam::Manipulation, "Манип", "Manip", parameters)
+ParameterManipulation::ParameterManipulation(Param **parameters) : CMSParam(TypeCMSParam::Manipulation, "Манип", "Manip", parameters)
 {
 
 }
@@ -590,7 +590,7 @@ void DParam::OnPressButtonTune()
 }
 
 
-void ParameterComposite::OnPressButtonTune()
+void CMSParam::OnPressButtonTune()
 {
     form->OpenCompositeParameter();
 }
