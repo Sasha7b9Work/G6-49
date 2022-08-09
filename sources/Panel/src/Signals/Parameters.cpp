@@ -128,7 +128,7 @@ ParameterChoice *ParameterComposite::FindParameter(ParameterChoiceType::E p)
 }
 
 
-ParameterDouble *ParameterComposite::FindParameter(ParameterDoubleType::E p)
+ParameterDouble *ParameterComposite::FindParameter(TypeDParam::E p)
 {
     for(int i = 0; i < NumParameters(); i++)
     {
@@ -151,7 +151,7 @@ ParameterDouble *ParameterComposite::FindParameter(ParameterDoubleType::E p)
 
 cstr ParameterDouble::GetMainUnits() const
 {
-    static const cstr units[ParameterDoubleType::Count][2] =
+    static const cstr units[TypeDParam::Count][2] =
     {
         {"√ц",   "Hz"},   // Frequency
         {"с",    "s"},    // Period
@@ -196,7 +196,7 @@ void ParameterDouble::LoadNumberImpulsesIfNeed()
 
     if (parameter)
     {
-        if (type == ParameterDoubleType::Period || type == ParameterDoubleType::Duration)
+        if (type == TypeDParam::Period || type == TypeDParam::Duration)
         {
             parameter->LoadValue();
         }
@@ -287,19 +287,19 @@ void ParameterInteger::LoadValue()
 
 bool ParameterDouble::IsNotOrdered() const
 {
-    return (type == ParameterDoubleType::Amplitude) || (type == ParameterDoubleType::Offset) || (type == ParameterDoubleType::Phase);
+    return (type == TypeDParam::Amplitude) || (type == TypeDParam::Offset) || (type == TypeDParam::Phase);
 }
 
 
 bool ParameterDouble::IsPhase() const
 {
-    return (type == ParameterDoubleType::Phase);
+    return (type == TypeDParam::Phase);
 }
 
 
 bool ParameterDouble::IsTime() const
 {
-    static const bool isTime[ParameterDoubleType::Count] =
+    static const bool isTime[TypeDParam::Count] =
     {
         false,  // „астота
         true,   // ѕериод
@@ -476,7 +476,7 @@ int ParameterChoice::NumChoices() const
 }
 
 
-ParameterDouble::ParameterDouble(ParameterDoubleType::E t, pFuncBV funcActive, pchar nameRU, pchar const nameEN,
+ParameterDouble::ParameterDouble(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar const nameEN,
     const Value &_min_,
     const Value &_max,
     pValueInRange _valueInRange,
@@ -600,7 +600,7 @@ Value ParameterAmplitude::GetMax() const
 {
     // ampl / 2 + fabs(cm) <= 5
 
-    Value offset = form->FindParameter(ParameterDoubleType::Offset)->GetValue();
+    Value offset = form->FindParameter(TypeDParam::Offset)->GetValue();
     offset.SetSign(1);
     offset.Mul(2);
 
@@ -628,9 +628,9 @@ Value ParameterPacketPeriod::CalculateMinValue() const
 {
     // «начение периода не может быть меньше (N - 1) * Tи + tи + 10нс
 
-    ParameterPeriod *par_period = (ParameterPeriod *)form->FindParameter(ParameterDoubleType::Period);
+    ParameterPeriod *par_period = (ParameterPeriod *)form->FindParameter(TypeDParam::Period);
     ParameterInteger *par_number = form->FindParameter(ParameterIntegerType::PacketNumber);
-    ParameterDuration *par_duration = (ParameterDuration *)form->FindParameter(ParameterDoubleType::Duration);
+    ParameterDuration *par_duration = (ParameterDuration *)form->FindParameter(TypeDParam::Duration);
 
     if (par_period && par_number && par_duration)
     {

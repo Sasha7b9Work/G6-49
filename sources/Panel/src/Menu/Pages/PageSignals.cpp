@@ -225,7 +225,7 @@ static void OnPress_TuneParameter()
         {
             ParameterDouble *param = reinterpret_cast<ParameterDouble *>(CURRENT_PARAM);
 
-            if (param->GetType() == ParameterDoubleType::ManipulationDuration || param->GetType() == ParameterDoubleType::ManipulationPeriod)
+            if (param->GetType() == TypeDParam::ManipulationDuration || param->GetType() == TypeDParam::ManipulationPeriod)
             {
                 return;
             }
@@ -284,7 +284,7 @@ static void OnDraw_TuneParameter(int x, int y)
     {
         ParameterDouble *param = reinterpret_cast<ParameterDouble *>(CURRENT_PARAM);
 
-        if (param->GetType() == ParameterDoubleType::ManipulationDuration || param->GetType() == ParameterDoubleType::ManipulationPeriod)
+        if (param->GetType() == TypeDParam::ManipulationDuration || param->GetType() == TypeDParam::ManipulationPeriod)
         {
             const Item *item = reinterpret_cast<const Item *>(&bTuneParameter);
 

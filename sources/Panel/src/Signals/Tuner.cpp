@@ -624,9 +624,9 @@ int Indicator::NumberHighligthingDigits() const
     {
         ParameterDouble *param = Tuner::Current()->ReinterpretToDouble();
 
-        ParameterDoubleType::E type = param->GetType();
+        TypeDParam::E type = param->GetType();
 
-        if (type == ParameterDoubleType::Duration || type == ParameterDoubleType::Period || type == ParameterDoubleType::PacketPeriod)
+        if (type == TypeDParam::Duration || type == TypeDParam::Period || type == TypeDParam::PacketPeriod)
         {
             if (digits[result + 1].IsEmpty())
             {
@@ -1154,11 +1154,11 @@ void DisplayCorrection::Init(Value value)
 
     if (form->value == TypeForm::Packet)
     {
-        if (param == form->FindParameter(ParameterDoubleType::Period) ||
+        if (param == form->FindParameter(TypeDParam::Period) ||
             param == form->FindParameter(ParameterIntegerType::PacketNumber) ||
-            param == form->FindParameter(ParameterDoubleType::Duration))
+            param == form->FindParameter(TypeDParam::Duration))
         {
-            ParameterPacketPeriod *par_per = (ParameterPacketPeriod *)form->FindParameter(ParameterDoubleType::PacketPeriod);
+            ParameterPacketPeriod *par_per = (ParameterPacketPeriod *)form->FindParameter(TypeDParam::PacketPeriod);
 
             if (par_per->RecalcualateValue())
             {
@@ -1229,9 +1229,9 @@ void Tuner::OnButtonApply()
         {
             ParameterDouble *paramDouble = Current()->ReinterpretToDouble();
 
-            ParameterDoubleType::E type = paramDouble->GetType();
+            TypeDParam::E type = paramDouble->GetType();
 
-            if (type == ParameterDoubleType::PacketPeriod)
+            if (type == TypeDParam::PacketPeriod)
             {
                 ParameterPacketPeriod *pack_period = (ParameterPacketPeriod *)paramDouble;
 
@@ -1242,7 +1242,7 @@ void Tuner::OnButtonApply()
                     return;
                 }
             }
-            else if (type == ParameterDoubleType::Duration || type == ParameterDoubleType::Period)
+            else if (type == TypeDParam::Duration || type == TypeDParam::Period)
             {
                 int fractNano = DisplayEntering::ToValue().FractNano();
 
@@ -1280,7 +1280,7 @@ bool Tuner::ParameterIsOffset()
 {
     ParameterDouble *offset = ReinterpretToDouble();
 
-    return (offset == nullptr) ? false : (offset->GetType() == ParameterDoubleType::Offset);
+    return (offset == nullptr) ? false : (offset->GetType() == TypeDParam::Offset);
 
 }
 

@@ -224,17 +224,17 @@ void Form::TuneGenerator()
             SendParameterToGenerator(ParameterChoiceType::ManipulationEnabled); //-V525
             if(manipulationEnabled)
             {
-                SendParameterToGenerator(ParameterDoubleType::ManipulationDuration);
-                SendParameterToGenerator(ParameterDoubleType::ManipulationPeriod);
+                SendParameterToGenerator(TypeDParam::ManipulationDuration);
+                SendParameterToGenerator(TypeDParam::ManipulationPeriod);
             }
 
             int opened = currentParam;
 
             CloseCompositeParameter();
 
-            SendParameterToGenerator(ParameterDoubleType::Frequency);
-            SendParameterToGenerator(ParameterDoubleType::Amplitude);
-            SendParameterToGenerator(ParameterDoubleType::Offset);
+            SendParameterToGenerator(TypeDParam::Frequency);
+            SendParameterToGenerator(TypeDParam::Amplitude);
+            SendParameterToGenerator(TypeDParam::Offset);
 
             OpenCompositeParameter();
 
@@ -247,37 +247,37 @@ void Form::TuneGenerator()
             SendParameterToGenerator(ParameterChoiceType::ManipulationEnabled); //-V525
             if(manipulationEnabled)
             {
-                SendParameterToGenerator(ParameterDoubleType::ManipulationDuration);
-                SendParameterToGenerator(ParameterDoubleType::ManipulationPeriod);
+                SendParameterToGenerator(TypeDParam::ManipulationDuration);
+                SendParameterToGenerator(TypeDParam::ManipulationPeriod);
             }
 
             CloseCompositeParameter();
 
-            SendParameterToGenerator(ParameterDoubleType::Frequency);
-            SendParameterToGenerator(ParameterDoubleType::Amplitude);
-            SendParameterToGenerator(ParameterDoubleType::Offset);
+            SendParameterToGenerator(TypeDParam::Frequency);
+            SendParameterToGenerator(TypeDParam::Amplitude);
+            SendParameterToGenerator(TypeDParam::Offset);
         }
 
         if(GetWave()->GetChannel().IsB())
         {
-            SendParameterToGenerator(ParameterDoubleType::Phase);
+            SendParameterToGenerator(TypeDParam::Phase);
         }
     }
     else
     {
-        SendParameterToGenerator(ParameterDoubleType::Frequency);
-        SendParameterToGenerator(ParameterDoubleType::Amplitude);
-        SendParameterToGenerator(ParameterDoubleType::Offset);
-        SendParameterToGenerator(ParameterDoubleType::Period);
-        SendParameterToGenerator(ParameterDoubleType::Duration);
+        SendParameterToGenerator(TypeDParam::Frequency);
+        SendParameterToGenerator(TypeDParam::Amplitude);
+        SendParameterToGenerator(TypeDParam::Offset);
+        SendParameterToGenerator(TypeDParam::Period);
+        SendParameterToGenerator(TypeDParam::Duration);
         SendParameterToGenerator(ParameterIntegerType::PacketNumber);
-        SendParameterToGenerator(ParameterDoubleType::PacketPeriod);
+        SendParameterToGenerator(TypeDParam::PacketPeriod);
         SendParameterToGenerator(ParameterChoiceType::Polarity);
     }
 }
 
 
-ParameterDouble *Form::FindParameter(ParameterDoubleType::E p) const
+ParameterDouble *Form::FindParameter(TypeDParam::E p) const
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -402,7 +402,7 @@ ParameterInteger *Form::FindParameter(ParameterIntegerType::E t) const
 }
 
 
-void Form::SendParameterToGenerator(ParameterDoubleType::E p) const
+void Form::SendParameterToGenerator(TypeDParam::E p) const
 {
     Param *param = FindParameter(p);
 
@@ -730,7 +730,7 @@ uint8 *Form::GetFormFlash(const Chan &ch)
 
 double Form::GetOffset() const
 {
-    ParameterDouble *parameter = FindParameter(ParameterDoubleType::Offset);
+    ParameterDouble *parameter = FindParameter(TypeDParam::Offset);
 
     return (parameter) ? parameter->GetValue().ToDouble() : 0.0;
 }
@@ -738,7 +738,7 @@ double Form::GetOffset() const
 
 double Form::GetAmplitude() const
 {
-    ParameterDouble *parameter = FindParameter(ParameterDoubleType::Amplitude);
+    ParameterDouble *parameter = FindParameter(TypeDParam::Amplitude);
 
     return (parameter) ? parameter->GetValue().ToDouble() : 0.0;
 }
@@ -826,8 +826,8 @@ bool Form::CheckerParameters::InvalidDurationImpulse() const
 {
     if (form->Is(TypeForm::Impulse))
     {
-        double duration = form->FindParameter(ParameterDoubleType::Duration)->GetValue().ToDouble();
-        double period = form->FindParameter(ParameterDoubleType::Period)->GetValue().ToDouble();
+        double duration = form->FindParameter(TypeDParam::Duration)->GetValue().ToDouble();
+        double period = form->FindParameter(TypeDParam::Period)->GetValue().ToDouble();
 
         if (duration >= period)
         {
@@ -838,9 +838,9 @@ bool Form::CheckerParameters::InvalidDurationImpulse() const
     if (form->Is(TypeForm::Packet))
     {
         uint64 number = form->FindParameter(ParameterIntegerType::PacketNumber)->GetValue().ToUINT64();
-        double duration_impulse = form->FindParameter(ParameterDoubleType::Duration)->GetValue().ToDouble();
-        double period_impulse = form->FindParameter(ParameterDoubleType::Period)->GetValue().ToDouble();
-        double period_packet = form->FindParameter(ParameterDoubleType::PacketPeriod)->GetValue().ToDouble();
+        double duration_impulse = form->FindParameter(TypeDParam::Duration)->GetValue().ToDouble();
+        double period_impulse = form->FindParameter(TypeDParam::Period)->GetValue().ToDouble();
+        double period_packet = form->FindParameter(TypeDParam::PacketPeriod)->GetValue().ToDouble();
 
         double duration_packet = (double)(number - 1) * period_impulse + duration_impulse;
 

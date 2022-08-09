@@ -91,13 +91,13 @@ public:
     operator TypeForm::E() const { return value; }
     
     // Находит требуемый параметр. Возвращает 0, если такого параметра нет
-    ParameterDouble *FindParameter(ParameterDoubleType::E p) const;
+    ParameterDouble *FindParameter(TypeDParam::E p) const;
     ParameterChoice *FindParameter(ParameterChoiceType::E p) const;
     ParameterInteger *FindParameter(ParameterIntegerType::E p) const;
     ParameterComposite *FindParameter(ParameterCompositeType::E p) const;
     
     // Засылает параметр в генератор
-    void SendParameterToGenerator(ParameterDoubleType::E p) const;
+    void SendParameterToGenerator(TypeDParam::E p) const;
     void SendParameterToGenerator(ParameterChoiceType::E p) const;
     void SendParameterToGenerator(ParameterIntegerType::E p) const;
 

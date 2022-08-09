@@ -109,14 +109,14 @@ struct Param
 
 protected:
     
-    Form             *form;         // Форма, для которой зада этот параметр
+    Form         *form;         // Форма, для которой зада этот параметр
     Param        *parent;       // Если параметр вложенный, то здесь адрес родителя
     KindParam::E  kind;
-    pchar             names[2];
+    pchar         names[2];
 };
 
 
-struct ParameterDoubleType
+struct TypeDParam
 {
     enum E
     {
@@ -146,7 +146,7 @@ struct ParameterDouble : public Param
     friend class Tuner;
     friend class TunerDisplay;
 
-    ParameterDouble(ParameterDoubleType::E t, pFuncBV funcActive, pchar const nameRU, pchar const nameEN,
+    ParameterDouble(TypeDParam::E t, pFuncBV funcActive, pchar const nameRU, pchar const nameEN,
                     const Value  &min,
                     const Value  &max,
                     pValueInRange valueInRange,
@@ -161,7 +161,7 @@ struct ParameterDouble : public Param
     bool SetAndLoadValue(Value val);
     
     // Возвращает true, если параметр имеет знак
-    bool IsSigned() const { return (type == ParameterDoubleType::Offset); }
+    bool IsSigned() const { return (type == TypeDParam::Offset); }
 
     // Возвращает true, если параметр не может изменять размерность
     bool IsNotOrdered() const;
@@ -201,7 +201,7 @@ struct ParameterDouble : public Param
 
     void SetValue(Value val) { value = val; }
      
-    ParameterDoubleType::E GetType() const { return type; }
+    TypeDParam::E GetType() const { return type; }
 
     virtual void StoreState();
 
@@ -209,11 +209,11 @@ struct ParameterDouble : public Param
 
     ParameterDouble &operator=(const ParameterDouble &);
 
-    bool IsAmplitude() const { return type == ParameterDoubleType::Amplitude; }
+    bool IsAmplitude() const { return type == TypeDParam::Amplitude; }
 
 private:
     Tuner tuner;        // Используется для настройки 
-    const ParameterDoubleType::E type;
+    const TypeDParam::E type;
     Value         min;
     Value         max;
     pValueInRange valueInRange;
@@ -364,7 +364,7 @@ struct ParameterComposite : public Param
     int NumParameters() const;
     Param **Parameters() { return params; }
 
-    ParameterDouble *FindParameter(ParameterDoubleType::E p);
+    ParameterDouble *FindParameter(TypeDParam::E p);
     ParameterChoice *FindParameter(ParameterChoiceType::E p);
 
     virtual String ToString(String &units) const;
@@ -404,7 +404,7 @@ private:
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Value ///
 struct ParameterVoltage : public ParameterDouble
 {
-    ParameterVoltage(ParameterDoubleType::E type, pchar nameRU, pchar nameEN,
+    ParameterVoltage(TypeDParam::E type, pchar nameRU, pchar nameEN,
                      const Value &min,
                      const Value &max,
                      pValueInRange valueInRange,
@@ -419,7 +419,7 @@ struct ParameterAmplitude : public ParameterVoltage
                        const Value &max = Value("10", Order::One),
                        pValueInRange valueInRange = EValueInRange,
                        const Value &value = DEFAULT_AMPLITUDE) :
-        ParameterVoltage(ParameterDoubleType::Amplitude, "Размах", "Amplitude", min, max, valueInRange, value) { }
+        ParameterVoltage(TypeDParam::Amplitude, "Размах", "Amplitude", min, max, valueInRange, value) { }
 
     virtual Value GetMax() const;
 };
@@ -431,7 +431,7 @@ struct ParameterOffset : public ParameterVoltage
                     const Value &min = Value("-5", Order::One),
                     const Value &max = Value("5", Order::One),
                     const Value &value = Value("0", Order::One)) :
-        ParameterVoltage(ParameterDoubleType::Offset, "Смещение", "Offset", min, max, valueInRange, value) { }
+        ParameterVoltage(TypeDParam::Offset, "Смещение", "Offset", min, max, valueInRange, value) { }
 };
 
 
@@ -441,13 +441,13 @@ struct ParameterFrequency : public ParameterDouble
                        const Value &max,
                        pValueInRange valueInRange = EValueInRange,
                        const Value &value = Value("1", Order::Kilo)) :
-        ParameterDouble(ParameterDoubleType::Frequency, Param::FuncActive, "Частота", "Frequency", min, max, valueInRange, value) { }
+        ParameterDouble(TypeDParam::Frequency, Param::FuncActive, "Частота", "Frequency", min, max, valueInRange, value) { }
 };
 
 
 struct ParameterTime : public ParameterDouble
 {
-    ParameterTime(ParameterDoubleType::E t, pFuncBV funcActive, pchar nameRU, pchar  const nameEN,
+    ParameterTime(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar  const nameEN,
                   const Value &min,
                   const Value &max,
                   pValueInRange valueInRange,
@@ -457,7 +457,7 @@ struct ParameterTime : public ParameterDouble
 
 struct ParameterPhase : public ParameterDouble
 {
-    ParameterPhase() : ParameterDouble(ParameterDoubleType::Phase, Param::FuncActive, "Фаза", "Phase",
+    ParameterPhase() : ParameterDouble(TypeDParam::Phase, Param::FuncActive, "Фаза", "Phase",
                                        Value("0", Order::One),
                                        Value("360", Order::One),
                                        EValueInRange,
@@ -468,7 +468,7 @@ struct ParameterPhase : public ParameterDouble
 struct ParameterPacketPeriod : public ParameterTime
 {
     ParameterPacketPeriod(const Value &max, const Value &value) :
-        ParameterTime(ParameterDoubleType::PacketPeriod, Param::FuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
+        ParameterTime(TypeDParam::PacketPeriod, Param::FuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
     // Возвращает true, если значение изменилось
@@ -484,21 +484,21 @@ struct ParameterPacketPeriod : public ParameterTime
 struct ParameterPeriod : public ParameterTime
 {
     ParameterPeriod(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
-        ParameterTime(ParameterDoubleType::Period, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
+        ParameterTime(TypeDParam::Period, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 };
 
 
 struct ParameterDuration : public ParameterTime
 {
     ParameterDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
-        ParameterTime(ParameterDoubleType::Duration, Param::FuncActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
+        ParameterTime(TypeDParam::Duration, Param::FuncActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 };
 
 
 struct ParameterDelay : public ParameterTime
 {
     ParameterDelay(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") :
-        ParameterTime(ParameterDoubleType::Delay, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
+        ParameterTime(TypeDParam::Delay, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 };
 
 
@@ -508,7 +508,7 @@ struct ParameterManipulationDuration : public ParameterTime
                                   const Value &max,
                                   pValueInRange valueInRange,
                                   const Value &value) :
-        ParameterTime(ParameterDoubleType::ManipulationDuration, Param::FuncActive, "Длит", "Duration", min, max, valueInRange, value) { }
+        ParameterTime(TypeDParam::ManipulationDuration, Param::FuncActive, "Длит", "Duration", min, max, valueInRange, value) { }
 };
 
 
@@ -518,7 +518,7 @@ struct ParameterManipulationPeriod : public ParameterTime
                                 const Value &max,
                                 pValueInRange valueInRange,
                                 const Value &value) :
-        ParameterTime(ParameterDoubleType::ManipulationPeriod, Param::FuncActive, "Период", "Period", min, max, valueInRange, value) { }
+        ParameterTime(TypeDParam::ManipulationPeriod, Param::FuncActive, "Период", "Period", min, max, valueInRange, value) { }
 };
 
 

@@ -121,7 +121,7 @@ Param *WaveGraphics::GetParameterForDraw(const Chan &ch, int i)
             {
                 ParameterDouble *paramDouble = reinterpret_cast<ParameterDouble *>(parameter);
             
-                if (paramDouble->GetType() == ParameterDoubleType::Frequency)
+                if (paramDouble->GetType() == TypeDParam::Frequency)
                 {
                     parameter = FORM(Chan(ch).GetInverse())->GetParameter(i);
                 }

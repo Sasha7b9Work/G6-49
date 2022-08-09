@@ -90,13 +90,13 @@ static void RepayEmptySymbols(char *buffer)
 
 static cstr ZeroValue(const ParameterDouble *param)
 {
-    ParameterDoubleType::E type = param->GetType();
+    TypeDParam::E type = param->GetType();
 
-    if (type == ParameterDoubleType::Amplitude)
+    if (type == TypeDParam::Amplitude)
     {
         return "00.0000";
     }
-    else if (type == ParameterDoubleType::Offset)
+    else if (type == TypeDParam::Offset)
     {
         return "+00.0000";
     }

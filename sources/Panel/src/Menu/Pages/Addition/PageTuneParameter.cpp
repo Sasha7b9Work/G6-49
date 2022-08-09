@@ -127,7 +127,7 @@ bool PageTuneParameter::VerifyForPossiblyChangesAmplitude(const Control &control
 
             if (param->IsAmplitude() && (param->GetValue().Abs() == 0))
             {
-                ParameterDouble *param_offset = CURRENT_FORM->FindParameter(ParameterDoubleType::Offset);
+                ParameterDouble *param_offset = CURRENT_FORM->FindParameter(TypeDParam::Offset);
 
                 if (param_offset)
                 {

@@ -253,7 +253,7 @@ bool SCPI::Handler::Processing(SimpleMessage *message)
 }
 
 
-pchar SCPI::ProcessParameterDouble(pchar buffer, ParameterDoubleType::E value)
+pchar SCPI::ProcessParameterDouble(pchar buffer, TypeDParam::E value)
 {
     ParameterDouble *param = CURRENT_FORM->FindParameter(value);
 

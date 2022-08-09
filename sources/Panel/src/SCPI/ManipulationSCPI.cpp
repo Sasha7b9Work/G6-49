@@ -48,7 +48,7 @@ static void HintEnabled(String *message)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pchar FuncMDuration(pchar buffer)
 {
-    return SCPI::ProcessParameterDouble(buffer, ParameterDoubleType::ManipulationDuration);
+    return SCPI::ProcessParameterDouble(buffer, TypeDParam::ManipulationDuration);
 }
 
 static void HintMDuration(String *)
@@ -59,7 +59,7 @@ static void HintMDuration(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pchar FuncMPeriod(pchar buffer)
 {
-    return SCPI::ProcessParameterDouble(buffer, ParameterDoubleType::ManipulationPeriod);
+    return SCPI::ProcessParameterDouble(buffer, TypeDParam::ManipulationPeriod);
 }
 
 
