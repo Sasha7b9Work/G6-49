@@ -1158,7 +1158,7 @@ void DisplayCorrection::Init(Value value)
             param == form->FindParameter(TypeIParam::PacketNumber) ||
             param == form->FindParameter(TypeDParam::Duration))
         {
-            ParamPacketPeriod *par_per = (ParamPacketPeriod *)form->FindParameter(TypeDParam::PacketPeriod);
+            PPacketPeriod *par_per = (PPacketPeriod *)form->FindParameter(TypeDParam::PacketPeriod);
 
             if (par_per->RecalcualateValue())
             {
@@ -1233,7 +1233,7 @@ void Tuner::OnButtonApply()
 
             if (type == TypeDParam::PacketPeriod)
             {
-                ParamPacketPeriod *pack_period = (ParamPacketPeriod *)paramDouble;
+                PPacketPeriod *pack_period = (PPacketPeriod *)paramDouble;
 
                 if (DisplayEntering::ToValue() < pack_period->CalculateMinValue())
                 {

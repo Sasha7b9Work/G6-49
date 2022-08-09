@@ -435,9 +435,9 @@ struct ParamOffset : public PVoltage
 };
 
 
-struct ParamFrequency : public DParam
+struct PFrequency : public DParam
 {
-    ParamFrequency(const Value &min,
+    PFrequency(const Value &min,
                        const Value &max,
                        pValueInRange valueInRange = EValueInRange,
                        const Value &value = Value("1", Order::Kilo)) :
@@ -445,9 +445,9 @@ struct ParamFrequency : public DParam
 };
 
 
-struct ParamTime : public DParam
+struct PTime : public DParam
 {
-    ParamTime(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar  const nameEN,
+    PTime(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar  const nameEN,
                   const Value &min,
                   const Value &max,
                   pValueInRange valueInRange,
@@ -455,9 +455,9 @@ struct ParamTime : public DParam
 };
 
 
-struct ParamPhase : public DParam
+struct PPhase : public DParam
 {
-    ParamPhase() : DParam(TypeDParam::Phase, Param::FuncActive, "Фаза", "Phase",
+    PPhase() : DParam(TypeDParam::Phase, Param::FuncActive, "Фаза", "Phase",
                                        Value("0", Order::One),
                                        Value("360", Order::One),
                                        EValueInRange,
@@ -465,10 +465,10 @@ struct ParamPhase : public DParam
 };
 
 
-struct ParamPacketPeriod : public ParamTime
+struct PPacketPeriod : public PTime
 {
-    ParamPacketPeriod(const Value &max, const Value &value) :
-        ParamTime(TypeDParam::PacketPeriod, Param::FuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
+    PPacketPeriod(const Value &max, const Value &value) :
+        PTime(TypeDParam::PacketPeriod, Param::FuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
     // Возвращает true, если значение изменилось
@@ -481,44 +481,44 @@ struct ParamPacketPeriod : public ParamTime
 };
 
 
-struct ParamPeriod : public ParamTime
+struct PPeriod : public PTime
 {
-    ParamPeriod(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
-        ParamTime(TypeDParam::Period, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
+    PPeriod(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
+        PTime(TypeDParam::Period, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 };
 
 
-struct ParamDuration : public ParamTime
+struct PDuration : public PTime
 {
-    ParamDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
-        ParamTime(TypeDParam::Duration, Param::FuncActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
+    PDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
+        PTime(TypeDParam::Duration, Param::FuncActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 };
 
 
-struct PDelay : public ParamTime
+struct PDelay : public PTime
 {
     PDelay(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") :
-        ParamTime(TypeDParam::Delay, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
+        PTime(TypeDParam::Delay, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 };
 
 
-struct PManipulationDuration : public ParamTime
+struct PManipulationDuration : public PTime
 {
     PManipulationDuration(const Value &min,
                                   const Value &max,
                                   pValueInRange valueInRange,
                                   const Value &value) :
-        ParamTime(TypeDParam::ManipulationDuration, Param::FuncActive, "Длит", "Duration", min, max, valueInRange, value) { }
+        PTime(TypeDParam::ManipulationDuration, Param::FuncActive, "Длит", "Duration", min, max, valueInRange, value) { }
 };
 
 
-struct PManipulationPeriod : public ParamTime
+struct PManipulationPeriod : public PTime
 {
     PManipulationPeriod(const Value &min,
                                 const Value &max,
                                 pValueInRange valueInRange,
                                 const Value &value) :
-        ParamTime(TypeDParam::ManipulationPeriod, Param::FuncActive, "Период", "Period", min, max, valueInRange, value) { }
+        PTime(TypeDParam::ManipulationPeriod, Param::FuncActive, "Период", "Period", min, max, valueInRange, value) { }
 };
 
 
