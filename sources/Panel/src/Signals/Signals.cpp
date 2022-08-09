@@ -90,7 +90,7 @@ static SMinMax OffstInRange(Form *form)
 static ParamFrequency    sineA_Frequency(FREQUENCY_SINE_MIN, FREQUENCY_SINE_MAX);
 static ParamAmplitude    sineA_Amplitude;
 static ParamOffset       sineA_Offset(OffstInRange);
-static ParameterManipulation sineA_Manipulation(sineManipulationA);
+static PManipulation sineA_Manipulation(sineManipulationA);
 
 static Param *params_SineA[] =
 {
@@ -253,7 +253,7 @@ static ParamAmplitude     impulseA_Amplitude;
 static ParamOffset        impulseA_Offset;
 static ParameterPolarity      impulseA_Polarity(namesPolarity);
 static ParameterModeStart     impulseA_ModeStart(Param::FuncActive, namesModeStartImpulse);
-static ParameterClockImpulse  impulse_Clock(namesClockImpulse);
+static PClockImpulse  impulse_Clock(namesClockImpulse);
 static ParameterModeStartStop impulseA_StartStop(FuncActive_ModeStartStopAndDelayImpulseA, namesModeStartStopImpulse);
 static ParamDelay         impulseA_Delay(FuncActive_ModeStartStopAndDelayImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
 
@@ -360,7 +360,7 @@ static ParamFrequency    sineB_Frequency(FREQUENCY_SINE_MIN, FREQUENCY_SINE_MAX)
 static ParamAmplitude    sineB_Amplitude;
 static ParamOffset       sineB_Offset;
 static ParamPhase        sineB_Phase;
-static ParameterManipulation sineB_Manipulation(sineManipulationB);
+static PManipulation sineB_Manipulation(sineManipulationB);
 
 static Param *params_SineB[] =
 {

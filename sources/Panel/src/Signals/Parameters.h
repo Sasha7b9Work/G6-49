@@ -549,15 +549,15 @@ struct ParameterPolarity : public CParam
 };
 
 
-struct ParameterClockImpulse : public CParam
+struct PClockImpulse : public CParam
 {
-    ParameterClockImpulse(pchar *names) : CParam(TypeCParam::ClockImpulse, Param::FuncActive, "Оп. частота", "Clock", names) { }
+    PClockImpulse(pchar *names) : CParam(TypeCParam::ClockImpulse, Param::FuncActive, "Оп. частота", "Clock", names) { }
 };
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Complex ///
-struct ParameterManipulation : public CMSParam
+struct PManipulation : public CMSParam
 {
-    ParameterManipulation(Param **paramaters);
+    PManipulation(Param **paramaters);
 };
 

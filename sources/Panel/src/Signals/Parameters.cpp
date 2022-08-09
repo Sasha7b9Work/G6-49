@@ -436,7 +436,7 @@ bool CParam::SetAndLoadChoice(int ch)
 }
 
 
-ParameterManipulation::ParameterManipulation(Param **parameters) : CMSParam(TypeCMSParam::Manipulation, "Манип", "Manip", parameters)
+PManipulation::PManipulation(Param **parameters) : CMSParam(TypeCMSParam::Manipulation, "Манип", "Manip", parameters)
 {
 
 }
