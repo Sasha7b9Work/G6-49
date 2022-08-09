@@ -42,7 +42,7 @@ void Viewer::Draw(int y, int xName, int xValue, int xUnits, const Chan &ch)
 
     typedef void (Viewer::*funcDrawValue)(int, int, int);
 
-    static const funcDrawValue funcs[ParameterKind::Count] =
+    static const funcDrawValue funcs[KndParam::Count] =
     {
         &Viewer::DrawValue,
         &Viewer::DrawChoice,
