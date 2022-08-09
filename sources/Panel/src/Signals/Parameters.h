@@ -7,6 +7,11 @@
 #include "Settings/SettingsTypes.h"
 
 
+class Form;
+struct Key;
+struct Parameter;
+
+
 struct StructMinMax
 {
     StructMinMax() : min(1), max(1), valid(true) { }
@@ -15,20 +20,15 @@ struct StructMinMax
     bool valid;     // ≈сли true - текущее значение допустимо
 };
 
-typedef StructMinMax (*pValueInRange)();
+typedef StructMinMax (*pValueInRange)(Form *);
 
-inline StructMinMax EValueInRange() { return StructMinMax(); }
+inline StructMinMax EValueInRange(Form *) { return StructMinMax(); }
 
 
 #define DEFAULT_AMPLITUDE Value("1", Order::One)
 
 #define IMPULSE_PERIOD_MIN   Value("20", Order::Nano)
 #define IMPULSE_DURATION_MIN Value("10", Order::Nano)
-
-
-class Form;
-struct Key;
-struct Parameter;
 
 
 struct ParameterKind
@@ -81,11 +81,13 @@ struct Parameter
 
     Viewer viewer;
 
+    // Ёто "самое максимальное" значение параметра. Ѕольше его быть не может
     virtual Value GetMax() const { return Value("1", Order::One); }
 
+    // Ёто "самое минимальное" значение параметра. ћеньше его быть не может
     virtual Value GetMin() const { return Value("0", Order::One); }
 
-    virtual StructMinMax ValueInRange() const { return EValueInRange(); }
+    virtual StructMinMax ValueInRange() const { return EValueInRange(form); }
 
     virtual Value GetValue() const { return Value("1", Order::One); } //-V524
 
@@ -101,14 +103,14 @@ struct Parameter
 
     static bool FuncActive() { return true; }
 
-    pFuncBV              funcOfActive;  // јктивен ли данный параметр
+    pFuncBV          funcOfActive;  // јктивен ли данный параметр
 
 protected:
     
-    Form                *form;          // ‘орма, дл€ которой зада этот параметр
-    Parameter           *parent;        // ≈сли параметр вложенный, то здесь адрес родител€
-    ParameterKind::E     kind;
-    pchar                names[2];
+    Form             *form;         // ‘орма, дл€ которой зада этот параметр
+    Parameter        *parent;       // ≈сли параметр вложенный, то здесь адрес родител€
+    ParameterKind::E  kind;
+    pchar             names[2];
 };
 
 
@@ -179,13 +181,16 @@ struct ParameterDouble : public Parameter
     // ¬озвращает единицы измерени€, приведЄнные к пор€дку order. ≈сли order == Order::Count, единциы будут рассчитыватьс€ исход€ из текущего значени€ value
     pString GetUnits(Order::E order = Order::Count) const;
 
+    Value Max() const { return max; }
+
     // ¬озвращает максимальное значение, которое может иметь параметр
     virtual Value GetMax() const { return max; }
     
     // ¬озвращает минимальное значение, которое может иметь параметр
     virtual Value GetMin() const { return min; }
 
-    virtual StructMinMax ValueInRange() const { return valueInRange(); }
+    // ¬озвращает стрктуру, котора€ описывает максимальное и минимальное 
+    virtual StructMinMax ValueInRange() const { return valueInRange(form); }
 
     virtual Tuner *GetTuner()   { return &tuner; };
 
@@ -255,7 +260,7 @@ struct ParameterInteger : public Parameter
                                
     virtual Value GetMin() const              { return min;   }
 
-    virtual StructMinMax ValueInRange() const { return valueInRange(); }
+    virtual StructMinMax ValueInRange() const { return valueInRange(form); }
 
     virtual String ToString(Value value) const;
 
@@ -404,8 +409,8 @@ struct ParameterAmplitude : public ParameterVoltage
 {
     ParameterAmplitude(const Value &min = Value("0", Order::One),
                        const Value &max = Value("10", Order::One),
-                       const Value &value = DEFAULT_AMPLITUDE,
-                       pValueInRange valueInRange = EValueInRange) :
+                       pValueInRange valueInRange = EValueInRange,
+                       const Value &value = DEFAULT_AMPLITUDE) :
         ParameterVoltage(ParameterDoubleType::Amplitude, "–азмах", "Amplitude", min, max, valueInRange, value) { }
 
     virtual Value GetMax() const;
@@ -414,14 +419,11 @@ struct ParameterAmplitude : public ParameterVoltage
 
 struct ParameterOffset : public ParameterVoltage
 {
-    ParameterOffset(const Value &min = Value("-5", Order::One),
+    ParameterOffset(pValueInRange valueInRange = EValueInRange,
+                    const Value &min = Value("-5", Order::One),
                     const Value &max = Value("5", Order::One),
-                    pValueInRange valueInRange = EValueInRange,
                     const Value &value = Value("0", Order::One)) :
         ParameterVoltage(ParameterDoubleType::Offset, "—мещение", "Offset", min, max, valueInRange, value) { }
-
-    virtual Value GetMax() const;
-    virtual Value GetMin() const;
 };
 
 

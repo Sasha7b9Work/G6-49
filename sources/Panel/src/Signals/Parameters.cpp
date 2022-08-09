@@ -611,43 +611,6 @@ Value ParameterAmplitude::GetMax() const
 }
 
 
-Value ParameterOffset::GetMax() const
-{
-    // Ампл == 0  | [0 ... 5]
-    // Ампл <= 1В | [0 ... 2.5], ampl / 2 + fabs(см) <= 2.5
-    // Ампл > 1В  | [0 ... 5],   ампл / 2 + fabs(см) <= 5
-
-    Value amplitude = form->FindParameter(ParameterDoubleType::Amplitude)->GetValue();
-
-    Value result = ParameterDouble::GetMax();
-
-    if (amplitude.Abs() == 0)
-    {
-        return ParameterDouble::GetMax();
-    }
-    else if (amplitude.ToDouble() <= 1.0F)
-    {
-        result.Div(2);
-    }
-
-    amplitude.Div(2);
-
-    result.Sub(amplitude);
-
-    return result;
-}
-
-
-Value ParameterOffset::GetMin() const
-{
-    Value result = GetMax();
-
-    result.SetSign(-1);
-
-    return result;
-}
-
-
 pchar ParameterChoiceType::Name(ParameterChoiceType::E type)
 {
     static pchar  const names[ParameterChoiceType::Count] =

@@ -822,10 +822,12 @@ void DisplayCorrection::ShowMessageOutRangIfNeed(Value value)
 {
     Parameter *param = Tuner::Current()->GetParameter();
 
-    if (value > param->GetMax() || value < param->GetMin())
+    StructMinMax min_max = Tuner::Current()->GetParameter()->ValueInRange();
+
+    if (!min_max.valid)
     {
-        String m = param->ToString(param->GetMin());
-        char *buffer = m.c_str();
+        String min = param->ToString(min_max.min);
+        char *buffer = min.c_str();
 
         while (buffer && *buffer == '0')            // Удаляем все нули в начале
         {
@@ -834,18 +836,17 @@ void DisplayCorrection::ShowMessageOutRangIfNeed(Value value)
 
         if (buffer && (*buffer == '.' || *buffer == ','))       // Если первый символ - точка, добавляем один ноль перед точкой
         {
-            if (buffer > m.c_str())
+            if (buffer > min.c_str())
             {
                 buffer--;
             }
         }
 
-        String min(buffer);
+        String max_str = param->ToString(min_max.max);
+        String min_str(buffer);
 
-        String max = param->ToString(param->GetMax());
-
-        Display::Warnings::Show(String("Выход за границы диапазона %s ... %s", min.c_str(), max.c_str()),
-                                String("Out of range %s ... %s", min.c_str(), max.c_str()), true);
+        Display::Warnings::Show(String("Выход за границы диапазона %s ... %s", min_str.c_str(), max_str.c_str()),
+                                String("Out of range %s ... %s", min_str.c_str(), max_str.c_str()), true);
     }
 }
 

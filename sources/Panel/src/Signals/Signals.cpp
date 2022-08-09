@@ -51,9 +51,45 @@ static Parameter *sineManipulationA[] =
     nullptr
 };
 
+
+static StructMinMax OffstInRange(Form *form)
+{
+    // Ампл == 0  | [0 ... 5]
+    // Ампл <= 1В | [0 ... 2.5], ampl / 2 + fabs(см) <= 2.5
+    // Ампл > 1В  | [0 ... 5],   ампл / 2 + fabs(см) <= 5
+
+    Value amplitude = form->FindParameter(ParameterDoubleType::Amplitude)->GetValue();
+    ParameterDouble *param_offset = form->FindParameter(ParameterDoubleType::Offset);
+
+    StructMinMax result;
+    result.max = param_offset->Max();
+
+    if (amplitude.Abs() == 0)
+    {
+        result.max = param_offset->Max();
+    }
+    else if(amplitude.ToDouble() <= 1.0F)
+    {
+        result.max.Div(2);
+    }
+
+    amplitude.Div(2);
+
+    result.max.Sub(amplitude);
+
+    result.min = param_offset->Max();
+    result.min.SetSign(-1);
+
+    Value offset = param_offset->GetValue();
+
+    result.valid = (offset <= result.max) && (offset >= result.min);
+
+    return result;
+}
+
 static ParameterFrequency    sineA_Frequency(FREQUENCY_SINE_MIN, FREQUENCY_SINE_MAX);
 static ParameterAmplitude    sineA_Amplitude;
-static ParameterOffset       sineA_Offset;
+static ParameterOffset       sineA_Offset(OffstInRange);
 static ParameterManipulation sineA_Manipulation(sineManipulationA);
 
 static Parameter *params_SineA[] =
