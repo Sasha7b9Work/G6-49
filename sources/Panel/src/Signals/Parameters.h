@@ -103,6 +103,8 @@ struct Parameter
 
     static bool FuncActive() { return true; }
 
+    ParameterDouble *ReinterpretToDouble() { return (ParameterDouble *)this; }
+
     pFuncBV          funcOfActive;  // Активен ли данный параметр
 
 protected:
@@ -206,6 +208,8 @@ struct ParameterDouble : public Parameter
     virtual void RestoreState();
 
     ParameterDouble &operator=(const ParameterDouble &);
+
+    bool IsAmplitude() const { return type == ParameterDoubleType::Amplitude; }
 
 private:
     Tuner tuner;        // Используется для настройки 

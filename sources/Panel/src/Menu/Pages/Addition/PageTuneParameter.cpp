@@ -121,26 +121,21 @@ bool PageTuneParameter::VerifyForPossiblyChangesAmplitude(const Control &control
 {
     if (control.IsRotate() || control.IsEntering())
     {
-        Parameter *parameter = Tuner::Current()->GetParameter();
-
-        if (parameter->GetKind() == ParameterKind::Double)
+        if (Tuner::Current()->GetParameter()->IsDouble())
         {
-            ParameterDouble *paramDouble = reinterpret_cast<ParameterDouble *>(parameter);
+            ParameterDouble *param = Tuner::Current()->GetParameter()->ReinterpretToDouble();
 
-            if (paramDouble->GetType() == ParameterDoubleType::Amplitude)
+            if (param->IsAmplitude() && (param->GetValue().Abs() == 0))
             {
-                if (paramDouble->GetValue().Abs() == 0)
+                ParameterDouble *param_offset = CURRENT_FORM->FindParameter(ParameterDoubleType::Offset);
+
+                if (param_offset)
                 {
-                    ParameterDouble *offset = CURRENT_FORM->FindParameter(ParameterDoubleType::Offset);
-
-                    if (offset)
+                    if (std::fabs(param_offset->GetValue().ToDouble()) > 2.5)
                     {
-                        if (std::fabs(offset->GetValue().ToDouble()) > 2.5)
-                        {
-                            Display::Warnings::Show("Смещение не более +/- 2.5В", "Offset no more than +/- 2.5V", true);
+                        Display::Warnings::Show("Смещение не более +/- 2.5В", "Offset no more than +/- 2.5V", true);
 
-                            return false;
-                        }
+                        return false;
                     }
                 }
             }
