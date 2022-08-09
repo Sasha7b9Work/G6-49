@@ -25,9 +25,9 @@ namespace A
     namespace Impulse
     {
         extern Form *form;
-        extern ParameterModeStartStop *start_stop;
+        extern PModeStartStop *start_stop;
         extern ParamDelay         *delay;
-        extern ParameterModeStart     *mode_start;
+        extern PModeStart     *mode_start;
         extern ParamPeriod        *period;
     }
 
@@ -49,6 +49,6 @@ namespace B
         extern Form *form;
         extern ParamPeriod    *period;
         extern ParamDuration  *duration;
-        extern ParameterModeStart *mode_start;
+        extern PModeStart *mode_start;
     }
 };

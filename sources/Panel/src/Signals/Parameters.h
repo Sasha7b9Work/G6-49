@@ -523,29 +523,29 @@ struct ParamManipulationPeriod : public ParamTime
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
-struct ParameterModeStart : public CParam
+struct PModeStart : public CParam
 {
-    ParameterModeStart(pFuncBV funcActive, pchar *names) : CParam(TypeCParam::ModeStart, funcActive, "Запуск", "Start", names) { }
+    PModeStart(pFuncBV funcActive, pchar *names) : CParam(TypeCParam::ModeStart, funcActive, "Запуск", "Start", names) { }
 };
 
 
-struct ParameterModeStartStop : public CParam
+struct PModeStartStop : public CParam
 {
-    ParameterModeStartStop(pFuncBV funcActive, pchar *names) : CParam(TypeCParam::ModeStartStop, funcActive, "А-Старт,В-Стоп", "A-Start,B-Stop", names) { }
+    PModeStartStop(pFuncBV funcActive, pchar *names) : CParam(TypeCParam::ModeStartStop, funcActive, "А-Старт,В-Стоп", "A-Start,B-Stop", names) { }
 };
 
 
-struct ParameterManipulationEnabled : public CParam
+struct PManipulationEnabled : public CParam
 {
-    ParameterManipulationEnabled(pchar *names) : 
+    PManipulationEnabled(pchar *names) : 
         CParam(TypeCParam::ManipulationEnabled, Param::FuncActive, "Манип", "Manip", names) { }
 
 };
 
 
-struct ParameterPolarity : public CParam
+struct PPolarity : public CParam
 {
-    ParameterPolarity(pchar *names) : CParam(TypeCParam::Polarity, Param::FuncActive, "Полярность", "Polarity", names) { }
+    PPolarity(pchar *names) : CParam(TypeCParam::Polarity, Param::FuncActive, "Полярность", "Polarity", names) { }
 };
 
 
