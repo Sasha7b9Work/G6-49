@@ -33,10 +33,10 @@ static void FuncCloseManipulation()
 
 
 static ParameterManipulationEnabled   sineManipulationA_Enabled (namesManipulationEnabled);
-static ParameterManipulationDuration  sineManipulationA_Duration(Value("10", Order::Nano), Value("10", Order::One),
+static ParamManipulationDuration  sineManipulationA_Duration(Value("10", Order::Nano), Value("10", Order::One),
                                                                  EValueInRange,
                                                                  Value("5", Order::Milli));
-static ParameterManipulationPeriod    sineManipulationA_Period  (Value("20", Order::Nano), Value("10000", Order::One),
+static ParamManipulationPeriod    sineManipulationA_Period  (Value("20", Order::Nano), Value("10000", Order::One),
                                                                  EValueInRange,
                                                                  Value("25", Order::Milli));
 static BParam                sineManipulationA_Exit    ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
@@ -339,10 +339,10 @@ static Form *formsA[] =
 
 
 static ParameterManipulationEnabled  sineManipulationB_Enabled  (namesManipulationEnabled);
-static ParameterManipulationDuration sineManipulationB_Duration(Value("10", Order::Nano), Value("10", Order::One),
+static ParamManipulationDuration sineManipulationB_Duration(Value("10", Order::Nano), Value("10", Order::One),
                                                                 EValueInRange,
                                                                 Value("5", Order::Milli));
-static ParameterManipulationPeriod   sineManipulationB_Period(Value("20", Order::Nano), Value("10000", Order::One),
+static ParamManipulationPeriod   sineManipulationB_Period(Value("20", Order::Nano), Value("10000", Order::One),
                                                               EValueInRange,
                                                               Value("25", Order::Milli));
 static BParam               sineManipulationB_Exit     ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);

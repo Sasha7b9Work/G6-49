@@ -502,9 +502,9 @@ struct ParamDelay : public ParamTime
 };
 
 
-struct ParameterManipulationDuration : public ParamTime
+struct ParamManipulationDuration : public ParamTime
 {
-    ParameterManipulationDuration(const Value &min,
+    ParamManipulationDuration(const Value &min,
                                   const Value &max,
                                   pValueInRange valueInRange,
                                   const Value &value) :
@@ -512,9 +512,9 @@ struct ParameterManipulationDuration : public ParamTime
 };
 
 
-struct ParameterManipulationPeriod : public ParamTime
+struct ParamManipulationPeriod : public ParamTime
 {
-    ParameterManipulationPeriod(const Value &min,
+    ParamManipulationPeriod(const Value &min,
                                 const Value &max,
                                 pValueInRange valueInRange,
                                 const Value &value) :
