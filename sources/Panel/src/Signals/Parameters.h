@@ -31,7 +31,7 @@ inline SMinMax EValueInRange(Form *) { return SMinMax(); }
 #define IMPULSE_DURATION_MIN Value("10", Order::Nano)
 
 
-struct KndParam
+struct KindParam
 {
     enum E
     {
@@ -47,7 +47,7 @@ struct KndParam
 
 struct Param
 {
-    Param(KndParam::E k, pFuncBV funcActive, pchar nRU, pchar nEN);
+    Param(KindParam::E k, pFuncBV funcActive, pchar nRU, pchar nEN);
 
     virtual ~Param() { }
 
@@ -77,7 +77,7 @@ struct Param
 
     Form *GetForm();
     
-    KndParam::E GetKind() { return kind; }
+    KindParam::E GetKind() { return kind; }
 
     Viewer viewer;
 
@@ -111,7 +111,7 @@ protected:
     
     Form             *form;         // ‘орма, дл€ которой зада этот параметр
     Param        *parent;       // ≈сли параметр вложенный, то здесь адрес родител€
-    KndParam::E  kind;
+    KindParam::E  kind;
     pchar             names[2];
 };
 
@@ -313,7 +313,7 @@ struct ParameterChoiceType
 struct ParameterChoice : public Param
 {
     ParameterChoice(ParameterChoiceType::E t, pFuncBV funcActive, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
-        Param(KndParam::Choice, funcActive, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
+        Param(KindParam::Choice, funcActive, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
 
     ParameterChoiceType::E GetType() { return type; }
 
@@ -355,7 +355,7 @@ struct ParameterCompositeType
 struct ParameterComposite : public Param
 {
     ParameterComposite(ParameterCompositeType::E v, pchar nameRU, pchar nameEN, Param **parameters) :
-        Param(KndParam::Composite, Param::FuncActive, nameRU, nameEN), params(parameters), type(v) { }
+        Param(KindParam::Composite, Param::FuncActive, nameRU, nameEN), params(parameters), type(v) { }
 
     virtual void SetForm(Form *form);
 
@@ -385,7 +385,7 @@ private:
 struct ParameterButton : public Param
 {
     ParameterButton(pchar titleRU, pchar titleEN, pFuncVV f) :
-        Param(KndParam::Button, Param::FuncActive, titleRU, titleEN), func(f) {};
+        Param(KindParam::Button, Param::FuncActive, titleRU, titleEN), func(f) {};
 
     virtual String ToString(String &) const { return String(""); };
 
