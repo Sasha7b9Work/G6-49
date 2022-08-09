@@ -382,9 +382,9 @@ private:
 };
 
 
-struct ParameterButton : public Param
+struct BParam : public Param
 {
-    ParameterButton(pchar titleRU, pchar titleEN, pFuncVV f) :
+    BParam(pchar titleRU, pchar titleEN, pFuncVV f) :
         Param(KindParam::Button, Param::FuncActive, titleRU, titleEN), func(f) {};
 
     virtual String ToString(String &) const { return String(""); };

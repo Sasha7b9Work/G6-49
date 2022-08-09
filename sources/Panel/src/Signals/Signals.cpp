@@ -39,7 +39,7 @@ static ParameterManipulationDuration  sineManipulationA_Duration(Value("10", Ord
 static ParameterManipulationPeriod    sineManipulationA_Period  (Value("20", Order::Nano), Value("10000", Order::One),
                                                                  EValueInRange,
                                                                  Value("25", Order::Milli));
-static ParameterButton                sineManipulationA_Exit    ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
+static BParam                sineManipulationA_Exit    ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
 
 
 static Param *sineManipulationA[] =
@@ -196,7 +196,7 @@ static ParameterFrequency  freeA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX)
 static ParameterAmplitude  freeA_Amplitude;
 static ParameterOffset     freeA_Offset;
 static ParameterModeStart  freeA_ModeStart(Param::FuncActive, namesModeStartFree);
-static ParameterButton     freeA_Choose   ("Выбрать", "Choose", OnChoose_FileA);
+static BParam     freeA_Choose   ("Выбрать", "Choose", OnChoose_FileA);
 
 static Param *params_FreeA[] =
 {
@@ -345,7 +345,7 @@ static ParameterManipulationDuration sineManipulationB_Duration(Value("10", Orde
 static ParameterManipulationPeriod   sineManipulationB_Period(Value("20", Order::Nano), Value("10000", Order::One),
                                                               EValueInRange,
                                                               Value("25", Order::Milli));
-static ParameterButton               sineManipulationB_Exit     ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
+static BParam               sineManipulationB_Exit     ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
 
 static Param *sineManipulationB[] =
 {
@@ -435,7 +435,7 @@ static ParameterFrequency  freeB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX)
 static ParameterAmplitude  freeB_Amplitude;
 static ParameterOffset     freeB_Offset;
 static ParameterModeStart  freeB_ModeStart(Param::FuncActive, namesModeStartFree);
-static ParameterButton     freeB_Choose("Выбрать", "Choose", OnChoose_FileB);
+static BParam     freeB_Choose("Выбрать", "Choose", OnChoose_FileB);
 
 static Param *params_FreeB[] =
 {
