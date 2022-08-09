@@ -3,7 +3,7 @@
 #include "Settings/SettingsTypes.h"
 
 
-struct Parameter;
+struct Param;
 
 
 namespace WaveGraphics
@@ -23,5 +23,5 @@ namespace WaveGraphics
     // Высота области отрисовки сигнала
     int Height();
 
-    Parameter *GetParameterForDraw(const Chan &, int i);
+    Param *GetParameterForDraw(const Chan &, int i);
 };

@@ -476,9 +476,9 @@ DEF_CHOICE_2( cShowSends,                                                       
     "Показывать параметры", "Show options",
     "Показывает параметры, засылаемые в ПЛИС", "Shows parameters sent to FPGA",
     DISABLED_RU,                 DISABLED_EN,
-    "Показ параметров отключён", "Parameter display disabled",
+    "Показ параметров отключён", "Param display disabled",
     ENABLED_RU,                  ENABLED_EN,
-    "Показ параметров включён",  "Parameter display enabled",
+    "Показ параметров включён",  "Param display enabled",
     set.dbg.showSends, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
 )
 

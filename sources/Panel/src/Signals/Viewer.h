@@ -6,14 +6,14 @@
 */
 
 
-struct Parameter;
+struct Param;
 
 
 class Viewer
 {
 public:
 
-    Viewer(Parameter *param);
+    Viewer(Param *param);
 
     // Отрисовать параметр со значением в горизонтали y. Название параметра выводится с xName, значение - с xValue, единциы измерения - c xUnits
     void Draw(int y, int xName, int xValue, int xUnits, const Chan &);
@@ -30,5 +30,5 @@ private:
 
     void DrawButton(int y, int xValue, int xUnits);
 
-    Parameter *param;
+    Param *param;
 };

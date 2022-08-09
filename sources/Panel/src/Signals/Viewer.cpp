@@ -18,7 +18,7 @@ static bool IsOpenedFirstSubPageSignals()
 }
 
 
-Viewer::Viewer(Parameter *_param) : param(_param)
+Viewer::Viewer(Param *_param) : param(_param)
 {
 
 }

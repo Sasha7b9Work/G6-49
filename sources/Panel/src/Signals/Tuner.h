@@ -6,7 +6,7 @@
 
 
 class DisplayCorrection;
-struct Parameter;
+struct Param;
 struct ParameterDouble;
 struct ParameterInteger;
 class Tuner;
@@ -212,7 +212,7 @@ public:
 
     // Вывод сообщения о выходе за пределы допустимого диапазона, если необходимо
     // Возвращает false, если выходит за границы диапазона допустимых значений
-    static bool ShowMessageOutRangIfNeed(Parameter *);
+    static bool ShowMessageOutRangIfNeed(Param *);
 
     // Рассчитывает, к какому порядку нужно привести значение для индикации (Для частоты и времени порядок плавающий, а для счётчиков и напряжения - постоянный, равный Order::One)
     static Order::E CalculateOrderForIndication();
@@ -260,7 +260,7 @@ public:
         };
     };
 
-    Tuner(Parameter *param);
+    Tuner(Param *param);
 
     void Init();
 
@@ -274,7 +274,7 @@ public:
     // Обработчик нажатия кнопки "Применить"
     void OnButtonApply();
 
-    Parameter *GetParameter() { return param; }
+    Param *GetParameter() { return param; }
 
     static bool InModeCorrection() { return (mode == ModeTuning::Correction); }
 
@@ -299,7 +299,7 @@ public:
 
 private:
 
-    Parameter *param;           // Настраиваемый параметр
+    Param *param;           // Настраиваемый параметр
 
     DisplayCorrection display;
 

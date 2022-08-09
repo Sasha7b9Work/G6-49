@@ -9,7 +9,7 @@
 
 class Form;
 struct Key;
-struct Parameter;
+struct Param;
 
 
 struct StructMinMax
@@ -45,11 +45,11 @@ struct ParameterKind
 };
 
 
-struct Parameter
+struct Param
 {
-    Parameter(ParameterKind::E k, pFuncBV funcActive, pchar nRU, pchar nEN);
+    Param(ParameterKind::E k, pFuncBV funcActive, pchar nRU, pchar nEN);
 
-    virtual ~Parameter() { }
+    virtual ~Param() { }
 
     pString Name() const;
 
@@ -60,10 +60,10 @@ struct Parameter
 
     virtual Tuner *GetTuner() { return nullptr; }
 
-    void SetParent(Parameter *p);
+    void SetParent(Param *p);
     
     // Возвращает адрес родительского параметра
-    Parameter *GetParent();
+    Param *GetParent();
 
     bool IsDouble() const;
     bool IsInteger() const;
@@ -110,7 +110,7 @@ struct Parameter
 protected:
     
     Form             *form;         // Форма, для которой зада этот параметр
-    Parameter        *parent;       // Если параметр вложенный, то здесь адрес родителя
+    Param        *parent;       // Если параметр вложенный, то здесь адрес родителя
     ParameterKind::E  kind;
     pchar             names[2];
 };
@@ -140,7 +140,7 @@ struct ParameterDoubleType
 };
 
 
-struct ParameterDouble : public Parameter
+struct ParameterDouble : public Param
 {
     friend struct LogicFloatValue;
     friend class Tuner;
@@ -245,7 +245,7 @@ struct ParameterIntegerType
 };
 
 
-struct ParameterInteger : public Parameter
+struct ParameterInteger : public Param
 {
     ParameterInteger(ParameterIntegerType::E t, pchar  const nameRU, pchar const nameEN,
         const Value &min, const Value &max, pValueInRange, const Value &);
@@ -310,10 +310,10 @@ struct ParameterChoiceType
 };
 
 
-struct ParameterChoice : public Parameter
+struct ParameterChoice : public Param
 {
     ParameterChoice(ParameterChoiceType::E t, pFuncBV funcActive, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
-        Parameter(ParameterKind::Choice, funcActive, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
+        Param(ParameterKind::Choice, funcActive, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
 
     ParameterChoiceType::E GetType() { return type; }
 
@@ -352,17 +352,17 @@ struct ParameterCompositeType
 };
 
 
-struct ParameterComposite : public Parameter
+struct ParameterComposite : public Param
 {
-    ParameterComposite(ParameterCompositeType::E v, pchar nameRU, pchar nameEN, Parameter **parameters) :
-        Parameter(ParameterKind::Composite, Parameter::FuncActive, nameRU, nameEN), params(parameters), type(v) { }
+    ParameterComposite(ParameterCompositeType::E v, pchar nameRU, pchar nameEN, Param **parameters) :
+        Param(ParameterKind::Composite, Param::FuncActive, nameRU, nameEN), params(parameters), type(v) { }
 
     virtual void SetForm(Form *form);
 
     virtual void Reset() { }
 
     int NumParameters() const;
-    Parameter **Parameters() { return params; }
+    Param **Parameters() { return params; }
 
     ParameterDouble *FindParameter(ParameterDoubleType::E p);
     ParameterChoice *FindParameter(ParameterChoiceType::E p);
@@ -377,15 +377,15 @@ struct ParameterComposite : public Parameter
 
 private:
     
-    Parameter **params; // Здесь находятся дополнительные параметры в случае, если они требуются
+    Param **params; // Здесь находятся дополнительные параметры в случае, если они требуются
     ParameterCompositeType::E type;
 };
 
 
-struct ParameterButton : public Parameter
+struct ParameterButton : public Param
 {
     ParameterButton(pchar titleRU, pchar titleEN, pFuncVV f) :
-        Parameter(ParameterKind::Button, Parameter::FuncActive, titleRU, titleEN), func(f) {};
+        Param(ParameterKind::Button, Param::FuncActive, titleRU, titleEN), func(f) {};
 
     virtual String ToString(String &) const { return String(""); };
 
@@ -409,7 +409,7 @@ struct ParameterVoltage : public ParameterDouble
                      const Value &max,
                      pValueInRange valueInRange,
                      const Value &value) :
-        ParameterDouble(type, Parameter::FuncActive, nameRU, nameEN, min, max, valueInRange, value) { }
+        ParameterDouble(type, Param::FuncActive, nameRU, nameEN, min, max, valueInRange, value) { }
 };
 
 
@@ -441,7 +441,7 @@ struct ParameterFrequency : public ParameterDouble
                        const Value &max,
                        pValueInRange valueInRange = EValueInRange,
                        const Value &value = Value("1", Order::Kilo)) :
-        ParameterDouble(ParameterDoubleType::Frequency, Parameter::FuncActive, "Частота", "Frequency", min, max, valueInRange, value) { }
+        ParameterDouble(ParameterDoubleType::Frequency, Param::FuncActive, "Частота", "Frequency", min, max, valueInRange, value) { }
 };
 
 
@@ -457,7 +457,7 @@ struct ParameterTime : public ParameterDouble
 
 struct ParameterPhase : public ParameterDouble
 {
-    ParameterPhase() : ParameterDouble(ParameterDoubleType::Phase, Parameter::FuncActive, "Фаза", "Phase",
+    ParameterPhase() : ParameterDouble(ParameterDoubleType::Phase, Param::FuncActive, "Фаза", "Phase",
                                        Value("0", Order::One),
                                        Value("360", Order::One),
                                        EValueInRange,
@@ -468,7 +468,7 @@ struct ParameterPhase : public ParameterDouble
 struct ParameterPacketPeriod : public ParameterTime
 {
     ParameterPacketPeriod(const Value &max, const Value &value) :
-        ParameterTime(ParameterDoubleType::PacketPeriod, Parameter::FuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
+        ParameterTime(ParameterDoubleType::PacketPeriod, Param::FuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
     // Возвращает true, если значение изменилось
@@ -491,7 +491,7 @@ struct ParameterPeriod : public ParameterTime
 struct ParameterDuration : public ParameterTime
 {
     ParameterDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
-        ParameterTime(ParameterDoubleType::Duration, Parameter::FuncActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
+        ParameterTime(ParameterDoubleType::Duration, Param::FuncActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 };
 
 
@@ -508,7 +508,7 @@ struct ParameterManipulationDuration : public ParameterTime
                                   const Value &max,
                                   pValueInRange valueInRange,
                                   const Value &value) :
-        ParameterTime(ParameterDoubleType::ManipulationDuration, Parameter::FuncActive, "Длит", "Duration", min, max, valueInRange, value) { }
+        ParameterTime(ParameterDoubleType::ManipulationDuration, Param::FuncActive, "Длит", "Duration", min, max, valueInRange, value) { }
 };
 
 
@@ -518,7 +518,7 @@ struct ParameterManipulationPeriod : public ParameterTime
                                 const Value &max,
                                 pValueInRange valueInRange,
                                 const Value &value) :
-        ParameterTime(ParameterDoubleType::ManipulationPeriod, Parameter::FuncActive, "Период", "Period", min, max, valueInRange, value) { }
+        ParameterTime(ParameterDoubleType::ManipulationPeriod, Param::FuncActive, "Период", "Period", min, max, valueInRange, value) { }
 };
 
 
@@ -538,26 +538,26 @@ struct ParameterModeStartStop : public ParameterChoice
 struct ParameterManipulationEnabled : public ParameterChoice
 {
     ParameterManipulationEnabled(pchar *names) : 
-        ParameterChoice(ParameterChoiceType::ManipulationEnabled, Parameter::FuncActive, "Манип", "Manip", names) { }
+        ParameterChoice(ParameterChoiceType::ManipulationEnabled, Param::FuncActive, "Манип", "Manip", names) { }
 
 };
 
 
 struct ParameterPolarity : public ParameterChoice
 {
-    ParameterPolarity(pchar *names) : ParameterChoice(ParameterChoiceType::Polarity, Parameter::FuncActive, "Полярность", "Polarity", names) { }
+    ParameterPolarity(pchar *names) : ParameterChoice(ParameterChoiceType::Polarity, Param::FuncActive, "Полярность", "Polarity", names) { }
 };
 
 
 struct ParameterClockImpulse : public ParameterChoice
 {
-    ParameterClockImpulse(pchar *names) : ParameterChoice(ParameterChoiceType::ClockImpulse, Parameter::FuncActive, "Оп. частота", "Clock", names) { }
+    ParameterClockImpulse(pchar *names) : ParameterChoice(ParameterChoiceType::ClockImpulse, Param::FuncActive, "Оп. частота", "Clock", names) { }
 };
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Complex ///
 struct ParameterManipulation : public ParameterComposite
 {
-    ParameterManipulation(Parameter **paramaters);
+    ParameterManipulation(Param **paramaters);
 };
 

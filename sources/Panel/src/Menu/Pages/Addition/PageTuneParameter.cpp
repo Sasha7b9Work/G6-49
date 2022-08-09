@@ -20,10 +20,10 @@ static ParameterInteger storedInteger = ParameterInteger(ParameterIntegerType::P
                 EValueInRange,
                 Value("0", Order::One));
 
-static Parameter *tuned = nullptr;     // Настраиваемый параметр
+static Param *tuned = nullptr;     // Настраиваемый параметр
 
 
-void PageTuneParameter::SetParameter(Parameter *parameter)
+void PageTuneParameter::SetParameter(Param *parameter)
 {
     if(parameter->IsDouble())
     {
@@ -236,7 +236,7 @@ bool PageTuneParameter::IsOpened()
 
 void PageTuneParameter::CallbackOnButtonCancel()
 {
-    Parameter *parameter = CURRENT_WAVE.GetCurrentForm()->CurrentParameter();
+    Param *parameter = CURRENT_WAVE.GetCurrentForm()->CurrentParameter();
 
     if (parameter->IsDouble())
     {

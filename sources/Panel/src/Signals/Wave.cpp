@@ -105,7 +105,7 @@ void Wave::Reset()
 }
 
 
-Form::Form(TypeForm::E v, Parameter **parameters, Wave *w) : value(v), wave(w), params(parameters), currentParam(0)
+Form::Form(TypeForm::E v, Param **parameters, Wave *w) : value(v), wave(w), params(parameters), currentParam(0)
 {
     numParams = 0;
 	
@@ -142,7 +142,7 @@ void Form::Reset()
 }
 
 
-Parameter *Form::CurrentParameter() const
+Param *Form::CurrentParameter() const
 {
     return params[currentParam];
 }
@@ -154,7 +154,7 @@ int Form::NumParameters() const
 }
 
 
-Parameter *Form::GetParameter(int i) const
+Param *Form::GetParameter(int i) const
 {
     if(i < numParams)
     {
@@ -216,7 +216,7 @@ void Form::TuneGenerator()
 
     if(value == TypeForm::Sine)
     {
-        Parameter *manipulation = FindParameter(ParameterChoiceType::ManipulationEnabled);
+        Param *manipulation = FindParameter(ParameterChoiceType::ManipulationEnabled);
         bool manipulationEnabled = reinterpret_cast<ParameterChoice *>(manipulation)->GetChoice() == 1;
 
         if(CurrentParameter()->GetParent())                                 // –‡ÒÍ˚Ú Ô‡‡ÏÂÚ Ã¿Õ»œ”Àﬂ÷»ﬂ
@@ -281,7 +281,7 @@ ParameterDouble *Form::FindParameter(ParameterDoubleType::E p) const
 {
     for(int i = 0; i < numParams; i++)
     {
-        Parameter *param = params[i];
+        Param *param = params[i];
 
         if(param->IsDouble())
         {
@@ -313,7 +313,7 @@ ParameterChoice *Form::FindParameter(ParameterChoiceType::E p) const
 {
     for(int i = 0; i < numParams; i++)
     {
-        Parameter *param = params[i];
+        Param *param = params[i];
 
         if(param->IsChoice())
         {
@@ -346,7 +346,7 @@ ParameterComposite *Form::FindParameter(ParameterCompositeType::E t) const
 {
     for (int i = 0; i < numParams; i++)
     {
-        Parameter *param = params[i];
+        Param *param = params[i];
 
         if (param->IsComposite())
         {
@@ -363,7 +363,7 @@ ParameterComposite *Form::FindParameter(ParameterCompositeType::E t) const
     {
         for (int i = 0; i < numParams; i++)
         {
-            Parameter *param = old.params[i];
+            Param *param = old.params[i];
 
             if (param->IsComposite())
             {
@@ -385,7 +385,7 @@ ParameterInteger *Form::FindParameter(ParameterIntegerType::E t) const
 {
     for (int i = 0; i < numParams; i++)
     {
-        Parameter *param = params[i];
+        Param *param = params[i];
 
         if (param->IsInteger())
         {
@@ -404,7 +404,7 @@ ParameterInteger *Form::FindParameter(ParameterIntegerType::E t) const
 
 void Form::SendParameterToGenerator(ParameterDoubleType::E p) const
 {
-    Parameter *param = FindParameter(p);
+    Param *param = FindParameter(p);
 
     if (param)
     {
@@ -415,7 +415,7 @@ void Form::SendParameterToGenerator(ParameterDoubleType::E p) const
 
 void Form::SendParameterToGenerator(ParameterChoiceType::E p) const
 {
-    Parameter *param = FindParameter(p);
+    Param *param = FindParameter(p);
 
     if(param)
     {
@@ -426,7 +426,7 @@ void Form::SendParameterToGenerator(ParameterChoiceType::E p) const
 
 void Form::SendParameterToGenerator(ParameterIntegerType::E p) const
 {
-    Parameter *param = FindParameter(p);
+    Param *param = FindParameter(p);
 
     if (param)
     {
@@ -748,7 +748,7 @@ void Form::StoreState()
 {
     for (int i = 0; i < NumParameters(); i++)
     {
-        Parameter *parameter = GetParameter(i);
+        Param *parameter = GetParameter(i);
 
         if (parameter)
         {
@@ -762,7 +762,7 @@ void Form::RestoreState()
 {
     for (int i = 0; i < NumParameters(); i++)
     {
-        Parameter *parameter = GetParameter(i);
+        Param *parameter = GetParameter(i);
 
         if (parameter)
         {

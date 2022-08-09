@@ -4,7 +4,7 @@
 #include "Menu/MenuItems.h"
 
 
-struct Parameter;
+struct Param;
 
 
 struct PageMain
@@ -84,7 +84,7 @@ namespace PageTuneParameter
     extern Page *self;
 
     // Устанавливает параметр для редактирования
-    void SetParameter(Parameter *);
+    void SetParameter(Param *);
 
     // Установить режим ввода значения
     void SetModeEntering();

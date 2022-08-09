@@ -293,10 +293,10 @@ namespace Message
 
 
         // ”ниверсальное сособщение дл€ засылки параметра
-        struct Parameter : public SimpleMessage
+        struct Param : public SimpleMessage
         {
-            Parameter(Command::E param, uint8 ch, uint64 value);
-            Parameter(Command::E param, uint8 ch, uint8 choice);
+            Param(Command::E param, uint8 ch, uint64 value);
+            Param(Command::E param, uint8 ch, uint8 choice);
         };
     }
 

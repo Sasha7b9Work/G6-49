@@ -179,7 +179,7 @@ void PGenerator::SetParameterChoice(ParameterChoice *param)
         Command::SetManipulation
     };
 
-    Message::Set::Parameter(commands[param->GetType()],
+    Message::Set::Param(commands[param->GetType()],
         static_cast<uint8>(param->GetForm()->GetWave()->GetChannel()),
         static_cast<uint8>(param->GetChoice())).Transmit();
 }
@@ -226,7 +226,7 @@ void PGenerator::SetParameterDouble(ParameterDouble *param)
 
     Command com(commands[param->GetType()]);
 
-    Message::Set::Parameter(com, ch, value.ToUINT64()).Transmit();
+    Message::Set::Param(com, ch, value.ToUINT64()).Transmit();
 }
 
 
@@ -243,7 +243,7 @@ void PGenerator::SetParameterInteger(ParameterInteger *param)
 
     Command com(commands[param->GetType()]);
 
-    Message::Set::Parameter(com, ch, value.ToUINT64()).Transmit();
+    Message::Set::Param(com, ch, value.ToUINT64()).Transmit();
 }
 
 
@@ -261,7 +261,7 @@ void PGenerator::LoadSettings()
     PGenerator::TuneChannel(ChB);
 }
 
-void PGenerator::SetParameter(Parameter *parameter)
+void PGenerator::SetParameter(Param *parameter)
 {
     if(parameter->IsDouble())
     {

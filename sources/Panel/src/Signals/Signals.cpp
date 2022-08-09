@@ -42,7 +42,7 @@ static ParameterManipulationPeriod    sineManipulationA_Period  (Value("20", Ord
 static ParameterButton                sineManipulationA_Exit    ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
 
 
-static Parameter *sineManipulationA[] =
+static Param *sineManipulationA[] =
 {
     &sineManipulationA_Enabled,
     &sineManipulationA_Duration,
@@ -92,7 +92,7 @@ static ParameterAmplitude    sineA_Amplitude;
 static ParameterOffset       sineA_Offset(OffstInRange);
 static ParameterManipulation sineA_Manipulation(sineManipulationA);
 
-static Parameter *params_SineA[] =
+static Param *params_SineA[] =
 {
     &sineA_Frequency,
     &sineA_Amplitude,
@@ -139,9 +139,9 @@ static pchar namesClockImpulse[] =
 static ParameterFrequency  rampPlusA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude  rampPlusA_Amplitude;
 static ParameterOffset     rampPlusA_Offset;
-static ParameterModeStart  rampPlusA_ModeStart(Parameter::FuncActive, namesModeStartFree);
+static ParameterModeStart  rampPlusA_ModeStart(Param::FuncActive, namesModeStartFree);
 
-static Parameter *params_RampPlusA[] =
+static Param *params_RampPlusA[] =
 {
     &rampPlusA_Frequency,
     &rampPlusA_Amplitude,
@@ -156,9 +156,9 @@ static Form formRampPlusA(TypeForm::RampPlus, params_RampPlusA, &waves[Chan::A])
 static ParameterFrequency  rampMinusA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude  rampMinusA_Amplitude;
 static ParameterOffset     rampMinusA_Offset;
-static ParameterModeStart  rampMinusA_ModeStart(Parameter::FuncActive, namesModeStartFree);
+static ParameterModeStart  rampMinusA_ModeStart(Param::FuncActive, namesModeStartFree);
 
-static Parameter *params_RampMinusA[] =
+static Param *params_RampMinusA[] =
 {
     &rampMinusA_Frequency,
     &rampMinusA_Amplitude,
@@ -173,9 +173,9 @@ static Form formRampMinusA(TypeForm::RampMinus, params_RampMinusA, &waves[Chan::
 static ParameterFrequency triangleA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude triangleA_Amplitude;
 static ParameterOffset    triangleA_Offset;
-static ParameterModeStart triangleA_ModeStart(Parameter::FuncActive, namesModeStartFree);
+static ParameterModeStart triangleA_ModeStart(Param::FuncActive, namesModeStartFree);
 
-static Parameter *params_TriangleA[] =
+static Param *params_TriangleA[] =
 {
     &triangleA_Frequency,
     &triangleA_Amplitude,
@@ -195,10 +195,10 @@ static void OnChoose_FileA()
 static ParameterFrequency  freeA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude  freeA_Amplitude;
 static ParameterOffset     freeA_Offset;
-static ParameterModeStart  freeA_ModeStart(Parameter::FuncActive, namesModeStartFree);
+static ParameterModeStart  freeA_ModeStart(Param::FuncActive, namesModeStartFree);
 static ParameterButton     freeA_Choose   ("Выбрать", "Choose", OnChoose_FileA);
 
-static Parameter *params_FreeA[] =
+static Param *params_FreeA[] =
 {
     &freeA_Frequency,
     &freeA_Amplitude,
@@ -216,7 +216,7 @@ static ParameterFrequency meanderA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MA
 static ParameterAmplitude meanderA_Amplitude;
 static ParameterOffset    meanderA_Offset;
 
-static Parameter *params_MeanderA[] =
+static Param *params_MeanderA[] =
 {
     &meanderA_Frequency,
     &meanderA_Amplitude,
@@ -252,7 +252,7 @@ static ParameterDuration      impulseA_Duration (Value("100", Order::Kilo), Valu
 static ParameterAmplitude     impulseA_Amplitude;
 static ParameterOffset        impulseA_Offset;
 static ParameterPolarity      impulseA_Polarity(namesPolarity);
-static ParameterModeStart     impulseA_ModeStart(Parameter::FuncActive, namesModeStartImpulse);
+static ParameterModeStart     impulseA_ModeStart(Param::FuncActive, namesModeStartImpulse);
 static ParameterClockImpulse  impulse_Clock(namesClockImpulse);
 static ParameterModeStartStop impulseA_StartStop(FuncActive_ModeStartStopAndDelayImpulseA, namesModeStartStopImpulse);
 static ParameterDelay         impulseA_Delay(FuncActive_ModeStartStopAndDelayImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
@@ -262,7 +262,7 @@ ParameterDelay         *A::Impulse::delay      = &impulseA_Delay;
 ParameterModeStartStop *A::Impulse::start_stop = &impulseA_StartStop;
 ParameterModeStart     *A::Impulse::mode_start = &impulseA_ModeStart;
 
-static Parameter *params_ImpulseA[] =
+static Param *params_ImpulseA[] =
 {
     &impulseA_Period,
     &impulseA_Duration,
@@ -297,13 +297,13 @@ static ParameterPacketPeriod packetA_PacketPeriod  (Value("100", Order::Kilo), V
 static ParameterAmplitude    packetA_Amplitude;
 static ParameterOffset       packetA_Offset;
 static ParameterPolarity     packetA_Polarity(namesPolarity);
-static ParameterModeStart    packetA_ModeStart(Parameter::FuncActive, namesModeStartImpulse);
+static ParameterModeStart    packetA_ModeStart(Param::FuncActive, namesModeStartImpulse);
 
 ParameterPeriod *A::Packet::period_impulse = &packetA_Period;
 ParameterDuration *A::Packet::duration = &packetA_Duration;
 ParameterInteger *A::Packet::number = &packetA_PacketNumber;
 
-static Parameter *params_PacketA[] =
+static Param *params_PacketA[] =
 {
     &packetA_Period,
     &packetA_Duration,
@@ -347,7 +347,7 @@ static ParameterManipulationPeriod   sineManipulationB_Period(Value("20", Order:
                                                               Value("25", Order::Milli));
 static ParameterButton               sineManipulationB_Exit     ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
 
-static Parameter *sineManipulationB[] =
+static Param *sineManipulationB[] =
 {
     &sineManipulationB_Enabled,
     &sineManipulationB_Duration,
@@ -362,7 +362,7 @@ static ParameterOffset       sineB_Offset;
 static ParameterPhase        sineB_Phase;
 static ParameterManipulation sineB_Manipulation(sineManipulationB);
 
-static Parameter *params_SineB[] =
+static Param *params_SineB[] =
 {
     &sineB_Frequency,
     &sineB_Amplitude,
@@ -378,9 +378,9 @@ static Form formSineB(TypeForm::Sine, params_SineB, &waves[Chan::B]);
 static ParameterFrequency  rampPlusB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude  rampPlusB_Amplitude;
 static ParameterOffset     rampPlusB_Offset;
-static ParameterModeStart  rampPlusB_ModeStart(Parameter::FuncActive, namesModeStartFree);
+static ParameterModeStart  rampPlusB_ModeStart(Param::FuncActive, namesModeStartFree);
 
-static Parameter *params_RampPlusB[] =
+static Param *params_RampPlusB[] =
 {
     &rampPlusB_Frequency,
     &rampPlusB_Amplitude,
@@ -395,9 +395,9 @@ static Form formRampPlusB(TypeForm::RampPlus, params_RampPlusB, &waves[Chan::B])
 static ParameterFrequency  rampMinusB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude  rampMinusB_Amplitude;
 static ParameterOffset     rampMinusB_Offset;
-static ParameterModeStart  rampMinusB_ModeStart(Parameter::FuncActive, namesModeStartFree);
+static ParameterModeStart  rampMinusB_ModeStart(Param::FuncActive, namesModeStartFree);
 
-static Parameter *params_RampMinusB[] =
+static Param *params_RampMinusB[] =
 {
     &rampMinusB_Frequency,
     &rampMinusB_Amplitude,
@@ -412,9 +412,9 @@ static Form formRampMinusB(TypeForm::RampMinus, params_RampMinusB, &waves[Chan::
 static ParameterFrequency  triangleB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude  triangleB_Amplitude;
 static ParameterOffset     triangleB_Offset;
-static ParameterModeStart  triangleB_ModeStart(Parameter::FuncActive, namesModeStartFree);
+static ParameterModeStart  triangleB_ModeStart(Param::FuncActive, namesModeStartFree);
 
-static Parameter *params_TriangleB[] =
+static Param *params_TriangleB[] =
 {
     &triangleB_Frequency,
     &triangleB_Amplitude,
@@ -434,10 +434,10 @@ static void OnChoose_FileB()
 static ParameterFrequency  freeB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParameterAmplitude  freeB_Amplitude;
 static ParameterOffset     freeB_Offset;
-static ParameterModeStart  freeB_ModeStart(Parameter::FuncActive, namesModeStartFree);
+static ParameterModeStart  freeB_ModeStart(Param::FuncActive, namesModeStartFree);
 static ParameterButton     freeB_Choose("Выбрать", "Choose", OnChoose_FileB);
 
-static Parameter *params_FreeB[] =
+static Param *params_FreeB[] =
 {
     &freeB_Frequency,
     &freeB_Amplitude,
@@ -454,7 +454,7 @@ static ParameterFrequency meanderB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MA
 static ParameterAmplitude meanderB_Amplitude;
 static ParameterOffset    meanderB_Offset;
 
-static Parameter *params_MeanderB[] =
+static Param *params_MeanderB[] =
 {
     &meanderB_Frequency,
     &meanderB_Amplitude,
@@ -501,7 +501,7 @@ static ParameterModeStart impulseB_ModeStart(FuncActive_ModeStartImpulseB, names
 
 ParameterDuration  *B::Impulse::duration = &impulseB_Duration;
 
-static Parameter *params_ImpulseB[] =
+static Param *params_ImpulseB[] =
 {
     &impulseB_Period,
     &impulseB_Duration,

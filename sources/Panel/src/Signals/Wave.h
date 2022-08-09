@@ -31,7 +31,7 @@ public:
         Init(static_cast<TypeForm::E>(v));
     };
 
-    Form(TypeForm::E v, Parameter **param, Wave *w);
+    Form(TypeForm::E v, Param **param, Wave *w);
 
     void Init(TypeForm::E v)
     {
@@ -47,13 +47,13 @@ public:
     pString Name(uint lang = static_cast<uint>(-1)) const;
     
     // ¬озвращает ссылку на текущий параметр
-    Parameter *CurrentParameter() const;
+    Param *CurrentParameter() const;
     
     // ¬озвращает количество доступных параметров
     int NumParameters() const;
     
     // ¬озвращает ссылку на i-ый параметр из массива params
-    Parameter *GetParameter(int i) const;
+    Param *GetParameter(int i) const;
     
     // ”становить текущим следующй параметр
     void SetNextParameter();
@@ -123,7 +123,7 @@ private:
     Wave *wave;
     
     // «десь хран€тс€ параметры
-    Parameter **params;
+    Param **params;
     
     // —колько всего параметров
     int numParams;
@@ -151,11 +151,11 @@ private:
     struct Old
     {
         // «десь сохран€етс€ указатель на основные параметры в случае раскрыти€ сложного параметра
-        Parameter **params;
+        Param **params;
         int numParams;
         int currentParam;
         Old() : params(nullptr), numParams(0), currentParam(0) { }
-        void Init(Parameter **parameters, int num, int current) { params = parameters; numParams = num; currentParam = current; }
+        void Init(Param **parameters, int num, int current) { params = parameters; numParams = num; currentParam = current; }
     } old;
 
     struct CheckerParameters

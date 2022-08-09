@@ -109,9 +109,9 @@ void WaveGraphics::DrawParameters(const Chan &ch, int y)
 }
 
 
-Parameter *WaveGraphics::GetParameterForDraw(const Chan &ch, int i)
+Param *WaveGraphics::GetParameterForDraw(const Chan &ch, int i)
 {
-    Parameter *parameter = FORM(ch)->GetParameter(i);
+    Param *parameter = FORM(ch)->GetParameter(i);
 
     if (FORM_A->IsDDS() && FORM_B->IsDDS())               // Если установлены произвольные сигналы на обоих каналах и выводим нетекущий канал,
     {                                                                   // то значение частоты будем брать из текущего канала (особенность работы аппаратной части прибора)

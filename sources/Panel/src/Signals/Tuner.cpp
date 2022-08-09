@@ -552,7 +552,7 @@ void Indicator::IncreaseInPositionInteger(int pos)
 
 void Indicator::DecreaseInPosition(int pos)
 {
-    Parameter *param = Tuner::Current()->GetParameter();
+    Param *param = Tuner::Current()->GetParameter();
 
     Value value = param->GetValue();
 
@@ -646,7 +646,7 @@ bool Indicator::CommaInPosition(int pos) const
 
 int Indicator::PositionComma() const
 {
-    Parameter *param = Tuner::Current()->GetParameter();
+    Param *param = Tuner::Current()->GetParameter();
 
     if (param->IsDouble())
     {
@@ -818,7 +818,7 @@ bool DisplayCorrection::OnControlKey(const Control &control)
 }
 
 
-bool DisplayCorrection::ShowMessageOutRangIfNeed(Parameter *param)
+bool DisplayCorrection::ShowMessageOutRangIfNeed(Param *param)
 {
     StructMinMax min_max = Tuner::Current()->GetParameter()->ValueInRange();
 
@@ -896,7 +896,7 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
 
 bool DisplayEntering::ValueInBoundaries()
 {
-    Parameter *param = Tuner::Current()->GetParameter();
+    Param *param = Tuner::Current()->GetParameter();
 
     Value min = param->GetMin();
     Value max = param->GetMax();
@@ -1138,7 +1138,7 @@ void DisplayCorrection::FillDigitsFractPartForDouble()
 
 void DisplayCorrection::Init(Value value)
 {
-    Parameter *param = Tuner::Current()->GetParameter();
+    Param *param = Tuner::Current()->GetParameter();
 
     Form *form = param->GetForm();
 
@@ -1170,7 +1170,7 @@ void DisplayCorrection::Init(Value value)
 }
 
 
-Tuner::Tuner(Parameter *_param) : param(_param), display(this)
+Tuner::Tuner(Param *_param) : param(_param), display(this)
 {
 }
 
@@ -1248,7 +1248,7 @@ void Tuner::OnButtonApply()
                 if ((fractNano % 10) != 0)
                 {
                     Display::Warnings::Show("Параметр должен быть кратен 10 нс",
-                                            "Parameter must be a multiple of 10 ns", true);
+                                            "Param must be a multiple of 10 ns", true);
                     return;
                 }
             }

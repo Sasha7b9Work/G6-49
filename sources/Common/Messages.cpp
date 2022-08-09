@@ -475,14 +475,14 @@ Message::DebugMode::DebugMode(uint8 mode) : SimpleMessage(2, Command::ModeDebug)
 }
 
 
-Message::Set::Parameter::Parameter(Command::E param, uint8 ch, uint64 value) : SimpleMessage(10, (uint8)param)
+Message::Set::Param::Param(Command::E param, uint8 ch, uint64 value) : SimpleMessage(10, (uint8)param)
 {
     PutUINT8(ch);
     PutUINT64(value);
 }
 
 
-Message::Set::Parameter::Parameter(Command::E param, uint8 ch, uint8 value) : SimpleMessage(3, (uint8)param)
+Message::Set::Param::Param(Command::E param, uint8 ch, uint8 value) : SimpleMessage(3, (uint8)param)
 {
     PutUINT8(ch);
     PutUINT8(value);

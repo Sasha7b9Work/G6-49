@@ -16,7 +16,7 @@
 int ParameterChoice::choiceModeStartFree = 0;
 
 
-Parameter::Parameter(ParameterKind::E k, pFuncBV funcActive, pchar nRU, pchar nEN) :
+Param::Param(ParameterKind::E k, pFuncBV funcActive, pchar nRU, pchar nEN) :
     viewer(this), funcOfActive(funcActive), form(nullptr), parent(nullptr), kind(k)
 {
     names[0] = nRU;
@@ -24,60 +24,60 @@ Parameter::Parameter(ParameterKind::E k, pFuncBV funcActive, pchar nRU, pchar nE
 }
 
 
-void Parameter::SetForm(Form *f)
+void Param::SetForm(Form *f)
 {
     form = f;
 }
 
 
-bool Parameter::IsDouble() const
+bool Param::IsDouble() const
 {
     return (kind == ParameterKind::Double);
 }
 
 
-bool Parameter::IsInteger() const
+bool Param::IsInteger() const
 {
     return (kind == ParameterKind::Integer);
 }
 
 
-bool Parameter::IsComposite() const
+bool Param::IsComposite() const
 {
     return (kind == ParameterKind::Composite);
 }
 
 
-bool Parameter::IsChoice() const
+bool Param::IsChoice() const
 {
     return (kind == ParameterKind::Choice);
 }
 
 
-pString Parameter::Name() const
+pString Param::Name() const
 {
     return names[LANGUAGE];
 }
 
 
-void Parameter::SetParent(Parameter *p)
+void Param::SetParent(Param *p)
 {
     parent = p;
 }
 
 
-Parameter *Parameter::GetParent()
+Param *Param::GetParent()
 {
     return parent;
 }
 
-bool Parameter::IsOpened() const
+bool Param::IsOpened() const
 {
     return (parent != nullptr);
 }
 
 
-Form *Parameter::GetForm()
+Form *Param::GetForm()
 {
     return form;
 }
@@ -85,7 +85,7 @@ Form *Parameter::GetForm()
 
 void ParameterComposite::SetForm(Form *f)
 {
-    Parameter::SetForm(f);
+    Param::SetForm(f);
 
     for (int i = 0; i < NumParameters(); i++)
     {
@@ -111,7 +111,7 @@ ParameterChoice *ParameterComposite::FindParameter(ParameterChoiceType::E p)
 {
     for(int i = 0; i < NumParameters(); i++)
     {
-        Parameter *param = params[i];
+        Param *param = params[i];
 
         if(param->IsChoice())
         {
@@ -132,7 +132,7 @@ ParameterDouble *ParameterComposite::FindParameter(ParameterDoubleType::E p)
 {
     for(int i = 0; i < NumParameters(); i++)
     {
-        Parameter *param = params[i];
+        Param *param = params[i];
 
         if(param->IsDouble())
         {
@@ -436,7 +436,7 @@ bool ParameterChoice::SetAndLoadChoice(int ch)
 }
 
 
-ParameterManipulation::ParameterManipulation(Parameter **parameters) : ParameterComposite(ParameterCompositeType::Manipulation, "Манип", "Manip", parameters)
+ParameterManipulation::ParameterManipulation(Param **parameters) : ParameterComposite(ParameterCompositeType::Manipulation, "Манип", "Manip", parameters)
 {
 
 }
@@ -481,14 +481,14 @@ ParameterDouble::ParameterDouble(ParameterDoubleType::E t, pFuncBV funcActive, p
     const Value &_max,
     pValueInRange _valueInRange,
     const Value &_value) :
-    Parameter(ParameterKind::Double, funcActive, nameRU, nameEN), tuner(this), type(t), min(_min_), max(_max), valueInRange(_valueInRange),
+    Param(ParameterKind::Double, funcActive, nameRU, nameEN), tuner(this), type(t), min(_min_), max(_max), valueInRange(_valueInRange),
     value(_value), resetValue(_value), stored(_value)
 {
 }
 
 
 ParameterDouble::ParameterDouble(const ParameterDouble &rhs) :
-    Parameter(ParameterKind::Double, Parameter::FuncActive, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
+    Param(ParameterKind::Double, Param::FuncActive, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
     min(rhs.min), max(rhs.max), valueInRange(EValueInRange), value(rhs.value), resetValue(rhs.resetValue), stored(rhs.stored)
 {
 }
@@ -555,7 +555,7 @@ String ParameterInteger::ToString(Value val) const
 
 ParameterInteger::ParameterInteger(ParameterIntegerType::E t, pchar nameRU, pchar nameEN,
     const Value &_min, const Value &_max, pValueInRange _valueInRange, const Value &_value) :
-    Parameter(ParameterKind::Integer, Parameter::FuncActive, nameRU, nameEN), tuner(this), type(t),
+    Param(ParameterKind::Integer, Param::FuncActive, nameRU, nameEN), tuner(this), type(t),
     min(_min), max(_max), valueInRange(_valueInRange), value(_value), resetValue(_value)
 {
 }

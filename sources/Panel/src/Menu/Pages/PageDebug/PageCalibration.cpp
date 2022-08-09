@@ -140,7 +140,7 @@ DEF_CHOICE_5(cRange,
 
 // Для смещения +/- 5В
 DEF_CHOICE_4(cParameterFullVoltage,
-    "Параметр", "Parameter",
+    "Параметр", "Param",
     "", "",
     "Размах",  "Amplitude", "", "",
     "+5В",     "+5V",       "", "",
@@ -152,7 +152,7 @@ DEF_CHOICE_4(cParameterFullVoltage,
 
 // Для смещения +/- 2.5В
 DEF_CHOICE_4(cParameterHalfVoltage,
-    "Параметр", "Parameter",
+    "Параметр", "Param",
     "", "",
     "Размах",  "Amplitude", "", "",
     "+2.5В",   "+2.5V",     "", "",
