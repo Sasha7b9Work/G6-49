@@ -52,7 +52,7 @@ static Param *sineManipulationA[] =
 };
 
 
-static StructMinMax OffstInRange(Form *form)
+static SMinMax OffstInRange(Form *form)
 {
     // ΐμολ == 0  | [0 ... 5]
     // ΐμολ <= 1Β | [0 ... 2.5], ampl / 2 + fabs(ρμ) <= 2.5
@@ -61,7 +61,7 @@ static StructMinMax OffstInRange(Form *form)
     Value amplitude = form->FindParameter(ParameterDoubleType::Amplitude)->GetValue();
     ParameterDouble *param_offset = form->FindParameter(ParameterDoubleType::Offset);
 
-    StructMinMax result;
+    SMinMax result;
     result.max = param_offset->Max();
 
     if (amplitude.Abs() == 0)

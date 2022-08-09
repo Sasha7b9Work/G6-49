@@ -12,17 +12,17 @@ struct Key;
 struct Param;
 
 
-struct StructMinMax
+struct SMinMax
 {
-    StructMinMax() : min(1), max(1), valid(true) { }
+    SMinMax() : min(1), max(1), valid(true) { }
     Value min;      // ћинимально допустимое значение
     Value max;      // ћаксимально допустимое значение
     bool valid;     // ≈сли true - текущее значение допустимо
 };
 
-typedef StructMinMax (*pValueInRange)(Form *);
+typedef SMinMax (*pValueInRange)(Form *);
 
-inline StructMinMax EValueInRange(Form *) { return StructMinMax(); }
+inline SMinMax EValueInRange(Form *) { return SMinMax(); }
 
 
 #define DEFAULT_AMPLITUDE Value("1", Order::One)
@@ -87,7 +87,7 @@ struct Param
     // Ёто "самое минимальное" значение параметра. ћеньше его быть не может
     virtual Value GetMin() const { return Value("0", Order::One); }
 
-    virtual StructMinMax ValueInRange() const { return EValueInRange(form); }
+    virtual SMinMax ValueInRange() const { return EValueInRange(form); }
 
     virtual Value GetValue() const { return Value("1", Order::One); } //-V524
 
@@ -192,7 +192,7 @@ struct ParameterDouble : public Param
     virtual Value GetMin() const { return min; }
 
     // ¬озвращает стрктуру, котора€ описывает максимальное и минимальное 
-    virtual StructMinMax ValueInRange() const { return valueInRange(form); }
+    virtual SMinMax ValueInRange() const { return valueInRange(form); }
 
     virtual Tuner *GetTuner()   { return &tuner; };
 
@@ -268,7 +268,7 @@ struct ParameterInteger : public Param
 
     virtual Value GetMin() const              { return min;   }
 
-    virtual StructMinMax ValueInRange() const { return valueInRange(form); }
+    virtual SMinMax ValueInRange() const { return valueInRange(form); }
 
     virtual String ToString(Value value) const;
 

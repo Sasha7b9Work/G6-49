@@ -1,3 +1,4 @@
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "common/Common.h"
 #include "Display/Painter.h"
@@ -820,7 +821,7 @@ bool DisplayCorrection::OnControlKey(const Control &control)
 
 bool DisplayCorrection::ShowMessageOutRangIfNeed(Param *param)
 {
-    StructMinMax min_max = Tuner::Current()->GetParameter()->ValueInRange();
+    SMinMax min_max = Tuner::Current()->GetParameter()->ValueInRange();
 
     if (!min_max.valid)
     {
