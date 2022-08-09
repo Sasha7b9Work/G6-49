@@ -15,14 +15,14 @@ using namespace Primitives;
 static uint8 formFlash[Chan::Count][POINTS_IN_FORM];
 
 
-pString Form::Name(uint lang) const
+cstr Form::Name(uint lang) const
 {
     if (lang == static_cast<uint>(-1))
     {
         lang = LANGUAGE;
     }
 
-    static const pString names[TypeForm::Count][2] =
+    static const cstr names[TypeForm::Count][2] =
     {
         {"Синус",   "Sinus"},
         {"Пила+",   "Saw+"},
@@ -38,9 +38,9 @@ pString Form::Name(uint lang) const
 }
 
 
-pString Register::Name() const
+cstr Register::Name() const
 {
-    static const pString names[Register::Count] =
+    static const cstr names[Register::Count] =
     {
         "Мультиплексор 1",
         "Мультиплексор 2",

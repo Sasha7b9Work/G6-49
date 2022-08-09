@@ -106,5 +106,13 @@ source_group(Interface       FILES ${INTERFACE})
 source_group(Keyboard        FILES ${KEYBOARD})
 source_group(Utils           FILES ${UTILS})
 
-add_library(PLoader ${LIBS_HAL} ${HARDWARE} ${HARDWARE_CMSIS} ${HARDWARE_HAL} ${SRC} ${COMMON}
-                    ${DISPLAY} ${INTERFACE} ${KEYBOARD} ${UTILS})
+add_library(${PROJECT_NAME} ${LIBS_HAL}
+                            ${HARDWARE}
+                            ${HARDWARE_CMSIS}
+                            ${HARDWARE_HAL}
+                            ${SRC} ${COMMON}
+                            ${DISPLAY}
+                            ${INTERFACE}
+                            ${KEYBOARD}
+                            ${UTILS}
+)

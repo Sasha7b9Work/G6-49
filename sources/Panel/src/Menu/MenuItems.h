@@ -249,7 +249,7 @@ public:
 struct StructHelpSmallButton
 {
     pFuncVII    funcDrawUGO;    // Указатель на функцию отрисовки изображения варианта кнопки
-    pString     helpUGO[2];     // Подпись к данному изображению.
+    cstr     helpUGO[2];     // Подпись к данному изображению.
 };
 
 
@@ -347,10 +347,10 @@ public:
     COMMON_PART_MENU_ITEM;
 
     int8    *cell;
-    pString *namesRU;       // Варианты выбора на русском и английском языках.
-    pString *namesEN;
-    pString *hintsRU;       // Подсказки для каждого варианта на русском языке
-    pString *hintsEN;
+    cstr *namesRU;       // Варианты выбора на русском и английском языках.
+    cstr *namesEN;
+    cstr *hintsRU;       // Подсказки для каждого варианта на русском языке
+    cstr *hintsEN;
     pFuncVB  funcOnChanged; // Функция должна вызываться после изменения значения элемента.
     pFuncVII funcForDraw;   // Функция вызывается после отрисовки элемента. 
 
@@ -362,10 +362,10 @@ class Choice : public Item
 public:
 
     int8 *cell;
-    pString *namesRU;       // Варианты выбора на русском и английском языках.
-    pString *namesEN;
-    pString *hintsRU;       // Подсказки для каждого варианта на русском языке
-    pString *hintsEN;
+    cstr *namesRU;       // Варианты выбора на русском и английском языках.
+    cstr *namesEN;
+    cstr *hintsRU;       // Подсказки для каждого варианта на русском языке
+    cstr *hintsEN;
     pFuncVB  funcOnChanged; // Функция должна вызываться после изменения значения элемента.
     pFuncVII funcForDraw;   // Функция вызывается после отрисовки элемента. 
 
@@ -419,7 +419,7 @@ public:
     // Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии и 0 в противном.
     Item *Press(const Control &);
 
-    pString NameSubItem(int num) const;
+    cstr NameSubItem(int num) const;
 
     String NameCurrentSubItem() const;
 

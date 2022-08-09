@@ -198,13 +198,13 @@ Indicator::Indicator(DisplayCorrection *_display) : indexHighlight(0), display(_
 }
 
 
-int Indicator::Draw(int x, int y, int width, const pString units) const
+int Indicator::Draw(int x, int y, int width, const cstr units) const
 {
     return Tuner::Current()->ReinterpretToDouble() ? DrawDouble(x, y, width, units) : DrawInteger(x, y, width);
 }
 
 
-int Indicator::DrawDouble(int x, int y, int width, const pString units) const
+int Indicator::DrawDouble(int x, int y, int width, const cstr units) const
 {
     if (Tuner::Current()->ParameterIsNotOrdered())
     {
@@ -219,7 +219,7 @@ int Indicator::DrawDouble(int x, int y, int width, const pString units) const
 }
 
 
-int Indicator::DrawDouble(int x, int y, const pString units, bool test) const
+int Indicator::DrawDouble(int x, int y, const cstr units, bool test) const
 {
     static const int dx = 12;
 

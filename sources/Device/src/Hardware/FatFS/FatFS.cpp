@@ -6,7 +6,7 @@
 
 String FatFS::ErrorString(FRESULT result)
 {
-    static const pString strings[] =
+    static const cstr strings[] =
     {
         "FR_OK",
         "FR_DISK_ERR",

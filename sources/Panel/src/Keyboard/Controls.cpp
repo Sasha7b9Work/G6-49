@@ -46,7 +46,7 @@ bool Control::IsRelease() const
 }
 
 
-pString Key::Name() const
+cstr Key::Name() const
 {
     static pchar names[] =
     {

@@ -88,7 +88,7 @@ static void RepayEmptySymbols(char *buffer)
 }
 
 
-static pString ZeroValue(const ParameterDouble *param)
+static cstr ZeroValue(const ParameterDouble *param)
 {
     ParameterDoubleType::E type = param->GetType();
 
@@ -105,7 +105,7 @@ static pString ZeroValue(const ParameterDouble *param)
 }
 
 
-pString MathDouble::GetIndicatedValue(const ParameterDouble *param)
+cstr MathDouble::GetIndicatedValue(const ParameterDouble *param)
 {
     static const int NUM_DIGITS = 6;
     static const int LENGTH_BUFFER = NUM_DIGITS + 2;

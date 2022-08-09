@@ -16,7 +16,7 @@
 #define uint16  unsigned short
 #define uint    unsigned int
 #define uchar   unsigned char
-#define pString pchar  const
+#define cstr pchar  const
 
 #include "Display/Painter.h"
 #include "Display/Text.h"
@@ -34,7 +34,7 @@
 #undef uint16 
 #undef uint   
 #undef uchar  
-#undef pString
+#undef cstr
 
 
 #include "defines.h"

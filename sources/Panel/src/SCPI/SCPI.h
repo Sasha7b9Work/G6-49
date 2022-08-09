@@ -60,7 +60,7 @@ namespace SCPI
     // Послать сообщение об ошибочных символах, если таковые имеются
     void SendBadSymbols();
 
-    void ProcessHint(String *message, pString names[]); //-V2504
+    void ProcessHint(String *message, cstr names[]); //-V2504
 
     void ProcessRequestParameterValue(const ParameterDouble *param);
 
@@ -70,7 +70,7 @@ namespace SCPI
 
     pchar ProcessParameterInteger(pchar buffer, ParameterIntegerType::E value);
 
-    pchar ProcessParameterChoice(pchar buffer, ParameterChoiceType::E choice, pString *names);
+    pchar ProcessParameterChoice(pchar buffer, ParameterChoiceType::E choice, cstr *names);
 
     namespace Handler
     {

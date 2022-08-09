@@ -133,6 +133,26 @@ source_group(Signals                FILES ${SIGNALS})
 source_group(Tests                  FILES ${TESTS})
 source_group(Utils                  FILES ${UTILS})
 
-add_library(Panel ${LIBS_HAL} ${HARDWARE} ${HARDWARE_CMSIS} ${HARDWARE_HAL} ${SRC} ${COMMON} ${DISPLAY} ${DISPLAY_FONT}
-                  ${FDRIVE} ${FREQMETER} ${GENERATOR} ${INTERFACE} ${KEYBOARD} ${MENU} ${MENU_PAGES} ${MENU_PAGES_ADDITION}
-                  ${MENU_PAGES_PAGEDEBUG} ${SCPI} ${SETTINGS} ${SIGNALS} ${TESTS} ${UTILS})
+add_library(${PROJECT_NAME} ${LIBS_HAL}
+                            ${HARDWARE}
+                            ${HARDWARE_CMSIS}
+                            ${HARDWARE_HAL}
+                            ${SRC}
+                            ${COMMON}
+                            ${DISPLAY}
+                            ${DISPLAY_FONT}
+                            ${FDRIVE}
+                            ${FREQMETER}
+                            ${GENERATOR}
+                            ${INTERFACE}
+                            ${KEYBOARD}
+                            ${MENU}
+                            ${MENU_PAGES}
+                            ${MENU_PAGES_ADDITION}
+                            ${MENU_PAGES_PAGEDEBUG}
+                            ${SCPI}
+                            ${SETTINGS}
+                            ${SIGNALS}
+                            ${TESTS}
+                            ${UTILS}
+)

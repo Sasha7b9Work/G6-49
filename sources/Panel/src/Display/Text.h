@@ -31,10 +31,10 @@ private:
 class BigText
 {
 public:
-    BigText(pString t, int s) : text(t), size(s) {}
+    BigText(cstr t, int s) : text(t), size(s) {}
     void Draw(int x, int y, const Color & = Color::NUMBER);
 private:
-    pString text;
+    cstr text;
     int size;
 };
 
@@ -118,9 +118,9 @@ private:
 
     void Conversion(TypeConversionString::E conv);
 
-    int DrawSubString(int x, int y, pString t);
+    int DrawSubString(int x, int y, cstr t);
 
-    int DrawSpaces(int x, int y, pString t, int *numSymbols);
+    int DrawSpaces(int x, int y, cstr t, int *numSymbols);
 
     // Возвращает высоту экрана, которую займёт текст text, при выводе от left до right в переменной height. Если bool == false, то текст не влезет на экран 
     bool GetHeightTextWithTransfers(int left, int top, int right, int *height);

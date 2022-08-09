@@ -13,7 +13,7 @@ static void AddChar(char *buffer, const Value &value, int pos, Order::E order)
 }
 
 
-pString Value::ToString(bool sign, Order::E order) const
+cstr Value::ToString(bool sign, Order::E order) const
 {
     static char buffer[50];
 
@@ -45,9 +45,9 @@ pString Value::ToString(bool sign, Order::E order) const
 }
 
 
-pString Order::Suffix(Order::E order)
+cstr Order::Suffix(Order::E order)
 {
-    static const pString suf[Count][2] =
+    static const cstr suf[Count][2] =
     {
         {"Ì", "M"},
         {"ê",  "k"},

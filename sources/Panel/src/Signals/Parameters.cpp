@@ -54,7 +54,7 @@ bool Param::IsChoice() const
 }
 
 
-pString Param::Name() const
+cstr Param::Name() const
 {
     return names[LANGUAGE];
 }
@@ -149,9 +149,9 @@ ParameterDouble *ParameterComposite::FindParameter(ParameterDoubleType::E p)
 }
 
 
-pString ParameterDouble::GetMainUnits() const
+cstr ParameterDouble::GetMainUnits() const
 {
-    static const pString units[ParameterDoubleType::Count][2] =
+    static const cstr units[ParameterDoubleType::Count][2] =
     {
         {"Ãö",   "Hz"},   // Frequency
         {"ñ",    "s"},    // Period
@@ -174,7 +174,7 @@ pString ParameterDouble::GetMainUnits() const
 }
 
 
-pString ParameterDouble::GetUnits(Order::E order) const
+cstr ParameterDouble::GetUnits(Order::E order) const
 {
     if (order == Order::Count)
     {

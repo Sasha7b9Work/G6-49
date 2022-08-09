@@ -7,9 +7,9 @@
 
 
 
-pString Command::Name() const
+cstr Command::Name() const
 {
-    static const pString names[Count] =
+    static const cstr names[Count] =
     {
         "RequestData",
         "EnableChannel",

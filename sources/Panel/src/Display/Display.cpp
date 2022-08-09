@@ -24,7 +24,7 @@ namespace Display
 {
     struct WarningMessage
     {
-        WarningMessage(pString msg = "") : timeStart(_TIME_MS) { if (msg[0] != '\0') { message = new String(msg); } else { message = nullptr; } };
+        WarningMessage(cstr msg = "") : timeStart(_TIME_MS) { if (msg[0] != '\0') { message = new String(msg); } else { message = nullptr; } };
         void Delete() { if (message) { delete message; message = nullptr; } }
         bool IsEqual(const String &msg);
         uint timeStart;

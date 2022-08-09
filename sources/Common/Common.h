@@ -33,7 +33,7 @@ struct Order
         Count
     };
 
-    static pString Suffix(Order::E order);
+    static cstr Suffix(Order::E order);
 
     // Возвращает степень, соответсвующую порядку
     static int GetPow10(Order::E order);
@@ -94,7 +94,7 @@ struct Value
     Order::E GetOrder() const;
 
     // Возращает строку значения
-    pString ToString(bool sign, Order::E order = Order::Count) const;
+    cstr ToString(bool sign, Order::E order = Order::Count) const;
 
     bool operator<(const Value &);
     bool operator>(const Value &);

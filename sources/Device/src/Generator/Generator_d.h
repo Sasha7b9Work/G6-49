@@ -57,7 +57,7 @@ struct Attenuation
 
     explicit Attenuation(Attenuation::E v) : value(v) { }
     float Units() const;
-    pString Name() const;
+    cstr Name() const;
 };
 
 

@@ -47,7 +47,7 @@ public:
 
     Indicator(DisplayCorrection *);
 
-    int Draw(int x, int y, int width, const pString units) const;
+    int Draw(int x, int y, int width, const cstr units) const;
 
     bool OnControlKey(const Control &);
 
@@ -127,9 +127,9 @@ private:
     // Возвращает true, если все цифровые разряды справа равны нулю
     bool AllNumberOfRightIsZero(int pos) const;
 
-    int DrawDouble(int x, int y, int wdidth, const pString units) const;
+    int DrawDouble(int x, int y, int wdidth, const cstr units) const;
 
-    int DrawDouble(int x, int y, const pString units, bool test) const;
+    int DrawDouble(int x, int y, const cstr units, bool test) const;
 
     int DrawInteger(int x, int y, int width) const;
 

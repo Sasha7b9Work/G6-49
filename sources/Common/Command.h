@@ -109,11 +109,11 @@ struct Command
     Command(E v) : value(v) {};
     Command(const uint8 v) : value(static_cast<E>(v)) {};
     operator uint8() const { return static_cast<uint8>(value); };
-    pString Name() const;
+    cstr Name() const;
     operator E() const { return value; };
     operator uint8() { return static_cast<uint8>(value); }
 private:
-    pString Value(uint8 *buffer) const;
+    cstr Value(uint8 *buffer) const;
 };
 
 
@@ -145,7 +145,7 @@ struct Register
     } value;
     explicit Register(E v) : value(v) {};
     explicit Register(uint8 v) : value(static_cast<E>(v)) {};
-    pString Name() const;
+    cstr Name() const;
     operator E() { return value; }
 };
 

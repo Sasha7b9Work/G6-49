@@ -26,7 +26,7 @@ namespace AD9952
         } value;
         Register(E v) : value(v) { };
         operator uint8() const { return static_cast<uint8>(value); };
-        pString Name() const;
+        cstr Name() const;
         bool Is(E v) const { return value == v; };
     };
 
@@ -196,9 +196,9 @@ void AD9952::WriteARR(const Chan &ch)
 }
 
 
-pString AD9952::Register::Name() const
+cstr AD9952::Register::Name() const
 {
-    static const pString names[Number] =
+    static const cstr names[Number] =
     {
         "CFR1",
         "CFR2",

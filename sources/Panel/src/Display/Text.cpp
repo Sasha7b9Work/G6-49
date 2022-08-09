@@ -858,7 +858,7 @@ void String::Conversion(TypeConversionString::E conv)
 }
 
 
-int String::DrawSubString(int x, int y, pString _t)
+int String::DrawSubString(int x, int y, cstr _t)
 {
     pchar t = _t;
     int numSymbols = 0;
@@ -872,7 +872,7 @@ int String::DrawSubString(int x, int y, pString _t)
 }
 
 
-int String::DrawSpaces(int x, int y, pString _t, int *numSymbols)
+int String::DrawSpaces(int x, int y, cstr _t, int *numSymbols)
 {
     pchar t = _t;
     *numSymbols = 0;

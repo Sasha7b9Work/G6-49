@@ -25,7 +25,7 @@ typedef int bool;
 #define __I volatile
 #endif
 
-typedef const char *const      pString;
+typedef const char *const      cstr;
 typedef const char *           pchar;
 typedef unsigned int           uint;
 typedef unsigned short int     uint16;

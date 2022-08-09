@@ -105,13 +105,14 @@ file(GLOB UTILS          src/Utils/*)
 
 set_source_files_properties(${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBH} PROPERTIES HEADER_FILE_ONLY TRUE)
 
-source_group(libs\\FatFS     FILES ${LIBS_FATFS})
-source_group(libs\\HAL       FILES ${LIBS_HAL})
-source_group(libs\\USBH      FILES ${LIBS_USBH})
+source_group(libs/FatFS      FILES ${LIBS_FATFS})
+source_group(libs/HAL        FILES ${LIBS_HAL})
+source_group(libs/USBH       FILES ${LIBS_USBH})
 source_group(Hardware        FILES ${HARDWARE})
-source_group(Hardware\\CMSIS FILES ${HARDWARE_CMSIS})
-source_group(Hardware\\HAL   FILES ${HARDWARE_HAL})
-source_group(Hardware\\USBH  FILES ${HARDWARE_USBH})
+source_group(Hardware/CMSIS  FILES ${HARDWARE_CMSIS})
+source_group(Hardware/FatFS  FILES ${HARDWARE_FATFS})
+source_group(Hardware/HAL    FILES ${HARDWARE_HAL})
+source_group(Hardware/USBH   FILES ${HARDWARE_USBH})
 source_group(src             FILES ${SRC})
 source_group(common          FILES ${COMMON})
 source_group(FDrive          FILES ${FDRIVE})
@@ -121,5 +122,19 @@ source_group(Settings        FILES ${SETTINGS})
 source_group(Utils           FILES ${UTILS})
 
                    
-add_library(DLoader ${LIBS_FATFS} ${LIBS_USBH} ${LIBS_HAL} ${HARDWARE} ${HARDWARE_CMSIS} ${HARDWARE_HAL} ${HARDWARE_USBH}
-                    ${SRC} ${COMMON} ${FDRIVE} ${GENERATOR} ${INTERFACE} ${SETTINGS} ${UTILS})
+add_library(${PROJECT_NAME} ${LIBS_FATFS}
+                            ${LIBS_USBH}
+                            ${LIBS_HAL}
+                            ${HARDWARE}
+                            ${HARDWARE_CMSIS}
+                            ${HARDWARE_FATFS}
+                            ${HARDWARE_HAL}
+                            ${HARDWARE_USBH}
+                            ${SRC}
+                            ${COMMON}
+                            ${FDRIVE}
+                            ${GENERATOR}
+                            ${INTERFACE}
+                            ${SETTINGS}
+                            ${UTILS}
+)

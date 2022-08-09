@@ -11,7 +11,7 @@ struct ParameterInteger;
 namespace MathDouble
 {
     // Возвращает числовое представление Value с numDigits значащими цифрами и запятой.
-    pString GetIndicatedValue(const ParameterDouble *param);
+    cstr GetIndicatedValue(const ParameterDouble *param);
 
     // Возвращает позицию первого ненулевого символа "1" - десятки (1e1), "0" - единицы (1e0), "-1" - десятые (1e-1), "-2" - сотые (1e-2)
     int GetPositionFirstDigit(const ParameterDouble *param, Order::E order = Order::Count);

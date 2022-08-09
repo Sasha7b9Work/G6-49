@@ -122,16 +122,16 @@ file(GLOB UTILS          src/Utils/*)
 
 set_source_files_properties(${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBD} ${LIBS_USBH} PROPERTIES HEADER_FILE_ONLY TRUE)
 
-source_group(libs\\FatFS     FILES ${LIBS_FATFS})
-source_group(libs\\HAL       FILES ${LIBS_HAL})
-source_group(libs\\USBD      FILES ${LIBS_USBD})
-source_group(libs\\USBH      FILES ${LIBS_USBH})
+source_group(libs/FatFS      FILES ${LIBS_FATFS})
+source_group(libs/HAL        FILES ${LIBS_HAL})
+source_group(libs/USBD       FILES ${LIBS_USBD})
+source_group(libs/USBH       FILES ${LIBS_USBH})
 source_group(Hardware        FILES ${HARDWARE})
-source_group(Hardware\\CMSIS FILES ${HARDWARE_CMSIS})
-source_group(Hardware\\FatFS FILES ${HARDWARE_FATFS})
-source_group(Hardware\\HAL   FILES ${HARDWARE_HAL})
-source_group(Hardware\\USBD  FILES ${HARDWARE_USBD})
-source_group(Hardware\\USBH  FILES ${HARDWARE_USBH})
+source_group(Hardware/CMSIS  FILES ${HARDWARE_CMSIS})
+source_group(Hardware/FatFS  FILES ${HARDWARE_FATFS})
+source_group(Hardware/HAL    FILES ${HARDWARE_HAL})
+source_group(Hardware/USBD   FILES ${HARDWARE_USBD})
+source_group(Hardware/USBH   FILES ${HARDWARE_USBH})
 source_group(src             FILES ${SRC})
 source_group(common          FILES ${COMMON})
 source_group(FDrive          FILES ${FDRIVE})
@@ -141,6 +141,22 @@ source_group(Interface       FILES ${INTERFACE})
 source_group(Settings        FILES ${SETTINGS})
 source_group(Utils           FILES ${UTILS})
 
-add_library(Device ${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBD} ${LIBS_USBH} ${HARDWARE} ${HARDWARE_CMSIS} ${HARDWARE_FATFS}
-                   ${HARDWARE_HAL} ${HARDWARE_USBD} ${HARDWARE_USBH} ${SRC} ${COMMON} ${FDRIVE} ${FREQMETER} ${GENERATOR}
-                   ${INTERFACE} ${SETTINGS} ${UTILS})
+add_library(${PROJECT_NAME} ${LIBS_FATFS}
+                            ${LIBS_HAL}
+                            ${LIBS_USBD}
+                            ${LIBS_USBH}
+                            ${HARDWARE}
+                            ${HARDWARE_CMSIS}
+                            ${HARDWARE_FATFS}
+                            ${HARDWARE_HAL}
+                            ${HARDWARE_USBD}
+                            ${HARDWARE_USBH}
+                            ${SRC}
+                            ${COMMON}
+                            ${FDRIVE}
+                            ${FREQMETER}
+                            ${GENERATOR}
+                            ${INTERFACE}
+                            ${SETTINGS}
+                            ${UTILS}
+)

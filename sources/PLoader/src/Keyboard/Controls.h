@@ -50,7 +50,7 @@ struct Key
     bool IsDown() const { return action == Down; }
     bool IsLong() const { return action == Long; }
     char ToChar() const;
-    static pString Name(Key::E key);
+    static cstr Name(Key::E key);
     bool IsFunctional() const;
     // Возвращает true, если поворот ручки
     bool IsRotate() const;

@@ -446,9 +446,9 @@ float Attenuation::Units() const
 }
 
 
-pString Attenuation::Name() const
+cstr Attenuation::Name() const
 {
-    static const pString name[Count] =
+    static const cstr name[Count] =
     {
         "0",
         "10",

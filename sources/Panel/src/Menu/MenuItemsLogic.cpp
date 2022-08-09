@@ -520,7 +520,7 @@ Item *Button::Press(Action::E action)
 }
 
 
-pString ChoiceParameter::NameSubItem(int number) const
+cstr ChoiceParameter::NameSubItem(int number) const
 {
     return static_cast<ParameterDouble *>(form->GetParameter(number))->Name();
 }

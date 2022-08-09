@@ -229,7 +229,7 @@ static bool IsBeginCommand(const char &symbol)
 }
 
 
-void SCPI::ProcessHint(String *message, pString names[]) //-V2504
+void SCPI::ProcessHint(String *message, cstr names[]) //-V2504
 {
     message->Append(" {");
     for(int i = 0; i < names[i][0] != 0; i++)
@@ -311,7 +311,7 @@ pchar SCPI::ProcessParameterInteger(pchar buffer, ParameterIntegerType::E type)
 }
 
 
-pchar SCPI::ProcessParameterChoice(pchar buffer, ParameterChoiceType::E choice, pString *names)
+pchar SCPI::ProcessParameterChoice(pchar buffer, ParameterChoiceType::E choice, cstr *names)
 {
     ParameterChoice *param = CURRENT_FORM->FindParameter(choice);
 

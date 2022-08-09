@@ -155,14 +155,14 @@ source_group(Signals                FILES ${SIGNALS})
 source_group(Tests                  FILES ${TESTS})
 source_group(Utils                  FILES ${UTILS})
 
-add_executable(G6-49 ${COMMON} ${COMMON_VS_HAL} ${SRC} ${DISPLAY} ${DISPLAY_FONT} ${FDRIVE} ${FREQMETER} ${GENERATOR}
-                     ${GUI} ${HARDWARE} ${HARDWARE_HAL} ${INTERFACE} ${KEYBOARD} ${LIBS_CMSIS} ${LIBS_HAL} ${MENU} ${MENU_PAGES}
-                     ${MENU_PAGES_ADDITION} ${MENU_PAGES_PAGEDEBUG} ${SCPI} ${TESTS} ${SETTINGS} ${SIGNALS} ${UTILS})
+add_executable(${PROJECT_NAME} ${COMMON} ${COMMON_VS_HAL} ${SRC} ${DISPLAY} ${DISPLAY_FONT} ${FDRIVE} ${FREQMETER} ${GENERATOR}
+                               ${GUI} ${HARDWARE} ${HARDWARE_HAL} ${INTERFACE} ${KEYBOARD} ${LIBS_CMSIS} ${LIBS_HAL} ${MENU} ${MENU_PAGES}
+                               ${MENU_PAGES_ADDITION} ${MENU_PAGES_PAGEDEBUG} ${SCPI} ${TESTS} ${SETTINGS} ${SIGNALS} ${UTILS})
 
-target_link_libraries(G6-49 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
-target_link_libraries(G6-49 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
+target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
+target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
 
-target_link_libraries(G6-49 WinMM.lib)
-target_link_libraries(G6-49 version.lib)
-target_link_libraries(G6-49 Imm32.Lib)
-target_link_libraries(G6-49 Setupapi.lib)
+target_link_libraries(${PROJECT_NAME} WinMM.lib)
+target_link_libraries(${PROJECT_NAME} version.lib)
+target_link_libraries(${PROJECT_NAME} Imm32.Lib)
+target_link_libraries(${PROJECT_NAME} Setupapi.lib)

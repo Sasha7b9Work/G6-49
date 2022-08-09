@@ -51,7 +51,7 @@ struct Param
 
     virtual ~Param() { }
 
-    pString Name() const;
+    cstr Name() const;
 
     virtual void SetForm(Form *form);
 
@@ -178,10 +178,10 @@ struct ParameterDouble : public Param
     virtual String ToString(Value value) const;
 
     // Возвращает основные единицы измерения (без учёта порядка)
-    pString GetMainUnits() const;
+    cstr GetMainUnits() const;
 
     // Возвращает единицы измерения, приведённые к порядку order. Если order == Order::Count, единциы будут рассчитываться исходя из текущего значения value
-    pString GetUnits(Order::E order = Order::Count) const;
+    cstr GetUnits(Order::E order = Order::Count) const;
 
     Value Max() const { return max; }
 
