@@ -247,18 +247,18 @@ static bool FuncActive_ModeStartStopAndDelayImpulseA()
 }
 
 
-static ParameterPeriod        impulseA_Period   (FuncActive_PeriodImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
-static ParameterDuration      impulseA_Duration (Value("100", Order::Kilo), Value("20", Order::Micro));
+static ParamPeriod        impulseA_Period   (FuncActive_PeriodImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
+static ParamDuration      impulseA_Duration (Value("100", Order::Kilo), Value("20", Order::Micro));
 static ParamAmplitude     impulseA_Amplitude;
 static ParamOffset        impulseA_Offset;
 static ParameterPolarity      impulseA_Polarity(namesPolarity);
 static ParameterModeStart     impulseA_ModeStart(Param::FuncActive, namesModeStartImpulse);
 static ParameterClockImpulse  impulse_Clock(namesClockImpulse);
 static ParameterModeStartStop impulseA_StartStop(FuncActive_ModeStartStopAndDelayImpulseA, namesModeStartStopImpulse);
-static ParameterDelay         impulseA_Delay(FuncActive_ModeStartStopAndDelayImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
+static ParamDelay         impulseA_Delay(FuncActive_ModeStartStopAndDelayImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
 
-ParameterPeriod        *A::Impulse::period     = &impulseA_Period;
-ParameterDelay         *A::Impulse::delay      = &impulseA_Delay;
+ParamPeriod        *A::Impulse::period     = &impulseA_Period;
+ParamDelay         *A::Impulse::delay      = &impulseA_Delay;
 ParameterModeStartStop *A::Impulse::start_stop = &impulseA_StartStop;
 ParameterModeStart     *A::Impulse::mode_start = &impulseA_ModeStart;
 
@@ -284,23 +284,23 @@ static bool FuncActive_PeriodPacketA()
     return (packetA_ModeStart.GetChoice() == 0);
 }
 
-static ParameterPeriod       packetA_Period        (FuncActive_PeriodPacketA, Value("100", Order::Kilo), Value("200", Order::Micro),
+static ParamPeriod       packetA_Period        (FuncActive_PeriodPacketA, Value("100", Order::Kilo), Value("200", Order::Micro),
     "Период имп", "Period imp");
-static ParameterDuration     packetA_Duration      (Value("100", Order::Kilo), Value("10", Order::Micro),  "Длит имп",
+static ParamDuration     packetA_Duration      (Value("100", Order::Kilo), Value("10", Order::Micro),  "Длит имп",
     "Dur imp");
 static IParam      packetA_PacketNumber  (TypeIParam::PacketNumber, "Кол-во имп", "Count imp",
                                                     Value("1", Order::One),
                                                     Value("1000000000", Order::One),
                                                     EValueInRange,
                                                     Value("3", Order::One));
-static ParameterPacketPeriod packetA_PacketPeriod  (Value("100", Order::Kilo), Value("0.1", Order::One));
+static ParamPacketPeriod packetA_PacketPeriod  (Value("100", Order::Kilo), Value("0.1", Order::One));
 static ParamAmplitude    packetA_Amplitude;
 static ParamOffset       packetA_Offset;
 static ParameterPolarity     packetA_Polarity(namesPolarity);
 static ParameterModeStart    packetA_ModeStart(Param::FuncActive, namesModeStartImpulse);
 
-ParameterPeriod *A::Packet::period_impulse = &packetA_Period;
-ParameterDuration *A::Packet::duration = &packetA_Duration;
+ParamPeriod *A::Packet::period_impulse = &packetA_Period;
+ParamDuration *A::Packet::duration = &packetA_Duration;
 IParam *A::Packet::number = &packetA_PacketNumber;
 
 static Param *params_PacketA[] =
@@ -492,14 +492,14 @@ static bool FuncActive_ModeStartImpulseB()
 }
 
 
-static ParameterPeriod    impulseB_Period   (FuncActive_PeriodImpulseB, Value("100", Order::Kilo), Value("100", Order::Micro));
-static ParameterDuration  impulseB_Duration (Value("100", Order::Kilo), Value("20", Order::Micro));
+static ParamPeriod    impulseB_Period   (FuncActive_PeriodImpulseB, Value("100", Order::Kilo), Value("100", Order::Micro));
+static ParamDuration  impulseB_Duration (Value("100", Order::Kilo), Value("20", Order::Micro));
 static ParamAmplitude impulseB_Amplitude;
 static ParamOffset    impulseB_Offset;
 static ParameterPolarity  impulseB_Polarity(namesPolarity);
 static ParameterModeStart impulseB_ModeStart(FuncActive_ModeStartImpulseB, namesModeStartImpulse);
 
-ParameterDuration  *B::Impulse::duration = &impulseB_Duration;
+ParamDuration  *B::Impulse::duration = &impulseB_Duration;
 
 static Param *params_ImpulseB[] =
 {
@@ -543,8 +543,8 @@ Wave waves[Chan::Count] =
 Form                   *A::Impulse::form = &formImpulseA;
 
 Form                   *A::Packet::form = &formPacketImpulseA;
-ParameterPacketPeriod  *A::Packet::period_packet = &packetA_PacketPeriod;
+ParamPacketPeriod  *A::Packet::period_packet = &packetA_PacketPeriod;
 
 Form                   *B::Impulse::form = &formImpulseB;
-ParameterPeriod        *B::Impulse::period = &impulseB_Period;
+ParamPeriod        *B::Impulse::period = &impulseB_Period;
 ParameterModeStart     *B::Impulse::mode_start = &impulseB_ModeStart;

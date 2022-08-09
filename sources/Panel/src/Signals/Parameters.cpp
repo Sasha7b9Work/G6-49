@@ -624,13 +624,13 @@ pchar TypeCParam::Name(TypeCParam::E type)
 }
 
 
-Value ParameterPacketPeriod::CalculateMinValue() const
+Value ParamPacketPeriod::CalculateMinValue() const
 {
     // «начение периода не может быть меньше (N - 1) * Tи + tи + 10нс
 
-    ParameterPeriod *par_period = (ParameterPeriod *)form->FindParameter(TypeDParam::Period);
+    ParamPeriod *par_period = (ParamPeriod *)form->FindParameter(TypeDParam::Period);
     IParam *par_number = form->FindParameter(TypeIParam::PacketNumber);
-    ParameterDuration *par_duration = (ParameterDuration *)form->FindParameter(TypeDParam::Duration);
+    ParamDuration *par_duration = (ParamDuration *)form->FindParameter(TypeDParam::Duration);
 
     if (par_period && par_number && par_duration)
     {
@@ -649,7 +649,7 @@ Value ParameterPacketPeriod::CalculateMinValue() const
 }
 
 
-bool ParameterPacketPeriod::RecalcualateValue()
+bool ParamPacketPeriod::RecalcualateValue()
 {
     Value min_value = CalculateMinValue();
 

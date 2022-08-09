@@ -465,9 +465,9 @@ struct ParamPhase : public DParam
 };
 
 
-struct ParameterPacketPeriod : public ParamTime
+struct ParamPacketPeriod : public ParamTime
 {
-    ParameterPacketPeriod(const Value &max, const Value &value) :
+    ParamPacketPeriod(const Value &max, const Value &value) :
         ParamTime(TypeDParam::PacketPeriod, Param::FuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
@@ -481,23 +481,23 @@ struct ParameterPacketPeriod : public ParamTime
 };
 
 
-struct ParameterPeriod : public ParamTime
+struct ParamPeriod : public ParamTime
 {
-    ParameterPeriod(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
+    ParamPeriod(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
         ParamTime(TypeDParam::Period, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 };
 
 
-struct ParameterDuration : public ParamTime
+struct ParamDuration : public ParamTime
 {
-    ParameterDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
+    ParamDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
         ParamTime(TypeDParam::Duration, Param::FuncActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 };
 
 
-struct ParameterDelay : public ParamTime
+struct ParamDelay : public ParamTime
 {
-    ParameterDelay(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") :
+    ParamDelay(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") :
         ParamTime(TypeDParam::Delay, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 };
 
