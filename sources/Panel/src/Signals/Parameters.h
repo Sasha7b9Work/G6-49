@@ -425,9 +425,9 @@ struct ParamAmplitude : public ParamVoltage
 };
 
 
-struct ParameterOffset : public ParamVoltage
+struct ParamOffset : public ParamVoltage
 {
-    ParameterOffset(pValueInRange valueInRange = EValueInRange,
+    ParamOffset(pValueInRange valueInRange = EValueInRange,
                     const Value &min = Value("-5", Order::One),
                     const Value &max = Value("5", Order::One),
                     const Value &value = Value("0", Order::One)) :
