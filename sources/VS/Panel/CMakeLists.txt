@@ -155,9 +155,31 @@ source_group(Signals                FILES ${SIGNALS})
 source_group(Tests                  FILES ${TESTS})
 source_group(Utils                  FILES ${UTILS})
 
-add_executable(${PROJECT_NAME} ${COMMON} ${COMMON_VS_HAL} ${SRC} ${DISPLAY} ${DISPLAY_FONT} ${FDRIVE} ${FREQMETER} ${GENERATOR}
-                               ${GUI} ${HARDWARE} ${HARDWARE_HAL} ${INTERFACE} ${KEYBOARD} ${LIBS_CMSIS} ${LIBS_HAL} ${MENU} ${MENU_PAGES}
-                               ${MENU_PAGES_ADDITION} ${MENU_PAGES_PAGEDEBUG} ${SCPI} ${TESTS} ${SETTINGS} ${SIGNALS} ${UTILS})
+add_executable(${PROJECT_NAME} ${COMMON}
+                               ${COMMON_VS_HAL}
+                               ${SRC}
+                               ${DISPLAY}
+                               ${DISPLAY_FONT}
+                               ${FDRIVE}
+                               ${FREQMETER}
+                               ${GENERATOR}
+                               ${GUI}
+                               ${HARDWARE}
+                               ${HARDWARE_HAL}
+                               ${INTERFACE}
+                               ${KEYBOARD}
+                               ${LIBS_CMSIS}
+                               ${LIBS_HAL}
+                               ${MENU}
+                               ${MENU_PAGES}
+                               ${MENU_PAGES_ADDITION}
+                               ${MENU_PAGES_PAGEDEBUG}
+                               ${SCPI}
+                               ${TESTS}
+                               ${SETTINGS}
+                               ${SIGNALS}
+                               ${UTILS}
+)
 
 target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
 target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)

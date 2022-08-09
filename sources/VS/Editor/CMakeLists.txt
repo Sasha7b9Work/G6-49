@@ -78,7 +78,16 @@ source_group(Utils           FILES ${UTILS})
 source_group(Windows         FILES ${WINDOWS})
 source_group(Resources       FILES ${RESOURCES})
 
-add_executable(${PROJECT_NAME} ${DOC} ${SRC} ${CONTROLS} ${DIALOGS} ${EDITOR} ${EDITOR_PAINTER} ${UTILS} ${WINDOWS} ${RESOURCES})
+add_executable(${PROJECT_NAME} ${DOC}
+                               ${SRC}
+                               ${CONTROLS}
+                               ${DIALOGS}
+                               ${EDITOR}
+                               ${EDITOR_PAINTER}
+                               ${UTILS}
+                               ${WINDOWS}
+                               ${RESOURCES}
+)
 
 target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
 target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
