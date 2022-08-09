@@ -495,16 +495,16 @@ struct ParamDuration : public ParamTime
 };
 
 
-struct ParamDelay : public ParamTime
+struct PDelay : public ParamTime
 {
-    ParamDelay(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") :
+    PDelay(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") :
         ParamTime(TypeDParam::Delay, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 };
 
 
-struct ParamManipulationDuration : public ParamTime
+struct PManipulationDuration : public ParamTime
 {
-    ParamManipulationDuration(const Value &min,
+    PManipulationDuration(const Value &min,
                                   const Value &max,
                                   pValueInRange valueInRange,
                                   const Value &value) :
@@ -512,9 +512,9 @@ struct ParamManipulationDuration : public ParamTime
 };
 
 
-struct ParamManipulationPeriod : public ParamTime
+struct PManipulationPeriod : public ParamTime
 {
-    ParamManipulationPeriod(const Value &min,
+    PManipulationPeriod(const Value &min,
                                 const Value &max,
                                 pValueInRange valueInRange,
                                 const Value &value) :

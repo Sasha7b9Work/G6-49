@@ -33,10 +33,10 @@ static void FuncCloseManipulation()
 
 
 static PManipulationEnabled   sineManipulationA_Enabled (namesManipulationEnabled);
-static ParamManipulationDuration  sineManipulationA_Duration(Value("10", Order::Nano), Value("10", Order::One),
+static PManipulationDuration  sineManipulationA_Duration(Value("10", Order::Nano), Value("10", Order::One),
                                                                  EValueInRange,
                                                                  Value("5", Order::Milli));
-static ParamManipulationPeriod    sineManipulationA_Period  (Value("20", Order::Nano), Value("10000", Order::One),
+static PManipulationPeriod    sineManipulationA_Period  (Value("20", Order::Nano), Value("10000", Order::One),
                                                                  EValueInRange,
                                                                  Value("25", Order::Milli));
 static BParam                sineManipulationA_Exit    ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
@@ -255,10 +255,10 @@ static PPolarity      impulseA_Polarity(namesPolarity);
 static PModeStart     impulseA_ModeStart(Param::FuncActive, namesModeStartImpulse);
 static PClockImpulse  impulse_Clock(namesClockImpulse);
 static PModeStartStop impulseA_StartStop(FuncActive_ModeStartStopAndDelayImpulseA, namesModeStartStopImpulse);
-static ParamDelay         impulseA_Delay(FuncActive_ModeStartStopAndDelayImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
+static PDelay         impulseA_Delay(FuncActive_ModeStartStopAndDelayImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
 
 ParamPeriod        *A::Impulse::period     = &impulseA_Period;
-ParamDelay         *A::Impulse::delay      = &impulseA_Delay;
+PDelay         *A::Impulse::delay      = &impulseA_Delay;
 PModeStartStop *A::Impulse::start_stop = &impulseA_StartStop;
 PModeStart     *A::Impulse::mode_start = &impulseA_ModeStart;
 
@@ -339,10 +339,10 @@ static Form *formsA[] =
 
 
 static PManipulationEnabled  sineManipulationB_Enabled  (namesManipulationEnabled);
-static ParamManipulationDuration sineManipulationB_Duration(Value("10", Order::Nano), Value("10", Order::One),
+static PManipulationDuration sineManipulationB_Duration(Value("10", Order::Nano), Value("10", Order::One),
                                                                 EValueInRange,
                                                                 Value("5", Order::Milli));
-static ParamManipulationPeriod   sineManipulationB_Period(Value("20", Order::Nano), Value("10000", Order::One),
+static PManipulationPeriod   sineManipulationB_Period(Value("20", Order::Nano), Value("10000", Order::One),
                                                               EValueInRange,
                                                               Value("25", Order::Milli));
 static BParam               sineManipulationB_Exit     ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);

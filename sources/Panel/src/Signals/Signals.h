@@ -26,7 +26,7 @@ namespace A
     {
         extern Form *form;
         extern PModeStartStop *start_stop;
-        extern ParamDelay         *delay;
+        extern PDelay         *delay;
         extern PModeStart     *mode_start;
         extern ParamPeriod        *period;
     }
