@@ -280,7 +280,7 @@ int MathParameterDouble::GetNumberDigitsAfterComma(Order::E)
 }
 
 
-int MathParameterInteger::GetMaxNumberDigits(const ParameterInteger *parameter)
+int MathParameterInteger::GetMaxNumberDigits(const IParam *parameter)
 {
     Value max = parameter->GetMax();
 

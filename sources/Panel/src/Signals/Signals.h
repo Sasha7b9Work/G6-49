@@ -37,7 +37,7 @@ namespace A
         extern ParameterPacketPeriod *period_packet;
         extern ParameterPeriod       *period_impulse;
         extern ParameterDuration     *duration;
-        extern ParameterInteger      *number;
+        extern IParam      *number;
     }
 };
 

@@ -9,7 +9,7 @@
 class DisplayCorrection;
 struct Param;
 struct DParam;
-struct ParameterInteger;
+struct IParam;
 class Tuner;
 
 
@@ -296,7 +296,7 @@ public:
     // Возвращает указатеь на DParam, если param имеет тип Double и nullptr в ином случае
     DParam *ReinterpretToDouble();
 
-    ParameterInteger *ReinterpretToInteger();
+    IParam *ReinterpretToInteger();
 
 private:
 

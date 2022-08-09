@@ -284,7 +284,7 @@ pchar SCPI::ProcessParameterDouble(pchar buffer, TypeDParam::E value)
 
 pchar SCPI::ProcessParameterInteger(pchar buffer, TypeIParam::E type)
 {
-    ParameterInteger *param = CURRENT_FORM->FindParameter(type);
+    IParam *param = CURRENT_FORM->FindParameter(type);
 
     SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
 
@@ -350,7 +350,7 @@ void SCPI::ProcessRequestParameterValue(const DParam *param)
 }
 
 
-void SCPI::ProcessRequestParameterValue(const ParameterInteger *param)
+void SCPI::ProcessRequestParameterValue(const IParam *param)
 {
     if (param == nullptr)
     {

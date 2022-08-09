@@ -531,7 +531,7 @@ void Indicator::IncreaseInPositionDouble(int pos)
 
 void Indicator::IncreaseInPositionInteger(int pos)
 {
-    ParameterInteger *param = Tuner::Current()->ReinterpretToInteger();
+    IParam *param = Tuner::Current()->ReinterpretToInteger();
 
     Value value = param->GetValue();
 
@@ -1105,7 +1105,7 @@ void DisplayCorrection::FillDigitsIntegerPartForDouble()
 
 void DisplayCorrection::FillDigitsForInteger()
 {
-    ParameterInteger *param = tuner->ReinterpretToInteger();
+    IParam *param = tuner->ReinterpretToInteger();
 
     Value value = param->GetValue();
 
@@ -1299,7 +1299,7 @@ DParam *Tuner::ReinterpretToDouble()
 }
 
 
-ParameterInteger *Tuner::ReinterpretToInteger()
+IParam *Tuner::ReinterpretToInteger()
 {
-    return param->IsInteger() ? reinterpret_cast<ParameterInteger *>(param) : nullptr;
+    return param->IsInteger() ? reinterpret_cast<IParam *>(param) : nullptr;
 }

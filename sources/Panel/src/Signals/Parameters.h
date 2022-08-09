@@ -245,9 +245,9 @@ struct TypeIParam
 };
 
 
-struct ParameterInteger : public Param
+struct IParam : public Param
 {
-    ParameterInteger(TypeIParam::E t, pchar  const nameRU, pchar const nameEN,
+    IParam(TypeIParam::E t, pchar  const nameRU, pchar const nameEN,
         const Value &min, const Value &max, pValueInRange, const Value &);
 
     virtual void Reset() { SetAndLoadValue(resetValue); }

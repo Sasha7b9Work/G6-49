@@ -381,7 +381,7 @@ ParameterComposite *Form::FindParameter(ParameterCompositeType::E t) const
 }
 
 
-ParameterInteger *Form::FindParameter(TypeIParam::E t) const
+IParam *Form::FindParameter(TypeIParam::E t) const
 {
     for (int i = 0; i < numParams; i++)
     {
@@ -389,7 +389,7 @@ ParameterInteger *Form::FindParameter(TypeIParam::E t) const
 
         if (param->IsInteger())
         {
-            ParameterInteger *integer = static_cast<ParameterInteger *>(param);
+            IParam *integer = static_cast<IParam *>(param);
 
             if (integer->GetType() == t)
             {

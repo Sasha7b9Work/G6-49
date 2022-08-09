@@ -230,7 +230,7 @@ void PGenerator::SetParameterDouble(DParam *param)
 }
 
 
-void PGenerator::SetParameterInteger(ParameterInteger *param)
+void PGenerator::SetParameterInteger(IParam *param)
 {
     static const Command::E commands[TypeIParam::Count] =
     {
@@ -273,7 +273,7 @@ void PGenerator::SetParameter(Param *parameter)
     }
     else if (parameter->IsInteger())
     {
-        SetParameterInteger(static_cast<ParameterInteger *>(parameter));
+        SetParameterInteger(static_cast<IParam *>(parameter));
     }
 }
 

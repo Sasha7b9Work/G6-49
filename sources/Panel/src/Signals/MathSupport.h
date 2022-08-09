@@ -5,7 +5,7 @@
 
 struct Value;
 struct DParam;
-struct ParameterInteger;
+struct IParam;
 
 
 namespace MathDouble
@@ -43,5 +43,5 @@ namespace MathParameterDouble
 namespace MathParameterInteger
 {
     // Возвращает количество разрядов для параметра parameter (в них должно помещаться максимально возможное значение параметра parameter)
-    int GetMaxNumberDigits(const ParameterInteger *parameter);
+    int GetMaxNumberDigits(const IParam *parameter);
 };

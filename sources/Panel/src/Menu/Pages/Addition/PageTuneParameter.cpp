@@ -14,7 +14,7 @@
 static DParam storedDouble = ParameterAmplitude(); //-V1054 Здесь ошибки не случится, потому что в наследуемых от DParam
                                                             // классах нет данных
 
-static ParameterInteger storedInteger = ParameterInteger(TypeIParam::PacketNumber, "", "", //-V810
+static IParam storedInteger = IParam(TypeIParam::PacketNumber, "", "", //-V810
                 Value("0", Order::One),
                 Value("100", Order::One),
                 EValueInRange,
@@ -32,7 +32,7 @@ void PageTuneParameter::SetParameter(Param *parameter)
     }
     else if (parameter->IsInteger())
     {
-        storedInteger = *reinterpret_cast<ParameterInteger *>(parameter);
+        storedInteger = *reinterpret_cast<IParam *>(parameter);
         tuned = parameter;
     }
 }
@@ -244,7 +244,7 @@ void PageTuneParameter::CallbackOnButtonCancel()
     }
     else if (parameter->IsInteger())
     {
-        *reinterpret_cast<ParameterInteger *>(parameter) = storedInteger;
+        *reinterpret_cast<IParam *>(parameter) = storedInteger;
     }
 
     PGenerator::TuneChannel(CURRENT_CHANNEL);

@@ -27,7 +27,7 @@ namespace PGenerator
 
     void SetParameterChoice(ParameterChoice *param);
 
-    void SetParameterInteger(ParameterInteger *param);
+    void SetParameterInteger(IParam *param);
 
     void SetParameter(Param *param);
 
