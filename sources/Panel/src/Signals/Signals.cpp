@@ -87,7 +87,7 @@ static SMinMax OffstInRange(Form *form)
     return result;
 }
 
-static ParameterFrequency    sineA_Frequency(FREQUENCY_SINE_MIN, FREQUENCY_SINE_MAX);
+static ParamFrequency    sineA_Frequency(FREQUENCY_SINE_MIN, FREQUENCY_SINE_MAX);
 static ParamAmplitude    sineA_Amplitude;
 static ParamOffset       sineA_Offset(OffstInRange);
 static ParameterManipulation sineA_Manipulation(sineManipulationA);
@@ -136,7 +136,7 @@ static pchar namesClockImpulse[] =
 };
 
 
-static ParameterFrequency  rampPlusA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
+static ParamFrequency  rampPlusA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude  rampPlusA_Amplitude;
 static ParamOffset     rampPlusA_Offset;
 static ParameterModeStart  rampPlusA_ModeStart(Param::FuncActive, namesModeStartFree);
@@ -153,7 +153,7 @@ static Param *params_RampPlusA[] =
 static Form formRampPlusA(TypeForm::RampPlus, params_RampPlusA, &waves[Chan::A]);
 
 
-static ParameterFrequency  rampMinusA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
+static ParamFrequency  rampMinusA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude  rampMinusA_Amplitude;
 static ParamOffset     rampMinusA_Offset;
 static ParameterModeStart  rampMinusA_ModeStart(Param::FuncActive, namesModeStartFree);
@@ -170,7 +170,7 @@ static Param *params_RampMinusA[] =
 static Form formRampMinusA(TypeForm::RampMinus, params_RampMinusA, &waves[Chan::A]);
 
 
-static ParameterFrequency triangleA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
+static ParamFrequency triangleA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude triangleA_Amplitude;
 static ParamOffset    triangleA_Offset;
 static ParameterModeStart triangleA_ModeStart(Param::FuncActive, namesModeStartFree);
@@ -192,7 +192,7 @@ static void OnChoose_FileA()
     PageLoadForm::LoadForm(ChA);
 }
 
-static ParameterFrequency  freeA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
+static ParamFrequency  freeA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude  freeA_Amplitude;
 static ParamOffset     freeA_Offset;
 static ParameterModeStart  freeA_ModeStart(Param::FuncActive, namesModeStartFree);
@@ -212,7 +212,7 @@ static Form formFreeA(TypeForm::Free, params_FreeA, &waves[Chan::A]);
 
 
 
-static ParameterFrequency meanderA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
+static ParamFrequency meanderA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude meanderA_Amplitude;
 static ParamOffset    meanderA_Offset;
 
@@ -356,10 +356,10 @@ static Param *sineManipulationB[] =
     nullptr
 };
 
-static ParameterFrequency    sineB_Frequency(FREQUENCY_SINE_MIN, FREQUENCY_SINE_MAX);
+static ParamFrequency    sineB_Frequency(FREQUENCY_SINE_MIN, FREQUENCY_SINE_MAX);
 static ParamAmplitude    sineB_Amplitude;
 static ParamOffset       sineB_Offset;
-static ParameterPhase        sineB_Phase;
+static ParamPhase        sineB_Phase;
 static ParameterManipulation sineB_Manipulation(sineManipulationB);
 
 static Param *params_SineB[] =
@@ -375,7 +375,7 @@ static Param *params_SineB[] =
 static Form formSineB(TypeForm::Sine, params_SineB, &waves[Chan::B]);
 
 
-static ParameterFrequency  rampPlusB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
+static ParamFrequency  rampPlusB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude  rampPlusB_Amplitude;
 static ParamOffset     rampPlusB_Offset;
 static ParameterModeStart  rampPlusB_ModeStart(Param::FuncActive, namesModeStartFree);
@@ -392,7 +392,7 @@ static Param *params_RampPlusB[] =
 static Form formRampPlusB(TypeForm::RampPlus, params_RampPlusB, &waves[Chan::B]);
 
 
-static ParameterFrequency  rampMinusB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
+static ParamFrequency  rampMinusB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude  rampMinusB_Amplitude;
 static ParamOffset     rampMinusB_Offset;
 static ParameterModeStart  rampMinusB_ModeStart(Param::FuncActive, namesModeStartFree);
@@ -409,7 +409,7 @@ static Param *params_RampMinusB[] =
 static Form formRampMinusB(TypeForm::RampMinus, params_RampMinusB, &waves[Chan::B]);
 
 
-static ParameterFrequency  triangleB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
+static ParamFrequency  triangleB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude  triangleB_Amplitude;
 static ParamOffset     triangleB_Offset;
 static ParameterModeStart  triangleB_ModeStart(Param::FuncActive, namesModeStartFree);
@@ -431,7 +431,7 @@ static void OnChoose_FileB()
     PageLoadForm::LoadForm(ChB);
 }
 
-static ParameterFrequency  freeB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
+static ParamFrequency  freeB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude  freeB_Amplitude;
 static ParamOffset     freeB_Offset;
 static ParameterModeStart  freeB_ModeStart(Param::FuncActive, namesModeStartFree);
@@ -450,7 +450,7 @@ static Param *params_FreeB[] =
 static Form formFreeB(TypeForm::Free, params_FreeB, &waves[Chan::B]);
 
 
-static ParameterFrequency meanderB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
+static ParamFrequency meanderB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude meanderB_Amplitude;
 static ParamOffset    meanderB_Offset;
 
