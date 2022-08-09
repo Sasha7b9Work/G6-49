@@ -70,7 +70,7 @@ namespace SCPI
 
     pchar ProcessParameterInteger(pchar buffer, TypeIParam::E value);
 
-    pchar ProcessParameterChoice(pchar buffer, ParameterChoiceType::E choice, cstr *names);
+    pchar ProcessParameterChoice(pchar buffer, TypeCParam::E choice, cstr *names);
 
     namespace Handler
     {

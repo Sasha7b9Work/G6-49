@@ -107,7 +107,7 @@ int ParameterComposite::NumParameters() const
 }
 
 
-ParameterChoice *ParameterComposite::FindParameter(ParameterChoiceType::E p)
+ParameterChoice *ParameterComposite::FindParameter(TypeCParam::E p)
 {
     for(int i = 0; i < NumParameters(); i++)
     {
@@ -338,7 +338,7 @@ String ParameterComposite::ToString(String &units) const
             "Off", "On"
         };
 
-        ParameterChoice *enabled = const_cast<ParameterComposite *>(this)->FindParameter(ParameterChoiceType::ManipulationEnabled);
+        ParameterChoice *enabled = const_cast<ParameterComposite *>(this)->FindParameter(TypeCParam::ManipulationEnabled);
 
         return String(LANG_RU ? valuesRU[enabled->GetChoice()] : valuesEN[enabled->GetChoice()]);
     }
@@ -357,7 +357,7 @@ String ParameterChoice::ToString(String &units) const
 
 int ParameterChoice::GetChoice() const 
 {
-    if (type == ParameterChoiceType::ModeStart)
+    if (type == TypeCParam::ModeStart)
     {
         if (form->IsDDS())
         {
@@ -371,7 +371,7 @@ int ParameterChoice::GetChoice() const
 
 void ParameterChoice::NextChoice()
 {
-    if (type == ParameterChoiceType::ModeStartStop)
+    if (type == TypeCParam::ModeStartStop)
     {
         Math::CircleIncrease(&choice, 0, NumChoices() - 1);
 
@@ -389,7 +389,7 @@ void ParameterChoice::NextChoice()
         return;
     }
 
-    if (type == ParameterChoiceType::ModeStart)
+    if (type == TypeCParam::ModeStart)
     {
         if (form->IsDDS())
         {
@@ -403,7 +403,7 @@ void ParameterChoice::NextChoice()
         PGenerator::LoadStartMode(form->GetWave()->GetChannel(), form->IsDDS() ? 0 : 1, GetChoice());
         PGenerator::TuneChannel(form->GetWave()->GetChannel());
     }
-    else if (type == ParameterChoiceType::ClockImpulse)
+    else if (type == TypeCParam::ClockImpulse)
     {
         Message::SetClockImpulse(GetChoice()).Transmit();
 
@@ -611,9 +611,9 @@ Value ParameterAmplitude::GetMax() const
 }
 
 
-pchar ParameterChoiceType::Name(ParameterChoiceType::E type)
+pchar TypeCParam::Name(TypeCParam::E type)
 {
-    static pchar  const names[ParameterChoiceType::Count] =
+    static pchar  const names[TypeCParam::Count] =
     {
         "Polarity",
         "Mode start",

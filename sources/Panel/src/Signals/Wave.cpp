@@ -216,12 +216,12 @@ void Form::TuneGenerator()
 
     if(value == TypeForm::Sine)
     {
-        Param *manipulation = FindParameter(ParameterChoiceType::ManipulationEnabled);
+        Param *manipulation = FindParameter(TypeCParam::ManipulationEnabled);
         bool manipulationEnabled = reinterpret_cast<ParameterChoice *>(manipulation)->GetChoice() == 1;
 
         if(CurrentParameter()->GetParent())                                 // –‡ÒÍ˚Ú Ô‡‡ÏÂÚ Ã¿Õ»œ”Àﬂ÷»ﬂ
         {
-            SendParameterToGenerator(ParameterChoiceType::ManipulationEnabled); //-V525
+            SendParameterToGenerator(TypeCParam::ManipulationEnabled); //-V525
             if(manipulationEnabled)
             {
                 SendParameterToGenerator(TypeDParam::ManipulationDuration);
@@ -244,7 +244,7 @@ void Form::TuneGenerator()
         {
             OpenCompositeParameter();
 
-            SendParameterToGenerator(ParameterChoiceType::ManipulationEnabled); //-V525
+            SendParameterToGenerator(TypeCParam::ManipulationEnabled); //-V525
             if(manipulationEnabled)
             {
                 SendParameterToGenerator(TypeDParam::ManipulationDuration);
@@ -272,7 +272,7 @@ void Form::TuneGenerator()
         SendParameterToGenerator(TypeDParam::Duration);
         SendParameterToGenerator(TypeIParam::PacketNumber);
         SendParameterToGenerator(TypeDParam::PacketPeriod);
-        SendParameterToGenerator(ParameterChoiceType::Polarity);
+        SendParameterToGenerator(TypeCParam::Polarity);
     }
 }
 
@@ -309,7 +309,7 @@ DParam *Form::FindParameter(TypeDParam::E p) const
 }
 
 
-ParameterChoice *Form::FindParameter(ParameterChoiceType::E p) const
+ParameterChoice *Form::FindParameter(TypeCParam::E p) const
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -413,7 +413,7 @@ void Form::SendParameterToGenerator(TypeDParam::E p) const
 }
 
 
-void Form::SendParameterToGenerator(ParameterChoiceType::E p) const
+void Form::SendParameterToGenerator(TypeCParam::E p) const
 {
     Param *param = FindParameter(p);
 
@@ -474,7 +474,7 @@ bool Form::CloseCompositeParameter()
 
 bool Wave::StartModeIsSingle()
 {
-    ParameterChoice* param = static_cast<ParameterChoice *>(GetCurrentForm()->FindParameter(ParameterChoiceType::ModeStart));
+    ParameterChoice* param = static_cast<ParameterChoice *>(GetCurrentForm()->FindParameter(TypeCParam::ModeStart));
 
     if(param)
     {
@@ -550,7 +550,7 @@ void Form::DrawSine(const Chan &ch, int x0, int y0, int width, int height)
 
     if (param)
     {
-        ParameterChoice *choice = param->FindParameter(ParameterChoiceType::ManipulationEnabled);
+        ParameterChoice *choice = param->FindParameter(TypeCParam::ManipulationEnabled);
 
         if (choice->GetChoice() == 1)
         {
@@ -649,7 +649,7 @@ void Form::DrawImpulse(const Chan &ch, int x0, int y0, int, int height)
     int minY = y0;
     int maxY = y0 + height;
 
-    ParameterChoice *param = WAVE(ch).GetCurrentForm()->FindParameter(ParameterChoiceType::Polarity);
+    ParameterChoice *param = WAVE(ch).GetCurrentForm()->FindParameter(TypeCParam::Polarity);
 
     if (param->GetChoice() == 1)
     {

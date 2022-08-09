@@ -311,13 +311,13 @@ pchar SCPI::ProcessParameterInteger(pchar buffer, TypeIParam::E type)
 }
 
 
-pchar SCPI::ProcessParameterChoice(pchar buffer, ParameterChoiceType::E choice, cstr *names)
+pchar SCPI::ProcessParameterChoice(pchar buffer, TypeCParam::E choice, cstr *names)
 {
     ParameterChoice *param = CURRENT_FORM->FindParameter(choice);
 
     if(param == nullptr)
     {
-        String answer("%s parameter not found for the current signal", ParameterChoiceType::Name(choice));
+        String answer("%s parameter not found for the current signal", TypeCParam::Name(choice));
         return nullptr;
     }
 

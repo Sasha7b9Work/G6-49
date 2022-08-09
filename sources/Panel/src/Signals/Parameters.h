@@ -39,7 +39,7 @@ struct KindParam
         Choice,     // Выбор из нескольких значений
         Composite,  // Составной параметр, состоящий из нескольких простых (манипуляция)
         Button,     // Кнопка - по её нажатию происходит какое-либо действие
-        Integer,
+        Integer,    // Целое число
         Count
     };
 };
@@ -294,7 +294,7 @@ private:
 };
 
 
-struct ParameterChoiceType
+struct TypeCParam
 {
     enum E
     {
@@ -306,16 +306,16 @@ struct ParameterChoiceType
         Count
     };
 
-    static pchar Name(ParameterChoiceType::E type);
+    static pchar Name(TypeCParam::E type);
 };
 
 
 struct ParameterChoice : public Param
 {
-    ParameterChoice(ParameterChoiceType::E t, pFuncBV funcActive, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
+    ParameterChoice(TypeCParam::E t, pFuncBV funcActive, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
         Param(KindParam::Choice, funcActive, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
 
-    ParameterChoiceType::E GetType() { return type; }
+    TypeCParam::E GetType() { return type; }
 
     int GetChoice() const;
 
@@ -332,7 +332,7 @@ struct ParameterChoice : public Param
     virtual void Reset() { SetAndLoadChoice(0); };
 
 private:
-	ParameterChoiceType::E type;
+	TypeCParam::E type;
     int choice;                         // Текущий выбор. И выбор для режима запуска импульсных сигналов
     static int choiceModeStartFree;     // Выбор режима запуска произвольных сигналов
     pchar *choices;               // Идут так - 0(рус), 0(англ), 1(рус), 1(англ)...
@@ -365,7 +365,7 @@ struct ParameterComposite : public Param
     Param **Parameters() { return params; }
 
     DParam *FindParameter(TypeDParam::E p);
-    ParameterChoice *FindParameter(ParameterChoiceType::E p);
+    ParameterChoice *FindParameter(TypeCParam::E p);
 
     virtual String ToString(String &units) const;
 
@@ -525,33 +525,33 @@ struct ParameterManipulationPeriod : public ParameterTime
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
 struct ParameterModeStart : public ParameterChoice
 {
-    ParameterModeStart(pFuncBV funcActive, pchar *names) : ParameterChoice(ParameterChoiceType::ModeStart, funcActive, "Запуск", "Start", names) { }
+    ParameterModeStart(pFuncBV funcActive, pchar *names) : ParameterChoice(TypeCParam::ModeStart, funcActive, "Запуск", "Start", names) { }
 };
 
 
 struct ParameterModeStartStop : public ParameterChoice
 {
-    ParameterModeStartStop(pFuncBV funcActive, pchar *names) : ParameterChoice(ParameterChoiceType::ModeStartStop, funcActive, "А-Старт,В-Стоп", "A-Start,B-Stop", names) { }
+    ParameterModeStartStop(pFuncBV funcActive, pchar *names) : ParameterChoice(TypeCParam::ModeStartStop, funcActive, "А-Старт,В-Стоп", "A-Start,B-Stop", names) { }
 };
 
 
 struct ParameterManipulationEnabled : public ParameterChoice
 {
     ParameterManipulationEnabled(pchar *names) : 
-        ParameterChoice(ParameterChoiceType::ManipulationEnabled, Param::FuncActive, "Манип", "Manip", names) { }
+        ParameterChoice(TypeCParam::ManipulationEnabled, Param::FuncActive, "Манип", "Manip", names) { }
 
 };
 
 
 struct ParameterPolarity : public ParameterChoice
 {
-    ParameterPolarity(pchar *names) : ParameterChoice(ParameterChoiceType::Polarity, Param::FuncActive, "Полярность", "Polarity", names) { }
+    ParameterPolarity(pchar *names) : ParameterChoice(TypeCParam::Polarity, Param::FuncActive, "Полярность", "Polarity", names) { }
 };
 
 
 struct ParameterClockImpulse : public ParameterChoice
 {
-    ParameterClockImpulse(pchar *names) : ParameterChoice(ParameterChoiceType::ClockImpulse, Param::FuncActive, "Оп. частота", "Clock", names) { }
+    ParameterClockImpulse(pchar *names) : ParameterChoice(TypeCParam::ClockImpulse, Param::FuncActive, "Оп. частота", "Clock", names) { }
 };
 
 
