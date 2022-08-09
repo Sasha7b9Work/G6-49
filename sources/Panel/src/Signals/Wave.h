@@ -92,7 +92,7 @@ public:
     
     // Находит требуемый параметр. Возвращает 0, если такого параметра нет
     DParam *FindParameter(TypeDParam::E p) const;
-    ParameterChoice *FindParameter(TypeCParam::E p) const;
+    CParam *FindParameter(TypeCParam::E p) const;
     IParam *FindParameter(TypeIParam::E p) const;
     ParameterComposite *FindParameter(ParameterCompositeType::E p) const;
     

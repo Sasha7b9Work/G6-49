@@ -313,7 +313,7 @@ pchar SCPI::ProcessParameterInteger(pchar buffer, TypeIParam::E type)
 
 pchar SCPI::ProcessParameterChoice(pchar buffer, TypeCParam::E choice, cstr *names)
 {
-    ParameterChoice *param = CURRENT_FORM->FindParameter(choice);
+    CParam *param = CURRENT_FORM->FindParameter(choice);
 
     if(param == nullptr)
     {

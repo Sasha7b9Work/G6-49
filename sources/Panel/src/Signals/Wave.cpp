@@ -217,7 +217,7 @@ void Form::TuneGenerator()
     if(value == TypeForm::Sine)
     {
         Param *manipulation = FindParameter(TypeCParam::ManipulationEnabled);
-        bool manipulationEnabled = reinterpret_cast<ParameterChoice *>(manipulation)->GetChoice() == 1;
+        bool manipulationEnabled = reinterpret_cast<CParam *>(manipulation)->GetChoice() == 1;
 
         if(CurrentParameter()->GetParent())                                 // –аскрыт параметр ћјЌ»ѕ”Ћя÷»я
         {
@@ -309,7 +309,7 @@ DParam *Form::FindParameter(TypeDParam::E p) const
 }
 
 
-ParameterChoice *Form::FindParameter(TypeCParam::E p) const
+CParam *Form::FindParameter(TypeCParam::E p) const
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -317,7 +317,7 @@ ParameterChoice *Form::FindParameter(TypeCParam::E p) const
 
         if(param->IsChoice())
         {
-            ParameterChoice *choice = static_cast<ParameterChoice *>(param);
+            CParam *choice = static_cast<CParam *>(param);
 
             if (choice->GetType() == p)
             {
@@ -329,7 +329,7 @@ ParameterChoice *Form::FindParameter(TypeCParam::E p) const
         {
             ParameterComposite *complex = reinterpret_cast<ParameterComposite *>(param);
 
-            ParameterChoice *choice = complex->FindParameter(p);
+            CParam *choice = complex->FindParameter(p);
 
             if(choice)
             {
@@ -474,7 +474,7 @@ bool Form::CloseCompositeParameter()
 
 bool Wave::StartModeIsSingle()
 {
-    ParameterChoice* param = static_cast<ParameterChoice *>(GetCurrentForm()->FindParameter(TypeCParam::ModeStart));
+    CParam* param = static_cast<CParam *>(GetCurrentForm()->FindParameter(TypeCParam::ModeStart));
 
     if(param)
     {
@@ -550,7 +550,7 @@ void Form::DrawSine(const Chan &ch, int x0, int y0, int width, int height)
 
     if (param)
     {
-        ParameterChoice *choice = param->FindParameter(TypeCParam::ManipulationEnabled);
+        CParam *choice = param->FindParameter(TypeCParam::ManipulationEnabled);
 
         if (choice->GetChoice() == 1)
         {
@@ -649,7 +649,7 @@ void Form::DrawImpulse(const Chan &ch, int x0, int y0, int, int height)
     int minY = y0;
     int maxY = y0 + height;
 
-    ParameterChoice *param = WAVE(ch).GetCurrentForm()->FindParameter(TypeCParam::Polarity);
+    CParam *param = WAVE(ch).GetCurrentForm()->FindParameter(TypeCParam::Polarity);
 
     if (param->GetChoice() == 1)
     {

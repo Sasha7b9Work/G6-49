@@ -13,7 +13,7 @@
 #include <cstdio>
 
 
-int ParameterChoice::choiceModeStartFree = 0;
+int CParam::choiceModeStartFree = 0;
 
 
 Param::Param(KindParam::E k, pFuncBV funcActive, pchar nRU, pchar nEN) :
@@ -107,7 +107,7 @@ int ParameterComposite::NumParameters() const
 }
 
 
-ParameterChoice *ParameterComposite::FindParameter(TypeCParam::E p)
+CParam *ParameterComposite::FindParameter(TypeCParam::E p)
 {
     for(int i = 0; i < NumParameters(); i++)
     {
@@ -115,7 +115,7 @@ ParameterChoice *ParameterComposite::FindParameter(TypeCParam::E p)
 
         if(param->IsChoice())
         {
-            ParameterChoice *choice = static_cast<ParameterChoice *>(param);
+            CParam *choice = static_cast<CParam *>(param);
 
             if(choice->GetType() == p)
             {
@@ -338,7 +338,7 @@ String ParameterComposite::ToString(String &units) const
             "Off", "On"
         };
 
-        ParameterChoice *enabled = const_cast<ParameterComposite *>(this)->FindParameter(TypeCParam::ManipulationEnabled);
+        CParam *enabled = const_cast<ParameterComposite *>(this)->FindParameter(TypeCParam::ManipulationEnabled);
 
         return String(LANG_RU ? valuesRU[enabled->GetChoice()] : valuesEN[enabled->GetChoice()]);
     }
@@ -347,7 +347,7 @@ String ParameterComposite::ToString(String &units) const
 }
 
 
-String ParameterChoice::ToString(String &units) const
+String CParam::ToString(String &units) const
 {
     units.Free();
 
@@ -355,7 +355,7 @@ String ParameterChoice::ToString(String &units) const
 }
 
 
-int ParameterChoice::GetChoice() const 
+int CParam::GetChoice() const 
 {
     if (type == TypeCParam::ModeStart)
     {
@@ -369,7 +369,7 @@ int ParameterChoice::GetChoice() const
 }
 
 
-void ParameterChoice::NextChoice()
+void CParam::NextChoice()
 {
     if (type == TypeCParam::ModeStartStop)
     {
@@ -421,7 +421,7 @@ void ParameterChoice::NextChoice()
 }
 
 
-bool ParameterChoice::SetAndLoadChoice(int ch)
+bool CParam::SetAndLoadChoice(int ch)
 {
     if(ch < 0 || ch >= NumChoices())
     {
@@ -460,7 +460,7 @@ bool IParam::InRange(Value val) const
 }
 
 
-int ParameterChoice::NumChoices() const
+int CParam::NumChoices() const
 {
     int count = 0;
 
@@ -577,7 +577,7 @@ void IParam::OnPressButtonTune()
 
 
 
-void ParameterChoice::OnPressButtonTune()
+void CParam::OnPressButtonTune()
 {
     NextChoice();
 }

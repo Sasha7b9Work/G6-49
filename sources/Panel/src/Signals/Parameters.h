@@ -310,9 +310,9 @@ struct TypeCParam
 };
 
 
-struct ParameterChoice : public Param
+struct CParam : public Param
 {
-    ParameterChoice(TypeCParam::E t, pFuncBV funcActive, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
+    CParam(TypeCParam::E t, pFuncBV funcActive, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
         Param(KindParam::Choice, funcActive, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
 
     TypeCParam::E GetType() { return type; }
@@ -365,7 +365,7 @@ struct ParameterComposite : public Param
     Param **Parameters() { return params; }
 
     DParam *FindParameter(TypeDParam::E p);
-    ParameterChoice *FindParameter(TypeCParam::E p);
+    CParam *FindParameter(TypeCParam::E p);
 
     virtual String ToString(String &units) const;
 
@@ -523,35 +523,35 @@ struct ParameterManipulationPeriod : public ParameterTime
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
-struct ParameterModeStart : public ParameterChoice
+struct ParameterModeStart : public CParam
 {
-    ParameterModeStart(pFuncBV funcActive, pchar *names) : ParameterChoice(TypeCParam::ModeStart, funcActive, "Запуск", "Start", names) { }
+    ParameterModeStart(pFuncBV funcActive, pchar *names) : CParam(TypeCParam::ModeStart, funcActive, "Запуск", "Start", names) { }
 };
 
 
-struct ParameterModeStartStop : public ParameterChoice
+struct ParameterModeStartStop : public CParam
 {
-    ParameterModeStartStop(pFuncBV funcActive, pchar *names) : ParameterChoice(TypeCParam::ModeStartStop, funcActive, "А-Старт,В-Стоп", "A-Start,B-Stop", names) { }
+    ParameterModeStartStop(pFuncBV funcActive, pchar *names) : CParam(TypeCParam::ModeStartStop, funcActive, "А-Старт,В-Стоп", "A-Start,B-Stop", names) { }
 };
 
 
-struct ParameterManipulationEnabled : public ParameterChoice
+struct ParameterManipulationEnabled : public CParam
 {
     ParameterManipulationEnabled(pchar *names) : 
-        ParameterChoice(TypeCParam::ManipulationEnabled, Param::FuncActive, "Манип", "Manip", names) { }
+        CParam(TypeCParam::ManipulationEnabled, Param::FuncActive, "Манип", "Manip", names) { }
 
 };
 
 
-struct ParameterPolarity : public ParameterChoice
+struct ParameterPolarity : public CParam
 {
-    ParameterPolarity(pchar *names) : ParameterChoice(TypeCParam::Polarity, Param::FuncActive, "Полярность", "Polarity", names) { }
+    ParameterPolarity(pchar *names) : CParam(TypeCParam::Polarity, Param::FuncActive, "Полярность", "Polarity", names) { }
 };
 
 
-struct ParameterClockImpulse : public ParameterChoice
+struct ParameterClockImpulse : public CParam
 {
-    ParameterClockImpulse(pchar *names) : ParameterChoice(TypeCParam::ClockImpulse, Param::FuncActive, "Оп. частота", "Clock", names) { }
+    ParameterClockImpulse(pchar *names) : CParam(TypeCParam::ClockImpulse, Param::FuncActive, "Оп. частота", "Clock", names) { }
 };
 
 
