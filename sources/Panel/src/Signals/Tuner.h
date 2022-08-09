@@ -211,7 +211,8 @@ public:
     bool OnControlKey(const Control &);
 
     // ¬ывод сообщени€ о выходе за пределы допустимого диапазона, если необходимо
-    static void ShowMessageOutRangIfNeed(Value value);
+    // ¬озвращает false, если выходит за границы диапазона допустимых значений
+    static bool ShowMessageOutRangIfNeed(Parameter *);
 
     // –ассчитывает, к какому пор€дку нужно привести значение дл€ индикации (ƒл€ частоты и времени пор€док плавающий, а дл€ счЄтчиков и напр€жени€ - посто€нный, равный Order::One)
     static Order::E CalculateOrderForIndication();

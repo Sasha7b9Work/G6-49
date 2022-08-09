@@ -255,9 +255,13 @@ struct ParameterInteger : public Parameter
     virtual Tuner *GetTuner()                 { return &tuner; }
 
     virtual Value GetValue() const            { return value; }
-                               
+
+    Value Max() const { return max; }
+
+    Value Min() const { return min; }
+
     virtual Value GetMax() const              { return max;   }
-                               
+
     virtual Value GetMin() const              { return min;   }
 
     virtual StructMinMax ValueInRange() const { return valueInRange(form); }

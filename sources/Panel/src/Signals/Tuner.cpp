@@ -519,12 +519,12 @@ void Indicator::IncreaseInPositionDouble(int pos)
         value.Add(step);
     }
 
-    if (value != param->GetValue() && value <= param->GetMax())
+    if (value != param->GetValue() && value <= param->Max())
     {
         display->Init(value);
     }
 
-    DisplayCorrection::ShowMessageOutRangIfNeed(value);
+    DisplayCorrection::ShowMessageOutRangIfNeed(param);
 }
 
 
@@ -541,12 +541,12 @@ void Indicator::IncreaseInPositionInteger(int pos)
         value.Add(step);
     }
 
-    if (value != param->GetValue() && value <= param->GetMax())
+    if (value != param->GetValue() && value <= param->Max())
     {
         display->Init(value);
     }
 
-    DisplayCorrection::ShowMessageOutRangIfNeed(value);
+    DisplayCorrection::ShowMessageOutRangIfNeed(param);
 }
 
 
@@ -563,12 +563,12 @@ void Indicator::DecreaseInPosition(int pos)
         value.Sub(step);
     }
 
-    if (value != param->GetValue() && value >= param->GetMin())
+    if (value != param->GetValue())
     {
         display->Init(value);
     }
 
-    DisplayCorrection::ShowMessageOutRangIfNeed(value);
+    DisplayCorrection::ShowMessageOutRangIfNeed(param);
 }
 
 
@@ -818,10 +818,8 @@ bool DisplayCorrection::OnControlKey(const Control &control)
 }
 
 
-void DisplayCorrection::ShowMessageOutRangIfNeed(Value value)
+bool DisplayCorrection::ShowMessageOutRangIfNeed(Parameter *param)
 {
-    Parameter *param = Tuner::Current()->GetParameter();
-
     StructMinMax min_max = Tuner::Current()->GetParameter()->ValueInRange();
 
     if (!min_max.valid)
@@ -848,6 +846,8 @@ void DisplayCorrection::ShowMessageOutRangIfNeed(Value value)
         Display::Warnings::Show(String("Выход за границы диапазона %s ... %s", min_str.c_str(), max_str.c_str()),
                                 String("Out of range %s ... %s", min_str.c_str(), max_str.c_str()), true);
     }
+
+    return min_max.valid;
 }
 
 
@@ -913,15 +913,14 @@ bool DisplayEntering::ValueInBoundaries()
         return true;
     }
 
+    bool result = true;
 
-    bool valid = (value >= param->GetMin()) && (value <= param->GetMax());
-
-    if (!valid && !buffer.IsEmpty())
+    if (!buffer.IsEmpty())
     {
-        DisplayCorrection::ShowMessageOutRangIfNeed(value);
+        result = DisplayCorrection::ShowMessageOutRangIfNeed(param);
     }
 
-    return valid;
+    return result;
 }
 
 
