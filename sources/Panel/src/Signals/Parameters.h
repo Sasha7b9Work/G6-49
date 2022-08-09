@@ -402,9 +402,9 @@ private:
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Value ///
-struct ParamVoltage : public DParam
+struct PVoltage : public DParam
 {
-    ParamVoltage(TypeDParam::E type, pchar nameRU, pchar nameEN,
+    PVoltage(TypeDParam::E type, pchar nameRU, pchar nameEN,
                      const Value &min,
                      const Value &max,
                      pValueInRange valueInRange,
@@ -413,25 +413,25 @@ struct ParamVoltage : public DParam
 };
 
 
-struct ParamAmplitude : public ParamVoltage
+struct ParamAmplitude : public PVoltage
 {
     ParamAmplitude(const Value &min = Value("0", Order::One),
                        const Value &max = Value("10", Order::One),
                        pValueInRange valueInRange = EValueInRange,
                        const Value &value = DEFAULT_AMPLITUDE) :
-        ParamVoltage(TypeDParam::Amplitude, "Размах", "Amplitude", min, max, valueInRange, value) { }
+        PVoltage(TypeDParam::Amplitude, "Размах", "Amplitude", min, max, valueInRange, value) { }
 
     virtual Value GetMax() const;
 };
 
 
-struct ParamOffset : public ParamVoltage
+struct ParamOffset : public PVoltage
 {
     ParamOffset(pValueInRange valueInRange = EValueInRange,
                     const Value &min = Value("-5", Order::One),
                     const Value &max = Value("5", Order::One),
                     const Value &value = Value("0", Order::One)) :
-        ParamVoltage(TypeDParam::Offset, "Смещение", "Offset", min, max, valueInRange, value) { }
+        PVoltage(TypeDParam::Offset, "Смещение", "Offset", min, max, valueInRange, value) { }
 };
 
 
