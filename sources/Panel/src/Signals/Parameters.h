@@ -211,6 +211,9 @@ struct DParam : public Param
 
     bool IsAmplitude() const { return type == TypeDParam::Amplitude; }
 
+    // Возвращает количество значащих знакомест перед запятой (исключая знаковый разряд). В предположении, что значение приведено к порядку order
+    int GetNumberDigitsBeforeComma(Order::E order = Order::Count);
+
 private:
     Tuner tuner;        // Используется для настройки 
     const TypeDParam::E type;
@@ -405,10 +408,10 @@ private:
 struct PVoltage : public DParam
 {
     PVoltage(TypeDParam::E type, pchar nameRU, pchar nameEN,
-                     const Value &min,
-                     const Value &max,
-                     pValueInRange valueInRange,
-                     const Value &value) :
+             const Value &min,
+             const Value &max,
+             pValueInRange valueInRange,
+             const Value &value) :
         DParam(type, Param::FuncActive, nameRU, nameEN, min, max, valueInRange, value) { }
 };
 
@@ -416,9 +419,9 @@ struct PVoltage : public DParam
 struct ParamAmplitude : public PVoltage
 {
     ParamAmplitude(const Value &min = Value("0", Order::One),
-                       const Value &max = Value("10", Order::One),
-                       pValueInRange valueInRange = EValueInRange,
-                       const Value &value = DEFAULT_AMPLITUDE) :
+                   const Value &max = Value("10", Order::One),
+                   pValueInRange valueInRange = EValueInRange,
+                   const Value &value = DEFAULT_AMPLITUDE) :
         PVoltage(TypeDParam::Amplitude, "Размах", "Amplitude", min, max, valueInRange, value) { }
 
     virtual Value GetMax() const;
@@ -428,9 +431,9 @@ struct ParamAmplitude : public PVoltage
 struct ParamOffset : public PVoltage
 {
     ParamOffset(pValueInRange valueInRange = EValueInRange,
-                    const Value &min = Value("-5", Order::One),
-                    const Value &max = Value("5", Order::One),
-                    const Value &value = Value("0", Order::One)) :
+                const Value &min = Value("-5", Order::One),
+                const Value &max = Value("5", Order::One),
+                const Value &value = Value("0", Order::One)) :
         PVoltage(TypeDParam::Offset, "Смещение", "Offset", min, max, valueInRange, value) { }
 };
 
@@ -438,9 +441,9 @@ struct ParamOffset : public PVoltage
 struct PFrequency : public DParam
 {
     PFrequency(const Value &min,
-                       const Value &max,
-                       pValueInRange valueInRange = EValueInRange,
-                       const Value &value = Value("1", Order::Kilo)) :
+               const Value &max,
+               pValueInRange valueInRange = EValueInRange,
+               const Value &value = Value("1", Order::Kilo)) :
         DParam(TypeDParam::Frequency, Param::FuncActive, "Частота", "Frequency", min, max, valueInRange, value) { }
 };
 
@@ -448,20 +451,20 @@ struct PFrequency : public DParam
 struct PTime : public DParam
 {
     PTime(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar  const nameEN,
-                  const Value &min,
-                  const Value &max,
-                  pValueInRange valueInRange,
-                  const Value &value) : DParam(t, funcActive, nameRU, nameEN, min, max, valueInRange, value) { }
+          const Value &min,
+          const Value &max,
+          pValueInRange valueInRange, const Value &value) :
+        DParam(t, funcActive, nameRU, nameEN, min, max, valueInRange, value) { }
 };
 
 
 struct PPhase : public DParam
 {
     PPhase() : DParam(TypeDParam::Phase, Param::FuncActive, "Фаза", "Phase",
-                                       Value("0", Order::One),
-                                       Value("360", Order::One),
-                                       EValueInRange,
-                                       Value("0", Order::One)) { }
+                      Value("0", Order::One),
+                      Value("360", Order::One),
+                      EValueInRange,
+                      Value("0", Order::One)) { }
 };
 
 
@@ -505,9 +508,9 @@ struct PDelay : public PTime
 struct PManipulationDuration : public PTime
 {
     PManipulationDuration(const Value &min,
-                                  const Value &max,
-                                  pValueInRange valueInRange,
-                                  const Value &value) :
+                          const Value &max,
+                          pValueInRange valueInRange,
+                          const Value &value) :
         PTime(TypeDParam::ManipulationDuration, Param::FuncActive, "Длит", "Duration", min, max, valueInRange, value) { }
 };
 
@@ -515,9 +518,9 @@ struct PManipulationDuration : public PTime
 struct PManipulationPeriod : public PTime
 {
     PManipulationPeriod(const Value &min,
-                                const Value &max,
-                                pValueInRange valueInRange,
-                                const Value &value) :
+                        const Value &max,
+                        pValueInRange valueInRange,
+                        const Value &value) :
         PTime(TypeDParam::ManipulationPeriod, Param::FuncActive, "Период", "Period", min, max, valueInRange, value) { }
 };
 

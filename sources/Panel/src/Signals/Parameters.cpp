@@ -521,6 +521,18 @@ void DParam::Reset()
 }
 
 
+int DParam::GetNumberDigitsBeforeComma(Order::E order)
+{
+    if (IsNotOrdered())
+    {
+        return IsPhase() ? 3 : 2;
+    }
+
+    return MathDouble::GetPositionFirstDigit(GetMax(), order) + 1;
+}
+
+
+
 static Order::E CalculateOrder(const DParam *param)
 {
     return param->IsNotOrdered() ? Order::One : param->GetValue().GetOrder();

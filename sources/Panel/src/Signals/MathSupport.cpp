@@ -258,17 +258,6 @@ int MathDouble::GetDigit(const Value &val, int position, Order::E order)
 }
 
 
-int MathParameterDouble::GetNumberDigitsBeforeComma(Order::E order)
-{
-    if (param->IsNotOrdered())
-    {
-        return param->IsPhase() ? 3 : 2;
-    }
-
-    return MathDouble::GetPositionFirstDigit(param->GetMax(), order) + 1;
-}
-
-
 int MathParameterDouble::GetNumberDigitsAfterComma(Order::E)
 {
     if (param->IsNotOrdered())

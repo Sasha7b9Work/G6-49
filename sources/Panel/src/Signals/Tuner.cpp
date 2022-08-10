@@ -1037,9 +1037,7 @@ void DisplayCorrection::Init()
 
 void DisplayCorrection::InitDouble()
 {
-    MathParameterDouble::SetParameterDouble(tuner->ReinterpretToDouble());
-
-    int before = MathParameterDouble::GetNumberDigitsBeforeComma(CalculateOrderForIndication());
+    int before = tuner->ReinterpretToDouble()->GetNumberDigitsBeforeComma(CalculateOrderForIndication());
 
     indicator.digits[before].Set(Digit::COMMA);
 
