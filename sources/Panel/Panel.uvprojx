@@ -2298,16 +2298,6 @@
               <FilePath>.\src\Signals\Viewer.h</FilePath>
             </File>
             <File>
-              <FileName>MathSupport.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Signals\MathSupport.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>MathSupport.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Signals\MathSupport.h</FilePath>
-            </File>
-            <File>
               <FileName>Parameters.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Signals\Parameters.cpp</FilePath>

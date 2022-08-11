@@ -653,6 +653,44 @@ char Value::GetChar(int position, Order::E order) const
 }
 
 
+int Value::GetPositionFirstDigit(Order::E order) const
+{
+    Value _value = *this;
+
+    _value.SetSign(1);
+
+    int result = 0;
+
+    if (_value.Integer() > 0)
+    {
+        int whole = _value.Integer();
+
+        while (whole > 9)
+        {
+            whole /= 10;
+            result++;
+        }
+    }
+    else
+    {
+        int fract = _value.FractNano();
+
+        if (fract == 0)
+        {
+            return 0;
+        }
+
+        do
+        {
+            result--;
+            fract *= 10;
+        } while (fract < (100 * 1000 * 1000));
+    }
+
+    return result - Order::GetPow10(order == Order::Count ? _value.GetOrder() : order);
+}
+
+
 #ifdef PANEL
 
 bool Chan::Enabled() const

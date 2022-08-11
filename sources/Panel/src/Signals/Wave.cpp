@@ -716,9 +716,9 @@ void Form::DrawFree(const Chan &ch, int x0, int y0, int width, int height)
 }
 
 
-void Form::SetFormFlash(const Chan &ch, const uint8 data[POINTS_IN_FORM])
+void Form::SetFormFlash(const Chan &ch, const uint8 _data[POINTS_IN_FORM])
 {
-    std::memcpy(&formFlash[ch.value][0], data, POINTS_IN_FORM);
+    std::memcpy(&formFlash[ch.value][0], _data, POINTS_IN_FORM);
 }
 
 

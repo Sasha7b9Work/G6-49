@@ -3,7 +3,6 @@
 #include "common/Common.h"
 #include "Signals/Tuner.h"
 #include "Signals/Viewer.h"
-#include "Signals/MathSupport.h"
 #include "Settings/SettingsTypes.h"
 
 

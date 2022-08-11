@@ -1,7 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Generator/Generator_p.h"
-#include "Signals/MathSupport.h"
 #include "Signals/Parameters.h"
 #include "Interface/Messages_p.h"
 #include "Signals/Signals.h"
@@ -9,11 +8,89 @@
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
+#include "Utils/StringUtils.h"
 #include <cmath>
 #include <cstdio>
 
 
 int CParam::choiceModeStartFree = 0;
+
+
+namespace MathSupport
+{
+    static cstr ZeroValue(const DParam *param)
+    {
+        TypeDParam::E type = param->GetType();
+
+        if (type == TypeDParam::Amplitude)
+        {
+            return "00.0000";
+        }
+        else if (type == TypeDParam::Offset)
+        {
+            return "+00.0000";
+        }
+
+        return "0.0";
+    }
+
+    // Погасить незначащие символы
+    static void RepayEmptySymbols(char *buffer)
+    {
+        char *first = buffer;
+
+        int sign = 0;
+
+        if (*buffer == '-')
+        {
+            sign = -1;
+            buffer[0] = ' ';
+            buffer++;
+        }
+        else if (*buffer == '+')
+        {
+            sign = +1;
+            buffer[0] = ' ';
+            buffer++;
+        }
+
+        while (*buffer == '0')
+        {
+            if (*(buffer + 1) == '.')
+            {
+                break;
+            }
+            *buffer = ' ';
+            buffer++;
+        }
+
+        if (sign != 0)
+        {
+            *(buffer - 1) = (sign < 0) ? '-' : '+';
+        }
+
+        char *end = SU::FindEnd(buffer);
+
+        buffer = end - 1;
+
+        while (*buffer == '0')
+        {
+            *buffer = '\0';
+            buffer--;
+        }
+
+        while (*first == ' ') //-V1044
+        {
+            buffer = first;
+
+            do
+            {
+                buffer++;
+                *(buffer - 1) = *buffer;
+            } while (*buffer != '\0');
+        }
+    }
+}
 
 
 Param::Param(KindParam::E k, pFuncBV funcActive, pchar nRU, pchar nEN) :
@@ -699,4 +776,68 @@ int IParam::GetMaxNumberDigits() const
     }
 
     return result - 1;
+}
+
+
+int DParam::GetPositionFirstDigit(Order::E order) const
+{
+    if (IsPhase())
+    {
+        return 2;
+    }
+
+    return IsNotOrdered() ? 1 : GetValue().GetPositionFirstDigit(order);
+}
+
+
+cstr DParam::GetIndicatedValue() const
+{
+    static const int NUM_DIGITS = 6;
+    static const int LENGTH_BUFFER = NUM_DIGITS + 2;
+
+    static char buffer[LENGTH_BUFFER + 1];                      // Дополнительно завершающий ноль и точка
+    buffer[LENGTH_BUFFER - 1] = '\0';
+
+    if (value.Abs() == 0)
+    {
+        std::strcpy(buffer, MathSupport::ZeroValue(this));
+    }
+    else
+    {
+        bool sign = IsSigned();
+
+        Order::E order = IsNotOrdered() ? Order::One : Order::Count;
+
+        if (sign)
+        {
+            buffer[0] = (value.Sign() > 0) ? '+' : '-';
+        }
+
+        int posDigit = GetPositionFirstDigit(order);     // Позиция первого значащего символа относительно точки
+
+        for (int i = sign ? 1 : 0; i < LENGTH_BUFFER - 1; i++)
+        {
+            char symbol = value.GetChar(posDigit, order);
+
+            buffer[i] = symbol;
+
+            if (posDigit == 0)
+            {
+                buffer[++i] = '.';
+            }
+
+            posDigit--;
+        }
+    }
+
+    MathSupport::RepayEmptySymbols(buffer);
+
+    if (IsSigned())
+    {
+        buffer[LENGTH_BUFFER - 1] = ' ';
+        buffer[LENGTH_BUFFER] = '\0';
+    }
+
+    return buffer;
+
 }
