@@ -332,12 +332,12 @@ void Item::Press(const Control &control) //-V801
 
         switch (type.value)
         {
-        case TypeItem::Choice:              ReinterpretToChoice()->Press(control);              break;
-        case TypeItem::Button:              ReinterpretToButton()->Press(control.action);       break;
-        case TypeItem::ChoiceParameter:     ReinterpretToChoiceParameter()->Press(control);     break;
-        case TypeItem::SmallButton:         ReinterpretToSButton()->Press(control.action);      break;
-        case TypeItem::Page:                ((Page *)(this))->Press(control);                   break;
-        case TypeItem::Governor:            ((Governor *)(this))->Press(control);               break;
+        case TypeItem::Choice:          ((Choice *)this)->Press(control);           break;
+        case TypeItem::Button:          ((Button *)this)->Press(control.action);    break;
+        case TypeItem::ChoiceParameter: ((ChoiceParameter *)this)->Press(control);  break;
+        case TypeItem::SmallButton:     ((SButton *)this)->Press(control.action);   break;
+        case TypeItem::Page:            ((Page *)this)->Press(control);             break;
+        case TypeItem::Governor:        ((Governor *)this)->Press(control);         break;
         case TypeItem::NoneLight:
         case TypeItem::NoneDark:
         case TypeItem::GovernorColor:

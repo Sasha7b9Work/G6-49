@@ -108,12 +108,6 @@ public:
 
     static Item emptyDark;
     static Item emptyLight;
-
-    Button          *ReinterpretToButton()          { return (Button *)this; }
-    Choice          *ReinterpretToChoice()          { return (Choice *)this; }
-    ChoiceParameter *ReinterpretToChoiceParameter() { return (ChoiceParameter *)this; }
-    Page            *ReinterpretToPage()            { return (Page *)this; }
-    SButton         *ReinterpretToSButton()         { return (SButton *)this; }
 };
 
 
