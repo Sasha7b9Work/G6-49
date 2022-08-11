@@ -144,7 +144,7 @@ private:
 #pragma warning(pop)
 #endif
 
-#define MAKE_COLOR(r, g, b) ((col_val)(static_cast<uint>(b) + (static_cast<uint>(g) << 8) + (static_cast<uint>(r) << 16)))
+#define MAKE_COLOR(r, g, b) ((col_val)((uint)(b) + ((uint)(g) << 8) + ((uint)(r) << 16)))
 #define R_FROM_COLOR(color) (((col_val)(color) >> 16) & 0xff)
 #define G_FROM_COLOR(color) (((col_val)(color) >> 8)  & 0xff)
 #define B_FROM_COLOR(color) (((col_val)(color))       & 0xff)

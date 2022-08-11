@@ -198,7 +198,7 @@ static void SetFormWave(SimpleMessage *msg)
 {
     Chan ch(msg->TakeUINT8());
 
-    DGenerator::SetFormWave(ch, static_cast<TypeForm::E>(msg->TakeUINT8()));
+    DGenerator::SetFormWave(ch, (TypeForm::E)msg->TakeUINT8());
 }
 
 
@@ -301,7 +301,7 @@ static void SetStartMode(SimpleMessage *msg)
 
     StartMode::E mode = (StartMode::E)msg->TakeUINT8();
 
-    FPGA::SetStartMode(ch, static_cast<uint8>((firstByte & 2) >> 1), mode);
+    FPGA::SetStartMode(ch, (uint8)((firstByte & 2) >> 1), mode);
 }
 
 
@@ -355,7 +355,7 @@ static void SetPin(SimpleMessage *message)
         HPin::_15
     };
 
-    HAL_PIO::Write(static_cast<HPort::E>(port), pins[pin], state ? HState::Set : HState::Reset);
+    HAL_PIO::Write((HPort::E)port, pins[pin], state ? HState::Set : HState::Reset);
 }
 
 
@@ -474,15 +474,15 @@ static void WriteRegister(SimpleMessage *msg)
         break;
 
     case Register::FreqMeter_Resist:
-        DFreqMeter::SetResist(static_cast<FreqResist::E>(value.ToUINT64()));
+        DFreqMeter::SetResist((FreqResist::E)value.ToUINT64());
         break;
 
     case Register::FreqMeter_Couple:
-        DFreqMeter::SetCouple(static_cast<FreqCouple::E>(value.ToUINT64()));
+        DFreqMeter::SetCouple((FreqCouple::E)value.ToUINT64());
         break;
 
     case Register::FreqMeter_Filtr:
-        DFreqMeter::SetFiltr(static_cast<FreqFiltr::E>(value.ToUINT64()));
+        DFreqMeter::SetFiltr((FreqFiltr::E)value.ToUINT64());
         break;
 
     case Register::deleted_Multiplexor1:
@@ -532,18 +532,18 @@ static void RequestPictureDDSfromStorage(SimpleMessage *message)
 
     float aveValue = 127.0F;
 
-    float step = FPGA::NUM_POINTS / static_cast<float>(size);
+    float step = FPGA::NUM_POINTS / (float)size;
 
     uint8 picture[size];
 
     for (uint i = 0; i < size; i++)
     {
-        float val = data[static_cast<int>(static_cast<float>(i) * step)];
+        float val = data[(int)((float)i * step)];
 
-        picture[i] = static_cast<uint8>(aveValue + val * 125.0F);
+        picture[i] = (uint8)(aveValue + val * 125.0F);
     }
 
-    Message::Storage::RequestPictureDDS(static_cast<uint8>(ch), picture).Transmit();
+    Message::Storage::RequestPictureDDS((uint8)ch, picture).Transmit();
 }
 
 

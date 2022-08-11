@@ -191,7 +191,7 @@ void FPGA::WriteMaxAmplitude(const Chan &ch)
 {
     // «аписать максимальный размах сигнала в регистры
 
-    uint64 data = (static_cast<uint64>(16383) << 14) + (8191);
+    uint64 data = ((uint64)16383 << 14) + (8191);
 
     static const Register::E regs[Chan::Count] = { Register::_3_RectA, Register::_4_RectB };
 
@@ -282,7 +282,7 @@ void FPGA::SetFrequency(const Chan &ch)
     }
     else if (InModeDDS(ch))
     {
-        uint64 N = static_cast<uint64>((frequency * (static_cast<uint64>(1) << 40)) / 1E8F);
+        uint64 N = (uint64)((frequency * ((uint64)1 << 40)) / 1E8F);
         Register::Write(Register::_1_Freq, N);
     }
     else if(ModeWork::value[ch] == ModeWork::Impulse || ModeWork::value[ch] == ModeWork::Impulse2)
@@ -292,7 +292,7 @@ void FPGA::SetFrequency(const Chan &ch)
             ModeWork::value[ch] = ModeWork::Impulse;
             WriteControlRegister();
         }
-        uint N = static_cast<uint>(1E8F / frequency + 0.5F);
+        uint N = (uint)(1E8F / frequency + 0.5F);
         Register::Write(ch.IsA() ? Register::_5_PeriodImpulseA : Register::_7_PeriodImpulseB, N);
     }
 }
@@ -325,7 +325,7 @@ void FPGA::PacketImpulse::SetPeriodPacket(Value period)
 
 void FPGA::PacketImpulse::SetNumberImpules(uint value)
 {
-    uint64 n = static_cast<uint64>(((value - 1) * periodImpulse.ToDouble() + durationImpulse.ToDouble()) / 10E-9);
+    uint64 n = (uint64)(((value - 1) * periodImpulse.ToDouble() + durationImpulse.ToDouble()) / 10E-9);
 
     Register::Write(Register::_6_DurationImpulseA, n);
 }
@@ -404,7 +404,7 @@ void FPGA::WriteControlRegister()
         Bit::Clear(data, RG0::_5_ManipulationOSK1);
     }
 
-    switch(static_cast<uint8>(ModeWork::value[Chan::A])) //-V2520
+    switch((uint8)ModeWork::value[Chan::A]) //-V2520
     {
         case ModeWork::Meander:     
             Bit::Set(data, RG0::_8_MeanderA);
@@ -415,7 +415,7 @@ void FPGA::WriteControlRegister()
             break;
     }
 
-    switch(static_cast<uint8>(ModeWork::value[Chan::B])) //-V2520
+    switch((uint8)ModeWork::value[Chan::B]) //-V2520
     {
         case ModeWork::Meander:   
             Bit::Set(data, RG0::_9_MeanderB);
@@ -602,7 +602,7 @@ static uint CalculateCodeAmplitude(const Chan &ch)
 
     double amplitude = k * att * SettingsGenerator::Amplitude(ch);
 
-    return static_cast<uint>(amplitude * 1023);
+    return (uint)(amplitude * 1023);
 }
 
 
@@ -637,13 +637,13 @@ void FPGA::TransformCodeToData(const uint8 codeIn[FPGA::NUM_POINTS * 2], float d
 {
     for (int i = 0; i < FPGA::NUM_POINTS; i++)
     {
-        uint16 code = static_cast<uint16>(codeIn[i] + (codeIn[i + FPGA::NUM_POINTS] << 8));
+        uint16 code = (uint16)(codeIn[i] + (codeIn[i + FPGA::NUM_POINTS] << 8));
 
         float sign = _GET_BIT(code, 13) ? 1.0F : -1.0F;
 
         _CLEAR_BIT(code, 13);
 
-        float data = static_cast<float>(code) / 0x1fff;
+        float data = (float)code / 0x1fff;
 
         dataOut[i] = data * sign;
     }

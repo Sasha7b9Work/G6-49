@@ -25,7 +25,7 @@ namespace AD9952
             Number
         } value;
         Register(E v) : value(v) { };
-        operator uint8() const { return static_cast<uint8>(value); };
+        operator uint8() const { return (uint8)value; };
         cstr Name() const;
         bool Is(E v) const { return value == v; };
     };
@@ -152,7 +152,7 @@ void AD9952::WriteCFR2(const Chan &ch)
 
 void AD9952::WritePOW(const Chan &ch)
 {
-    uint value = static_cast<uint>(phase[ch] / 360.0F * static_cast<float>(1 << 13) + 0.5F);
+    uint value = (uint)(phase[ch] / 360.0F * (float)(1 << 13) + 0.5F);
     WriteToHardware(ch, Register::POW, value * 2);
 }
 
@@ -165,7 +165,7 @@ void AD9952::WriteASF(const Chan &ch)
 
     double amplitude = k * att * SettingsGenerator::Amplitude(ch);
 
-    uint value = static_cast<uint>(amplitude * static_cast<float>(0x3FFF));
+    uint value = (uint)(amplitude * (float)0x3FFF);
 
     Bit::Set(value, 14);  // \ Это биты множителя скорости
     Bit::Set(value, 15);  // / нарастания фронта 
@@ -186,7 +186,7 @@ void AD9952::WriteFTW0(const Chan &ch)
 {
     double FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::ClockAD992::Get() == FPGA::ClockAD992::_100MHz ? 1e8F : 1e6F)) * std::powf(2.0F, 32.0F);
 
-    WriteToHardware(ch, Register::FTW0, static_cast<uint>(FTWf + 0.5F));
+    WriteToHardware(ch, Register::FTW0, (uint)(FTWf + 0.5F));
 }
 
 
@@ -225,13 +225,13 @@ void AD9952::WriteToHardware(const Chan &ch, Register::E reg, uint value)
     };
 
     uint8 buffer[5];
-    buffer[0] = static_cast<uint8>(reg);
+    buffer[0] = (uint8)reg;
     int pointer = 1;                    // В это место буфера будем записывать каждый следующий байт
 
     int curByte = numBytes[reg] - 1;    // Здесь будем перебирать байты value от старшего к младшему
     while (curByte >= 0)
     {
-        buffer[pointer++] = static_cast<uint8>(value >> (curByte * 8));
+        buffer[pointer++] = (uint8)(value >> (curByte * 8));
         --curByte;
     }
 
@@ -239,7 +239,7 @@ void AD9952::WriteToHardware(const Chan &ch, Register::E reg, uint value)
     
     HAL_PIO::Reset(cs);
 
-    HAL_SPI3::Transmit(buffer, static_cast<uint16>(numBytes[reg] + 1));
+    HAL_SPI3::Transmit(buffer, (uint16)(numBytes[reg] + 1));
     
     HAL_PIO::Set(WR_AD9952_IO_UPD);
     volatile int i = 0;

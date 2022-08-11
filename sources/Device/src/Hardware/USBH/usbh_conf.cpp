@@ -4,7 +4,7 @@
 #include <stm32f4xx_hal.h>
 #include <usbh_core.h>
 
- 
+
 
 //                       LL Driver Callbacks (HCD -> USB Host Library)
 
@@ -13,7 +13,7 @@
   * @retval None */
 void HAL_HCD_SOF_Callback(HCD_HandleTypeDef *hhcd)
 {
-  USBH_LL_IncTimer (static_cast<USBH_HandleTypeDef *>(hhcd->pData));
+    USBH_LL_IncTimer((USBH_HandleTypeDef *)hhcd->pData);
 }
 
 
@@ -22,7 +22,7 @@ void HAL_HCD_SOF_Callback(HCD_HandleTypeDef *hhcd)
   * @retval None */
 void HAL_HCD_Connect_Callback(HCD_HandleTypeDef *hhcd)
 {
-  USBH_LL_Connect(static_cast<USBH_HandleTypeDef *>(hhcd->pData));
+    USBH_LL_Connect((USBH_HandleTypeDef *)hhcd->pData);
 }
 
 
@@ -31,8 +31,8 @@ void HAL_HCD_Connect_Callback(HCD_HandleTypeDef *hhcd)
   * @retval None */
 void HAL_HCD_Disconnect_Callback(HCD_HandleTypeDef *hhcd)
 {
-  USBH_LL_Disconnect(static_cast<USBH_HandleTypeDef *>(hhcd->pData));
-} 
+    USBH_LL_Disconnect((USBH_HandleTypeDef *)hhcd->pData);
+}
 
 
 /** @brief  Notify URB state change callback.
@@ -49,8 +49,8 @@ void HAL_HCD_HC_NotifyURBChange_Callback(HCD_HandleTypeDef *, uint8_t, HCD_URBSt
   * @param  phost: Host handle
   * @retval USBH Status */
 USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
-{  
-    return static_cast<USBH_StatusTypeDef>(HAL_HCD::USBH_LL_Init(phost));
+{
+    return (USBH_StatusTypeDef)HAL_HCD::USBH_LL_Init(phost);
 }
 
 
@@ -59,18 +59,18 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
   * @retval USBH Status */
 USBH_StatusTypeDef USBH_LL_DeInit(USBH_HandleTypeDef *phost)
 {
-  HAL_HCD_DeInit(static_cast<HCD_HandleTypeDef *>(phost->pData));
-  return USBH_OK; 
+    HAL_HCD_DeInit((HCD_HandleTypeDef *)phost->pData);
+    return USBH_OK;
 }
 
 
-/** @brief  Starts the Low Level portion of the Host driver.   
+/** @brief  Starts the Low Level portion of the Host driver.
   * @param  phost: Host handle
   * @retval USBH Status */
 USBH_StatusTypeDef USBH_LL_Start(USBH_HandleTypeDef *phost)
 {
-  HAL_HCD_Start(static_cast<HCD_HandleTypeDef *>(phost->pData));
-  return USBH_OK; 
+    HAL_HCD_Start((HCD_HandleTypeDef *)phost->pData);
+    return USBH_OK;
 }
 
 
@@ -79,7 +79,7 @@ USBH_StatusTypeDef USBH_LL_Start(USBH_HandleTypeDef *phost)
   * @retval USBH Status */
 USBH_StatusTypeDef USBH_LL_Stop(USBH_HandleTypeDef *phost)
 {
-    HAL_HCD_Stop(static_cast<HCD_HandleTypeDef *>(phost->pData));
+    HAL_HCD_Stop((HCD_HandleTypeDef *)phost->pData);
     return USBH_OK;
 }
 
@@ -91,7 +91,7 @@ USBH_SpeedTypeDef USBH_LL_GetSpeed(USBH_HandleTypeDef *phost)
 {
     USBH_SpeedTypeDef speed = USBH_SPEED_FULL;
 
-    switch(HAL_HCD_GetCurrentSpeed(static_cast<HCD_HandleTypeDef *>(phost->pData)))
+    switch (HAL_HCD_GetCurrentSpeed((HCD_HandleTypeDef *)phost->pData))
     {
     case 0:
         speed = USBH_SPEED_HIGH;
@@ -111,20 +111,20 @@ USBH_SpeedTypeDef USBH_LL_GetSpeed(USBH_HandleTypeDef *phost)
 /** @brief  Resets the Host Port of the Low Level Driver.
   * @param  phost: Host handle
   * @retval USBH Status */
-USBH_StatusTypeDef USBH_LL_ResetPort (USBH_HandleTypeDef *phost) 
+USBH_StatusTypeDef USBH_LL_ResetPort(USBH_HandleTypeDef *phost)
 {
-  HAL_HCD_ResetPort(static_cast<HCD_HandleTypeDef *>(phost->pData));
-  return USBH_OK; 
+    HAL_HCD_ResetPort((HCD_HandleTypeDef *)phost->pData);
+    return USBH_OK;
 }
 
 
 /** @brief  Returns the last transfered packet size.
   * @param  phost: Host handle
-  * @param  pipe: Pipe index   
+  * @param  pipe: Pipe index
   * @retval SimpleMessage Size */
-uint32_t USBH_LL_GetLastXferSize(USBH_HandleTypeDef *phost, uint8_t pipe)  
+uint32_t USBH_LL_GetLastXferSize(USBH_HandleTypeDef *phost, uint8_t pipe)
 {
-  return HAL_HCD_HC_GetXferCount(static_cast<HCD_HandleTypeDef *>(phost->pData), pipe);
+    return HAL_HCD_HC_GetXferCount((HCD_HandleTypeDef *)phost->pData, pipe);
 }
 
 
@@ -133,36 +133,36 @@ uint32_t USBH_LL_GetLastXferSize(USBH_HandleTypeDef *phost, uint8_t pipe)
   * @param  pipe: Pipe index
   * @param  epnum: Endpoint Number
   * @param  dev_address: Device USB address
-  * @param  speed: Device Speed 
+  * @param  speed: Device Speed
   * @param  ep_type: Endpoint Type
-  * @param  mps: Endpoint Max SimpleMessage Size                 
+  * @param  mps: Endpoint Max SimpleMessage Size
   * @retval USBH Status */
 USBH_StatusTypeDef USBH_LL_OpenPipe(USBH_HandleTypeDef *phost, uint8_t pipe, uint8_t epnum, uint8_t dev_address, uint8_t speed, uint8_t ep_type,
-                                    uint16_t mps)
+    uint16_t mps)
 {
-  HAL_HCD_HC_Init(static_cast<HCD_HandleTypeDef *>(phost->pData), pipe, epnum, dev_address, speed, ep_type, mps);
-  return USBH_OK; 
+    HAL_HCD_HC_Init((HCD_HandleTypeDef *)phost->pData, pipe, epnum, dev_address, speed, ep_type, mps);
+    return USBH_OK;
 }
 
 
 /** @brief  Closes a pipe of the Low Level Driver.
   * @param  phost: Host handle
-  * @param  pipe: Pipe index               
+  * @param  pipe: Pipe index
   * @retval USBH Status */
-USBH_StatusTypeDef USBH_LL_ClosePipe(USBH_HandleTypeDef *phost, uint8_t pipe)   
+USBH_StatusTypeDef USBH_LL_ClosePipe(USBH_HandleTypeDef *phost, uint8_t pipe)
 {
-  HAL_HCD_HC_Halt(static_cast<HCD_HandleTypeDef *>(phost->pData), pipe);
-  return USBH_OK;
+    HAL_HCD_HC_Halt((HCD_HandleTypeDef *)phost->pData, pipe);
+    return USBH_OK;
 }
 
 
 /** @brief  Submits a new URB to the low level driver.
   * @param  phost: Host handle
-  * @param  pipe: Pipe index    
+  * @param  pipe: Pipe index
   *          This parameter can be a value from 1 to 15
   * @param  direction: Channel number
   *          This parameter can be one of these values:
-  *           0: Output 
+  *           0: Output
   *           1: Input
   * @param  ep_type: Endpoint Type
   *          This parameter can be one of these values:
@@ -178,15 +178,15 @@ USBH_StatusTypeDef USBH_LL_ClosePipe(USBH_HandleTypeDef *phost, uint8_t pipe)
   * @param  length: length of URB data
   * @param  do_ping: activate do ping protocol (for high speed only)
   *          This parameter can be one of these values:
-  *           0: do ping inactive 
-  *           1: do ping active 
+  *           0: do ping inactive
+  *           1: do ping active
   * @retval USBH Status
   */
-USBH_StatusTypeDef USBH_LL_SubmitURB(USBH_HandleTypeDef *phost, uint8_t pipe, uint8_t direction, uint8_t ep_type, uint8_t token, uint8_t* pbuff, 
-                                     uint16_t length, uint8_t do_ping) 
+USBH_StatusTypeDef USBH_LL_SubmitURB(USBH_HandleTypeDef *phost, uint8_t pipe, uint8_t direction, uint8_t ep_type, uint8_t token, uint8_t *pbuff,
+    uint16_t length, uint8_t do_ping)
 {
-  HAL_HCD_HC_SubmitRequest(static_cast<HCD_HandleTypeDef *>(phost->pData), pipe, direction, ep_type, token, pbuff, length, do_ping);
-  return USBH_OK;   
+    HAL_HCD_HC_SubmitRequest((HCD_HandleTypeDef *)phost->pData, pipe, direction, ep_type, token, pbuff, length, do_ping);
+    return USBH_OK;
 }
 
 
@@ -199,40 +199,40 @@ USBH_StatusTypeDef USBH_LL_SubmitURB(USBH_HandleTypeDef *phost, uint8_t pipe, ui
   *            @arg URB_IDLE
   *            @arg URB_DONE
   *            @arg URB_NOTREADY
-  *            @arg URB_NYET 
-  *            @arg URB_ERROR  
-  *            @arg URB_STALL      
+  *            @arg URB_NYET
+  *            @arg URB_ERROR
+  *            @arg URB_STALL
   */
-USBH_URBStateTypeDef USBH_LL_GetURBState(USBH_HandleTypeDef *phost, uint8_t pipe) 
+USBH_URBStateTypeDef USBH_LL_GetURBState(USBH_HandleTypeDef *phost, uint8_t pipe)
 {
-  return static_cast<USBH_URBStateTypeDef>(HAL_HCD_HC_GetURBState (static_cast<HCD_HandleTypeDef *>(phost->pData), pipe));
+    return (USBH_URBStateTypeDef)HAL_HCD_HC_GetURBState((HCD_HandleTypeDef *)phost->pData, pipe);
 }
 
 /** @brief  Drives VBUS.
   * @param  state: VBUS state
   *          This parameter can be one of these values:
-  *           0: VBUS Active 
+  *           0: VBUS Active
   *           1: VBUS Inactive
   * @retval USBH Status  */
 USBH_StatusTypeDef USBH_LL_DriverVBUS(USBH_HandleTypeDef *, uint8_t)
 {
     HAL_TIM::Delay(200);
-    return USBH_OK;  
+    return USBH_OK;
 }
 
 /** @brief  Sets toggle for a pipe.
-  * @param  pipe: Pipe index   
+  * @param  pipe: Pipe index
   * @param  toggle: toggle (0/1)
   * @retval USBH Status  */
-USBH_StatusTypeDef USBH_LL_SetToggle(USBH_HandleTypeDef *, uint8_t pipe, uint8_t toggle)   
+USBH_StatusTypeDef USBH_LL_SetToggle(USBH_HandleTypeDef *, uint8_t pipe, uint8_t toggle)
 {
-    return static_cast<USBH_StatusTypeDef>(HAL_HCD::USBH_LL_SetToggle(pipe, toggle));
+    return (USBH_StatusTypeDef)HAL_HCD::USBH_LL_SetToggle(pipe, toggle);
 }
 
 /** @brief  Returns the current toggle of a pipe.
   * @param  pipe: Pipe index
   * @retval toggle (0/1) */
-uint8_t USBH_LL_GetToggle(USBH_HandleTypeDef *, uint8_t pipe)   
+uint8_t USBH_LL_GetToggle(USBH_HandleTypeDef *, uint8_t pipe)
 {
     return HAL_HCD::USBH_LL_GetToggle(pipe);
 }
@@ -244,7 +244,7 @@ uint8_t USBH_LL_GetToggle(USBH_HandleTypeDef *, uint8_t pipe)
   */
 void USBH_Delay(uint32_t Delay)
 {
-    HAL_TIM::Delay(Delay);  
+    HAL_TIM::Delay(Delay);
 }
 
 #if (USBH_DEBUG_LEVEL > 1)

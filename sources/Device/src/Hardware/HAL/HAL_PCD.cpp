@@ -47,7 +47,7 @@ void HAL_PCD::IRQHandler()
 
 int HAL_PCD::USBD_LL_Init(void *usbd_HandleTypeDef)
 {
-    USBD_HandleTypeDef *pdev = static_cast<USBD_HandleTypeDef *>(usbd_HandleTypeDef);
+    USBD_HandleTypeDef *pdev = (USBD_HandleTypeDef *)usbd_HandleTypeDef;
 
     NVIC_SetPriority(SysTick_IRQn, 0);
 

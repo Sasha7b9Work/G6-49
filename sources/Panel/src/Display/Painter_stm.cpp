@@ -19,7 +19,7 @@ void Painter::BeginScene(const Color &col)
 
     uint *address = reinterpret_cast<uint *>(Display::GetBuffer());
     uint *end = address + (BUFFER_HEIGHT * BUFFER_WIDTH) / 4;
-    uint value = static_cast<uint>(col.value) + static_cast<uint>(col.value << 8) + static_cast<uint>(col.value << 16) + static_cast<uint>(col.value << 24);
+    uint value = (uint)col.value + (uint)(col.value << 8) + (uint)(col.value << 16) + (uint)(col.value << 24);
     while (address != end)
     {
         *address++ = value;
@@ -93,8 +93,8 @@ void Primitives::Line::Draw(int x1, int y1, int x2, int y2, const Color &col)
     }
     int x = x1;
     int y = y1;
-    int dx = static_cast<int>(std::fabsf(static_cast<float>(x2 - x1)));
-    int dy = static_cast<int>(std::fabsf(static_cast<float>(y2 - y1)));
+    int dx = (int)std::fabsf((float)(x2 - x1));
+    int dy = (int)std::fabsf((float)(y2 - y1));
     int s1 = Math::Sign(x2 - x1);
     int s2 = Math::Sign(y2 - y1);
     int temp;

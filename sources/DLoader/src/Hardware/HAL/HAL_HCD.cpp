@@ -54,7 +54,7 @@ void HAL_HCD::IRQHandler()
 
 int HAL_HCD::USBH_LL_Init(void *usbh_HandleTypeDef)
 {
-    USBH_HandleTypeDef *phost = static_cast<USBH_HandleTypeDef *>(usbh_HandleTypeDef);
+    USBH_HandleTypeDef *phost = (USBH_HandleTypeDef *)usbh_HandleTypeDef;
 
     /* Set the LL driver parameters */
     handle.Instance = USB_OTG_FS;
@@ -75,7 +75,7 @@ int HAL_HCD::USBH_LL_Init(void *usbh_HandleTypeDef)
 
     USBH_LL_SetTimer(phost, HAL_HCD_GetCurrentFrame(&handle));
 
-    return static_cast<int>(USBH_OK);
+    return (int)USBH_OK;
 }
 
 

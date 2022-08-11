@@ -86,7 +86,7 @@ bool String::Allocate(uint size)
 {
     Free();
 
-    buffer = static_cast<char *>(std::malloc(size));
+    buffer = (char *)std::malloc(size);
 
     if (buffer)
     {

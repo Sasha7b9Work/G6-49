@@ -40,5 +40,5 @@ void HAL_I2C1::Init()
 void HAL_I2C1::Transmit(uint8 address, uint8 data[3])
 {
     // Смещение на один бит влево - страшная штука. Если не знать, можно потерять много времени
-    HAL_I2C_Master_Transmit(&handle, static_cast<uint16>(address << 1), data, 3, 100);
+    HAL_I2C_Master_Transmit(&handle, (uint16)(address << 1), data, 3, 100);
 }

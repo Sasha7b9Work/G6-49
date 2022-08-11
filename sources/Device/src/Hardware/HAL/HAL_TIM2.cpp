@@ -14,7 +14,7 @@ void HAL_TIM2::Init()
     handler.Instance = TIM2;
     handler.Init.Prescaler = 0;
     handler.Init.CounterMode = TIM_COUNTERMODE_UP;
-    handler.Init.Period = static_cast<uint>(-1);
+    handler.Init.Period = (uint)(-1);
     handler.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 
     HAL_TIM_Base_Init(&handler);

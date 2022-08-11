@@ -109,7 +109,7 @@ static uint FindLastOccupiedRecord(uint start, uint sizeSector, uint sizeRecord)
 
 static void EraseSector(uint startAddress)
 {
-    if (GetSector(startAddress) == static_cast<uint>(-1))
+    if (GetSector(startAddress) == (uint)(-1))
     {
         return;
     }
@@ -156,7 +156,7 @@ static uint GetSector(uint address)
         i++;
     }
 
-    return static_cast<uint>(-1);
+    return (uint)(-1);
 }
 
 
@@ -168,7 +168,7 @@ static void WriteData(uint address, void *data, uint size)
 
     for (uint i = 0; i < size; i++)
     {
-        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address++, (static_cast<uint8 *>(data))[i]);
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address++, ((uint8 *)data)[i]);
     }
 
     HAL_FLASH_Lock();

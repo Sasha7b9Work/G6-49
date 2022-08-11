@@ -149,9 +149,9 @@ float Calibrator::GetAmplitudeK(const Chan &ch)
 {
     uint8 r = CalculateRange(ch);
 
-    int16 k = *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 0U);
+    int16 k = *setCal.GetK((uint8)ch, SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 0U);
 
-    return 1.0F + static_cast<float>(k) / 1e3F;
+    return 1.0F + (float)k / 1e3F;
 }
 
 
@@ -159,7 +159,7 @@ float Calibrator::GetOffsetK_Zero(const Chan &ch)
 {
     uint8 r = CalculateRange(ch);
 
-    return 2048.0F + static_cast<float>(*setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 2U));
+    return 2048.0F + (float)(*setCal.GetK((uint8)ch, SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 2U));
 }
 
 
@@ -167,7 +167,7 @@ double Calibrator::GetOffsetK_Negative(const Chan &ch)
 {
     uint8 r = CalculateRange(ch);
 
-    return 4095.0 - *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 3U);
+    return 4095.0 - *setCal.GetK((uint8)ch, SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 3U);
 }
 
 
@@ -175,7 +175,7 @@ double Calibrator::GetOffsetK_Positive(const Chan &ch)
 {
     uint8 r = CalculateRange(ch);
 
-    return 0.0 - *setCal.GetK(static_cast<uint8>(ch), SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 1U);
+    return 0.0 - *setCal.GetK((uint8)ch, SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 1U);
 }
 
 
@@ -183,7 +183,7 @@ float Calibrator::GetFreqMeterK_Trig()
 {
     float step = 4096.0F / 200.0F;
 
-    return static_cast<float>(*setCal.GetFreqMeterK()) * step;
+    return (float)(*setCal.GetFreqMeterK()) * step;
 }
 
 

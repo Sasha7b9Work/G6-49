@@ -18,7 +18,7 @@ Buffer::~Buffer()
 
 uint8 *Buffer::Data()
 {
-    return static_cast<uint8 *>(buffer);
+    return (uint8 *)buffer;
 }
 
 

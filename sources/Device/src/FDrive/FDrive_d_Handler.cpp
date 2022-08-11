@@ -105,11 +105,11 @@ static void RequestFile()
 {
     char name[255];
 
-    int numFile = static_cast<int>(msg->TakeUINT8());
+    int numFile = (int)msg->TakeUINT8();
 
     if (FileSystem::GetNameFile(msg->String(2), numFile, name))
     {
-        Message::FDrive::FileName(static_cast<uint8>(numFile), name).Transmit();
+        Message::FDrive::FileName((uint8)numFile, name).Transmit();
     }
 }
 
@@ -117,14 +117,14 @@ static void RequestFile()
 static void RequestFileSize()
 {
     char name[255];
-    int numFile = static_cast<int>(msg->TakeUINT8());
+    int numFile = (int)msg->TakeUINT8();
     if (FileSystem::GetNameFile(msg->String(2), numFile, name))           // Получаем имя файла
     {
         String fullPath("%s\\%s", msg->String(2), name);
 
         uint size = FileSystem::GetFileSize(fullPath.c_str());
 
-        Message::FDrive::FileSize(static_cast<uint8>(numFile), size).Transmit();
+        Message::FDrive::FileSize((uint8)numFile, size).Transmit();
     }
 }
 
@@ -133,7 +133,7 @@ static void LoadDDSfromFile()
 {
     char fullName[255];
     Chan ch(msg->TakeUINT8());
-    int numFile = static_cast<int>(msg->TakeUINT8());
+    int numFile = (int)msg->TakeUINT8();
     std::strcpy(fullName, msg->String(2));
     std::strcat(fullName, "\\");
 
@@ -145,7 +145,7 @@ static void LoadDDSfromFile()
         TransformDataToCode(buffer.DataFloat(), code);
         FPGA::SaveExtSignal(ch, code);
 
-        Message::FDrive::LoadDDSfromFile(ch, static_cast<uint8>(numFile), 0).Transmit();     // Посылаем признак того, что сохранение завершено
+        Message::FDrive::LoadDDSfromFile(ch, (uint8)numFile, 0).Transmit();     // Посылаем признак того, что сохранение завершено
     }
 }
 
@@ -156,7 +156,7 @@ static void GetPictureDDS()
     uint8 data[SIZE];
     std::memset(data, 0, SIZE);
 
-    int numFile = static_cast<int>(msg->TakeUINT8());
+    int numFile = (int)msg->TakeUINT8();
 
     char fullName[255];
     std::strcpy(fullName, msg->String(2));
@@ -171,7 +171,7 @@ static void GetPictureDDS()
         }
     }
 
-    Message::FDrive::RequestPictureDDSfromFile(static_cast<uint8>(numFile), data).Transmit();
+    Message::FDrive::RequestPictureDDSfromFile((uint8)numFile, data).Transmit();
 }
 
 
@@ -296,14 +296,14 @@ uint FileSystem::GetFileSize(const char *fullPath)
         return size;
     }
 
-    return static_cast<uint>(-1);
+    return (uint)(-1);
 }
 
 
 // Конвертировать считанное из файла значение в float [-1.0 ... 1.0]
 static float ConvertToFloat(int value)
 {
-    return -1.0F + static_cast<float>(value) / 4095.0F * 2.0F;
+    return -1.0F + (float)value / 4095.0F * 2.0F;
 }
 
 
@@ -311,11 +311,11 @@ static float ConvertToFloat(int value)
 static void Interpolate(float values[FPGA::NUM_POINTS], int iFilledLast, int iReaded)
 {
     int numSteps = iReaded - iFilledLast;
-    float stepY = (values[iReaded] - values[iFilledLast]) / static_cast<float>(numSteps);
+    float stepY = (values[iReaded] - values[iFilledLast]) / (float)numSteps;
 
     for (int i = 1; i < numSteps; i++)
     {
-        values[i + iFilledLast] = values[iFilledLast] + static_cast<float>(i) * stepY;
+        values[i + iFilledLast] = values[iFilledLast] + (float)i * stepY;
     }
 }
 
@@ -382,19 +382,19 @@ static void TransformDataToCode(float dataIn[FPGA::NUM_POINTS], uint8 codeOut[FP
 {
     Normalize(dataIn);
 
-    float max = static_cast<float>(0x1fff);
+    float max = (float)0x1fff;
 
     for (int i = 0; i < FPGA::NUM_POINTS; i++)
     {
-        uint16 c = static_cast<uint16>(std::fabsf(dataIn[i]) * max);
+        uint16 c = (uint16)(std::fabsf(dataIn[i]) * max);
 
         if (dataIn[i] > 0.0F)
         {
             SetBit(c, 13);
         }
 
-        codeOut[i]                    = static_cast<uint8>(c);
-        codeOut[i + FPGA::NUM_POINTS] = static_cast<uint8>(c >> 8);
+        codeOut[i]                    = (uint8)(c);
+        codeOut[i + FPGA::NUM_POINTS] = (uint8)(c >> 8);
     }
 }
 
@@ -462,13 +462,13 @@ static void FillPicture(uint8 *picture, uint size, float values[FPGA::NUM_POINTS
 
     float aveValue = 127.0F;
 
-    float step = static_cast<float>(FPGA::NUM_POINTS) / static_cast<float>(size);
+    float step = (float)FPGA::NUM_POINTS / (float)size;
 
     for (uint i = 0; i < size; i++)
     {
-        float val = values[static_cast<int>(static_cast<float>(i) * step)];
+        float val = values[(int)((float)i * step)];
 
-        picture[i] = static_cast<uint8>(aveValue + val * 125.0F);
+        picture[i] = (uint8)(aveValue + val * 125.0F);
     }
 }
 
@@ -489,7 +489,7 @@ static void CreateFile()
 static void WriteToFile()
 {
     uint wr = 0;
-    uint size = static_cast<uint>(msg->TakeINT());
+    uint size = (uint)msg->TakeINT();
     f_write(&fileObj, msg->TakeData(5), size, &wr);
 }
 

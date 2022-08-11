@@ -42,7 +42,7 @@ static uint GetSector(uint address);
 
 static void EraseSector(uint startAddress)
 {
-    if (GetSector(startAddress) == static_cast<uint>(-1))
+    if (GetSector(startAddress) == (uint)(-1))
     {
         return;
     }
@@ -91,7 +91,7 @@ static uint GetSector(uint address)
         i++;
     }
 
-    return static_cast<uint>(-1);
+    return (uint)(-1);
 }
 
 
@@ -164,7 +164,7 @@ void HAL_EEPROM::Init()
 
     for (int i = 0; i < (FPGA::NUM_POINTS * Chan::Count); i++)
     {
-        if (data[i] != static_cast<uint>(-1))
+        if (data[i] != (uint)(-1))
         {
             return;
         }

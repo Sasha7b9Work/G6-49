@@ -144,7 +144,7 @@ int DLDrive::File::Open(const char *name)
 
 void DLDrive::File::Seek(int pos)
 {
-    f_lseek(&file, static_cast<FSIZE_t>(pos));
+    f_lseek(&file, (FSIZE_t)pos);
 }
 
 
@@ -152,9 +152,9 @@ int DLDrive::File::Read(int size, uint8 *buffer)
 {
     uint readed = 0;
 
-    if(f_read(&file, buffer, static_cast<UINT>(size), &readed) == FR_OK)
+    if(f_read(&file, buffer, (UINT)size, &readed) == FR_OK)
     {
-        return static_cast<int>(readed);
+        return (int)readed;
     }
 
     return -1;

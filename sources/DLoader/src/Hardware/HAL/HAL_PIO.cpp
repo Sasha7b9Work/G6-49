@@ -128,7 +128,7 @@ void HAL_PIO::Write(HPort::E port, uint16 pin, bool state)
 
 uint8 HAL_PIO::Read(HPort::E port, uint16 pin)
 {
-    return static_cast<uint8>(HAL_GPIO_ReadPin(PORT(port), pin));
+    return (uint8)HAL_GPIO_ReadPin(PORT(port), pin);
 }
 
 
@@ -197,7 +197,7 @@ void HAL_PIO::Init()
 void HAL_PIO::WriteFPGA(uint8 byte)
 {
     //                                                                                 биты 0,1                                    биты 2,3
-    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(byte) & 0x03) << 14) + ((static_cast<uint16>(byte & 0x0c)) >> 2);;
+    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + (uint16)(((int16)byte & 0x03) << 14) + (((uint16)(byte & 0x0c)) >> 2);;
     //                                                                                биты 4,5,6
-    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(byte) & 0xf0) << 3);
+    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + (uint16)(((int16)byte & 0xf0) << 3);
 }

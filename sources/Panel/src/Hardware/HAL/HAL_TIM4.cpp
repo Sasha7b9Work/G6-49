@@ -26,7 +26,7 @@ void HAL_TIM4::Init(void (*func)())
 
     handleTIM4.Instance = TIM4;
     handleTIM4.Init.Period = TIME_UPDATE * 10 - 1;
-    handleTIM4.Init.Prescaler = static_cast<uint>((SystemCoreClock / 2) / 10000) - 1;
+    handleTIM4.Init.Prescaler = (uint)((SystemCoreClock / 2) / 10000) - 1;
     handleTIM4.Init.ClockDivision = 0;
     handleTIM4.Init.CounterMode = TIM_COUNTERMODE_UP;
 

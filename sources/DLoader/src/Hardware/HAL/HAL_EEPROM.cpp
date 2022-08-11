@@ -28,7 +28,7 @@ void HAL_EEPROM::WriteBuffer(int address, const uint8 *data, int size)
 
     for(int i = 0; i < size; i++)
     {
-        HAL_FLASH_Program(TYPEPROGRAM_BYTE, static_cast<uint>(address), data[i]);
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, (uint)address, data[i]);
         ++address;
     }
 
@@ -38,7 +38,7 @@ void HAL_EEPROM::WriteBuffer(int address, const uint8 *data, int size)
 
 void HAL_EEPROM::EraseSectors(int count)
 {
-    ::EraseSectors(FLASH_SECTOR_5, static_cast<uint>(count));
+    ::EraseSectors(FLASH_SECTOR_5, (uint)count);
 }
 
 

@@ -55,7 +55,7 @@ DSTATUS USBH_status(BYTE lun)
         res = RES_OK;
     }
 
-    return static_cast<DSTATUS>(res);
+    return (DSTATUS)res;
 }
 
 /**
@@ -159,7 +159,7 @@ DRESULT USBH_ioctl(BYTE lun, BYTE cmd, void *buff)
     case GET_SECTOR_COUNT:
         if(USBH_MSC_GetLUNInfo(reinterpret_cast<USBH_HandleTypeDef *>(DDrive::handle), lun, &info) == USBH_OK)
         {
-            *static_cast<DWORD *>(buff) = info.capacity.block_nbr; //-V525
+            *(DWORD *)buff = info.capacity.block_nbr; //-V525
             res = RES_OK;
         }
         break;
@@ -168,7 +168,7 @@ DRESULT USBH_ioctl(BYTE lun, BYTE cmd, void *buff)
     case GET_SECTOR_SIZE:
         if(USBH_MSC_GetLUNInfo(reinterpret_cast<USBH_HandleTypeDef *>(DDrive::handle), lun, &info) == USBH_OK) //-V1037
         {
-            *static_cast<DWORD *>(buff) = info.capacity.block_size;
+            *(DWORD *)buff = info.capacity.block_size;
             res = RES_OK;
         }
         break;
@@ -178,7 +178,7 @@ DRESULT USBH_ioctl(BYTE lun, BYTE cmd, void *buff)
 
         if(USBH_MSC_GetLUNInfo(reinterpret_cast<USBH_HandleTypeDef *>(DDrive::handle), lun, &info) == USBH_OK)
         {
-            *static_cast<DWORD *>(buff) = info.capacity.block_size;
+            *(DWORD *)buff = info.capacity.block_size;
             res = RES_OK;
         }
         break;

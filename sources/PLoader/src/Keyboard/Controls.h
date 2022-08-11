@@ -42,7 +42,7 @@ struct Key
         NumActions
     } action;
 
-    operator uint8() const            { return static_cast<uint8>(value); };
+    operator uint8() const            { return (uint8)value; };
     bool Is(Key::E c) const           { return (c == value); };
     bool Is(Key::E c, Action a) const { return value == c && action == a; };
     bool IsDigit() const;

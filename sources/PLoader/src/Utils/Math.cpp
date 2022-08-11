@@ -83,8 +83,8 @@ float Math::RoundFloat(float value, int numDigits)
 
     if (digsInInt < numDigits)  // Подстрахуемся
     {
-        float pow = static_cast<float>(Math::Pow10(numDigits - digsInInt));
-        absValue = static_cast<float>(static_cast<int>(absValue * pow + 0.5F)) / static_cast<float>(pow);
+        float pow = (float)Math::Pow10(numDigits - digsInInt);
+        absValue = (float)((int)(absValue * pow + 0.5F)) / (float)pow;
     }
 
     return (value > 0.0F) ? absValue : -absValue;

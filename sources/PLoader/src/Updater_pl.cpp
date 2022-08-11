@@ -77,7 +77,7 @@ static void DrawProgress(int y, float portion)
 
     Painter::DrawRectangle(x, y, width, height, Color::WHITE);
 
-    Painter::FillRegion(x, y, static_cast<int>(width * portion), height);
+    Painter::FillRegion(x, y, (int)(width * portion), height);
 }
 
 
@@ -90,7 +90,7 @@ bool Updater::Handler(SimpleMessage *message)
     switch(com)
     {
     case Command::PortionUpgradeDevice:
-        sud.portionUpgrade = static_cast<float>(message->TakeUINT()) / 100.0F;
+        sud.portionUpgrade = (float)message->TakeUINT() / 100.0F;
         break;
 
     case Command::AnswerUpgradePanel:
@@ -118,7 +118,7 @@ float StructUpgradePanel::PortionUpgrade()
         return -1.0F;
     }
 
-    return static_cast<float>(numChunk * SIZE_CHUNK) / static_cast<float>(sizeFirmware);
+    return (float)(numChunk * SIZE_CHUNK) / (float)sizeFirmware;
 }
 
 
