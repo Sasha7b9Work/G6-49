@@ -1092,7 +1092,7 @@ void DisplayCorrection::FillDigitsIntegerPartForDouble()
 
     for (int i = 0; i < before; i++)
     {
-        indicator.digits[pos].Set(MathDouble::GetChar(value, i, order));
+        indicator.digits[pos].Set(value.GetChar(i, order));
         pos--;
 
         if (param->IsSigned() && (pos == 0))
@@ -1113,7 +1113,7 @@ void DisplayCorrection::FillDigitsForInteger()
 
     for (int i = 0; pos >= 0; i++)
     {
-        indicator.digits[pos].Set(MathDouble::GetChar(value, i, Order::One));
+        indicator.digits[pos].Set(value.GetChar(i, Order::One));
         pos--;
     }
 }
@@ -1134,7 +1134,7 @@ void DisplayCorrection::FillDigitsFractPartForDouble()
 
     for (int i = 0; i < after; i++)
     {
-        indicator.digits[pos].Set(MathDouble::GetChar(value, -i - 1, order));
+        indicator.digits[pos].Set(value.GetChar(-i - 1, order));
         pos++;
     }
 }

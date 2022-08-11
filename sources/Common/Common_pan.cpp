@@ -8,7 +8,7 @@
 static void AddChar(char *buffer, const Value &value, int pos, Order::E order)
 {
     char digit[2] = { 0, 0 };
-    digit[0] = MathDouble::GetChar(value, pos, order);
+    digit[0] = value.GetChar(pos, order);
     std::strcat(buffer, digit);
 }
 
@@ -27,7 +27,7 @@ cstr Value::ToString(bool sign, Order::E order) const
 
     order = (order == Order::Count) ? GetOrder() : order;
 
-    int first = MathDouble::GetPositionFirstDigit(*this, order);
+    int first = GetPositionFirstDigit(order);
 
     for (int i = first; i >= 0; i--)
     {

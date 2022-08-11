@@ -528,7 +528,7 @@ int DParam::GetNumberDigitsBeforeComma(Order::E order) const
         return IsPhase() ? 3 : 2;
     }
 
-    return MathDouble::GetPositionFirstDigit(GetMax(), order) + 1;
+    return GetMax().GetPositionFirstDigit(order) + 1;
 }
 
 
@@ -551,7 +551,7 @@ static Order::E CalculateOrder(const DParam *param)
 
 String DParam::ToString(String &units) const
 {
-    String result(MathDouble::GetIndicatedValue(this));
+    String result(GetIndicatedValue());
 
     units.Set(TypeConversionString::None, GetUnits(CalculateOrder(this)));
 

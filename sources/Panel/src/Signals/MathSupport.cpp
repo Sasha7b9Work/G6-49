@@ -8,15 +8,6 @@
 #include <cstring>
 
 
-namespace MathDouble
-{
-    static Order::E CalculateOrder(const DParam* param)
-    {
-        return param->IsNotOrdered() ? Order::One : Order::Count;
-    }
-}
-
-
 // Погасить незначащие символы
 static void RepayEmptySymbols(char *buffer)
 {
@@ -92,7 +83,7 @@ static cstr ZeroValue(const DParam *param)
 }
 
 
-cstr MathDouble::GetIndicatedValue(const DParam *param)
+cstr DParam::GetIndicatedValue() const
 {
     static const int NUM_DIGITS = 6;
     static const int LENGTH_BUFFER = NUM_DIGITS + 2;
@@ -100,27 +91,27 @@ cstr MathDouble::GetIndicatedValue(const DParam *param)
     static char buffer[LENGTH_BUFFER + 1];                      // Дополнительно завершающий ноль и точка
     buffer[LENGTH_BUFFER - 1] = '\0';
 
-    Value value = param->GetValue();
-
     if (value.Abs() == 0)
     {
-        std::strcpy(buffer, ZeroValue(param));
+        std::strcpy(buffer, ZeroValue(this));
     }
     else
     {
-        bool sign = param->IsSigned();
-        Order::E order = CalculateOrder(param);
+        bool sign = IsSigned();
+
+        Order::E order = IsNotOrdered() ? Order::One : Order::Count;
 
         if (sign)
         {
             buffer[0] = (value.Sign() > 0) ? '+' : '-';
         }
 
-        int posDigit = GetPositionFirstDigit(param, order);     // Позиция первого значащего символа относительно точки
+        int posDigit = GetPositionFirstDigit(order);     // Позиция первого значащего символа относительно точки
 
         for (int i = sign ? 1 : 0; i < LENGTH_BUFFER - 1; i++)
         {
-            char symbol = GetChar(value, posDigit, order);
+            char symbol = value.GetChar(posDigit, order);
+
             buffer[i] = symbol;
 
             if (posDigit == 0)
@@ -134,7 +125,7 @@ cstr MathDouble::GetIndicatedValue(const DParam *param)
 
     RepayEmptySymbols(buffer);
 
-    if (param->IsSigned())
+    if (IsSigned())
     {
         buffer[LENGTH_BUFFER - 1] = ' ';
         buffer[LENGTH_BUFFER] = '\0';
@@ -145,27 +136,28 @@ cstr MathDouble::GetIndicatedValue(const DParam *param)
 }
 
 
-int MathDouble::GetPositionFirstDigit(const DParam *param, Order::E order)
+int DParam::GetPositionFirstDigit(Order::E order) const
 {
-    if (param->IsPhase())
+    if (IsPhase())
     {
         return 2;
     }
 
-    return param->IsNotOrdered() ? 1 : GetPositionFirstDigit(param->GetValue(), order);
+    return IsNotOrdered() ? 1 : GetValue().GetPositionFirstDigit(order);
 }
 
 
-int MathDouble::GetPositionFirstDigit(const Value &val, Order::E order)
+int Value::GetPositionFirstDigit(Order::E order) const
 {
-    Value value = val;
-    value.SetSign(1);
+    Value _value = *this;
+
+    _value.SetSign(1);
 
     int result = 0;
 
-    if (value.Integer() > 0)
+    if (_value.Integer() > 0)
     {
-        int whole = value.Integer();
+        int whole = _value.Integer();
 
         while (whole > 9)
         {
@@ -175,7 +167,7 @@ int MathDouble::GetPositionFirstDigit(const Value &val, Order::E order)
     }
     else
     {
-        int fract = value.FractNano();
+        int fract = _value.FractNano();
 
         if (fract == 0)
         {
@@ -189,24 +181,24 @@ int MathDouble::GetPositionFirstDigit(const Value &val, Order::E order)
         } while (fract < (100 * 1000 * 1000));
     }
 
-    return result - Order::GetPow10(order == Order::Count ? value.GetOrder() : order);
+    return result - Order::GetPow10(order == Order::Count ? _value.GetOrder() : order);
 }
 
 
-char MathDouble::GetChar(const Value &value, int position, Order::E order)
+char Value::GetChar(int position, Order::E order) const
 {
-    int digit = GetDigit(value, position, order);
+    int digit = GetDigit(position, order);
 
-    return (digit == -1) ? '\0' : static_cast<char>(GetDigit(value, position, order) | 0x30);
+    return (digit == -1) ? '\0' : (char)(GetDigit(position, order) | 0x30);
 }
 
 
-int MathDouble::GetDigit(const Value &val, int position, Order::E order)
+int Value::GetDigit(int position, Order::E order) const
 {
-    Value value = val;
-    value.SetSign(1);
+    Value _value = *this;
+    _value.SetSign(1);
 
-    order = (order == Order::Count) ? value.GetOrder() : order;
+    order = (order == Order::Count) ? _value.GetOrder() : order;
 
     position += Order::GetPow10(order);
 
@@ -214,7 +206,7 @@ int MathDouble::GetDigit(const Value &val, int position, Order::E order)
     {
         int divider = 100 * 1000 * 1000;       // На это число будем делить количество наносекунд
 
-        int fract = value.FractNano();
+        int fract = _value.FractNano();
 
         while(position < - 1)
         {
@@ -232,7 +224,7 @@ int MathDouble::GetDigit(const Value &val, int position, Order::E order)
     }
     else
     {
-        int whole = value.Integer();
+        int whole = _value.Integer();
 
         while(position > 0)
         {

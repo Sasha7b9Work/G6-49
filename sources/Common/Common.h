@@ -96,6 +96,16 @@ struct Value
     // ¬озращает строку значени€
     cstr ToString(bool sign, Order::E order = Order::Count) const;
 
+    // ¬озвращает символ в позиции position. «нак не учитываетс€. “очка находитс€ соответственно order. One - после единиц, Kilo - после тыс€ч и так далее.
+    // Order::Count - значенине по умолчанию - зап€та€ в позиции относительно размерности числового значени€
+    char GetChar(int postition, Order::E order) const;
+
+    int GetPositionFirstDigit(Order::E order) const;
+
+    // ¬озвращает цифру в позиции position. “очка находитс€ соответственно order. One - после единиц, Kilo - после тыс€ч и так далее.
+    // Order::Count - значенине по умолчанию - зап€та€ в позиции относительно размерности числового значени€
+    int GetDigit(int position, Order::E order = Order::Count) const;
+
     bool operator<(const Value &);
     bool operator>(const Value &);
     bool operator<=(const Value &);
