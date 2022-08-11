@@ -30,7 +30,7 @@ inline SMinMax EValueInRange(Form *) { return SMinMax(); }
 #define IMPULSE_DURATION_MIN Value("10", Order::Nano)
 
 
-struct KindParam
+struct TypeParam
 {
     enum E
     {
@@ -46,7 +46,7 @@ struct KindParam
 
 struct Param
 {
-    Param(KindParam::E k, pFuncBV funcActive, pchar nRU, pchar nEN);
+    Param(TypeParam::E k, pFuncBV funcActive, pchar nRU, pchar nEN);
 
     virtual ~Param() { }
 
@@ -76,7 +76,7 @@ struct Param
 
     Form *GetForm();
     
-    KindParam::E GetKind() { return kind; }
+    TypeParam::E GetKind() { return kind; }
 
     Viewer viewer;
 
@@ -102,7 +102,7 @@ struct Param
 
     static bool FuncActive() { return true; }
 
-    DParam *ToDouble() { return (kind == KindParam::Double) ? (DParam *)this : nullptr; }
+    DParam *ToDouble() { return (kind == TypeParam::Double) ? (DParam *)this : nullptr; }
 
     pFuncBV     funcOfActive;  // јктивен ли данный параметр
 
@@ -110,7 +110,7 @@ protected:
     
     Form         *form;         // ‘орма, дл€ которой зада этот параметр
     Param        *parent;       // ≈сли параметр вложенный, то здесь адрес родител€
-    KindParam::E  kind;
+    TypeParam::E  kind;
     pchar         names[2];
 };
 
@@ -328,7 +328,7 @@ struct TypeCParam
 struct CParam : public Param
 {
     CParam(TypeCParam::E t, pFuncBV funcActive, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
-        Param(KindParam::Choice, funcActive, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
+        Param(TypeParam::Choice, funcActive, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
 
     TypeCParam::E GetType() { return type; }
 
@@ -370,7 +370,7 @@ struct TypeCMSParam
 struct CMSParam : public Param
 {
     CMSParam(TypeCMSParam::E v, pchar nameRU, pchar nameEN, Param **parameters) :
-        Param(KindParam::Composite, Param::FuncActive, nameRU, nameEN), params(parameters), type(v) { }
+        Param(TypeParam::Composite, Param::FuncActive, nameRU, nameEN), params(parameters), type(v) { }
 
     virtual void SetForm(Form *form);
 
@@ -400,7 +400,7 @@ private:
 struct BParam : public Param
 {
     BParam(pchar titleRU, pchar titleEN, pFuncVV f) :
-        Param(KindParam::Button, Param::FuncActive, titleRU, titleEN), func(f) {};
+        Param(TypeParam::Button, Param::FuncActive, titleRU, titleEN), func(f) {};
 
     virtual String ToString(String &) const { return String(""); };
 
