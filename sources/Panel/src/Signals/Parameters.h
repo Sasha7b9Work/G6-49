@@ -212,10 +212,10 @@ struct DParam : public Param
     bool IsAmplitude() const { return type == TypeDParam::Amplitude; }
 
     // Возвращает количество значащих знакомест перед запятой (исключая знаковый разряд). В предположении, что значение приведено к порядку order
-    int GetNumberDigitsBeforeComma(Order::E order = Order::Count);
+    int GetNumberDigitsBeforeComma(Order::E order = Order::Count) const;
 
     // Возвращает количество значащих знакомест после запятой
-    int GetNumberDigitsAfterComma(Order::E order = Order::Count);
+    int GetNumberDigitsAfterComma(Order::E order = Order::Count) const;
 
 private:
     Tuner tuner;        // Используется для настройки 

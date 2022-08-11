@@ -291,10 +291,10 @@ public:
     // Возвращает true, если настраиваемый параметр имеет единицы измерения "Вольт"
     bool IsNotOrdered();
 
-    static bool IsDouble() { return Current()->ReinterpretToDouble() != nullptr; };
+    static bool IsDouble() { return Current()->ToDouble() != nullptr; };
 
     // Возвращает указатеь на DParam, если param имеет тип Double и nullptr в ином случае
-    DParam *ReinterpretToDouble();
+    DParam *ToDouble();
 
     IParam *ReinterpretToInteger();
 

@@ -521,7 +521,7 @@ void DParam::Reset()
 }
 
 
-int DParam::GetNumberDigitsBeforeComma(Order::E order)
+int DParam::GetNumberDigitsBeforeComma(Order::E order) const
 {
     if (IsNotOrdered())
     {
@@ -532,7 +532,7 @@ int DParam::GetNumberDigitsBeforeComma(Order::E order)
 }
 
 
-int DParam::GetNumberDigitsAfterComma(Order::E)
+int DParam::GetNumberDigitsAfterComma(Order::E) const
 {
     if (IsNotOrdered())
     {
