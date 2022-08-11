@@ -217,7 +217,7 @@ void Form::TuneGenerator()
     if(value == TypeForm::Sine)
     {
         Param *manipulation = FindParameter(TypeCParam::ManipulationEnabled);
-        bool manipulationEnabled = reinterpret_cast<CParam *>(manipulation)->GetChoice() == 1;
+        bool manipulationEnabled = ((CParam *)manipulation)->GetChoice() == 1;
 
         if(CurrentParameter()->GetParent())                                 // Ðàñêðûò ïàðàìåòð ÌÀÍÈÏÓËßÖÈß
         {
@@ -327,7 +327,7 @@ CParam *Form::FindParameter(TypeCParam::E p) const
         
         if(param->IsComposite())
         {
-            CMSParam *complex = reinterpret_cast<CMSParam *>(param);
+            CMSParam *complex = (CMSParam *)param;
 
             CParam *choice = complex->FindParameter(p);
 

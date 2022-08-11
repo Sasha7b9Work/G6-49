@@ -17,7 +17,7 @@ void Painter::BeginScene(const Color &col)
 {   
     col.SetAsCurrent();
 
-    uint *address = reinterpret_cast<uint *>(Display::GetBuffer());
+    uint *address = (uint *)Display::GetBuffer();
     uint *end = address + (BUFFER_HEIGHT * BUFFER_WIDTH) / 4;
     uint value = (uint)col.value + (uint)(col.value << 8) + (uint)(col.value << 16) + (uint)(col.value << 24);
     while (address != end)

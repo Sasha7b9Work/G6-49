@@ -103,7 +103,7 @@ static void WriteData(uint dest, void *src, uint size)
 
     for (uint i = 0; i < size; i++)
     {
-        HAL_FLASH_Program(TYPEPROGRAM_BYTE, dest++, (reinterpret_cast<uint8 *>(src))[i]);
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, dest++, ((uint8 *)src)[i]);
     }
 
     HAL_FLASH_Lock();
@@ -178,6 +178,6 @@ void HAL_EEPROM::Init()
 
     for (int i = 0; i < (FPGA::NUM_POINTS * Chan::Count); i++)
     {
-        WriteData(reinterpret_cast<uint>(address), &value, 4);
+        WriteData((uint)address, &value, 4);
     }
 }

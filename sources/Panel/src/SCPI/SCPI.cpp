@@ -247,7 +247,7 @@ bool SCPI::Handler::Processing(SimpleMessage *message)
 {
     uint size = message->TakeUINT();
 
-    SCPI::AppendNewData(reinterpret_cast<pchar>(message->TakeData(5)), size);
+    SCPI::AppendNewData((pchar)message->TakeData(5), size);
 
     return true;
 }

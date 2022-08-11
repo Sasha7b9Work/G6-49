@@ -44,7 +44,7 @@ static void SetAttributeConnected()
 
 static int8_t CDC_Itf_Init()
 {
-    USBD_CDC_SetRxBuffer(reinterpret_cast<USBD_HandleTypeDef *>(DVCP::handle), UserRxBuffer);
+    USBD_CDC_SetRxBuffer((USBD_HandleTypeDef *)DVCP::handle, UserRxBuffer);
     Timer::SetAndStartOnce(Timer::Type::USB, SetAttributeConnected, 100);   /** \todo Задержка введена для того, чтобы не было ложных срабатываний в 
                                                                  usbd_conf.c:HAL_PCD_SetupStageCallback при определении подключения хоста */
     return (USBD_OK);
@@ -118,7 +118,7 @@ static int8_t CDC_Itf_Receive(uint8 *buffer, uint *length) //-V2009 //-V2558
 {
     Message::SCPI::Data(buffer, (int)(*length)).Transmit();
 
-    USBD_CDC_ReceivePacket(reinterpret_cast<USBD_HandleTypeDef *>(DVCP::handle));
+    USBD_CDC_ReceivePacket((USBD_HandleTypeDef *)DVCP::handle);
 
     return USBD_OK;
 }

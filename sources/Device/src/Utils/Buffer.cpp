@@ -24,7 +24,7 @@ uint8 *Buffer::Data()
 
 float *Buffer::DataFloat()
 {
-    return reinterpret_cast<float *>(Data());
+    return (float *)Data();
 }
 
 

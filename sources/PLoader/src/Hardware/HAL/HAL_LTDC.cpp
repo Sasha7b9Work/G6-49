@@ -114,7 +114,7 @@ static void SetBuffers()
     pLayerCfg.Alpha0 = 0xff;
     pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
     pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
-    pLayerCfg.FBStartAdress = reinterpret_cast<uint>(frontBuffer);
+    pLayerCfg.FBStartAdress = (uint)frontBuffer;
     pLayerCfg.ImageWidth = SCREEN_WIDTH;
     pLayerCfg.ImageHeight = SCREEN_HEIGHT;
     pLayerCfg.Backcolor.Blue = 0;
@@ -143,7 +143,7 @@ void HAL_LTDC::ToggleBuffers()
     {
         if (HAL_DMA2D_ConfigLayer(&hDMA2D, 1) == HAL_OK)
         {
-            if (HAL_DMA2D_Start(&hDMA2D, reinterpret_cast<uint>(backBuffer), reinterpret_cast<uint>(frontBuffer), SCREEN_WIDTH, SCREEN_HEIGHT) == HAL_OK)
+            if (HAL_DMA2D_Start(&hDMA2D, (uint)backBuffer, (uint)frontBuffer, SCREEN_WIDTH, SCREEN_HEIGHT) == HAL_OK)
             {
                 HAL_DMA2D_PollForTransfer(&hDMA2D, 1);
             }
@@ -175,7 +175,7 @@ void HAL_LTDC::FillRegion(int, int, int, int, const Color &color)
     {
         if (HAL_DMA2D_ConfigLayer(&handle, 1) == HAL_OK)
         {
-            if (HAL_DMA2D_Start(&handle, color.value, reinterpret_cast<uint>(backBuffer), SCREEN_WIDTH, SCREEN_HEIGHT) == HAL_OK)
+            if (HAL_DMA2D_Start(&handle, color.value, (uint)backBuffer, SCREEN_WIDTH, SCREEN_HEIGHT) == HAL_OK)
             {
                 HAL_DMA2D_PollForTransfer(&handle, 200);
             }

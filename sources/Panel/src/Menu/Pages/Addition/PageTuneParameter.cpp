@@ -27,12 +27,12 @@ void PageTuneParameter::SetParameter(Param *parameter)
 {
     if(parameter->IsDouble())
     {
-        storedDouble = *reinterpret_cast<DParam *>(parameter);
+        storedDouble = *(DParam *)parameter;
         tuned = parameter;
     }
     else if (parameter->IsInteger())
     {
-        storedInteger = *reinterpret_cast<IParam *>(parameter);
+        storedInteger = *(IParam *)parameter;
         tuned = parameter;
     }
 }
@@ -204,7 +204,7 @@ DEF_PAGE_SB(pTuneParameter,
     Page::SB_Input, 0, Item::FuncActive, OnOpenClose_TuneParameter, OnDraw_TuneParameter, OnControl_TuneParameter
 )
 
-Page *PageTuneParameter::self = reinterpret_cast<Page *>((PageBase *)&pTuneParameter);
+Page *PageTuneParameter::self = (Page *)&pTuneParameter;
 
 
 void PageTuneParameter::SetModeEntering()
@@ -215,8 +215,8 @@ void PageTuneParameter::SetModeEntering()
     }
     else
     {
-        pTuneParameter.items[0] = reinterpret_cast<Item *>((SButtonBase *)&sbMore);
-        pTuneParameter.items[1] = reinterpret_cast<Item *>((SButtonBase *)&sbLess);
+        pTuneParameter.items[0] = (Item *)&sbMore;
+        pTuneParameter.items[1] = (Item *)&sbLess;
     }
 }
 
@@ -240,11 +240,11 @@ void PageTuneParameter::CallbackOnButtonCancel()
 
     if (parameter->IsDouble())
     {
-        *reinterpret_cast<DParam *>(parameter) = storedDouble;
+        *((DParam *)parameter) = storedDouble;
     }
     else if (parameter->IsInteger())
     {
-        *reinterpret_cast<IParam *>(parameter) = storedInteger;
+        *((IParam *)parameter) = storedInteger;
     }
 
     PGenerator::TuneChannel(CURRENT_CHANNEL);

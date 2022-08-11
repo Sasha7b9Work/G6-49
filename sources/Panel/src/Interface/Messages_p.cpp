@@ -7,7 +7,7 @@
 Message::LoadFormDDS::LoadFormDDS(uint8 ch, uint16 data[PGenerator::DDS_NUM_POINTS]) : SimpleMessage(2 + PGenerator::DDS_NUM_POINTS * 2, Command::LoadFormDDS)
 {
     PutUINT8(ch);
-    PutData(reinterpret_cast<uint8*>(data), sizeof(data[0]) * PGenerator::DDS_NUM_POINTS);
+    PutData((uint8*)data, sizeof(data[0]) * PGenerator::DDS_NUM_POINTS);
 }
 
 

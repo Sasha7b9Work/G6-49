@@ -5,7 +5,7 @@
 
 
 extern const PageBase pFrequencyCounter;
-Page *PageFrequencyCounter::self = reinterpret_cast<Page *>((PageBase *)&pFrequencyCounter);
+Page *PageFrequencyCounter::self = (Page *)&pFrequencyCounter;
 
 
 // Настроить вид страницы в соответствии с режимом измерения
@@ -228,13 +228,13 @@ static void Tune_Page()
 
     if (set.freq.measure == FreqMeasure::Freq)
     {
-        page->items[2] = reinterpret_cast<Item *>((ChoiceBase *)&cBillingTime);
+        page->items[2] = (Item *)&cBillingTime;
         page->items[3] = &Item::emptyLight;
     }
     else if (set.freq.measure == FreqMeasure::Period)
     {
-        page->items[2] = reinterpret_cast<Item *>((ChoiceBase *)&cTimeStamps);
-        page->items[3] = reinterpret_cast<Item *>((ChoiceBase *)&cAvePeriod);
+        page->items[2] = (Item *)&cTimeStamps;
+        page->items[3] = (Item *)&cAvePeriod;
     }
     else
     {

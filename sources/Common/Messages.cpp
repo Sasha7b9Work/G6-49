@@ -292,7 +292,7 @@ bool SimpleMessage::IsEquals(const SimpleMessage *message) const
 
 char *SimpleMessage::String(int pos)
 {
-    return reinterpret_cast<char *>(&buffer[pos]);
+    return (char *)&buffer[pos];
 }
 
 
@@ -376,7 +376,7 @@ Message::FDrive::NumDirsAndFiles::NumDirsAndFiles(char *directory) : SimpleMessa
     int size = 1 +    (int)std::strlen(directory) + 1;
     AllocateMemory(size);
     PutUINT8(Command::FDrive_NumDirsAndFiles);
-    std::strcpy(reinterpret_cast<char *>(buffer + 1), directory);
+    std::strcpy((char *)(buffer + 1), directory);
 }
 
 
@@ -387,7 +387,7 @@ Message::FDrive::FileName::FileName(uint8 numFile, char *name) : SimpleMessage()
     AllocateMemory(size);
     PutUINT8(Command::FDrive_RequestFile);
     PutUINT8(numFile);
-    std::strcpy(reinterpret_cast<char *>(buffer + 2), name);
+    std::strcpy((char *)(buffer + 2), name);
 }
 
 
@@ -396,7 +396,7 @@ Message::FDrive::CreateFFile::CreateFFile(pchar name) : SimpleMessage()
     int size = 1 + (int)std::strlen(name) + 1;
     AllocateMemory(size);
     PutUINT8(Command::FDrive_CreateFile);
-    std::strcpy(reinterpret_cast<char *>(buffer + 1), name);
+    std::strcpy((char *)(buffer + 1), name);
 }
 
 
@@ -420,7 +420,7 @@ Message::FDrive::FileString::FileString(uint numString, char *nameFile) : Simple
     AllocateMemory(size);
     PutUINT8(Command::FDrive_RequestFileString);
     PutUINT8((uint8)numString);
-    std::strcpy(reinterpret_cast<char *>(buffer + 2), nameFile);
+    std::strcpy((char *)(buffer + 2), nameFile);
 }
 
 
@@ -439,7 +439,7 @@ Message::Log::Log(char *string) : SimpleMessage()
     AllocateMemory(size);
     PutUINT8(Command::Log);
 
-    std::strcpy(reinterpret_cast<char *>(buffer + 1), string);
+    std::strcpy((char *)(buffer + 1), string);
 }
 
 
@@ -497,7 +497,7 @@ Message::FDrive::LoadDDSfromFile::LoadDDSfromFile(uint8 ch, uint8 numFile, char 
     PutUINT8(Command::FDrive_LoadDDSfromFile);
     PutUINT8(ch);
     PutUINT8(numFile);
-    std::strcpy(reinterpret_cast<char *>(&buffer[3]), directory);
+    std::strcpy((char *)&buffer[3], directory);
 }
 
 

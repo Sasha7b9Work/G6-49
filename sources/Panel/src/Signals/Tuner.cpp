@@ -1298,11 +1298,11 @@ bool Tuner::IsNotOrdered()
 
 DParam *Tuner::ToDouble()
 {
-    return param->IsDouble() ? reinterpret_cast<DParam *>(param) : nullptr;
+    return param->IsDouble() ? (DParam *)param : nullptr;
 }
 
 
 IParam *Tuner::ToInteger()
 {
-    return param->IsInteger() ? reinterpret_cast<IParam *>(param) : nullptr;
+    return param->IsInteger() ? (IParam *)param : nullptr;
 }

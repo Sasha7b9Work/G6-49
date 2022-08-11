@@ -63,7 +63,7 @@ void PageSignals::OnPress_Channel(bool active)
         cParameters.form = CURRENT_FORM;
         numForm = CURRENT_FORM->value;
 
-        pageSignals.items[1] = reinterpret_cast<Item *>((ChoiceBase *)(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB));
+        pageSignals.items[1] = (Item *)(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB);
 
         PGenerator::TuneChannel(CURRENT_CHANNEL);
     }
@@ -90,7 +90,7 @@ DEF_CHOICE_2( cChannel,                                                         
 
 static void ChangedForm()
 {
-    ChoiceBase *choice = reinterpret_cast<ChoiceBase *>(pageSignals.items[1]);      // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала
+    ChoiceBase *choice = (ChoiceBase *)pageSignals.items[1];      // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала
 
     CURRENT_WAVE.SetIndexForm(choice->CurrentIndex());                              // Установить для текущего сигнала индекс формы из ChoiceBase
 
@@ -223,7 +223,7 @@ static void OnPress_TuneParameter()
     {
         if (CURRENT_PARAM->IsDouble())
         {
-            DParam *param = reinterpret_cast<DParam *>(CURRENT_PARAM);
+            DParam *param = (DParam *)CURRENT_PARAM;
 
             if (param->GetType() == TypeDParam::ManipulationDuration || param->GetType() == TypeDParam::ManipulationPeriod)
             {
@@ -282,11 +282,11 @@ static void OnDraw_TuneParameter(int x, int y)
 {
     if (CURRENT_PARAM->IsDouble())
     {
-        DParam *param = reinterpret_cast<DParam *>(CURRENT_PARAM);
+        DParam *param = (DParam *)CURRENT_PARAM;
 
         if (param->GetType() == TypeDParam::ManipulationDuration || param->GetType() == TypeDParam::ManipulationPeriod)
         {
-            const Item *item = reinterpret_cast<const Item *>(&bTuneParameter);
+            const Item *item = (const Item *)&bTuneParameter;
 
             bool isShade = item->IsShade();
 
@@ -320,4 +320,4 @@ DEF_PAGE_4( pageSignals,   //-V641
     Page::Signals, PageMain::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, FuncBeforeDraw
 )
 
-Page *PageSignals::self = reinterpret_cast<Page *>((PageBase *)&pageSignals);
+Page *PageSignals::self = (Page *)&pageSignals;

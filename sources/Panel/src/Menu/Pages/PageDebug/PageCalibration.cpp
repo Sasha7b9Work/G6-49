@@ -249,7 +249,7 @@ static void OnEnter_Calibration(bool enter)
 }
 
 
-const PageBase *page = (const PageBase *)reinterpret_cast<PageBase *>(PageDebug::self);
+const PageBase *page = (const PageBase *)(PageBase *)PageDebug::self;
 
 
 DEF_PAGE_4_VAR( pCalibration,
@@ -263,18 +263,18 @@ DEF_PAGE_4_VAR( pCalibration,
 )
 
 
-Page *PageDebug::Calibartion::self = reinterpret_cast<Page *>((PageBase *)&pCalibration);
+Page *PageDebug::Calibartion::self = (Page *)&pCalibration;
 
 
 static void TuneControls()
 {
     if(range < 3)
     {
-        pCalibration.items[3] = reinterpret_cast<Item *>((ChoiceBase *)&cParameterHalfVoltage);
+        pCalibration.items[3] = (Item *)&cParameterHalfVoltage;
     }
     else
     {
-        pCalibration.items[3] = reinterpret_cast<Item *>((ChoiceBase *)&cParameterFullVoltage);
+        pCalibration.items[3] = (Item *)&cParameterFullVoltage;
     }
 }
 

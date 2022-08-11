@@ -11,5 +11,5 @@ void PVCP::SendStringAsynch(const char *data)
 {
     char *mes = (char *)data;
 
-    Message::SCPI::Data(reinterpret_cast<uint8 *>(mes), (int)std::strlen(data)).Transmit();
+    Message::SCPI::Data((uint8 *)mes, (int)std::strlen(data)).Transmit();
 }

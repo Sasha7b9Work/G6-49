@@ -21,7 +21,7 @@ extern const PageBase pUSB;
 
 
 extern const PageBase pService;
-Page *PageService::self = reinterpret_cast<Page *>((PageBase *)&pService);
+Page *PageService::self = (Page *)&pService;
 
 
 void PageService::OnPress_Reset()
@@ -81,7 +81,7 @@ DEF_PAGE_4_VAR(pService,                                                        
     &Item::emptyLight,
     &Item::emptyLight,
     //PageDebug::self,
-    Page::Service, reinterpret_cast<PageBase *>(PageMain::self), Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
+    Page::Service, (PageBase *)PageMain::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 

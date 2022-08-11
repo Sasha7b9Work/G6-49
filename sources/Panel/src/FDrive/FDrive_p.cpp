@@ -319,7 +319,7 @@ void FDrive::SaveScreenToFlash()
         colorStruct.green = (uint8)((float)G_FROM_COLOR(color));
         colorStruct.red = (uint8)((float)R_FROM_COLOR(color));
         colorStruct.rgbReserved = 0;
-        (reinterpret_cast<STM32tagRGBQUAD *>(buffer))[i] = colorStruct;
+        ((STM32tagRGBQUAD *)buffer)[i] = colorStruct;
     }
 
     for (int i = 0; i < 4; i++)

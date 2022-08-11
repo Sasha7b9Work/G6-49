@@ -147,7 +147,7 @@ void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], F
 {
     uint16 buffer[DDS_NUM_POINTS];
 
-    uint8 *code = reinterpret_cast<uint8 *>(buffer);
+    uint8 *code = (uint8 *)buffer;
 
     float max = (float)0x1fff;
 

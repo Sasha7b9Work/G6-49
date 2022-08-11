@@ -163,21 +163,21 @@ NativeSymbol *HeaderFont::GetSymbol(uint8 num)
         return nullptr;
     }
 
-    uint8 *offset = reinterpret_cast<uint8 *>(header) + header->offsets[num];
+    uint8 *offset = (uint8 *)header + header->offsets[num];
 
-    return reinterpret_cast<NativeSymbol *>(offset);
+    return (NativeSymbol *)offset;
 }
 
 
 HeaderFont *HeaderFont::Sefl()
 {
-    return reinterpret_cast<HeaderFont *>((uint8 *)AFont::font); //-V2567
+    return (HeaderFont *)AFont::font; //-V2567
 }
 
 
 uint8 *NativeSymbol::Data()
 {
-    return reinterpret_cast<uint8 *>(this) + sizeof(*this);
+    return (uint8 *)(this) + sizeof(*this);
 }
 
 

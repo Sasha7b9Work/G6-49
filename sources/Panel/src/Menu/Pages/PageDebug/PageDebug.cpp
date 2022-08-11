@@ -27,7 +27,7 @@ extern const PageBase pDebug;
 extern const ButtonBase bSend;
 
 
-Page *PageDebug::self = reinterpret_cast<Page *>((PageBase *)&pDebug);
+Page *PageDebug::self = (Page *)&pDebug;
 // Регистр, в который будет производится занесение значения по нажатию кнопки ЗАСЛАТЬ
 Register::E currentRegister = Register::FreqMeterLevel;
 // Флаг показа окна ввода
@@ -308,7 +308,7 @@ static bool AllowableSymbol(Key::E key)
 
 void PageDebug::PageRegisters::Draw()
 {
-    if (CURRENT_PAGE != reinterpret_cast<Page *>((PageBase *)&pRegisters))
+    if (CURRENT_PAGE != (Page *)&pRegisters)
     {
         return;
     }
@@ -485,7 +485,7 @@ DEF_CHOICE_2( cShowSends,                                                       
 
 static void OnPress_Prev()
 {
-    Math::CircleDecrease<uint8>(reinterpret_cast<uint8 *>(&currentRegister), 0, Register::Count - 1);
+    Math::CircleDecrease<uint8>((uint8 *)&currentRegister, 0, Register::Count - 1);
 }
 
 DEF_BUTTON( bPrev,                                                                                                                                            //--- РЕГИСТРЫ - Предыдущий ---
@@ -497,7 +497,7 @@ DEF_BUTTON( bPrev,                                                              
 
 static void OnPress_Next()
 {
-    Math::CircleIncrease<uint8>(reinterpret_cast<uint8 *>(&currentRegister), 0, Register::Count - 1);
+    Math::CircleIncrease<uint8>((uint8 *)&currentRegister, 0, Register::Count - 1);
 }
 
 DEF_BUTTON( bNext,                                                                                                                                             //--- РЕГИСТРЫ - Следующий ---
@@ -511,9 +511,9 @@ static void OnPress_DebugCancel()
 {
     showInputWindow = false;
     std::memset(dbuffer, 0, MAX_SIZE_BUFFER + 1);
-    pRegisters.items[0] = reinterpret_cast<Item*>((ButtonBase*)&bPrev);
-    pRegisters.items[1] = reinterpret_cast<Item*>((ButtonBase*)&bNext);
-    pRegisters.items[2] = reinterpret_cast<Item*>((ButtonBase*)&bSend);
+    pRegisters.items[0] = (Item *)&bPrev;
+    pRegisters.items[1] = (Item *)&bNext;
+    pRegisters.items[2] = (Item *)&bSend;
 }
 
 static void OnDraw_Cancel(int x, int y)
@@ -563,9 +563,9 @@ static void OnPress_Send()
     showInputWindow = true;
     std::memset(dbuffer, 0, MAX_SIZE_BUFFER + 1);
 
-    pRegisters.items[0] = reinterpret_cast<Item*>((ButtonBase*)&bBackspace);
-    pRegisters.items[1] = reinterpret_cast<Item*>((ButtonBase*)&bCancel);
-    pRegisters.items[2] = reinterpret_cast<Item*>((ButtonBase*)&bSave);
+    pRegisters.items[0] = (Item *)&bBackspace;
+    pRegisters.items[1] = (Item *)&bCancel;
+    pRegisters.items[2] = (Item *)&bSave;
 
     int position = 0;
 

@@ -59,7 +59,7 @@ void DVCP::SendData(const void *_buffer, uint size)
 
 void DVCP::SendString(char *data)
 {
-    SendData(reinterpret_cast<uint8 *>(data), std::strlen(data));
+    SendData((uint8 *)data, std::strlen(data));
 }
 
 

@@ -66,7 +66,7 @@ void HAL_EEPROM::LoadSettings(CalibrationSettings *settings)
 
     if (address)                                            // Если нашли сохранённую запись
     {
-        *settings = *(reinterpret_cast<CalibrationSettings *>(address));      // То запишем её в целевой объект
+        *settings = *((CalibrationSettings *)address);      // То запишем её в целевой объект
     }
 }
 
@@ -78,7 +78,7 @@ static uint FindFirstFreeRecord(uint start, uint sizeFull, uint sizeRecord)
 
     while (address < end)
     {
-        if (*(reinterpret_cast<uint *>(address)) == 0xffffffffU)
+        if (*((uint *)address) == 0xffffffffU)
         {
             return address;
         }

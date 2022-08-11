@@ -119,4 +119,4 @@ DEF_PAGE_6(pSubRanges, //-V641
     Page::SubRanges, PageDebug::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
-Page *PageDebug::SubRange::self = reinterpret_cast<Page *>((PageBase *)&pSubRanges);
+Page *PageDebug::SubRange::self = (Page *)&pSubRanges;

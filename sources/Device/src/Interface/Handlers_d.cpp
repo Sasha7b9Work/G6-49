@@ -526,7 +526,7 @@ static void RequestPictureDDSfromStorage(SimpleMessage *message)
 
     float data[FPGA::NUM_POINTS];
 
-    FPGA::TransformCodeToData(reinterpret_cast<uint8 *>(code), data);
+    FPGA::TransformCodeToData((uint8 *)code, data);
 
     const int size = 240;
 

@@ -18,5 +18,5 @@ void HAL_CRC32::Init()
 
 uint HAL_CRC32::CalculateALIGN32(void *data, int size)
 {
-    return HAL_CRC_Calculate(&handle, reinterpret_cast<uint *>(data), (uint)(size / 4));
+    return HAL_CRC_Calculate(&handle, (uint *)data, (uint)(size / 4));
 }

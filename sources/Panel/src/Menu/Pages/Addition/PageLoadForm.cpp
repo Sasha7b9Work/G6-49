@@ -8,7 +8,7 @@
 
 
 extern const PageBase pageLoad;
-Page *PageLoadForm::self = reinterpret_cast<Page *>((PageBase *)&pageLoad);
+Page *PageLoadForm::self = (Page *)&pageLoad;
 
 
 DEF_BUTTON( bUp,                                                                                                                              //--- ÍÀÑÒĞÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃĞÓÇÊÀ - Ââåğõ ---

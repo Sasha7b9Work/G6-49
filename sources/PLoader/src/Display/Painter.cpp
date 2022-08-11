@@ -12,7 +12,7 @@ void Painter::BeginScene(const Color &col)
 {
     col.SetAsCurrent();
 
-    uint *address = reinterpret_cast<uint *>(HAL_LTDC::GetBuffer());
+    uint *address = (uint *)HAL_LTDC::GetBuffer();
     uint *end = address + (SCREEN_HEIGHT * SCREEN_WIDTH) / 4;
     uint value = (uint)col.value + (uint)(col.value << 8) + (uint)(col.value << 16) + (uint)(col.value << 24);
     while(address != end)

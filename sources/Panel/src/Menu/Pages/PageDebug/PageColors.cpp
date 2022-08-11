@@ -139,7 +139,7 @@ DEF_PAGE_3(pColors,
 )
 
 
-Page *PageDebug::Colors::self = reinterpret_cast<Page *>((PageBase *)&pColors);
-Page *PageDebug::Colors::ChanA::self = reinterpret_cast<Page *>((PageBase *)&pChanA);
-Page *PageDebug::Colors::ChanB::self = reinterpret_cast<Page *>((PageBase *)&pChanB);
-Page *PageDebug::Colors::Menu::self = reinterpret_cast<Page *>((PageBase *)&pMenu);
+Page *PageDebug::Colors::self = (Page *)&pColors;
+Page *PageDebug::Colors::ChanA::self = (Page *)&pChanA;
+Page *PageDebug::Colors::ChanB::self = (Page *)&pChanB;
+Page *PageDebug::Colors::Menu::self = (Page *)&pMenu;
