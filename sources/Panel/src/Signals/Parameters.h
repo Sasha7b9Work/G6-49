@@ -214,6 +214,9 @@ struct DParam : public Param
     // Возвращает количество значащих знакомест перед запятой (исключая знаковый разряд). В предположении, что значение приведено к порядку order
     int GetNumberDigitsBeforeComma(Order::E order = Order::Count);
 
+    // Возвращает количество значащих знакомест после запятой
+    int GetNumberDigitsAfterComma(Order::E order = Order::Count);
+
 private:
     Tuner tuner;        // Используется для настройки 
     const TypeDParam::E type;

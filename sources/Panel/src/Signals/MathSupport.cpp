@@ -8,25 +8,12 @@
 #include <cstring>
 
 
-namespace MathParameterDouble
-{
-    // Собственно параметр, по которому будут производится вычислеиня
-    static DParam *param = nullptr;
-}
-
-
 namespace MathDouble
 {
     static Order::E CalculateOrder(const DParam* param)
     {
         return param->IsNotOrdered() ? Order::One : Order::Count;
     }
-}
-
-
-void MathParameterDouble::SetParameterDouble(DParam* parameter)
-{
-    param = parameter;
 }
 
 
@@ -255,17 +242,6 @@ int MathDouble::GetDigit(const Value &val, int position, Order::E order)
 
         return (whole % 10);
     }
-}
-
-
-int MathParameterDouble::GetNumberDigitsAfterComma(Order::E)
-{
-    if (param->IsNotOrdered())
-    {
-        return 3;
-    }
-
-    return -Order::GetPow10(param->GetMin().GetOrder()) + Order::GetPow10(param->GetValue().GetOrder());
 }
 
 

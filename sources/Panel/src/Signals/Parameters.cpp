@@ -532,6 +532,16 @@ int DParam::GetNumberDigitsBeforeComma(Order::E order)
 }
 
 
+int DParam::GetNumberDigitsAfterComma(Order::E)
+{
+    if (IsNotOrdered())
+    {
+        return 3;
+    }
+
+    return -Order::GetPow10(GetMin().GetOrder()) + Order::GetPow10(GetValue().GetOrder());
+}
+
 
 static Order::E CalculateOrder(const DParam *param)
 {

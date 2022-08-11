@@ -28,15 +28,6 @@ namespace MathDouble
 };
 
 
-namespace MathParameterDouble
-{
-    void SetParameterDouble(DParam *);
-
-    // Возвращает количество значащих знакомест после запятой
-    int GetNumberDigitsAfterComma(Order::E order = Order::Count);
-};
-
-
 namespace MathParameterInteger
 {
     // Возвращает количество разрядов для параметра parameter (в них должно помещаться максимально возможное значение параметра parameter)

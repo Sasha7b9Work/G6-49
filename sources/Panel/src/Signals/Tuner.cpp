@@ -1077,8 +1077,10 @@ void DisplayCorrection::FillDigitsIntegerPartForDouble()
 {
     Order::E order = CalculateOrderForIndication();
 
-    int before = MathParameterDouble::GetNumberDigitsBeforeComma(order);
     DParam *param = tuner->ReinterpretToDouble();
+
+    int before = param->GetNumberDigitsBeforeComma(order);
+
     Value value = param->GetValue();
 
     int pos = before - 1;                               // –азр€д в этой позиции будем заполн€ть значени€ми целых
@@ -1121,8 +1123,11 @@ void DisplayCorrection::FillDigitsFractPartForDouble()
 {
     Order::E order = CalculateOrderForIndication();
 
-    int before = MathParameterDouble::GetNumberDigitsBeforeComma(order);
-    int after = MathParameterDouble::GetNumberDigitsAfterComma(order);
+    DParam *param = tuner->ReinterpretToDouble();
+
+    int before = param->GetNumberDigitsBeforeComma(order);
+    int after = param->GetNumberDigitsAfterComma(order);
+
     Value value = tuner->ReinterpretToDouble()->GetValue();
 
     int pos = before + 1;                                   // “еперь в эту позицию будем записывать рразр€ды после зап€той
