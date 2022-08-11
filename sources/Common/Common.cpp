@@ -373,7 +373,7 @@ void Value::FromINT(int v)
 
 double Value::ToDouble() const
 {
-    return (double)(Abs()) / 1E9 * static_cast<double>(Sign());
+    return (double)(Abs()) / 1E9 * (double)Sign();
 }
 
 
@@ -433,7 +433,7 @@ int Value::Integer() const
 {
     uint64 val = Abs();
 
-    return static_cast<int>(val / (1000 * 1000 * 1000)) * Sign();
+    return (int)(val / (1000 * 1000 * 1000)) * Sign();
 }
 
 
@@ -444,7 +444,7 @@ int Value::FractNano() const
 
     int whole = val.Integer();
 
-    return static_cast<int>(val.value - static_cast<int>(whole * 1000 * 1000 * 1000));
+    return (int)(val.value - (int)(whole * 1000 * 1000 * 1000));
 }
 
 

@@ -48,7 +48,7 @@ SimpleMessage *SimpleMessage::Clone()
     SimpleMessage *result = new SimpleMessage();
     if (result->AllocateMemory(Size()))
     {
-        std::memcpy(result->buffer, buffer, static_cast<uint>(allocated));
+        std::memcpy(result->buffer, buffer, (uint)allocated);
         result->used = used;
         result->taken = taken;
     }
@@ -70,7 +70,7 @@ bool SimpleMessage::CreateAllocate(const uint8 *_buffer, int _size)
 {
     if (AllocateMemory(_size))
     {
-        std::memcpy(buffer, _buffer, static_cast<uint>(_size)); //-V595
+        std::memcpy(buffer, _buffer, (uint)_size); //-V595
         used = _size;
     }
 
@@ -82,7 +82,7 @@ bool SimpleMessage::CreateFromMessage(const SimpleMessage *message)
 {
     if (AllocateMemory(message->Size()))
     {
-        std::memcpy(buffer, message->buffer, static_cast<uint>(message->allocated)); //-V595
+        std::memcpy(buffer, message->buffer, (uint)message->allocated); //-V595
         used = message->used;
     }
 
@@ -107,7 +107,7 @@ void SimpleMessage::PutUINT64(uint64 data)
 
 void SimpleMessage::PutINT16(int16 data)
 {
-    PutUINT16(static_cast<uint16>(data));
+    PutUINT16((uint16)data);
 }
 
 
@@ -129,13 +129,13 @@ void SimpleMessage::PutUINT(uint data)
 
 void SimpleMessage::PutINT(int data)
 {
-    PutUINT(static_cast<uint>(data));
+    PutUINT((uint)data);
 }
 
 
 void SimpleMessage::PutData(const uint8 *data, int length)
 {
-    std::memcpy(buffer + used, data, static_cast<uint>(length));
+    std::memcpy(buffer + used, data, (uint)length);
     used += length;
 }
 
@@ -169,7 +169,7 @@ uint16 SimpleMessage::TakeUINT16()
 
 int16 SimpleMessage::TakeINT16()
 {
-    return static_cast<int16>(TakeUINT16());
+    return (int16)TakeUINT16();
 }
 
 
@@ -185,7 +185,7 @@ uint SimpleMessage::TakeUINT()
 
 int SimpleMessage::TakeINT()
 {
-    return static_cast<int>(TakeUINT());
+    return (int)TakeUINT();
 }
 
 
@@ -212,7 +212,7 @@ float SimpleMessage::TakeFLOAT()
 void SimpleMessage::TakeRemainigData(uint8 *data)
 {
     int size = allocated - taken;
-    std::memcpy(data, buffer + taken, static_cast<uint>(size));
+    std::memcpy(data, buffer + taken, (uint)size);
     taken = allocated;
 }
 
@@ -235,7 +235,7 @@ bool SimpleMessage::AllocateMemory(int size)
     created++;
     createdSize += size;
 
-    buffer = static_cast<uint8 *>(std::malloc(static_cast<uint>(size)));
+    buffer = (uint8 *)std::malloc((uint)size);
 
     if (buffer)
     {
@@ -286,7 +286,7 @@ bool SimpleMessage::IsEquals(const SimpleMessage *message) const
         return false;
     }
 
-    return std::memcmp(message->buffer, buffer, static_cast<uint>(allocated)) == 0;
+    return std::memcmp(message->buffer, buffer, (uint)allocated) == 0;
 }
 
 
@@ -373,7 +373,7 @@ Message::FDrive::NumDirsAndFiles::NumDirsAndFiles(uint numDirs, uint numFiles) :
 
 Message::FDrive::NumDirsAndFiles::NumDirsAndFiles(char *directory) : SimpleMessage()
 {   //          name | string                   | завершающий ноль
-    int size = 1 +    static_cast<int>(std::strlen(directory)) + 1;
+    int size = 1 +    (int)std::strlen(directory) + 1;
     AllocateMemory(size);
     PutUINT8(Command::FDrive_NumDirsAndFiles);
     std::strcpy(reinterpret_cast<char *>(buffer + 1), directory);
@@ -382,8 +382,8 @@ Message::FDrive::NumDirsAndFiles::NumDirsAndFiles(char *directory) : SimpleMessa
 
 Message::FDrive::FileName::FileName(uint8 numFile, char *name) : SimpleMessage()
 {
-    //          v0 | v1 | string |              завершающий_ноль
-    int size = 1 +  1 +  static_cast<int>(std::strlen(name)) + 1;
+    //        v0 | v1 | string |              завершающий_ноль
+    int size = 1 +  1 +  (int)std::strlen(name) + 1;
     AllocateMemory(size);
     PutUINT8(Command::FDrive_RequestFile);
     PutUINT8(numFile);
