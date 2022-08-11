@@ -286,7 +286,7 @@ public:
     static Tuner *Current() { return current; };
 
     // Возвращает true, если натсраиваемый параметр - смещение
-    bool ParameterIsOffset();
+    bool IsOffset();
 
     // Возвращает true, если настраиваемый параметр имеет единицы измерения "Вольт"
     bool ParameterIsNotOrdered();

@@ -55,7 +55,7 @@ void DisplayEntering::EnterBuffer::Push(Key::E key)
         return;
     }
 
-    if ((key == Key::Minus) && !Tuner::Current()->ParameterIsOffset()) { return; }
+    if ((key == Key::Minus) && !Tuner::Current()->IsOffset()) { return; }
 
     if (stack.Size() > 14)                                             { return; }
                                                                        
@@ -1279,7 +1279,7 @@ void Tuner::SetModeEntering()
 }
 
 
-bool Tuner::ParameterIsOffset()
+bool Tuner::IsOffset()
 {
     DParam *offset = ReinterpretToDouble();
 
