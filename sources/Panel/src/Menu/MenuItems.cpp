@@ -94,10 +94,11 @@ bool Item::IsPressed() const
 
 bool Item::IsOpened() const
 {
-    if (type == TypeItem::Page)
+    if (type.IsPage())
     {
         return Keeper()->CurrentItemIsOpened();
     }
+
     return Menu::GetOpenedItem() == this;
 }
 

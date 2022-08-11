@@ -19,7 +19,7 @@ class SButton;
 
 // Общая часть для всех типов элементов меню
 #define COMMON_PART_MENU_ITEM                                                                                                                 \
-    const TypeItem::E  type;          /* Тип итема */                                                                                         \
+    const TypeItem     type;          /* Тип итема */                                                                                         \
     const int8         num;           /* Число вариантов для Choice или число контролов для Page*/                                            \
     const bool         isPageSB;      /* Если true, то это страница малых кнопок, когда type == Item_Page */                                  \
     const uint8        name;          /* Имя из перечисления NamePage, если type == Item_Page */                                              \
@@ -47,11 +47,17 @@ struct TypeItem
         GovernorColor,      // Позволяет выбрать цвет.
         SmallButton,        // Кнопка для режима малых кнопок
         ChoiceParameter
-    };
+    } value;
+
+    TypeItem(E v) : value(v) {}
+
+    bool IsButton() const          { return value == Button; }
+    bool IsChoice() const          { return value == Choice; }
+    bool IsChoiceParameter() const { return value == ChoiceParameter; }
+    bool IsPage() const            { return value == Page; }
 };
 
 
-   
 class Item
 {
 public:
@@ -77,8 +83,6 @@ public:
     
     // Обрабатывает нажатие кнопки. Возвращает указатель на себя, если находится в открытом состоянии после нажатия, и 0 в противном случае
     void Press(const Control &);
-
-    TypeItem::E GetType() const;
 
     // Возвращает порядковый номер пункта меню на странице
     int PositionOnPage() const;

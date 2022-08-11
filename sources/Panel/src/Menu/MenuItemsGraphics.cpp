@@ -17,14 +17,14 @@ void Item::Draw(bool opened, int x, int y) const
 {
     Font::ForceUpperCase(true);
 
-    switch(type)
+    switch(type.value)
     {
-    case TypeItem::Choice:          static_cast<const Choice *>(this)->Draw(opened, x, y);          break;
-    case TypeItem::Button:          static_cast<const Button *>(this)->Draw(x, y);                  break;
-    case TypeItem::ChoiceParameter: static_cast<const ChoiceParameter *>(this)->Draw(opened, x, y); break;
-    case TypeItem::SmallButton:     static_cast<const SButton *>(this)->Draw(x, y);                 break;
-    case TypeItem::Governor:        static_cast<const Governor *>(this)->Draw(x, y);                break;
-    case TypeItem::Page:            static_cast<const Page *>(this)->DrawClosed(x, y);              break;
+    case TypeItem::Choice:          ((const Choice *)this)->Draw(opened, x, y);          break;
+    case TypeItem::Button:          ((const Button *)this)->Draw(x, y);                  break;
+    case TypeItem::ChoiceParameter: ((const ChoiceParameter *)this)->Draw(opened, x, y); break;
+    case TypeItem::SmallButton:     ((const SButton *)this)->Draw(x, y);                 break;
+    case TypeItem::Governor:        ((const Governor *)this)->Draw(x, y);                break;
+    case TypeItem::Page:            ((const Page *)this)->DrawClosed(x, y);              break;
 
     case TypeItem::NoneLight:
     case TypeItem::NoneDark:
@@ -39,7 +39,7 @@ void Item::Draw(bool opened, int x, int y) const
 
 void Item::DrawTitle(int x, int y) const
 {
-    if (GetType() == TypeItem::Page || GetType() == TypeItem::Button)
+    if (type.IsPage() || type.IsButton())
     {
         y += 15;
     }
@@ -53,7 +53,7 @@ void Item::DrawTitle(int x, int y) const
 
     Color((IsPressed() || IsOpened()) ? Color::BACK : ((IsShade() || !funcOfActive()) ? Color::GRAY_25 : Color::FILL)).SetAsCurrent();
 
-    if (string.NumberWords() != 1 && GetType() == TypeItem::Page)
+    if (string.NumberWords() != 1 && type.IsPage())
     {
         string.DrawInColumn(x + 7, y, Item::WIDTH, 7);
     }

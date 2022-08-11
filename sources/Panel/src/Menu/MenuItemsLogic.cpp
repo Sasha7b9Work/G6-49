@@ -330,37 +330,20 @@ void Item::Press(const Control &control) //-V801
     {
         Menu::pressedItem = (control.IsDown() && !IsOpened()) ? this : 0;
 
-        if (type == TypeItem::Choice)
+        switch (type.value)
         {
-            ReinterpretToChoice()->Press(control);
-        }
-        else if (type == TypeItem::Button)
-        {
-            ReinterpretToButton()->Press(control.action);
-        }
-        else if (type == TypeItem::ChoiceParameter)
-        {
-            ReinterpretToChoiceParameter()->Press(control);
-        }
-        else if (type == TypeItem::SmallButton)
-        {
-            ReinterpretToSButton()->Press(control.action);
-        }
-        else if(type == TypeItem::Page)
-        {
-            static_cast<Page *>(this)->Press(control);
-        }
-        else if(type == TypeItem::Governor)
-        {
-            static_cast<Governor *>(this)->Press(control);
+        case TypeItem::Choice:              ReinterpretToChoice()->Press(control);              break;
+        case TypeItem::Button:              ReinterpretToButton()->Press(control.action);       break;
+        case TypeItem::ChoiceParameter:     ReinterpretToChoiceParameter()->Press(control);     break;
+        case TypeItem::SmallButton:         ReinterpretToSButton()->Press(control.action);      break;
+        case TypeItem::Page:                ((Page *)(this))->Press(control);                   break;
+        case TypeItem::Governor:            ((Governor *)(this))->Press(control);               break;
+        case TypeItem::NoneLight:
+        case TypeItem::NoneDark:
+        case TypeItem::GovernorColor:
+            break;
         }
     }
-}
-
-
-TypeItem::E Item::GetType() const
-{
-    return static_cast<TypeItem::E>(type);
 }
 
 
@@ -368,13 +351,13 @@ int8 Choice::CurrentIndex() const
 {
     int8 retValue = 0;
 
-    if (type == TypeItem::Choice)
+    if (type.IsChoice())
     {
         retValue = *cell;
     }
-    else if (type == TypeItem::ChoiceParameter)
+    else if (type.IsChoiceParameter())
     {
-        const ChoiceParameter *param = reinterpret_cast<const ChoiceParameter *>(this);
+        const ChoiceParameter *param = (const ChoiceParameter *)(this);
 
         Form *form = param->form;
 
@@ -387,10 +370,11 @@ int8 Choice::CurrentIndex() const
 
 int8 ChoiceBase::CurrentIndex() const
 {
-    if(type == TypeItem::Choice)
+    if(type.IsChoice())
     {
         return *cell;
     }
+
     return 0;
 }
 
