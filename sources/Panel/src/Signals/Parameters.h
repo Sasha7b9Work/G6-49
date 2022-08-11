@@ -102,7 +102,7 @@ struct Param
 
     static bool FuncActive() { return true; }
 
-    DParam *ToDouble() { return (DParam *)this; }
+    DParam *ToDouble() { return (kind == KindParam::Double) ? (DParam *)this : nullptr; }
 
     pFuncBV     funcOfActive;  // Активен ли данный параметр
 
@@ -209,6 +209,7 @@ struct DParam : public Param
     DParam &operator=(const DParam &);
 
     bool IsAmplitude() const { return type == TypeDParam::Amplitude; }
+    bool IsFrequency() const { return type == TypeDParam::Frequency; }
 
     // Возвращает количество значащих знакомест перед запятой (исключая знаковый разряд). В предположении, что значение приведено к порядку order
     int GetNumberDigitsBeforeComma(Order::E order = Order::Count) const;
