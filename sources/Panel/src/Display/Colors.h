@@ -138,7 +138,7 @@ private:
 #define COLOR_TYPE(r, g, b, sR, sG, sB, bright, col) {r, g, b, sR, sG, sB, bright, col, 0, false, false};
 
 
-#define MAKE_COLOR(r, g, b) ((col_val)(static_cast<uint>(b) + (static_cast<uint>(g) << 8) + (static_cast<uint>(r) << 16)))
+#define MAKE_COLOR(r, g, b) ((col_val)((uint)(b) + ((uint)(g) << 8) + ((uint)(r) << 16)))
 #define R_FROM_COLOR(color) (((col_val)(color) >> 16) & 0xff)
 #define G_FROM_COLOR(color) (((col_val)(color) >> 8)  & 0xff)
 #define B_FROM_COLOR(color) (((col_val)(color))       & 0xff)

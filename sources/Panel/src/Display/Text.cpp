@@ -39,7 +39,7 @@ int Char::Draw(int eX, int eY, const Color &color)
         symbol = SU::ToUpper(symbol);
     }
 
-    uint8 s = static_cast<uint8>(symbol);
+    uint8 s = (uint8)symbol;
 
     int8 width = Font::Width(s);
     int8 height = Font::Height();
@@ -147,7 +147,7 @@ bool Char::IsLetter()
  /* 0xf0 */  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true
     };
 
-    return isLetter[static_cast<uint8>(symbol)];
+    return isLetter[(uint8)symbol];
 }
 
 
@@ -175,7 +175,7 @@ int String::DrawPartWord(char *word, int x, int y, int xRight, bool draw)
             {
                 String(subString).Draw(x, y);
             }
-            return static_cast<int>(std::strlen(subString)) - 1;
+            return (int)std::strlen(subString) - 1;
         }
     }
 
@@ -194,7 +194,7 @@ int String::DrawInColumnWithTransfersDiffColors(const int left, const int top, c
     int right = left + width;
 
     char buf[20];
-    int numSymbols = static_cast<int>(std::strlen(text));
+    int numSymbols = (int)std::strlen(text);
 
     int y = top - 1;
     int x = left;
@@ -304,7 +304,7 @@ char *WordWorker::PartWordForTransfer(pchar word, const uint *lengthSyllables, i
     uint length = 0;
     for (int i = 0; i <= numSyllable; i++)
     {
-        length += static_cast<uint>(lengthSyllables[i]);
+        length += (uint)lengthSyllables[i];
     }
     std::memcpy(buffer, word, length);
     buffer[length] = '-';
@@ -402,7 +402,7 @@ bool Char::IsConsonant()
         true, true, true, false, true, true, true, true, true, true, true, false, true, false, false, false
     };
 
-    return isConsonat[static_cast<uint8>(symbol)];
+    return isConsonat[(uint8)symbol];
 }
 
 

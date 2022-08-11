@@ -113,7 +113,7 @@ uint8 AdvancedFont::GetHeight()
 
     for (int i = 0; i < 256; i++)
     {
-        NativeSymbol *symbol = HeaderFont::Sefl()->GetSymbol(static_cast<uint8>(i));
+        NativeSymbol *symbol = HeaderFont::Sefl()->GetSymbol((uint8)(i));
 
         if (symbol && symbol->height > result)
         {

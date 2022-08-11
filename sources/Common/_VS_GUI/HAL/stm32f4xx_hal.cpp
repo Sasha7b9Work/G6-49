@@ -6,7 +6,7 @@
 uint32_t HAL_GetTick()
 {
 #ifdef GUI
-    return static_cast<uint>(clock());
+    return (uint)clock();
 #else
     return 0;
 #endif

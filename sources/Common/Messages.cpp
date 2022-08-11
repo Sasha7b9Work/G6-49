@@ -393,7 +393,7 @@ Message::FDrive::FileName::FileName(uint8 numFile, char *name) : SimpleMessage()
 
 Message::FDrive::CreateFFile::CreateFFile(pchar name) : SimpleMessage()
 {
-    int size = 1 + static_cast<int>(std::strlen(name)) + 1;
+    int size = 1 + (int)std::strlen(name) + 1;
     AllocateMemory(size);
     PutUINT8(Command::FDrive_CreateFile);
     std::strcpy(reinterpret_cast<char *>(buffer + 1), name);
@@ -403,7 +403,7 @@ Message::FDrive::CreateFFile::CreateFFile(pchar name) : SimpleMessage()
 Message::FDrive::WriteToFile::WriteToFile(void *data, int size) : SimpleMessage(size + 1 + 4, Command::FDrive_WriteToFile)
 {
     PutINT(size);
-    std::memcpy(buffer + 5, data, static_cast<uint>(size));
+    std::memcpy(buffer + 5, data, (uint)size);
 }
 
 
@@ -416,10 +416,10 @@ Message::FDrive::CloseFile::CloseFile() : SimpleMessage(1, Command::FDrive_Close
 Message::FDrive::FileString::FileString(uint numString, char *nameFile) : SimpleMessage()
 {
     //          commmand  numString  nameFile                завершающий_ноль
-    int size = 1 +       1 +        static_cast<int>(std::strlen(nameFile)) + 1;
+    int size = 1 +       1 +        (int)std::strlen(nameFile) + 1;
     AllocateMemory(size);
     PutUINT8(Command::FDrive_RequestFileString);
-    PutUINT8(static_cast<uint8>(numString));
+    PutUINT8((uint8)numString);
     std::strcpy(reinterpret_cast<char *>(buffer + 2), nameFile);
 }
 
@@ -434,7 +434,7 @@ Message::FDrive::FileSize::FileSize(uint8 numFile, uint size) : SimpleMessage(6,
 Message::Log::Log(char *string) : SimpleMessage()
 {
     //          v0 | string              | завершающий_ноль
-    int size = 1 + static_cast<int>(std::strlen(string)) + 1;
+    int size = 1 + (int)std::strlen(string) + 1;
 
     AllocateMemory(size);
     PutUINT8(Command::Log);
@@ -492,7 +492,7 @@ Message::Set::Param::Param(Command::E param, uint8 ch, uint8 value) : SimpleMess
 Message::FDrive::LoadDDSfromFile::LoadDDSfromFile(uint8 ch, uint8 numFile, char *directory) : SimpleMessage()
 {
     //          com ch  numFile directory                 завершающий_ноль
-    int size = 1 + 1 + 1 +      static_cast<int>(std::strlen(directory)) + 1; //-V522
+    int size = 1 + 1 + 1 +      (int)std::strlen(directory) + 1; //-V522
     AllocateMemory(size);
     PutUINT8(Command::FDrive_LoadDDSfromFile);
     PutUINT8(ch);

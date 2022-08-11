@@ -52,7 +52,7 @@ int Font::GetHeight(char s)
 {
     if (IsAdvanced())
     {
-        return AdvancedFont::GetHeight(static_cast<uint8>(s));
+        return AdvancedFont::GetHeight((uint8)(s));
     }
 
     return 9;
@@ -63,10 +63,10 @@ int Font::GetWidth(char symbol)
 {
     if (IsAdvanced())
     {
-        return AdvancedFont::GetWidth(static_cast<uint8>(symbol));
+        return AdvancedFont::GetWidth((uint8)(symbol));
     }
 
-    return font->symbol[static_cast<uint8>(Font::InUpperCase() ? static_cast<uint8>(SU::ToUpper(symbol)) : static_cast<uint8>(symbol))].width + 1;
+    return font->symbol[(uint8)(Font::InUpperCase() ? (uint8)SU::ToUpper(symbol) : (uint8)symbol)].width + 1;
 }
 
 
@@ -95,7 +95,7 @@ void Font::StoreAndSet(TypeFont::E typeFont)
 
 int8 Font::Width(char symbol)
 {
-    return Width(static_cast<uint8>(symbol));
+    return Width((uint8)symbol);
 }
 
 
@@ -103,10 +103,10 @@ int8 Font::Width(uint8 symbol)
 {
     if(IsAdvanced())
     {
-        return static_cast<int8>(AdvancedFont::GetWidth(symbol));
+        return (int8)AdvancedFont::GetWidth(symbol);
     }
 
-    return static_cast<int8>(font->symbol[symbol].width);
+    return (int8)font->symbol[symbol].width;
 }
 
 
@@ -114,10 +114,10 @@ int8 Font::Height()
 {
     if(IsAdvanced())
     {
-        return static_cast<int8>(AdvancedFont::GetHeight());
+        return (int8)AdvancedFont::GetHeight();
     }
 
-    return static_cast<int8>(font->height);
+    return (int8)font->height;
 }
 
 
@@ -125,7 +125,7 @@ bool Font::RowNotEmpty(int s, int row)
 {
     if(IsAdvanced())
     {
-        return AdvancedFont::RowNotEmpty(static_cast<uint8>(s), row);
+        return AdvancedFont::RowNotEmpty((uint8)s, row);
     }
 
     static const uint8 *bytes = 0;
@@ -133,7 +133,7 @@ bool Font::RowNotEmpty(int s, int row)
     if(s != prevChar)
     {
         prevChar = s;
-        bytes = font->symbol[static_cast<uint8>(prevChar)].bytes;
+        bytes = font->symbol[(uint8)prevChar].bytes;
     }
     return bytes[row] != 0;
 }
@@ -143,7 +143,7 @@ bool Font::BitIsExist(int s, int row, int bit)
 {
     if(IsAdvanced())
     {
-        return AdvancedFont::BitIsExist(static_cast<uint8>(s), row, bit);
+        return AdvancedFont::BitIsExist((uint8)s, row, bit);
     }
 
     static uint8 prevByte = 0;      // \todo здесь точно статики нужны?
@@ -151,7 +151,7 @@ bool Font::BitIsExist(int s, int row, int bit)
     static int prevNumByte = -1;
     if(prevNumByte != row || prevChar != s)
     {
-        prevByte = font->symbol[static_cast<uint8>(s)].bytes[row];
+        prevByte = font->symbol[(uint8)s].bytes[row];
         prevChar = s;
         prevNumByte = row;
     }
