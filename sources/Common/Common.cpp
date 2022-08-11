@@ -601,6 +601,58 @@ int Order::GetPow10(Order::E order)
 }
 
 
+int Value::GetDigit(int position, Order::E order) const
+{
+    Value _value = *this;
+    _value.SetSign(1);
+
+    order = (order == Order::Count) ? _value.GetOrder() : order;
+
+    position += Order::GetPow10(order);
+
+    if (position < 0)
+    {
+        int divider = 100 * 1000 * 1000;       // Ќа это число будем делить количество наносекунд
+
+        int fract = _value.FractNano();
+
+        while (position < -1)
+        {
+            if (divider == 0)
+            {
+                return -1;
+            }
+
+            fract %= divider;
+            divider /= 10;
+            position++;
+        }
+
+        return (divider == 0) ? -1 : (fract / divider);
+    }
+    else
+    {
+        int whole = _value.Integer();
+
+        while (position > 0)
+        {
+            whole /= 10;
+            position--;
+        }
+
+        return (whole % 10);
+    }
+}
+
+
+char Value::GetChar(int position, Order::E order) const
+{
+    int digit = GetDigit(position, order);
+
+    return (digit == -1) ? '\0' : (char)(GetDigit(position, order) | 0x30);
+}
+
+
 #ifdef PANEL
 
 bool Chan::Enabled() const
