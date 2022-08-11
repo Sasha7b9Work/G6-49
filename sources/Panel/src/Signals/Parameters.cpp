@@ -192,7 +192,7 @@ CParam *CMSParam::FindParameter(TypeCParam::E p)
 
         if(param->IsChoice())
         {
-            CParam *choice = static_cast<CParam *>(param);
+            CParam *choice = (CParam *)param;
 
             if(choice->GetType() == p)
             {
@@ -213,7 +213,7 @@ DParam *CMSParam::FindParameter(TypeDParam::E p)
 
         if(param->IsDouble())
         {
-            DParam *parameter = static_cast<DParam *>(param);
+            DParam *parameter = (DParam *)param;
 
             if(parameter->GetType() == p)
             {

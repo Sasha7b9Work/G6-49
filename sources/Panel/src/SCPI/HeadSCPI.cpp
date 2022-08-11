@@ -213,7 +213,7 @@ static pchar FuncForm(pchar buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(formNames[*CURRENT_FORM]));
 
-    SCPI_PROCESS_ARRAY(formNames, PageSignals::SCPI_SetForm(static_cast<TypeForm::E>(i)));
+    SCPI_PROCESS_ARRAY(formNames, PageSignals::SCPI_SetForm((TypeForm::E)i));
 }
 
 
@@ -351,7 +351,7 @@ static pchar FuncLanguage(pchar buffer)
         {
             SCPI_PROLOG(end)
 
-            LANGUAGE = static_cast<uint8>(i);
+            LANGUAGE = (uint8)i;
 
             SCPI_EPILOG(end)
         }
@@ -397,7 +397,7 @@ static pchar FuncSound(pchar buffer)
         {
             SCPI_PROLOG(end)
 
-            setCal.soundVolume = static_cast<uint8>(i);
+            setCal.soundVolume = (uint8)i;
             PageService::OnChange_Volume(true);
 
             SCPI_EPILOG(end)

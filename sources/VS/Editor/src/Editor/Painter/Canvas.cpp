@@ -215,7 +215,7 @@ void Canvas::OnMouseRightDown(wxMouseEvent &event) //-V2009
 
     mouseIsDown = false;
 
-    (static_cast<Frame* >(parent))->ShowContextMenu({ mouseX, mouseY });
+    ((Frame *)parent)->ShowContextMenu({ mouseX, mouseY });
 
     SetMouseCursor();
 }
@@ -370,14 +370,14 @@ void Grid::DrawHorizontalLines()
 
     for (int i = 1; i < 20; i++)
     {
-        Painter::DrawHLine(X(), static_cast<int>(Y() + i * stepY + 0.5F), Right(), (i == 10) ? Color::GRAY_5F : Color::GRAY_2F);
+        Painter::DrawHLine(X(), (int)(Y() + i * stepY + 0.5F), Right(), (i == 10) ? Color::GRAY_5F : Color::GRAY_2F);
     }
 }
 
 
 void Grid::DrawTypePercents()
 {
-    float stepX = Point::AMOUNT / static_cast<float>((100.0F / (static_cast<float>(deltaPercents) / 1000)));
+    float stepX = Point::AMOUNT / (float)((100.0F / ((float)deltaPercents / 1000)));
 
     for (int i = 0; i < Point::AMOUNT / 2; i++)
     {
@@ -391,8 +391,8 @@ void Grid::DrawTypePoints()
 {
     for (int i = 0; i < Point::AMOUNT / 2 / deltaPoints; i++)
     {
-        Painter::DrawVLine(Point::FromData(static_cast<uint16>(Point::AMOUNT / 2 + deltaPoints * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F);
-        Painter::DrawVLine(Point::FromData(static_cast<uint16>(Point::AMOUNT / 2 - deltaPoints * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F);
+        Painter::DrawVLine(Point::FromData((uint16)(Point::AMOUNT / 2 + deltaPoints * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F);
+        Painter::DrawVLine(Point::FromData((uint16)(Point::AMOUNT / 2 - deltaPoints * i), 0).CanvasX(), Y(), Bottom(), ((i % 10) == 0) ? Color::GRAY_5F : Color::GRAY_2F);
     }
 }
 

@@ -31,10 +31,10 @@ void CalibrationSettings::Load()
                 for(int param = 0; param < NUM_PARAMETERS; param++)
                 {
                     Message::CalibrateLoad(
-                        static_cast<uint8>(ch),
-                        static_cast<uint8>(sig),
-                        static_cast<uint8>(range),
-                        static_cast<uint8>(param)
+                        (uint8)ch,
+                        (uint8)sig,
+                        (uint8)range,
+                        (uint8)param
                     ).Transmit();
                 }
             }

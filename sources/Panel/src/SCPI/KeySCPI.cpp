@@ -57,8 +57,8 @@ static pchar FuncKeyPress(pchar buffer)
         {
             SCPI_PROLOG(end)
 
-            Keyboard::AppendEvent(static_cast<Key::E>(i), Action::Down);
-            Keyboard::AppendEvent(static_cast<Key::E>(i), Action::Up);
+            Keyboard::AppendEvent((Key::E)i, Action::Down);
+            Keyboard::AppendEvent((Key::E)i, Action::Up);
 
             SCPI_EPILOG(end)
         }
@@ -83,8 +83,8 @@ static pchar FuncKeyLong(pchar buffer)
         {
             SCPI_PROLOG(end)
 
-            Keyboard::AppendEvent(static_cast<Key::E>(i), Action::Down);
-            Keyboard::AppendEvent(static_cast<Key::E>(i), Action::Long);
+            Keyboard::AppendEvent((Key::E)i, Action::Down);
+            Keyboard::AppendEvent((Key::E)i, Action::Long);
 
             SCPI_EPILOG(end)
         }
@@ -112,8 +112,8 @@ pchar SCPI::FuncReg(pchar buffer)
         {
             SCPI_PROLOG(end)
 
-            Keyboard::AppendEvent(static_cast<Key::E>(i + Key::RotateLeft), Action::Down);
-            Keyboard::AppendEvent(static_cast<Key::E>(i + Key::RotateLeft), Action::Up);
+            Keyboard::AppendEvent((Key::E)(i + Key::RotateLeft), Action::Down);
+            Keyboard::AppendEvent((Key::E)(i + Key::RotateLeft), Action::Up);
 
             SCPI_EPILOG(end)
         }

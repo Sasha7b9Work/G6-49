@@ -35,20 +35,20 @@ SinXDialog::SinXDialog() : Dialog(wxT("Параметры сигнала sin(x)/x"), true)
 
 void SinXDialog::SendAdditionForm()
 { 
-    float T = static_cast<float>(Point::AMOUNT / 2) / (static_cast<float>(scNumPeriods->GetValue()) + 0.25F);
+    float T = (float)(Point::AMOUNT / 2) / ((float)scNumPeriods->GetValue() + 0.25F);
 
     int i0 = Point::AMOUNT / 2;
 
     for (int i = 0; i < Point::AMOUNT / 2; i++)
     {
-        float x = static_cast<float>(i) / T * 2.0F * static_cast<float>(M_PI);
+        float x = (float)i / T * 2.0F * (float)M_PI;
 
         float sinx_x = std::sinf(x) / x;
 
         int curLess = i0 + i;
         int curMore = i0 - i;
 
-        uint16 value = static_cast<uint16>(Point::AVE + sinx_x * Point::AVE);
+        uint16 value = (uint16)(Point::AVE + sinx_x * Point::AVE);
 
         if (i == 0)
         {

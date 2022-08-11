@@ -20,17 +20,17 @@ static int16 blueMenu = 0;
 
 void PageDebug::Colors::Init()
 {
-    redChanA = static_cast<int16>(R_FROM_COLOR(Color::CHAN_A.GetRGB()));
-    greenChanA = static_cast<int16>(G_FROM_COLOR(Color::CHAN_A.GetRGB()));
-    blueChanA = static_cast<int16>(B_FROM_COLOR(Color::CHAN_A.GetRGB()));
+    redChanA = (int16)R_FROM_COLOR(Color::CHAN_A.GetRGB());
+    greenChanA = (int16)G_FROM_COLOR(Color::CHAN_A.GetRGB());
+    blueChanA = (int16)B_FROM_COLOR(Color::CHAN_A.GetRGB());
 
-    redChanB = static_cast<int16>(R_FROM_COLOR(Color::CHAN_B.GetRGB()));
-    greenChanB = static_cast<int16>(G_FROM_COLOR(Color::CHAN_B.GetRGB()));
-    blueChanB = static_cast<int16>(B_FROM_COLOR(Color::CHAN_B.GetRGB()));
+    redChanB = (int16)R_FROM_COLOR(Color::CHAN_B.GetRGB());
+    greenChanB = (int16)G_FROM_COLOR(Color::CHAN_B.GetRGB());
+    blueChanB = (int16)B_FROM_COLOR(Color::CHAN_B.GetRGB());
 
-    redMenu = static_cast<int16>(R_FROM_COLOR(Color::MENU_ITEM.GetRGB()));
-    greenMenu = static_cast<int16>(G_FROM_COLOR(Color::MENU_ITEM.GetRGB()));
-    blueMenu = static_cast<int16>(B_FROM_COLOR(Color::MENU_ITEM.GetRGB()));
+    redMenu = (int16)R_FROM_COLOR(Color::MENU_ITEM.GetRGB());
+    greenMenu = (int16)G_FROM_COLOR(Color::MENU_ITEM.GetRGB());
+    blueMenu = (int16)B_FROM_COLOR(Color::MENU_ITEM.GetRGB());
 }
 
 

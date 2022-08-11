@@ -66,15 +66,15 @@ void TrapezeDialog::SendAdditionForm()
 {
     int start = scDelay->GetValue();
 
-    float center = static_cast<float>(start) + static_cast<float>(Point::AMOUNT - start) / 2.0F;
+    float center = (float)start + (float)(Point::AMOUNT - start) / 2.0F;
 
-    float pointsInTrapeze = static_cast<float>(Point::AMOUNT - start);
+    float pointsInTrapeze = (float)(Point::AMOUNT - start);
 
-    int left = static_cast<int>(center + pointsInTrapeze / 2.0F * static_cast<float>(scVertex1->GetValue()) / 100.0F);
-    int right = static_cast<int>(center + pointsInTrapeze / 2.0F * static_cast<float>(scVertex2->GetValue()) / 100.0F);
+    int left = (int)(center + pointsInTrapeze / 2.0F * (float)scVertex1->GetValue() / 100.0F);
+    int right = (int)(center + pointsInTrapeze / 2.0F * (float)scVertex2->GetValue() / 100.0F);
 
-    int levelHI = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * static_cast<float>(scLevelUp->GetValue()) / 100.0F); //-V2007
-    int levelLOW = static_cast<int>(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * static_cast<float>(scLevelDown->GetValue()) / 100.0F); //-V2007
+    int levelHI = (int)(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * (float)scLevelUp->GetValue() / 100.0F); //-V2007
+    int levelLOW = (int)(Point::AVE + (Point::MAX + Point::MIN) / 2.0F * (float)scLevelDown->GetValue() / 100.0F); //-V2007
 
     int min = levelLOW;
     int max = levelHI;
@@ -97,9 +97,9 @@ void TrapezeDialog::SendAdditionForm()
 
     points.clear();
 
-    points.push_back(Point::FromData(static_cast<uint16>(start), static_cast<uint16>(min))); //-V823
-    points.push_back(Point::FromData(static_cast<uint16>(left),  static_cast<uint16>(max))); //-V823
-    points.push_back(Point::FromData(static_cast<uint16>(right), static_cast<uint16>(max))); //-V823
+    points.push_back(Point::FromData((uint16)start, (uint16)min)); //-V823
+    points.push_back(Point::FromData((uint16)left,  (uint16)max)); //-V823
+    points.push_back(Point::FromData((uint16)right, (uint16)max)); //-V823
 }
 
 

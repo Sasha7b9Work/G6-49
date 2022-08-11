@@ -80,8 +80,8 @@ ParametersDialog::ParametersDialog(uint16 index, uint16 value) : wxDialog(nullpt
 
 void ParametersDialog::OnButtonApply(wxCommandEvent &)
 {
-    uint16 index = static_cast<uint16>(atoi(tcPosition->GetValue().c_str()));
-    uint16 value = static_cast<uint16>(atoi(tcValue->GetValue().c_str()));
+    uint16 index = (uint16)atoi(tcPosition->GetValue().c_str());
+    uint16 value = (uint16)atoi(tcValue->GetValue().c_str());
 
     TheForm->RemoveCurrentMarker();
     TheForm->SetPointInRealCoord(index, value);

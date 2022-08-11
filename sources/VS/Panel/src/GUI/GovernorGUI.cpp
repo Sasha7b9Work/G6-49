@@ -3,12 +3,9 @@
 #include "GUI/GovernorGUI.h"
 
 
-//#define SHOW_NAME_FUNC()   std::cout << __FUNCTION__ << std::endl
-
-
 GovernorGUI::GovernorGUI(wxWindow *parent, const wxPoint &position) : wxPanel(parent, wxID_ANY, position), timer(this, 1)
 {
-    angle = static_cast<float>(rand());
+    angle = (float)rand();
 
     cursor = { false, {0, 0}, 0 };
 
@@ -32,12 +29,12 @@ void GovernorGUI::OnPaint(wxPaintEvent &)
    
     dc.DrawCircle(radius, radius, radius);
 
-    float r = static_cast<float>(radius) * 0.6F;
+    float r = (float)radius * 0.6F;
 
-    float x = static_cast<float>(radius) + Sin(static_cast<int>(angle) * stepAngle) * r;
-    float y = static_cast<float>(radius) + Cos(static_cast<int>(angle) * stepAngle) * r;
+    float x = (float)radius + Sin((int)angle * stepAngle) * r;
+    float y = (float)radius + Cos((int)angle * stepAngle) * r;
 
-    dc.DrawCircle(static_cast<int>(x), static_cast<int>(y), radius / 5);
+    dc.DrawCircle((int)x, (int)y, radius / 5);
 }
 
 
@@ -74,13 +71,13 @@ bool GovernorGUI::MouseOnGovernor(wxMouseEvent &event) //-V2009
 
 float GovernorGUI::Sin(int grad)
 {
-    return sinf(static_cast<float>(grad) * 3.1415926F / 180.0F);
+    return sinf((float)grad * 3.1415926F / 180.0F);
 }
 
 
 float GovernorGUI::Cos(int grad)
 {
-    return cosf(static_cast<float>(grad) * 3.1415926F / 180.0F);
+    return cosf((float)grad * 3.1415926F / 180.0F);
 }
 
 
@@ -94,7 +91,7 @@ void GovernorGUI::OnTimer(wxTimerEvent &)
 
         if(delta != 0)
         {
-            angle += 0.1F * static_cast<float>(delta);
+            angle += 0.1F * (float)delta;
 
             Refresh();
         }

@@ -70,7 +70,7 @@ void NumberBuffer::ProcessRegulator(const Key::E key)
 
     // Сохраняем старое значение, чтобы восстановить его в случае, если при изменении оно превысит максимальное
     char temp[32];
-    std::memcpy(temp, buffer, static_cast<uint>(size));
+    std::memcpy(temp, buffer, (uint)size);
 
     if (key == Key::RotateRight)
     {
@@ -82,9 +82,9 @@ void NumberBuffer::ProcessRegulator(const Key::E key)
     }
 
     // Восстанавливаем старое значение, если новое вышло за пределы
-    if(max != 0 && ToUINT() > static_cast<uint>(max))
+    if(max != 0 && ToUINT() > (uint)max)
     {
-        std::memcpy(buffer, temp, static_cast<uint>(size));
+        std::memcpy(buffer, temp, (uint)size);
     }
 }
 
@@ -167,7 +167,7 @@ bool NumberBuffer::DecreaseDigit(int pos)
 
 int NumberBuffer::NumSymbols()
 {
-    return static_cast<int>(size);
+    return (int)size;
 }
 
 
@@ -192,10 +192,10 @@ int NumberBuffer::PositionCursor()
 
 uint NumberBuffer::ToUINT()
 {
-    uint result = static_cast<uint>(-1);
+    uint result = (uint)(-1);
     if(!SU::String2UInt(buffer, &result))
     {
-        return static_cast<uint>(-1);
+        return (uint)(-1);
     }
 
     return result;

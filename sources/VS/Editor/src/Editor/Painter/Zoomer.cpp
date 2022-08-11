@@ -114,7 +114,7 @@ void Zoomer::Decrease(int /*mouseX*/)
 
 void Zoomer::CalculateIndexesPoints()
 {
-    numberDrawingPoints = static_cast<int>(100.0F / static_cast<float>(scale) * Point::AMOUNT);
+    numberDrawingPoints = (int)(100.0F / (float)scale * Point::AMOUNT);
 
     indexFirstPoint = indexMiddlePoint - numberDrawingPoints / 2;
 
@@ -142,7 +142,7 @@ int Zoomer::Scale()
 
 float Zoomer::ScaleF()
 {
-    return static_cast<float>(scale) / 100.0F;
+    return (float)scale / 100.0F;
 }
 
 
@@ -173,9 +173,9 @@ void Window::Draw()
 
 int Window::X()
 {
-    float dX = static_cast<float>(Zoomer::IndexFirsPoint()) / Point::AMOUNT * static_cast<float>(Grid::Width());
+    float dX = (float)Zoomer::IndexFirsPoint() / Point::AMOUNT * (float)Grid::Width();
 
-    return Zoomer::X() + static_cast<int>(dX + 0.5F);
+    return Zoomer::X() + (int)(dX + 0.5F);
 }
 
 
@@ -185,9 +185,9 @@ bool Window::MoveTo(int mouseX)
     {
         int deltaPixels = mouseX - Grabber::CoordX();
 
-        int deltaPoints = static_cast<int>(PointsInPixel() * deltaPixels);
+        int deltaPoints = (int)(PointsInPixel() * deltaPixels);
 
-        Zoomer::indexFirstPoint = Math::Limitation<int>(Grabber::IndexFirstPoint() + deltaPoints, 0, static_cast<int>(Point::AMOUNT - Zoomer::numberDrawingPoints));
+        Zoomer::indexFirstPoint = Math::Limitation<int>(Grabber::IndexFirstPoint() + deltaPoints, 0, (int)(Point::AMOUNT - Zoomer::numberDrawingPoints));
 
         Zoomer::indexMiddlePoint = Zoomer::indexFirstPoint + Zoomer::numberDrawingPoints / 2;
 
@@ -208,9 +208,9 @@ int Window::Right()
 
 int Window::Width()
 {
-    float width = static_cast<float>(Zoomer::NumberDrawingPoints()) / Point::AMOUNT * static_cast<float>(Grid::Width());
+    float width = (float)Zoomer::NumberDrawingPoints() / Point::AMOUNT * (float)Grid::Width();
 
-    return static_cast<int>(width + 0.5F);
+    return (int)(width + 0.5F);
 }
 
 
@@ -342,5 +342,5 @@ void Grabber::Grab(int mouseX, int mouseY)
 
 double Window::PointsInPixel()
 {
-    return static_cast<double>(Point::AMOUNT) / Zoomer::Width();
+    return (double)Point::AMOUNT / Zoomer::Width();
 }

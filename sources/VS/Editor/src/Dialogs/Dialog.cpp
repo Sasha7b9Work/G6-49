@@ -79,9 +79,9 @@ wxPanel *Dialog::CreatePanelPolarity(bool polarityDirect, bool polarityBack)
 
 void Dialog::DrawLine(int x1, int y1, int x2, int y2)
 {
-    float dX = static_cast<float>(x2 - x1);
+    float dX = (float)(x2 - x1);
 
-    float dY = std::fabsf(static_cast<float>(y2 - y1));
+    float dY = std::fabsf((float)(y2 - y1));
 
     float k = dY / dX;
 
@@ -89,14 +89,14 @@ void Dialog::DrawLine(int x1, int y1, int x2, int y2)
     {
         for(int x = x1; x <= x2; x++)
         {
-            data[x] = static_cast<uint16>(static_cast<float>(y1) + static_cast<float>(x - x1) * k + 0.5F);
+            data[x] = (uint16)((float)y1 + (float)(x - x1) * k + 0.5F);
         }
     }
     else
     {
         for(int x = x1; x <= x2; x++)
         {
-            data[x] = static_cast<uint16>(static_cast<float>(y1) - static_cast<float>(x - x1) * k + 0.5F);
+            data[x] = (uint16)((float)y1 - (float)(x - x1) * k + 0.5F);
         }
     }
 }

@@ -213,10 +213,10 @@ static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxS
         return;
     }
 
-    wxButton *button = new wxButton(frame, static_cast<wxWindowID>(key), Key(key).Name(), pos, size);
+    wxButton *button = new wxButton(frame, (wxWindowID)key, Key(key).Name(), pos, size);
 
-    button->Connect(static_cast<wxWindowID>(key), wxEVT_LEFT_DOWN, wxCommandEventHandler(Frame::OnKeyDown));
-    button->Connect(static_cast<wxWindowID>(key), wxEVT_LEFT_UP, wxCommandEventHandler(Frame::OnKeyUp));
+    button->Connect((wxWindowID)key, wxEVT_LEFT_DOWN, wxCommandEventHandler(Frame::OnKeyDown));
+    button->Connect((wxWindowID)key, wxEVT_LEFT_UP, wxCommandEventHandler(Frame::OnKeyUp));
 
     buttons[key] = button;
 }
@@ -237,9 +237,9 @@ void Color::SetAsCurrent() const
             color = ((time / 500) % 2) ? COLOR(COLOR_WHITE) : COLOR(COLOR_BLACK);
         }
 
-        uint8 b = static_cast<uint8>(color);
-        uint8 g = static_cast<uint8>(color >> 8);
-        uint8 r = static_cast<uint8>(color >> 16);
+        uint8 b = (uint8)(color);
+        uint8 g = (uint8)(color >> 8);
+        uint8 r = (uint8)(color >> 16);
 
         wxColour colorDraw = wxColour(r, g, b);
 

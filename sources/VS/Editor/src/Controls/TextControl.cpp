@@ -27,7 +27,7 @@ void TextControlInt::OnKeyDown(wxKeyEvent &event)
 
         if (end - start != 0)
         {
-            buffer[0] = static_cast<char>(code);
+            buffer[0] = (char)code;
             buffer[1] = 0;
 
             SetValue("");
@@ -39,7 +39,7 @@ void TextControlInt::OnKeyDown(wxKeyEvent &event)
         {
             std::strcpy(buffer, GetValue().c_str());
             uint length = std::strlen(buffer);
-            buffer[length] = static_cast<char>(code);
+            buffer[length] = (char)code;
             if (length > SIZE_BUFFER - 2) { length = SIZE_BUFFER - 2; }
             buffer[length + 1] = 0;
             int value = atoi(buffer);
@@ -80,7 +80,7 @@ void TextControlFloat::OnKeyDown(wxKeyEvent &event)
 
         if (end - start != 0)
         {
-            buffer[0] = static_cast<char>(code);
+            buffer[0] = (char)code;
             buffer[1] = 0;
 
             SetValue("");
@@ -92,10 +92,10 @@ void TextControlFloat::OnKeyDown(wxKeyEvent &event)
         {
             std::strcpy(buffer, GetValue().c_str());
             uint length = std::strlen(buffer);
-            buffer[length] = static_cast<char>(code);
+            buffer[length] = (char)code;
             if (length > SIZE_BUFFER - 2) { length = SIZE_BUFFER - 2; }
             buffer[length + 1] = 0;
-            float value = static_cast<float>(std::atof(buffer));
+            float value = (float)std::atof(buffer);
 
             event.Skip(value >= min && value <= max);
         }

@@ -998,7 +998,7 @@ void DisplayEntering::OnButtonOrderMore()
     {
         Order::Store(order);
 
-        order = static_cast<Order::E>(order - 1);
+        order = (Order::E)(order - 1);
 
         if (!ValueInBoundaries())
         {
@@ -1014,7 +1014,7 @@ void DisplayEntering::OnButtonOrderLess()
     {
         Order::Store(order);
 
-        order = static_cast<Order::E>(order + 1);
+        order = (Order::E)(order + 1);
 
         if (!ValueInBoundaries())
         {

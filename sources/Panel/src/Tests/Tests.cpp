@@ -46,7 +46,7 @@ static void TestKeyboard()
         {
             if (keys[i])
             {
-                std::strcat(buffer, Key(static_cast<Key::E>(i)).Name());
+                std::strcat(buffer, Key((Key::E)i).Name());
                 std::strcat(buffer, ", ");
                 counter++;
             }

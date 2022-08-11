@@ -113,11 +113,11 @@ void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
 {
     history.Add(line->GetLineText(0));
 
-    String txt("    %s", static_cast<pchar >(line->GetLineText(0).mb_str()));
+    String txt("    %s", (pchar)line->GetLineText(0).mb_str());
 
     AddLine(txt.c_str());
 
-    txt.Set(TypeConversionString::None, "%s\x0d", static_cast<pchar >(line->GetLineText(0).mb_str()));
+    txt.Set(TypeConversionString::None, "%s\x0d", (pchar)line->GetLineText(0).mb_str());
 
     if (ComPort::IsOpened())
     {

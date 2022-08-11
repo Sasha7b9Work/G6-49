@@ -11,5 +11,5 @@ template uint16 Math::Round(float);
 template <class T>
 T Math::Round(float value)
 {
-    return static_cast<T>(std::round(value));
+    return (T)std::round(value);
 }

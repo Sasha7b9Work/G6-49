@@ -42,7 +42,7 @@ void IntValue::Sub5(char *bufferOut, int *_posComma)
 
 int IntValue::ToWhole(pchar buffer)
 {
-    int numDigits = static_cast<int>(std::strlen(buffer));
+    int numDigits = (int)std::strlen(buffer);
 
     int pow = 1;
 
@@ -103,7 +103,7 @@ void IntValue::Fract1000toString(char *buffer, int numDigits)
     {
         if (i < numDigits)
         {
-            buffer[i] = static_cast<char>(DigitFromFract1000(i) | 0x30);
+            buffer[i] = (char)(DigitFromFract1000(i) | 0x30);
         }
     }
 }

@@ -354,7 +354,7 @@ void PageDebug::PageRegisters::DrawInputWindow()
 
     int position = NumberBuffer::PositionCursor();
 
-    int size = static_cast<int>(std::strlen(dbuffer));
+    int size = (int)std::strlen(dbuffer);
 
     for (int i = 0; i < size; i++)
     {
@@ -365,7 +365,7 @@ void PageDebug::PageRegisters::DrawInputWindow()
         }
         x = BigChar(dbuffer[i], 4).Draw(x, Y_INPUT + 20) + 3;
     }
-    if (position == static_cast<int>(std::strlen(dbuffer)) && position < SizeBuffer())
+    if (position == (int)std::strlen(dbuffer) && position < SizeBuffer())
     {
         Rectangle(19, 31).DrawFilled(x - 2, Y_INPUT + 19, Color::GRAY_10, Color::BLUE);
     }
@@ -576,12 +576,12 @@ static void OnPress_Send()
         if (type == Uint)
         {
             SU::UInt64_2String(VALUE(currentRegister), dbuffer);
-            position = static_cast<int>(std::strlen(dbuffer));
+            position = (int)std::strlen(dbuffer);
         }
         else if (type == Binary)
         {
             SU::Bin2StringN((uint)VALUE(currentRegister), dbuffer, SizeBuffer(currentRegister));
-            position = static_cast<int>(std::strlen(dbuffer));
+            position = (int)std::strlen(dbuffer);
         }
         else // if (type == Uint10_Uint10 || type == Uint14_Uint14)
         {

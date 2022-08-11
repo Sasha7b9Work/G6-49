@@ -84,7 +84,7 @@ ExponentDialog::ExponentDialog() : Dialog(wxT("Параметры экспоненциального сигна
 
 void ExponentDialog::InvertPoint(uint16 *point)
 {
-    *point = static_cast<uint16>(static_cast<uint16>(Point::MAX - *point) + Point::AVE);
+    *point = (uint16)((uint16)(Point::MAX - *point) + Point::AVE);
 }
 
 
@@ -124,13 +124,13 @@ void ExponentDialog::SendAdditionForm()
 
     double k = (std::log(y0) - std::log(y1)) / (x0 - x1);
 
-    int start = static_cast<int>(std::log(y0) / k - x0);
+    int start = (int)(std::log(y0) / k - x0);
 
     for (int i = 0; i < Point::AMOUNT; i++)
     {
-        double value = std::exp(k * (static_cast<double>(i) + start));
+        double value = std::exp(k * ((double)i + start));
 
-        uint16 uValue = static_cast<uint16>(Point::AVE + value);
+        uint16 uValue = (uint16)(Point::AVE + value);
 
         data[i] = Math::Limitation<uint16>(uValue, Point::MIN, Point::MAX);
     }

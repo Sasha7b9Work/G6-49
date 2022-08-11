@@ -7,7 +7,7 @@
 
 Buffer::Buffer(uint _size) : data(nullptr), size(0)
 {
-    data = static_cast<uint8 *>(std::malloc(_size));
+    data = (uint8 *)std::malloc(_size);
     size = _size;
 }
 

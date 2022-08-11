@@ -19,7 +19,7 @@ namespace Math
     template<class T>
     T Abs(T value)
     {
-        return (value < static_cast<T>(0)) ? -value : value;
+        return (value < (T)0) ? -value : value;
     }
 
     template<class T>

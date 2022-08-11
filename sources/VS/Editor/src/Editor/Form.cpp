@@ -56,8 +56,8 @@ void Form::Clear()
 
     markers.clear();
 
-    SetPointInRealCoord(static_cast<uint16>(0), Point::AVE);
-    SetPointInRealCoord(static_cast<uint16>(Point::AMOUNT - 1), Point::AVE);
+    SetPointInRealCoord((uint16)0, Point::AVE);
+    SetPointInRealCoord((uint16)(Point::AMOUNT - 1), Point::AVE);
 }
 
 
@@ -71,7 +71,7 @@ uint Form::PointInPosition(uint16 pos)
         }
     }
 
-    return static_cast<uint>(-1);
+    return (uint)(-1);
 }
 
 
@@ -81,7 +81,7 @@ void Form::SetPoint(Point point)
 
     uint index = PointInPosition(point.pos);
 
-    if (index == static_cast<uint>(-1))
+    if (index == (uint)(-1))
     {
         markers.push_back(point);
 
@@ -148,7 +148,7 @@ void Form::SetPointInPosition(uint16 pos)
 
     uint index = PointInPosition(point.pos);
 
-    if(index != static_cast<uint>(-1))
+    if(index != (uint)(-1))
     {
         markers[index] = point;
     }
@@ -165,11 +165,11 @@ void Form::RemoveCurrentMarker()
 {
     if (iCurMarker < markers.size())
     {
-        markers.erase(markers.begin() + static_cast<const int>(iCurMarker));
+        markers.erase(markers.begin() + (const int)iCurMarker);
 
         LinearInterpolationLeft(iCurMarker);
 
-        iCurMarker = static_cast<uint>(-1);
+        iCurMarker = (uint)(-1);
     }
 }
 
@@ -198,11 +198,11 @@ void Form::MoveMarker(int canvasX, int canvasY)
 
         if (point.pos <= left.pos)
         {
-            point.pos = static_cast<uint16>(left.pos + 1);
+            point.pos = (uint16)(left.pos + 1);
         }
         else if (point.pos >= right.pos)
         {
-            point.pos = static_cast<uint16>(right.pos - 1);
+            point.pos = (uint16)(right.pos - 1);
         }
 
         uint tempIndex = iCurMarker;
@@ -235,7 +235,7 @@ typedef bool (*pFuncCompare)(Point, Point);
 
 void Form::AlignPoint(Align::E align)
 {
-    uint index = static_cast<uint>(-1);
+    uint index = (uint)(-1);
 
     Point point = markers[iCurMarker];
 
@@ -292,7 +292,7 @@ void Form::AlignPoint(Align::E align)
         }
     }
 
-    if (index != static_cast<uint>(-1))
+    if (index != (uint)(-1))
     {
         markers[iCurMarker].data = markers[index].data;
         SetPoint(markers[iCurMarker]);
@@ -304,13 +304,13 @@ void Form::AlignPoint(Align::E align)
 
 int Point::CanvasX() const
 {
-    return Math::Round<int>(PixelsInPointX() * static_cast<float>(pos - Zoomer::IndexFirsPoint()));
+    return Math::Round<int>(PixelsInPointX() * (float)(pos - Zoomer::IndexFirsPoint()));
 }
 
 
 int Point::CanvasY() const
 {
-    return Grid::Y() + Math::Round<int>(PixelsInDiscretY() * static_cast<float>(Point::MAX - data));
+    return Grid::Y() + Math::Round<int>(PixelsInDiscretY() * (float)(Point::MAX - data));
 }
 
 
@@ -321,7 +321,7 @@ bool Form::ExistMarker(int canvasX, int canvasY, bool pressed, uint16 *index, ui
         return false;
     }
 
-    uint16 positionNearestPoint = static_cast<uint16>(-1);
+    uint16 positionNearestPoint = (uint16)(-1);
     double nearestDistance = 1e10;
 
     for(uint16 i = 0; i < markers.size(); i++)
@@ -337,7 +337,7 @@ bool Form::ExistMarker(int canvasX, int canvasY, bool pressed, uint16 *index, ui
 
     if(nearestDistance < Marker::SIZE * 2.5)
     {
-        if(iCurMarker == static_cast<uint>(-1) || !pressed)
+        if(iCurMarker == (uint)(-1) || !pressed)
         {
             iCurMarker = positionNearestPoint;
         }
@@ -357,7 +357,7 @@ bool Form::ExistMarker(int canvasX, int canvasY, bool pressed, uint16 *index, ui
 
     if (!pressed)
     {
-        iCurMarker = static_cast<uint>(-1);
+        iCurMarker = (uint)(-1);
     }
 
     return false;
@@ -388,8 +388,8 @@ static void DrawData(const uint16 data[Point::AMOUNT], const Color &colorBright,
     {
         for (int i = Zoomer::IndexFirsPoint() + 1; i < Zoomer::IndexLastPoint(); i++)
         {
-            Point p0 = Point::FromData(static_cast<uint16>(i - 1), data[i - 1]);
-            Point p1 = Point::FromData(static_cast<uint16>(i), data[i]);
+            Point p0 = Point::FromData((uint16)(i - 1), data[i - 1]);
+            Point p1 = Point::FromData((uint16)(i), data[i]);
 
             Painter::DrawLine(p0.CanvasX(), p0.CanvasY(), p1.CanvasX(), p1.CanvasY(), colorDark);
 
@@ -402,8 +402,8 @@ static void DrawData(const uint16 data[Point::AMOUNT], const Color &colorBright,
 
         for (int i = Zoomer::IndexFirsPoint() + 1; i < Zoomer::IndexLastPoint(); i++)
         {
-            Point p0 = Point::FromData(static_cast<uint16>(i - 1), data[i - 1]);
-            Point p1 = Point::FromData(static_cast<uint16>(i), data[i]);
+            Point p0 = Point::FromData((uint16)(i - 1), data[i - 1]);
+            Point p1 = Point::FromData((uint16)(i), data[i]);
 
             Painter::DrawLine(p0.CanvasX(), p0.CanvasY(), p1.CanvasX(), p1.CanvasY());
         }
@@ -422,7 +422,7 @@ void Form::Draw()
         Painter::DrawPoint(point.CanvasX(), point.CanvasY(), Marker::SIZE);
     }
 
-    if (iCurMarker != static_cast<uint>(-1))
+    if (iCurMarker != (uint)(-1))
     {
         Point &point = markers[iCurMarker];
         Painter::DrawPoint(point.CanvasX(), point.CanvasY(), Marker::SIZE * 3);
@@ -441,9 +441,9 @@ void Form::LinearInterpolation(uint16 pos1, uint16 pos2)
     uint16 data1 = data[pos1];
     uint16 data2 = data[pos2];
 
-    float delta = static_cast<float>(data2 - data1) / static_cast<float>(pos2 - pos1);  // Разность значений между соседними точками
+    float delta = (float)(data2 - data1) / (float)(pos2 - pos1);  // Разность значений между соседними точками
     
-    float value = static_cast<float>(data[pos1]) + delta;                                  // Значение в текущей позиции
+    float value = (float)data[pos1] + delta;                                  // Значение в текущей позиции
     
     for (int i = pos1 + 1; i < pos2; i++)
     {
@@ -499,8 +499,8 @@ void Form::SetMainForm(const uint16 dat[Point::AMOUNT], const std::vector<Point>
 
     markers.clear();
 
-    SetPointInRealCoord(static_cast<uint16>(0), dat[0]);
-    SetPointInRealCoord(static_cast<uint16>(Point::AMOUNT - 1), dat[Point::AMOUNT - 1]);
+    SetPointInRealCoord((uint16)0, dat[0]);
+    SetPointInRealCoord((uint16)(Point::AMOUNT - 1), dat[Point::AMOUNT - 1]);
 
     std::memcpy(data, dat, Point::AMOUNT * 2);
 
@@ -632,12 +632,12 @@ static bool ConvertStringToTwoShort(const wxString &line, uint16 *val1, uint16 *
         return false;
     }
 
-    if(!ConvertSubStringToShort(line, 0, static_cast<uint>(pos - 1), val1, Point::AMOUNT))
+    if(!ConvertSubStringToShort(line, 0, (uint)(pos - 1), val1, Point::AMOUNT))
     {
         return false;
     }
 
-    if(!ConvertSubStringToShort(line, static_cast<uint>(pos + 1), line.size() - 1, val2, Point::MAX))
+    if(!ConvertSubStringToShort(line, (uint)(pos + 1), line.size() - 1, val2, Point::MAX))
     {
         return false;
     }
@@ -657,7 +657,7 @@ static bool ConvertSubStringToShort(const wxString &line, uint startPos, uint en
         return false;
     }
 
-    *value = static_cast<uint16>(val);
+    *value = (uint16)val;
 
     return true;
 }

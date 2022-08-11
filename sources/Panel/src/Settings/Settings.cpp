@@ -63,7 +63,7 @@ static const Settings defSet =
         MAKE_COLOR(15, 15, 15)          // MENU_ITEM_SHADE
 #endif
     },
-    static_cast<Page *>(PageMain::self),    // menu_currentPage
+    (Page *)PageMain::self,                 // menu_currentPage
     {0},                                    // menu_posActItem[]
     {0},                                    // menu_currentSubPage[]
     {false, false},                         // enabled[2]

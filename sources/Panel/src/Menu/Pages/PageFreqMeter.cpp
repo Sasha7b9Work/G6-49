@@ -84,7 +84,7 @@ void PageFrequencyCounter::OnPress_Resist(bool active)
 {
     if (active)
     {
-        PGenerator::LoadRegister(Register::FreqMeter_Resist, static_cast<uint>(set.freq.resist));
+        PGenerator::LoadRegister(Register::FreqMeter_Resist, (uint)set.freq.resist);
     }
 }
 
@@ -101,7 +101,7 @@ void PageFrequencyCounter::OnPress_Couple(bool active)
 {
     if (active)
     {
-        PGenerator::LoadRegister(Register::FreqMeter_Couple, static_cast<uint>(set.freq.couple));
+        PGenerator::LoadRegister(Register::FreqMeter_Couple, (uint)set.freq.couple);
     }
 }
 
@@ -118,7 +118,7 @@ void PageFrequencyCounter::OnPress_Filtr(bool active)
 {
     if (active)
     {
-        PGenerator::LoadRegister(Register::FreqMeter_Filtr, static_cast<uint>(set.freq.filtr));
+        PGenerator::LoadRegister(Register::FreqMeter_Filtr, (uint)set.freq.filtr);
     }
 }
 

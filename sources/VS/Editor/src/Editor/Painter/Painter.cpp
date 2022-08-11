@@ -139,9 +139,9 @@ wxColour Painter::MakeColour(const Color &color)
 {
     uint value = COLOR(color.value);
 
-    uint8 b = static_cast<uint8>(value);
-    uint8 g = static_cast<uint8>(value >> 8);
-    uint8 r = static_cast<uint8>(value >> 16);
+    uint8 b = (uint8)(value);
+    uint8 g = (uint8)(value >> 8);
+    uint8 r = (uint8)(value >> 16);
 
     return wxColour(r, g, b);
 }

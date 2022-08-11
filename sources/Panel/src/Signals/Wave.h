@@ -28,7 +28,7 @@ public:
 
     Form(uint8 v)
     {
-        Init(static_cast<TypeForm::E>(v));
+        Init((TypeForm::E)v);
     };
 
     Form(TypeForm::E v, Param **param, Wave *w);
@@ -44,7 +44,7 @@ public:
     };
 
     // ¬озвращает человеческое название формы сигнала
-    cstr Name(uint lang = static_cast<uint>(-1)) const;
+    cstr Name(uint lang = (uint)(-1)) const;
     
     // ¬озвращает ссылку на текущий параметр
     Param *CurrentParameter() const;

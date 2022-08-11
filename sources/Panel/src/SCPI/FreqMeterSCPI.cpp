@@ -96,7 +96,7 @@ static pchar FuncMeasure(pchar buf)
         {
             SCPI_PROLOG(end)
 
-            set.freq.measure = static_cast<FreqMeasure::E>(i);
+            set.freq.measure = (FreqMeasure::E)i;
             PageFrequencyCounter::OnPress_Measure(true);
 
             SCPI_EPILOG(end)
@@ -139,7 +139,7 @@ static pchar FuncLevel(pchar buffer)
     {
         if (paramValue >= -100 && paramValue <= 100)
         {
-            set.freq.level = static_cast<int16>(paramValue);
+            set.freq.level = (int16)paramValue;
             PageFrequencyCounter::OnChange_FreqLevel();
             return end_str +1;
         }
@@ -211,7 +211,7 @@ static pchar FuncTimeCounting(pchar buffer)
         {
             SCPI_PROLOG(end)
 
-            set.freq.billingTime.value = static_cast<PFreqMeter::BillingTime::E>(i);
+            set.freq.billingTime.value = (PFreqMeter::BillingTime::E)i;
             PageFrequencyCounter::OnPress_BillingTime(true);
 
             SCPI_EPILOG(end)
@@ -257,7 +257,7 @@ static pchar FuncLPF(pchar buffer)
         {
             SCPI_PROLOG(end)
 
-            set.freq.filtr = static_cast<FreqFiltr::E>(i);
+            set.freq.filtr = (FreqFiltr::E)i;
             PageFrequencyCounter::OnPress_Filtr(true);
 
             SCPI_EPILOG(end)
@@ -302,7 +302,7 @@ static pchar FuncCoupling(pchar buffer)
         {
             SCPI_PROLOG(end)
 
-            set.freq.couple = static_cast<FreqCouple::E>(i);
+            set.freq.couple = (FreqCouple::E)i;
             PageFrequencyCounter::OnPress_Couple(true);
 
             SCPI_EPILOG(end)
@@ -348,7 +348,7 @@ static pchar FuncResistance(pchar buffer)
         {
             SCPI_PROLOG(end)
 
-            set.freq.resist = static_cast<FreqResist::E>(i);
+            set.freq.resist = (FreqResist::E)i;
             PageFrequencyCounter::OnPress_Resist(true);
 
             SCPI_EPILOG(end)
@@ -394,7 +394,7 @@ static pchar FuncTest(pchar buffer)
         {
             SCPI_PROLOG(end)
 
-            set.freq.test = static_cast<FreqTest::E>(i);
+            set.freq.test = (FreqTest::E)i;
             PageFrequencyCounter::OnPress_Test(true);
 
             SCPI_EPILOG(end)
@@ -443,7 +443,7 @@ static pchar FuncTimeLabels(pchar buffer)
         {
             SCPI_PROLOG(end)
 
-            set.freq.timeStamps.value = static_cast<FreqTimeStamps::E>(i);
+            set.freq.timeStamps.value = (FreqTimeStamps::E)i;
             PageFrequencyCounter::OnPress_TimeStamps(true);
 
             SCPI_EPILOG(end)
@@ -492,7 +492,7 @@ static pchar FuncNumberPeriods(pchar buffer)
         {
             SCPI_PROLOG(end)
 
-            set.freq.avePeriod.value = static_cast<PFreqMeter::AvePeriod::E>(4 - i);
+            set.freq.avePeriod.value = (PFreqMeter::AvePeriod::E)(4 - i);
             PageFrequencyCounter::OnPress_AvePeriod(true);
 
             SCPI_EPILOG(end)

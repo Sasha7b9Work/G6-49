@@ -38,8 +38,8 @@ struct FreqInterval
         _1,
         _10
     } value;
-    FreqInterval(uint v) : value(static_cast<E>(v)) {};
-    operator uint8() const { return static_cast<uint8>(value); };
+    FreqInterval(uint v) : value((E)v) {};
+    operator uint8() const { return (uint8)value; };
 };
 
 // Измерять частоту или период
@@ -51,8 +51,8 @@ struct FreqMeasure
         Freq,
         Period
     } value;
-    explicit FreqMeasure(uint v) : value(static_cast<E>(v)) {};
-    operator uint8() const { return static_cast<uint8>(value); };
+    explicit FreqMeasure(uint v) : value((E)v) {};
+    operator uint8() const { return (uint8)value; };
 };
 
 // Метки времени
@@ -69,7 +69,7 @@ struct FreqTimeStamps
 
     FreqTimeStamps(E v) : value(v) { }
 
-    operator uint8() const { return static_cast<uint8>(value); };
+    operator uint8() const { return (uint8)value; };
 };
 
 // Тестовый режим частотомера
@@ -80,6 +80,6 @@ struct FreqTest
         Off,
         On
     } value;
-    FreqTest(uint v) : value(static_cast<E>(v)) {};
-    operator uint8() const { return static_cast<uint8>(value); };
+    FreqTest(uint v) : value((E)v) {};
+    operator uint8() const { return (uint8)value; };
 };

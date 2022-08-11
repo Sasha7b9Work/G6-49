@@ -17,7 +17,7 @@ static uint8 formFlash[Chan::Count][POINTS_IN_FORM];
 
 cstr Form::Name(uint lang) const
 {
-    if (lang == static_cast<uint>(-1))
+    if (lang == (uint)(-1))
     {
         lang = LANGUAGE;
     }
@@ -285,7 +285,7 @@ DParam *Form::FindParameter(TypeDParam::E p) const
 
         if(param->IsDouble())
         {
-            DParam *parameter = static_cast<DParam *>(param);
+            DParam *parameter = (DParam *)param;
 
             if (parameter->GetType() == p)
             {
@@ -294,7 +294,7 @@ DParam *Form::FindParameter(TypeDParam::E p) const
         }
         else if(param->IsComposite())
         {
-            CMSParam *parameter = static_cast<CMSParam *>(param);
+            CMSParam *parameter = (CMSParam *)param;
 
             DParam *val = parameter->FindParameter(p);
 
@@ -317,7 +317,7 @@ CParam *Form::FindParameter(TypeCParam::E p) const
 
         if(param->IsChoice())
         {
-            CParam *choice = static_cast<CParam *>(param);
+            CParam *choice = (CParam *)param;
 
             if (choice->GetType() == p)
             {
@@ -350,7 +350,7 @@ CMSParam *Form::FindParameter(TypeCMSParam::E t) const
 
         if (param->IsComposite())
         {
-            CMSParam *composite = static_cast<CMSParam *>(param);
+            CMSParam *composite = (CMSParam *)param;
 
             if (composite->GetType() == t)
             {
@@ -367,7 +367,7 @@ CMSParam *Form::FindParameter(TypeCMSParam::E t) const
 
             if (param->IsComposite())
             {
-                CMSParam *composite = static_cast<CMSParam *>(param);
+                CMSParam *composite = (CMSParam *)param;
 
                 if (composite->GetType() == t)
                 {
@@ -389,7 +389,7 @@ IParam *Form::FindParameter(TypeIParam::E t) const
 
         if (param->IsInteger())
         {
-            IParam *integer = static_cast<IParam *>(param);
+            IParam *integer = (IParam *)param;
 
             if (integer->GetType() == t)
             {
@@ -444,7 +444,7 @@ void Form::OpenCompositeParameter()
 
     old.Init(params, numParams, currentParam);
 
-    CMSParam *parent = static_cast<CMSParam *>(CurrentParameter());
+    CMSParam *parent = (CMSParam *)CurrentParameter();
 
     numParams = parent->NumParameters();
     params = parent->Parameters();
@@ -474,7 +474,7 @@ bool Form::CloseCompositeParameter()
 
 bool Wave::StartModeIsSingle()
 {
-    CParam* param = static_cast<CParam *>(GetCurrentForm()->FindParameter(TypeCParam::ModeStart));
+    CParam* param = (CParam *)GetCurrentForm()->FindParameter(TypeCParam::ModeStart);
 
     if(param)
     {
@@ -515,9 +515,9 @@ void Form::DrawUGO(const Chan &ch, int y0) const
         std::srand(2); //-V1057
         for (int i = 0; i < 100; i++)
         {
-            yNoise[i] = aveY - static_cast<int>(std::rand() % 50 - 25);
+            yNoise[i] = aveY - (int)(std::rand() % 50 - 25);
 
-            yExp[i] = aveY - static_cast<int>(std::expf(static_cast<float>(i) / 12.5F) + 0.5F) + 1;
+            yExp[i] = aveY - (int)(std::expf((float)i / 12.5F) + 0.5F) + 1;
         }
 
         first = false;
@@ -571,8 +571,8 @@ void Form::DrawSine(const Chan &ch, int x0, int y0, int width, int height)
 
                 for (int i = delta; i < width / 3; i++)
                 {
-                    int y1 = y0 - static_cast<int>(std::sinf(static_cast<float>(i - delta) * speed) * static_cast<float>(height) / 2.0F);
-                    int y2 = y0 - static_cast<int>(std::sinf(static_cast<float>(i) * speed) * static_cast<float>(height) / 2.0F);
+                    int y1 = y0 - (int)(std::sinf((float)(i - delta) * speed) * (float)height / 2.0F);
+                    int y2 = y0 - (int)(std::sinf((float)i * speed) * (float)height / 2.0F);
 
                     Line::Draw(dX + x0 + i - delta, y1, dX + x0 + i, y2);
                 }
@@ -588,8 +588,8 @@ void Form::DrawSine(const Chan &ch, int x0, int y0, int width, int height)
 
     for (int i = delta; i < width; i++)
     {
-        int y1 = y0 - static_cast<int>(std::sinf(static_cast<float>(i - delta) * speed) * static_cast<float>(height) / 2.0F);
-        int y2 = y0 - static_cast<int>(std::sinf(static_cast<float>(i) * speed) * static_cast<float>(height) / 2.0F);
+        int y1 = y0 - (int)(std::sinf((float)(i - delta) * speed) * (float)height / 2.0F);
+        int y2 = y0 - (int)(std::sinf((float)i * speed) * (float)height / 2.0F);
 
         Line::Draw(x0 + i - delta, y1, x0 + i, y2);
     }
@@ -700,16 +700,16 @@ void Form::DrawFree(const Chan &ch, int x0, int y0, int width, int height)
 {
     int numPoints = 240;
 
-    float sX = static_cast<float>(width) / static_cast<float>(numPoints);
-    float sY = static_cast<float>(height) / 255.0F;
+    float sX = (float)width / (float)numPoints;
+    float sY = (float)height / 255.0F;
 
     for (int i = 1; i < numPoints; i++)
     {
-        int x1 = static_cast<int>(static_cast<float>(x0) + sX * static_cast<float>(i - 1));
-        int y1 = static_cast<int>(static_cast<float>(y0 + height) - static_cast<float>(formFlash[ch.value][i - 1]) * sY);
+        int x1 = (int)((float)x0 + sX * (float)(i - 1));
+        int y1 = (int)((float)(y0 + height) - (float)formFlash[ch.value][i - 1] * sY);
 
-        int x2 = static_cast<int>(static_cast<float>(x0) + sX * static_cast<float>(i));
-        int y2 = static_cast<int>(static_cast<float>(y0 + height) - static_cast<float>(formFlash[ch.value][i]) * sY);
+        int x2 = (int)((float)x0 + sX * (float)i);
+        int y2 = (int)((float)(y0 + height) - (float)formFlash[ch.value][i] * sY);
 
         Line().Draw(x1, y1, x2, y2);
     }

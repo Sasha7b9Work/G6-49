@@ -16,7 +16,7 @@ public:
             Minus
         } value;
         Step(E v) : value(v) {};
-        operator uint8() const { return static_cast<uint8>(value); };
+        operator uint8() const { return (uint8)value; };
     };
 
     // Размеры буферов, в которых хранятся целая и дробная части

@@ -15,7 +15,7 @@ template class Stack<TypeFont::E>;
 template <typename T>
 Stack<T>::Stack(int _size) : buffer(0), size(_size), numElements(0U)
 {
-    buffer = static_cast<T *>(std::malloc(sizeof(T) * _size));
+    buffer = (T *)(std::malloc(sizeof(T) * _size));
 }
 
 
@@ -72,7 +72,7 @@ T &Stack<T>::operator[](const int index) const
         return buffer[index];
     }
 
-    static T nullValue = static_cast<T>(0);
+    static T nullValue = (T)0;
 
     return nullValue;
 }

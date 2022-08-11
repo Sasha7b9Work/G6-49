@@ -59,34 +59,34 @@ char *SU::Float2String(float value, bool alwaysSign, int numDigits, char bufferO
 
     char format[10] = "%4.2f\0\0";
 
-    format[1] = static_cast<char>(numDigits) + 0x30;
+    format[1] = (char)numDigits + 0x30;
 
     int numDigitsInInt = Math::DigitsInIntPart(value);
 
-    format[3] = static_cast<char>((numDigits - numDigitsInInt) + 0x30);
+    format[3] = (char)((numDigits - numDigitsInInt) + 0x30);
     if (numDigits == numDigitsInInt)
     {
         format[5] = '.';
     }
 
     float absValue = std::fabsf(value);
-    std::sprintf(pBuffer, format, static_cast<double>(absValue));
+    std::sprintf(pBuffer, format, (double)absValue);
 
-    float val = static_cast<float>(std::atof(pBuffer)); //-V2508
+    float val = (float)std::atof(pBuffer); //-V2508
 
     if (Math::DigitsInIntPart(val) != numDigitsInInt)
     {
         numDigitsInInt = Math::DigitsInIntPart(val);
-        format[3] = static_cast<char>((numDigits - numDigitsInInt) + 0x30);
+        format[3] = (char)((numDigits - numDigitsInInt) + 0x30);
         if (numDigits == numDigitsInInt)
         {
             format[5] = '.';
         }
-        std::sprintf(pBuffer, format, static_cast<double>(value));
+        std::sprintf(pBuffer, format, (double)value);
     }
 
     bool signExist = alwaysSign || value < 0;
-    while (std::strlen(bufferOut) < static_cast<uint>(numDigits + (signExist ? 2 : 1)))
+    while (std::strlen(bufferOut) < (uint)(numDigits + (signExist ? 2 : 1)))
     {
         std::strcat(bufferOut, "0");
     }
@@ -168,7 +168,7 @@ uint SU::StringToBin32(char buffer[33])
 
     char *pointer = buffer;
 
-    for(int i = static_cast<int>(size) - 1; i >= 0; i--)
+    for(int i = (int)size - 1; i >= 0; i--)
     {
         if(*pointer++ != '0')
         {
@@ -370,13 +370,13 @@ bool SU::GetWord(pchar string, Word *word, const int numWord)
         {
             word->address = const_cast<char *>(string);
             ChooseSymbols(&string);
-            word->numSymbols = static_cast<int8>(string - word->address);
+            word->numSymbols = (int8)(string - word->address);
 
             char *pointer = word->address;
             int numSymbols = word->numSymbols;
             for (int i = 0; i < numSymbols; i++)
             {
-                *pointer = static_cast<char>(std::toupper(*pointer));
+                *pointer = (char)std::toupper(*pointer);
                 pointer++;
             }
             return true;
@@ -397,7 +397,7 @@ bool SU::GetWord(pchar string, Word *word, const int numWord)
 bool SU::WordEqualZeroString(Word *word, char* string)
 {
     char *ch = string;
-    char *w = static_cast<char*>(word->address);
+    char *w = (char *)word->address;
 
     while (*ch != 0)
     {
@@ -429,7 +429,7 @@ int SU::FindSymbol(pchar string, char symbol)
 
 char SU::ToUpper(char symbol)
 {
-    uint8 s = static_cast<uint8>(symbol);
+    uint8 s = (uint8)symbol;
 
     if(s >= 0xe0) //-V547
     {
@@ -441,7 +441,7 @@ char SU::ToUpper(char symbol)
     }
     else if (s <= 0x7a)
     {
-        return static_cast<char>(std::toupper(s));
+        return (char)std::toupper(s);
     }
 
     return symbol;
@@ -498,11 +498,11 @@ bool SU::String2Int(pchar buffer, int *value, char **end)
 
 char *SU::ToUpper(void *s, uint size)
 {
-    char *str = static_cast<char *>(s);
+    char *str = (char *)s;
 
     for (uint i = 0; i < size; i++)
     {
-        str[i] = static_cast<char>(std::toupper(str[i]));
+        str[i] = (char)std::toupper(str[i]);
     }
 
     return str;
@@ -517,15 +517,15 @@ char *SU::ToUpper(char *str)
 
 char SU::ToLower(char symbol)
 {
-    uint8 s = static_cast<uint8>(symbol);
+    uint8 s = (uint8)symbol;
 
     if(s >= 0x41 && s <= 0x5a)
     {
-        return static_cast<char>(s + 0x20);
+        return (char)(s + 0x20);
     }
     else if(s >= 0xc0 && s < 0xE0)
     {
-        return static_cast<char>(s + 0x20);
+        return (char)(s + 0x20);
     }
 
     return symbol;
@@ -555,7 +555,7 @@ char *SU::UInt2StringThisPoint(uint value, char bufferOut[20], int allDigits, in
 
         value /= 10;
 
-        *pointer = static_cast<char>(digit) | 0x30;
+        *pointer = (char)digit | 0x30;
 
         pointer--;
     }
@@ -583,5 +583,5 @@ void Locale::FindSeparator()
 
     std::strtof(str, &end);
 
-    separator = static_cast<uint8>((end == (str + 1) ? ',' : '.'));
+    separator = (uint8)((end == (str + 1) ? ',' : '.'));
 }

@@ -508,9 +508,9 @@ void Frame::CreateGaversine(wxCommandEvent &)
 
     for (int i = 0; i < Point::AMOUNT; i++)
     {
-        float sinx = std::sinf(static_cast<float>(i) / Point::AMOUNT * 2.0F * 3.14F);
+        float sinx = std::sinf((float)i / Point::AMOUNT * 2.0F * 3.14F);
 
-        data[i] = static_cast<uint16>(Point::AVE + static_cast<uint16>(sinx * sinx * Point::AVE));
+        data[i] = (uint16)(Point::AVE + (uint16)(sinx * sinx * Point::AVE));
     }
 
     TheFrame->SetBlockingCanvas(true);
@@ -525,9 +525,9 @@ void Frame::CreateNoise(wxCommandEvent &)
 
     for (int i = 0; i < Point::AMOUNT; i++)
     {
-        float x = static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX);
+        float x = (float)std::rand() / (float)RAND_MAX;
 
-        data[i] = static_cast<uint16>(x * Point::MAX + 0.5F);
+        data[i] = (uint16)(x * Point::MAX + 0.5F);
     }
 
     TheFrame->SetBlockingCanvas(true);
