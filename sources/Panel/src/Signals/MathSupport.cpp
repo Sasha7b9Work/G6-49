@@ -243,19 +243,3 @@ int MathDouble::GetDigit(const Value &val, int position, Order::E order)
         return (whole % 10);
     }
 }
-
-
-int MathParameterInteger::GetMaxNumberDigits(const IParam *parameter)
-{
-    Value max = parameter->GetMax();
-
-    int result = 1;
-
-    while (max.Integer() != 0)
-    {
-        result++;
-        max.Div(10);
-    }
-
-    return result - 1;
-}

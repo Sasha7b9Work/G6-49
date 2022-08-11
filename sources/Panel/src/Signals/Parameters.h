@@ -288,6 +288,9 @@ struct IParam : public Param
 
     bool InRange(Value v) const;
 
+    // Возвращает количество разрядов для параметра parameter (в них должно помещаться максимально возможное значение параметра parameter)
+    int GetMaxNumberDigits() const;
+
 private:
 
     Tuner tuner;

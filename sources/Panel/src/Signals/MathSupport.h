@@ -26,10 +26,3 @@ namespace MathDouble
     // Order::Count - значенине по умолчанию - запятая в позиции относительно размерности числового значения
     char GetChar(const Value &value, int postition, Order::E order);
 };
-
-
-namespace MathParameterInteger
-{
-    // Возвращает количество разрядов для параметра parameter (в них должно помещаться максимально возможное значение параметра parameter)
-    int GetMaxNumberDigits(const IParam *parameter);
-};

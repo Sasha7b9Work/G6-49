@@ -1049,7 +1049,7 @@ void DisplayCorrection::InitDouble()
 
 void DisplayCorrection::InitInteger()
 {
-    int numDigits = MathParameterInteger::GetMaxNumberDigits(tuner->ReinterpretToInteger());
+    int numDigits = tuner->ReinterpretToInteger()->GetMaxNumberDigits();
 
     for (int i = 0; i < numDigits; i++)
     {
@@ -1109,7 +1109,7 @@ void DisplayCorrection::FillDigitsForInteger()
 
     Value value = param->GetValue();
 
-    int pos = MathParameterInteger::GetMaxNumberDigits(param) - 1;
+    int pos = param->GetMaxNumberDigits() - 1;
 
     for (int i = 0; pos >= 0; i++)
     {

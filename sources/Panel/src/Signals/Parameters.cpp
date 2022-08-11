@@ -684,3 +684,19 @@ bool PPacketPeriod::RecalcualateValue()
 
     return false;
 }
+
+
+int IParam::GetMaxNumberDigits() const
+{
+    Value _max = GetMax();
+
+    int result = 1;
+
+    while (_max.Integer() != 0)
+    {
+        result++;
+        _max.Div(10);
+    }
+
+    return result - 1;
+}
