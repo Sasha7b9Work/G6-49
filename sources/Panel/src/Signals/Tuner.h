@@ -289,7 +289,7 @@ public:
     bool IsOffset();
 
     // Возвращает true, если настраиваемый параметр имеет единицы измерения "Вольт"
-    bool ParameterIsNotOrdered();
+    bool IsNotOrdered();
 
     static bool ParameterIsDouble() { return Current()->ReinterpretToDouble() != nullptr; };
 

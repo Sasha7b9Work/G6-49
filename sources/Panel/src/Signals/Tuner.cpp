@@ -206,7 +206,7 @@ int Indicator::Draw(int x, int y, int width, const cstr units) const
 
 int Indicator::DrawDouble(int x, int y, int width, const cstr units) const
 {
-    if (Tuner::Current()->ParameterIsNotOrdered())
+    if (Tuner::Current()->IsNotOrdered())
     {
         return DrawDouble(x + 90, y, units, false);
     }
@@ -1288,7 +1288,7 @@ bool Tuner::IsOffset()
 }
 
 
-bool Tuner::ParameterIsNotOrdered()
+bool Tuner::IsNotOrdered()
 {
     DParam *voltage = ReinterpretToDouble();
 
