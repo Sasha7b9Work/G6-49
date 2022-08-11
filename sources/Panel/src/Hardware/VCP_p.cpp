@@ -9,7 +9,7 @@
 
 void PVCP::SendStringAsynch(const char *data)
 {
-    char *mes = const_cast<char *>(data);
+    char *mes = (char *)data;
 
     Message::SCPI::Data(reinterpret_cast<uint8 *>(mes), (int)std::strlen(data)).Transmit();
 }

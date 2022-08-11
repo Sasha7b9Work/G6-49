@@ -27,7 +27,7 @@ extern const PageBase pDebug;
 extern const ButtonBase bSend;
 
 
-Page *PageDebug::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pDebug));
+Page *PageDebug::self = reinterpret_cast<Page *>((PageBase *)&pDebug);
 // –егистр, в который будет производитс€ занесение значени€ по нажатию кнопки «ј—Ћј“№
 Register::E currentRegister = Register::FreqMeterLevel;
 // ‘лаг показа окна ввода
@@ -308,7 +308,7 @@ static bool AllowableSymbol(Key::E key)
 
 void PageDebug::PageRegisters::Draw()
 {
-    if (CURRENT_PAGE != reinterpret_cast<Page *>(const_cast<PageBase *>(&pRegisters)))
+    if (CURRENT_PAGE != reinterpret_cast<Page *>((PageBase *)&pRegisters))
     {
         return;
     }
@@ -511,9 +511,9 @@ static void OnPress_DebugCancel()
 {
     showInputWindow = false;
     std::memset(dbuffer, 0, MAX_SIZE_BUFFER + 1);
-    pRegisters.items[0] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bPrev));
-    pRegisters.items[1] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bNext));
-    pRegisters.items[2] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bSend));
+    pRegisters.items[0] = reinterpret_cast<Item*>((ButtonBase*)&bPrev);
+    pRegisters.items[1] = reinterpret_cast<Item*>((ButtonBase*)&bNext);
+    pRegisters.items[2] = reinterpret_cast<Item*>((ButtonBase*)&bSend);
 }
 
 static void OnDraw_Cancel(int x, int y)
@@ -563,9 +563,9 @@ static void OnPress_Send()
     showInputWindow = true;
     std::memset(dbuffer, 0, MAX_SIZE_BUFFER + 1);
 
-    pRegisters.items[0] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bBackspace));
-    pRegisters.items[1] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bCancel));
-    pRegisters.items[2] = reinterpret_cast<Item*>(const_cast<ButtonBase*>(&bSave));
+    pRegisters.items[0] = reinterpret_cast<Item*>((ButtonBase*)&bBackspace);
+    pRegisters.items[1] = reinterpret_cast<Item*>((ButtonBase*)&bCancel);
+    pRegisters.items[2] = reinterpret_cast<Item*>((ButtonBase*)&bSave);
 
     int position = 0;
 

@@ -42,7 +42,7 @@ void HAL_FSMC::Init()
         HAL_UNLOCKED, HAL_SRAM_STATE_RESET, 0
     };
 
-    if(HAL_SRAM_Init(const_cast<SRAM_HandleTypeDef *>(&sramHandle), const_cast<FMC_NORSRAM_TimingTypeDef *>(&sramTiming), const_cast<FMC_NORSRAM_TimingTypeDef *>(&sramTiming)) != HAL_OK)
+    if(HAL_SRAM_Init((SRAM_HandleTypeDef *)&sramHandle, (FMC_NORSRAM_TimingTypeDef *)&sramTiming, (FMC_NORSRAM_TimingTypeDef *)&sramTiming) != HAL_OK)
     {
         ERROR_HANDLER();
     };

@@ -21,7 +21,7 @@ extern const PageBase pUSB;
 
 
 extern const PageBase pService;
-Page *PageService::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pService));
+Page *PageService::self = reinterpret_cast<Page *>((PageBase *)&pService);
 
 
 void PageService::OnPress_Reset()

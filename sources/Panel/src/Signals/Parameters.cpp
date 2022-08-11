@@ -415,7 +415,7 @@ String CMSParam::ToString(String &units) const
             "Off", "On"
         };
 
-        CParam *enabled = const_cast<CMSParam *>(this)->FindParameter(TypeCParam::ManipulationEnabled);
+        CParam *enabled = ((CMSParam *)this)->FindParameter(TypeCParam::ManipulationEnabled);
 
         return String(LANG_RU ? valuesRU[enabled->GetChoice()] : valuesEN[enabled->GetChoice()]);
     }

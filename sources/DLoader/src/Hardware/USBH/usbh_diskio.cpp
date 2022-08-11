@@ -108,7 +108,7 @@ DRESULT USBH_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
     DRESULT res = RES_ERROR;
     MSC_LUNTypeDef info;
     
-    if(USBH_MSC_Write(reinterpret_cast<USBH_HandleTypeDef *>(DLDrive::handleUSBH), lun, sector, const_cast<BYTE *>(buff), count) == USBH_OK)
+    if(USBH_MSC_Write(reinterpret_cast<USBH_HandleTypeDef *>(DLDrive::handleUSBH), lun, sector, (BYTE *)buff, count) == USBH_OK)
     {
         res = RES_OK;
     }

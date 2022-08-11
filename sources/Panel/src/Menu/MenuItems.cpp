@@ -51,7 +51,7 @@ Item *Page::GetItem(const Key::E key) const
 {
     int index = CurrentSubPage() * Menu::NUM_ITEMS_ON_DISPLAY + (key - Key::F1);
 
-    return (index < NumItems()) ? const_cast<Item *>(items[index]) : &Item::emptyLight;
+    return (index < NumItems()) ? (Item *)items[index] : &Item::emptyLight;
 }
 
 

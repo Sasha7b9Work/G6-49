@@ -59,7 +59,7 @@ Value::Value(int v)
 
 bool Value::FromString(pchar buffer, char **end, int numDigitsAfterComma)
 {
-    char *begin = const_cast<char *>(buffer);
+    char *begin = (char *)buffer;
 
     int sign = 0;
 

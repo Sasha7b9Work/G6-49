@@ -63,7 +63,7 @@ void PageSignals::OnPress_Channel(bool active)
         cParameters.form = CURRENT_FORM;
         numForm = CURRENT_FORM->value;
 
-        pageSignals.items[1] = reinterpret_cast<Item *>(const_cast<ChoiceBase *>(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB));
+        pageSignals.items[1] = reinterpret_cast<Item *>((ChoiceBase *)(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB));
 
         PGenerator::TuneChannel(CURRENT_CHANNEL);
     }
@@ -320,4 +320,4 @@ DEF_PAGE_4( pageSignals,   //-V641
     Page::Signals, PageMain::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, FuncBeforeDraw
 )
 
-Page *PageSignals::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pageSignals));
+Page *PageSignals::self = reinterpret_cast<Page *>((PageBase *)&pageSignals);

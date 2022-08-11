@@ -195,7 +195,7 @@ void FileSystem::GetNumDirsAndFiles(const char *fullPath, uint *numDirs, uint *n
     *numFiles = 0;
 
     char nameDir[_MAX_LFN + 1];
-    std::memcpy(nameDir, const_cast<char *>(fullPath), std::strlen(fullPath)); //-V2567
+    std::memcpy(nameDir, (char *)fullPath, std::strlen(fullPath)); //-V2567
     nameDir[std::strlen(fullPath)] = '\0';
 
     if (f_opendir(&dir, nameDir) == FR_OK)
@@ -241,7 +241,7 @@ bool FileSystem::GetNameFile(const char *fullPath, int numFile, char *nameFileOu
 {
     StructForReadDir srd;
 
-    std::memcpy(srd.nameDir, const_cast<char *>(fullPath), std::strlen(fullPath)); //-V2567
+    std::memcpy(srd.nameDir, (char *)fullPath, std::strlen(fullPath)); //-V2567
     srd.nameDir[std::strlen(fullPath)] = '\0';
 
     DIR *pDir = &srd.dir;

@@ -171,7 +171,7 @@ NativeSymbol *HeaderFont::GetSymbol(uint8 num)
 
 HeaderFont *HeaderFont::Sefl()
 {
-    return reinterpret_cast<HeaderFont *>(const_cast<uint8 *>(AFont::font)); //-V2567
+    return reinterpret_cast<HeaderFont *>((uint8 *)AFont::font); //-V2567
 }
 
 

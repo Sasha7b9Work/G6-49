@@ -52,7 +52,7 @@ void DVCP::SendData(const void *_buffer, uint size)
     volatile USBD_CDC_HandleTypeDef *pCDC = (USBD_CDC_HandleTypeDef *)handleUSBD.pClassData;
 
     while (pCDC->TxState == 1) {};
-    USBD_CDC_SetTxBuffer(&handleUSBD, (uint8 *)(const_cast<void *>(_buffer)), (uint16)size);
+    USBD_CDC_SetTxBuffer(&handleUSBD, (uint8 *)((void *)_buffer), (uint16)size);
     USBD_CDC_TransmitPacket(&handleUSBD);
 }
 

@@ -204,7 +204,7 @@ DEF_PAGE_SB(pTuneParameter,
     Page::SB_Input, 0, Item::FuncActive, OnOpenClose_TuneParameter, OnDraw_TuneParameter, OnControl_TuneParameter
 )
 
-Page *PageTuneParameter::self = reinterpret_cast<Page *>(const_cast<PageBase *>(&pTuneParameter));
+Page *PageTuneParameter::self = reinterpret_cast<Page *>((PageBase *)&pTuneParameter);
 
 
 void PageTuneParameter::SetModeEntering()
@@ -215,8 +215,8 @@ void PageTuneParameter::SetModeEntering()
     }
     else
     {
-        pTuneParameter.items[0] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbMore));
-        pTuneParameter.items[1] = reinterpret_cast<Item *>(const_cast<SButtonBase *>(&sbLess));
+        pTuneParameter.items[0] = reinterpret_cast<Item *>((SButtonBase *)&sbMore);
+        pTuneParameter.items[1] = reinterpret_cast<Item *>((SButtonBase *)&sbLess);
     }
 }
 
