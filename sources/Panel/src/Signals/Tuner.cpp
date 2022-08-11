@@ -531,7 +531,7 @@ void Indicator::IncreaseInPositionDouble(int pos)
 
 void Indicator::IncreaseInPositionInteger(int pos)
 {
-    IParam *param = Tuner::Current()->ReinterpretToInteger();
+    IParam *param = Tuner::Current()->ToInteger();
 
     Value value = param->GetValue();
 
@@ -1049,7 +1049,7 @@ void DisplayCorrection::InitDouble()
 
 void DisplayCorrection::InitInteger()
 {
-    int numDigits = tuner->ReinterpretToInteger()->GetMaxNumberDigits();
+    int numDigits = tuner->ToInteger()->GetMaxNumberDigits();
 
     for (int i = 0; i < numDigits; i++)
     {
@@ -1105,7 +1105,7 @@ void DisplayCorrection::FillDigitsIntegerPartForDouble()
 
 void DisplayCorrection::FillDigitsForInteger()
 {
-    IParam *param = tuner->ReinterpretToInteger();
+    IParam *param = tuner->ToInteger();
 
     Value value = param->GetValue();
 
@@ -1152,7 +1152,7 @@ void DisplayCorrection::Init(Value value)
     }
     else if (param->IsInteger())
     {
-        tuner->ReinterpretToInteger()->SetAndLoadValue(value);
+        tuner->ToInteger()->SetAndLoadValue(value);
     }
 
     if (form->value == TypeForm::Packet)
@@ -1302,7 +1302,7 @@ DParam *Tuner::ToDouble()
 }
 
 
-IParam *Tuner::ReinterpretToInteger()
+IParam *Tuner::ToInteger()
 {
     return param->IsInteger() ? reinterpret_cast<IParam *>(param) : nullptr;
 }

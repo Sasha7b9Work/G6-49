@@ -296,7 +296,7 @@ public:
     // Возвращает указатеь на DParam, если param имеет тип Double и nullptr в ином случае
     DParam *ToDouble();
 
-    IParam *ReinterpretToInteger();
+    IParam *ToInteger();
 
 private:
 
