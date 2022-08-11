@@ -22,7 +22,7 @@ static bool EqualsRequestString(Task *task1, Task *task2)
 
 void FileRequests::SendRequestForString(const String *name, int numString)
 {
-    Message::FDrive::FileString message(static_cast<uint>(numString), name->c_str());
+    Message::FDrive::FileString message((uint)numString, name->c_str());
 
     Task *task = new Task(&message, ListFiles::Handler::Processing, EqualsRequestString);
 

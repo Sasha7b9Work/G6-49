@@ -659,7 +659,7 @@ char *String::c_str() const
 bool String::Allocate(uint size)
 {
     std::free(text);
-    text = static_cast<char *>(std::malloc(size));
+    text = (char *)std::malloc(size);
     if (text)
     {
         return true;
@@ -757,7 +757,7 @@ int String::DrawInColumnWithTransfers(const int left, const int top, const int w
     int right = left + width;
 
     char buf[20];
-    int numSymbols = static_cast<int>(std::strlen(text));
+    int numSymbols = (int)std::strlen(text);
 
     int y = top - 1;
     int x = left;
@@ -889,7 +889,7 @@ int String::DrawSpaces(int x, int y, cstr _t, int *numSymbols)
 bool String::GetHeightTextWithTransfers(int left, int top, int right, int *height)
 {
     char buf[20];
-    int numSymbols = static_cast<int>(std::strlen(text));
+    int numSymbols = (int)std::strlen(text);
 
     int y = top - 1;
     int x = left;
@@ -979,7 +979,7 @@ int String::Size() const
         return 0;
     }
 
-    return static_cast<int>(std::strlen(text));
+    return (int)std::strlen(text);
 }
 
 

@@ -45,10 +45,10 @@ static void DrawSignal(int x, int y, const uint8 *data, float scale)
     for (int i = 1; i < 240; i++)
     {
         int x1 = x + i - 1;
-        int y1 = static_cast<int>(static_cast<float>(y) - static_cast<float>(data[i - 1]) * scale);
+        int y1 = (int)((float)y - (float)data[i - 1] * scale);
 
         int x2 = x + i;
-        int y2 = static_cast<int>(static_cast<float>(y) - static_cast<float>(data[i]) * scale);
+        int y2 = (int)((float)y - (float)data[i] * scale);
 
         Line().Draw(x1, y1, x2, y2);
     }
@@ -115,7 +115,7 @@ void File::RequestFromPicture(int numberFile)
 {
     Close();
 
-    Message::FDrive::RequestPictureDDSfromFile message(static_cast<uint8>(numberFile));
+    Message::FDrive::RequestPictureDDSfromFile message((uint8)numberFile);
 
     Task *task = new Task(&message, File::Handler, EqualsRequestPicture);
 

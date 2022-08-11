@@ -33,7 +33,7 @@ namespace PGenerator
 void PGenerator::EnableChannel(const Chan &ch, bool enable)
 {
     set.enabled[ch] = enable;
-    Message::EnableChannel((uint8)(ch.value), static_cast<uint8>(enable ? 1U : 0U)).Transmit();
+    Message::EnableChannel((uint8)(ch.value), (uint8)(enable ? 1U : 0U)).Transmit();
 }
 
 
@@ -53,27 +53,27 @@ void PGenerator::LoadStartMode(const Chan &ch, int signal, int mode)
 
 void PGenerator::LoadRegister(Register::E reg, uint64 value)
 {
-    Message::WriteRegister(static_cast<uint8>(reg), value).Transmit();
+    Message::WriteRegister((uint8)reg, value).Transmit();
 }
 
 
 void PGenerator::SetDebugMode(bool enable)
 {
-    Message::DebugMode(static_cast<uint8>(enable ? 1 : 0)).Transmit();
+    Message::DebugMode((uint8)(enable ? 1 : 0)).Transmit();
 }
 
 
 void PGenerator::SetFormWave(const Wave *w)
 {
     Chan ch = w->GetChannel();
-    uint8 form = static_cast<uint8>(FORM(ch)->value);
+    uint8 form = (uint8)(FORM(ch)->value);
 
     if(FORM(ch)->IsDDS())
     {
         LoadFormDDS(FORM(ch));
     }
 
-    Message::Set::FormWave(static_cast<uint8>(ch), form).Transmit();
+    Message::Set::FormWave((uint8)ch, form).Transmit();
 }
 
 
@@ -81,7 +81,7 @@ void PGenerator::SetFormWave(const Chan &ch, TypeForm::E form)
 {
     // \todo Здесь, наверное, неправильная установка формы сигнала - что будет при установке произвольной формы?
 
-    Message::Set::FormWave(static_cast<uint8>(ch), static_cast<uint8>(form)).Transmit();
+    Message::Set::FormWave((uint8)ch, static_cast<uint8>(form)).Transmit();
 }
 
 
@@ -93,11 +93,11 @@ void PGenerator::LoadFormDDS(Form *form)
     {
         case TypeForm::RampPlus:
             {
-                float step = 2.0F / static_cast<float>(DDS_NUM_POINTS);
+                float step = 2.0F / (float)DDS_NUM_POINTS;
 
                 for(int i = 0; i < DDS_NUM_POINTS; i++)
                 {
-                    data[i] = -1.0F + step * static_cast<float>(i);
+                    data[i] = -1.0F + step * (float)i;
                 }
 
                 TransformDataToCodeAndTransmit(data, form);
@@ -105,11 +105,11 @@ void PGenerator::LoadFormDDS(Form *form)
             break;
         case TypeForm::RampMinus:
             {
-                float step = 2.0F / static_cast<float>(DDS_NUM_POINTS);
+                float step = 2.0F / (float)DDS_NUM_POINTS;
 
                 for (int i = 0; i < DDS_NUM_POINTS; i++)
                 {
-                    data[i] = 1.0F - step * static_cast<float>(i);
+                    data[i] = 1.0F - step * (float)i;
                 }
 
                 TransformDataToCodeAndTransmit(data, form);
@@ -117,16 +117,16 @@ void PGenerator::LoadFormDDS(Form *form)
             break;
         case TypeForm::Triangle:
             {
-                float step = 2.0F / static_cast<float>(DDS_NUM_POINTS / 2);
+                float step = 2.0F / (float)(DDS_NUM_POINTS / 2);
 
                 for (int i = 0; i < DDS_NUM_POINTS / 2; i++)
                 {
-                    data[i] = - 1.0F + step * static_cast<float>(i);
+                    data[i] = - 1.0F + step * (float)i;
                 }
 
                 for(int i = DDS_NUM_POINTS / 2; i < DDS_NUM_POINTS; i++)
                 {
-                    data[i] = 1.0F - step * static_cast<float>(i - DDS_NUM_POINTS / 2);
+                    data[i] = 1.0F - step * (float)(i - DDS_NUM_POINTS / 2);
                 }
 
                 TransformDataToCodeAndTransmit(data, form);
@@ -149,24 +149,24 @@ void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], F
 
     uint8 *code = reinterpret_cast<uint8 *>(buffer);
 
-    float max = static_cast<float>(0x1fff);
+    float max = (float)0x1fff;
 
     for (int i = 0; i < DDS_NUM_POINTS; i++)
     {
         float value = d[i];
 
-        uint16 c = static_cast<uint16>(std::fabsf(value) * max);
+        uint16 c = (uint16)(std::fabsf(value) * max);
 
         if (value > 0.0F)
         {
             _SET_BIT(c, 13);
         }
 
-        code[i] = static_cast<uint8>(c);
-        code[i + DDS_NUM_POINTS] = static_cast<uint8>(c >> 8);
+        code[i] = (uint8)c;
+        code[i + DDS_NUM_POINTS] = (uint8)(c >> 8);
     }
 
-    Message::LoadFormDDS(static_cast<uint8>(form->GetWave()->GetChannel()), buffer).Transmit();
+    Message::LoadFormDDS((uint8)form->GetWave()->GetChannel(), buffer).Transmit();
 }
 
 

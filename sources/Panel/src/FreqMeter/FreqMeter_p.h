@@ -37,7 +37,7 @@ struct PFreqMeter
 
         BillingTime(E v) : value(v) { }
 
-        operator uint8() const { return static_cast<uint8>(value); };
+        operator uint8() const { return (uint8)value; };
     };
 
     // Число усредняемых период в режиме измерения периода сигнала
@@ -54,7 +54,7 @@ struct PFreqMeter
 
         AvePeriod(E v) : value(v) { }
 
-        operator uint8() const { return static_cast<uint8>(value); };
+        operator uint8() const { return (uint8)value; };
     };
 
 private:

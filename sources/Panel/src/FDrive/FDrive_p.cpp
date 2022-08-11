@@ -127,7 +127,7 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
 
 bool FDrive::Handler::IsMount()
 {
-    mounted = static_cast<Mount>(msg->TakeUINT8());
+    mounted = (Mount)msg->TakeUINT8();
     Init();
     return true;
 }
@@ -175,7 +175,7 @@ void FDrive::PressChoose()
 {
     inStateWaitCompleteLoad = true;
     
-    Message::FDrive::LoadDDSfromFile(static_cast<uint8>(CURRENT_CHANNEL), static_cast<uint8>(ListFiles::NumberCurrentFile()), FDrive::CurrentDirectory()).Transmit();
+    Message::FDrive::LoadDDSfromFile((uint8)(CURRENT_CHANNEL), (uint8)ListFiles::NumberCurrentFile(), FDrive::CurrentDirectory()).Transmit();
     
     File::SetDataToWave();
 }

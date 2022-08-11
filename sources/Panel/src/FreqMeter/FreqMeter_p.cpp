@@ -50,7 +50,7 @@ static String FormValue(uint8 lang)
 
     if(set.freq.measure == FreqMeasure::Freq)
     {
-        std::sprintf(text, ((lang == 0) ? "%sêÃö" : "%skHz"), SU::UInt2StringThisPoint(valueFreq, buffer, 8, static_cast<int>(set.freq.billingTime)));
+        std::sprintf(text, ((lang == 0) ? "%sêÃö" : "%skHz"), SU::UInt2StringThisPoint(valueFreq, buffer, 8, (int)set.freq.billingTime));
     }
     else
     {
@@ -98,9 +98,9 @@ void PFreqMeter::LoadLevel()
 {
     int max = 4 * 1024;
 
-    float step = static_cast<float>(max) / 200.0F;
+    float step = (float)max / 200.0F;
 
-    int value = static_cast<int>(static_cast<float>(max / 2) + static_cast<float>(set.freq.level) * step);
+    int value = (int)((float)(max / 2) + (float)set.freq.level * step);
 
     Math::Limitation(&value, 0, max - 1);
 
@@ -115,9 +115,9 @@ void PFreqMeter::LoadHysteresis()
 {
     int max = 4 * 1024;
 
-    float step = static_cast<float>(max) / 100.0F;
+    float step = (float)max / 100.0F;
 
-    int value = static_cast<int>(step * static_cast<float>(set.freq.hysteresis));
+    int value = (int)(step * (float)set.freq.hysteresis);
 
     Math::Limitation(&value, 0, max - 1);
 
