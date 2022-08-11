@@ -1228,7 +1228,7 @@ void Tuner::OnButtonApply()
     }
     else
     {
-        if (Current()->ParameterIsDouble())
+        if (Current()->IsDouble())
         {
             DParam *paramDouble = Current()->ReinterpretToDouble();
 
