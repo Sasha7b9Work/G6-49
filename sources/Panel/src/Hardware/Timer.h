@@ -17,7 +17,7 @@ namespace Timer
             Count
         } value;
         Type(E v) : value(v) {};
-        operator uint8() const { return static_cast<uint8>(value); };
+        operator uint8() const { return (uint8)value; };
     };
 
     void Init();

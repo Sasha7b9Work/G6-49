@@ -13,7 +13,7 @@ char Key::ToChar() const
 {
     if(IsDigit())
     {
-        return static_cast<char>((value - Key::_0) | 0x30);
+        return (char)((value - Key::_0) | 0x30);
     }
     else if(value == Key::Comma)
     {

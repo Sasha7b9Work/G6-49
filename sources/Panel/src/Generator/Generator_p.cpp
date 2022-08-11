@@ -81,7 +81,7 @@ void PGenerator::SetFormWave(const Chan &ch, TypeForm::E form)
 {
     // \todo Здесь, наверное, неправильная установка формы сигнала - что будет при установке произвольной формы?
 
-    Message::Set::FormWave((uint8)ch, static_cast<uint8>(form)).Transmit();
+    Message::Set::FormWave((uint8)ch, (uint8)form).Transmit();
 }
 
 
@@ -180,22 +180,22 @@ void PGenerator::SetParameterChoice(CParam *param)
     };
 
     Message::Set::Param(commands[param->GetType()],
-        static_cast<uint8>(param->GetForm()->GetWave()->GetChannel()),
-        static_cast<uint8>(param->GetChoice())).Transmit();
+        (uint8)param->GetForm()->GetWave()->GetChannel(),
+        (uint8)param->GetChoice()).Transmit();
 }
 
 
 void PGenerator::SetOffset(const Chan &ch, float offset)
 {
     // \todo Говнокод - запись параметра из двух мест
-    Message::Set::Offset(static_cast<uint8>(ch), Value(offset).ToUINT64()).Transmit();
+    Message::Set::Offset((uint8)ch, Value(offset).ToUINT64()).Transmit();
 }
 
 
 void PGenerator::SetAmplitude(const Chan &ch, float amplitude)
 {
     // \todo Говнокод - запись параметра из двух мест
-    Message::Set::Amplitude(static_cast<uint8>(ch), Value(amplitude).ToUINT64()).Transmit();
+    Message::Set::Amplitude((uint8)ch, Value(amplitude).ToUINT64()).Transmit();
 }
 
 

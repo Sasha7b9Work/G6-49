@@ -48,11 +48,11 @@ void Choice::StartChange(int delta) const
 
         if (delta > 0)
         {
-            Math::CircleIncrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
+            Math::CircleIncrease<int8>(&index, 0, (int8)NumSubItems() - 1);
         }
         else if (delta < 0)
         {
-            Math::CircleDecrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
+            Math::CircleDecrease<int8>(&index, 0, (int8)NumSubItems() - 1);
         }
 
         *cell = index;
@@ -68,7 +68,7 @@ float Choice::Step()
     static const int numLines = 60;
     if (tsChoice.address == this)
     {
-        float delta = speed * static_cast<float>(_TIME_MS - tsChoice.timeStart);
+        float delta = speed * (float)(_TIME_MS - tsChoice.timeStart);
         if (delta == 0.0F)  // -V550 //-V2550 //-V550
         {
             delta = 0.001F; // Таймер в несколько первых кадров может показать, что прошло 0 мс, но мы возвращаем большее число, потому что ноль будет говорить о том, что движения нет
@@ -80,7 +80,7 @@ float Choice::Step()
             {
                 return delta;
             }
-            Math::CircleIncrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
+            Math::CircleIncrease<int8>(&index, 0, (int8)NumSubItems() - 1);
         }
         else if (tsChoice.dir == DECREASE)
         {
@@ -90,7 +90,7 @@ float Choice::Step()
             {
                 return delta;
             }
-            Math::CircleDecrease<int8>(&index, 0, static_cast<int8>(NumSubItems()) - 1);
+            Math::CircleDecrease<int8>(&index, 0, (int8)NumSubItems() - 1);
         }
 
         *cell = index;
@@ -202,7 +202,7 @@ float Governor::Step()
     float delta = 0.0F;
     if (tsGovernor.address == this)
     {
-        delta = speed * static_cast<float>(_TIME_MS - tsGovernor.timeStart);
+        delta = speed * (float)(_TIME_MS - tsGovernor.timeStart);
         if (tsGovernor.dir == DECREASE)
         {
             delta *= -1.0F;
@@ -248,7 +248,7 @@ float Governor::Step()
 void Governor::ChangeValue(int delta)
 {
     int16 oldValue = *cell;
-    *cell += static_cast<int16>(Math::Sign(delta) * Math::Pow10(gCurDigit));
+    *cell += (int16)(Math::Sign(delta) * Math::Pow10(gCurDigit));
     LIMITATION(*cell, minValue, maxValue);
     if (*cell != oldValue)
     {
@@ -264,7 +264,7 @@ void Governor::NextPosition()
 {
     if (Menu::GetOpenedItem() == this)
     {
-        Math::CircleIncrease<int8>(&gCurDigit, 0, static_cast<int8>(NumDigits() - 1));
+        Math::CircleIncrease<int8>(&gCurDigit, 0, (int8)(NumDigits() - 1));
     }
 }
 
@@ -361,7 +361,7 @@ int8 Choice::CurrentIndex() const
 
         Form *form = param->form;
 
-        retValue = static_cast<int8>(static_cast<const DParam *>(form->CurrentParameter())->GetType());
+        retValue = (int8)(static_cast<const DParam *>(form->CurrentParameter())->GetType());
     }
 
     return retValue;
@@ -383,7 +383,7 @@ int Item::PositionOnPage() const
 {
     if(Keeper() == 0)                       // Если у страницы нет хранителя - она принадлежит главному меню
     {
-        return Menu::GetPosition(static_cast<const Page *>(this));
+        return Menu::GetPosition((const Page *)this);
     }
 
     for(int i = 0; i < Keeper()->NumItems(); i++)
@@ -506,7 +506,7 @@ Item *Button::Press(Action::E action)
 
 cstr ChoiceParameter::NameSubItem(int number) const
 {
-    return static_cast<DParam *>(form->GetParameter(number))->Name();
+    return ((DParam *)form->GetParameter(number))->Name();
 }
 
 

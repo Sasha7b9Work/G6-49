@@ -98,7 +98,7 @@ void Hint::Draw()
             y0 = item->DrawHint(x0 + 5, y0 + 17, width - 8) + 5; //-V2007
             if(item->type.IsChoice())
             {
-                const Choice *choice = static_cast<const Choice *>(item);
+                const Choice *choice = (const Choice *)item;
                 width -= 10;
 
                 if(needCalculate)
@@ -206,7 +206,7 @@ void Hint::DrawPagesUGO(const int xRight, const int y0)
         {
             Rectangle(size, size).Fill(x, y0, Color::FILL);
             Font::Set(TypeFont::_5);
-            Char(static_cast<char>(currentPage + 0x30)).Draw(x + 2, y0 - 3, Color::BACK);
+            Char((char)(currentPage + 0x30)).Draw(x + 2, y0 - 3, Color::BACK);
             Font::Set(TypeFont::_8);
         }
         else

@@ -138,13 +138,13 @@ int Page::CurrentSubPage() const
 
 void Page::SetPosActItem(int pos)
 {
-    MENU_POS_ACT_ITEM(name) = static_cast<int8>(pos);
+    MENU_POS_ACT_ITEM(name) = (int8)pos;
 }
 
 
 void Page::SetCurrentSubPage(int pos)
 {
-    MENU_CURRENT_SUBPAGE(name) = static_cast<int8>(pos);
+    MENU_CURRENT_SUBPAGE(name) = (int8)pos;
 }
 
 
