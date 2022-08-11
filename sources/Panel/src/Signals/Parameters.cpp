@@ -93,7 +93,7 @@ namespace MathSupport
 }
 
 
-Param::Param(TypeParam::E k, pFuncBV funcActive, pchar nRU, pchar nEN) :
+Param::Param(KindParam::E k, pFuncBV funcActive, pchar nRU, pchar nEN) :
     viewer(this), funcOfActive(funcActive), form(nullptr), parent(nullptr), kind(k)
 {
     names[0] = nRU;
@@ -109,25 +109,25 @@ void Param::SetForm(Form *f)
 
 bool Param::IsDouble() const
 {
-    return (kind == TypeParam::Double);
+    return (kind == KindParam::Double);
 }
 
 
 bool Param::IsInteger() const
 {
-    return (kind == TypeParam::Integer);
+    return (kind == KindParam::Integer);
 }
 
 
 bool Param::IsComposite() const
 {
-    return (kind == TypeParam::Composite);
+    return (kind == KindParam::Composite);
 }
 
 
 bool Param::IsChoice() const
 {
-    return (kind == TypeParam::Choice);
+    return (kind == KindParam::Choice);
 }
 
 
@@ -558,14 +558,14 @@ DParam::DParam(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar const na
     const Value &_max,
     pValueInRange _valueInRange,
     const Value &_value) :
-    Param(TypeParam::Double, funcActive, nameRU, nameEN), tuner(this), type(t), min(_min_), max(_max), valueInRange(_valueInRange),
+    Param(KindParam::Double, funcActive, nameRU, nameEN), tuner(this), type(t), min(_min_), max(_max), valueInRange(_valueInRange),
     value(_value), resetValue(_value), stored(_value)
 {
 }
 
 
 DParam::DParam(const DParam &rhs) :
-    Param(TypeParam::Double, Param::FuncActive, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
+    Param(KindParam::Double, Param::FuncActive, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
     min(rhs.min), max(rhs.max), valueInRange(EValueInRange), value(rhs.value), resetValue(rhs.resetValue), stored(rhs.stored)
 {
 }
@@ -654,7 +654,7 @@ String IParam::ToString(Value val) const
 
 IParam::IParam(TypeIParam::E t, pchar nameRU, pchar nameEN,
     const Value &_min, const Value &_max, pValueInRange _valueInRange, const Value &_value) :
-    Param(TypeParam::Integer, Param::FuncActive, nameRU, nameEN), tuner(this), type(t),
+    Param(KindParam::Integer, Param::FuncActive, nameRU, nameEN), tuner(this), type(t),
     min(_min), max(_max), valueInRange(_valueInRange), value(_value), resetValue(_value)
 {
 }
