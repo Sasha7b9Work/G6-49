@@ -57,7 +57,7 @@ void ComPort::Send(pchar buffer)
 {
     if (IsOpened())
     {
-        char *p = const_cast<char *>(buffer);
+        char *p = (char *)buffer;
 
         RS232_SendBuf(openedPort, reinterpret_cast<uint8 *>(p), (int)std::strlen(buffer));
     }
