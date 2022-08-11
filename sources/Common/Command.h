@@ -107,11 +107,11 @@ struct Command
             Count
     } value;
     Command(E v) : value(v) {};
-    Command(const uint8 v) : value(static_cast<E>(v)) {};
-    operator uint8() const { return static_cast<uint8>(value); };
+    Command(const uint8 v) : value((E)v) {};
+    operator uint8() const { return (uint8)value; };
     cstr Name() const;
     operator E() const { return value; };
-    operator uint8() { return static_cast<uint8>(value); }
+    operator uint8() { return (uint8)value; }
 private:
     cstr Value(uint8 *buffer) const;
 };
@@ -144,7 +144,7 @@ struct Register
         Count
     } value;
     explicit Register(E v) : value(v) {};
-    explicit Register(uint8 v) : value(static_cast<E>(v)) {};
+    explicit Register(uint8 v) : value((E)v) {};
     cstr Name() const;
     operator E() { return value; }
 };

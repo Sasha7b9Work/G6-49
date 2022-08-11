@@ -219,7 +219,7 @@ void Value::FromString(pchar const buffer, int pow10)
 
     int end = FindIntegerPart(buffer, pos);         // Находим окончание целой части
 
-    units = static_cast<int>(AssembleInteger(buffer, pos, end));    // Находим целую часть
+    units = (int)AssembleInteger(buffer, pos, end);    // Находим целую часть
 
     if (buffer[end] == '.' || buffer[end] == ',')
     {
@@ -245,10 +245,10 @@ void Value::FromString(pchar const buffer, int pow10)
 
 void Value::FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign)
 {
-    value = static_cast<uint>(units);
+    value = (uint)units;
     value *= 1000 * 1000 * 1000;
 
-    value += static_cast<uint>(nUnits + uUnits * 1000 + mUnits * 1000 * 1000);
+    value += (uint)(nUnits + uUnits * 1000 + mUnits * 1000 * 1000);
 
     if (sign < 0)
     {
@@ -356,7 +356,7 @@ void Value::FromDouble(double v)
 {
     int sign = (v < 0.0) ? -1 : 1;
 
-    value = static_cast<uint64>(std::fabs(v) * 1.E9);
+    value = (uint64)(std::fabs(v) * 1.E9);
 
     if (sign < 0)
     {
@@ -373,7 +373,7 @@ void Value::FromINT(int v)
 
 double Value::ToDouble() const
 {
-    return static_cast<double>(Abs()) / 1E9 * static_cast<double>(Sign());
+    return (double)(Abs()) / 1E9 * static_cast<double>(Sign());
 }
 
 
