@@ -102,9 +102,9 @@ struct Param
 
     static bool FuncActive() { return true; }
 
-    DParam *ReinterpretToDouble() { return (DParam *)this; }
+    DParam *ToDouble() { return (DParam *)this; }
 
-    pFuncBV          funcOfActive;  // Активен ли данный параметр
+    pFuncBV     funcOfActive;  // Активен ли данный параметр
 
 protected:
     

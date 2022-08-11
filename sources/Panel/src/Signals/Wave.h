@@ -152,8 +152,8 @@ private:
     {
         // Здесь сохраняется указатель на основные параметры в случае раскрытия сложного параметра
         Param **params;
-        int numParams;
-        int currentParam;
+        int     numParams;
+        int     currentParam;
         Old() : params(nullptr), numParams(0), currentParam(0) { }
         void Init(Param **parameters, int num, int current) { params = parameters; numParams = num; currentParam = current; }
     } old;

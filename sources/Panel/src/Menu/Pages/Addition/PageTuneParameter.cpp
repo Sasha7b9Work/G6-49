@@ -123,7 +123,7 @@ bool PageTuneParameter::VerifyForPossiblyChangesAmplitude(const Control &control
     {
         if (Tuner::Current()->GetParameter()->IsDouble())
         {
-            DParam *param = Tuner::Current()->GetParameter()->ReinterpretToDouble();
+            DParam *param = Tuner::Current()->GetParameter()->ToDouble();
 
             if (param->IsAmplitude() && (param->GetValue().Abs() == 0))
             {
