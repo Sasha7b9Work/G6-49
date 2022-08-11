@@ -19,15 +19,15 @@ class SButton;
 
 // Общая часть для всех типов элементов меню
 #define COMMON_PART_MENU_ITEM                                                                                                               \
-    TypeItem::E     type;           /* Тип итема */                                                                                         \
-    int8            num;            /* Число вариантов для Choice или число контролов для Page*/                                            \
-    bool            isPageSB;       /* Если true, то это страница малых кнопок, когда type == Item_Page */                                  \
-    uint8           name;           /* Имя из перечисления NamePage, если type == Item_Page */                                              \
+    const TypeItem::E  type;     /* Тип итема */                                                                                         \
+    int8               num;            /* Число вариантов для Choice или число контролов для Page*/                                            \
+    bool               isPageSB;       /* Если true, то это страница малых кнопок, когда type == Item_Page */                                  \
+    uint8              name;           /* Имя из перечисления NamePage, если type == Item_Page */                                              \
                                     /* В случае, если type == Item_Choice,  определяет номер бита */                                        \
-    const PageBase  *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */                                            \
-    const char      *title[2];      /* Название страницы на русском и английском языках */                                                  \
-    const char      *hint[2];       /* Подсказка на русском и английском языках */                                                          \
-    pFuncBV         funcOfActive    /* Активен ли данный элемент */
+    const PageBase    *keeper;        /* Адрес страницы, которой принадлежит. Для Page_Main = 0 */                                            \
+    const char        *title[2];      /* Название страницы на русском и английском языках */                                                  \
+    const char        *hint[2];       /* Подсказка на русском и английском языках */                                                          \
+    pFuncBV           funcOfActive    /* Активен ли данный элемент */
 
 class PageBase;
 class Page;

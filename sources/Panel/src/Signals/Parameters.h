@@ -268,17 +268,17 @@ struct IParam : public Param
 
     virtual void OnPressButtonTune();
 
-    virtual Tuner *GetTuner()                 { return &tuner; }
+    virtual Tuner *GetTuner()            { return &tuner; }
 
-    virtual Value GetValue() const            { return value; }
+    virtual Value GetValue() const       { return value; }
 
-    Value Max() const { return max; }
+    Value Max() const                    { return max; }
 
-    Value Min() const { return min; }
+    Value Min() const                    { return min; }
 
-    virtual Value GetMax() const              { return max;   }
+    virtual Value GetMax() const         { return max;   }
 
-    virtual Value GetMin() const              { return min;   }
+    virtual Value GetMin() const         { return min;   }
 
     virtual SMinMax ValueInRange() const { return valueInRange(form); }
 
@@ -299,7 +299,7 @@ struct IParam : public Param
 
 private:
 
-    Tuner tuner;
+    Tuner         tuner;
     TypeIParam::E type;
     Value         min;
     Value         max;
