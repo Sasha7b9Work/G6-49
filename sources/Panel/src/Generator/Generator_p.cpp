@@ -265,15 +265,15 @@ void PGenerator::SetParameter(Param *parameter)
 {
     if(parameter->IsDouble())
     {
-        SetParameterDouble(static_cast<DParam *>(parameter));
+        SetParameterDouble((DParam *)parameter);
     }
     else if(parameter->IsChoice())
     {
-        SetParameterChoice(static_cast<CParam *>(parameter));
+        SetParameterChoice((CParam *)parameter);
     }
     else if (parameter->IsInteger())
     {
-        SetParameterInteger(static_cast<IParam *>(parameter));
+        SetParameterInteger((IParam *)parameter);
     }
 }
 
