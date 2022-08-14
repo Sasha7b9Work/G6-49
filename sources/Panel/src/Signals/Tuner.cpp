@@ -845,7 +845,7 @@ bool DisplayCorrection::ShowMessageOutRangIfNeed(Param *param)
         String min_str(buffer);
 
         Display::Warnings::Show(String("Выход за границы диапазона %s ... %s", min_str.c_str(), max_str.c_str()),
-                                String("Out of range %s ... %s", min_str.c_str(), max_str.c_str()), true);
+                                String("Out of range %s ... %s", min_str.c_str(), max_str.c_str()), false);
     }
 
     return min_max.valid;

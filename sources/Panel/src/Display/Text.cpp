@@ -963,7 +963,7 @@ void String::RemoveFromBegin(uint numSymbols)
 }
 
 
-void String::RemoveFromEnd()
+void String::RemoveEndSymbol()
 {
     if (Size() > 0)
     {

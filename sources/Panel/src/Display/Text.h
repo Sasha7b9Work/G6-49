@@ -95,10 +95,12 @@ public:
     void Append(pchar str, uint numSymbols);
 
     void Append(char symbol);
+
     // Удаляет numSymbols из начала строки
     void RemoveFromBegin(uint numSymbols);
 
-    void RemoveFromEnd();
+    // Удаляет последний символ
+    void RemoveEndSymbol();
 
     // Размер строки в символах (без учёта заверщающего нуля)
     int Size() const;

@@ -237,7 +237,7 @@ void SCPI::ProcessHint(String *message, cstr names[]) //-V2504
         message->Append(names[i]);
         message->Append(" |");
     }
-    message->RemoveFromEnd();
+    message->RemoveEndSymbol();
     message->Append('}');
     SCPI::SendAnswer(message->c_str());
 }
