@@ -516,37 +516,37 @@ void Value::MulPow10(int pow)
 }
 
 
-bool Value::operator<(const Value &rhs)
+bool Value::operator<(const Value &rhs) const
 {
     return ToDouble() < rhs.ToDouble();
 }
 
 
-bool Value::operator<=(const Value &rhs)
+bool Value::operator<=(const Value &rhs) const
 {
     return ToDouble() <= rhs.ToDouble();
 }
 
 
-bool Value::operator>(const Value &rhs)
+bool Value::operator>(const Value &rhs) const
 {
     return ToDouble() > rhs.ToDouble();
 }
 
 
-bool Value::operator>=(const Value &rhs)
+bool Value::operator>=(const Value &rhs) const
 {
     return ToDouble() >= rhs.ToDouble();
 }
 
 
-bool Value::operator==(const Value &rhs)
+bool Value::operator==(const Value &rhs) const
 {
     return (value == rhs.value);
 }
 
 
-bool Value::operator!=(const Value &rhs)
+bool Value::operator!=(const Value &rhs) const
 {
     return (value != rhs.value);
 }

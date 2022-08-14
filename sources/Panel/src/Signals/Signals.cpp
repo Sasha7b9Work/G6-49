@@ -59,7 +59,7 @@ static Param *sineManipulationA[] =
 
 
 static PFrequency    sineA_Frequency(FREQUENCY_SINE_MIN, FREQUENCY_SINE_MAX);
-static PAmplitudePic sineA_Amplitude;
+static PAmplitudePic sineA_Amplitude(Value("0", Order::One), Value("10", Order::One), PAmplitudePic::InRange);
 static POffset       sineA_Offset(POffset::InRange);
 static PManipulation sineA_Manipulation(sineManipulationA);
 

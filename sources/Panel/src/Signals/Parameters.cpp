@@ -883,15 +883,29 @@ SMinMax POffset::InRange(Form *form)
 }
 
 
-SMinMax PAmplitudePic::InRange(Form * /*form*/)
+SMinMax PAmplitudePic::InRange(Form * form)
 {
-    // ampl / 2 + fabs(cm) <= 5
+    // Ампл == 0  | [0 ... 5]
+    // Ампл <= 1В | [0 ... 2.5], ampl / 2 + fabs(см) <= 2.5
+    // Ампл > 1В  | [0 ... 5],   ампл / 2 + fabs(см) <= 5
 
     SMinMax result;
     result.min = Value(0);
 
-//    DParam *param_offset = form->FindParameter(TypeDParam::Offset);
-//    DParam *param_ampl = form->FindParameter(TypeDParam::AmplitudePic);
+    DParam *param_offset = form->FindParameter(TypeDParam::Offset);
+    DParam *param_ampl = form->FindParameter(TypeDParam::AmplitudePic);
+
+    Value offset = param_offset->GetValue();
+    const Value amplitude = param_ampl->GetValue();
+
+    result.max = param_ampl->Max();
+
+    offset.SetSign(1);
+
+    result.max.Sub(offset);
+    result.max.Mul(2);
+
+    result.valid = (amplitude <= result.max);
 
     return result;
 }

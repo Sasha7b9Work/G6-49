@@ -106,12 +106,12 @@ struct Value
     // Order::Count - значенине по умолчанию - запятая в позиции относительно размерности числового значения
     int GetDigit(int position, Order::E order = Order::Count) const;
 
-    bool operator<(const Value &);
-    bool operator>(const Value &);
-    bool operator<=(const Value &);
-    bool operator>=(const Value &);
-    bool operator==(const Value &);
-    bool operator!=(const Value &);
+    bool operator<(const Value &) const;
+    bool operator>(const Value &) const;
+    bool operator<=(const Value &) const;
+    bool operator>=(const Value &) const;
+    bool operator==(const Value &) const;
+    bool operator!=(const Value &) const;
 
 private:
 
