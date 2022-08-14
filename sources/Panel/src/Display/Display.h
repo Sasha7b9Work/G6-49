@@ -35,6 +35,7 @@ namespace Display
         struct Top
         {
             static void Show(const String &ru, const String &en);
+            static void Show(const String &);
         };
 
         struct Center
@@ -44,7 +45,6 @@ namespace Display
         };
 
         static void ShowCenter(const String &ru1, const String &ru2, const String &en1, const String &en2);
-        static void Show(const String &, bool in_center);
 
         static void ClearTop();
 

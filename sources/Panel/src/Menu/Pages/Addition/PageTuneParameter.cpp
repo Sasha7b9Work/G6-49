@@ -101,7 +101,7 @@ void PageTuneParameter::OnPress_Apply()
 
     if (invalid_parameters.Size())
     {
-        Display::Warnings::Show(invalid_parameters, false);
+        Display::Warnings::Top::Show(invalid_parameters);
     }
     else
     {

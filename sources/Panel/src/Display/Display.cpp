@@ -151,16 +151,9 @@ void Display::Warnings::ShowCenter(const String &ru1, const String &ru2, const S
 }
 
 
-void Display::Warnings::Show(const String &warning, bool in_center)
+void Display::Warnings::Top::Show(const String &warning)
 {
-    if (in_center)
-    {
-        warnings.AppendCenter(warning);
-    }
-    else
-    {
-        warnings.AppendTop(warning);
-    }
+    warnings.AppendTop(warning);
 }
 
 
