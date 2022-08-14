@@ -145,7 +145,7 @@ void Display::Warnings::Center::Show(pchar ru, pchar en)
 }
 
 
-void Display::Warnings::ShowCenter(const String &ru1, const String &ru2, const String &en1, const String &en2)
+void Display::Warnings::Center::Show2Strings(const String &ru1, const String &ru2, const String &en1, const String &en2)
 {
     warnings.AppendCenter2Strings(LANG_RU ? ru1 : en1, LANG_RU ? ru2 : en2);
 }

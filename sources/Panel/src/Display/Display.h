@@ -42,9 +42,8 @@ namespace Display
         {
             static void Show(const String &ru, const String &en);
             static void Show(pchar ru, pchar en);
+            static void Show2Strings(const String &ru1, const String &ru2, const String &en1, const String &en2);
         };
-
-        static void ShowCenter(const String &ru1, const String &ru2, const String &en1, const String &en2);
 
         static void ClearTop();
 
