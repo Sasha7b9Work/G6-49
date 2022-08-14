@@ -15,7 +15,7 @@
 
 int CParam::choiceModeStartFree = 0;
 
-DParam DParam::Empty(TypeDParam::Frequency, Param::EFuncActive, "Пустой", "Empty", Value(0), Value(1), EValueInRange, Value(1));
+DParam DParam::empty(TypeDParam::Frequency, Param::EFuncActive, "Пустой", "Empty", Value(0), Value(1), EValueInRange, Value(1));
 
 
 namespace MathSupport
@@ -847,5 +847,5 @@ cstr DParam::GetIndicatedValue() const
 
 DParam *Param::ToDouble()
 {
-    return (kind == KindParam::Double) ? (DParam *)this : &DParam::Empty;
+    return (kind == KindParam::Double) ? (DParam *)this : &DParam::empty;
 }

@@ -223,7 +223,7 @@ struct DParam : public Param
     // Возвращает позицию первого ненулевого символа "1" - десятки (1e1), "0" - единицы (1e0), "-1" - десятые (1e-1), "-2" - сотые (1e-2)
     int GetPositionFirstDigit(Order::E order = Order::Count) const;
 
-    static DParam Empty;
+    static DParam empty;
 
 private:
     Tuner tuner;        // Используется для настройки 
