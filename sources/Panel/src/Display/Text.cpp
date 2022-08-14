@@ -972,6 +972,22 @@ void String::RemoveEndSymbol()
 }
 
 
+void String::RemoveFromEnd(char symbol)
+{
+    while (Size() > 0)
+    {
+        if (text[Size() - 1] == symbol)
+        {
+            text[Size() - 1] = '\0';
+        }
+        else
+        {
+            break;
+        }
+    }
+}
+
+
 int String::Size() const
 {
     if (text == nullptr)

@@ -87,9 +87,9 @@ struct Param
 
     virtual Value GetValue() const { return Value("1", Order::One); } //-V524
 
-    virtual String ToString(String &) const { return String(""); };
-
-    virtual String ToString(Value) const { return String(""); };
+    virtual String ToString(String &units) const { return units; };
+    // bool - если true - удал€ть последние нули
+    virtual String ToString(Value, bool = false) const { return String(""); };
 
     // —охранить состо€ние параметра
     virtual void StoreState() { };
@@ -172,7 +172,7 @@ struct DParam : public Param
 
     // ¬озвращает строковое представление значени€ параметра
     virtual String ToString(String &units) const;
-    virtual String ToString(Value value) const;
+    virtual String ToString(Value value, bool delete_zeros = false) const;
 
     // ¬озвращает основные единицы измерени€ (без учЄта пор€дка)
     cstr GetMainUnits() const;
@@ -265,6 +265,7 @@ struct IParam : public Param
     virtual void Reset() { SetAndLoadValue(resetValue); }
 
     virtual String ToString(String &units) const;
+    virtual String ToString(Value value, bool delete_zeros = false) const;
 
     virtual void OnPressButtonTune();
 
@@ -281,8 +282,6 @@ struct IParam : public Param
     virtual Value GetMin() const         { return min;   }
 
     virtual SMinMax ValueInRange() const { return valueInRange(form); }
-
-    virtual String ToString(Value value) const;
 
     TypeIParam::E GetType()   { return type; }
 
@@ -339,8 +338,7 @@ struct CParam : public Param
     bool SetAndLoadChoice(int ch);
 
     virtual String ToString(String &units) const;
-
-    virtual String ToString(Value) const { return String(""); };
+    virtual String ToString(Value, bool /*delete_zeros*/ = false) const { return String(""); };
 
     virtual void OnPressButtonTune();
 
@@ -383,8 +381,7 @@ struct CMSParam : public Param
     CParam *FindParameter(TypeCParam::E p);
 
     virtual String ToString(String &units) const;
-
-    virtual String ToString(Value) const { return String(""); };
+    virtual String ToString(Value, bool /*delete_zeros*/ = false) const { return String(""); };
 
     virtual void OnPressButtonTune();
 
@@ -403,8 +400,7 @@ struct BParam : public Param
         Param(KindParam::Button, Param::EFuncActive, titleRU, titleEN), func(f) {};
 
     virtual String ToString(String &) const { return String(""); };
-
-    virtual String ToString(Value) const { return String(""); };
+    virtual String ToString(Value, bool /*delete_zeros*/ = false) const { return String(""); };
 
     virtual void OnPressButtonTune() { func(); };
 

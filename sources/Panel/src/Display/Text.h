@@ -102,6 +102,9 @@ public:
     // Удаляет последний символ
     void RemoveEndSymbol();
 
+    // Удалить последние символы symbol
+    void RemoveFromEnd(char symbol);
+
     // Размер строки в символах (без учёта заверщающего нуля)
     int Size() const;
 

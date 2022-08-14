@@ -638,19 +638,30 @@ String DParam::ToString(String &units) const
 }
 
 
-String DParam::ToString(Value val) const
+String DParam::ToString(Value val, bool delete_zeros) const
 {
-    String string(val.ToString(IsSigned()));
-    string.Append(" ");
-    string.Append(GetUnits(val.GetOrder()));
+    String result(val.ToString(IsSigned()));
+    if (delete_zeros)
+    {
+        result.RemoveFromEnd('0');
+    }
+    result.Append(" ");
+    result.Append(GetUnits(val.GetOrder()));
 
-    return string;
+    return result;
 }
 
 
-String IParam::ToString(Value val) const
+String IParam::ToString(Value val, bool delete_zeros) const
 {
-    return String(val.ToString(false, Order::One));
+    String result(val.ToString(false, Order::One));
+
+    if (delete_zeros)
+    {
+        result.RemoveFromEnd('0');
+    }
+
+    return result;
 }
 
 
