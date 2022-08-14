@@ -1,8 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
-inline void EmptyFuncVB(bool) {}
-
 
 #define DEF_BUTTON(name, titleRU, hintRU, titleEN, hintEN, keeper, funcActive, funcPress, funcDraw)                                         \
 static const ButtonBase name = { TypeItem::Button, 0, false, Page::NoPage, (const PageBase *)(&keeper), {titleRU, hintRU}, {titleEN, hintEN}, funcActive,       \
