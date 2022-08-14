@@ -87,6 +87,13 @@ static SMinMax OffstInRange(Form *form)
     return result;
 }
 
+
+//static SMinMax AmplitudeInRange(Form *)
+//{
+//    return SMinMax();
+//}
+
+
 static PFrequency    sineA_Frequency(FREQUENCY_SINE_MIN, FREQUENCY_SINE_MAX);
 static PAmplitude    sineA_Amplitude;
 static POffset       sineA_Offset(OffstInRange);
