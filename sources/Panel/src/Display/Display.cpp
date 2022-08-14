@@ -273,7 +273,7 @@ void Display::Warnings::ClearAll()
 }
 
 
-void Display::Warnings::ClearTop()
+void Display::Warnings::Top::Clear()
 {
     warnings.ClearTop();
 }
