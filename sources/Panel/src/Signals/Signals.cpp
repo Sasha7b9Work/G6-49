@@ -77,7 +77,7 @@ static SMinMax OffstInRange(Form *form)
 
     result.max.Sub(amplitude);
 
-    result.min = param_offset->Max();
+    result.min = result.max;
     result.min.SetSign(-1);
 
     Value offset = param_offset->GetValue();
