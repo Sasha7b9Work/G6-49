@@ -87,10 +87,10 @@ static SMinMax OffstInRange(Form *form)
     return result;
 }
 
-static PFrequency    sineA_Frequency(FREQUENCY_SINE_MIN, FREQUENCY_SINE_MAX);
-static ParamAmplitude    sineA_Amplitude;
-static ParamOffset       sineA_Offset(OffstInRange);
-static PManipulation sineA_Manipulation(sineManipulationA);
+static PFrequency     sineA_Frequency(FREQUENCY_SINE_MIN, FREQUENCY_SINE_MAX);
+static ParamAmplitude sineA_Amplitude;
+static ParamOffset    sineA_Offset(OffstInRange);
+static PManipulation  sineA_Manipulation(sineManipulationA);
 
 static Param *params_SineA[] =
 {

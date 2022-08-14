@@ -96,17 +96,6 @@ static void Draw_Apply(int x, int y)
 void PageTuneParameter::OnPress_Apply()
 {
     Tuner::Current()->OnButtonApply();
-
-    String invalid_parameters = CURRENT_FORM->InvalidParameters();
-
-    if (invalid_parameters.Size())
-    {
-        Display::Warnings::Top::Show(invalid_parameters);
-    }
-    else
-    {
-        Display::Warnings::Top::Clear();
-    }
 }
 
 DEF_GRAPH_BUTTON(sbEnter,

@@ -785,40 +785,6 @@ void Wave::SetForm(Form *form)
 }
 
 
-String Form::InvalidParameters() const
-{
-    CheckerParameters checker(this);
-
-    if (!checker.InvalidDurationImpulse())
-    {
-        if (Is(TypeForm::Impulse))
-        {
-            if (LANG_RU)
-            {
-                return String("Ќеверные параметры : длительность, период");
-            }
-            else
-            {
-                return String("Invalid parameters: duration, period");
-            }
-        }
-        if (Is(TypeForm::Packet))
-        {
-            if (LANG_RU)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
-    }
-
-    return String("");
-}
-
-
 Form::CheckerParameters::CheckerParameters(const Form *_form) : form(_form) { }
 
 
