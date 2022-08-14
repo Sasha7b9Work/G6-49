@@ -621,7 +621,7 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
     &bNext,
     &bSend,
     &Item::emptyLight,
-    Page::Registers, &pDebug, Item::EFuncActive, Page::FuncEnter, OnKey_PageRegisters
+    Page::Registers, &pDebug, Item::EFuncActive, Page::FuncEnter, OnKey_PageRegisters, FuncBeforeDraw
 )
 
 
@@ -653,7 +653,7 @@ DEF_PAGE_10( pDebug,                                                            
     &cStatistics,                               // ОТЛАДКА - Статистика
     &cShowSends,                                // ОТЛАДКА - Показывать параметры
     &bSaveSettings,                             // ОТЛАДКА - Сохранить настройки
-    Page::Debug, PageService::self, Item::EFuncActive, Page::FuncEnter, Item::EFuncOnKey
+    Page::Debug, PageService::self, Item::EFuncActive, Page::FuncEnter, Item::EFuncOnKey, Page::FuncDraw
 )
 
 
