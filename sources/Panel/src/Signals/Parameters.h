@@ -100,9 +100,9 @@ struct Param
     // Восстановить состояине параметра
     virtual void RestoreState() { };
 
-    static bool FuncActive() { return true; }
+    static bool EFuncActive() { return true; }
 
-    DParam *ToDouble() { return (kind == KindParam::Double) ? (DParam *)this : nullptr; }
+    DParam *ToDouble();
 
     pFuncBV     funcOfActive;  // Активен ли данный параметр
 
@@ -222,6 +222,8 @@ struct DParam : public Param
 
     // Возвращает позицию первого ненулевого символа "1" - десятки (1e1), "0" - единицы (1e0), "-1" - десятые (1e-1), "-2" - сотые (1e-2)
     int GetPositionFirstDigit(Order::E order = Order::Count) const;
+
+    static DParam Empty;
 
 private:
     Tuner tuner;        // Используется для настройки 
@@ -370,7 +372,7 @@ struct TypeCMSParam
 struct CMSParam : public Param
 {
     CMSParam(TypeCMSParam::E v, pchar nameRU, pchar nameEN, Param **parameters) :
-        Param(KindParam::Composite, Param::FuncActive, nameRU, nameEN), params(parameters), type(v) { }
+        Param(KindParam::Composite, Param::EFuncActive, nameRU, nameEN), params(parameters), type(v) { }
 
     virtual void SetForm(Form *form);
 
@@ -400,7 +402,7 @@ private:
 struct BParam : public Param
 {
     BParam(pchar titleRU, pchar titleEN, pFuncVV f) :
-        Param(KindParam::Button, Param::FuncActive, titleRU, titleEN), func(f) {};
+        Param(KindParam::Button, Param::EFuncActive, titleRU, titleEN), func(f) {};
 
     virtual String ToString(String &) const { return String(""); };
 
@@ -424,7 +426,7 @@ struct PVoltage : public DParam
              const Value &max,
              pValueInRange valueInRange,
              const Value &value) :
-        DParam(type, Param::FuncActive, nameRU, nameEN, min, max, valueInRange, value) { }
+        DParam(type, Param::EFuncActive, nameRU, nameEN, min, max, valueInRange, value) { }
 };
 
 
@@ -456,7 +458,7 @@ struct PFrequency : public DParam
                const Value &max,
                pValueInRange valueInRange = EValueInRange,
                const Value &value = Value("1", Order::Kilo)) :
-        DParam(TypeDParam::Frequency, Param::FuncActive, "Частота", "Frequency", min, max, valueInRange, value) { }
+        DParam(TypeDParam::Frequency, Param::EFuncActive, "Частота", "Frequency", min, max, valueInRange, value) { }
 };
 
 
@@ -472,7 +474,7 @@ struct PTime : public DParam
 
 struct PPhase : public DParam
 {
-    PPhase() : DParam(TypeDParam::Phase, Param::FuncActive, "Фаза", "Phase",
+    PPhase() : DParam(TypeDParam::Phase, Param::EFuncActive, "Фаза", "Phase",
                       Value("0", Order::One),
                       Value("360", Order::One),
                       EValueInRange,
@@ -483,7 +485,7 @@ struct PPhase : public DParam
 struct PPacketPeriod : public PTime
 {
     PPacketPeriod(const Value &max, const Value &value) :
-        PTime(TypeDParam::PacketPeriod, Param::FuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
+        PTime(TypeDParam::PacketPeriod, Param::EFuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
     // Возвращает true, если значение изменилось
@@ -506,7 +508,7 @@ struct PPeriod : public PTime
 struct PDuration : public PTime
 {
     PDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
-        PTime(TypeDParam::Duration, Param::FuncActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
+        PTime(TypeDParam::Duration, Param::EFuncActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
 };
 
 
@@ -523,7 +525,7 @@ struct PManipulationDuration : public PTime
                           const Value &max,
                           pValueInRange valueInRange,
                           const Value &value) :
-        PTime(TypeDParam::ManipulationDuration, Param::FuncActive, "Длит", "Duration", min, max, valueInRange, value) { }
+        PTime(TypeDParam::ManipulationDuration, Param::EFuncActive, "Длит", "Duration", min, max, valueInRange, value) { }
 };
 
 
@@ -533,7 +535,7 @@ struct PManipulationPeriod : public PTime
                         const Value &max,
                         pValueInRange valueInRange,
                         const Value &value) :
-        PTime(TypeDParam::ManipulationPeriod, Param::FuncActive, "Период", "Period", min, max, valueInRange, value) { }
+        PTime(TypeDParam::ManipulationPeriod, Param::EFuncActive, "Период", "Period", min, max, valueInRange, value) { }
 };
 
 
@@ -553,20 +555,20 @@ struct PModeStartStop : public CParam
 struct PManipulationEnabled : public CParam
 {
     PManipulationEnabled(pchar *names) : 
-        CParam(TypeCParam::ManipulationEnabled, Param::FuncActive, "Манип", "Manip", names) { }
+        CParam(TypeCParam::ManipulationEnabled, Param::EFuncActive, "Манип", "Manip", names) { }
 
 };
 
 
 struct PPolarity : public CParam
 {
-    PPolarity(pchar *names) : CParam(TypeCParam::Polarity, Param::FuncActive, "Полярность", "Polarity", names) { }
+    PPolarity(pchar *names) : CParam(TypeCParam::Polarity, Param::EFuncActive, "Полярность", "Polarity", names) { }
 };
 
 
 struct PClockImpulse : public CParam
 {
-    PClockImpulse(pchar *names) : CParam(TypeCParam::ClockImpulse, Param::FuncActive, "Оп. частота", "Clock", names) { }
+    PClockImpulse(pchar *names) : CParam(TypeCParam::ClockImpulse, Param::EFuncActive, "Оп. частота", "Clock", names) { }
 };
 
 

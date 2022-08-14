@@ -139,7 +139,7 @@ static pchar namesClockImpulse[] =
 static PFrequency  rampPlusA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude  rampPlusA_Amplitude;
 static ParamOffset     rampPlusA_Offset;
-static PModeStart  rampPlusA_ModeStart(Param::FuncActive, namesModeStartFree);
+static PModeStart  rampPlusA_ModeStart(Param::EFuncActive, namesModeStartFree);
 
 static Param *params_RampPlusA[] =
 {
@@ -156,7 +156,7 @@ static Form formRampPlusA(TypeForm::RampPlus, params_RampPlusA, &waves[Chan::A])
 static PFrequency  rampMinusA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude  rampMinusA_Amplitude;
 static ParamOffset     rampMinusA_Offset;
-static PModeStart  rampMinusA_ModeStart(Param::FuncActive, namesModeStartFree);
+static PModeStart  rampMinusA_ModeStart(Param::EFuncActive, namesModeStartFree);
 
 static Param *params_RampMinusA[] =
 {
@@ -173,7 +173,7 @@ static Form formRampMinusA(TypeForm::RampMinus, params_RampMinusA, &waves[Chan::
 static PFrequency triangleA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude triangleA_Amplitude;
 static ParamOffset    triangleA_Offset;
-static PModeStart triangleA_ModeStart(Param::FuncActive, namesModeStartFree);
+static PModeStart triangleA_ModeStart(Param::EFuncActive, namesModeStartFree);
 
 static Param *params_TriangleA[] =
 {
@@ -195,7 +195,7 @@ static void OnChoose_FileA()
 static PFrequency  freeA_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude  freeA_Amplitude;
 static ParamOffset     freeA_Offset;
-static PModeStart  freeA_ModeStart(Param::FuncActive, namesModeStartFree);
+static PModeStart  freeA_ModeStart(Param::EFuncActive, namesModeStartFree);
 static BParam     freeA_Choose   ("Выбрать", "Choose", OnChoose_FileA);
 
 static Param *params_FreeA[] =
@@ -252,7 +252,7 @@ static PDuration      impulseA_Duration (Value("100", Order::Kilo), Value("20", 
 static ParamAmplitude     impulseA_Amplitude;
 static ParamOffset        impulseA_Offset;
 static PPolarity      impulseA_Polarity(namesPolarity);
-static PModeStart     impulseA_ModeStart(Param::FuncActive, namesModeStartImpulse);
+static PModeStart     impulseA_ModeStart(Param::EFuncActive, namesModeStartImpulse);
 static PClockImpulse  impulse_Clock(namesClockImpulse);
 static PModeStartStop impulseA_StartStop(FuncActive_ModeStartStopAndDelayImpulseA, namesModeStartStopImpulse);
 static PDelay         impulseA_Delay(FuncActive_ModeStartStopAndDelayImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
@@ -297,7 +297,7 @@ static PPacketPeriod packetA_PacketPeriod  (Value("100", Order::Kilo), Value("0.
 static ParamAmplitude    packetA_Amplitude;
 static ParamOffset       packetA_Offset;
 static PPolarity     packetA_Polarity(namesPolarity);
-static PModeStart    packetA_ModeStart(Param::FuncActive, namesModeStartImpulse);
+static PModeStart    packetA_ModeStart(Param::EFuncActive, namesModeStartImpulse);
 
 PPeriod *A::Packet::period_impulse = &packetA_Period;
 PDuration *A::Packet::duration = &packetA_Duration;
@@ -378,7 +378,7 @@ static Form formSineB(TypeForm::Sine, params_SineB, &waves[Chan::B]);
 static PFrequency  rampPlusB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude  rampPlusB_Amplitude;
 static ParamOffset     rampPlusB_Offset;
-static PModeStart  rampPlusB_ModeStart(Param::FuncActive, namesModeStartFree);
+static PModeStart  rampPlusB_ModeStart(Param::EFuncActive, namesModeStartFree);
 
 static Param *params_RampPlusB[] =
 {
@@ -395,7 +395,7 @@ static Form formRampPlusB(TypeForm::RampPlus, params_RampPlusB, &waves[Chan::B])
 static PFrequency  rampMinusB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude  rampMinusB_Amplitude;
 static ParamOffset     rampMinusB_Offset;
-static PModeStart  rampMinusB_ModeStart(Param::FuncActive, namesModeStartFree);
+static PModeStart  rampMinusB_ModeStart(Param::EFuncActive, namesModeStartFree);
 
 static Param *params_RampMinusB[] =
 {
@@ -412,7 +412,7 @@ static Form formRampMinusB(TypeForm::RampMinus, params_RampMinusB, &waves[Chan::
 static PFrequency  triangleB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude  triangleB_Amplitude;
 static ParamOffset     triangleB_Offset;
-static PModeStart  triangleB_ModeStart(Param::FuncActive, namesModeStartFree);
+static PModeStart  triangleB_ModeStart(Param::EFuncActive, namesModeStartFree);
 
 static Param *params_TriangleB[] =
 {
@@ -434,7 +434,7 @@ static void OnChoose_FileB()
 static PFrequency  freeB_Frequency(FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
 static ParamAmplitude  freeB_Amplitude;
 static ParamOffset     freeB_Offset;
-static PModeStart  freeB_ModeStart(Param::FuncActive, namesModeStartFree);
+static PModeStart  freeB_ModeStart(Param::EFuncActive, namesModeStartFree);
 static BParam     freeB_Choose("Выбрать", "Choose", OnChoose_FileB);
 
 static Param *params_FreeB[] =

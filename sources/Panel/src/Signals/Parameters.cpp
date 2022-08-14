@@ -15,6 +15,8 @@
 
 int CParam::choiceModeStartFree = 0;
 
+DParam DParam::Empty(TypeDParam::Frequency, Param::EFuncActive, "Пустой", "Empty", Value(0), Value(1), EValueInRange, Value(1));
+
 
 namespace MathSupport
 {
@@ -565,7 +567,7 @@ DParam::DParam(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar const na
 
 
 DParam::DParam(const DParam &rhs) :
-    Param(KindParam::Double, Param::FuncActive, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
+    Param(KindParam::Double, Param::EFuncActive, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
     min(rhs.min), max(rhs.max), valueInRange(EValueInRange), value(rhs.value), resetValue(rhs.resetValue), stored(rhs.stored)
 {
 }
@@ -654,7 +656,7 @@ String IParam::ToString(Value val) const
 
 IParam::IParam(TypeIParam::E t, pchar nameRU, pchar nameEN,
     const Value &_min, const Value &_max, pValueInRange _valueInRange, const Value &_value) :
-    Param(KindParam::Integer, Param::FuncActive, nameRU, nameEN), tuner(this), type(t),
+    Param(KindParam::Integer, Param::EFuncActive, nameRU, nameEN), tuner(this), type(t),
     min(_min), max(_max), valueInRange(_valueInRange), value(_value), resetValue(_value)
 {
 }
@@ -840,4 +842,10 @@ cstr DParam::GetIndicatedValue() const
 
     return buffer;
 
+}
+
+
+DParam *Param::ToDouble()
+{
+    return (kind == KindParam::Double) ? (DParam *)this : &DParam::Empty;
 }
