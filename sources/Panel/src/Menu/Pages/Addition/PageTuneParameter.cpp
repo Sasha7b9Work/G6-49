@@ -105,7 +105,7 @@ void PageTuneParameter::OnPress_Apply()
     }
     else
     {
-        Display::Warnings::ClearAllTheTime();
+        Display::Warnings::ClearTop();
     }
 }
 

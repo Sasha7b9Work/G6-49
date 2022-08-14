@@ -35,13 +35,13 @@ namespace Display
     struct WarningsDisplay
     {
         WarningsDisplay() : last(0) { }
-        void Show();
-        void AppendTemp(const String &);
+        void Draw();
+        void AppendCenter(const String &);
         // Добавить две строки
-        void AppendTemp2Strings(const String &, const String &);
-        void ClearTemp();
-        void AppendAllTheTime(const String &);
-        void ClearAllTheTime();
+        void AppendCenter2Strings(const String &, const String &);
+        void ClearCenter();
+        void AppendTop(const String &);
+        void ClearTop();
 
     private:
         static const int NUM_WARNINGS = 10;
@@ -121,51 +121,51 @@ void Display::Update()
     Statistics::Show();
     Console::Draw();
     Keyboard::Draw();
-    warnings.Show();
+    warnings.Draw();
     Painter::EndScene();
     Statistics::EndFrame();
 }
 
 
-void Display::Warnings::Show(const String &ru, const String &en, bool auto_delete)
+void Display::Warnings::Show(const String &ru, const String &en, bool in_center)
 {
-    if (auto_delete)
+    if (in_center)
     {
-        warnings.AppendTemp(LANG_RU ? ru : en);
+        warnings.AppendCenter(LANG_RU ? ru : en);
     }
     else
     {
-        warnings.AppendAllTheTime(LANG_RU ? ru : en);
+        warnings.AppendTop(LANG_RU ? ru : en);
     }
 }
 
 
 void Display::Warnings::ShowCenter(const String &ru1, const String &ru2, const String &en1, const String &en2)
 {
-    warnings.AppendTemp2Strings(LANG_RU ? ru1 : en1, LANG_RU ? ru2 : en2);
+    warnings.AppendCenter2Strings(LANG_RU ? ru1 : en1, LANG_RU ? ru2 : en2);
 }
 
 
-void Display::Warnings::Show(const String &warning, bool auto_delete)
+void Display::Warnings::Show(const String &warning, bool in_center)
 {
-    if (auto_delete)
+    if (in_center)
     {
-        warnings.AppendTemp(warning);
+        warnings.AppendCenter(warning);
     }
     else
     {
-        warnings.AppendAllTheTime(warning);
+        warnings.AppendTop(warning);
     }
 }
 
 
-void Display::Warnings::Show(pchar ru, pchar en, bool auto_delete)
+void Display::Warnings::Show(pchar ru, pchar en, bool in_center)
 {
-    Show(String(ru), String(en), auto_delete);
+    Show(String(ru), String(en), in_center);
 }
 
 
-void Display::WarningsDisplay::AppendTemp(const String &warning)
+void Display::WarningsDisplay::AppendCenter(const String &warning)
 {
     if (!IsEmpty() && Last().IsEqual(warning))
     {
@@ -183,7 +183,7 @@ void Display::WarningsDisplay::AppendTemp(const String &warning)
 }
 
 
-void Display::WarningsDisplay::AppendTemp2Strings(const String &str1, const String &str2)
+void Display::WarningsDisplay::AppendCenter2Strings(const String &str1, const String &str2)
 {
     if (last >= 2 && (warnings[last - 1].IsEqual(str2) && warnings[last - 2].IsEqual(str1)))
     {
@@ -204,19 +204,19 @@ void Display::WarningsDisplay::AppendTemp2Strings(const String &str1, const Stri
 }
 
 
-void Display::WarningsDisplay::AppendAllTheTime(const String &warning)
+void Display::WarningsDisplay::AppendTop(const String &warning)
 {
     warning_flash = warning;
 }
 
 
-void Display::WarningsDisplay::ClearAllTheTime()
+void Display::WarningsDisplay::ClearTop()
 {
     warning_flash.Free();
 }
 
 
-void Display::WarningsDisplay::Show()
+void Display::WarningsDisplay::Draw()
 {
     Update();
 
@@ -260,7 +260,7 @@ void Display::WarningsDisplay::Update()
 }
 
 
-void Display::WarningsDisplay::ClearTemp()
+void Display::WarningsDisplay::ClearCenter()
 {
     if (last != 0)
     {
@@ -276,14 +276,14 @@ void Display::WarningsDisplay::ClearTemp()
 
 void Display::Warnings::ClearAll()
 {
-    warnings.ClearTemp();
-    warnings.ClearAllTheTime();
+    warnings.ClearCenter();
+    warnings.ClearTop();
 }
 
 
-void Display::Warnings::ClearAllTheTime()
+void Display::Warnings::ClearTop()
 {
-    warnings.ClearAllTheTime();
+    warnings.ClearTop();
 }
 
 

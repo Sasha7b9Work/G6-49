@@ -32,14 +32,12 @@ namespace Display
 
     struct Warnings
     {
-        // Вывести временно
-        static void Show(const String &ru, const String &en, bool auto_delete);
+        static void Show(const String &ru, const String &en, bool in_center);
         static void ShowCenter(const String &ru1, const String &ru2, const String &en1, const String &en2);
-        static void Show(pchar ru, pchar en, bool auto_delete);
-        static void Show(const String &, bool auto_delete);
+        static void Show(pchar ru, pchar en, bool in_center);
+        static void Show(const String &, bool in_center);
 
-        // Вывести на постоянно
-        static void ClearAllTheTime();
+        static void ClearTop();
 
         static void ClearAll();
     };
