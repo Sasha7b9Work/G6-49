@@ -1,7 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
-inline void FuncChanged() {}
 inline void FuncBeforeDraw() {}
 inline void EmptyFuncVV() {}
 inline void EmptyFuncVB(bool) {}
