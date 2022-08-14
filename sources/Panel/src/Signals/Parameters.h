@@ -427,21 +427,21 @@ struct PVoltage : public DParam
 struct PAmplitude : public PVoltage
 {
     PAmplitude(const Value &min = Value("0", Order::One),
-                   const Value &max = Value("10", Order::One),
-                   pValueInRange valueInRange = EValueInRange,
-                   const Value &value = DEFAULT_AMPLITUDE) :
+               const Value &max = Value("10", Order::One),
+               pValueInRange valueInRange = EValueInRange,
+               const Value &value = DEFAULT_AMPLITUDE) :
         PVoltage(TypeDParam::Amplitude, "Размах", "Amplitude", min, max, valueInRange, value) { }
 
     virtual Value GetMax() const;
 };
 
 
-struct ParamOffset : public PVoltage
+struct POffset : public PVoltage
 {
-    ParamOffset(pValueInRange valueInRange = EValueInRange,
-                const Value &min = Value("-5", Order::One),
-                const Value &max = Value("5", Order::One),
-                const Value &value = Value("0", Order::One)) :
+    POffset(pValueInRange valueInRange = EValueInRange,
+            const Value &min = Value("-5", Order::One),
+            const Value &max = Value("5", Order::One),
+            const Value &value = Value("0", Order::One)) :
         PVoltage(TypeDParam::Offset, "Смещение", "Offset", min, max, valueInRange, value) { }
 };
 
