@@ -34,10 +34,10 @@ static void FuncCloseManipulation()
 
 static PManipulationEnabled   sineManipulationA_Enabled (namesManipulationEnabled);
 static PManipulationDuration  sineManipulationA_Duration(Value("10", Order::Nano), Value("10", Order::One),
-                                                                 EValueInRange,
+                                                                 Param::EValueInRange,
                                                                  Value("5", Order::Milli));
 static PManipulationPeriod    sineManipulationA_Period  (Value("20", Order::Nano), Value("10000", Order::One),
-                                                                 EValueInRange,
+                                                                 Param::EValueInRange,
                                                                  Value("25", Order::Milli));
 static BParam                sineManipulationA_Exit    ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
 
@@ -291,7 +291,7 @@ static PDuration     packetA_Duration      (Value("100", Order::Kilo), Value("10
 static IParam      packetA_PacketNumber  (TypeIParam::PacketNumber, "Кол-во имп", "Count imp",
                                                     Value("1", Order::One),
                                                     Value("1000000000", Order::One),
-                                                    EValueInRange,
+                                                    Param::EValueInRange,
                                                     Value("3", Order::One));
 static PPacketPeriod packetA_PacketPeriod  (Value("100", Order::Kilo), Value("0.1", Order::One));
 static ParamAmplitude    packetA_Amplitude;
@@ -340,11 +340,11 @@ static Form *formsA[] =
 
 static PManipulationEnabled  sineManipulationB_Enabled  (namesManipulationEnabled);
 static PManipulationDuration sineManipulationB_Duration(Value("10", Order::Nano), Value("10", Order::One),
-                                                                EValueInRange,
-                                                                Value("5", Order::Milli));
+                                                        Param::EValueInRange,
+                                                        Value("5", Order::Milli));
 static PManipulationPeriod   sineManipulationB_Period(Value("20", Order::Nano), Value("10000", Order::One),
-                                                              EValueInRange,
-                                                              Value("25", Order::Milli));
+                                                     Param::EValueInRange,
+                                                     Value("25", Order::Milli));
 static BParam               sineManipulationB_Exit     ("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
 
 static Param *sineManipulationB[] =

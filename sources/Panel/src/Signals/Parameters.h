@@ -21,9 +21,6 @@ struct SMinMax
 
 typedef SMinMax (*pValueInRange)(Form *);
 
-inline SMinMax EValueInRange(Form *) { return SMinMax(); }
-
-
 #define DEFAULT_AMPLITUDE Value("1", Order::One)
 
 #define IMPULSE_PERIOD_MIN   Value("20", Order::Nano)
@@ -101,6 +98,7 @@ struct Param
     virtual void RestoreState() { };
 
     static bool EFuncActive() { return true; }
+    static SMinMax EValueInRange(Form *) { return SMinMax(); }
 
     DParam *ToDouble();
 

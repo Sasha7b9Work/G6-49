@@ -15,10 +15,10 @@ static DParam storedDouble = ParamAmplitude(); //-V1054 Здесь ошибки не случится
                                                             // классах нет данных
 
 static IParam storedInteger = IParam(TypeIParam::PacketNumber, "", "", //-V810
-                Value("0", Order::One),
-                Value("100", Order::One),
-                EValueInRange,
-                Value("0", Order::One));
+                                     Value("0", Order::One),
+                                     Value("100", Order::One),
+                                     Param::EValueInRange,
+                                     Value("0", Order::One));
 
 static Param *tuned = nullptr;     // Настраиваемый параметр
 
