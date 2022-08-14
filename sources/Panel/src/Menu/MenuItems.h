@@ -291,7 +291,6 @@ public:
     int16   maxValue;
     int16  *cell;
     pFuncVV funcOfChanged;
-    pFuncVB funcPress;
 };
 
 class Governor : public Item
@@ -302,7 +301,6 @@ public:
     int16   maxValue;       // Максимальное значение.
     int16  *cell;
     pFuncVV funcOfChanged;  // Функция, которую нужно вызывать после того, как значение регулятора изменилось.
-    pFuncVB funcPress;      // Функция вызывается при нажатие на item. Параметр bool == true означает, что item устанавливается активным
     
     // Запускает процессс анимации инкремента или декремента элемента меню типа Governor (в зависимости от знака delta).
     void StartChange(int detla);

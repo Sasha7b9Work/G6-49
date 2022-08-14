@@ -47,18 +47,18 @@ static void OnChanged()
 DEF_GOVERNOR( gRedChanA,
     "Красный", "Red",
     "", "",
-    redChanA, 0, 255, *PageDebug::Colors::ChanA::self, Item::EFuncActive, OnChanged, EmptyFuncVB);
+    redChanA, 0, 255, *PageDebug::Colors::ChanA::self, Item::EFuncActive, OnChanged);
 
 
 DEF_GOVERNOR(gGreenChanA,
     "Зелёный", "Green",
     "", "",
-    greenChanA, 0, 255, *PageDebug::Colors::ChanA::self, Item::EFuncActive, OnChanged, EmptyFuncVB);
+    greenChanA, 0, 255, *PageDebug::Colors::ChanA::self, Item::EFuncActive, OnChanged);
 
 DEF_GOVERNOR(gBlueChanA,
     "Синий", "Blue",
     "", "",
-    blueChanA, 0, 255, *PageDebug::Colors::ChanA::self, Item::EFuncActive, OnChanged, EmptyFuncVB);
+    blueChanA, 0, 255, *PageDebug::Colors::ChanA::self, Item::EFuncActive, OnChanged);
 
 
 DEF_PAGE_3( pChanA, //-V641
@@ -76,18 +76,18 @@ DEF_PAGE_3( pChanA, //-V641
 DEF_GOVERNOR(gRedChanB,
     "Красный", "Red",
     "", "",
-    redChanB, 0, 255, *PageDebug::Colors::ChanB::self, Item::EFuncActive, OnChanged, EmptyFuncVB);
+    redChanB, 0, 255, *PageDebug::Colors::ChanB::self, Item::EFuncActive, OnChanged);
 
 
 DEF_GOVERNOR(gGreenChanB,
     "Зелёный", "Green",
     "", "",
-    greenChanB, 0, 255, *PageDebug::Colors::ChanB::self, Item::EFuncActive, OnChanged, EmptyFuncVB);
+    greenChanB, 0, 255, *PageDebug::Colors::ChanB::self, Item::EFuncActive, OnChanged);
 
 DEF_GOVERNOR(gBlueChanB,
     "Синий", "Blue",
     "", "",
-    blueChanB, 0, 255, *PageDebug::Colors::ChanB::self, Item::EFuncActive, OnChanged, EmptyFuncVB);
+    blueChanB, 0, 255, *PageDebug::Colors::ChanB::self, Item::EFuncActive, OnChanged);
 
 
 DEF_PAGE_3(pChanB, //-V641
@@ -104,18 +104,18 @@ DEF_PAGE_3(pChanB, //-V641
 DEF_GOVERNOR(gRedMenu,
     "Красный", "Red",
     "", "",
-    redMenu, 0, 255, *PageDebug::Colors::Menu::self, Item::EFuncActive, OnChanged, EmptyFuncVB);
+    redMenu, 0, 255, *PageDebug::Colors::Menu::self, Item::EFuncActive, OnChanged);
 
 
 DEF_GOVERNOR(gGreenMenu,
     "Зелёный", "Green",
     "", "",
-    greenMenu, 0, 255, *PageDebug::Colors::Menu::self, Item::EFuncActive, OnChanged, EmptyFuncVB);
+    greenMenu, 0, 255, *PageDebug::Colors::Menu::self, Item::EFuncActive, OnChanged);
 
 DEF_GOVERNOR(gBlueMenu,
     "Синий", "Blue",
     "", "",
-    blueMenu, 0, 255, *PageDebug::Colors::Menu::self, Item::EFuncActive, OnChanged, EmptyFuncVB);
+    blueMenu, 0, 255, *PageDebug::Colors::Menu::self, Item::EFuncActive, OnChanged);
 
 
 DEF_PAGE_3(pMenu, //-V641

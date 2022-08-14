@@ -188,7 +188,7 @@ void PageFrequencyCounter::OnChange_FreqLevel()
 DEF_GOVERNOR( gLevel,                                                                                                                                          //--- ЧАСТОТОМЕР - Уровень ---
     "Уровень", "Level",
     "Подстройка уровня синхронизации", "Sync level adjustment",
-    set.freq.level, -100, 100, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnChange_FreqLevel, EmptyFuncVB
+    set.freq.level, -100, 100, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnChange_FreqLevel
 )
 
 
@@ -201,7 +201,7 @@ static void OnChange_Hysteresis()
 DEF_GOVERNOR( gHysteresis,                                                                                                                                  //--- ЧАСТОТОМЕР - Гистерезис ---
     "Гистерезис", "Hysteresis",
     "Задаёт гистерезис для уменьшения влияния помех на точность измерений", "Sets hysteresis to reduce the effect of interference on measurement accuracy",
-    set.freq.hysteresis, 0, 100, pFrequencyCounter, Item::EFuncActive, OnChange_Hysteresis, EmptyFuncVB
+    set.freq.hysteresis, 0, 100, pFrequencyCounter, Item::EFuncActive, OnChange_Hysteresis
 )
 
 volatile const GovernorBase *pgHysteresis = &gHysteresis;
