@@ -218,7 +218,7 @@ DEF_PAGE_8( pFrequencyCounter,                                                  
     &cCouple,        // ×ÀÑÒÎÒÎÌÅĞ - Âõîä
     &cFiltr,         // ×ÀÑÒÎÒÎÌÅĞ - ÔÍ×
     &cTest,          // ×ÀÑÒÎÒÎÌÅĞ - Òåñò
-    Page::FrequencyCounter, PageMain::self, Item::EFuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
+    Page::FrequencyCounter, PageMain::self, Item::EFuncActive, Page::FuncEnter, Item::EFuncOnKey, Page::FuncDraw
 )
 
 

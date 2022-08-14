@@ -106,6 +106,7 @@ public:
 
     static bool EFuncActive() { return true; }
     static void EFuncDraw(int, int) {}
+    static bool EFuncOnKey(const Control &) { return false; }
 
     static Item emptyDark;
     static Item emptyLight;
