@@ -81,7 +81,7 @@ DEF_PAGE_4_VAR(pService,                                                        
     &Item::emptyLight,
     &Item::emptyLight,
     //PageDebug::self,
-    Page::Service, (PageBase *)PageMain::self, Item::EFuncActive, Page::FuncEnter, Item::EFuncOnKey, Page::FuncDraw
+    Page::Service, (PageBase *)PageMain::self, Item::EFuncActive, Page::FuncEnter, Item::EFuncOnKey
 )
 
 

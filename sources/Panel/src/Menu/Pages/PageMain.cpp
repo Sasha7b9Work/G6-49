@@ -8,7 +8,7 @@ DEF_PAGE_3(pageMain,
            PageSignals::self,
            PageFrequencyCounter::self,
            PageService::self,
-           Page::Main, nullptr, Item::EFuncActive, Page::FuncEnter, Item::EFuncOnKey, FuncBeforeDraw
+           Page::Main, nullptr, Item::EFuncActive, Page::FuncEnter, Item::EFuncOnKey
 )
 
 Page *PageMain::self = (Page *)&pageMain;
