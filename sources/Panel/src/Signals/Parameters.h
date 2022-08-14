@@ -424,12 +424,12 @@ struct PVoltage : public DParam
 };
 
 
-struct PAmplitude : public PVoltage
+struct PAmplitudePic : public PVoltage
 {
-    PAmplitude(const Value &min = Value("0", Order::One),
-               const Value &max = Value("10", Order::One),
-               pValueInRange valueInRange = EValueInRange,
-               const Value &value = DEFAULT_AMPLITUDE) :
+    PAmplitudePic(const Value &min = Value("0", Order::One),
+                  const Value &max = Value("10", Order::One),
+                  pValueInRange valueInRange = EValueInRange,
+                  const Value &value = DEFAULT_AMPLITUDE) :
         PVoltage(TypeDParam::Amplitude, "Размах", "Amplitude", min, max, valueInRange, value) { }
 
     virtual Value GetMax() const;

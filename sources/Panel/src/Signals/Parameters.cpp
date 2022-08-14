@@ -708,7 +708,7 @@ void CMSParam::OnPressButtonTune()
 }
 
 
-Value PAmplitude::GetMax() const
+Value PAmplitudePic::GetMax() const
 {
     // ampl / 2 + fabs(cm) <= 5
 
