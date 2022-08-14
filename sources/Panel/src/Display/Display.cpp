@@ -133,12 +133,6 @@ void Display::Warnings::Top::Show(const String &ru, const String &en)
 }
 
 
-void Display::Warnings::Top::Show(pchar ru, pchar en)
-{
-    warnings.AppendTop(LANG_RU ? String(ru) : String(en));
-}
-
-
 void Display::Warnings::Center::Show(const String &ru, const String &en)
 {
     warnings.AppendCenter(LANG_RU ? ru : en);

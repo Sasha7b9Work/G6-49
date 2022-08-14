@@ -35,7 +35,6 @@ namespace Display
         struct Top
         {
             static void Show(const String &ru, const String &en);
-            static void Show(pchar ru, pchar en);
         };
 
         struct Center
