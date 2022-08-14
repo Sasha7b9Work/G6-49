@@ -845,8 +845,8 @@ bool DisplayCorrection::ShowMessageOutRangIfNeed(Param *param)
 
         String min_str = param->ToString(min_max.min, true);
 
-        Display::Warnings::Show(String("Выход за границы диапазона %s ... %s", min_str.c_str(), max_str.c_str()),
-                                String("Out of range %s ... %s", min_str.c_str(), max_str.c_str()), false);
+        Display::Warnings::Top::Show(String("Выход за границы диапазона %s ... %s", min_str.c_str(), max_str.c_str()),
+                                     String("Out of range %s ... %s", min_str.c_str(), max_str.c_str()));
     }
     else
     {
@@ -1245,8 +1245,8 @@ void Tuner::OnButtonApply()
 
                 if (DisplayEntering::ToValue() < pack_period->CalculateMinValue())
                 {
-                    Display::Warnings::Show(String("Параметр не может быть меньше %s сек", pack_period->CalculateMinValue().ToString(false, Order::One)),
-                                            String("The parameter cannot be less %s s", pack_period->CalculateMinValue().ToString(false, Order::One)), true);
+                    Display::Warnings::Center::Show(String("Параметр не может быть меньше %s сек", pack_period->CalculateMinValue().ToString(false, Order::One)),
+                                               String("The parameter cannot be less %s s", pack_period->CalculateMinValue().ToString(false, Order::One)));
                     return;
                 }
             }

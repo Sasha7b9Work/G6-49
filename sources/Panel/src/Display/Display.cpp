@@ -127,15 +127,27 @@ void Display::Update()
 }
 
 
-void Display::Warnings::Show(const String &ru, const String &en, bool in_center)
+void Display::Warnings::Top::Show(const String &ru, const String &en)
+{
+    warnings.AppendTop(LANG_RU ? ru : en);
+}
+
+
+void Display::Warnings::Center::Show(const String &ru, const String &en)
+{
+    warnings.AppendCenter(LANG_RU ? ru : en);
+}
+
+
+void Display::Warnings::Show(pchar ru, pchar en, bool in_center)
 {
     if (in_center)
     {
-        warnings.AppendCenter(LANG_RU ? ru : en);
+        warnings.AppendCenter(LANG_RU ? String(ru) : String(en));
     }
     else
     {
-        warnings.AppendTop(LANG_RU ? ru : en);
+        warnings.AppendTop(LANG_RU ? String(ru) : String(en));
     }
 }
 
@@ -156,12 +168,6 @@ void Display::Warnings::Show(const String &warning, bool in_center)
     {
         warnings.AppendTop(warning);
     }
-}
-
-
-void Display::Warnings::Show(pchar ru, pchar en, bool in_center)
-{
-    Show(String(ru), String(en), in_center);
 }
 
 
