@@ -36,7 +36,7 @@ void PageService::OnPress_Reset()
 //DEF_BUTTON( bReset,                                                                                                                                                 //--- ОТЛАДКА - СБРОС ---
 //    "СБРОС", "RESET",
 //    "Сброс настроек на значения по умолчанию", "Reset to default",
-//    pService, Item::FuncActive, PageService::OnPress_Reset, FuncDraw
+//    pService, Item::EFuncActive, PageService::OnPress_Reset, FuncDraw
 //)
 
 
@@ -45,7 +45,7 @@ DEF_CHOICE_2(cLanguage,
     "Выбор языка", "Language choice",
     "Russian",    "Russian",    "", "",
     "Aнглийский", "Английский", "", "",
-    set.lang, pService, Item::FuncActive, FuncChangedChoice, FuncDraw
+    set.lang, pService, Item::EFuncActive, FuncChangedChoice, FuncDraw
 )
 
 
@@ -66,7 +66,7 @@ DEF_CHOICE_4(cVolume,
     "Мин",   "Min",    "", "",
     "Cредн", "Middle", "", "",
     "Макс",  "Max",    "", "",
-    setCal.soundVolume, pService, Item::FuncActive, PageService::OnChange_Volume, FuncDraw
+    setCal.soundVolume, pService, Item::EFuncActive, PageService::OnChange_Volume, FuncDraw
 )
 
 
@@ -81,7 +81,7 @@ DEF_PAGE_4_VAR(pService,                                                        
     &Item::emptyLight,
     &Item::emptyLight,
     //PageDebug::self,
-    Page::Service, (PageBase *)PageMain::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
+    Page::Service, (PageBase *)PageMain::self, Item::EFuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 

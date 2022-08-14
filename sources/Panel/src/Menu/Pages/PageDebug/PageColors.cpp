@@ -47,18 +47,18 @@ static void OnChanged()
 DEF_GOVERNOR( gRedChanA,
     "Красный", "Red",
     "", "",
-    redChanA, 0, 255, *PageDebug::Colors::ChanA::self, Item::FuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
+    redChanA, 0, 255, *PageDebug::Colors::ChanA::self, Item::EFuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
 
 
 DEF_GOVERNOR(gGreenChanA,
     "Зелёный", "Green",
     "", "",
-    greenChanA, 0, 255, *PageDebug::Colors::ChanA::self, Item::FuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
+    greenChanA, 0, 255, *PageDebug::Colors::ChanA::self, Item::EFuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
 
 DEF_GOVERNOR(gBlueChanA,
     "Синий", "Blue",
     "", "",
-    blueChanA, 0, 255, *PageDebug::Colors::ChanA::self, Item::FuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
+    blueChanA, 0, 255, *PageDebug::Colors::ChanA::self, Item::EFuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
 
 
 DEF_PAGE_3( pChanA, //-V641
@@ -67,7 +67,7 @@ DEF_PAGE_3( pChanA, //-V641
     &gRedChanA,
     &gGreenChanA,
     &gBlueChanA,
-    Page::Color_ChanA, PageDebug::Colors::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
+    Page::Color_ChanA, PageDebug::Colors::self, Item::EFuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 
@@ -76,18 +76,18 @@ DEF_PAGE_3( pChanA, //-V641
 DEF_GOVERNOR(gRedChanB,
     "Красный", "Red",
     "", "",
-    redChanB, 0, 255, *PageDebug::Colors::ChanB::self, Item::FuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
+    redChanB, 0, 255, *PageDebug::Colors::ChanB::self, Item::EFuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
 
 
 DEF_GOVERNOR(gGreenChanB,
     "Зелёный", "Green",
     "", "",
-    greenChanB, 0, 255, *PageDebug::Colors::ChanB::self, Item::FuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
+    greenChanB, 0, 255, *PageDebug::Colors::ChanB::self, Item::EFuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
 
 DEF_GOVERNOR(gBlueChanB,
     "Синий", "Blue",
     "", "",
-    blueChanB, 0, 255, *PageDebug::Colors::ChanB::self, Item::FuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
+    blueChanB, 0, 255, *PageDebug::Colors::ChanB::self, Item::EFuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
 
 
 DEF_PAGE_3(pChanB, //-V641
@@ -96,7 +96,7 @@ DEF_PAGE_3(pChanB, //-V641
     &gRedChanB,
     &gGreenChanB,
     &gBlueChanB,
-    Page::Color_ChanA, PageDebug::Colors::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
+    Page::Color_ChanA, PageDebug::Colors::self, Item::EFuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 
@@ -104,18 +104,18 @@ DEF_PAGE_3(pChanB, //-V641
 DEF_GOVERNOR(gRedMenu,
     "Красный", "Red",
     "", "",
-    redMenu, 0, 255, *PageDebug::Colors::Menu::self, Item::FuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
+    redMenu, 0, 255, *PageDebug::Colors::Menu::self, Item::EFuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
 
 
 DEF_GOVERNOR(gGreenMenu,
     "Зелёный", "Green",
     "", "",
-    greenMenu, 0, 255, *PageDebug::Colors::Menu::self, Item::FuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
+    greenMenu, 0, 255, *PageDebug::Colors::Menu::self, Item::EFuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
 
 DEF_GOVERNOR(gBlueMenu,
     "Синий", "Blue",
     "", "",
-    blueMenu, 0, 255, *PageDebug::Colors::Menu::self, Item::FuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
+    blueMenu, 0, 255, *PageDebug::Colors::Menu::self, Item::EFuncActive, OnChanged, EmptyFuncVV, EmptyFuncVB);
 
 
 DEF_PAGE_3(pMenu, //-V641
@@ -124,7 +124,7 @@ DEF_PAGE_3(pMenu, //-V641
     &gRedMenu,
     &gGreenMenu,
     &gBlueMenu,
-    Page::Color_ChanA, PageDebug::Colors::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
+    Page::Color_ChanA, PageDebug::Colors::self, Item::EFuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 
@@ -135,7 +135,7 @@ DEF_PAGE_3(pColors,
     PageDebug::Colors::ChanA::self,
     PageDebug::Colors::ChanB::self,
     PageDebug::Colors::Menu::self,
-    Page::Colors, PageDebug::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
+    Page::Colors, PageDebug::self, Item::EFuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 

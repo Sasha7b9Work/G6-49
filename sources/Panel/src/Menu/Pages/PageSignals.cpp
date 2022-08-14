@@ -306,7 +306,7 @@ DEF_BUTTON( bTuneParameter,                                                     
 DEF_CHOICE_PARAMETER( cParameters,                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Параметр ---
     "ПАРАМЕТР", "PARAMETER",
     "Выбор параметра для настройки", "Select an option to configure",
-    *PageSignals::self, Item::FuncActive, OnPress_TuneParameter, WAVE(ChA).GetForm(0)
+    *PageSignals::self, Item::EFuncActive, OnPress_TuneParameter, WAVE(ChA).GetForm(0)
 )
 
 
@@ -317,7 +317,7 @@ DEF_PAGE_4( pageSignals,   //-V641
     &cFormA,                    // НАСТРОЙКИ СИГНАЛОВ - Форма
     &cParameters,               // НАСТРОЙКИ СИГНАЛОВ - Параметр
     &bTuneParameter,            // НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра
-    Page::Signals, PageMain::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, FuncBeforeDraw
+    Page::Signals, PageMain::self, Item::EFuncActive, Page::FuncEnter, FuncOnKey, FuncBeforeDraw
 )
 
 Page *PageSignals::self = (Page *)&pageSignals;

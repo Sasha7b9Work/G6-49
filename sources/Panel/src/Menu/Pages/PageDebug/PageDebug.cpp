@@ -424,7 +424,7 @@ DEF_CHOICE_2(cConsole,                                                          
     "Отображение консоли выключено", "Console display off",
     ENABLED_RU, ENABLED_EN,
     "Отображение консоли включено", "Console Display Enabled",
-    set.dbg.showConsole, pDebug, Item::FuncActive, OnPress_DebugMode, FuncDraw
+    set.dbg.showConsole, pDebug, Item::EFuncActive, OnPress_DebugMode, FuncDraw
 )
 
 
@@ -445,7 +445,7 @@ DEF_CHOICE_2( cSaveScreen,
     "Ручка выполняет стандартную функцию", "The handle performs a standard function",
     ENABLED_RU, ENABLED_EN,
     "Нажатие на ручку сохраняет содержимое экрана на флешку", "Pressing the pen saves the contents of the screen to a USB flash drive",
-    saveSreenEnabled, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
+    saveSreenEnabled, pDebug, Item::EFuncActive, FuncChangedChoice, FuncDraw
 )
 
 
@@ -456,7 +456,7 @@ static void OnPress_SaveSettings()
 DEF_BUTTON( bSaveSettings,                                                                                                                            //--- ОТЛАДКА - СОХРАНИТЬ НАСТРОЙКИ ---
     "СОХРАНИТЬ НАСТРОЙКИ", "SAVE SETTINGS",
     "Сохранить текущие настройки", "Save current settings",
-    pDebug, Item::FuncActive, OnPress_SaveSettings, FuncDraw
+    pDebug, Item::EFuncActive, OnPress_SaveSettings, FuncDraw
 )
 
 
@@ -468,7 +468,7 @@ DEF_CHOICE_2( cStatistics,                                                      
     "Показ статистики отключён", "Show statistics disabled",
     ENABLED_RU,                  ENABLED_EN,
     "Показ статистики включен",  "Show statistics enabled",
-    set.dbg.showStatistics, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
+    set.dbg.showStatistics, pDebug, Item::EFuncActive, FuncChangedChoice, FuncDraw
 )
 
 
@@ -479,7 +479,7 @@ DEF_CHOICE_2( cShowSends,                                                       
     "Показ параметров отключён", "Param display disabled",
     ENABLED_RU,                  ENABLED_EN,
     "Показ параметров включён",  "Param display enabled",
-    set.dbg.showSends, pDebug, Item::FuncActive, FuncChangedChoice, FuncDraw
+    set.dbg.showSends, pDebug, Item::EFuncActive, FuncChangedChoice, FuncDraw
 )
 
 
@@ -491,7 +491,7 @@ static void OnPress_Prev()
 DEF_BUTTON( bPrev,                                                                                                                                            //--- РЕГИСТРЫ - Предыдущий ---
     "Предыдущий", "Previous",
     "Переход к предыдущему регистру", "Go to previous register",
-    pRegisters, Item::FuncActive, OnPress_Prev, FuncDraw
+    pRegisters, Item::EFuncActive, OnPress_Prev, FuncDraw
 )
 
 
@@ -503,7 +503,7 @@ static void OnPress_Next()
 DEF_BUTTON( bNext,                                                                                                                                             //--- РЕГИСТРЫ - Следующий ---
     "Следующий", "Next",
     "Переход к следующему регистру", "Go to the next register",
-    pRegisters, Item::FuncActive, OnPress_Next, FuncDraw
+    pRegisters, Item::EFuncActive, OnPress_Next, FuncDraw
 )
 
 
@@ -524,7 +524,7 @@ static void OnDraw_Cancel(int x, int y)
 DEF_BUTTON( bCancel,                                                                                                                               //--- РЕГИСТРЫ - Input window - Отмена ---
     "Отмена", "Cancel",
     "Отменяет засылку значения в регистр и закрывает окно ввода", "Cancels registering a value and closes the input window",
-    pRegisters, Item::FuncActive, OnPress_DebugCancel, OnDraw_Cancel
+    pRegisters, Item::EFuncActive, OnPress_DebugCancel, OnDraw_Cancel
 )
 
 
@@ -536,7 +536,7 @@ static void OnDraw_Backspace(int x, int y)
 DEF_BUTTON( bBackspace,                                                                                                                         //--- РЕГИСТРЫ - Input window - Backspace ---
     "Backspace", "Backspace",
     "Удаляет последний введённый символ", "Deletes the last character entered",
-    pRegisters, Item::FuncActive, NumberBuffer::PressBackspace, OnDraw_Backspace
+    pRegisters, Item::EFuncActive, NumberBuffer::PressBackspace, OnDraw_Backspace
 )
 
 
@@ -554,7 +554,7 @@ static void OnDraw_Save(int x, int y)
 DEF_BUTTON( bSave,                                                                                                                                //--- РЕГИСТРЫ - Окно ввода --- Заслать ---
     "Заслать", "Send",
     "Записывает значение в выбранный регистр", "Writes a value to the selected register",
-    pRegisters, Item::FuncActive, OnPress_Save, OnDraw_Save
+    pRegisters, Item::EFuncActive, OnPress_Save, OnDraw_Save
 )
 
 
@@ -610,7 +610,7 @@ static void OnPress_Send()
 DEF_BUTTON( bSend,                                                                                                                                               //--- РЕГИСТРЫ - Заслать ---
     "Заслать", "Send",
     "Открывает окно ввода значения регистра", "Opens a register value input window",
-    pRegisters, Item::FuncActive, OnPress_Send, FuncDraw
+    pRegisters, Item::EFuncActive, OnPress_Send, FuncDraw
 )
 
 
@@ -621,7 +621,7 @@ DEF_PAGE_4_VAR( pRegisters,                                                     
     &bNext,
     &bSend,
     &Item::emptyLight,
-    Page::Registers, &pDebug, Item::FuncActive, Page::FuncEnter, OnKey_PageRegisters, FuncBeforeDraw
+    Page::Registers, &pDebug, Item::EFuncActive, Page::FuncEnter, OnKey_PageRegisters, FuncBeforeDraw
 )
 
 
@@ -636,7 +636,7 @@ static void OnChange_FreqMeterK()
 DEF_GOVERNOR(gFreqMeterK,                                                                                                                                          //--- ЧАСТОТОМЕР - Уровень ---
     "Ур синхр", "Trig lev",
     "Калибровочный коэффициент уровня синхронизации частотомера", "Frequency meter calibration factor",
-    setCal.kFreqMeter, -150, 150, pDebug, Item::FuncActive, OnChange_FreqMeterK, EmptyFuncVV, 0
+    setCal.kFreqMeter, -150, 150, pDebug, Item::EFuncActive, OnChange_FreqMeterK, EmptyFuncVV, 0
 )
 
 
@@ -653,7 +653,7 @@ DEF_PAGE_10( pDebug,                                                            
     &cStatistics,                               // ОТЛАДКА - Статистика
     &cShowSends,                                // ОТЛАДКА - Показывать параметры
     &bSaveSettings,                             // ОТЛАДКА - Сохранить настройки
-    Page::Debug, PageService::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
+    Page::Debug, PageService::self, Item::EFuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 

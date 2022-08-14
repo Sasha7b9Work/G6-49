@@ -48,7 +48,7 @@ static void Draw_More(int x, int y)
 DEF_GRAPH_BUTTON(sbMore,
     "Больше", "More",
     "Увеличить порядок", "Increase order",
-    *PageTuneParameter::self, Item::FuncActive, DisplayEntering::OnButtonOrderMore, Draw_More
+    *PageTuneParameter::self, Item::EFuncActive, DisplayEntering::OnButtonOrderMore, Draw_More
 )
 
 
@@ -63,7 +63,7 @@ static void Draw_Less(int x, int y)
 DEF_GRAPH_BUTTON(sbLess,
     "Меньше", "Less",
     "Уменьшить порядок", "Decrease order",
-    *PageTuneParameter::self, Item::FuncActive, DisplayEntering::OnButtonOrderLess, Draw_Less
+    *PageTuneParameter::self, Item::EFuncActive, DisplayEntering::OnButtonOrderLess, Draw_Less
 )
 
 
@@ -82,7 +82,7 @@ static void Draw_Cancel(int x, int y)
 DEF_GRAPH_BUTTON(sbCancel,
     "Отменить", "Cancel",
     "Отказаться от ввода нового значения", "Refuse to enter a new value",
-    *PageTuneParameter::self, Item::FuncActive, OnPress_Cancel, Draw_Cancel
+    *PageTuneParameter::self, Item::EFuncActive, OnPress_Cancel, Draw_Cancel
 )
 
 
@@ -112,7 +112,7 @@ void PageTuneParameter::OnPress_Apply()
 DEF_GRAPH_BUTTON(sbEnter,
     "Применить", "Apply",
     "Подтвердить ввод нового значения", "Confirm new value entry",
-    *PageTuneParameter::self, Item::FuncActive, PageTuneParameter::OnPress_Apply, Draw_Apply
+    *PageTuneParameter::self, Item::EFuncActive, PageTuneParameter::OnPress_Apply, Draw_Apply
 )
 
 
@@ -201,7 +201,7 @@ DEF_PAGE_SB(pTuneParameter,
     &Item::emptyDark,
     &sbCancel,
     &sbEnter,
-    Page::SB_Input, 0, Item::FuncActive, OnOpenClose_TuneParameter, OnDraw_TuneParameter, OnControl_TuneParameter
+    Page::SB_Input, 0, Item::EFuncActive, OnOpenClose_TuneParameter, OnDraw_TuneParameter, OnControl_TuneParameter
 )
 
 Page *PageTuneParameter::self = (Page *)&pTuneParameter;

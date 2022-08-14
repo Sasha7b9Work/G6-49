@@ -14,7 +14,7 @@ Page *PageLoadForm::self = (Page *)&pageLoad;
 DEF_BUTTON( bUp,                                                                                                                              //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - ¬‚Âı ---
     "¬‚Âı", "Up",
     "", "",
-    pageLoad, Item::FuncActive, FDrive::PressUp, FuncDraw
+    pageLoad, Item::EFuncActive, FDrive::PressUp, FuncDraw
 )
 
 volatile const ButtonBase *pbUp = &bUp;
@@ -23,7 +23,7 @@ volatile const ButtonBase *pbUp = &bUp;
 DEF_BUTTON( bDown,                                                                                                                             //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - ¬ÌËÁ ---
     "¬ÌËÁ", "Down",
     "", "",
-    pageLoad, Item::FuncActive, FDrive::PressDown, FuncDraw
+    pageLoad, Item::EFuncActive, FDrive::PressDown, FuncDraw
 )
 
 volatile const ButtonBase *pbDown = &bDown;
@@ -32,7 +32,7 @@ volatile const ButtonBase *pbDown = &bDown;
 DEF_BUTTON( bEnter,                                                                                                                           //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - Enter ---
     "¬˚·Ó", "Choice",
     "", "",
-    pageLoad, Item::FuncActive, Button::FuncPress, FuncDraw
+    pageLoad, Item::EFuncActive, Button::FuncPress, FuncDraw
 )
 
 volatile const ButtonBase *pbEnter = &bEnter;
@@ -47,7 +47,7 @@ static void OnPress_Choose()
 DEF_BUTTON( bChoose,                                                                                                                     //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - ”ÒÚ‡ÌÓ‚ËÚ¸ ---
     "¬˚·‡Ú¸", "Select",
     "", "",
-    pageLoad, Item::FuncActive, OnPress_Choose, FuncDraw
+    pageLoad, Item::EFuncActive, OnPress_Choose, FuncDraw
 )
 
 
@@ -80,7 +80,7 @@ DEF_PAGE_4( pageLoad,                                                           
     0,
     0,
     0,
-    Page::Settings_Load, nullptr, Item::FuncActive, Page::FuncEnter, OnControl, FDrive::Draw
+    Page::Settings_Load, nullptr, Item::EFuncActive, Page::FuncEnter, OnControl, FDrive::Draw
 )
 
 

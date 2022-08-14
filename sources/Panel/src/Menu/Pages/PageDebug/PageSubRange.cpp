@@ -18,7 +18,7 @@ DEF_CHOICE_2( cPE15,
     "", "",
     "0", "0", "", "",
     "1", "1", "", "",
-    set.reg.PE15, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PE15, FuncDraw
+    set.reg.PE15, (*PageDebug::SubRange::self), Item::EFuncActive, OnPress_PE15, FuncDraw
 )
 
 
@@ -35,7 +35,7 @@ DEF_CHOICE_2( cPB10,
     "", "",
     "0", "0", "", "",
     "1", "1", "", "",
-    set.reg.PB10, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PB10, FuncDraw
+    set.reg.PB10, (*PageDebug::SubRange::self), Item::EFuncActive, OnPress_PB10, FuncDraw
 )
 
 
@@ -52,7 +52,7 @@ DEF_CHOICE_2( cPF0,
     "", "",
     "0", "0", "", "",
     "1", "1", "", "",
-    set.reg.PF0, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PF0, FuncDraw
+    set.reg.PF0, (*PageDebug::SubRange::self), Item::EFuncActive, OnPress_PF0, FuncDraw
 )
 
 
@@ -69,7 +69,7 @@ DEF_CHOICE_2( cPF5,
     "", "",
     "0", "0", "", "",
     "1", "1", "", "",
-    set.reg.PF5, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PF5, FuncDraw
+    set.reg.PF5, (*PageDebug::SubRange::self), Item::EFuncActive, OnPress_PF5, FuncDraw
 )
 
 
@@ -86,7 +86,7 @@ DEF_CHOICE_2( cPC13,
     "", "",
     "0", "0", "", "",
     "1", "1", "", "",
-    set.reg.PC13, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PC13, FuncDraw
+    set.reg.PC13, (*PageDebug::SubRange::self), Item::EFuncActive, OnPress_PC13, FuncDraw
 )
 
 
@@ -103,7 +103,7 @@ DEF_CHOICE_2(cPC14,
     "", "",
     "0", "0", "", "",
     "1", "1", "", "",
-    set.reg.PC14, (*PageDebug::SubRange::self), Item::FuncActive, OnPress_PC14, FuncDraw
+    set.reg.PC14, (*PageDebug::SubRange::self), Item::EFuncActive, OnPress_PC14, FuncDraw
 )
 
 
@@ -116,7 +116,7 @@ DEF_PAGE_6(pSubRanges, //-V641
     &cPF5,
     &cPC13,
     &cPC14,
-    Page::SubRanges, PageDebug::self, Item::FuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
+    Page::SubRanges, PageDebug::self, Item::EFuncActive, Page::FuncEnter, FuncOnKey, Page::FuncDraw
 )
 
 Page *PageDebug::SubRange::self = (Page *)&pSubRanges;

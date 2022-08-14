@@ -104,7 +104,7 @@ public:
         static const int HEIGHT = 12;
     };
 
-    static bool FuncActive() { return true; }
+    static bool EFuncActive() { return true; }
 
     static Item emptyDark;
     static Item emptyLight;
