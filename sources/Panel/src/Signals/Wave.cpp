@@ -233,7 +233,7 @@ void Form::TuneGenerator()
             CloseCompositeParameter();
 
             SendParameterToGenerator(TypeDParam::Frequency);
-            SendParameterToGenerator(TypeDParam::Amplitude);
+            SendParameterToGenerator(TypeDParam::AmplitudePic);
             SendParameterToGenerator(TypeDParam::Offset);
 
             OpenCompositeParameter();
@@ -254,7 +254,7 @@ void Form::TuneGenerator()
             CloseCompositeParameter();
 
             SendParameterToGenerator(TypeDParam::Frequency);
-            SendParameterToGenerator(TypeDParam::Amplitude);
+            SendParameterToGenerator(TypeDParam::AmplitudePic);
             SendParameterToGenerator(TypeDParam::Offset);
         }
 
@@ -266,7 +266,7 @@ void Form::TuneGenerator()
     else
     {
         SendParameterToGenerator(TypeDParam::Frequency);
-        SendParameterToGenerator(TypeDParam::Amplitude);
+        SendParameterToGenerator(TypeDParam::AmplitudePic);
         SendParameterToGenerator(TypeDParam::Offset);
         SendParameterToGenerator(TypeDParam::Period);
         SendParameterToGenerator(TypeDParam::Duration);
@@ -738,7 +738,7 @@ double Form::GetOffset() const
 
 double Form::GetAmplitude() const
 {
-    DParam *parameter = FindParameter(TypeDParam::Amplitude);
+    DParam *parameter = FindParameter(TypeDParam::AmplitudePic);
 
     return (parameter) ? parameter->GetValue().ToDouble() : 0.0;
 }

@@ -119,7 +119,7 @@ struct TypeDParam
     {
         Frequency,              // Частота
         Period,                 // Период
-        Amplitude,              // Амплитуда
+        AmplitudePic,           // Размах
         Offset,                 // Смещение
         Duration,               // Длительность
         DutyRatio,              // Скважность
@@ -206,7 +206,7 @@ struct DParam : public Param
 
     DParam &operator=(const DParam &);
 
-    bool IsAmplitude() const { return type == TypeDParam::Amplitude; }
+    bool IsAmplitude() const { return type == TypeDParam::AmplitudePic; }
     bool IsFrequency() const { return type == TypeDParam::Frequency; }
 
     // Возвращает количество значащих знакомест перед запятой (исключая знаковый разряд). В предположении, что значение приведено к порядку order
@@ -430,9 +430,9 @@ struct PAmplitudePic : public PVoltage
                   const Value &max = Value("10", Order::One),
                   pValueInRange valueInRange = EValueInRange,
                   const Value &value = DEFAULT_AMPLITUDE) :
-        PVoltage(TypeDParam::Amplitude, "Размах", "Amplitude", min, max, valueInRange, value) { }
+        PVoltage(TypeDParam::AmplitudePic, "Размах", "Amplitude", min, max, valueInRange, value) { }
 
-    virtual Value GetMax() const;
+    static SMinMax InRange(Form *);
 };
 
 
@@ -444,7 +444,7 @@ struct POffset : public PVoltage
             const Value &value = Value("0", Order::One)) :
         PVoltage(TypeDParam::Offset, "Смещение", "Offset", min, max, valueInRange, value) { }
 
-    static SMinMax InRange(Form *form);
+    static SMinMax InRange(Form *);
 };
 
 

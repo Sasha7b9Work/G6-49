@@ -417,7 +417,7 @@ static void HintSound(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pchar FuncAmplitude(pchar buffer)
 {
-    return SCPI::ProcessParameterDouble(buffer, TypeDParam::Amplitude);
+    return SCPI::ProcessParameterDouble(buffer, TypeDParam::AmplitudePic);
 }
 
 

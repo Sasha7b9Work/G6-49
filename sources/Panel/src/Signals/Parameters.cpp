@@ -24,7 +24,7 @@ namespace MathSupport
     {
         TypeDParam::E type = param->GetType();
 
-        if (type == TypeDParam::Amplitude)
+        if (type == TypeDParam::AmplitudePic)
         {
             return "00.0000";
         }
@@ -366,7 +366,7 @@ void IParam::LoadValue()
 
 bool DParam::IsNotOrdered() const
 {
-    return (type == TypeDParam::Amplitude) || (type == TypeDParam::Offset) || (type == TypeDParam::Phase);
+    return (type == TypeDParam::AmplitudePic) || (type == TypeDParam::Offset) || (type == TypeDParam::Phase);
 }
 
 
@@ -708,21 +708,6 @@ void CMSParam::OnPressButtonTune()
 }
 
 
-Value PAmplitudePic::GetMax() const
-{
-    // ampl / 2 + fabs(cm) <= 5
-
-    Value offset = form->FindParameter(TypeDParam::Offset)->GetValue();
-    offset.SetSign(1);
-    offset.Mul(2);
-
-    Value result = DParam::GetMax();
-    result.Sub(offset);
-
-    return result;
-}
-
-
 pchar TypeCParam::Name(TypeCParam::E type)
 {
     static pchar  const names[TypeCParam::Count] =
@@ -868,7 +853,7 @@ SMinMax POffset::InRange(Form *form)
     // Ампл <= 1В | [0 ... 2.5], ampl / 2 + fabs(см) <= 2.5
     // Ампл > 1В  | [0 ... 5],   ампл / 2 + fabs(см) <= 5
 
-    Value amplitude = form->FindParameter(TypeDParam::Amplitude)->GetValue();
+    Value amplitude = form->FindParameter(TypeDParam::AmplitudePic)->GetValue();
     DParam *param_offset = form->FindParameter(TypeDParam::Offset);
 
     SMinMax result;
@@ -893,6 +878,20 @@ SMinMax POffset::InRange(Form *form)
     Value offset = param_offset->GetValue();
 
     result.valid = (offset <= result.max) && (offset >= result.min);
+
+    return result;
+}
+
+
+SMinMax PAmplitudePic::InRange(Form * /*form*/)
+{
+    // ampl / 2 + fabs(cm) <= 5
+
+    SMinMax result;
+    result.min = Value(0);
+
+//    DParam *param_offset = form->FindParameter(TypeDParam::Offset);
+//    DParam *param_ampl = form->FindParameter(TypeDParam::AmplitudePic);
 
     return result;
 }
