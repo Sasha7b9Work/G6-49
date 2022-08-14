@@ -105,6 +105,7 @@ public:
     };
 
     static bool EFuncActive() { return true; }
+    static void EFuncDraw(int, int) {}
 
     static Item emptyDark;
     static Item emptyLight;

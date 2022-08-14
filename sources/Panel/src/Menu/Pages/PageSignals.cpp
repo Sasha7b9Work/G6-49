@@ -84,7 +84,7 @@ DEF_CHOICE_2( cChannel,                                                         
     "Управление параметрами сигнала на выходе A", "Control the parameters of the signal at output A",
     "B",                                          "B",
     "Управление параметрами сигнала на выходе B", "Control the parameters of the signal at output B",
-    set.cur_chan, *PageSignals::self, IsActive_Channel, PageSignals::OnPress_Channel, FuncDraw
+    set.cur_chan, *PageSignals::self, IsActive_Channel, PageSignals::OnPress_Channel, Item::EFuncDraw
 )
 
 
@@ -194,7 +194,7 @@ DEF_CHOICE_8( cFormA,                                                           
     FORM_RU(TypeForm::Impulse),     FORM_EN(TypeForm::Impulse),     "Импульсы",         "Impulse",
     FORM_RU(TypeForm::Packet),      FORM_EN(TypeForm::Packet),      "Пакеты",           "Packets",
     FORM_RU(TypeForm::Free),        FORM_EN(TypeForm::Free),        "Произвольный",     "Free",
-    numForm, *PageSignals::self, IsActive_Form, PageSignals::OnChanged_Form, FuncDraw
+    numForm, *PageSignals::self, IsActive_Form, PageSignals::OnChanged_Form, Item::EFuncDraw
 )
 
 DEF_CHOICE_7( cFormB,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
@@ -207,7 +207,7 @@ DEF_CHOICE_7( cFormB,                                                           
     FORM_RU(TypeForm::Meander),   FORM_RU(TypeForm::Meander),   "Меандр",           "Meander",
     FORM_RU(TypeForm::Impulse),   FORM_RU(TypeForm::Impulse),   "Импульсы",         "Impulse",
     FORM_RU(TypeForm::Free),      FORM_RU(TypeForm::Free),      "Произвольный",     "Free",
-    numForm, *PageSignals::self, IsActive_Form, PageSignals::OnChanged_Form, FuncDraw
+    numForm, *PageSignals::self, IsActive_Form, PageSignals::OnChanged_Form, Item::EFuncDraw
 )
 
 

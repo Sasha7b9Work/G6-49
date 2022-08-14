@@ -115,7 +115,7 @@ DEF_CHOICE_3(cChannelCal,
     "A", "A", "", "",
     "B", "B", "", "",
     "",  "",  "", "",
-    channel, pCalibration, Item::EFuncActive, OnChange_Source, FuncDraw
+    channel, pCalibration, Item::EFuncActive, OnChange_Source, Item::EFuncDraw
 )
 
 DEF_CHOICE_3(cSignal,
@@ -124,7 +124,7 @@ DEF_CHOICE_3(cSignal,
     "Синус", "Sinus", "", "",
     "DDS", "DDS", "", "",
     "", "", "", "",
-    signal, pCalibration, Item::EFuncActive, OnChange_Source, FuncDraw
+    signal, pCalibration, Item::EFuncActive, OnChange_Source, Item::EFuncDraw
 )
 
 DEF_CHOICE_5(cRange,
@@ -135,7 +135,7 @@ DEF_CHOICE_5(cRange,
     "1 В",    "1 V",    "", "",
     "3 В",    "3 V",    "", "",
     "10 В",   "10 V",   "", "",
-    range, pCalibration, Item::EFuncActive, OnChange_Parameters, FuncDraw
+    range, pCalibration, Item::EFuncActive, OnChange_Parameters, Item::EFuncDraw
 )
 
 // Для смещения +/- 5В
@@ -146,7 +146,7 @@ DEF_CHOICE_4(cParameterFullVoltage,
     "+5В",     "+5V",       "", "",
     "0В",      "0V",        "", "",
     "-5В",     "-5V",       "", "",
-    parameter, pCalibration, Item::EFuncActive, OnChange_Parameters, FuncDraw
+    parameter, pCalibration, Item::EFuncActive, OnChange_Parameters, Item::EFuncDraw
 )
 
 
@@ -158,7 +158,7 @@ DEF_CHOICE_4(cParameterHalfVoltage,
     "+2.5В",   "+2.5V",     "", "",
     "0В",      "0V",        "", "",
     "-2.5В",   "-2.5V",     "", "",
-    parameter, pCalibration, Item::EFuncActive, OnChange_Parameters, FuncDraw
+    parameter, pCalibration, Item::EFuncActive, OnChange_Parameters, Item::EFuncDraw
 )
 
 

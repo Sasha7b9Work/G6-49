@@ -45,7 +45,7 @@ DEF_CHOICE_2(cLanguage,
     "Выбор языка", "Language choice",
     "Russian",    "Russian",    "", "",
     "Aнглийский", "Английский", "", "",
-    set.lang, pService, Item::EFuncActive, FuncChangedChoice, FuncDraw
+    set.lang, pService, Item::EFuncActive, FuncChangedChoice, Item::EFuncDraw
 )
 
 
@@ -66,7 +66,7 @@ DEF_CHOICE_4(cVolume,
     "Мин",   "Min",    "", "",
     "Cредн", "Middle", "", "",
     "Макс",  "Max",    "", "",
-    setCal.soundVolume, pService, Item::EFuncActive, PageService::OnChange_Volume, FuncDraw
+    setCal.soundVolume, pService, Item::EFuncActive, PageService::OnChange_Volume, Item::EFuncDraw
 )
 
 

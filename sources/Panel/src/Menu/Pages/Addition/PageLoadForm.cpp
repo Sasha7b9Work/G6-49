@@ -14,7 +14,7 @@ Page *PageLoadForm::self = (Page *)&pageLoad;
 DEF_BUTTON( bUp,                                                                                                                              //--- ÍÀÑÒĞÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃĞÓÇÊÀ - Ââåğõ ---
     "Ââåğõ", "Up",
     "", "",
-    pageLoad, Item::EFuncActive, FDrive::PressUp, FuncDraw
+    pageLoad, Item::EFuncActive, FDrive::PressUp, Item::EFuncDraw
 )
 
 volatile const ButtonBase *pbUp = &bUp;
@@ -23,7 +23,7 @@ volatile const ButtonBase *pbUp = &bUp;
 DEF_BUTTON( bDown,                                                                                                                             //--- ÍÀÑÒĞÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃĞÓÇÊÀ - Âíèç ---
     "Âíèç", "Down",
     "", "",
-    pageLoad, Item::EFuncActive, FDrive::PressDown, FuncDraw
+    pageLoad, Item::EFuncActive, FDrive::PressDown, Item::EFuncDraw
 )
 
 volatile const ButtonBase *pbDown = &bDown;
@@ -32,7 +32,7 @@ volatile const ButtonBase *pbDown = &bDown;
 DEF_BUTTON( bEnter,                                                                                                                           //--- ÍÀÑÒĞÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃĞÓÇÊÀ - Enter ---
     "Âûáîğ", "Choice",
     "", "",
-    pageLoad, Item::EFuncActive, Button::FuncPress, FuncDraw
+    pageLoad, Item::EFuncActive, Button::FuncPress, Item::EFuncDraw
 )
 
 volatile const ButtonBase *pbEnter = &bEnter;
@@ -47,7 +47,7 @@ static void OnPress_Choose()
 DEF_BUTTON( bChoose,                                                                                                                     //--- ÍÀÑÒĞÎÉÊÈ ÑÈÃÍÀËÎÂ - ÇÀÃĞÓÇÊÀ - Óñòàíîâèòü ---
     "Âûáğàòü", "Select",
     "", "",
-    pageLoad, Item::EFuncActive, OnPress_Choose, FuncDraw
+    pageLoad, Item::EFuncActive, OnPress_Choose, Item::EFuncDraw
 )
 
 

@@ -27,7 +27,7 @@ DEF_CHOICE_3( cMeasure,                                                         
     "Отключено", "Off",       "Измерения отключены", "Measurements off",
     "Частота",   "Frequency", "Измерение частоты",   "Frequency measurement",
     "Период",    "Period",    "Измерение периода",   "Period measurement",
-    set.freq.measure, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_Measure, FuncDraw
+    set.freq.measure, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_Measure, Item::EFuncDraw
 )
 
 
@@ -45,7 +45,7 @@ DEF_CHOICE_2( cInterval,                                                        
     "Выбор интервала запуска измерений частоты", "Frequency start interval selection",
     "1 c",  "1 s",  "Запуск процесса измерения частомера производится с интервалом 1 секунда",  "The process of measuring the frequency meter is started at intervals of 1 second",
     "10 с", "10 s", "Запуск процесса измерения частомера производится с интервалом 10 секунда", "The measurement process starts with a 10 second interval",
-    set.freq.interval, pFrequencyCounter, Item::EFuncActive, OnPress_Interval, FuncDraw
+    set.freq.interval, pFrequencyCounter, Item::EFuncActive, OnPress_Interval, Item::EFuncDraw
 )
 
 volatile const ChoiceBase *pcInterval = &cInterval;
@@ -68,7 +68,7 @@ DEF_CHOICE_5( cBillingTime,                                                     
     "100 мс",   "100 ms",   "Длительность измерения 100 миллисекунд",   "Measurement duration 100 milliseconds",
     "1000 мс",  "1000 ms",  "Длительность измерения 1000 миллисекунд",  "Measurement duration 1000 milliseconds",
     "10000 мс", "10000 ms", "Длительность измерения 10000 миллисекунд", "Measurement duration 10000 milliseconds",
-    set.freq.billingTime, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_BillingTime, FuncDraw
+    set.freq.billingTime, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_BillingTime, Item::EFuncDraw
 )
 
 
@@ -77,7 +77,7 @@ DEF_CHOICE_2(cResist,                                                           
     "Управление сопротивлением входа частотомера", "Frequency counter input resistance control",
     "1 МОм", "1 MOhm", "Сопротивление входа 1 МОм", "Input impedance 1 MOhm",
     "50 Ом", "50 Ohm", "Сопротивление входа 50 Ом", "50 ohm input impedance",
-    set.freq.resist, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_Resist, FuncDraw
+    set.freq.resist, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_Resist, Item::EFuncDraw
 )
 
 void PageFrequencyCounter::OnPress_Resist(bool active)
@@ -94,7 +94,7 @@ DEF_CHOICE_2(cCouple,                                                           
     "Пропускает/запрещает постоянную составляющую", "Skips / Disables DC",
     "Перем", "Alternate", "Постоянная составляющая поступает на вход частотомера",    "The constant component is fed to the input of the frequency counter",
     "Пост",  "Direct",    "Постоянная составляющая не поступает на вход частотомера", "The constant component does not go to the input of the frequency meter",
-    set.freq.couple, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_Couple, FuncDraw
+    set.freq.couple, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_Couple, Item::EFuncDraw
 )
 
 void PageFrequencyCounter::OnPress_Couple(bool active)
@@ -111,7 +111,7 @@ DEF_CHOICE_2(cFiltr,                                                            
     "Включает/отключает фильтр нижних частот на входе частотомера", "Enables / disables the low-pass filter at the input of the frequency meter",
     DISABLED_RU, DISABLED_EN, "ФНЧ на входе частотомера отключен",  "LPF at the input of the frequency meter is disabled",
     ENABLED_RU,  ENABLED_EN,  "ФНЧ на входе частотомера водключен", "Low-pass filter at the input of the frequency meter",
-    set.freq.filtr, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_Filtr, FuncDraw
+    set.freq.filtr, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_Filtr, Item::EFuncDraw
 )
 
 void PageFrequencyCounter::OnPress_Filtr(bool active)
@@ -130,7 +130,7 @@ DEF_CHOICE_5(cAvePeriod,                                                        
     "100",   "100",   "Измерения производить по ста периодам",            "Measurements over a hundred periods",
     "1000",  "1000",  "Измерения производить по тысяче периодов",         "Measure over a thousand periods",
     "10000", "10000", "Измерения производить по десяти тысячам периодов", "Measure over ten thousand periods",
-    set.freq.avePeriod, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_AvePeriod, FuncDraw
+    set.freq.avePeriod, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_AvePeriod, Item::EFuncDraw
 )
 
 void PageFrequencyCounter::OnPress_AvePeriod(bool active)
@@ -150,7 +150,7 @@ DEF_CHOICE_5(cTimeStamps,                                                       
     "10-5 с", "10-5 s",  "", "",
     "10-6 с", "10-6 s",  "", "",
     "10-7 с", "10-7 s",  "", "",
-    set.freq.timeStamps, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_TimeStamps, FuncDraw
+    set.freq.timeStamps, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_TimeStamps, Item::EFuncDraw
 )
 
 void PageFrequencyCounter::OnPress_TimeStamps(bool active)
@@ -167,7 +167,7 @@ DEF_CHOICE_2(cTest,                                                             
     "Включение/отключение тестового режима", "Enable / disable test mode",
     DISABLED_RU, DISABLED_EN, "", "",
     ENABLED_RU,  ENABLED_EN,  "", "",
-    set.freq.test, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_Test, FuncDraw
+    set.freq.test, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_Test, Item::EFuncDraw
 )
 
 void PageFrequencyCounter::OnPress_Test(bool active)

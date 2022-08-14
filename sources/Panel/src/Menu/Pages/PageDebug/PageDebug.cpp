@@ -424,7 +424,7 @@ DEF_CHOICE_2(cConsole,                                                          
     "Отображение консоли выключено", "Console display off",
     ENABLED_RU, ENABLED_EN,
     "Отображение консоли включено", "Console Display Enabled",
-    set.dbg.showConsole, pDebug, Item::EFuncActive, OnPress_DebugMode, FuncDraw
+    set.dbg.showConsole, pDebug, Item::EFuncActive, OnPress_DebugMode, Item::EFuncDraw
 )
 
 
@@ -445,7 +445,7 @@ DEF_CHOICE_2( cSaveScreen,
     "Ручка выполняет стандартную функцию", "The handle performs a standard function",
     ENABLED_RU, ENABLED_EN,
     "Нажатие на ручку сохраняет содержимое экрана на флешку", "Pressing the pen saves the contents of the screen to a USB flash drive",
-    saveSreenEnabled, pDebug, Item::EFuncActive, FuncChangedChoice, FuncDraw
+    saveSreenEnabled, pDebug, Item::EFuncActive, FuncChangedChoice, Item::EFuncDraw
 )
 
 
@@ -456,7 +456,7 @@ static void OnPress_SaveSettings()
 DEF_BUTTON( bSaveSettings,                                                                                                                            //--- ОТЛАДКА - СОХРАНИТЬ НАСТРОЙКИ ---
     "СОХРАНИТЬ НАСТРОЙКИ", "SAVE SETTINGS",
     "Сохранить текущие настройки", "Save current settings",
-    pDebug, Item::EFuncActive, OnPress_SaveSettings, FuncDraw
+    pDebug, Item::EFuncActive, OnPress_SaveSettings, Item::EFuncDraw
 )
 
 
@@ -468,7 +468,7 @@ DEF_CHOICE_2( cStatistics,                                                      
     "Показ статистики отключён", "Show statistics disabled",
     ENABLED_RU,                  ENABLED_EN,
     "Показ статистики включен",  "Show statistics enabled",
-    set.dbg.showStatistics, pDebug, Item::EFuncActive, FuncChangedChoice, FuncDraw
+    set.dbg.showStatistics, pDebug, Item::EFuncActive, FuncChangedChoice, Item::EFuncDraw
 )
 
 
@@ -479,7 +479,7 @@ DEF_CHOICE_2( cShowSends,                                                       
     "Показ параметров отключён", "Param display disabled",
     ENABLED_RU,                  ENABLED_EN,
     "Показ параметров включён",  "Param display enabled",
-    set.dbg.showSends, pDebug, Item::EFuncActive, FuncChangedChoice, FuncDraw
+    set.dbg.showSends, pDebug, Item::EFuncActive, FuncChangedChoice, Item::EFuncDraw
 )
 
 
@@ -491,7 +491,7 @@ static void OnPress_Prev()
 DEF_BUTTON( bPrev,                                                                                                                                            //--- РЕГИСТРЫ - Предыдущий ---
     "Предыдущий", "Previous",
     "Переход к предыдущему регистру", "Go to previous register",
-    pRegisters, Item::EFuncActive, OnPress_Prev, FuncDraw
+    pRegisters, Item::EFuncActive, OnPress_Prev, Item::EFuncDraw
 )
 
 
@@ -503,7 +503,7 @@ static void OnPress_Next()
 DEF_BUTTON( bNext,                                                                                                                                             //--- РЕГИСТРЫ - Следующий ---
     "Следующий", "Next",
     "Переход к следующему регистру", "Go to the next register",
-    pRegisters, Item::EFuncActive, OnPress_Next, FuncDraw
+    pRegisters, Item::EFuncActive, OnPress_Next, Item::EFuncDraw
 )
 
 
@@ -610,7 +610,7 @@ static void OnPress_Send()
 DEF_BUTTON( bSend,                                                                                                                                               //--- РЕГИСТРЫ - Заслать ---
     "Заслать", "Send",
     "Открывает окно ввода значения регистра", "Opens a register value input window",
-    pRegisters, Item::EFuncActive, OnPress_Send, FuncDraw
+    pRegisters, Item::EFuncActive, OnPress_Send, Item::EFuncDraw
 )
 
 
