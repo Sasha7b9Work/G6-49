@@ -636,7 +636,7 @@ static void OnChange_FreqMeterK()
 DEF_GOVERNOR(gFreqMeterK,                                                                                                                                          //--- ЧАСТОТОМЕР - Уровень ---
     "Ур синхр", "Trig lev",
     "Калибровочный коэффициент уровня синхронизации частотомера", "Frequency meter calibration factor",
-    setCal.kFreqMeter, -150, 150, pDebug, Item::EFuncActive, OnChange_FreqMeterK, EmptyFuncVV, 0
+    setCal.kFreqMeter, -150, 150, pDebug, Item::EFuncActive, OnChange_FreqMeterK, EmptyFuncVB
 )
 
 

@@ -1,7 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
-inline void EmptyFuncVV() {}
 inline void EmptyFuncVB(bool) {}
 
 
@@ -10,9 +9,9 @@ static const ButtonBase name = { TypeItem::Button, 0, false, Page::NoPage, (cons
     funcPress, funcDraw };
 
 
-#define DEF_GOVERNOR(name, titleRU, hintRU, titleEN, hintEN, cell, min, max, keeper, funcActive, funcChanged, funcBeforeDraw, funcPress)    \
+#define DEF_GOVERNOR(name, titleRU, hintRU, titleEN, hintEN, cell, min, max, keeper, funcActive, funcChanged, funcPress)                    \
 static const GovernorBase name = { TypeItem::Governor, 0, false, Page::NoPage, (const PageBase *)&keeper,                                   \
-    {titleRU, hintRU}, {titleEN, hintEN}, funcActive, min, max, (int16 *)(&(cell)), funcChanged, funcBeforeDraw, funcPress};
+    {titleRU, hintRU}, {titleEN, hintEN}, funcActive, min, max, (int16 *)(&(cell)), funcChanged, funcPress};
 
 
 #define DEF_PAGE_SB(name, titleRU, hintRU, titleEN, hintEN, item0, item1, item2, item3,                                                     \
