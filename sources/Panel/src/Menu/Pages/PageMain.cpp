@@ -3,12 +3,12 @@
 
 
 DEF_PAGE_3(pageMain,
-           "лемч", "MENU",
-           "", "",
-           PageSignals::self,
-           PageFrequencyCounter::self,
-           PageService::self,
-           Page::Main, nullptr, Item::EFuncActive, Page::FuncEnter, Item::EFuncOnKey, FuncBeforeDraw
+    "лемч", "MENU",
+    "", "",
+    PageSignals::self,
+    PageFrequencyCounter::self,
+    PageService::self,
+    Page::Main, nullptr, Item::EFuncActive, Page::EFuncEnter, Item::EFuncOnKey, FuncBeforeDraw
 )
 
 Page *PageMain::self = (Page *)&pageMain;

@@ -80,7 +80,7 @@ DEF_PAGE_4( pageLoad,                                                           
     0,
     0,
     0,
-    Page::Settings_Load, nullptr, Item::EFuncActive, Page::FuncEnter, OnControl, FDrive::Draw
+    Page::Settings_Load, nullptr, Item::EFuncActive, Page::EFuncEnter, OnControl, FDrive::Draw
 )
 
 
