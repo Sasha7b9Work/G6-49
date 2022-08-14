@@ -317,7 +317,7 @@ DEF_PAGE_4( pageSignals,   //-V641
     &cFormA,                    // НАСТРОЙКИ СИГНАЛОВ - Форма
     &cParameters,               // НАСТРОЙКИ СИГНАЛОВ - Параметр
     &bTuneParameter,            // НАСТРОЙКИ СИГНАЛОВ - Ввести значение параметра
-    Page::Signals, PageMain::self, Item::EFuncActive, Page::EFuncEnter, Item::EFuncOnKey, FuncBeforeDraw
+    Page::Signals, PageMain::self, Item::EFuncActive, Page::EFuncEnter, Item::EFuncOnKey, Page::EFuncAfterDraw
 )
 
 Page *PageSignals::self = (Page *)&pageSignals;
