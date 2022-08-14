@@ -239,7 +239,7 @@ public:
 
     void Draw(int x, int y) const;
 
-    static void FuncPress() { };
+    static void EFuncPress() { };
 };
 
 

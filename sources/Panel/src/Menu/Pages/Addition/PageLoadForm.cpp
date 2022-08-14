@@ -32,7 +32,7 @@ volatile const ButtonBase *pbDown = &bDown;
 DEF_BUTTON( bEnter,                                                                                                                           //--- Õ¿—“–Œ… » —»√Õ¿ÀŒ¬ - «¿√–”« ¿ - Enter ---
     "¬˚·Ó", "Choice",
     "", "",
-    pageLoad, Item::EFuncActive, Button::FuncPress, Item::EFuncDraw
+    pageLoad, Item::EFuncActive, Button::EFuncPress, Item::EFuncDraw
 )
 
 volatile const ButtonBase *pbEnter = &bEnter;
