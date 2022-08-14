@@ -192,7 +192,7 @@ void PGenerator::SetOffset(const Chan &ch, float offset)
 }
 
 
-void PGenerator::SetAmplitude(const Chan &ch, float amplitude)
+void PGenerator::SetAmplitudePic(const Chan &ch, float amplitude)
 {
     // \todo √овнокод - запись параметра из двух мест
     Message::Set::Amplitude((uint8)ch, Value(amplitude).ToUINT64()).Transmit();

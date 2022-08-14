@@ -33,7 +33,7 @@ namespace PGenerator
 
     void SetOffset(const Chan &, float offset);
 
-    void SetAmplitude(const Chan &, float amplitude);
+    void SetAmplitudePic(const Chan &, float amplitude);
 
     void SetDebugMode(bool enable);
 
