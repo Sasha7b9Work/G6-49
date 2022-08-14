@@ -445,7 +445,7 @@ DEF_CHOICE_2( cSaveScreen,
     "Ручка выполняет стандартную функцию", "The handle performs a standard function",
     ENABLED_RU, ENABLED_EN,
     "Нажатие на ручку сохраняет содержимое экрана на флешку", "Pressing the pen saves the contents of the screen to a USB flash drive",
-    saveSreenEnabled, pDebug, Item::EFuncActive, FuncChangedChoice, Item::EFuncDraw
+    saveSreenEnabled, pDebug, Item::EFuncActive, Choice::EFuncChanged, Item::EFuncDraw
 )
 
 
@@ -468,7 +468,7 @@ DEF_CHOICE_2( cStatistics,                                                      
     "Показ статистики отключён", "Show statistics disabled",
     ENABLED_RU,                  ENABLED_EN,
     "Показ статистики включен",  "Show statistics enabled",
-    set.dbg.showStatistics, pDebug, Item::EFuncActive, FuncChangedChoice, Item::EFuncDraw
+    set.dbg.showStatistics, pDebug, Item::EFuncActive, Choice::EFuncChanged, Item::EFuncDraw
 )
 
 
@@ -479,7 +479,7 @@ DEF_CHOICE_2( cShowSends,                                                       
     "Показ параметров отключён", "Param display disabled",
     ENABLED_RU,                  ENABLED_EN,
     "Показ параметров включён",  "Param display enabled",
-    set.dbg.showSends, pDebug, Item::EFuncActive, FuncChangedChoice, Item::EFuncDraw
+    set.dbg.showSends, pDebug, Item::EFuncActive, Choice::EFuncChanged, Item::EFuncDraw
 )
 
 

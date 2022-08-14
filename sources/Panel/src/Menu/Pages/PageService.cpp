@@ -45,7 +45,7 @@ DEF_CHOICE_2(cLanguage,
     "Выбор языка", "Language choice",
     "Russian",    "Russian",    "", "",
     "Aнглийский", "Английский", "", "",
-    set.lang, pService, Item::EFuncActive, FuncChangedChoice, Item::EFuncDraw
+    set.lang, pService, Item::EFuncActive, Choice::EFuncChanged, Item::EFuncDraw
 )
 
 

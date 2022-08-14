@@ -396,6 +396,8 @@ public:
     Item *Press(const Control &);
 
     int8 CurrentIndex() const;
+
+    static void EFuncChanged(bool) {}
 };
 
 
