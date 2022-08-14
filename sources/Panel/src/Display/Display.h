@@ -32,6 +32,8 @@ namespace Display
 
     struct Warnings
     {
+        static void Clear();
+
         struct Top
         {
             static void Show(const String &ru, const String &en);
@@ -45,7 +47,5 @@ namespace Display
             static void Show(pchar ru, pchar en);
             static void Show2Strings(const String &ru1, const String &ru2, const String &en1, const String &en2);
         };
-
-        static void ClearAll();
     };
 };

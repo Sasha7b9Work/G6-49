@@ -266,7 +266,7 @@ void Display::WarningsDisplay::ClearCenter()
 }
 
 
-void Display::Warnings::ClearAll()
+void Display::Warnings::Clear()
 {
     warnings.ClearCenter();
     warnings.ClearTop();
