@@ -821,7 +821,7 @@ bool DisplayCorrection::OnControlKey(const Control &control)
 
 bool DisplayCorrection::ShowMessageOutRangIfNeed(Param *param)
 {
-    SMinMax min_max = Tuner::Current()->GetParameter()->ValueInRange();
+    SMinMax min_max = param->ValueInRange();
 
     if (!min_max.valid)
     {
@@ -845,8 +845,8 @@ bool DisplayCorrection::ShowMessageOutRangIfNeed(Param *param)
 
         String min_str = param->ToString(min_max.min, true);
 
-        Display::Warnings::Top::Show(String("¬ыход за границы диапазона %s ... %s", min_str.c_str(), max_str.c_str()),
-                                     String("Out of range %s ... %s", min_str.c_str(), max_str.c_str()));
+        Display::Warnings::Top::Show(String("%s : границы диапазона %s ... %s", param->Name(), min_str.c_str(), max_str.c_str()),
+                                     String("%s : out of range %s ... %s", param->Name(), min_str.c_str(), max_str.c_str()));
     }
     else
     {
