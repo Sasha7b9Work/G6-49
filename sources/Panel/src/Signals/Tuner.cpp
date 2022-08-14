@@ -1256,8 +1256,7 @@ void Tuner::OnButtonApply()
 
                 if ((fractNano % 10) != 0)
                 {
-                    Display::Warnings::Show("Параметр должен быть кратен 10 нс",
-                                            "Param must be a multiple of 10 ns", true);
+                    Display::Warnings::Center::Show("Параметр должен быть кратен 10 нс", "Param must be a multiple of 10 ns");
                     return;
                 }
             }

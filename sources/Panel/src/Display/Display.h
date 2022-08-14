@@ -35,15 +35,16 @@ namespace Display
         struct Top
         {
             static void Show(const String &ru, const String &en);
+            static void Show(pchar ru, pchar en);
         };
 
         struct Center
         {
             static void Show(const String &ru, const String &en);
+            static void Show(pchar ru, pchar en);
         };
 
         static void ShowCenter(const String &ru1, const String &ru2, const String &en1, const String &en2);
-        static void Show(pchar ru, pchar en, bool in_center);
         static void Show(const String &, bool in_center);
 
         static void ClearTop();
