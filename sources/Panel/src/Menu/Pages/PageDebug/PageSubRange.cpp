@@ -116,7 +116,7 @@ DEF_PAGE_6(pSubRanges, //-V641
     &cPF5,
     &cPC13,
     &cPC14,
-    Page::SubRanges, PageDebug::self, Item::EFuncActive, Page::FuncEnter, Item::EFuncOnKey, Page::FuncDraw
+    Page::SubRanges, PageDebug::self, Item::EFuncActive, Page::FuncEnter, Item::EFuncOnKey, Page::EFuncAfterDraw
 )
 
 Page *PageDebug::SubRange::self = (Page *)&pSubRanges;

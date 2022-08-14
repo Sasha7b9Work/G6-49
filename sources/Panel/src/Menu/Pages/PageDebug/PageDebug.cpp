@@ -653,7 +653,7 @@ DEF_PAGE_10( pDebug,                                                            
     &cStatistics,                               // ОТЛАДКА - Статистика
     &cShowSends,                                // ОТЛАДКА - Показывать параметры
     &bSaveSettings,                             // ОТЛАДКА - Сохранить настройки
-    Page::Debug, PageService::self, Item::EFuncActive, Page::FuncEnter, Item::EFuncOnKey, Page::FuncDraw
+    Page::Debug, PageService::self, Item::EFuncActive, Page::FuncEnter, Item::EFuncOnKey, Page::EFuncAfterDraw
 )
 
 

@@ -123,7 +123,7 @@ public:
     
     Item    **items;        // Здесь указатели на пункты этой страницы (в обычной странице) для страницы малых кнопок  здесь хранятся 6 указателей на SButton : 0 - B_Menu, 1...5 - B_F1...B_F5
     pFuncVB   funcEnter;    // Будет вызываться при нажатии на свёрнутую страницу
-    pFuncVV   funcOnDraw;   // Будет вызываться после отрисовки кнопок
+    pFuncVV   funcAfterDraw;   // Будет вызываться после отрисовки кнопок
     pFuncBKey funcOnKey;
 
     bool CurrentItemIsOpened() const;
@@ -170,7 +170,7 @@ public:
     pFuncVB  funcEnter;
     
     // Будет вызываться после отрисовки кнопок
-    pFuncVV  funcOnDraw;
+    pFuncVV  funcAfterDraw;
     
     // В странице малых кнопок вызывается при повороте ручки установка
     pFuncBKey funcOnKey;
@@ -211,7 +211,7 @@ public:
         static const int HEIGHT = 18;
     };
 
-    static void FuncDraw() {};
+    static void EFuncAfterDraw() {};
 
     static void FuncEnter(bool) { };
 };

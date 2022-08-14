@@ -276,5 +276,5 @@ void Page::DrawOpened() const
         }
     }
 
-    funcOnDraw();
+    funcAfterDraw();
 }
