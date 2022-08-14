@@ -443,6 +443,8 @@ struct POffset : public PVoltage
             const Value &max = Value("5", Order::One),
             const Value &value = Value("0", Order::One)) :
         PVoltage(TypeDParam::Offset, "Смещение", "Offset", min, max, valueInRange, value) { }
+
+    static SMinMax InRange(Form *form);
 };
 
 

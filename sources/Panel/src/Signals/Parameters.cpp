@@ -860,3 +860,39 @@ DParam *Param::ToDouble()
 {
     return (kind == KindParam::Double) ? (DParam *)this : &DParam::empty;
 }
+
+
+SMinMax POffset::InRange(Form *form)
+{
+    // Ампл == 0  | [0 ... 5]
+    // Ампл <= 1В | [0 ... 2.5], ampl / 2 + fabs(см) <= 2.5
+    // Ампл > 1В  | [0 ... 5],   ампл / 2 + fabs(см) <= 5
+
+    Value amplitude = form->FindParameter(TypeDParam::Amplitude)->GetValue();
+    DParam *param_offset = form->FindParameter(TypeDParam::Offset);
+
+    SMinMax result;
+    result.max = param_offset->Max();
+
+    if (amplitude.Abs() == 0)
+    {
+        result.max = param_offset->Max();
+    }
+    else if (amplitude.ToDouble() <= 1.0F)
+    {
+        result.max.Div(2);
+    }
+
+    amplitude.Div(2);
+
+    result.max.Sub(amplitude);
+
+    result.min = result.max;
+    result.min.SetSign(-1);
+
+    Value offset = param_offset->GetValue();
+
+    result.valid = (offset <= result.max) && (offset >= result.min);
+
+    return result;
+}
