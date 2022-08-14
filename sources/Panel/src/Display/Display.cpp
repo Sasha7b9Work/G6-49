@@ -151,12 +151,6 @@ void Display::Warnings::Center::Show2Strings(const String &ru1, const String &ru
 }
 
 
-void Display::Warnings::Top::Show(const String &warning)
-{
-    warnings.AppendTop(warning);
-}
-
-
 void Display::WarningsDisplay::AppendCenter(const String &warning)
 {
     if (!IsEmpty() && Last().IsEqual(warning))
