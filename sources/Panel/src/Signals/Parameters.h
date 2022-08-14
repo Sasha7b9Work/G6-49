@@ -424,9 +424,9 @@ struct PVoltage : public DParam
 };
 
 
-struct ParamAmplitude : public PVoltage
+struct PAmplitude : public PVoltage
 {
-    ParamAmplitude(const Value &min = Value("0", Order::One),
+    PAmplitude(const Value &min = Value("0", Order::One),
                    const Value &max = Value("10", Order::One),
                    pValueInRange valueInRange = EValueInRange,
                    const Value &value = DEFAULT_AMPLITUDE) :

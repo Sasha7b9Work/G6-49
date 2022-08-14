@@ -11,7 +11,7 @@
 
 
 // Здесь будем сохранять настраиваемый параметр перед его изменением, чтобы восстановить в случае необходимости
-static DParam storedDouble = ParamAmplitude(); //-V1054 Здесь ошибки не случится, потому что в наследуемых от DParam
+static DParam storedDouble = PAmplitude(); //-V1054 Здесь ошибки не случится, потому что в наследуемых от DParam
                                                             // классах нет данных
 
 static IParam storedInteger = IParam(TypeIParam::PacketNumber, "", "", //-V810

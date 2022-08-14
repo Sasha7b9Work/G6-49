@@ -708,7 +708,7 @@ void CMSParam::OnPressButtonTune()
 }
 
 
-Value ParamAmplitude::GetMax() const
+Value PAmplitude::GetMax() const
 {
     // ampl / 2 + fabs(cm) <= 5
 
