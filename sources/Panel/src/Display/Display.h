@@ -34,7 +34,7 @@ namespace Display
     {
         // Вывести временно
         static void Show(const String &ru, const String &en, bool auto_delete);
-        static void Show2Strings(const String &ru1, const String &ru2, const String &en1, const String &en2);
+        static void ShowCenter(const String &ru1, const String &ru2, const String &en1, const String &en2);
         static void Show(pchar ru, pchar en, bool auto_delete);
         static void Show(const String &, bool auto_delete);
 

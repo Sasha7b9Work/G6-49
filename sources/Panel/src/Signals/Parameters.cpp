@@ -486,7 +486,7 @@ void CParam::NextChoice()
     {
         Message::SetClockImpulse(GetChoice()).Transmit();
 
-        Display::Warnings::Show2Strings(String("100ћ√ц - длит./период 10нс...40сек"), String("1ћ√ц - длит./период 1мкс...4000сек"),
+        Display::Warnings::ShowCenter(String("100ћ√ц - длит./период 10нс...40сек"), String("1ћ√ц - длит./период 1мкс...4000сек"),
             String("100MHz - dur./period from 10ns...40sec"), String("1MHz - dur. / period 1us...4000sec"));
     }
     else

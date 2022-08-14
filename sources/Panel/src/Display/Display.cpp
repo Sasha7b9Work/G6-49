@@ -140,7 +140,7 @@ void Display::Warnings::Show(const String &ru, const String &en, bool auto_delet
 }
 
 
-void Display::Warnings::Show2Strings(const String &ru1, const String &ru2, const String &en1, const String &en2)
+void Display::Warnings::ShowCenter(const String &ru1, const String &ru2, const String &en1, const String &en2)
 {
     warnings.AppendTemp2Strings(LANG_RU ? ru1 : en1, LANG_RU ? ru2 : en2);
 }
