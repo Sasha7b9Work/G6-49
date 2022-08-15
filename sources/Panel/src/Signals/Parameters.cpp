@@ -928,3 +928,13 @@ SMinMax PFrequency::InRange(Form *)
 
     return result;
 }
+
+
+SMinMax PPacketPeriod::InRange(Form *)
+{
+    SMinMax result;
+
+    result.valid = true;
+
+    return result;
+}

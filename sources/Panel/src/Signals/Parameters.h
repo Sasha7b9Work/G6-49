@@ -475,7 +475,7 @@ struct PPhase : public DParam
     PPhase() : DParam(TypeDParam::Phase, Param::EFuncActive, "Фаза", "Phase",
                       Value("0", Order::One),
                       Value("360", Order::One),
-                      EValueInRange,
+                      Param::EValueInRange,
                       Value("0", Order::One)) { }
 };
 
@@ -483,7 +483,7 @@ struct PPhase : public DParam
 struct PPacketPeriod : public PTime
 {
     PPacketPeriod(const Value &max, const Value &value) :
-        PTime(TypeDParam::PacketPeriod, Param::EFuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
+        PTime(TypeDParam::PacketPeriod, Param::EFuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, PPacketPeriod::InRange, value) { }
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
     // Возвращает true, если значение изменилось
@@ -493,6 +493,8 @@ struct PPacketPeriod : public PTime
     Value CalculateMinValue() const;
 
     virtual Value GetMin() const { return CalculateMinValue(); }
+
+    static SMinMax InRange(Form *form);
 };
 
 
