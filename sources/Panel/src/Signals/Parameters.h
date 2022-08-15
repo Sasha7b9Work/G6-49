@@ -448,11 +448,10 @@ struct POffset : public PVoltage
 
 struct PFrequency : public DParam
 {
-    PFrequency(pValueInRange valueInRange,
-               const Value &min,
+    PFrequency(const Value &min,
                const Value &max,
                const Value &value = Value("1", Order::Kilo)) :
-        DParam(TypeDParam::Frequency, Param::EFuncActive, "Частота", "Frequency", min, max, valueInRange, value) { }
+        DParam(TypeDParam::Frequency, Param::EFuncActive, "Частота", "Frequency", min, max, PFrequency::InRange, value) { }
 
     static SMinMax InRange(Form *);
 };
