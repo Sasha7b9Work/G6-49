@@ -267,10 +267,6 @@ struct IParam : public Param
 
     virtual Value GetValue() const       { return value; }
 
-    Value Max() const                    { return max; }
-
-    Value Min() const                    { return min; }
-
     virtual Value GetMax() const         { return max;   }
 
     virtual Value GetMin() const         { return min;   }
