@@ -454,6 +454,7 @@ struct PFrequency : public DParam
 
     static const Value min_sin;
     static const Value max_sin;
+    static const Value min_DDS;
 
     static SMinMax InRange(Form *);
 };
@@ -482,16 +483,16 @@ struct PPhase : public DParam
 struct PPeriod : public PTime
 {
     PPeriod(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
-        PTime(TypeDParam::Period, funcActive, nameRU, nameEN, PPeriod::impulseMin, max, EValueInRange, value) { }
+        PTime(TypeDParam::Period, funcActive, nameRU, nameEN, PPeriod::min_impulse, max, EValueInRange, value) { }
 
-    static const Value impulseMin;
+    static const Value min_impulse;
 };
 
 
 struct PPeriodPacket : public PTime
 {
     PPeriodPacket(const Value &max, const Value &value) :
-        PTime(TypeDParam::PeriodPacket, Param::EFuncActive, "Период пак", "Packet per", PPeriod::impulseMin, max, PPeriodPacket::InRange, value) { }
+        PTime(TypeDParam::PeriodPacket, Param::EFuncActive, "Период пак", "Packet per", PPeriod::min_impulse, max, PPeriodPacket::InRange, value) { }
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
     // Возвращает true, если значение изменилось
@@ -509,14 +510,14 @@ struct PPeriodPacket : public PTime
 struct PDuration : public PTime
 {
     PDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
-        PTime(TypeDParam::Duration, Param::EFuncActive, nameRU, nameEN, PPeriod::impulseMin, max, EValueInRange, value) { }
+        PTime(TypeDParam::Duration, Param::EFuncActive, nameRU, nameEN, PPeriod::min_impulse, max, EValueInRange, value) { }
 };
 
 
 struct PDelay : public PTime
 {
     PDelay(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") :
-        PTime(TypeDParam::Delay, funcActive, nameRU, nameEN, PPeriod::impulseMin, max, EValueInRange, value) { }
+        PTime(TypeDParam::Delay, funcActive, nameRU, nameEN, PPeriod::min_impulse, max, EValueInRange, value) { }
 };
 
 
