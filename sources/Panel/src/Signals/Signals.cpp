@@ -56,7 +56,7 @@ static Param *sineManipulationA[] =
 //}
 
 
-static PFrequency    sineA_Frequency(PFrequency::sinMin, PFrequency::sinMax);
+static PFrequency    sineA_Frequency(PFrequency::min_sin, PFrequency::max_sin);
 static PAmplitudePic sineA_Amplitude;
 static POffset       sineA_Offset;
 static PManipulation sineA_Manipulation(sineManipulationA);
@@ -325,7 +325,7 @@ static Param *sineManipulationB[] =
     nullptr
 };
 
-static PFrequency    sineB_Frequency(PFrequency::sinMin, PFrequency::sinMax);
+static PFrequency    sineB_Frequency(PFrequency::min_sin, PFrequency::max_sin);
 static PAmplitudePic sineB_Amplitude;
 static POffset       sineB_Offset;
 static PPhase        sineB_Phase;

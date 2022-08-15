@@ -452,8 +452,8 @@ struct PFrequency : public DParam
                const Value &value = Value("1", Order::Kilo)) :
         DParam(TypeDParam::Frequency, Param::EFuncActive, "Частота", "Frequency", min, max, PFrequency::InRange, value) { }
 
-    static const Value sinMin;
-    static const Value sinMax;
+    static const Value min_sin;
+    static const Value max_sin;
 
     static SMinMax InRange(Form *);
 };
