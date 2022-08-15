@@ -841,7 +841,6 @@ Value DParam::Min() const
 {
     switch (type)
     {
-    case TypeDParam::Frequency:             break;
     case TypeDParam::Period:                break;
     case TypeDParam::AmplitudePic:          break;
     case TypeDParam::Offset:                break;
@@ -856,6 +855,8 @@ Value DParam::Min() const
     case TypeDParam::DurationManipulation:  break;
     case TypeDParam::PeriodManipulation:    break;
     case TypeDParam::PeriodPacket:          break;
+
+    case TypeDParam::Frequency:
     case TypeDParam::Count:                 break;
     }
 
@@ -867,7 +868,6 @@ Value DParam::Max() const
 {
     switch (type)
     {
-    case TypeDParam::Frequency:             break;
     case TypeDParam::Period:                break;
     case TypeDParam::AmplitudePic:          break;
     case TypeDParam::Offset:                break;
@@ -882,10 +882,24 @@ Value DParam::Max() const
     case TypeDParam::DurationManipulation:  break;
     case TypeDParam::PeriodManipulation:    break;
     case TypeDParam::PeriodPacket:          break;
+
+    case TypeDParam::Frequency:
     case TypeDParam::Count:                 break;
     }
 
     return Value(0);
+}
+
+
+Value PFrequency::Min() const
+{
+
+}
+
+
+Value PFrequency::Max() const
+{
+
 }
 
 
