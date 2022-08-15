@@ -15,8 +15,8 @@
 
 int CParam::choiceModeStartFree = 0;
 
-DParam DParam::empty(TypeDParam::Frequency, Param::EFuncActive, "Пустой", "Empty", Value(0), Value(1), Param::EInRange, Value(1));
-IParam IParam::empty(TypeIParam::PacketNumber, "Пустой", "Empty", Value("10", Order::Nano), Value("10", Order::Mega), Param::EInRange, Value(1.0));
+DParam DParam::empty(TypeDParam::Frequency, Param::EFuncActive, "Пустой", "Empty", Value(0), Value(1), Value(1));
+IParam IParam::empty(TypeIParam::PacketNumber, "Пустой", "Empty", Value("10", Order::Nano), Value("10", Order::Mega), Value(1.0));
 CParam CParam::empty(TypeCParam::Polarity, Param::EFuncActive, "Пустой", "Empty");
 CMSParam CMSParam::empty(TypeCMSParam::Manipulation, "Пустой", "Empty", nullptr);
 
@@ -551,17 +551,16 @@ int CParam::NumChoices() const
 DParam::DParam(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar const nameEN,
     const Value &_min_,
     const Value &_max,
-    pInRange _valueInRange,
     const Value &_value) :
-    Param(KindParam::Double, funcActive, nameRU, nameEN), tuner(this), type(t), min(_min_), max(_max), valueInRange(_valueInRange),
-    value(_value), resetValue(_value), stored(_value)
+    Param(KindParam::Double, funcActive, nameRU, nameEN), tuner(this), type(t), min(_min_), max(_max),
+        value(_value), resetValue(_value), stored(_value)
 {
 }
 
 
 DParam::DParam(const DParam &rhs) :
     Param(KindParam::Double, Param::EFuncActive, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
-    min(rhs.min), max(rhs.max), valueInRange(EInRange), value(rhs.value), resetValue(rhs.resetValue), stored(rhs.stored)
+    min(rhs.min), max(rhs.max), value(rhs.value), resetValue(rhs.resetValue), stored(rhs.stored)
 {
 }
 
@@ -659,9 +658,9 @@ String IParam::ToString(Value val, bool delete_zeros) const
 
 
 IParam::IParam(TypeIParam::E t, pchar nameRU, pchar nameEN,
-    const Value &_min, const Value &_max, pInRange _valueInRange, const Value &_value) :
+    const Value &_min, const Value &_max, const Value &_value) :
     Param(KindParam::Integer, Param::EFuncActive, nameRU, nameEN), tuner(this), type(t),
-    min(_min), max(_max), valueInRange(_valueInRange), value(_value), resetValue(_value)
+    min(_min), max(_max), value(_value), resetValue(_value)
 {
 }
 
@@ -815,6 +814,38 @@ DParam *Param::ToDouble()
 }
 
 
+Value PPeriodPacket::CalculateMinValue() const
+{
+    // Значение периода не может быть меньше (N - 1) * Tи + tи + 10нс
+
+    PPeriod *par_period = (PPeriod *)form->FindParameter(TypeDParam::Period);
+    IParam *par_number = form->FindParameter(TypeIParam::PacketNumber);
+    PDuration *par_duration = (PDuration *)form->FindParameter(TypeDParam::Duration);
+
+    if (par_period && par_number && par_duration)
+    {
+        Value min_value = par_period->GetValue();
+
+        min_value.Mul((uint)(par_number->GetValue().Integer() - 1));
+
+        min_value.Add(par_duration->GetValue());
+
+        min_value.Add(Value("10", Order::Nano));
+
+        return min_value;
+    }
+
+    return Value("20", Order::Nano);
+}
+
+
+SMinMax Param::ValueInRange() const
+{
+    return SMinMax(Min(), Max(), GetValue());
+}
+
+
+/*
 SMinMax POffset::InRange(Form *form)
 {
     // Ампл == 0  | [0 ... 5]
@@ -851,7 +882,7 @@ SMinMax POffset::InRange(Form *form)
 }
 
 
-SMinMax PAmplitudePic::InRange(Form * form)
+SMinMax PAmplitudePic::InRange(Form *form)
 {
     // Ампл == 0  | offset[0 ... 5]
     // Ампл <= 1В | offset[0 ... 2.5]; ampl / 2 + fabs(см) <= 2.5;
@@ -886,94 +917,4 @@ SMinMax PAmplitudePic::InRange(Form * form)
 
     return result;
 }
-
-
-SMinMax PFrequency::InRange(Form *)
-{
-    SMinMax result(true);
-
-    return result;
-}
-
-
-Value PPeriodPacket::CalculateMinValue() const
-{
-    // Значение периода не может быть меньше (N - 1) * Tи + tи + 10нс
-
-    PPeriod *par_period = (PPeriod *)form->FindParameter(TypeDParam::Period);
-    IParam *par_number = form->FindParameter(TypeIParam::PacketNumber);
-    PDuration *par_duration = (PDuration *)form->FindParameter(TypeDParam::Duration);
-
-    if (par_period && par_number && par_duration)
-    {
-        Value min_value = par_period->GetValue();
-
-        min_value.Mul((uint)(par_number->GetValue().Integer() - 1));
-
-        min_value.Add(par_duration->GetValue());
-
-        min_value.Add(Value("10", Order::Nano));
-
-        return min_value;
-    }
-
-    return Value("20", Order::Nano);
-}
-
-
-SMinMax PPeriodPacket::InRange(Form * /*form*/)
-{
-    SMinMax min_max(false);
-
-//    PPeriod *param_period = (PPeriod *)form->FindParameter(TypeDParam::Period);
-//    IParam *param_number = form->FindParameter(TypeIParam::PacketNumber);
-//    PDuration *param_duration = (PDuration *)form->FindParameter(TypeDParam::Duration);
-
-    return min_max;
-}
-
-
-SMinMax PPeriod::InRange(Form *)
-{
-    SMinMax result(true);
-
-    return result;
-}
-
-
-SMinMax PDuration::InRange(Form *)
-{
-    SMinMax result(true);
-
-    return result;
-}
-
-
-SMinMax PDelay::InRange(Form *)
-{
-    SMinMax result(true);
-
-    return result;
-}
-
-
-SMinMax PDurationManipulation::InRange(Form *)
-{
-    SMinMax result(true);
-
-    return result;
-}
-
-
-SMinMax PPeriodManipulation::InRange(Form *)
-{
-    SMinMax result(true);
-
-    return result;
-}
-
-
-SMinMax Param::ValueInRange() const
-{
-    return SMinMax(Min(), Max(), GetValue());
-}
+*/

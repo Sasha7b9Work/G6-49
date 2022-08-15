@@ -24,7 +24,6 @@ struct SMinMax
     bool valid;     // Если true - текущее значение допустимо
 };
 
-typedef SMinMax (*pInRange)(Form *);
 
 struct KindParam
 {
@@ -97,7 +96,6 @@ struct Param
     virtual void RestoreState() { };
 
     static bool EFuncActive() { return true; }
-    static SMinMax EInRange(Form *) { return SMinMax(true); }
 
     DParam *ToDouble();
 
@@ -146,7 +144,6 @@ struct DParam : public Param
     DParam(TypeDParam::E t, pFuncBV funcActive, pchar const nameRU, pchar const nameEN,
            const Value  &min,
            const Value  &max,
-           pInRange valueInRange,
            const Value  &value);
 
     DParam(const DParam &);
@@ -186,9 +183,6 @@ struct DParam : public Param
     // Возвращает минимальное значение, которое может иметь параметр
     virtual Value Min() const { return min; }
 
-    // Возвращает стрктуру, которая описывает максимальное и минимальное 
-    virtual SMinMax ValueInRange() const { return valueInRange(form); }
-
     virtual Tuner *GetTuner()   { return &tuner; };
 
     // Возвращает текущее значение параметра
@@ -226,7 +220,6 @@ private:
     const TypeDParam::E type;
     Value               min;
     Value               max;
-    pInRange            valueInRange;
     Value               value;
     Value               resetValue;
 
@@ -255,7 +248,7 @@ struct TypeIParam
 struct IParam : public Param
 {
     IParam(TypeIParam::E t, pchar  const nameRU, pchar const nameEN,
-        const Value &min, const Value &max, pInRange, const Value &);
+        const Value &min, const Value &max, const Value &);
 
     virtual void Reset() { SetAndLoadValue(resetValue); }
 
@@ -271,8 +264,6 @@ struct IParam : public Param
     virtual Value Max() const         { return max;   }
 
     virtual Value Min() const         { return min;   }
-
-    virtual SMinMax ValueInRange() const { return valueInRange(form); }
 
     TypeIParam::E GetType()   { return type; }
 
@@ -293,7 +284,6 @@ private:
     TypeIParam::E type;
     Value         min;
     Value         max;
-    pInRange      valueInRange;
     Value         value;
     Value         resetValue;
 };
@@ -415,9 +405,8 @@ struct PVoltage : public DParam
     PVoltage(TypeDParam::E type, pchar nameRU, pchar nameEN,
              const Value &min,
              const Value &max,
-             pInRange valueInRange,
              const Value &value) :
-        DParam(type, Param::EFuncActive, nameRU, nameEN, min, max, valueInRange, value) { }
+        DParam(type, Param::EFuncActive, nameRU, nameEN, min, max, value) { }
 };
 
 
@@ -426,9 +415,8 @@ struct PAmplitudePic : public PVoltage
     PAmplitudePic(const Value &min = Value("0", Order::One),
                   const Value &max = Value("10", Order::One),
                   const Value &value = PAmplitudePic::by_default) :
-        PVoltage(TypeDParam::AmplitudePic, "Размах", "Amplitude", min, max, PAmplitudePic::InRange, value) { }
+        PVoltage(TypeDParam::AmplitudePic, "Размах", "Amplitude", min, max, value) { }
 
-    static SMinMax InRange(Form *);
     static const Value by_default;
 };
 
@@ -438,9 +426,7 @@ struct POffset : public PVoltage
     POffset(const Value &min = Value("-5", Order::One),
             const Value &max = Value("5", Order::One),
             const Value &value = Value("0", Order::One)) :
-        PVoltage(TypeDParam::Offset, "Смещение", "Offset", min, max, POffset::InRange, value) { }
-
-    static SMinMax InRange(Form *);
+        PVoltage(TypeDParam::Offset, "Смещение", "Offset", min, max, value) { }
 };
 
 
@@ -449,14 +435,12 @@ struct PFrequency : public DParam
     PFrequency(const Value &min,
                const Value &max,
                const Value &value = Value("1", Order::Kilo)) :
-        DParam(TypeDParam::Frequency, Param::EFuncActive, "Частота", "Frequency", min, max, PFrequency::InRange, value) { }
+        DParam(TypeDParam::Frequency, Param::EFuncActive, "Частота", "Frequency", min, max, value) { }
 
     static const Value min_sin;
     static const Value max_sin;
     static const Value min_DDS;
     static const Value max_DDS;
-
-    static SMinMax InRange(Form *);
 };
 
 
@@ -465,8 +449,8 @@ struct PTime : public DParam
     PTime(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar  const nameEN,
           const Value &min,
           const Value &max,
-          pInRange valueInRange, const Value &value) :
-        DParam(t, funcActive, nameRU, nameEN, min, max, valueInRange, value) { }
+          const Value &value) :
+        DParam(t, funcActive, nameRU, nameEN, min, max, value) { }
 };
 
 
@@ -475,7 +459,6 @@ struct PPhase : public DParam
     PPhase() : DParam(TypeDParam::Phase, Param::EFuncActive, "Фаза", "Phase",
                       Value("0", Order::One),
                       Value("360", Order::One),
-                      Param::EInRange,
                       Value("0", Order::One)) { }
 };
 
@@ -483,18 +466,16 @@ struct PPhase : public DParam
 struct PPeriod : public PTime
 {
     PPeriod(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
-        PTime(TypeDParam::Period, funcActive, nameRU, nameEN, PPeriod::min_impulse, max, PPeriod::InRange, value) { }
+        PTime(TypeDParam::Period, funcActive, nameRU, nameEN, PPeriod::min_impulse, max, value) { }
 
     static const Value min_impulse;
-
-    static SMinMax InRange(Form *);
 };
 
 
 struct PPeriodPacket : public PTime
 {
     PPeriodPacket(const Value &max, const Value &value) :
-        PTime(TypeDParam::PeriodPacket, Param::EFuncActive, "Период пак", "Packet per", PPeriod::min_impulse, max, PPeriodPacket::InRange, value) { }
+        PTime(TypeDParam::PeriodPacket, Param::EFuncActive, "Период пак", "Packet per", PPeriod::min_impulse, max, value) { }
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
     // Возвращает true, если значение изменилось
@@ -504,26 +485,20 @@ struct PPeriodPacket : public PTime
     Value CalculateMinValue() const;
 
     virtual Value Min() const { return CalculateMinValue(); }
-
-    static SMinMax InRange(Form *);
 };
 
 
 struct PDuration : public PTime
 {
     PDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
-        PTime(TypeDParam::Duration, Param::EFuncActive, nameRU, nameEN, PPeriod::min_impulse, max, PDuration::InRange, value) { }
-
-    static SMinMax InRange(Form *);
+        PTime(TypeDParam::Duration, Param::EFuncActive, nameRU, nameEN, PPeriod::min_impulse, max, value) { }
 };
 
 
 struct PDelay : public PTime
 {
     PDelay(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") :
-        PTime(TypeDParam::Delay, funcActive, nameRU, nameEN, PPeriod::min_impulse, max, PDelay::InRange, value) { }
-
-    static SMinMax InRange(Form *);
+        PTime(TypeDParam::Delay, funcActive, nameRU, nameEN, PPeriod::min_impulse, max, value) { }
 };
 
 
@@ -532,9 +507,7 @@ struct PDurationManipulation : public PTime
     PDurationManipulation(const Value &min,
                           const Value &max,
                           const Value &value) :
-        PTime(TypeDParam::DurationManipulation, Param::EFuncActive, "Длит", "Duration", min, max, PDurationManipulation::InRange, value) { }
-
-    static SMinMax InRange(Form *);
+        PTime(TypeDParam::DurationManipulation, Param::EFuncActive, "Длит", "Duration", min, max, value) { }
 };
 
 
@@ -543,9 +516,7 @@ struct PPeriodManipulation : public PTime
     PPeriodManipulation(const Value &min,
                         const Value &max,
                         const Value &value) :
-        PTime(TypeDParam::PeriodManipulation, Param::EFuncActive, "Период", "Period", min, max, PPeriodManipulation::InRange, value) { }
-
-    static SMinMax InRange(Form *);
+        PTime(TypeDParam::PeriodManipulation, Param::EFuncActive, "Период", "Period", min, max, value) { }
 };
 
 

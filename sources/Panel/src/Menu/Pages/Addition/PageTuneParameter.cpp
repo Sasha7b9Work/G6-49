@@ -17,7 +17,6 @@ static DParam storedDouble = PAmplitudePic(); //-V1054 Здесь ошибки не случится,
 static IParam storedInteger = IParam(TypeIParam::PacketNumber, "", "", //-V810
                                      Value("0", Order::One),
                                      Value("100", Order::One),
-                                     Param::EInRange,
                                      Value("0", Order::One));
 
 static Param *tuned = nullptr;     // Настраиваемый параметр
