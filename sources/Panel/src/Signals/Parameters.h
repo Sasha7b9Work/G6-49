@@ -437,11 +437,10 @@ struct PAmplitudePic : public PVoltage
 
 struct POffset : public PVoltage
 {
-    POffset(pValueInRange valueInRange = EValueInRange,
-            const Value &min = Value("-5", Order::One),
+    POffset(const Value &min = Value("-5", Order::One),
             const Value &max = Value("5", Order::One),
             const Value &value = Value("0", Order::One)) :
-        PVoltage(TypeDParam::Offset, "Смещение", "Offset", min, max, valueInRange, value) { }
+        PVoltage(TypeDParam::Offset, "Смещение", "Offset", min, max, POffset::InRange, value) { }
 
     static SMinMax InRange(Form *);
 };
