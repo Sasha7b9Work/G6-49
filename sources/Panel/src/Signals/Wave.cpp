@@ -224,7 +224,7 @@ void Form::TuneGenerator()
             SendParameterToGenerator(TypeCParam::ManipulationEnabled); //-V525
             if(manipulationEnabled)
             {
-                SendParameterToGenerator(TypeDParam::ManipulationDuration);
+                SendParameterToGenerator(TypeDParam::DurationManipulation);
                 SendParameterToGenerator(TypeDParam::ManipulationPeriod);
             }
 
@@ -247,7 +247,7 @@ void Form::TuneGenerator()
             SendParameterToGenerator(TypeCParam::ManipulationEnabled); //-V525
             if(manipulationEnabled)
             {
-                SendParameterToGenerator(TypeDParam::ManipulationDuration);
+                SendParameterToGenerator(TypeDParam::DurationManipulation);
                 SendParameterToGenerator(TypeDParam::ManipulationPeriod);
             }
 

@@ -224,7 +224,7 @@ static void OnPress_TuneParameter()
         {
             DParam *param = (DParam *)CURRENT_PARAM;
 
-            if (param->GetType() == TypeDParam::ManipulationDuration || param->GetType() == TypeDParam::ManipulationPeriod)
+            if (param->GetType() == TypeDParam::DurationManipulation || param->GetType() == TypeDParam::ManipulationPeriod)
             {
                 return;
             }
@@ -283,7 +283,7 @@ static void OnDraw_TuneParameter(int x, int y)
     {
         DParam *param = (DParam *)CURRENT_PARAM;
 
-        if (param->GetType() == TypeDParam::ManipulationDuration || param->GetType() == TypeDParam::ManipulationPeriod)
+        if (param->GetType() == TypeDParam::DurationManipulation || param->GetType() == TypeDParam::ManipulationPeriod)
         {
             const Item *item = (const Item *)&bTuneParameter;
 

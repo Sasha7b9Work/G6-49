@@ -123,7 +123,7 @@ struct TypeDParam
         DurationFall,           // Длительность спада
         DurationStady,          // Длительность установившего значения
         DutyFactor,             // Коэффициент заполнения
-        ManipulationDuration,   // Длительность импульсов в режиме манипуляции
+        DurationManipulation,   // Длительность импульсов в режиме манипуляции
         ManipulationPeriod,     // Период следования импульсов в режиме манипуляции
         PeriodPacket,           // Период следования пачек импульсов в пакетном режиме
         Count
@@ -533,7 +533,7 @@ struct PManipulationDuration : public PTime
     PManipulationDuration(const Value &min,
                           const Value &max,
                           const Value &value) :
-        PTime(TypeDParam::ManipulationDuration, Param::EFuncActive, "Длит", "Duration", min, max, PManipulationDuration::InRange, value) { }
+        PTime(TypeDParam::DurationManipulation, Param::EFuncActive, "Длит", "Duration", min, max, PManipulationDuration::InRange, value) { }
 
     static SMinMax InRange(Form *);
 };
