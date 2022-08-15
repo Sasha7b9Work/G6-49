@@ -27,9 +27,7 @@ static void FuncCloseManipulation()
 
 
 static PManipulationEnabled   sineManipulationA_Enabled (namesManipulationEnabled);
-static PManipulationDuration  sineManipulationA_Duration(Value("10", Order::Nano), Value("10", Order::One),
-                                                                 Param::EValueInRange,
-                                                                 Value("5", Order::Milli));
+static PManipulationDuration  sineManipulationA_Duration(Value("10", Order::Nano), Value("10", Order::One), Value("5", Order::Milli));
 static PManipulationPeriod    sineManipulationA_Period  (Value("20", Order::Nano), Value("10000", Order::One),
                                                                  Param::EValueInRange,
                                                                  Value("25", Order::Milli));
@@ -304,9 +302,7 @@ static Form *formsA[] =
 
 
 static PManipulationEnabled  sineManipulationB_Enabled  (namesManipulationEnabled);
-static PManipulationDuration sineManipulationB_Duration(Value("10", Order::Nano), Value("10", Order::One),
-                                                        Param::EValueInRange,
-                                                        Value("5", Order::Milli));
+static PManipulationDuration sineManipulationB_Duration(Value("10", Order::Nano), Value("10", Order::One), Value("5", Order::Milli));
 static PManipulationPeriod   sineManipulationB_Period(Value("20", Order::Nano), Value("10000", Order::One),
                                                      Param::EValueInRange,
                                                      Value("25", Order::Milli));

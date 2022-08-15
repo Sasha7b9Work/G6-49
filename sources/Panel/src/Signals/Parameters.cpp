@@ -965,3 +965,11 @@ SMinMax PDelay::InRange(Form *)
 
     return result;
 }
+
+
+SMinMax PManipulationDuration::InRange(Form *)
+{
+    SMinMax result(true);
+
+    return result;
+}

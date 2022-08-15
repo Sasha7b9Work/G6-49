@@ -532,9 +532,10 @@ struct PManipulationDuration : public PTime
 {
     PManipulationDuration(const Value &min,
                           const Value &max,
-                          pValueInRange valueInRange,
                           const Value &value) :
-        PTime(TypeDParam::ManipulationDuration, Param::EFuncActive, "Длит", "Duration", min, max, valueInRange, value) { }
+        PTime(TypeDParam::ManipulationDuration, Param::EFuncActive, "Длит", "Duration", min, max, PManipulationDuration::InRange, value) { }
+
+    static SMinMax InRange(Form *);
 };
 
 
