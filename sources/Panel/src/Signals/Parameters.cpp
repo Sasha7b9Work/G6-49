@@ -491,6 +491,8 @@ void CParam::NextChoice()
     }
     else if (type == TypeCParam::ClockImpulse)
     {
+        Math::CircleIncrease(&choice, 0, NumChoices() - 1);
+
         Message::SetClockImpulse(GetChoice()).Transmit();
 
         Display::Warnings::Center::Show2Strings(String("100ћ√ц - длит./период 10нс...40сек"),     String("1ћ√ц - длит./период 1мкс...4000сек"),
