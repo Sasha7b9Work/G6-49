@@ -21,7 +21,6 @@ struct SMinMax
 
 typedef SMinMax (*pValueInRange)(Form *);
 
-#define IMPULSE_PERIOD_MIN   Value("20", Order::Nano)
 #define IMPULSE_DURATION_MIN Value("10", Order::Nano)
 
 
@@ -476,10 +475,19 @@ struct PPhase : public DParam
 };
 
 
+struct PPeriod : public PTime
+{
+    PPeriod(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
+        PTime(TypeDParam::Period, funcActive, nameRU, nameEN, PPeriod::impulseMin, max, EValueInRange, value) { }
+
+    static Value impulseMin;
+};
+
+
 struct PPeriodPacket : public PTime
 {
     PPeriodPacket(const Value &max, const Value &value) :
-        PTime(TypeDParam::PeriodPacket, Param::EFuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, PPeriodPacket::InRange, value) { }
+        PTime(TypeDParam::PeriodPacket, Param::EFuncActive, "Период пак", "Packet per", PPeriod::impulseMin, max, PPeriodPacket::InRange, value) { }
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
     // Возвращает true, если значение изменилось
@@ -494,24 +502,17 @@ struct PPeriodPacket : public PTime
 };
 
 
-struct PPeriod : public PTime
-{
-    PPeriod(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
-        PTime(TypeDParam::Period, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
-};
-
-
 struct PDuration : public PTime
 {
     PDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
-        PTime(TypeDParam::Duration, Param::EFuncActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
+        PTime(TypeDParam::Duration, Param::EFuncActive, nameRU, nameEN, PPeriod::impulseMin, max, EValueInRange, value) { }
 };
 
 
 struct PDelay : public PTime
 {
     PDelay(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") :
-        PTime(TypeDParam::Delay, funcActive, nameRU, nameEN, IMPULSE_PERIOD_MIN, max, EValueInRange, value) { }
+        PTime(TypeDParam::Delay, funcActive, nameRU, nameEN, PPeriod::impulseMin, max, EValueInRange, value) { }
 };
 
 
