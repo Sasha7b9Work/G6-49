@@ -520,7 +520,7 @@ void Indicator::IncreaseInPositionDouble(int pos)
         value.Add(step);
     }
 
-    if (value != param->GetValue() && value <= param->GetMax())
+    if (value != param->GetValue() && value <= param->Max())
     {
         display->Init(value);
     }
@@ -542,7 +542,7 @@ void Indicator::IncreaseInPositionInteger(int pos)
         value.Add(step);
     }
 
-    if (value != param->GetValue() && value <= param->GetMax())
+    if (value != param->GetValue() && value <= param->Max())
     {
         display->Init(value);
     }
@@ -900,7 +900,7 @@ bool DisplayEntering::ValueInBoundaries()
     Param *param = Tuner::Current()->GetParameter();
 
     Value min = param->GetMin();
-    Value max = param->GetMax();
+    Value max = param->Max();
 
     Value value = ToValue();
 

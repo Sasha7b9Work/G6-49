@@ -534,13 +534,13 @@ PManipulation::PManipulation(Param **parameters) : CMSParam(TypeCMSParam::Manipu
 
 bool DParam::InRange(double val) const
 {
-    return (val >= GetMin().ToDouble()) && (val <= GetMax().ToDouble());
+    return (val >= GetMin().ToDouble()) && (val <= Max().ToDouble());
 }
 
 
 bool DParam::InRange(Value val) const
 {
-    return (val >= GetMin() && val <= GetMax());
+    return (val >= GetMin() && val <= Max());
 }
 
 
@@ -612,7 +612,7 @@ int DParam::GetNumberDigitsBeforeComma(Order::E order) const
         return IsPhase() ? 3 : 2;
     }
 
-    return GetMax().GetPositionFirstDigit(order) + 1;
+    return Max().GetPositionFirstDigit(order) + 1;
 }
 
 
@@ -743,7 +743,7 @@ bool PPeriodPacket::RecalcualateValue()
 
 int IParam::GetMaxNumberDigits() const
 {
-    Value _max = GetMax();
+    Value _max = Max();
 
     int result = 1;
 
@@ -837,11 +837,11 @@ SMinMax POffset::InRange(Form *form)
     DParam *param_offset = form->FindParameter(TypeDParam::Offset);
 
     SMinMax result(false);
-    result.max = param_offset->GetMax();
+    result.max = param_offset->Max();
 
     if (amplitude.Abs() == 0)
     {
-        result.max = param_offset->GetMax();
+        result.max = param_offset->Max();
     }
     else if (amplitude.ToDouble() <= 1.0F)
     {

@@ -72,7 +72,7 @@ struct Param
     Viewer viewer;
 
     // Это "самое максимальное" значение параметра. Больше его быть не может
-    virtual Value GetMax() const { return Value("1", Order::One); }
+    virtual Value Max() const { return Value("1", Order::One); }
 
     // Это "самое минимальное" значение параметра. Меньше его быть не может
     virtual Value GetMin() const { return Value("0", Order::One); }
@@ -176,7 +176,7 @@ struct DParam : public Param
     cstr GetUnits(Order::E order = Order::Count) const;
 
     // Возвращает максимальное значение, которое может иметь параметр
-    virtual Value GetMax() const { return max; }
+    virtual Value Max() const { return max; }
     
     // Возвращает минимальное значение, которое может иметь параметр
     virtual Value GetMin() const { return min; }
@@ -267,7 +267,7 @@ struct IParam : public Param
 
     virtual Value GetValue() const       { return value; }
 
-    virtual Value GetMax() const         { return max;   }
+    virtual Value Max() const         { return max;   }
 
     virtual Value GetMin() const         { return min;   }
 
