@@ -918,3 +918,13 @@ SMinMax PAmplitudePic::InRange(Form * form)
 
     return result;
 }
+
+
+SMinMax PFrequency::InRange(Form *)
+{
+    SMinMax result;
+
+    result.valid = true;
+
+    return result;
+}
