@@ -32,7 +32,7 @@ namespace Display
 
     struct Warnings
     {
-        static void _Clear();
+        static void Clear();
 
         struct Top
         {
