@@ -477,10 +477,10 @@ struct PPhase : public DParam
 };
 
 
-struct PPacketPeriod : public PTime
+struct PPeriodPacket : public PTime
 {
-    PPacketPeriod(const Value &max, const Value &value) :
-        PTime(TypeDParam::PacketPeriod, Param::EFuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, PPacketPeriod::InRange, value) { }
+    PPeriodPacket(const Value &max, const Value &value) :
+        PTime(TypeDParam::PacketPeriod, Param::EFuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, PPeriodPacket::InRange, value) { }
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
     // Возвращает true, если значение изменилось

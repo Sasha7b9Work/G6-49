@@ -264,7 +264,7 @@ static IParam        packetA_PacketNumber(TypeIParam::PacketNumber, "Кол-во имп"
                                           Value("1000000000", Order::One),
                                           Param::EValueInRange,
                                           Value("3", Order::One));
-static PPacketPeriod packetA_PacketPeriod(Value("100", Order::Kilo), Value("0.1", Order::One));
+static PPeriodPacket packetA_PacketPeriod(Value("100", Order::Kilo), Value("0.1", Order::One));
 static PAmplitudePic packetA_Amplitude;
 static POffset       packetA_Offset;
 static PPolarity     packetA_Polarity(namesPolarity);
@@ -511,11 +511,11 @@ Wave waves[Chan::Count] =
 };
 
 
-Form                   *A::Impulse::form = &formImpulseA;
+Form           *A::Impulse::form = &formImpulseA;
 
-Form                   *A::Packet::form = &formPacketImpulseA;
-PPacketPeriod  *A::Packet::period_packet = &packetA_PacketPeriod;
+Form           *A::Packet::form = &formPacketImpulseA;
+PPeriodPacket  *A::Packet::period_packet = &packetA_PacketPeriod;
 
-Form                   *B::Impulse::form = &formImpulseB;
+Form           *B::Impulse::form = &formImpulseB;
 PPeriod        *B::Impulse::period = &impulseB_Period;
 PModeStart     *B::Impulse::mode_start = &impulseB_ModeStart;

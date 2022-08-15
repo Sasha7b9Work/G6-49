@@ -34,10 +34,10 @@ namespace A
     namespace Packet
     {
         extern Form *form;
-        extern PPacketPeriod *period_packet;
+        extern PPeriodPacket *period_packet;
         extern PPeriod       *period_impulse;
         extern PDuration     *duration;
-        extern IParam      *number;
+        extern IParam        *number;
     }
 };
 

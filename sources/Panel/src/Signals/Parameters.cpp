@@ -721,7 +721,7 @@ pchar TypeCParam::Name(TypeCParam::E type)
 }
 
 
-Value PPacketPeriod::CalculateMinValue() const
+Value PPeriodPacket::CalculateMinValue() const
 {
     // «начение периода не может быть меньше (N - 1) * Tи + tи + 10нс
 
@@ -746,7 +746,7 @@ Value PPacketPeriod::CalculateMinValue() const
 }
 
 
-bool PPacketPeriod::RecalcualateValue()
+bool PPeriodPacket::RecalcualateValue()
 {
     Value min_value = CalculateMinValue();
 
@@ -930,7 +930,7 @@ SMinMax PFrequency::InRange(Form *)
 }
 
 
-SMinMax PPacketPeriod::InRange(Form *)
+SMinMax PPeriodPacket::InRange(Form *)
 {
     SMinMax result;
 
