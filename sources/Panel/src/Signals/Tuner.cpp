@@ -520,7 +520,7 @@ void Indicator::IncreaseInPositionDouble(int pos)
         value.Add(step);
     }
 
-    if (value != param->GetValue() && value <= param->Max())
+    if (value != param->GetValue() && value <= param->GetMax())
     {
         display->Init(value);
     }

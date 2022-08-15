@@ -175,8 +175,6 @@ struct DParam : public Param
     // Возвращает единицы измерения, приведённые к порядку order. Если order == Order::Count, единциы будут рассчитываться исходя из текущего значения value
     cstr GetUnits(Order::E order = Order::Count) const;
 
-    Value Max() const { return max; }
-
     // Возвращает максимальное значение, которое может иметь параметр
     virtual Value GetMax() const { return max; }
     

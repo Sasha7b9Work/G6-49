@@ -837,11 +837,11 @@ SMinMax POffset::InRange(Form *form)
     DParam *param_offset = form->FindParameter(TypeDParam::Offset);
 
     SMinMax result(false);
-    result.max = param_offset->Max();
+    result.max = param_offset->GetMax();
 
     if (amplitude.Abs() == 0)
     {
-        result.max = param_offset->Max();
+        result.max = param_offset->GetMax();
     }
     else if (amplitude.ToDouble() <= 1.0F)
     {
