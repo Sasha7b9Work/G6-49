@@ -292,12 +292,6 @@ void DParam::LoadNumberImpulsesIfNeed()
 }
 
 
-//bool DParam::InRange(double val) const
-//{
-//    return (val >= Min().ToDouble()) && (val <= Max().ToDouble());
-//}
-
-
 bool DParam::SetAndLoadValue(double val)
 {
     if(val < Min().ToDouble() || val > Max().ToDouble())
@@ -317,7 +311,7 @@ bool DParam::SetAndLoadValue(double val)
 
 bool DParam::SetAndLoadValue(Value val)
 {
-    if (!InRange(val))
+    if (val < Min() || val > Max())
     {
         return false;
     }
@@ -535,12 +529,6 @@ bool CParam::SetAndLoadChoice(int ch)
 PManipulation::PManipulation(Param **parameters) : CMSParam(TypeCMSParam::Manipulation, "Манип", "Manip", parameters)
 {
 
-}
-
-
-bool DParam::InRange(Value val) const
-{
-    return (val >= Min() && val <= Max());
 }
 
 

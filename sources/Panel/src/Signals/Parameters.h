@@ -225,10 +225,6 @@ private:
     Value               value;
     Value               resetValue;
 
-    // Возвращает true, если параметр может принимать значение v
-//    bool InRange(double v) const;
-    bool InRange(Value v) const;
-
     // Для пакета импульсов после изменения периода или длительности импульсов нужно заслать ещё и число импульсов
     void LoadNumberImpulsesIfNeed();
 
