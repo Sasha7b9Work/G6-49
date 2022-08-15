@@ -426,11 +426,10 @@ struct PVoltage : public DParam
 
 struct PAmplitudePic : public PVoltage
 {
-    PAmplitudePic(pValueInRange valueInRange = EValueInRange,
-                  const Value &min = Value("0", Order::One),
+    PAmplitudePic(const Value &min = Value("0", Order::One),
                   const Value &max = Value("10", Order::One),
                   const Value &value = DEFAULT_AMPLITUDE) :
-        PVoltage(TypeDParam::AmplitudePic, "Размах", "Amplitude", min, max, valueInRange, value) { }
+        PVoltage(TypeDParam::AmplitudePic, "Размах", "Amplitude", min, max, PAmplitudePic::InRange, value) { }
 
     static SMinMax InRange(Form *);
 };

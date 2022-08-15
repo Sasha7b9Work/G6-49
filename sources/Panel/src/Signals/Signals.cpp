@@ -59,7 +59,7 @@ static Param *sineManipulationA[] =
 
 
 static PFrequency    sineA_Frequency(PFrequency::InRange, FREQUENCY_SINE_MIN, FREQUENCY_SINE_MAX);
-static PAmplitudePic sineA_Amplitude(PAmplitudePic::InRange);
+static PAmplitudePic sineA_Amplitude;
 static POffset       sineA_Offset(POffset::InRange);
 static PManipulation sineA_Manipulation(sineManipulationA);
 
@@ -108,7 +108,7 @@ static pchar namesClockImpulse[] =
 
 
 static PFrequency    rampPlusA_Frequency(PFrequency::InRange, FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
-static PAmplitudePic rampPlusA_Amplitude(PAmplitudePic::InRange);
+static PAmplitudePic rampPlusA_Amplitude;
 static POffset       rampPlusA_Offset(POffset::InRange);
 static PModeStart    rampPlusA_ModeStart(Param::EFuncActive, namesModeStartFree);
 
@@ -125,7 +125,7 @@ static Form formRampPlusA(TypeForm::RampPlus, params_RampPlusA, &waves[Chan::A])
 
 
 static PFrequency    rampMinusA_Frequency(PFrequency::InRange, FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
-static PAmplitudePic rampMinusA_Amplitude(PAmplitudePic::InRange);
+static PAmplitudePic rampMinusA_Amplitude;
 static POffset       rampMinusA_Offset(POffset::InRange);
 static PModeStart    rampMinusA_ModeStart(Param::EFuncActive, namesModeStartFree);
 
@@ -142,7 +142,7 @@ static Form formRampMinusA(TypeForm::RampMinus, params_RampMinusA, &waves[Chan::
 
 
 static PFrequency    triangleA_Frequency(PFrequency::InRange, FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
-static PAmplitudePic triangleA_Amplitude(PAmplitudePic::InRange);
+static PAmplitudePic triangleA_Amplitude;
 static POffset       triangleA_Offset(POffset::InRange);
 static PModeStart    triangleA_ModeStart(Param::EFuncActive, namesModeStartFree);
 
@@ -164,7 +164,7 @@ static void OnChoose_FileA()
 }
 
 static PFrequency    freeA_Frequency(PFrequency::InRange, FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
-static PAmplitudePic freeA_Amplitude(PAmplitudePic::InRange);
+static PAmplitudePic freeA_Amplitude;
 static POffset       freeA_Offset(POffset::InRange);
 static PModeStart    freeA_ModeStart(Param::EFuncActive, namesModeStartFree);
 static BParam        freeA_Choose("Выбрать", "Choose", OnChoose_FileA);
@@ -184,7 +184,7 @@ static Form formFreeA(TypeForm::Free, params_FreeA, &waves[Chan::A]);
 
 
 static PFrequency    meanderA_Frequency(PFrequency::InRange, FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
-static PAmplitudePic meanderA_Amplitude(PAmplitudePic::InRange);
+static PAmplitudePic meanderA_Amplitude;
 static POffset       meanderA_Offset(POffset::InRange);
 
 static Param *params_MeanderA[] =
@@ -220,7 +220,7 @@ static bool FuncActive_ModeStartStopAndDelayImpulseA()
 
 static PPeriod        impulseA_Period   (FuncActive_PeriodImpulseA, Value("100", Order::Kilo), Value("100", Order::Micro));
 static PDuration      impulseA_Duration (Value("100", Order::Kilo), Value("20", Order::Micro));
-static PAmplitudePic  impulseA_Amplitude(PAmplitudePic::InRange);
+static PAmplitudePic  impulseA_Amplitude;
 static POffset        impulseA_Offset(POffset::InRange);
 static PPolarity      impulseA_Polarity(namesPolarity);
 static PModeStart     impulseA_ModeStart(Param::EFuncActive, namesModeStartImpulse);
@@ -265,7 +265,7 @@ static IParam      packetA_PacketNumber  (TypeIParam::PacketNumber, "Кол-во имп"
                                                     Param::EValueInRange,
                                                     Value("3", Order::One));
 static PPacketPeriod packetA_PacketPeriod  (Value("100", Order::Kilo), Value("0.1", Order::One));
-static PAmplitudePic packetA_Amplitude(PAmplitudePic::InRange);
+static PAmplitudePic packetA_Amplitude;
 static POffset       packetA_Offset(POffset::InRange);
 static PPolarity     packetA_Polarity(namesPolarity);
 static PModeStart    packetA_ModeStart(Param::EFuncActive, namesModeStartImpulse);
@@ -328,7 +328,7 @@ static Param *sineManipulationB[] =
 };
 
 static PFrequency    sineB_Frequency(PFrequency::InRange, FREQUENCY_SINE_MIN, FREQUENCY_SINE_MAX);
-static PAmplitudePic sineB_Amplitude(PAmplitudePic::InRange);
+static PAmplitudePic sineB_Amplitude;
 static POffset       sineB_Offset(POffset::InRange);
 static PPhase        sineB_Phase;
 static PManipulation sineB_Manipulation(sineManipulationB);
@@ -347,7 +347,7 @@ static Form formSineB(TypeForm::Sine, params_SineB, &waves[Chan::B]);
 
 
 static PFrequency    rampPlusB_Frequency(PFrequency::InRange, FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
-static PAmplitudePic rampPlusB_Amplitude(PAmplitudePic::InRange);
+static PAmplitudePic rampPlusB_Amplitude;
 static POffset       rampPlusB_Offset(POffset::InRange);
 static PModeStart    rampPlusB_ModeStart(Param::EFuncActive, namesModeStartFree);
 
@@ -364,7 +364,7 @@ static Form formRampPlusB(TypeForm::RampPlus, params_RampPlusB, &waves[Chan::B])
 
 
 static PFrequency    rampMinusB_Frequency(PFrequency::InRange, FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
-static PAmplitudePic rampMinusB_Amplitude(PAmplitudePic::InRange);
+static PAmplitudePic rampMinusB_Amplitude;
 static POffset       rampMinusB_Offset(POffset::InRange);
 static PModeStart    rampMinusB_ModeStart(Param::EFuncActive, namesModeStartFree);
 
@@ -381,7 +381,7 @@ static Form formRampMinusB(TypeForm::RampMinus, params_RampMinusB, &waves[Chan::
 
 
 static PFrequency    triangleB_Frequency(PFrequency::InRange, FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
-static PAmplitudePic triangleB_Amplitude(PAmplitudePic::InRange);
+static PAmplitudePic triangleB_Amplitude;
 static POffset       triangleB_Offset(POffset::InRange);
 static PModeStart    triangleB_ModeStart(Param::EFuncActive, namesModeStartFree);
 
@@ -403,7 +403,7 @@ static void OnChoose_FileB()
 }
 
 static PFrequency    freeB_Frequency(PFrequency::InRange, FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
-static PAmplitudePic freeB_Amplitude(PAmplitudePic::InRange);
+static PAmplitudePic freeB_Amplitude;
 static POffset       freeB_Offset(POffset::InRange);
 static PModeStart    freeB_ModeStart(Param::EFuncActive, namesModeStartFree);
 static BParam        freeB_Choose("Выбрать", "Choose", OnChoose_FileB);
@@ -422,7 +422,7 @@ static Form formFreeB(TypeForm::Free, params_FreeB, &waves[Chan::B]);
 
 
 static PFrequency    meanderB_Frequency(PFrequency::InRange, FREQUENCY_DDS_MIN, FREQUENCY_DDS_MAX);
-static PAmplitudePic meanderB_Amplitude(PAmplitudePic::InRange);
+static PAmplitudePic meanderB_Amplitude;
 static POffset       meanderB_Offset(POffset::InRange);
 
 static Param *params_MeanderB[] =
@@ -465,7 +465,7 @@ static bool FuncActive_ModeStartImpulseB()
 
 static PPeriod       impulseB_Period(FuncActive_PeriodImpulseB, Value("100", Order::Kilo), Value("100", Order::Micro));
 static PDuration     impulseB_Duration(Value("100", Order::Kilo), Value("20", Order::Micro));
-static PAmplitudePic impulseB_Amplitude(PAmplitudePic::InRange);
+static PAmplitudePic impulseB_Amplitude;
 static POffset       impulseB_Offset(POffset::InRange);
 static PPolarity     impulseB_Polarity(namesPolarity);
 static PModeStart    impulseB_ModeStart(FuncActive_ModeStartImpulseB, namesModeStartImpulse);
