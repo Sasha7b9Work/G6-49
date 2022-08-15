@@ -513,7 +513,9 @@ struct PPeriodPacket : public PTime
 struct PDuration : public PTime
 {
     PDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
-        PTime(TypeDParam::Duration, Param::EFuncActive, nameRU, nameEN, PPeriod::min_impulse, max, EValueInRange, value) { }
+        PTime(TypeDParam::Duration, Param::EFuncActive, nameRU, nameEN, PPeriod::min_impulse, max, PDuration::InRange, value) { }
+
+    static SMinMax InRange(Form *);
 };
 
 
