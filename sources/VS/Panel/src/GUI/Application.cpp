@@ -136,7 +136,7 @@ void Frame::OnClose(wxCloseEvent &event)
 {
     ConsoleSCPI::Self()->Destroy();
 
-    Display::Warnings::Clear();
+    Display::Warnings::_Clear();
 
     event.Skip();
 }

@@ -127,25 +127,25 @@ void Display::Update()
 }
 
 
-void Display::Warnings::Top::Show(const String &ru, const String &en)
+void Display::Warnings::Top::_Show(const String &ru, const String &en)
 {
     warnings.AppendTop(LANG_RU ? ru : en);
 }
 
 
-void Display::Warnings::Center::Show(const String &ru, const String &en)
+void Display::Warnings::Center::_Show(const String &ru, const String &en)
 {
     warnings.AppendCenter(LANG_RU ? ru : en);
 }
 
 
-void Display::Warnings::Center::Show(pchar ru, pchar en)
+void Display::Warnings::Center::_Show(pchar ru, pchar en)
 {
     warnings.AppendCenter(LANG_RU ? String(ru) : String(en));
 }
 
 
-void Display::Warnings::Center::Show2Strings(const String &ru1, const String &ru2, const String &en1, const String &en2)
+void Display::Warnings::Center::_Show2Strings(const String &ru1, const String &ru2, const String &en1, const String &en2)
 {
     warnings.AppendCenter2Strings(LANG_RU ? ru1 : en1, LANG_RU ? ru2 : en2);
 }
@@ -260,14 +260,14 @@ void Display::WarningsDisplay::ClearCenter()
 }
 
 
-void Display::Warnings::Clear()
+void Display::Warnings::_Clear()
 {
     warnings.ClearCenter();
     warnings.ClearTop();
 }
 
 
-void Display::Warnings::Top::Clear()
+void Display::Warnings::Top::_Clear()
 {
     warnings.ClearTop();
 }

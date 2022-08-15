@@ -32,19 +32,19 @@ namespace Display
 
     struct Warnings
     {
-        static void Clear();
+        static void _Clear();
 
         struct Top
         {
-            static void Show(const String &ru, const String &en);
-            static void Clear();
+            static void _Show(const String &ru, const String &en);
+            static void _Clear();
         };
 
         struct Center
         {
-            static void Show(const String &ru, const String &en);
-            static void Show(pchar ru, pchar en);
-            static void Show2Strings(const String &ru1, const String &ru2, const String &en1, const String &en2);
+            static void _Show(const String &ru, const String &en);
+            static void _Show(pchar ru, pchar en);
+            static void _Show2Strings(const String &ru1, const String &ru2, const String &en1, const String &en2);
         };
     };
 };

@@ -71,7 +71,7 @@ void PageSignals::OnPress_Channel(bool active)
     {
         if (CURRENT_CHANNEL.IsA() && CURRENT_FORM->Is(TypeForm::Packet))
         {
-            Display::Warnings::Center::Show("В режиме ПАКЕТ выбор канала В невозможен", "Channel B cannot be selected in PACKET mode");
+            Display::Warnings::Center::_Show("В режиме ПАКЕТ выбор канала В невозможен", "Channel B cannot be selected in PACKET mode");
         }
     }
 }
@@ -161,7 +161,7 @@ void PageSignals::OnChanged_Form(bool active)
         {
             if (A::Impulse::start_stop->GetChoice() == 1)
             {
-                Display::Warnings::Center::Show("Отключите режим А-СТАРТ,В-СТОП", "Disable the A-START,B-STOP mode");
+                Display::Warnings::Center::_Show("Отключите режим А-СТАРТ,В-СТОП", "Disable the A-START,B-STOP mode");
             }
         }
     }
@@ -240,12 +240,12 @@ static void OnPress_TuneParameter()
             {
                 if (CURRENT_PARAM == A::Impulse::start_stop || CURRENT_PARAM == A::Impulse::delay)
                 {
-                    Display::Warnings::Center::Show("Выберите на канале В форму ИМПУЛЬС", "Select on the channel To form IMPULSE");
+                    Display::Warnings::Center::_Show("Выберите на канале В форму ИМПУЛЬС", "Select on the channel To form IMPULSE");
                 }
 
                 if (CURRENT_PARAM == A::Impulse::period)
                 {
-                    Display::Warnings::Center::Show("Недоступно при однократном запуске", "Not available on single launch");
+                    Display::Warnings::Center::_Show("Недоступно при однократном запуске", "Not available on single launch");
                 }
             }
         }
@@ -259,7 +259,7 @@ static void OnPress_TuneParameter()
                     {
                         if (B::Impulse::mode_start->GetChoice() == 1)
                         {
-                            Display::Warnings::Center::Show("Недоступно при однократном запуске", "Not available on single launch");
+                            Display::Warnings::Center::_Show("Недоступно при однократном запуске", "Not available on single launch");
                         }
                     }
                 }
@@ -268,7 +268,7 @@ static void OnPress_TuneParameter()
                 {
                     if (A::Impulse::start_stop->GetChoice() == 1)
                     {
-                        Display::Warnings::Center::Show("Недоступно в режиме А-СТАРТ, В-СТОП", "Not available in A-START, B-STOP mode");
+                        Display::Warnings::Center::_Show("Недоступно в режиме А-СТАРТ, В-СТОП", "Not available in A-START, B-STOP mode");
                     }
                 }
             }

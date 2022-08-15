@@ -845,12 +845,12 @@ bool DisplayCorrection::ShowMessageOutRangIfNeed(Param *param)
 
         String min_str = param->ToString(min_max.min, true);
 
-        Display::Warnings::Top::Show(String("%s : границы диапазона %s ... %s", param->Name(), min_str.c_str(), max_str.c_str()),
+        Display::Warnings::Top::_Show(String("%s : границы диапазона %s ... %s", param->Name(), min_str.c_str(), max_str.c_str()),
                                      String("%s : out of range %s ... %s", param->Name(), min_str.c_str(), max_str.c_str()));
     }
     else
     {
-        Display::Warnings::Top::Clear();
+        Display::Warnings::Top::_Clear();
     }
 
     return min_max.valid;
@@ -1240,7 +1240,7 @@ void Tuner::OnButtonApply()
 
                 if (DisplayEntering::ToValue() < pack_period->CalculateMinValue())
                 {
-                    Display::Warnings::Center::Show(String("Параметр не может быть меньше %s сек", pack_period->CalculateMinValue().ToString(false, Order::One)),
+                    Display::Warnings::Center::_Show(String("Параметр не может быть меньше %s сек", pack_period->CalculateMinValue().ToString(false, Order::One)),
                                                String("The parameter cannot be less %s s", pack_period->CalculateMinValue().ToString(false, Order::One)));
                     return;
                 }
@@ -1251,7 +1251,7 @@ void Tuner::OnButtonApply()
 
                 if ((fractNano % 10) != 0)
                 {
-                    Display::Warnings::Center::Show("Параметр должен быть кратен 10 нс", "Param must be a multiple of 10 ns");
+                    Display::Warnings::Center::_Show("Параметр должен быть кратен 10 нс", "Param must be a multiple of 10 ns");
                     return;
                 }
             }
