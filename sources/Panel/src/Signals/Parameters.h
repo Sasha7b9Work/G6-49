@@ -14,6 +14,11 @@ struct Param;
 struct SMinMax
 {
     SMinMax(bool val) : min(1), max(1), valid(val) { }
+    SMinMax(const Value &_min, const Value &_max, const Value &_value) : min(_min), max(_max)
+    {
+        valid = (_value >= min) && (_value <= max);
+    }
+
     Value min;      // ћинимально допустимое значение
     Value max;      // ћаксимально допустимое значение
     bool valid;     // ≈сли true - текущее значение допустимо
@@ -77,7 +82,7 @@ struct Param
     // Ёто "самое минимальное" значение параметра. ћеньше его быть не может
     virtual Value Min() const { return Value("0", Order::One); }
 
-    virtual SMinMax ValueInRange() const { return EInRange(form); }
+    virtual SMinMax ValueInRange() const;
 
     virtual Value GetValue() const { return Value("1", Order::One); } //-V524
 

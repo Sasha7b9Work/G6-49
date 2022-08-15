@@ -971,3 +971,9 @@ SMinMax PPeriodManipulation::InRange(Form *)
 
     return result;
 }
+
+
+SMinMax Param::ValueInRange() const
+{
+    return SMinMax(Min(), Max(), GetValue());
+}
