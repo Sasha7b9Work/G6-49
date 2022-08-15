@@ -292,6 +292,8 @@ struct IParam : public Param
     // Возвращает количество разрядов для параметра parameter (в них должно помещаться максимально возможное значение параметра parameter)
     int GetMaxNumberDigits() const;
 
+    static IParam empty;
+
 private:
 
     Tuner         tuner;
@@ -341,11 +343,13 @@ struct CParam : public Param
 
     virtual void Reset() { SetAndLoadChoice(0); };
 
+    static CParam empty;
+
 private:
-	TypeCParam::E type;
-    int choice;                         // Текущий выбор. И выбор для режима запуска импульсных сигналов
-    static int choiceModeStartFree;     // Выбор режима запуска произвольных сигналов
-    pchar *choices;               // Идут так - 0(рус), 0(англ), 1(рус), 1(англ)...
+	TypeCParam::E  type;
+    int            choice;                  // Текущий выбор. И выбор для режима запуска импульсных сигналов
+    static int     choiceModeStartFree;     // Выбор режима запуска произвольных сигналов
+    pchar         *choices;                 // Идут так - 0(рус), 0(англ), 1(рус), 1(англ)...
     
     // Количество вариантов выбора
     int NumChoices() const;
@@ -383,6 +387,8 @@ struct CMSParam : public Param
     virtual void OnPressButtonTune();
 
     TypeCMSParam::E GetType() { return type; }
+
+    static CMSParam empty;
 
 private:
     

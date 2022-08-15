@@ -16,7 +16,9 @@
 int CParam::choiceModeStartFree = 0;
 
 DParam DParam::empty(TypeDParam::Frequency, Param::EFuncActive, "Пустой", "Empty", Value(0), Value(1), EValueInRange, Value(1));
-
+IParam IParam::empty(TypeIParam::PacketNumber, "Пустой", "Empty", Value("10", Order::Nano), Value("10", Order::Mega), Param::EValueInRange, Value(1.0));
+CParam CParam::empty(TypeCParam::Polarity, Param::EFuncActive, "Пустой", "Empty");
+CMSParam CMSParam::empty(TypeCMSParam::Manipulation, "Пустой", "Empty", nullptr);
 
 const Value PAmplitudePic::by_default("1", Order::One);
 const Value PPeriod::min_impulse("20", Order::Nano);
@@ -730,31 +732,6 @@ pchar TypeCParam::Name(TypeCParam::E type)
 }
 
 
-Value PPeriodPacket::CalculateMinValue() const
-{
-    // Значение периода не может быть меньше (N - 1) * Tи + tи + 10нс
-
-    PPeriod *par_period = (PPeriod *)form->FindParameter(TypeDParam::Period);
-    IParam *par_number = form->FindParameter(TypeIParam::PacketNumber);
-    PDuration *par_duration = (PDuration *)form->FindParameter(TypeDParam::Duration);
-
-    if (par_period && par_number && par_duration)
-    {
-        Value min_value = par_period->GetValue();
-
-        min_value.Mul((uint)(par_number->GetValue().Integer() - 1));
-
-        min_value.Add(par_duration->GetValue());
-
-        min_value.Add(Value("10", Order::Nano));
-
-        return min_value;
-    }
-
-    return Value("20", Order::Nano);
-}
-
-
 bool PPeriodPacket::RecalcualateValue()
 {
     Value min_value = CalculateMinValue();
@@ -937,11 +914,40 @@ SMinMax PFrequency::InRange(Form *)
 }
 
 
-SMinMax PPeriodPacket::InRange(Form *)
+Value PPeriodPacket::CalculateMinValue() const
 {
-    SMinMax result(true);
+    // Значение периода не может быть меньше (N - 1) * Tи + tи + 10нс
 
-    return result;
+    PPeriod *par_period = (PPeriod *)form->FindParameter(TypeDParam::Period);
+    IParam *par_number = form->FindParameter(TypeIParam::PacketNumber);
+    PDuration *par_duration = (PDuration *)form->FindParameter(TypeDParam::Duration);
+
+    if (par_period && par_number && par_duration)
+    {
+        Value min_value = par_period->GetValue();
+
+        min_value.Mul((uint)(par_number->GetValue().Integer() - 1));
+
+        min_value.Add(par_duration->GetValue());
+
+        min_value.Add(Value("10", Order::Nano));
+
+        return min_value;
+    }
+
+    return Value("20", Order::Nano);
+}
+
+
+SMinMax PPeriodPacket::InRange(Form * /*form*/)
+{
+    SMinMax min_max(false);
+
+//    PPeriod *param_period = (PPeriod *)form->FindParameter(TypeDParam::Period);
+//    IParam *param_number = form->FindParameter(TypeIParam::PacketNumber);
+//    PDuration *param_duration = (PDuration *)form->FindParameter(TypeDParam::Duration);
+
+    return min_max;
 }
 
 
