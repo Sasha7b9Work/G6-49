@@ -484,9 +484,11 @@ struct PPhase : public DParam
 struct PPeriod : public PTime
 {
     PPeriod(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
-        PTime(TypeDParam::Period, funcActive, nameRU, nameEN, PPeriod::min_impulse, max, EValueInRange, value) { }
+        PTime(TypeDParam::Period, funcActive, nameRU, nameEN, PPeriod::min_impulse, max, PPeriod::InRange, value) { }
 
     static const Value min_impulse;
+
+    static SMinMax InRange(Form *);
 };
 
 
@@ -504,7 +506,7 @@ struct PPeriodPacket : public PTime
 
     virtual Value GetMin() const { return CalculateMinValue(); }
 
-    static SMinMax InRange(Form *form);
+    static SMinMax InRange(Form *);
 };
 
 

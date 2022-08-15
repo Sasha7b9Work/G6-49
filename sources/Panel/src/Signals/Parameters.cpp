@@ -945,3 +945,13 @@ SMinMax PPeriodPacket::InRange(Form *)
 
     return result;
 }
+
+
+SMinMax PPeriod::InRange(Form *)
+{
+    SMinMax result;
+
+    result.valid = true;
+
+    return result;
+}
