@@ -522,7 +522,9 @@ struct PDuration : public PTime
 struct PDelay : public PTime
 {
     PDelay(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") :
-        PTime(TypeDParam::Delay, funcActive, nameRU, nameEN, PPeriod::min_impulse, max, EValueInRange, value) { }
+        PTime(TypeDParam::Delay, funcActive, nameRU, nameEN, PPeriod::min_impulse, max, PDelay::InRange, value) { }
+
+    static SMinMax InRange(Form *);
 };
 
 

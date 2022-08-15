@@ -965,3 +965,13 @@ SMinMax PDuration::InRange(Form *)
 
     return result;
 }
+
+
+SMinMax PDelay::InRange(Form *)
+{
+    SMinMax result;
+
+    result.valid = true;
+
+    return result;
+}
