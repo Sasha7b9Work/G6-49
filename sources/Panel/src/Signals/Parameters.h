@@ -287,8 +287,6 @@ struct IParam : public Param
 
     void LoadValue();
 
-    bool InRange(Value v) const;
-
     // Возвращает количество разрядов для параметра parameter (в них должно помещаться максимально возможное значение параметра parameter)
     int GetMaxNumberDigits() const;
 
