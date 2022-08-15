@@ -10,10 +10,10 @@
 
 
 extern ChoiceParameterBase cParameters;
-extern const PageBase   pageSignals;
-extern const ChoiceBase cFormA;
-extern const ChoiceBase cFormB;
-extern const ButtonBase bTuneParameter;
+extern const PageBase      pageSignals;
+extern const ChoiceBase    cFormA;
+extern const ChoiceBase    cFormB;
+extern const ButtonBase    bTuneParameter;
 
 // Номер текущей формы сигнал
 static int numForm = 0;
