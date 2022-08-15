@@ -37,8 +37,7 @@ namespace Display
         struct Top
         {
             static void Show(const String &ru, const String &en);
-
-            static void _Clear();
+            static void Clear();
         };
 
         struct Center

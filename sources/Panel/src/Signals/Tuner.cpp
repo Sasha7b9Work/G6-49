@@ -850,7 +850,7 @@ bool DisplayCorrection::ShowMessageOutRangIfNeed(Param *param)
     }
     else
     {
-        Display::Warnings::Top::_Clear();
+        Display::Warnings::Top::Clear();
     }
 
     return min_max.valid;
