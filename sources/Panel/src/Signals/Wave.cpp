@@ -225,7 +225,7 @@ void Form::TuneGenerator()
             if(manipulationEnabled)
             {
                 SendParameterToGenerator(TypeDParam::DurationManipulation);
-                SendParameterToGenerator(TypeDParam::ManipulationPeriod);
+                SendParameterToGenerator(TypeDParam::PeriodManipulation);
             }
 
             int opened = currentParam;
@@ -248,7 +248,7 @@ void Form::TuneGenerator()
             if(manipulationEnabled)
             {
                 SendParameterToGenerator(TypeDParam::DurationManipulation);
-                SendParameterToGenerator(TypeDParam::ManipulationPeriod);
+                SendParameterToGenerator(TypeDParam::PeriodManipulation);
             }
 
             CloseCompositeParameter();
