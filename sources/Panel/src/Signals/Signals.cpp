@@ -11,8 +11,6 @@ extern PModeStart impulseA_ModeStart;
 extern PModeStart packetA_ModeStart;
 extern PModeStart impulseB_ModeStart;
 
-#define FREQUENCY_SINE_MIN  Value("300", Order::Micro)
-#define FREQUENCY_SINE_MAX  Value("100", Order::Mega)
 
 #define FREQUENCY_DDS_MIN   Value("100", Order::Micro)
 #define FREQUENCY_DDS_MAX   Value("10",  Order::Mega)
@@ -58,7 +56,7 @@ static Param *sineManipulationA[] =
 //}
 
 
-static PFrequency    sineA_Frequency(FREQUENCY_SINE_MIN, FREQUENCY_SINE_MAX);
+static PFrequency    sineA_Frequency(PFrequency::sinMin, PFrequency::sinMax);
 static PAmplitudePic sineA_Amplitude;
 static POffset       sineA_Offset;
 static PManipulation sineA_Manipulation(sineManipulationA);
@@ -327,7 +325,7 @@ static Param *sineManipulationB[] =
     nullptr
 };
 
-static PFrequency    sineB_Frequency(FREQUENCY_SINE_MIN, FREQUENCY_SINE_MAX);
+static PFrequency    sineB_Frequency(PFrequency::sinMin, PFrequency::sinMax);
 static PAmplitudePic sineB_Amplitude;
 static POffset       sineB_Offset;
 static PPhase        sineB_Phase;

@@ -20,6 +20,8 @@ DParam DParam::empty(TypeDParam::Frequency, Param::EFuncActive, "Пустой", "Empty
 
 Value PAmplitudePic::by_default("1", Order::One);
 Value PPeriod::impulseMin("20", Order::Nano);
+Value PFrequency::sinMin("300", Order::Micro);
+Value PFrequency::sinMax("100", Order::Mega);
 
 namespace MathSupport
 {
