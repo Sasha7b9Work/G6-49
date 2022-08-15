@@ -131,6 +131,7 @@ struct TypeDParam
 };
 
 
+// Double
 struct DParam : public Param
 {
     friend struct LogicFloatValue;
@@ -138,10 +139,10 @@ struct DParam : public Param
     friend class TunerDisplay;
 
     DParam(TypeDParam::E t, pFuncBV funcActive, pchar const nameRU, pchar const nameEN,
-                    const Value  &min,
-                    const Value  &max,
-                    pValueInRange valueInRange,
-                    const Value  &value);
+           const Value  &min,
+           const Value  &max,
+           pValueInRange valueInRange,
+           const Value  &value);
 
     DParam(const DParam &);
 
@@ -251,6 +252,7 @@ struct TypeIParam
 };
 
 
+// Integer
 struct IParam : public Param
 {
     IParam(TypeIParam::E t, pchar  const nameRU, pchar const nameEN,
@@ -318,6 +320,7 @@ struct TypeCParam
 };
 
 
+// Choice
 struct CParam : public Param
 {
     CParam(TypeCParam::E t, pFuncBV funcActive, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
@@ -358,7 +361,7 @@ struct TypeCMSParam
     };
 };
 
-
+// Composite
 struct CMSParam : public Param
 {
     CMSParam(TypeCMSParam::E v, pchar nameRU, pchar nameEN, Param **parameters) :
@@ -388,6 +391,7 @@ private:
 };
 
 
+// Button
 struct BParam : public Param
 {
     BParam(pchar titleRU, pchar titleEN, pFuncVV f) :
@@ -426,7 +430,7 @@ struct PAmplitudePic : public PVoltage
         PVoltage(TypeDParam::AmplitudePic, "Размах", "Amplitude", min, max, PAmplitudePic::InRange, value) { }
 
     static SMinMax InRange(Form *);
-    static Value  by_default;
+    static const Value by_default;
 };
 
 
@@ -448,8 +452,8 @@ struct PFrequency : public DParam
                const Value &value = Value("1", Order::Kilo)) :
         DParam(TypeDParam::Frequency, Param::EFuncActive, "Частота", "Frequency", min, max, PFrequency::InRange, value) { }
 
-    static Value sinMin;
-    static Value sinMax;
+    static const Value sinMin;
+    static const Value sinMax;
 
     static SMinMax InRange(Form *);
 };
@@ -480,7 +484,7 @@ struct PPeriod : public PTime
     PPeriod(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
         PTime(TypeDParam::Period, funcActive, nameRU, nameEN, PPeriod::impulseMin, max, EValueInRange, value) { }
 
-    static Value impulseMin;
+    static const Value impulseMin;
 };
 
 

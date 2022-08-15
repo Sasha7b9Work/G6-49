@@ -18,10 +18,10 @@ int CParam::choiceModeStartFree = 0;
 DParam DParam::empty(TypeDParam::Frequency, Param::EFuncActive, "Пустой", "Empty", Value(0), Value(1), EValueInRange, Value(1));
 
 
-Value PAmplitudePic::by_default("1", Order::One);
-Value PPeriod::impulseMin("20", Order::Nano);
-Value PFrequency::sinMin("300", Order::Micro);
-Value PFrequency::sinMax("100", Order::Mega);
+const Value PAmplitudePic::by_default("1", Order::One);
+const Value PPeriod::impulseMin("20", Order::Nano);
+const Value PFrequency::sinMin("300", Order::Micro);
+const Value PFrequency::sinMax("100", Order::Mega);
 
 namespace MathSupport
 {
