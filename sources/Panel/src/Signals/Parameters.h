@@ -455,6 +455,7 @@ struct PFrequency : public DParam
     static const Value min_sin;
     static const Value max_sin;
     static const Value min_DDS;
+    static const Value max_DDS;
 
     static SMinMax InRange(Form *);
 };

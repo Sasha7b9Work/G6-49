@@ -23,6 +23,7 @@ const Value PPeriod::min_impulse("20", Order::Nano);
 const Value PFrequency::min_sin("300", Order::Micro);
 const Value PFrequency::max_sin("100", Order::Mega);
 const Value PFrequency::min_DDS("100", Order::Micro);
+const Value PFrequency::max_DDS("10", Order::Mega);
 
 namespace MathSupport
 {
