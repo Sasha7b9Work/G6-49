@@ -141,10 +141,7 @@ struct DParam : public Param
     friend class Tuner;
     friend class TunerDisplay;
 
-    DParam(TypeDParam::E t, pFuncBV funcActive, pchar const nameRU, pchar const nameEN,
-           const Value  &min,
-           const Value  &max,
-           const Value  &value);
+    DParam(TypeDParam::E t, pFuncBV funcActive, pchar const nameRU, pchar const nameEN, const Value  &value);
 
     DParam(const DParam &);
 
@@ -177,16 +174,11 @@ struct DParam : public Param
     // Возвращает единицы измерения, приведённые к порядку order. Если order == Order::Count, единциы будут рассчитываться исходя из текущего значения value
     cstr GetUnits(Order::E order = Order::Count) const;
 
-    // Возвращает максимальное значение, которое может иметь параметр
-    virtual Value Max() const { return max; }
-    
-    // Возвращает минимальное значение, которое может иметь параметр
-    virtual Value Min() const { return min; }
+    virtual Value Min() const;
+    virtual Value Max() const;
+    virtual Value GetValue() const { return value; };
 
     virtual Tuner *GetTuner()   { return &tuner; };
-
-    // Возвращает текущее значение параметра
-    virtual Value GetValue() const { return value; };
 
     void SetValue(Value val) { value = val; }
      
@@ -218,8 +210,6 @@ struct DParam : public Param
 private:
     Tuner               tuner;          // Используется для настройки 
     const TypeDParam::E type;
-    Value               min;
-    Value               max;
     Value               value;
     Value               resetValue;
 
@@ -247,8 +237,7 @@ struct TypeIParam
 // Integer
 struct IParam : public Param
 {
-    IParam(TypeIParam::E t, pchar  const nameRU, pchar const nameEN,
-        const Value &min, const Value &max, const Value &);
+    IParam(TypeIParam::E t, pchar  const nameRU, pchar const nameEN, const Value &);
 
     virtual void Reset() { SetAndLoadValue(resetValue); }
 
@@ -259,11 +248,9 @@ struct IParam : public Param
 
     virtual Tuner *GetTuner()            { return &tuner; }
 
-    virtual Value GetValue() const       { return value; }
-
-    virtual Value Max() const         { return max;   }
-
-    virtual Value Min() const         { return min;   }
+    virtual Value Min() const;
+    virtual Value Max() const;
+    virtual Value GetValue() const { return value; }
 
     TypeIParam::E GetType()   { return type; }
 
@@ -282,8 +269,6 @@ private:
 
     Tuner         tuner;
     TypeIParam::E type;
-    Value         min;
-    Value         max;
     Value         value;
     Value         resetValue;
 };
@@ -402,20 +387,14 @@ private:
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Value ///
 struct PVoltage : public DParam
 {
-    PVoltage(TypeDParam::E type, pchar nameRU, pchar nameEN,
-             const Value &min,
-             const Value &max,
-             const Value &value) :
-        DParam(type, Param::EFuncActive, nameRU, nameEN, min, max, value) { }
+    PVoltage(TypeDParam::E type, pchar nameRU, pchar nameEN, const Value &value) :
+        DParam(type, Param::EFuncActive, nameRU, nameEN, value) { }
 };
 
 
 struct PAmplitudePic : public PVoltage
 {
-    PAmplitudePic(const Value &min = Value("0", Order::One),
-                  const Value &max = Value("10", Order::One),
-                  const Value &value = PAmplitudePic::by_default) :
-        PVoltage(TypeDParam::AmplitudePic, "Размах", "Amplitude", min, max, value) { }
+    PAmplitudePic(const Value &value = PAmplitudePic::by_default) : PVoltage(TypeDParam::AmplitudePic, "Размах", "Amplitude", value) { }
 
     static const Value by_default;
 };
@@ -423,19 +402,13 @@ struct PAmplitudePic : public PVoltage
 
 struct POffset : public PVoltage
 {
-    POffset(const Value &min = Value("-5", Order::One),
-            const Value &max = Value("5", Order::One),
-            const Value &value = Value("0", Order::One)) :
-        PVoltage(TypeDParam::Offset, "Смещение", "Offset", min, max, value) { }
+    POffset(const Value &value = Value("0", Order::One)) : PVoltage(TypeDParam::Offset, "Смещение", "Offset", value) { }
 };
 
 
 struct PFrequency : public DParam
 {
-    PFrequency(const Value &min,
-               const Value &max,
-               const Value &value = Value("1", Order::Kilo)) :
-        DParam(TypeDParam::Frequency, Param::EFuncActive, "Частота", "Frequency", min, max, value) { }
+    PFrequency(const Value &value = Value("1", Order::Kilo)) : DParam(TypeDParam::Frequency, Param::EFuncActive, "Частота", "Frequency", value) { }
 
     static const Value min_sin;
     static const Value max_sin;
@@ -446,27 +419,21 @@ struct PFrequency : public DParam
 
 struct PTime : public DParam
 {
-    PTime(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar  const nameEN,
-          const Value &min,
-          const Value &max,
-          const Value &value) :
-        DParam(t, funcActive, nameRU, nameEN, min, max, value) { }
+    PTime(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar  const nameEN, const Value &value) :
+        DParam(t, funcActive, nameRU, nameEN, value) { }
 };
 
 
 struct PPhase : public DParam
 {
-    PPhase() : DParam(TypeDParam::Phase, Param::EFuncActive, "Фаза", "Phase",
-                      Value("0", Order::One),
-                      Value("360", Order::One),
-                      Value("0", Order::One)) { }
+    PPhase() : DParam(TypeDParam::Phase, Param::EFuncActive, "Фаза", "Phase", Value("0", Order::One)) { }
 };
 
 
 struct PPeriod : public PTime
 {
-    PPeriod(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
-        PTime(TypeDParam::Period, funcActive, nameRU, nameEN, PPeriod::min_impulse, max, value) { }
+    PPeriod(pFuncBV funcActive, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
+        PTime(TypeDParam::Period, funcActive, nameRU, nameEN, value) { }
 
     static const Value min_impulse;
 };
@@ -474,8 +441,7 @@ struct PPeriod : public PTime
 
 struct PPeriodPacket : public PTime
 {
-    PPeriodPacket(const Value &max, const Value &value) :
-        PTime(TypeDParam::PeriodPacket, Param::EFuncActive, "Период пак", "Packet per", PPeriod::min_impulse, max, value) { }
+    PPeriodPacket(const Value &value) : PTime(TypeDParam::PeriodPacket, Param::EFuncActive, "Период пак", "Packet per", value) { }
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
     // Возвращает true, если значение изменилось
@@ -490,33 +456,25 @@ struct PPeriodPacket : public PTime
 
 struct PDuration : public PTime
 {
-    PDuration(const Value &max, const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") :
-        PTime(TypeDParam::Duration, Param::EFuncActive, nameRU, nameEN, PPeriod::min_impulse, max, value) { }
+    PDuration(const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") : PTime(TypeDParam::Duration, Param::EFuncActive, nameRU, nameEN, value) { }
 };
 
 
 struct PDelay : public PTime
 {
-    PDelay(pFuncBV funcActive, const Value &max, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") :
-        PTime(TypeDParam::Delay, funcActive, nameRU, nameEN, PPeriod::min_impulse, max, value) { }
+    PDelay(pFuncBV funcActive, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") : PTime(TypeDParam::Delay, funcActive, nameRU, nameEN, value) { }
 };
 
 
 struct PDurationManipulation : public PTime
 {
-    PDurationManipulation(const Value &min,
-                          const Value &max,
-                          const Value &value) :
-        PTime(TypeDParam::DurationManipulation, Param::EFuncActive, "Длит", "Duration", min, max, value) { }
+    PDurationManipulation(const Value &value) : PTime(TypeDParam::DurationManipulation, Param::EFuncActive, "Длит", "Duration", value) { }
 };
 
 
 struct PPeriodManipulation : public PTime
 {
-    PPeriodManipulation(const Value &min,
-                        const Value &max,
-                        const Value &value) :
-        PTime(TypeDParam::PeriodManipulation, Param::EFuncActive, "Период", "Period", min, max, value) { }
+    PPeriodManipulation(const Value &value) : PTime(TypeDParam::PeriodManipulation, Param::EFuncActive, "Период", "Period", value) { }
 };
 
 

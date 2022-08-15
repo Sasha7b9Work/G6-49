@@ -14,10 +14,7 @@
 static DParam storedDouble = PAmplitudePic(); //-V1054 Здесь ошибки не случится, потому что в наследуемых от DParam
                                                             // классах нет данных
 
-static IParam storedInteger = IParam(TypeIParam::PacketNumber, "", "", //-V810
-                                     Value("0", Order::One),
-                                     Value("100", Order::One),
-                                     Value("0", Order::One));
+static IParam storedInteger = IParam(TypeIParam::PacketNumber, "", "", Value(1));
 
 static Param *tuned = nullptr;     // Настраиваемый параметр
 

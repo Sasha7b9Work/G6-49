@@ -15,8 +15,8 @@
 
 int CParam::choiceModeStartFree = 0;
 
-DParam DParam::empty(TypeDParam::Frequency, Param::EFuncActive, "Пустой", "Empty", Value(0), Value(1), Value(1));
-IParam IParam::empty(TypeIParam::PacketNumber, "Пустой", "Empty", Value("10", Order::Nano), Value("10", Order::Mega), Value(1.0));
+DParam DParam::empty(TypeDParam::Frequency, Param::EFuncActive, "Пустой", "Empty", Value(1));
+IParam IParam::empty(TypeIParam::PacketNumber, "Пустой", "Empty", Value(1.0));
 CParam CParam::empty(TypeCParam::Polarity, Param::EFuncActive, "Пустой", "Empty");
 CMSParam CMSParam::empty(TypeCMSParam::Manipulation, "Пустой", "Empty", nullptr);
 
@@ -340,7 +340,7 @@ void DParam::RestoreState()
 
 bool IParam::SetAndLoadValue(Value val)
 {
-    if (val < min || val > max)
+    if (val < Min() || val > Max())
     {
         return false;
     }
@@ -354,7 +354,7 @@ bool IParam::SetAndLoadValue(Value val)
 
 bool IParam::SetAndLoadValue(int val)
 {
-    if (Value(val) < min || Value(val) > max)
+    if (Value(val) < Min() || Value(val) > Max())
     {
         return false;
     }
@@ -548,11 +548,8 @@ int CParam::NumChoices() const
 }
 
 
-DParam::DParam(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar const nameEN,
-    const Value &_min_,
-    const Value &_max,
-    const Value &_value) :
-    Param(KindParam::Double, funcActive, nameRU, nameEN), tuner(this), type(t), min(_min_), max(_max),
+DParam::DParam(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar const nameEN, const Value &_value) :
+    Param(KindParam::Double, funcActive, nameRU, nameEN), tuner(this), type(t),
         value(_value), resetValue(_value), stored(_value)
 {
 }
@@ -560,7 +557,7 @@ DParam::DParam(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar const na
 
 DParam::DParam(const DParam &rhs) :
     Param(KindParam::Double, Param::EFuncActive, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
-    min(rhs.min), max(rhs.max), value(rhs.value), resetValue(rhs.resetValue), stored(rhs.stored)
+    value(rhs.value), resetValue(rhs.resetValue), stored(rhs.stored)
 {
 }
 
@@ -574,11 +571,8 @@ DParam &DParam::operator=(const DParam &rhs)
     names[1] = rhs.names[1];
 
     tuner = rhs.tuner;
-    min = rhs.min;
     value = rhs.value;
     resetValue = rhs.resetValue;
-
-    max = rhs.max;
 
     stored.value = rhs.stored.value;
 
@@ -657,10 +651,8 @@ String IParam::ToString(Value val, bool delete_zeros) const
 }
 
 
-IParam::IParam(TypeIParam::E t, pchar nameRU, pchar nameEN,
-    const Value &_min, const Value &_max, const Value &_value) :
-    Param(KindParam::Integer, Param::EFuncActive, nameRU, nameEN), tuner(this), type(t),
-    min(_min), max(_max), value(_value), resetValue(_value)
+IParam::IParam(TypeIParam::E t, pchar nameRU, pchar nameEN, const Value &_value) :
+    Param(KindParam::Integer, Param::EFuncActive, nameRU, nameEN), tuner(this), type(t), value(_value), resetValue(_value)
 {
 }
 
@@ -842,6 +834,82 @@ Value PPeriodPacket::CalculateMinValue() const
 SMinMax Param::ValueInRange() const
 {
     return SMinMax(Min(), Max(), GetValue());
+}
+
+
+Value DParam::Min() const
+{
+    switch (type)
+    {
+    case TypeDParam::Frequency:             break;
+    case TypeDParam::Period:                break;
+    case TypeDParam::AmplitudePic:          break;
+    case TypeDParam::Offset:                break;
+    case TypeDParam::Duration:              break;
+    case TypeDParam::DutyRatio:             break;
+    case TypeDParam::Phase:                 break;
+    case TypeDParam::Delay:                 break;
+    case TypeDParam::DurationRise:          break;
+    case TypeDParam::DurationFall:          break;
+    case TypeDParam::DurationStady:         break;
+    case TypeDParam::DutyFactor:            break;
+    case TypeDParam::DurationManipulation:  break;
+    case TypeDParam::PeriodManipulation:    break;
+    case TypeDParam::PeriodPacket:          break;
+    case TypeDParam::Count:                 break;
+    }
+
+    return Value(0);
+}
+
+
+Value DParam::Max() const
+{
+    switch (type)
+    {
+    case TypeDParam::Frequency:             break;
+    case TypeDParam::Period:                break;
+    case TypeDParam::AmplitudePic:          break;
+    case TypeDParam::Offset:                break;
+    case TypeDParam::Duration:              break;
+    case TypeDParam::DutyRatio:             break;
+    case TypeDParam::Phase:                 break;
+    case TypeDParam::Delay:                 break;
+    case TypeDParam::DurationRise:          break;
+    case TypeDParam::DurationFall:          break;
+    case TypeDParam::DurationStady:         break;
+    case TypeDParam::DutyFactor:            break;
+    case TypeDParam::DurationManipulation:  break;
+    case TypeDParam::PeriodManipulation:    break;
+    case TypeDParam::PeriodPacket:          break;
+    case TypeDParam::Count:                 break;
+    }
+
+    return Value(0);
+}
+
+
+Value IParam::Min() const
+{
+    switch (type)
+    {
+    case TypeIParam::PacketNumber:      break;
+    case TypeIParam::Count:             break;
+    }
+
+    return Value(0);
+}
+
+
+Value IParam::Max() const
+{
+    switch (type)
+    {
+    case TypeIParam::PacketNumber:      break;
+    case TypeIParam::Count:             break;
+    }
+
+    return Value(0);
 }
 
 
