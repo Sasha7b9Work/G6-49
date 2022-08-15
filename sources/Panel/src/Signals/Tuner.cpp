@@ -626,7 +626,7 @@ int Indicator::NumberHighligthingDigits() const
 
         TypeDParam::E type = param->GetType();
 
-        if (type == TypeDParam::Duration || type == TypeDParam::Period || type == TypeDParam::PacketPeriod)
+        if (type == TypeDParam::Duration || type == TypeDParam::Period || type == TypeDParam::PeriodPacket)
         {
             if (digits[result + 1].IsEmpty())
             {
@@ -1161,7 +1161,7 @@ void DisplayCorrection::Init(Value value)
             param == form->FindParameter(TypeIParam::PacketNumber) ||
             param == form->FindParameter(TypeDParam::Duration))
         {
-            PPeriodPacket *par_per = (PPeriodPacket *)form->FindParameter(TypeDParam::PacketPeriod);
+            PPeriodPacket *par_per = (PPeriodPacket *)form->FindParameter(TypeDParam::PeriodPacket);
 
             if (par_per->RecalcualateValue())
             {
@@ -1234,7 +1234,7 @@ void Tuner::OnButtonApply()
 
             TypeDParam::E type = paramDouble->GetType();
 
-            if (type == TypeDParam::PacketPeriod)
+            if (type == TypeDParam::PeriodPacket)
             {
                 PPeriodPacket *pack_period = (PPeriodPacket *)paramDouble;
 

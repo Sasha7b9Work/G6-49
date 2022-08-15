@@ -469,7 +469,7 @@ static void HintDuration(String *)
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static pchar FuncPeriodPacket(pchar buffer)
 {
-    return SCPI::ProcessParameterDouble(buffer, TypeDParam::PacketPeriod);
+    return SCPI::ProcessParameterDouble(buffer, TypeDParam::PeriodPacket);
 }
 
 

@@ -131,7 +131,7 @@ struct TypeDParam
         DutyFactor,             // Коэффициент заполнения
         ManipulationDuration,   // Длительность импульсов в режиме манипуляции
         ManipulationPeriod,     // Период следования импульсов в режиме манипуляции
-        PacketPeriod,           // Период следования пачек импульсов в пакетном режиме
+        PeriodPacket,           // Период следования пачек импульсов в пакетном режиме
         Count
     };
 };
@@ -480,7 +480,7 @@ struct PPhase : public DParam
 struct PPeriodPacket : public PTime
 {
     PPeriodPacket(const Value &max, const Value &value) :
-        PTime(TypeDParam::PacketPeriod, Param::EFuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, PPeriodPacket::InRange, value) { }
+        PTime(TypeDParam::PeriodPacket, Param::EFuncActive, "Период пак", "Packet per", IMPULSE_PERIOD_MIN, max, PPeriodPacket::InRange, value) { }
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
     // Возвращает true, если значение изменилось
