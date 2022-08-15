@@ -528,20 +528,20 @@ struct PDelay : public PTime
 };
 
 
-struct PManipulationDuration : public PTime
+struct PDurationManipulation : public PTime
 {
-    PManipulationDuration(const Value &min,
+    PDurationManipulation(const Value &min,
                           const Value &max,
                           const Value &value) :
-        PTime(TypeDParam::DurationManipulation, Param::EFuncActive, "Длит", "Duration", min, max, PManipulationDuration::InRange, value) { }
+        PTime(TypeDParam::DurationManipulation, Param::EFuncActive, "Длит", "Duration", min, max, PDurationManipulation::InRange, value) { }
 
     static SMinMax InRange(Form *);
 };
 
 
-struct PManipulationPeriod : public PTime
+struct PPeriodManipulation : public PTime
 {
-    PManipulationPeriod(const Value &min,
+    PPeriodManipulation(const Value &min,
                         const Value &max,
                         pValueInRange valueInRange,
                         const Value &value) :

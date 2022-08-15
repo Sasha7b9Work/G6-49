@@ -967,7 +967,7 @@ SMinMax PDelay::InRange(Form *)
 }
 
 
-SMinMax PManipulationDuration::InRange(Form *)
+SMinMax PDurationManipulation::InRange(Form *)
 {
     SMinMax result(true);
 
