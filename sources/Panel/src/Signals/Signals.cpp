@@ -252,7 +252,7 @@ static PDuration     packetA_Duration(Value("100", Order::Kilo), Value("10", Ord
 static IParam        packetA_PacketNumber(TypeIParam::PacketNumber, "Кол-во имп", "Count imp",
                                           Value("1", Order::One),
                                           Value("1000000000", Order::One),
-                                          Param::EValueInRange,
+                                          Param::EInRange,
                                           Value("3", Order::One));
 static PPeriodPacket packetA_PacketPeriod(Value("100", Order::Kilo), Value("0.1", Order::One));
 static PAmplitudePic packetA_Amplitude;

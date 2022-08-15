@@ -77,7 +77,7 @@ struct Param
     // Это "самое минимальное" значение параметра. Меньше его быть не может
     virtual Value GetMin() const { return Value("0", Order::One); }
 
-    virtual SMinMax ValueInRange() const { return EValueInRange(form); }
+    virtual SMinMax ValueInRange() const { return EInRange(form); }
 
     virtual Value GetValue() const { return Value("1", Order::One); } //-V524
 
@@ -92,7 +92,7 @@ struct Param
     virtual void RestoreState() { };
 
     static bool EFuncActive() { return true; }
-    static SMinMax EValueInRange(Form *) { return SMinMax(true); }
+    static SMinMax EInRange(Form *) { return SMinMax(true); }
 
     DParam *ToDouble();
 
@@ -482,7 +482,7 @@ struct PPhase : public DParam
     PPhase() : DParam(TypeDParam::Phase, Param::EFuncActive, "Фаза", "Phase",
                       Value("0", Order::One),
                       Value("360", Order::One),
-                      Param::EValueInRange,
+                      Param::EInRange,
                       Value("0", Order::One)) { }
 };
 

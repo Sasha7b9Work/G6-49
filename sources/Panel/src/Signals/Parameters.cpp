@@ -15,8 +15,8 @@
 
 int CParam::choiceModeStartFree = 0;
 
-DParam DParam::empty(TypeDParam::Frequency, Param::EFuncActive, "Пустой", "Empty", Value(0), Value(1), EValueInRange, Value(1));
-IParam IParam::empty(TypeIParam::PacketNumber, "Пустой", "Empty", Value("10", Order::Nano), Value("10", Order::Mega), Param::EValueInRange, Value(1.0));
+DParam DParam::empty(TypeDParam::Frequency, Param::EFuncActive, "Пустой", "Empty", Value(0), Value(1), Param::EInRange, Value(1));
+IParam IParam::empty(TypeIParam::PacketNumber, "Пустой", "Empty", Value("10", Order::Nano), Value("10", Order::Mega), Param::EInRange, Value(1.0));
 CParam CParam::empty(TypeCParam::Polarity, Param::EFuncActive, "Пустой", "Empty");
 CMSParam CMSParam::empty(TypeCMSParam::Manipulation, "Пустой", "Empty", nullptr);
 
@@ -579,7 +579,7 @@ DParam::DParam(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar const na
 
 DParam::DParam(const DParam &rhs) :
     Param(KindParam::Double, Param::EFuncActive, rhs.names[0], rhs.names[1]), tuner(rhs.tuner), type(rhs.type),
-    min(rhs.min), max(rhs.max), valueInRange(EValueInRange), value(rhs.value), resetValue(rhs.resetValue), stored(rhs.stored)
+    min(rhs.min), max(rhs.max), valueInRange(EInRange), value(rhs.value), resetValue(rhs.resetValue), stored(rhs.stored)
 {
 }
 
