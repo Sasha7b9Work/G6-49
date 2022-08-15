@@ -845,7 +845,7 @@ bool DisplayCorrection::ShowMessageOutRangIfNeed(Param *param)
 
         String min_str = param->ToString(min_max.min, true);
 
-        Display::Warnings::Top::_Show(String("%s : границы диапазона %s ... %s", param->Name(), min_str.c_str(), max_str.c_str()),
+        Display::Warnings::Top::Show(String("%s : границы диапазона %s ... %s", param->Name(), min_str.c_str(), max_str.c_str()),
                                      String("%s : out of range %s ... %s", param->Name(), min_str.c_str(), max_str.c_str()));
     }
     else

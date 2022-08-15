@@ -127,7 +127,7 @@ void Display::Update()
 }
 
 
-void Display::Warnings::Top::_Show(const String &ru, const String &en)
+void Display::Warnings::Top::Show(const String &ru, const String &en)
 {
     warnings.AppendTop(LANG_RU ? ru : en);
 }
