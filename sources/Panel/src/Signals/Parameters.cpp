@@ -863,7 +863,7 @@ SMinMax POffset::InRange(Form *form)
     Value amplitude = form->FindParameter(TypeDParam::AmplitudePic)->GetValue();
     DParam *param_offset = form->FindParameter(TypeDParam::Offset);
 
-    SMinMax result;
+    SMinMax result(false);
     result.max = param_offset->Max();
 
     if (amplitude.Abs() == 0)
@@ -896,7 +896,7 @@ SMinMax PAmplitudePic::InRange(Form * form)
     // Ампл <= 1В | offset[0 ... 2.5]; ampl / 2 + fabs(см) <= 2.5;
     // Ампл > 1В  | offset[0 ... 5];   ампл / 2 + fabs(см) <= 5
 
-    SMinMax result;
+    SMinMax result(false);
     result.min = Value(0);
 
     DParam *param_ampl = form->FindParameter(TypeDParam::AmplitudePic);
@@ -929,9 +929,7 @@ SMinMax PAmplitudePic::InRange(Form * form)
 
 SMinMax PFrequency::InRange(Form *)
 {
-    SMinMax result;
-
-    result.valid = true;
+    SMinMax result(true);
 
     return result;
 }
@@ -939,9 +937,7 @@ SMinMax PFrequency::InRange(Form *)
 
 SMinMax PPeriodPacket::InRange(Form *)
 {
-    SMinMax result;
-
-    result.valid = true;
+    SMinMax result(true);
 
     return result;
 }
@@ -949,9 +945,7 @@ SMinMax PPeriodPacket::InRange(Form *)
 
 SMinMax PPeriod::InRange(Form *)
 {
-    SMinMax result;
-
-    result.valid = true;
+    SMinMax result(true);
 
     return result;
 }
@@ -959,9 +953,7 @@ SMinMax PPeriod::InRange(Form *)
 
 SMinMax PDuration::InRange(Form *)
 {
-    SMinMax result;
-
-    result.valid = true;
+    SMinMax result(true);
 
     return result;
 }
@@ -969,9 +961,7 @@ SMinMax PDuration::InRange(Form *)
 
 SMinMax PDelay::InRange(Form *)
 {
-    SMinMax result;
-
-    result.valid = true;
+    SMinMax result(true);
 
     return result;
 }

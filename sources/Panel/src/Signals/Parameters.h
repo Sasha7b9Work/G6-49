@@ -13,7 +13,7 @@ struct Param;
 
 struct SMinMax
 {
-    SMinMax() : min(1), max(1), valid(true) { }
+    SMinMax(bool val) : min(1), max(1), valid(val) { }
     Value min;      // Минимально допустимое значение
     Value max;      // Максимально допустимое значение
     bool valid;     // Если true - текущее значение допустимо
@@ -92,7 +92,7 @@ struct Param
     virtual void RestoreState() { };
 
     static bool EFuncActive() { return true; }
-    static SMinMax EValueInRange(Form *) { return SMinMax(); }
+    static SMinMax EValueInRange(Form *) { return SMinMax(true); }
 
     DParam *ToDouble();
 
