@@ -161,7 +161,7 @@ void PageSignals::OnChanged_Form(bool active)
         {
             if (A::Impulse::start_stop->GetChoice() == 1)
             {
-                Display::Warnings::Center::Show("Отключите режим А-СТАРТ,В-СТОП", "Disable the A-START,B-STOP mode");
+                Display::Warnings::Top::Show("Отключите режим А-СТАРТ,В-СТОП", "Disable the A-START,B-STOP mode");
             }
         }
     }
