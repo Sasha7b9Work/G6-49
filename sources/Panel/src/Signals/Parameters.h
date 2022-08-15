@@ -19,7 +19,7 @@ struct SMinMax
     bool valid;     // Если true - текущее значение допустимо
 };
 
-typedef SMinMax (*pValueInRange)(Form *);
+typedef SMinMax (*pInRange)(Form *);
 
 struct KindParam
 {
@@ -141,7 +141,7 @@ struct DParam : public Param
     DParam(TypeDParam::E t, pFuncBV funcActive, pchar const nameRU, pchar const nameEN,
            const Value  &min,
            const Value  &max,
-           pValueInRange valueInRange,
+           pInRange valueInRange,
            const Value  &value);
 
     DParam(const DParam &);
@@ -219,13 +219,13 @@ struct DParam : public Param
     static DParam empty;
 
 private:
-    Tuner tuner;        // Используется для настройки 
+    Tuner               tuner;          // Используется для настройки 
     const TypeDParam::E type;
-    Value         min;
-    Value         max;
-    pValueInRange valueInRange;
-    Value         value;
-    Value         resetValue;
+    Value               min;
+    Value               max;
+    pInRange            valueInRange;
+    Value               value;
+    Value               resetValue;
 
     // Возвращает true, если параметр может принимать значение v
     bool InRange(double v) const;
@@ -256,7 +256,7 @@ struct TypeIParam
 struct IParam : public Param
 {
     IParam(TypeIParam::E t, pchar  const nameRU, pchar const nameEN,
-        const Value &min, const Value &max, pValueInRange, const Value &);
+        const Value &min, const Value &max, pInRange, const Value &);
 
     virtual void Reset() { SetAndLoadValue(resetValue); }
 
@@ -300,7 +300,7 @@ private:
     TypeIParam::E type;
     Value         min;
     Value         max;
-    pValueInRange valueInRange;
+    pInRange      valueInRange;
     Value         value;
     Value         resetValue;
 };
@@ -422,7 +422,7 @@ struct PVoltage : public DParam
     PVoltage(TypeDParam::E type, pchar nameRU, pchar nameEN,
              const Value &min,
              const Value &max,
-             pValueInRange valueInRange,
+             pInRange valueInRange,
              const Value &value) :
         DParam(type, Param::EFuncActive, nameRU, nameEN, min, max, valueInRange, value) { }
 };
@@ -472,7 +472,7 @@ struct PTime : public DParam
     PTime(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar  const nameEN,
           const Value &min,
           const Value &max,
-          pValueInRange valueInRange, const Value &value) :
+          pInRange valueInRange, const Value &value) :
         DParam(t, funcActive, nameRU, nameEN, min, max, valueInRange, value) { }
 };
 

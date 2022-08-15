@@ -569,7 +569,7 @@ int CParam::NumChoices() const
 DParam::DParam(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar const nameEN,
     const Value &_min_,
     const Value &_max,
-    pValueInRange _valueInRange,
+    pInRange _valueInRange,
     const Value &_value) :
     Param(KindParam::Double, funcActive, nameRU, nameEN), tuner(this), type(t), min(_min_), max(_max), valueInRange(_valueInRange),
     value(_value), resetValue(_value), stored(_value)
@@ -677,7 +677,7 @@ String IParam::ToString(Value val, bool delete_zeros) const
 
 
 IParam::IParam(TypeIParam::E t, pchar nameRU, pchar nameEN,
-    const Value &_min, const Value &_max, pValueInRange _valueInRange, const Value &_value) :
+    const Value &_min, const Value &_max, pInRange _valueInRange, const Value &_value) :
     Param(KindParam::Integer, Param::EFuncActive, nameRU, nameEN), tuner(this), type(t),
     min(_min), max(_max), valueInRange(_valueInRange), value(_value), resetValue(_value)
 {
