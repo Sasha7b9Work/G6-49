@@ -534,13 +534,13 @@ PManipulation::PManipulation(Param **parameters) : CMSParam(TypeCMSParam::Manipu
 
 bool DParam::InRange(double val) const
 {
-    return (val >= GetMin().ToDouble()) && (val <= Max().ToDouble());
+    return (val >= Min().ToDouble()) && (val <= Max().ToDouble());
 }
 
 
 bool DParam::InRange(Value val) const
 {
-    return (val >= GetMin() && val <= Max());
+    return (val >= Min() && val <= Max());
 }
 
 
@@ -623,7 +623,7 @@ int DParam::GetNumberDigitsAfterComma(Order::E) const
         return 3;
     }
 
-    return -Order::GetPow10(GetMin().GetOrder()) + Order::GetPow10(GetValue().GetOrder());
+    return -Order::GetPow10(Min().GetOrder()) + Order::GetPow10(GetValue().GetOrder());
 }
 
 

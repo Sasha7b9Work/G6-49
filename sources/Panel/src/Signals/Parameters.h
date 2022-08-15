@@ -75,7 +75,7 @@ struct Param
     virtual Value Max() const { return Value("1", Order::One); }
 
     // Это "самое минимальное" значение параметра. Меньше его быть не может
-    virtual Value GetMin() const { return Value("0", Order::One); }
+    virtual Value Min() const { return Value("0", Order::One); }
 
     virtual SMinMax ValueInRange() const { return EInRange(form); }
 
@@ -179,7 +179,7 @@ struct DParam : public Param
     virtual Value Max() const { return max; }
     
     // Возвращает минимальное значение, которое может иметь параметр
-    virtual Value GetMin() const { return min; }
+    virtual Value Min() const { return min; }
 
     // Возвращает стрктуру, которая описывает максимальное и минимальное 
     virtual SMinMax ValueInRange() const { return valueInRange(form); }
@@ -269,7 +269,7 @@ struct IParam : public Param
 
     virtual Value Max() const         { return max;   }
 
-    virtual Value GetMin() const         { return min;   }
+    virtual Value Min() const         { return min;   }
 
     virtual SMinMax ValueInRange() const { return valueInRange(form); }
 
@@ -502,7 +502,7 @@ struct PPeriodPacket : public PTime
     // Рассчитывает минимально возможное значение при данных параметрах
     Value CalculateMinValue() const;
 
-    virtual Value GetMin() const { return CalculateMinValue(); }
+    virtual Value Min() const { return CalculateMinValue(); }
 
     static SMinMax InRange(Form *);
 };

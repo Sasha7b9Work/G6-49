@@ -899,7 +899,7 @@ bool DisplayEntering::ValueInBoundaries()
 {
     Param *param = Tuner::Current()->GetParameter();
 
-    Value min = param->GetMin();
+    Value min = param->Min();
     Value max = param->Max();
 
     Value value = ToValue();
