@@ -21,9 +21,6 @@ struct SMinMax
 
 typedef SMinMax (*pValueInRange)(Form *);
 
-#define IMPULSE_DURATION_MIN Value("10", Order::Nano)
-
-
 struct KindParam
 {
     enum E
