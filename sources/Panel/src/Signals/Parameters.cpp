@@ -973,3 +973,11 @@ SMinMax PDurationManipulation::InRange(Form *)
 
     return result;
 }
+
+
+SMinMax PPeriodManipulation::InRange(Form *)
+{
+    SMinMax result(true);
+
+    return result;
+}

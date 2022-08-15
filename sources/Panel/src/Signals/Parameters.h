@@ -543,9 +543,10 @@ struct PPeriodManipulation : public PTime
 {
     PPeriodManipulation(const Value &min,
                         const Value &max,
-                        pValueInRange valueInRange,
                         const Value &value) :
-        PTime(TypeDParam::PeriodManipulation, Param::EFuncActive, "Период", "Period", min, max, valueInRange, value) { }
+        PTime(TypeDParam::PeriodManipulation, Param::EFuncActive, "Период", "Period", min, max, PPeriodManipulation::InRange, value) { }
+
+    static SMinMax InRange(Form *);
 };
 
 
