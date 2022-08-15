@@ -55,7 +55,7 @@ struct Value
     // а order указыват, на сколько нужно умножжить итоговое число (3 - умножить на 1000, -3 - разделить на 1000)
     explicit Value(pchar const buffer, Order::E order);
 
-    void FromUnits(int units, uint mUnits, uint uUnits, uint nUnits, int sign);
+    void FromUnits(int units, uint mUnits = 0, uint uUnits = 0, uint nUnits = 0, int sign = 1);
     void FromDouble(double v);
     void FromUINT64(uint64 v) { value = v; }
     void FromINT(int v);
