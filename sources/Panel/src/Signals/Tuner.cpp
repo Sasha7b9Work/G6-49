@@ -870,11 +870,6 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
     {
         if (Tuner::Current()->InModeCorrection())
         {
-            if (!PageTuneParameter::VerifyForPossiblyChangesAmplitude(control))
-            {
-                return true;
-            }
-
             Tuner::Current()->SetModeEntering();
             order = Tuner::Current()->GetParameter()->GetValue().GetOrder();
 

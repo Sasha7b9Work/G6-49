@@ -100,9 +100,6 @@ namespace PageTuneParameter
 
     bool IsOpened();
 
-    // Проверка на возможность изменения размаха. Возвращает false, если изменение невозможно
-    bool VerifyForPossiblyChangesAmplitude(const Control &);
-
     // Нажатие на кнопку "Применить"
     void OnPress_Apply();
 };

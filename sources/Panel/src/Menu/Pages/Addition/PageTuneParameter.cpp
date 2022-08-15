@@ -105,36 +105,6 @@ DEF_GRAPH_BUTTON(sbEnter,
 )
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool PageTuneParameter::VerifyForPossiblyChangesAmplitude(const Control &control)
-{
-    if (control.IsRotate() || control.IsEntering())
-    {
-        if (Tuner::Current()->GetParameter()->IsDouble())
-        {
-            DParam *param = Tuner::Current()->GetParameter()->ToDouble();
-
-            if (param->IsAmplitude() && (param->GetValue().Abs() == 0))
-            {
-                DParam *param_offset = CURRENT_FORM->FindParameter(TypeDParam::Offset);
-
-                if (param_offset)
-                {
-                    if (std::fabs(param_offset->GetValue().ToDouble()) > 2.5)
-                    {
-                        Display::Warnings::Center::Show("Смещение не более +/- 2.5В", "Offset no more than +/- 2.5V");
-
-                        return false;
-                    }
-                }
-            }
-        }
-    }
-
-    return true;
-}
-
-
 static bool OnControl_TuneParameter(const Control &control)
 {
     if (control.IsUp() && control.Is(Key::Esc))
@@ -152,11 +122,6 @@ static bool OnControl_TuneParameter(const Control &control)
         }
         else
         {
-            if (!PageTuneParameter::VerifyForPossiblyChangesAmplitude(control))
-            {
-                return true;
-            }
-
             return Tuner::Current()->OnControlKey(control);
         }
     }
