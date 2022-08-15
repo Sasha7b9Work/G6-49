@@ -21,8 +21,6 @@ struct SMinMax
 
 typedef SMinMax (*pValueInRange)(Form *);
 
-#define DEFAULT_AMPLITUDE Value("1", Order::One)
-
 #define IMPULSE_PERIOD_MIN   Value("20", Order::Nano)
 #define IMPULSE_DURATION_MIN Value("10", Order::Nano)
 
@@ -428,10 +426,11 @@ struct PAmplitudePic : public PVoltage
 {
     PAmplitudePic(const Value &min = Value("0", Order::One),
                   const Value &max = Value("10", Order::One),
-                  const Value &value = DEFAULT_AMPLITUDE) :
+                  const Value &value = PAmplitudePic::by_default) :
         PVoltage(TypeDParam::AmplitudePic, "Размах", "Amplitude", min, max, PAmplitudePic::InRange, value) { }
 
     static SMinMax InRange(Form *);
+    static Value  by_default;
 };
 
 

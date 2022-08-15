@@ -18,6 +18,9 @@ int CParam::choiceModeStartFree = 0;
 DParam DParam::empty(TypeDParam::Frequency, Param::EFuncActive, "Пустой", "Empty", Value(0), Value(1), EValueInRange, Value(1));
 
 
+Value PAmplitudePic::by_default("1", Order::One);
+
+
 namespace MathSupport
 {
     static cstr ZeroValue(const DParam *param)
