@@ -4,80 +4,9 @@
 #include "Signals/Wave.h" 
 
 
-Value PPeriodPacket::CalculateMinValue() const
-{
-    // «начение периода не может быть меньше (N - 1) * Tи + tи + 10нс
-
-    PPeriod *par_period = (PPeriod *)form->FindParameter(TypeDParam::Period);
-    IParam *par_number = form->FindParameter(TypeIParam::PacketNumber);
-    PDuration *par_duration = (PDuration *)form->FindParameter(TypeDParam::Duration);
-
-    if (par_period && par_number && par_duration)
-    {
-        Value min_value = par_period->GetValue();
-
-        min_value.Mul((uint)(par_number->GetValue().Integer() - 1));
-
-        min_value.Add(par_duration->GetValue());
-
-        min_value.Add(Value("10", Order::Nano));
-
-        return min_value;
-    }
-
-    return Value("20", Order::Nano);
-}
-
-
 SMinMax Param::ValueInRange() const
 {
     return SMinMax(Min(), Max(), GetValue());
-}
-
-
-Value DParam::Min() const
-{
-    switch (type)
-    {
-    case TypeDParam::DurationManipulation:  break;
-    case TypeDParam::PeriodManipulation:    break;
-    case TypeDParam::PeriodPacket:          break;
-
-    case TypeDParam::Frequency:
-    case TypeDParam::Period:                break;
-    case TypeDParam::AmplitudePic:          break;
-    case TypeDParam::Offset:                break;
-    case TypeDParam::Duration:              break;
-    case TypeDParam::Phase:                 break;
-    case TypeDParam::Delay:                 break;
-
-    case TypeDParam::Count:                 break;
-    }
-
-    return Value(-1);
-}
-
-
-Value DParam::Max() const
-{
-    switch (type)
-    {
-    case TypeDParam::DurationManipulation:  break;
-    case TypeDParam::PeriodManipulation:    break;
-    case TypeDParam::PeriodPacket:          break;
-
-    case TypeDParam::Frequency:
-    case TypeDParam::Period:                break;
-    case TypeDParam::AmplitudePic:          break;
-    case TypeDParam::Offset:                break;
-    case TypeDParam::Duration:              break;
-    case TypeDParam::Phase:                 break;
-    case TypeDParam::Delay:                 break;
-
-    case TypeDParam::Count:                 break;
-    }
-
-    return Value(-1);
 }
 
 
@@ -160,6 +89,61 @@ Value PDelay::Min() const
 
 
 Value PDelay::Max() const
+{
+    return Value(-1);
+}
+
+
+Value PDurationManipulation::Min() const
+{
+    return Value(-1);
+}
+
+
+Value PDurationManipulation::Max() const
+{
+    return Value(-1);
+}
+
+
+Value PPeriodManipulation::Min() const
+{
+    return Value(-1);
+}
+
+
+Value PPeriodManipulation::Max() const
+{
+    return Value(-1);
+}
+
+
+Value PPeriodPacket::Min() const
+{
+    // «начение периода не может быть меньше (N - 1) * Tи + tи + 10нс
+
+    PPeriod *par_period = (PPeriod *)form->FindParameter(TypeDParam::Period);
+    IParam *par_number = form->FindParameter(TypeIParam::PacketNumber);
+    PDuration *par_duration = (PDuration *)form->FindParameter(TypeDParam::Duration);
+
+    if (par_period && par_number && par_duration)
+    {
+        Value min_value = par_period->GetValue();
+
+        min_value.Mul((uint)(par_number->GetValue().Integer() - 1));
+
+        min_value.Add(par_duration->GetValue());
+
+        min_value.Add(Value("10", Order::Nano));
+
+        return min_value;
+    }
+
+    return Value("20", Order::Nano);
+}
+
+
+Value PPeriodPacket::Max() const
 {
     return Value(-1);
 }

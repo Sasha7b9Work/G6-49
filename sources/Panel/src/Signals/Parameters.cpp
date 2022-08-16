@@ -697,7 +697,7 @@ pchar TypeCParam::Name(TypeCParam::E type)
 
 bool PPeriodPacket::RecalcualateValue()
 {
-    Value min_value = CalculateMinValue();
+    Value min_value = Min();
 
     if (GetValue() < min_value)
     {

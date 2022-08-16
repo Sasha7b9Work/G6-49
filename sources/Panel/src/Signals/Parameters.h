@@ -169,8 +169,8 @@ struct DParam : public Param
     // Возвращает единицы измерения, приведённые к порядку order. Если order == Order::Count, единциы будут рассчитываться исходя из текущего значения value
     cstr GetUnits(Order::E order = Order::Count) const;
 
-    virtual Value Min() const;
-    virtual Value Max() const;
+    virtual Value Min() const { return Value(-1); };
+    virtual Value Max() const { return Value(-1); };
     virtual Value GetValue() const { return value; };
 
     virtual Tuner *GetTuner()   { return &tuner; };
@@ -457,10 +457,8 @@ struct PPeriodPacket : public PTime
     // Возвращает true, если значение изменилось
     bool RecalcualateValue();
 
-    // Рассчитывает минимально возможное значение при данных параметрах
-    Value CalculateMinValue() const;
-
-    virtual Value Min() const { return CalculateMinValue(); }
+    virtual Value Min() const;
+    virtual Value Max() const;
 };
 
 
@@ -485,12 +483,18 @@ struct PDelay : public PTime
 struct PDurationManipulation : public PTime
 {
     PDurationManipulation(const Value &value) : PTime(TypeDParam::DurationManipulation, Param::EFuncActive, "Длит", "Duration", value) { }
+
+    virtual Value Min() const;
+    virtual Value Max() const;
 };
 
 
 struct PPeriodManipulation : public PTime
 {
     PPeriodManipulation(const Value &value) : PTime(TypeDParam::PeriodManipulation, Param::EFuncActive, "Период", "Period", value) { }
+
+    virtual Value Min() const;
+    virtual Value Max() const;
 };
 
 

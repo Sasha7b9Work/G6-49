@@ -1238,10 +1238,10 @@ void Tuner::OnButtonApply()
             {
                 PPeriodPacket *pack_period = (PPeriodPacket *)paramDouble;
 
-                if (DisplayEntering::ToValue() < pack_period->CalculateMinValue())
+                if (DisplayEntering::ToValue() < pack_period->Min())
                 {
-                    Display::Warnings::Center::_Show(String("Параметр не может быть меньше %s сек", pack_period->CalculateMinValue().ToString(false, Order::One)),
-                                               String("The parameter cannot be less %s s", pack_period->CalculateMinValue().ToString(false, Order::One)));
+                    Display::Warnings::Center::_Show(String("Параметр не может быть меньше %s сек", pack_period->Min().ToString(false, Order::One)),
+                                               String("The parameter cannot be less %s s", pack_period->Min().ToString(false, Order::One)));
                     return;
                 }
             }
