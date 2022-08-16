@@ -18,16 +18,16 @@ void Transceiver::Transmit(SimpleMessage *message)
 
     while (!result)
     {
-        HAL_SPI4::WaitFalling();                                                // Ожидаем перехода флага готовности прибора в состояние "свободен"
+        HAL_SPI4::WaitRelease();                                                    // Ожидаем перехода флага готовности прибора в состояние "свободен"
 
         for (int i = 0; i < 2; i++)
         {
-            HAL_SPI4::Transmit(message->Size(), 10);                               // Передаём размер передаваемых данных
+            HAL_SPI4::Transmit(message->Size(), 10);                                // Передаём размер передаваемых данных
 
-            HAL_SPI4::Transmit(message->TakeData(), message->Size(), timeout);         // Передаём непосредственно данные
+            HAL_SPI4::Transmit(message->TakeData(), message->Size(), timeout);      // Передаём непосредственно данные
 
             uint newSize = 0;
-            HAL_SPI4::Receive(&newSize, 4, 10);                                    // Теперь принимаем размер данных, которые хочет передать нам устройство
+            HAL_SPI4::Receive(&newSize, 4, 10);                                     // Теперь принимаем размер данных, которые хочет передать нам устройство
 
             uint trashedBytes = HAL_SPI4::ReceiveAndCompare(message->TakeData(), message->Size());
 
@@ -49,7 +49,7 @@ void Transceiver::Transmit(SimpleMessage *message)
 
 bool Transceiver::Receive(SimpleMessage *message)
 {
-    HAL_SPI4::WaitFalling();
+    HAL_SPI4::WaitRelease();
 
     int size = 0;
     HAL_SPI4::Receive(&size, 4, 10);
