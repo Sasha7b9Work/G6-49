@@ -39,7 +39,6 @@ Value DParam::Min() const
 {
     switch (type)
     {
-    case TypeDParam::DutyFactor:            break;
     case TypeDParam::DurationManipulation:  break;
     case TypeDParam::PeriodManipulation:    break;
     case TypeDParam::PeriodPacket:          break;
@@ -63,7 +62,6 @@ Value DParam::Max() const
 {
     switch (type)
     {
-    case TypeDParam::DutyFactor:            break;
     case TypeDParam::DurationManipulation:  break;
     case TypeDParam::PeriodManipulation:    break;
     case TypeDParam::PeriodPacket:          break;
