@@ -397,12 +397,18 @@ struct PAmplitudePic : public PVoltage
     PAmplitudePic(const Value &value = PAmplitudePic::by_default) : PVoltage(TypeDParam::AmplitudePic, "Размах", "Amplitude", value) { }
 
     static const Value by_default;
+
+    virtual Value Min() const;
+    virtual Value Max() const;
 };
 
 
 struct POffset : public PVoltage
 {
     POffset(const Value &value = Value("0", Order::One)) : PVoltage(TypeDParam::Offset, "Смещение", "Offset", value) { }
+
+    virtual Value Min() const;
+    virtual Value Max() const;
 };
 
 
@@ -439,6 +445,9 @@ struct PPeriod : public PTime
         PTime(TypeDParam::Period, funcActive, nameRU, nameEN, value) { }
 
     static const Value min_impulse;
+
+    virtual Value Min() const;
+    virtual Value Max() const;
 };
 
 
@@ -460,6 +469,9 @@ struct PPeriodPacket : public PTime
 struct PDuration : public PTime
 {
     PDuration(const Value &value, pchar nameRU = "Длит", pchar nameEN = "Dur") : PTime(TypeDParam::Duration, Param::EFuncActive, nameRU, nameEN, value) { }
+
+    virtual Value Min() const;
+    virtual Value Max() const;
 };
 
 

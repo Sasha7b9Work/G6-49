@@ -2327,6 +2327,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Signals\Wave.h</FilePath>
             </File>
+            <File>
+              <FileName>Parameters_ranges.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Signals\Parameters_ranges.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
