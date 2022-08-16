@@ -101,15 +101,15 @@ uint HAL_SPI4::ReceiveAndCompare(const void *compared, int size)
 
 
 
-bool HAL_SPI4::WaitRelease()
+void HAL_SPI4::WaitRelease()
 {
 	TimeMeterMS meter;
 
-	while (IsReady() && meter.ElapsedTime() < 100)
+	while (IsReady())
 	{
 		if (meter.ElapsedTime() > 100)
 		{
-			return false;
+			return;
 		}
 
 	};   // Если попали в время сигнала готовности, пропустим его, чтобы транзакция гарантированно начиналась после разрешающего фронта
@@ -118,11 +118,9 @@ bool HAL_SPI4::WaitRelease()
 	{
 		if (meter.ElapsedTime() > 100)
 		{
-			return false;
+			return;
 		}
 	};  // Теперь ожидаем, когда придёт сигнал готовности
-
-	return true;
 }
 
 
