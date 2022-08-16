@@ -83,7 +83,7 @@ namespace HAL_SPI4
     bool IsReady();
 
     // Ожидание перехода сигнала готовности из состояния "занят" в состояние "свободен"
-    void WaitRelease();
+    bool WaitRelease();
 };
 
 
