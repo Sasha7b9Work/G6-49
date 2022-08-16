@@ -248,7 +248,6 @@ cstr DParam::GetMainUnits() const
         {"с",    "s"},    // Duration
         {"\x7b", "\x7b"}, // Phase
         {"с",    "s"},    // Delay
-        {"с",    "s"},    // DurationStady
         {"",     ""},     // DutyFactor
         {"с",    "s"},    // ManipulationDuration
         {"с",    "s"},    // ManipulationPeriod
@@ -393,7 +392,6 @@ bool DParam::IsTime() const
         true,   // Длительность
         false,  // Сдвиг фазы
         true,   // Задержка
-        true,   // Длительность установившего значения
         false,  // Коэффициент заполнения
         true,   // Длительность импульсов в режиме манипуляции
         true,   // Период следования импульсов в режиме манипуляции
