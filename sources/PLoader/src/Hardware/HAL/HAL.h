@@ -55,8 +55,6 @@ namespace HAL_SPI4
     // Переслать массив данных
     bool Transmit(const void *buffer, int size, int timeout);
 
-    bool Transmit(uint value, int timeout);
-
     bool Transmit(int value, int timeout);
 
     // Принять массив данных
