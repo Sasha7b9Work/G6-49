@@ -248,7 +248,6 @@ cstr DParam::GetMainUnits() const
         {"с",    "s"},    // Duration
         {"\x7b", "\x7b"}, // Phase
         {"с",    "s"},    // Delay
-        {"с",    "s"},    // DurationRise
         {"с",    "s"},    // DurationFall
         {"с",    "s"},    // DurationStady
         {"",     ""},     // DutyFactor
@@ -395,7 +394,6 @@ bool DParam::IsTime() const
         true,   // Длительность
         false,  // Сдвиг фазы
         true,   // Задержка
-        true,   // Длительность нарастания
         true,   // Длительность спада
         true,   // Длительность установившего значения
         false,  // Коэффициент заполнения

@@ -121,7 +121,6 @@ struct TypeDParam
         Duration,               // Длительность
         Phase,                  // Сдвиг фазы
         Delay,                  // Задержка между каналами А и В при включённом режиме СТАРТ/СТОП
-        DurationRise,           // Длительность нарастания
         DurationFall,           // Длительность спада
         DurationStady,          // Длительность установившего значения
         DutyFactor,             // Коэффициент заполнения
@@ -435,6 +434,9 @@ struct PTime : public DParam
 struct PPhase : public DParam
 {
     PPhase() : DParam(TypeDParam::Phase, Param::EFuncActive, "Фаза", "Phase", Value("0", Order::One)) { }
+
+    virtual Value Min() const;
+    virtual Value Max() const;
 };
 
 
@@ -477,6 +479,9 @@ struct PDuration : public PTime
 struct PDelay : public PTime
 {
     PDelay(pFuncBV funcActive, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") : PTime(TypeDParam::Delay, funcActive, nameRU, nameEN, value) { }
+
+    virtual Value Min() const;
+    virtual Value Max() const;
 };
 
 

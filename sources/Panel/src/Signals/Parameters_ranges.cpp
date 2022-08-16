@@ -39,9 +39,6 @@ Value DParam::Min() const
 {
     switch (type)
     {
-    case TypeDParam::Phase:                 break;
-    case TypeDParam::Delay:                 break;
-    case TypeDParam::DurationRise:          break;
     case TypeDParam::DurationFall:          break;
     case TypeDParam::DurationStady:         break;
     case TypeDParam::DutyFactor:            break;
@@ -54,6 +51,8 @@ Value DParam::Min() const
     case TypeDParam::AmplitudePic:          break;
     case TypeDParam::Offset:                break;
     case TypeDParam::Duration:              break;
+    case TypeDParam::Phase:                 break;
+    case TypeDParam::Delay:                 break;
 
     case TypeDParam::Count:                 break;
     }
@@ -66,9 +65,6 @@ Value DParam::Max() const
 {
     switch (type)
     {
-    case TypeDParam::Phase:                 break;
-    case TypeDParam::Delay:                 break;
-    case TypeDParam::DurationRise:          break;
     case TypeDParam::DurationFall:          break;
     case TypeDParam::DurationStady:         break;
     case TypeDParam::DutyFactor:            break;
@@ -81,6 +77,8 @@ Value DParam::Max() const
     case TypeDParam::AmplitudePic:          break;
     case TypeDParam::Offset:                break;
     case TypeDParam::Duration:              break;
+    case TypeDParam::Phase:                 break;
+    case TypeDParam::Delay:                 break;
 
     case TypeDParam::Count:                 break;
     }
@@ -144,6 +142,30 @@ Value PDuration::Min() const
 
 
 Value PDuration::Max() const
+{
+    return Value(-1);
+}
+
+
+Value PPhase::Min() const
+{
+    return Value(0);
+}
+
+
+Value PPhase::Max() const
+{
+    return Value(360);
+}
+
+
+Value PDelay::Min() const
+{
+    return Value(-1);
+}
+
+
+Value PDelay::Max() const
 {
     return Value(-1);
 }
