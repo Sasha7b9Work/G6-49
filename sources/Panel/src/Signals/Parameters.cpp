@@ -246,7 +246,6 @@ cstr DParam::GetMainUnits() const
         {"В",    "V"},    // Amplitude
         {"В",    "V"},    // Offset
         {"с",    "s"},    // Duration
-        {"",     ""},     // DutyRatio
         {"\x7b", "\x7b"}, // Phase
         {"с",    "s"},    // Delay
         {"с",    "s"},    // DurationRise
@@ -394,7 +393,6 @@ bool DParam::IsTime() const
         false,  // Амплитуда
         false,  // Смещение
         true,   // Длительность
-        false,  // Скважность
         false,  // Сдвиг фазы
         true,   // Задержка
         true,   // Длительность нарастания

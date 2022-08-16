@@ -119,7 +119,6 @@ struct TypeDParam
         AmplitudePic,           // Размах
         Offset,                 // Смещение
         Duration,               // Длительность
-        DutyRatio,              // Скважность
         Phase,                  // Сдвиг фазы
         Delay,                  // Задержка между каналами А и В при включённом режиме СТАРТ/СТОП
         DurationRise,           // Длительность нарастания

@@ -35,8 +35,6 @@ static void SetOffset(SimpleMessage *);
 
 static void SetDuration(SimpleMessage *);
 
-static void SetDutyRatio(SimpleMessage *);
-
 static void SetPhase(SimpleMessage *);
 
 static void ModeDebug(SimpleMessage *);
@@ -101,7 +99,6 @@ void DHandlers::Processing(SimpleMessage *msg)
     case Command::SetAmplitude:                 func = SetAmplitude;                 break;
     case Command::SetOffset:                    func = SetOffset;                    break;
     case Command::SetDuration:                  func = SetDuration;                  break;
-    case Command::SetDutyRatio:                 func = SetDutyRatio;                 break;
     case Command::SetPhase:                     func = SetPhase;                     break;
     case Command::ModeDebug:                    func = ModeDebug;                    break;
     case Command::SetDelay:                     func = SetDelayStartStop;            break;
@@ -240,12 +237,6 @@ static void SetOffset(SimpleMessage *msg)
 static void SetDuration(SimpleMessage *msg)
 {
     SetGeneratorParameter(msg, DGenerator::SetDuration);
-}
-
-
-static void SetDutyRatio(SimpleMessage *msg)
-{
-    SetGeneratorParameter(msg, DGenerator::SetDutyRatio);
 }
 
 

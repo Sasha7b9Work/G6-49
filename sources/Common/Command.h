@@ -21,7 +21,6 @@ struct Command
              SetAmplitude,               // Установить амплитуду
              SetOffset,                  // Установать смещение
              SetDuration,
-             SetDutyRatio,
              SetPhase,
              ModeDebug,                  // Установка отладочного режиме - когда идут непрерывные засылки в FPGA
              SetDelay,                   // Задержка

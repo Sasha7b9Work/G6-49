@@ -18,7 +18,6 @@ cstr Command::Name() const
         "SetAmplitude",
         "SetOffset",
         "SetDuration",
-        "SetDutyRatio",
         "SetPhase",
         "ModeDebug",
         "SetDelay",

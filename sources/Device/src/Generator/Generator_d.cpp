@@ -228,12 +228,6 @@ void DGenerator::SetPacketPeriod(const Chan &, const Value &period)
 }
 
 
-void DGenerator::SetDutyRatio(const Chan &, const Value &)
-{
-
-}
-
-
 void DGenerator::SetDuration(const Chan &ch, const Value &value)
 {
     FPGA::SetDurationImpulse(ch, value);

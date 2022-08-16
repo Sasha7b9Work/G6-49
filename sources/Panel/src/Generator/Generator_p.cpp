@@ -208,7 +208,6 @@ void PGenerator::SetParameterDouble(DParam *param)
         Command::SetAmplitude,
         Command::SetOffset,
         Command::SetDuration,
-        Command::SetDutyRatio,
         Command::SetPhase,
         Command::SetDelay,
         Command::SetDurationRise,

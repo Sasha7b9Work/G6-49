@@ -26,8 +26,6 @@ namespace DGenerator
 
     void SetDuration(const Chan &, const Value &duration);
 
-    void SetDutyRatio(const Chan &, const Value &dutyRatio);
-
     void SetPhase(const Chan &, const Value &phase);
 
     void SetDelayStartStop(const Chan &, const Value &delay);
