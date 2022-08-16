@@ -9,11 +9,11 @@
 struct CalibrationSettings;
 
 
-struct HAL
+namespace HAL
 {
-	static void Init();
+    void Init();
 
-    static void ErrorHandler();
+    void ErrorHandler();
 };
 
 
@@ -25,68 +25,75 @@ namespace HAL_CRC32
 };
 
 
-struct HAL_EEPROM
+namespace HAL_EEPROM
 {
     // Стирает count секторов, начиная со стартового адреса основной прошивки
-    static void EraseSectors(int count);
+    void EraseSectors(int count);
 
-    static void WriteBuffer(int address, const uint8 *data, int size);
+    void WriteBuffer(int address, const uint8 *data, int size);
 };
 
 
-struct HAL_LTDC
+namespace HAL_LTDC
 {
-    static void Init();
+    void Init();
 
-    static void SetColors(uint *clut, uint8 numColors);
+    void SetColors(uint *clut, uint8 numColors);
 
-    static void ToggleBuffers();
+    void ToggleBuffers();
 
-    static void FillRegion(int x, int y, int width, int height, const Color &);
+    void FillRegion(int x, int y, int width, int height, const Color &);
 
-    static uint8 *GetBuffer();
+    uint8 *GetBuffer();
 };
 
 
-struct HAL_SPI4
+namespace HAL_SPI4
 {
-    static void Init();
+    void Init();
+
     // Переслать массив данных
-    static bool Transmit(const void *buffer, int size, int timeout);
+    bool Transmit(const void *buffer, int size, int timeout);
 
-    static bool Transmit(uint value, int timeout);
-    static bool Transmit(int value, int timeout);
+    bool Transmit(uint value, int timeout);
+
+    bool Transmit(int value, int timeout);
+
     // Принять массив данных
-    static bool Receive(void *recv, int size, int timeout);
+    bool Receive(void *recv, int size, int timeout);
+
     // Функция принимает size байт и сравнивает их с compared. Возвращает количество дефектных байт
-    static uint ReceiveAndCompare(const void *compared, int size);
+    uint ReceiveAndCompare(const void *compared, int size);
+
     // Возвращает true, если прибор готов к обмену
-    static bool IsReady();
+    bool IsReady();
+
     // Ожидание перехода сигнала готовности из состояния "занят" в состояние "свободен"
-    static void WaitFalling();
+    void WaitFalling();
 };
 
 
-struct HAL_TIM
+namespace HAL_TIM
 {
-    static uint TimeMS();
+    uint TimeMS();
 
-    static void Delay(uint timeMS);
+    void Delay(uint timeMS);
 };
 
 
 // Используетя для тиков
-struct HAL_TIM2
+namespace HAL_TIM2
 {
-    static void Init();
+    void Init();
 
-    static void DeInit();
+    void DeInit();
 
-    static uint TimeUS();
+    uint TimeUS();
 
-    static uint GetTicks();
+    uint GetTicks();
+
     // Запускает счётчик для измерения малых отрезков времени
-    static void StartMultiMeasurement();
+    void StartMultiMeasurement();
 };
 
 
@@ -103,13 +110,13 @@ namespace HAL_TIM3
 };
 
 
-struct HAL_TIM4
+namespace HAL_TIM4
 {
-    static void Init(void (*func)());
+    void Init(void (*func)());
     // Завести таймер, который остановится в timeStop мс
-    static void Start(uint timeStopMS);
+    void Start(uint timeStopMS);
 
-    static void Stop();
+    void Stop();
 
-    static void ElapsedCallback();
+    void ElapsedCallback();
 };

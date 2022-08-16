@@ -7,12 +7,13 @@
 #include <stm32f429xx.h>
 
 
-static bool OnStartMainApplication(SimpleMessage *message);
 
-
-static bool E(SimpleMessage *)
+namespace PHandlers
 {
-    return false;
+    static bool E(SimpleMessage *)
+    {
+        return false;
+    }
 }
 
 
@@ -45,7 +46,7 @@ bool PHandlers::Processing(SimpleMessage *msg)
 }
 
 
-static bool OnStartMainApplication(SimpleMessage *)
+bool PHandlers::OnStartMainApplication(SimpleMessage *)
 {
     typedef void(*pFunction)();
 

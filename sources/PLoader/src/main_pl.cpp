@@ -7,6 +7,7 @@
 #include "Hardware/Timer.h"
 #include "Keyboard/Keyboard.h"
 #include "Utils/Debug.h"
+#include "Interface/Handlers_pl.h"
 
 
 // True будет означать, что запрос на обновление уже послан
@@ -20,6 +21,8 @@ int main()
     HAL_LTDC::Init();
     Keyboard::Init();
 
+    TimeMeterMS meter;
+
     while(true)
     {
         Updater::Update();
@@ -31,5 +34,10 @@ int main()
         }
 
         PInterface::Update();
+
+        if (meter.ElapsedTime() > 3000)
+        {
+            PHandlers::OnStartMainApplication(nullptr);
+        }
     }
 }

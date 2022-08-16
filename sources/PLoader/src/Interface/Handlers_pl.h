@@ -2,7 +2,9 @@
 #pragma once
 
 
-struct PHandlers
+namespace PHandlers
 {
-    static bool Processing(SimpleMessage *message);
+    bool Processing(SimpleMessage *);
+
+    bool OnStartMainApplication(SimpleMessage *);
 };
