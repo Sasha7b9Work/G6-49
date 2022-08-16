@@ -291,11 +291,6 @@ public:
     // Возвращает true, если настраиваемый параметр имеет единицы измерения "Вольт"
     bool IsNotOrdered();
 
-    // Возвращает указатеь на DParam, если param имеет тип Double и nullptr в ином случае
-    DParam *ToDouble();
-
-    IParam *ToInteger();
-
 private:
 
     Param *param;           // Настраиваемый параметр

@@ -794,3 +794,9 @@ DParam *Param::ToDouble()
 {
     return (kind == KindParam::Double) ? (DParam *)this : &DParam::empty;
 }
+
+
+IParam *Param::ToInteger()
+{
+    return (kind == KindParam::Integer) ? (IParam *)this : &IParam::empty;
+}

@@ -48,7 +48,7 @@ namespace DisplayEntering
 
 void DisplayEntering::EnterBuffer::Push(Key::E key)
 {
-    DParam *p = Tuner::Current()->ToDouble();
+    DParam *p = Tuner::Current()->GetParameter()->ToDouble();
 
     if (p && p->IsNotOrdered() && (NumDigitsAfterComma() == 3))
     {
@@ -200,7 +200,7 @@ Indicator::Indicator(DisplayCorrection *_display) : indexHighlight(0), display(_
 
 int Indicator::Draw(int x, int y, int width, const cstr units) const
 {
-    return Tuner::Current()->ToDouble() ? DrawDouble(x, y, width, units) : DrawInteger(x, y, width);
+    return Tuner::Current()->GetParameter()->IsDouble() ? DrawDouble(x, y, width, units) : DrawInteger(x, y, width);
 }
 
 
@@ -509,7 +509,7 @@ void Indicator::IncreaseInPosition(int pos)
 
 void Indicator::IncreaseInPositionDouble(int pos)
 {
-    DParam *param = Tuner::Current()->ToDouble();
+    DParam *param = Tuner::Current()->GetParameter()->ToDouble();
 
     Value value = param->GetValue();
 
@@ -531,7 +531,7 @@ void Indicator::IncreaseInPositionDouble(int pos)
 
 void Indicator::IncreaseInPositionInteger(int pos)
 {
-    IParam *param = Tuner::Current()->ToInteger();
+    IParam *param = Tuner::Current()->GetParameter()->ToInteger();
 
     Value value = param->GetValue();
 
@@ -622,7 +622,7 @@ int Indicator::NumberHighligthingDigits() const
 
     if (Tuner::Current()->GetParameter()->IsDouble())
     {
-        DParam *param = Tuner::Current()->ToDouble();
+        DParam *param = Tuner::Current()->GetParameter()->ToDouble();
 
         TypeDParam::E type = param->GetType();
 
@@ -770,7 +770,7 @@ void DisplayCorrection::Draw()
 
     y += 60;
 
-    tuner->ToDouble() ? DrawDouble(x, y) : DrawInteger(x, y);
+    tuner->GetParameter()->IsDouble() ? DrawDouble(x, y) : DrawInteger(x, y);
 
     Font::Restore();
 }
@@ -797,7 +797,7 @@ void DisplayCorrection::DrawDouble(int x, int y)
     }
     else
     {
-        indicator.Draw(WaveGraphics::X(), y, WaveGraphics::Width(), tuner->ToDouble()->GetUnits(CalculateOrderForIndication()));
+        indicator.Draw(WaveGraphics::X(), y, WaveGraphics::Width(), tuner->GetParameter()->ToDouble()->GetUnits(CalculateOrderForIndication()));
     }
 }
 
@@ -860,7 +860,7 @@ bool DisplayCorrection::ShowMessageOutRangIfNeed(Param *param)
 void DisplayEntering::Init()
 {
     noVerifiForValid = true;
-    buffer.Prepare(Tuner::Current()->ToDouble());
+    buffer.Prepare(Tuner::Current()->GetParameter()->ToDouble());
 }
 
 
@@ -875,7 +875,7 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
 
             if (Tuner::Current()->GetParameter()->IsDouble())
             {
-                DParam *p = Tuner::Current()->ToDouble();
+                DParam *p = Tuner::Current()->GetParameter()->ToDouble();
 
                 if (p->IsNotOrdered())
                 {
@@ -974,11 +974,11 @@ void DisplayEntering::DrawUnits(int x, int y, int width)
         char units[10];
 
         std::strcpy(units, Order::Suffix(order));
-        std::strcat(units, Tuner::Current()->ToDouble()->GetMainUnits());
+        std::strcat(units, Tuner::Current()->GetParameter()->ToDouble()->GetMainUnits());
 
         Font::ForceUpperCase(false);
 
-        if (Tuner::Current()->GetParameter()->IsDouble() && Tuner::Current()->ToDouble()->IsPhase())
+        if (Tuner::Current()->GetParameter()->IsDouble() && Tuner::Current()->GetParameter()->ToDouble()->IsPhase())
         {
             Font::StoreAndSet(TypeFont::_8);
             Char(Ideograph::_8::BigDegree).Draw4InRect(x + 130, y);
@@ -1031,13 +1031,13 @@ void DisplayCorrection::Init()
         indicator.digits[i].Set('\0');
     }
 
-    tuner->ToDouble() ? InitDouble() : InitInteger();
+    tuner->GetParameter()->IsDouble() ? InitDouble() : InitInteger();
 }
 
 
 void DisplayCorrection::InitDouble()
 {
-    int before = tuner->ToDouble()->GetNumberDigitsBeforeComma(CalculateOrderForIndication());
+    int before = tuner->GetParameter()->ToDouble()->GetNumberDigitsBeforeComma(CalculateOrderForIndication());
 
     indicator.digits[before].Set(Digit::COMMA);
 
@@ -1049,7 +1049,7 @@ void DisplayCorrection::InitDouble()
 
 void DisplayCorrection::InitInteger()
 {
-    int numDigits = tuner->ToInteger()->GetMaxNumberDigits();
+    int numDigits = tuner->GetParameter()->ToInteger()->GetMaxNumberDigits();
 
     for (int i = 0; i < numDigits; i++)
     {
@@ -1064,7 +1064,7 @@ Order::E DisplayCorrection::CalculateOrderForIndication()
 {
     if (Tuner::Current()->GetParameter()->IsDouble())
     {
-        DParam *param = Tuner::Current()->ToDouble();
+        DParam *param = Tuner::Current()->GetParameter()->ToDouble();
 
         return param->IsNotOrdered() ? Order::One : param->GetValue().GetOrder();
     }
@@ -1077,7 +1077,7 @@ void DisplayCorrection::FillDigitsIntegerPartForDouble()
 {
     Order::E order = CalculateOrderForIndication();
 
-    DParam *param = tuner->ToDouble();
+    DParam *param = tuner->GetParameter()->ToDouble();
 
     int before = param->GetNumberDigitsBeforeComma(order);
 
@@ -1297,7 +1297,7 @@ bool Tuner::IsNotOrdered()
 
 DParam *Tuner::ToDouble()
 {
-    return param->IsDouble() ? (DParam *)param : nullptr;
+    return param->IsDouble() ? param->ToDouble() : nullptr;
 }
 
 
