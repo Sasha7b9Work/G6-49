@@ -157,9 +157,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>44</LineNumber>
+          <LineNumber>25</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134394868</Address>
+          <Address>134394794</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -168,14 +168,14 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;3&gt;.\src\Settings\CalibrationSettings.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\\src/Settings/CalibrationSettings.cpp\44</Expression>
+          <Expression>\\G6_49_P\src/Settings/CalibrationSettings.cpp\25</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>123</LineNumber>
+          <LineNumber>131</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134419650</Address>
+          <Address>134419696</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -184,14 +184,14 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;3&gt;..\common\Hardware\HAL\HAL_SPI4_p.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\G6_49_P\../common/Hardware/HAL/HAL_SPI4_p.cpp\123</Expression>
+          <Expression>\\G6_49_P\../common/Hardware/HAL/HAL_SPI4_p.cpp\131</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>114</LineNumber>
+          <LineNumber>127</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134419628</Address>
+          <Address>134419684</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -200,7 +200,23 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;3&gt;..\common\Hardware\HAL\HAL_SPI4_p.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\G6_49_P\../common/Hardware/HAL/HAL_SPI4_p.cpp\114</Expression>
+          <Expression>\\G6_49_P\../common/Hardware/HAL/HAL_SPI4_p.cpp\127</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>118</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134419660</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;3&gt;..\common\Hardware\HAL\HAL_SPI4_p.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\G6_49_P\../common/Hardware/HAL/HAL_SPI4_p.cpp\118</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
