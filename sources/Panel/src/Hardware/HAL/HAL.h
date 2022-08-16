@@ -79,9 +79,6 @@ namespace HAL_SPI4
     // Функция принимает size байт и сравнивает их с compared. Возвращает количество дефектных байт
     uint ReceiveAndCompare(const void *compared, int size);
 
-    // Возвращает true, если прибор готов к обмену
-    bool IsReady();
-
     // Ожидание перехода сигнала готовности из состояния "занят" в состояние "свободен"
     void WaitRelease();
 };

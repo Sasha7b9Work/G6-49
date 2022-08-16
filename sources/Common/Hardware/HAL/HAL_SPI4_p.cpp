@@ -7,25 +7,31 @@
 #include <stm32f4xx_hal.h>
 
 
-// Для связи с основным процессором
-static SPI_HandleTypeDef handleSPI4 =
+namespace HAL_SPI4
 {
-	SPI4,
+	// Для связи с основным процессором
+	static SPI_HandleTypeDef handleSPI4 =
 	{
-		SPI_MODE_MASTER,
-		SPI_DIRECTION_2LINES,
-		SPI_DATASIZE_8BIT,
-		SPI_POLARITY_HIGH,
-		SPI_PHASE_2EDGE,
-		SPI_NSS_SOFT,
-		SPI_BAUDRATEPRESCALER_32,
-		SPI_FIRSTBIT_MSB,
-		SPI_TIMODE_DISABLED,
-		SPI_CRCCALCULATION_DISABLED,
-		7
-	},
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
-};
+		SPI4,
+		{
+			SPI_MODE_MASTER,
+			SPI_DIRECTION_2LINES,
+			SPI_DATASIZE_8BIT,
+			SPI_POLARITY_HIGH,
+			SPI_PHASE_2EDGE,
+			SPI_NSS_SOFT,
+			SPI_BAUDRATEPRESCALER_32,
+			SPI_FIRSTBIT_MSB,
+			SPI_TIMODE_DISABLED,
+			SPI_CRCCALCULATION_DISABLED,
+			7
+		},
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
+	};
+
+	// Возвращает true, если прибор готов к обмену
+	static bool IsReady();
+}
 
 
 
