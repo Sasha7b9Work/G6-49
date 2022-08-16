@@ -210,7 +210,6 @@ void PGenerator::SetParameterDouble(DParam *param)
         Command::SetDuration,
         Command::SetPhase,
         Command::SetDelay,
-        Command::SetDurationFall,
         Command::SetDurationStady,
         Command::SetDutyFactor,
         Command::SetManipulationDuration,

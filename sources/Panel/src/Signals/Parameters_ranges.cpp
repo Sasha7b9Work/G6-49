@@ -39,7 +39,6 @@ Value DParam::Min() const
 {
     switch (type)
     {
-    case TypeDParam::DurationFall:          break;
     case TypeDParam::DurationStady:         break;
     case TypeDParam::DutyFactor:            break;
     case TypeDParam::DurationManipulation:  break;
@@ -65,7 +64,6 @@ Value DParam::Max() const
 {
     switch (type)
     {
-    case TypeDParam::DurationFall:          break;
     case TypeDParam::DurationStady:         break;
     case TypeDParam::DutyFactor:            break;
     case TypeDParam::DurationManipulation:  break;
