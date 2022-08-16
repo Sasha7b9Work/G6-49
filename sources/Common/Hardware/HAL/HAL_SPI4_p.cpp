@@ -53,6 +53,7 @@ void HAL_SPI4::Init()
 	// На этом пине будем читать занятость процессора генератора
 	isGPIO.Pin = GPIO_PIN_4;
 	isGPIO.Mode = GPIO_MODE_INPUT;
+	isGPIO.Pin = GPIO_PULLDOWN;
 	isGPIO.Alternate = 0;
 	HAL_GPIO_Init(GPIOE, &isGPIO);
 }
@@ -106,8 +107,7 @@ uint HAL_SPI4::ReceiveAndCompare(const void *compared, int size)
 }
 
 
-
-void HAL_SPI4::WaitRelease()
+bool HAL_SPI4::WaitRelease()
 {
 	TimeMeterMS meter;
 
@@ -115,7 +115,7 @@ void HAL_SPI4::WaitRelease()
 	{
 		if (meter.ElapsedTime() > 100)
 		{
-			return;
+			return false;
 		}
 
 	};   // Если попали в время сигнала готовности, пропустим его, чтобы транзакция гарантированно начиналась после разрешающего фронта
@@ -124,11 +124,18 @@ void HAL_SPI4::WaitRelease()
 	{
 		if (meter.ElapsedTime() > 100)
 		{
-			return;
+			return false;
 		}
 	};  // Теперь ожидаем, когда придёт сигнал готовности
+
+	return true;
 }
 
+
+bool HAL_SPI4::IsConnected()
+{
+	return !WaitRelease();
+}
 
 
 bool HAL_SPI4::IsReady()

@@ -22,6 +22,11 @@ void CalibrationSettings::Load()
     *this = defCalSet;                     // Сначала заполняем значениями по умолчанию - вдруг сохранённых настроек нету
     HAL_EEPROM::LoadSettings(this);
 
+    if (!HAL_SPI4::IsConnected())
+    {
+        return;
+    }
+
     for(int ch = 0; ch < NUM_CHAN; ch++)
     {
         for(int sig = 0; sig < NUM_SIGNALS; sig++)

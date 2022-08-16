@@ -103,6 +103,7 @@ file(GLOB HARDWARE                           src/Hardware/Beeper_win.cpp
 file(GLOB HARDWARE_HAL           ../../Panel/src/Hardware/HAL/HAL_TIM.cpp
                                              src/Hardware/HAL/HAL_EEPROM_win.cpp
                                              src/Hardware/HAL/HAL_PIO_win.cpp
+                                             src/Hardware/HAL/HAL_SPI4_win.cpp
                                              src/Hardware/HAL/HAL_TIM2_win.cpp
                                              src/Hardware/HAL/HAL_TIM3_win.cpp
                                              src/Hardware/HAL/HAL_TIM4_win.cpp)
