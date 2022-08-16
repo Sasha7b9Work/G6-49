@@ -1,5 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Hardware/HAL/HAL.h"
 
 
 #define _TIME_TICKS HAL_TIM2::GetTicks()
@@ -43,4 +44,14 @@ namespace Timer
 
     // Вызывается при срабатывании таймера
     void ElapsedCallback();
+};
+
+
+struct TimeMeterMS
+{
+    TimeMeterMS()      { Reset(); }
+    void Reset()       { time_reset = _TIME_MS; }
+    uint ElapsedTime() { return _TIME_MS - time_reset; }
+private:
+    uint time_reset;
 };

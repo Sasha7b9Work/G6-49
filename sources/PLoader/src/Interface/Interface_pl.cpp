@@ -51,7 +51,7 @@ void PInterface::AddTask(Task *task)
 void Task::TransmitMessage()
 {
     message->Transmit();    // Посылаем сообщение
-    timeLast = TIME_MS;     // запоминаем время посылки
+    timeLast = _TIME_MS;     // запоминаем время посылки
 }
 
 
@@ -75,7 +75,7 @@ void PInterface::SendTasks()
 
 bool Task::PassedLittleTimeAfterSend()
 {
-    return (TIME_MS - timeLast) < 1000;
+    return (_TIME_MS - timeLast) < 1000;
 }
 
 

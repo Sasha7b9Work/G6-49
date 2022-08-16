@@ -64,7 +64,7 @@ void Timer::DeInit()
 
 void Timer::ElapsedCallback()
 {
-    uint time = TIME_MS;
+    uint time = _TIME_MS;
 
     if (NearestTime() > time)
     {
@@ -84,7 +84,7 @@ void Timer::ElapsedCallback()
                 do      // Цикл нужен потому, что системный таймер SysTick, который отсчитываем миллисекунды, имеет наивысший приоритет,
                 {       // и если функция выполняется дольше, чем timer->dTm мс, то оно тут зависнет
                     timer->timeNextMS += timer->dTms;
-                } while (timer->timeNextMS < TIME_MS);
+                } while (timer->timeNextMS < _TIME_MS);
 
             }
             else
@@ -140,7 +140,7 @@ static void TuneTIM(Timer::Type type)
 
     uint timeNearest = NearestTime();
 
-    uint timeNext = TIME_MS + timer->dTms;
+    uint timeNext = _TIME_MS + timer->dTms;
     timer->timeNextMS = timeNext;
 
     if(timeNext < timeNearest)      // Если таймер должен сработать раньше текущего
@@ -182,7 +182,7 @@ static void StartTIM(uint timeStopMS)
         return;
     }
 
-    uint dT = timeStopMS - TIME_MS;
+    uint dT = timeStopMS - _TIME_MS;
 
     HAL_TIM3::StartIT((dT * 2) - 1);    // 10 соответствует 0.1мс. Т.е. если нам нужна 1мс, нужно засылать (100 - 1)
 }
@@ -196,8 +196,8 @@ static void StopTIM()
 
 void Timer::PauseOnTicks(uint numTicks)
 {
-    volatile uint startTicks = TIME_TICKS;
-    while (TIME_TICKS - startTicks < numTicks)
+    volatile uint startTicks = _TIME_TICKS;
+    while (_TIME_TICKS - startTicks < numTicks)
     {
     };
 }

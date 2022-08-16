@@ -21,15 +21,15 @@ int   Debug::line[10] = { 0 };
 
 void Debug::StartProfilingMS()
 {
-    timeStartMS = TIME_MS;
-    timePrevMS = TIME_MS; //-V656
+    timeStartMS = _TIME_MS;
+    timePrevMS = _TIME_MS; //-V656
 }
 
 
 uint Debug::PointProfilingMS(const char * /*_file*/, int /*_line*/)
 {
-    uint d = TIME_MS - timePrevMS;
-    timePrevMS = TIME_MS;
+    uint d = _TIME_MS - timePrevMS;
+    timePrevMS = _TIME_MS;
 
     return d;
 }
@@ -37,15 +37,15 @@ uint Debug::PointProfilingMS(const char * /*_file*/, int /*_line*/)
 
 void Debug::StartProfilingUS()
 {
-    timeStart = TIME_US;
+    timeStart = _TIME_US;
     timePrev = timeStart;
 }
 
 
 uint Debug::PointProfilingUS(const char * /*_file*/, int /*_line*/)
 {
-    uint d = TIME_US - timePrev;
-    timePrev = TIME_US;
+    uint d = _TIME_US - timePrev;
+    timePrev = _TIME_US;
     return d;
 }
 
@@ -58,13 +58,13 @@ void Debug::ClearTimeCounter()
 
 void Debug::StartIncreaseCounter()
 {
-    timeStartCounter = TIME_US;
+    timeStartCounter = _TIME_US;
 }
 
 
 void Debug::StopIncreaseCounter()
 {
-    timeCounter += (TIME_US - timeStartCounter);
+    timeCounter += (_TIME_US - timeStartCounter);
 }
 
 

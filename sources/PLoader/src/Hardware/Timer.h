@@ -3,9 +3,9 @@
 #include "Hardware/HAL/HAL.h"
 
 
-#define TIME_TICKS HAL_TIM2::GetTicks()
-#define TIME_US    HAL_TIM2::TimeUS()
-#define TIME_MS    HAL_TIM::TimeMS()
+#define _TIME_TICKS HAL_TIM2::GetTicks()
+#define _TIME_US    HAL_TIM2::TimeUS()
+#define _TIME_MS    HAL_TIM::TimeMS()
 
 
 struct Timer
@@ -43,4 +43,14 @@ struct Timer
     void PauseOnTicks(uint numTicks);
     // Вызывается при срабатывании таймера
     static void ElapsedCallback();
+};
+
+
+struct TimeMeterMS
+{
+    TimeMeterMS() { Reset(); }
+    void Reset() { time_reset = _TIME_MS; }
+    uint ElapsedTime() { return _TIME_MS - time_reset; }
+private:
+    uint time_reset;
 };
