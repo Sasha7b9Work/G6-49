@@ -12,61 +12,61 @@ SMinMax Param::ValueInRange() const
 
 Value PFrequency::Min() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
 Value PFrequency::Max() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
 Value PPeriod::Min() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
 Value PPeriod::Max() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
 Value PAmplitudePic::Min() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
 Value PAmplitudePic::Max() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
 Value POffset::Min() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
 Value POffset::Max() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
 Value PDuration::Min() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
 Value PDuration::Max() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
@@ -84,37 +84,37 @@ Value PPhase::Max() const
 
 Value PDelay::Min() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
 Value PDelay::Max() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
 Value PDurationManipulation::Min() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
 Value PDurationManipulation::Max() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
 Value PPeriodManipulation::Min() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
 Value PPeriodManipulation::Max() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
@@ -145,7 +145,7 @@ Value PPeriodPacket::Min() const
 
 Value PPeriodPacket::Max() const
 {
-    return Value(-1);
+    return Value(0);
 }
 
 
