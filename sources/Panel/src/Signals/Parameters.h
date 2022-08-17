@@ -203,7 +203,7 @@ struct DParam : public Param
 
     static DParam empty;
 
-    bool IsEmpty() const { return this == &empty; }
+    bool Exist() const { return this == &empty; }
 
 private:
     Tuner               tuner;          // Используется для настройки 
@@ -263,7 +263,7 @@ struct IParam : public Param
 
     static IParam empty;
 
-    bool IsEmpty() const { return this == &empty; }
+    bool Exist() const { return this == &empty; }
 
 private:
 
@@ -313,7 +313,7 @@ struct CParam : public Param
 
     static CParam empty;
 
-    bool IsEmpty() const { return this == &empty; }
+    bool Exist() const { return this == &empty; }
 
 private:
 	TypeCParam::E  type;
@@ -359,6 +359,8 @@ struct CMSParam : public Param
     TypeCMSParam::E GetType() { return type; }
 
     static CMSParam empty;
+
+    bool Exist() const { return this == &empty; }
 
 private:
     

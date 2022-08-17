@@ -14,6 +14,7 @@
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
+#include "Signals/Signals.h"
 
 
 using namespace Primitives;
@@ -1157,15 +1158,15 @@ void DisplayCorrection::Init(Value value)
 
     if (form->value == TypeForm::Packet)
     {
-        if (param == form->FindParameter(TypeDParam::Period) ||
-            param == form->FindParameter(TypeIParam::PacketNumber) ||
-            param == form->FindParameter(TypeDParam::Duration))
+        if (param == A::Packet::period_impulse ||
+            param == A::Packet::number ||
+            param == A::Packet::duration)
         {
-            PPeriodPacket *par_per = (PPeriodPacket *)form->FindParameter(TypeDParam::PeriodPacket);
+            PPeriodPacket &par_per = (PPeriodPacket &)form->FindParameter(TypeDParam::PeriodPacket);
 
-            if (par_per->RecalcualateValue())
+            if (par_per.RecalcualateValue())
             {
-                par_per->SetAndLoadValue(par_per->GetValue());
+                par_per.SetAndLoadValue(par_per.GetValue());
             }
         }
     }
@@ -1282,7 +1283,7 @@ bool Tuner::IsOffset()
 {
     DParam *offset = GetParameter()->ToDouble();
 
-    return offset->IsEmpty() ? false : (offset->GetType() == TypeDParam::Offset);
+    return offset->Exist() ? (offset->GetType() == TypeDParam::Offset) : false;
 
 }
 
@@ -1291,5 +1292,5 @@ bool Tuner::IsNotOrdered()
 {
     DParam *voltage = GetParameter()->ToDouble();
 
-    return voltage->IsEmpty() ? false : voltage->IsNotOrdered();
+    return voltage->Exist() ? voltage->IsNotOrdered() : false;
 }

@@ -170,7 +170,7 @@ void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], F
 }
 
 
-void PGenerator::SetParameterChoice(CParam *param)
+void PGenerator::SetParameterChoice(CParam &param)
 {
     static const Command::E commands[TypeCParam::Count] =
     {
@@ -179,9 +179,9 @@ void PGenerator::SetParameterChoice(CParam *param)
         Command::SetManipulation
     };
 
-    Message::Set::Param(commands[param->GetType()],
-        (uint8)param->GetForm()->GetWave()->GetChannel(),
-        (uint8)param->GetChoice()).Transmit();
+    Message::Set::Param(commands[param.GetType()],
+        (uint8)param.GetForm()->GetWave()->GetChannel(),
+        (uint8)param.GetChoice()).Transmit();
 }
 
 
@@ -199,7 +199,7 @@ void PGenerator::SetAmplitudePic(const Chan &ch, float amplitude)
 }
 
 
-void PGenerator::SetParameterDouble(DParam *param)
+void PGenerator::SetParameterDouble(DParam &param)
 {
     static const Command::E commands[TypeDParam::Count] =
     {
@@ -215,28 +215,28 @@ void PGenerator::SetParameterDouble(DParam *param)
         Command::SetPacketPeriod
     };
 
-    Value value = param->GetValue();
+    Value value = param.GetValue();
 
-    Chan ch(param->GetForm()->GetWave()->GetChannel());
+    Chan ch(param.GetForm()->GetWave()->GetChannel());
 
-    Command com(commands[param->GetType()]);
+    Command com(commands[param.GetType()]);
 
     Message::Set::Param(com, ch, value.ToUINT64()).Transmit();
 }
 
 
-void PGenerator::SetParameterInteger(IParam *param)
+void PGenerator::SetParameterInteger(IParam &param)
 {
     static const Command::E commands[TypeIParam::Count] =
     {
         Command::SetPacketNumber
     };
 
-    Value value = param->GetValue();
+    Value value = param.GetValue();
 
-    Chan ch(param->GetForm()->GetWave()->GetChannel());
+    Chan ch(param.GetForm()->GetWave()->GetChannel());
 
-    Command com(commands[param->GetType()]);
+    Command com(commands[param.GetType()]);
 
     Message::Set::Param(com, ch, value.ToUINT64()).Transmit();
 }
@@ -256,19 +256,19 @@ void PGenerator::LoadSettings()
     PGenerator::TuneChannel(ChB);
 }
 
-void PGenerator::SetParameter(Param *parameter)
+void PGenerator::SetParameter(Param &parameter)
 {
-    if(parameter->IsDouble())
+    if(parameter.IsDouble())
     {
-        SetParameterDouble((DParam *)parameter);
+        SetParameterDouble((DParam &)parameter);
     }
-    else if(parameter->IsChoice())
+    else if(parameter.IsChoice())
     {
-        SetParameterChoice((CParam *)parameter);
+        SetParameterChoice((CParam &)parameter);
     }
-    else if (parameter->IsInteger())
+    else if (parameter.IsInteger())
     {
-        SetParameterInteger((IParam *)parameter);
+        SetParameterInteger((IParam &)parameter);
     }
 }
 

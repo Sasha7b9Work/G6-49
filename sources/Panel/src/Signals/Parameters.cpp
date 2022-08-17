@@ -275,13 +275,13 @@ cstr DParam::GetUnits(Order::E order) const
 
 void DParam::LoadNumberImpulsesIfNeed()
 {
-    IParam *parameter = CURRENT_FORM->FindParameter(TypeIParam::PacketNumber);
+    IParam &parameter = CURRENT_FORM->FindParameter(TypeIParam::PacketNumber);
 
-    if (parameter)
+    if (parameter.Exist())
     {
         if (type == TypeDParam::Period || type == TypeDParam::Duration)
         {
-            parameter->LoadValue();
+            parameter.LoadValue();
         }
     }
 }
@@ -296,7 +296,7 @@ bool DParam::SetAndLoadValue(double val)
 
     value.FromDouble(val);
 
-    PGenerator::SetParameterDouble(this);
+    PGenerator::SetParameterDouble(*this);
 
     LoadNumberImpulsesIfNeed();
 
@@ -313,7 +313,7 @@ bool DParam::SetAndLoadValue(Value val)
 
     value = val;
 
-    PGenerator::SetParameterDouble(this);
+    PGenerator::SetParameterDouble(*this);
 
     LoadNumberImpulsesIfNeed();
 
@@ -342,7 +342,7 @@ bool IParam::SetAndLoadValue(Value val)
 
     value = val;
 
-    PGenerator::SetParameterInteger(this);
+    PGenerator::SetParameterInteger(*this);
 
     return true;
 }
@@ -356,7 +356,7 @@ bool IParam::SetAndLoadValue(int val)
 
     value.FromINT(val);
 
-    PGenerator::SetParameterInteger(this);
+    PGenerator::SetParameterInteger(*this);
 
     return true;
 }
@@ -364,7 +364,7 @@ bool IParam::SetAndLoadValue(int val)
 
 void IParam::LoadValue()
 {
-    PGenerator::SetParameterInteger(this);
+    PGenerator::SetParameterInteger(*this);
 }
 
 
@@ -461,7 +461,7 @@ void CParam::NextChoice()
         }
         else
         {
-            PGenerator::SetParameterDouble(A::Impulse::delay);
+            PGenerator::SetParameterDouble(*A::Impulse::delay);
         }
 
         return;
@@ -510,7 +510,7 @@ bool CParam::SetAndLoadChoice(int ch)
 
     choice = ch;
 
-    PGenerator::SetParameterChoice(this);
+    PGenerator::SetParameterChoice(*this);
 
     return true;
 }

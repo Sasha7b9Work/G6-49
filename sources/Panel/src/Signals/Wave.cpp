@@ -216,8 +216,8 @@ void Form::TuneGenerator()
 
     if(value == TypeForm::Sine)
     {
-        Param *manipulation = FindParameter(TypeCParam::ManipulationEnabled);
-        bool manipulationEnabled = ((CParam *)manipulation)->GetChoice() == 1;
+        CParam &manipulation = FindParameter(TypeCParam::ManipulationEnabled);
+        bool manipulationEnabled = manipulation.GetChoice() == 1;
 
         if(CurrentParameter()->GetParent())                                 // –‡ÒÍ˚Ú Ô‡‡ÏÂÚ Ã¿Õ»œ”Àﬂ÷»ﬂ
         {
@@ -277,7 +277,7 @@ void Form::TuneGenerator()
 }
 
 
-DParam *Form::FindParameter(TypeDParam::E p) const
+DParam &Form::FindParameter(TypeDParam::E p) const
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -289,7 +289,7 @@ DParam *Form::FindParameter(TypeDParam::E p) const
 
             if (parameter->GetType() == p)
             {
-                return parameter;
+                return *parameter;
             }
         }
         else if(param->IsComposite())
@@ -300,16 +300,16 @@ DParam *Form::FindParameter(TypeDParam::E p) const
 
             if(val)
             {
-                return val;
+                return *val;
             }
         }
     }
 
-    return &DParam::empty;
+    return DParam::empty;
 }
 
 
-CParam *Form::FindParameter(TypeCParam::E p) const
+CParam &Form::FindParameter(TypeCParam::E p) const
 {
     for(int i = 0; i < numParams; i++)
     {
@@ -321,7 +321,7 @@ CParam *Form::FindParameter(TypeCParam::E p) const
 
             if (choice->GetType() == p)
             {
-                return choice;
+                return *choice;
             }
         }
         
@@ -333,16 +333,16 @@ CParam *Form::FindParameter(TypeCParam::E p) const
 
             if(choice)
             {
-                return choice;
+                return *choice;
             }
         }
     }
 
-    return &CParam::empty;
+    return CParam::empty;
 }
 
 
-CMSParam *Form::FindParameter(TypeCMSParam::E t) const
+CMSParam &Form::FindParameter(TypeCMSParam::E t) const
 {
     for (int i = 0; i < numParams; i++)
     {
@@ -354,7 +354,7 @@ CMSParam *Form::FindParameter(TypeCMSParam::E t) const
 
             if (composite->GetType() == t)
             {
-                return composite;
+                return *composite;
             }
         }
     }
@@ -371,17 +371,17 @@ CMSParam *Form::FindParameter(TypeCMSParam::E t) const
 
                 if (composite->GetType() == t)
                 {
-                    return composite;
+                    return *composite;
                 }
             }
         }
     }
 
-    return &CMSParam::empty;
+    return CMSParam::empty;
 }
 
 
-IParam *Form::FindParameter(TypeIParam::E t) const
+IParam &Form::FindParameter(TypeIParam::E t) const
 {
     for (int i = 0; i < numParams; i++)
     {
@@ -393,20 +393,20 @@ IParam *Form::FindParameter(TypeIParam::E t) const
 
             if (integer->GetType() == t)
             {
-                return integer;
+                return *integer;
             }
         }
     }
 
-    return &IParam::empty;
+    return IParam::empty;
 }
 
 
 void Form::SendParameterToGenerator(TypeDParam::E p) const
 {
-    Param *param = FindParameter(p);
+    DParam &param = FindParameter(p);
 
-    if (param)
+    if (param.Exist())
     {
         PGenerator::SetParameter(param);
     }
@@ -415,9 +415,9 @@ void Form::SendParameterToGenerator(TypeDParam::E p) const
 
 void Form::SendParameterToGenerator(TypeCParam::E p) const
 {
-    Param *param = FindParameter(p);
+    CParam &param = FindParameter(p);
 
-    if(param)
+    if(param.Exist())
     {
         PGenerator::SetParameter(param);
     }
@@ -426,9 +426,9 @@ void Form::SendParameterToGenerator(TypeCParam::E p) const
 
 void Form::SendParameterToGenerator(TypeIParam::E p) const
 {
-    Param *param = FindParameter(p);
+    IParam &param = FindParameter(p);
 
-    if (param)
+    if (param.Exist())
     {
         PGenerator::SetParameter(param);
     }
@@ -474,11 +474,11 @@ bool Form::CloseCompositeParameter()
 
 bool Wave::StartModeIsSingle()
 {
-    CParam* param = (CParam *)GetCurrentForm()->FindParameter(TypeCParam::ModeStart);
+    CParam &param = GetCurrentForm()->FindParameter(TypeCParam::ModeStart);
 
-    if(param)
+    if(param.Exist())
     {
-        return param->GetChoice() == 1;
+        return param.GetChoice() == 1;
     }
 
     return false;
@@ -546,11 +546,11 @@ void Form::DrawUGO(const Chan &ch, int y0) const
 
 void Form::DrawSine(const Chan &ch, int x0, int y0, int width, int height)
 {
-    CMSParam *param = FORM(ch)->FindParameter(TypeCMSParam::Manipulation);
+    CMSParam &param = FORM(ch)->FindParameter(TypeCMSParam::Manipulation);
 
-    if (param)
+    if (param.Exist())
     {
-        CParam *choice = param->FindParameter(TypeCParam::ManipulationEnabled);
+        CParam *choice = param.FindParameter(TypeCParam::ManipulationEnabled);
 
         if (choice->GetChoice() == 1)
         {
@@ -649,9 +649,9 @@ void Form::DrawImpulse(const Chan &ch, int x0, int y0, int, int height)
     int minY = y0;
     int maxY = y0 + height;
 
-    CParam *param = WAVE(ch).GetCurrentForm()->FindParameter(TypeCParam::Polarity);
+    CParam &param = WAVE(ch).GetCurrentForm()->FindParameter(TypeCParam::Polarity);
 
-    if (param->GetChoice() == 1)
+    if (param.GetChoice() == 1)
     {
         minY = maxY;
         maxY = y0;
@@ -730,17 +730,17 @@ uint8 *Form::GetFormFlash(const Chan &ch)
 
 double Form::GetOffset() const
 {
-    DParam *parameter = FindParameter(TypeDParam::Offset);
+    DParam &parameter = FindParameter(TypeDParam::Offset);
 
-    return (parameter) ? parameter->GetValue().ToDouble() : 0.0;
+    return parameter.Exist() ? parameter.GetValue().ToDouble() : 0.0;
 }
 
 
 double Form::GetAmplitude() const
 {
-    DParam *parameter = FindParameter(TypeDParam::AmplitudePic);
+    DParam &parameter = FindParameter(TypeDParam::AmplitudePic);
 
-    return (parameter) ? parameter->GetValue().ToDouble() : 0.0;
+    return parameter.Exist() ? parameter.GetValue().ToDouble() : 0.0;
 }
 
 
@@ -792,8 +792,8 @@ bool Form::CheckerParameters::InvalidDurationImpulse() const
 {
     if (form->Is(TypeForm::Impulse))
     {
-        double duration = form->FindParameter(TypeDParam::Duration)->GetValue().ToDouble();
-        double period = form->FindParameter(TypeDParam::Period)->GetValue().ToDouble();
+        double duration = form->FindParameter(TypeDParam::Duration).GetValue().ToDouble();
+        double period = form->FindParameter(TypeDParam::Period).GetValue().ToDouble();
 
         if (duration >= period)
         {
@@ -803,10 +803,10 @@ bool Form::CheckerParameters::InvalidDurationImpulse() const
 
     if (form->Is(TypeForm::Packet))
     {
-        uint64 number = form->FindParameter(TypeIParam::PacketNumber)->GetValue().ToUINT64();
-        double duration_impulse = form->FindParameter(TypeDParam::Duration)->GetValue().ToDouble();
-        double period_impulse = form->FindParameter(TypeDParam::Period)->GetValue().ToDouble();
-        double period_packet = form->FindParameter(TypeDParam::PeriodPacket)->GetValue().ToDouble();
+        uint64 number = form->FindParameter(TypeIParam::PacketNumber).GetValue().ToUINT64();
+        double duration_impulse = form->FindParameter(TypeDParam::Duration).GetValue().ToDouble();
+        double period_impulse = form->FindParameter(TypeDParam::Period).GetValue().ToDouble();
+        double period_packet = form->FindParameter(TypeDParam::PeriodPacket).GetValue().ToDouble();
 
         double duration_packet = (double)(number - 1) * period_impulse + duration_impulse;
 

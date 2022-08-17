@@ -122,17 +122,17 @@ Value PPeriodPacket::Min() const
 {
     // «начение периода не может быть меньше (N - 1) * Tи + tи + 10нс
 
-    PPeriod *par_period = (PPeriod *)form->FindParameter(TypeDParam::Period);
-    IParam *par_number = form->FindParameter(TypeIParam::PacketNumber);
-    PDuration *par_duration = (PDuration *)form->FindParameter(TypeDParam::Duration);
+    PPeriod &par_period = (PPeriod &)form->FindParameter(TypeDParam::Period);
+    IParam &par_number = form->FindParameter(TypeIParam::PacketNumber);
+    PDuration &par_duration = (PDuration &)form->FindParameter(TypeDParam::Duration);
 
-    if (par_period && par_number && par_duration)
+    if (par_period.Exist() && par_number.Exist() && par_duration.Exist())
     {
-        Value min_value = par_period->GetValue();
+        Value min_value = par_period.GetValue();
 
-        min_value.Mul((uint)(par_number->GetValue().Integer() - 1));
+        min_value.Mul((uint)(par_number.GetValue().Integer() - 1));
 
-        min_value.Add(par_duration->GetValue());
+        min_value.Add(par_duration.GetValue());
 
         min_value.Add(Value("10", Order::Nano));
 
