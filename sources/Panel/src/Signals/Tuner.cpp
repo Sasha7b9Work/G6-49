@@ -1105,7 +1105,7 @@ void DisplayCorrection::FillDigitsIntegerPartForDouble()
 
 void DisplayCorrection::FillDigitsForInteger()
 {
-    IParam *param = tuner->ToInteger();
+    IParam *param = tuner->GetParameter()->ToInteger();
 
     Value value = param->GetValue();
 
@@ -1123,7 +1123,7 @@ void DisplayCorrection::FillDigitsFractPartForDouble()
 {
     Order::E order = CalculateOrderForIndication();
 
-    DParam *param = tuner->ToDouble();
+    DParam *param = tuner->GetParameter()->ToDouble();
 
     int before = param->GetNumberDigitsBeforeComma(order);
     int after = param->GetNumberDigitsAfterComma(order);
@@ -1148,11 +1148,11 @@ void DisplayCorrection::Init(Value value)
 
     if (param->IsDouble())
     {
-        tuner->ToDouble()->SetAndLoadValue(value);
+        tuner->GetParameter()->ToDouble()->SetAndLoadValue(value);
     }
     else if (param->IsInteger())
     {
-        tuner->ToInteger()->SetAndLoadValue(value);
+        tuner->GetParameter()->ToInteger()->SetAndLoadValue(value);
     }
 
     if (form->value == TypeForm::Packet)
@@ -1230,7 +1230,7 @@ void Tuner::OnButtonApply()
     {
         if (Current()->GetParameter()->IsDouble())
         {
-            DParam *paramDouble = Current()->ToDouble();
+            DParam *paramDouble = Current()->GetParameter()->ToDouble();
 
             TypeDParam::E type = paramDouble->GetType();
 
@@ -1280,7 +1280,7 @@ void Tuner::SetModeEntering()
 
 bool Tuner::IsOffset()
 {
-    DParam *offset = ToDouble();
+    DParam *offset = GetParameter()->ToDouble();
 
     return (offset == nullptr) ? false : (offset->GetType() == TypeDParam::Offset);
 
@@ -1289,19 +1289,7 @@ bool Tuner::IsOffset()
 
 bool Tuner::IsNotOrdered()
 {
-    DParam *voltage = ToDouble();
+    DParam *voltage = GetParameter()->ToDouble();
 
     return (voltage == nullptr) ? false : voltage->IsNotOrdered();
-}
-
-
-DParam *Tuner::ToDouble()
-{
-    return param->IsDouble() ? param->ToDouble() : nullptr;
-}
-
-
-IParam *Tuner::ToInteger()
-{
-    return param->IsInteger() ? (IParam *)param : nullptr;
 }
