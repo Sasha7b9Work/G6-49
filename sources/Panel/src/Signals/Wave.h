@@ -36,7 +36,7 @@ public:
     void Init(TypeForm::E v)
     {
         value = v;
-        wave = 0;
+        wave = nullptr;
         params = nullptr;
         numParams = 0;
         currentParam = 0;
