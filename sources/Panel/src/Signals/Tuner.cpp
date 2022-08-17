@@ -1282,7 +1282,7 @@ bool Tuner::IsOffset()
 {
     DParam *offset = GetParameter()->ToDouble();
 
-    return (offset == nullptr) ? false : (offset->GetType() == TypeDParam::Offset);
+    return offset->IsEmpty() ? false : (offset->GetType() == TypeDParam::Offset);
 
 }
 
@@ -1291,5 +1291,5 @@ bool Tuner::IsNotOrdered()
 {
     DParam *voltage = GetParameter()->ToDouble();
 
-    return (voltage == nullptr) ? false : voltage->IsNotOrdered();
+    return voltage->IsEmpty() ? false : voltage->IsNotOrdered();
 }

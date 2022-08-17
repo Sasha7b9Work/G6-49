@@ -203,6 +203,8 @@ struct DParam : public Param
 
     static DParam empty;
 
+    bool IsEmpty() const { return this == &empty; }
+
 private:
     Tuner               tuner;          // Используется для настройки 
     const TypeDParam::E type;
@@ -261,6 +263,8 @@ struct IParam : public Param
 
     static IParam empty;
 
+    bool IsEmpty() const { return this == &empty; }
+
 private:
 
     Tuner         tuner;
@@ -308,6 +312,8 @@ struct CParam : public Param
     virtual void Reset() { SetAndLoadChoice(0); };
 
     static CParam empty;
+
+    bool IsEmpty() const { return this == &empty; }
 
 private:
 	TypeCParam::E  type;

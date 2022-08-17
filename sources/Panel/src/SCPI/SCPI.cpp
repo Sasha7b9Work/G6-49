@@ -257,7 +257,7 @@ pchar SCPI::ProcessParameterDouble(pchar buffer, TypeDParam::E value)
 {
     DParam *param = CURRENT_FORM->FindParameter(value);
 
-    if (param == nullptr)
+    if (param->IsEmpty())
     {
         return nullptr;
     }
@@ -288,7 +288,7 @@ pchar SCPI::ProcessParameterInteger(pchar buffer, TypeIParam::E type)
 
     SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
 
-    if (param == nullptr)
+    if (param->IsEmpty())
     {
         return nullptr;
     }
@@ -315,7 +315,7 @@ pchar SCPI::ProcessParameterChoice(pchar buffer, TypeCParam::E choice, cstr *nam
 {
     CParam *param = CURRENT_FORM->FindParameter(choice);
 
-    if(param == nullptr)
+    if(param->IsEmpty())
     {
         String answer("%s parameter not found for the current signal", TypeCParam::Name(choice));
         return nullptr;
@@ -329,7 +329,7 @@ pchar SCPI::ProcessParameterChoice(pchar buffer, TypeCParam::E choice, cstr *nam
 
 void SCPI::ProcessRequestParameterValue(const DParam *param)
 {
-    if(param == nullptr)
+    if(param->IsEmpty())
     {
         SCPI_SEND_PARAMETER_DOES_NOT_EXIST();
     }
@@ -352,7 +352,7 @@ void SCPI::ProcessRequestParameterValue(const DParam *param)
 
 void SCPI::ProcessRequestParameterValue(const IParam *param)
 {
-    if (param == nullptr)
+    if (param->IsEmpty())
     {
         SCPI_SEND_PARAMETER_DOES_NOT_EXIST();
     }
