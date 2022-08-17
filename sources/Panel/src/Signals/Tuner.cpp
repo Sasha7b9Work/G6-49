@@ -1182,6 +1182,9 @@ Tuner::Tuner(Param *_param) : param(_param), display(this)
 
 void Tuner::Init()
 {
+    Tuner *self = this;
+    self = self;
+
     current = this;
 
     display.Init();
