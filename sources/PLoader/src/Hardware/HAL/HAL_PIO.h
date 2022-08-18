@@ -2,24 +2,24 @@
 #pragma once
 
 
-struct HPin
+namespace HPin
 {
-    static const uint16 _0;
-    static const uint16 _1;
-    static const uint16 _2;
-    static const uint16 _3;
-    static const uint16 _4;
-    static const uint16 _5;
-    static const uint16 _6;
-    static const uint16 _7;
-    static const uint16 _8;
-    static const uint16 _9;
-    static const uint16 _10;
-    static const uint16 _11;
-    static const uint16 _12;
-    static const uint16 _13;
-    static const uint16 _14;
-    static const uint16 _15;
+    extern const uint16 _0;
+    extern const uint16 _1;
+    extern const uint16 _2;
+    extern const uint16 _3;
+    extern const uint16 _4;
+    extern const uint16 _5;
+    extern const uint16 _6;
+    extern const uint16 _7;
+    extern const uint16 _8;
+    extern const uint16 _9;
+    extern const uint16 _10;
+    extern const uint16 _11;
+    extern const uint16 _12;
+    extern const uint16 _13;
+    extern const uint16 _14;
+    extern const uint16 _15;
 };
 
 struct HMode
@@ -73,11 +73,11 @@ struct HAlternate
 };
 
 
-struct HAL_PIO
+namespace HAL_PIO
 {
-    static void Init(char port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, HAlternate::E alternate = HAlternate::AF0_MCO);
+    void Init(char port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, HAlternate::E alternate = HAlternate::AF0_MCO);
 
-    static void WritePin(char port, uint16 maskPin, bool state);
+    void WritePin(char port, uint16 maskPin, bool state);
 
-    static bool ReadPin(char port, uint16 maskPin);
+    bool ReadPin(char port, uint16 maskPin);
 };
