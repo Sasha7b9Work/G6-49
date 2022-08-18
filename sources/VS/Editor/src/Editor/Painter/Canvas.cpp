@@ -26,6 +26,7 @@ namespace Grid
     static wxString sScale;
     static int deltaPoints = 1024;
     static int deltaPercents = 5000;
+
     static void DrawTypePercents();
     static void DrawTypePoints();
     static void DrawHorizontalLines();
