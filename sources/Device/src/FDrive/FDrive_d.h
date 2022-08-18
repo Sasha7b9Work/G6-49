@@ -11,8 +11,8 @@ namespace DDrive
 
     extern void *handle;
 
-    struct Handler
+    namespace Handler
     {
-        static void Processing(SimpleMessage *msg);
+        void Processing(SimpleMessage *msg);
     };
 };
