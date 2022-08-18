@@ -98,7 +98,7 @@ struct Param
     static bool EFuncActive() { return true; }
 
     DParam *ToDouble();
-    IParam *ToInteger();
+    IParam *ToInteger();    
 
     pFuncBV     funcOfActive;  // Активен ли данный параметр
 
