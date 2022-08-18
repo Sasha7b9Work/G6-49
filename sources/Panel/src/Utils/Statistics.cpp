@@ -14,11 +14,23 @@
 using namespace Primitives;
 
 
-int  Statistics::timeFrame = 0;
-int  Statistics::timeAllFrames = 0;
-uint Statistics::timeStartFrames = 0;
-uint Statistics::timeAccumFrames = 0;
-uint Statistics::timeStart = 0;
+namespace Statistics
+{
+    // ¬рем€ начала кадра
+    static uint timeStart = 0;
+
+    // ¬рем€, потраченное на отрисовку одного кадра
+    static int timeFrame = 0;
+
+    // «десь будем накапливать общее врем€ отрисовки
+    static uint timeAccumFrames = 0;
+
+    // ¬рем€ отрисовки всех кадров за 1 секунду
+    static int timeAllFrames = 0;
+
+    // ¬рем€ начала очередного 1-секундного отрезка, в течение которого замер€етс€ общее врем€ отрисовки
+    static uint timeStartFrames = 0;
+}
 
 
 
