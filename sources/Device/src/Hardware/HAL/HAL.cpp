@@ -5,6 +5,14 @@
 #include <stm32f4xx_hal.h>
 
 
+namespace HAL
+{
+    static void SystemClockConfig();
+
+    static void EnablePeriphery();
+}
+
+
 void HAL::Init()
 {
     SystemClockConfig();

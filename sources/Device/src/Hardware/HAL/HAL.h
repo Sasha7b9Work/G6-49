@@ -9,17 +9,11 @@ struct CalibrationSettings;
 #define ERROR_HANDLER() HAL::ErrorHandler()
 
 
-struct HAL
+namespace HAL
 {
-    static void Init();
+    void Init();
 
-    static void ErrorHandler();
-
-private:
-
-    static void SystemClockConfig();
-
-    static void EnablePeriphery();
+    void ErrorHandler();
 };
 
 
