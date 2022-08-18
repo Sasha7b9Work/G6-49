@@ -8,7 +8,7 @@
 #define _TIME_MS    HAL_TIM::TimeMS()
 
 
-struct Timer
+namespace Timer
 {
     struct Type
     {
@@ -22,27 +22,29 @@ struct Timer
         operator uint8() const { return (uint8)value; };
     };
 
-    static void Init();
+    void Init();
 
     void DeInit();
+
     // Назначает таймеру timer функцию и время срабатывания
-    static void Set(Type type, pFuncVV func, uint dTms);
+    void Set(Type, pFuncVV, uint dTms);
 
-    static void SetAndStartOnce(Type type, pFuncVV func, uint dTms);
+    void SetAndStartOnce(Type, pFuncVV, uint dTms);
 
-    void SetAndEnable(Type type, pFuncVV func, uint dTms);
+    void SetAndEnable(Type, pFuncVV, uint dTms);
 
-    static void StartOnce(Type type);
+    void StartOnce(Type);
 
-    void Enable(Type type);
+    void Enable(Type);
 
-    void Disable(Type type);
+    void Disable(Type);
 
-    bool IsRun(Type type);
+    bool IsRun(Type);
 
     void PauseOnTicks(uint numTicks);
+
     // Вызывается при срабатывании таймера
-    static void ElapsedCallback();
+    void ElapsedCallback();
 };
 
 

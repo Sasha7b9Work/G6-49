@@ -22,9 +22,9 @@ namespace DVCP
 
     extern void *handle;
 
-    struct Handler
+    namespace Handler
     {
-        static void Processing(SimpleMessage *msg);
+        void Processing(SimpleMessage *msg);
     };
 
     void SetConnectedToUSB(bool connected);

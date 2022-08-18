@@ -3,10 +3,8 @@
 #include <ff.h>
 
 
-
-class FatFS
+namespace FatFS
 {
-public:
-    static String ErrorString(FRESULT result);
+    String ErrorString(FRESULT result);
 };
 
