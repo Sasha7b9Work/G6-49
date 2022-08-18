@@ -30,52 +30,48 @@ namespace PageSignals
 };
 
 
-class PageFrequencyCounter
+namespace PageFrequencyCounter
 {
-public:
     // Сформировать содержимое регистра управления частотомером в соответствии с настройками
-    static void WriteRegisterRG9();
+    void WriteRegisterRG9();
 
-    static void OnPress_Measure(bool);
+    void OnPress_Measure(bool);
 
-    static void OnPress_BillingTime(bool);
+    void OnPress_BillingTime(bool);
 
-    static void OnPress_Resist(bool);
+    void OnPress_Resist(bool);
 
-    static void OnPress_TimeStamps(bool);
+    void OnPress_TimeStamps(bool);
 
-    static void OnPress_AvePeriod(bool);
+    void OnPress_AvePeriod(bool);
 
-    static void OnPress_Couple(bool);
+    void OnPress_Couple(bool);
 
-    static void OnPress_Filtr(bool);
+    void OnPress_Filtr(bool);
 
-    static void OnPress_Test(bool);
+    void OnPress_Test(bool);
 
-    static void OnChange_FreqLevel();
+    void OnChange_FreqLevel();
 
-    static Page *self;
+    extern Page *self;
 };
 
 
-class PageService
+namespace PageService
 {
-public:
+    void OnPress_Reset();
 
-    static void OnPress_Reset();
+    void OnChange_Volume(bool);
 
-    static void OnChange_Volume(bool);
-
-    static Page *self;
+    extern Page *self;
 };
 
 
-class PageLoadForm
+namespace PageLoadForm
 {
-public:
-    static Page *self;
+    extern Page *self;
 
-    static void LoadForm(const Chan &ch);
+    void LoadForm(const Chan &ch);
 };
 
 
@@ -105,76 +101,70 @@ namespace PageTuneParameter
 };
 
 
-struct PageDebug
+namespace PageDebug
 {
-    static Page *self;
+    extern Page *self;
 
     // Включить отображение страницы отладки
-    static void Enable();
+    void Enable();
 
-    static bool SaveScreenToFlashIsEnabled();
+    bool SaveScreenToFlashIsEnabled();
 
-    struct PageRegisters
+    namespace PageRegisters
     {
-        static void Draw();
-
-    private:
-        // Написать регистры
-        static void DrawRegisters(int x, int y);
-
-        static void DrawInputWindow();
+        void Draw();
     };
 
-    struct SubRange
+    namespace SubRange
     {
-        static Page *self;
+        extern Page *self;
     };
 
-    struct Colors
+    namespace Colors
     {
-        static void Init();
+        void Init();
 
-        static Page *self;
+        extern Page *self;
 
-        struct ChanA
+        namespace ChanA
         {
-            static Page *self;
+            extern Page *self;
         };
 
-        struct ChanB
+        namespace ChanB
         {
-            static Page *self;
+            extern Page *self;
         };
 
-        struct Menu
+        namespace Menu
         {
-            static Page *self;
+            extern Page *self;
         };
     };
 
-    struct Calibartion
+    namespace Calibartion
     {
-        static Page *self;
+        extern Page *self;
     };
 
-    struct _Calibration
+    namespace _Calibration
     {
-        struct PageA
+        namespace PageA
         {
-            static Page *self;
+            extern Page *self;
         };
 
-        struct PageB
+        namespace PageB
         {
-            static Page *self;
+            extern Page *self;
         };
 
-        static void OnPress_OffsetAD9952(const Chan &, bool enter, KoeffCal::E koeff);
+        void OnPress_OffsetAD9952(const Chan &, bool enter, KoeffCal::E koeff);
 
-        static void OnPress_DDS(const Chan &, bool enter, KoeffCal::E koeff);
+        void OnPress_DDS(const Chan &, bool enter, KoeffCal::E koeff);
 
-        static void OnPress_AmplitudeAD9952(const Chan &, bool enter, KoeffCal::E koeff);
+        void OnPress_AmplitudeAD9952(const Chan &, bool enter, KoeffCal::E koeff);
 
-        static void WriteKoeffCal(const Chan &, KoeffCal::E koeff);
+        void WriteKoeffCal(const Chan &, KoeffCal::E koeff);
     };
 };

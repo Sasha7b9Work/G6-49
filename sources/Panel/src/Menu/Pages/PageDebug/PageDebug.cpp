@@ -36,6 +36,19 @@ static bool showInputWindow = false;
 // Здесь хранятся введённые символы
 static char dbuffer[MAX_SIZE_BUFFER + 1];
 
+
+namespace PageDebug
+{
+    namespace PageRegisters
+    {
+        // Написать регистры
+        static void DrawRegisters(int x, int y);
+
+        static void DrawInputWindow();
+    }
+}
+
+
 // Тип вводимых чисел в окне ввода
 enum TypeInput
 {

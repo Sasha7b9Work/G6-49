@@ -4,9 +4,32 @@
 #include "Utils/Math.h"
 
 
-char *Number::integer = 0;
-char *Number::fract = 0;
-char  Number::sign = ' ';
+namespace Number
+{
+    // Возвращает значение, содержащееся в integer
+    static uint64 GetInteger(pchar buffer);
+
+    // Изменение положительного числа
+    static void ChangeInPositiveInteger(int position, Step step);
+
+    static void ChangeInNegativeInteger(int position, Step step);
+
+    // Изменение отрицательного числа
+    static void ChangeInPositiveFract(int position, Step step);
+
+    static void ChangeInNegativeFract(int position, Step step);
+
+    // Возвращает true, если все символы слева от данной позиции - нули
+    static bool AllLeftZeroInInteger(int position);
+
+    // Установить числу нулевое значение
+    static void SetAllZeros();
+
+    char *integer = nullptr;
+    char *fract = nullptr;
+    char  sign = ' ';
+
+}
 
 
 
