@@ -7,26 +7,26 @@
 struct Param;
 
 
-struct PageMain
+namespace PageMain
 {
-    static Page *self;
+    extern Page *self;
 };
 
 
-struct PageSignals
+namespace PageSignals
 {
-    static Page *self;
+    extern Page *self;
 
-    static void Init();
+    void Init();
 
-    static void OnPress_Channel(bool);
+    void OnPress_Channel(bool);
 
-    static void SetCurrentChanenl(const Chan &);
+    void SetCurrentChanenl(const Chan &);
 
     // Эта функция должна вызываться после выбора формы сигнала - по её нажатию происходит загрузка формы в прибор
-    static void OnChanged_Form(bool = true);
+    void OnChanged_Form(bool = true);
 
-    static void SCPI_SetForm(TypeForm::E form);
+    void SCPI_SetForm(TypeForm::E form);
 };
 
 
