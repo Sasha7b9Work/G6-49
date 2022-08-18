@@ -40,6 +40,16 @@ static void WriteData(uint dest, void *src, uint size);
 static uint GetSector(uint address);
 
 
+namespace HAL_EEPROM
+{
+    namespace Signal
+    {
+        // Возвращает адрес EEPROM, куда надо сохранять данные этого канала
+        static uint AddressForData(const Chan &);
+    }
+}
+
+
 static void EraseSector(uint startAddress)
 {
     if (GetSector(startAddress) == (uint)(-1))

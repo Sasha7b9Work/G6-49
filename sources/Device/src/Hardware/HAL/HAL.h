@@ -29,38 +29,34 @@ namespace HAL_EEPROM
 {
     void Init();
 
-    struct Signal
+    namespace Signal
     {
-        static void Save(const Chan &, uint16 data[DGenerator::DDS_NUM_POINTS]);
+        void Save(const Chan &, uint16 data[DGenerator::DDS_NUM_POINTS]);
 
-        static uint16 *Get(const Chan &);
-
-    private:
-        // Возвращает адрес EEPROM, куда надо сохранять данные этого канала
-        static uint AddressForData(const Chan &);
+        uint16 *Get(const Chan &);
     };
 };
 
 
-struct HAL_HCD
+namespace HAL_HCD
 {
-    static void Init();
+    void Init();
 
-    static void IRQHandler();
+    void IRQHandler();
 
-    static int USBH_LL_Init(void *usbh_HandleTypeDef);
+    int USBH_LL_Init(void *usbh_HandleTypeDef);
 
-    static int USBH_LL_SetToggle(uint8 pipe, uint8 toggle);
+    int USBH_LL_SetToggle(uint8 pipe, uint8 toggle);
 
-    static uint8 USBH_LL_GetToggle(uint8 pipe);
+    uint8 USBH_LL_GetToggle(uint8 pipe);
 };
 
 
-struct HAL_I2C1
+namespace HAL_I2C1
 {
-    static void Init();
+    void Init();
 
-    static void Transmit(uint8 address, uint8 data[3]);
+    void Transmit(uint8 address, uint8 data[3]);
 };
 
 
@@ -94,31 +90,31 @@ namespace HAL_SPI3
 };
 
 
-struct HAL_TIM
+namespace HAL_TIM
 {
-    static uint TimeMS();
+    uint TimeMS();
 
-    static void Delay(uint timeMS);
+    void Delay(uint timeMS);
 };
 
 
-struct HAL_TIM2
+namespace HAL_TIM2
 {
-    static void Init();
+    void Init();
 
-    static uint GetTicks();
+    uint GetTicks();
 
-    static void StartMultiMeasurement();
+    void StartMultiMeasurement();
 
-    static uint TimeUS();
+    uint TimeUS();
 };
 
 
-struct HAL_TIM3
+namespace HAL_TIM3
 {
-    static void Init();
+    void Init();
 
-    static void StartIT(uint period);
+    void StartIT(uint period);
 
-    static void StopIT();
+    void StopIT();
 };
