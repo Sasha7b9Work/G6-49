@@ -11,13 +11,43 @@
 using namespace Primitives;
 
 
-bool        Hint::show = false;
-const Item *Hint::item = 0;
-Key::E      Hint::key = Key::None;
-int         Hint::numPages = 0;
-int         Hint::currentPage = 0;
-int         Hint::firstItemOnSecondPage = 0;
-bool        Hint::needCalculate = false;
+namespace Hint
+{
+    // \brief ќтрисовывает подсказки с по€снени€ми
+    // start, end - начальный и конечный пункты choice дл€ выводв
+    // calculate - если true, то отрисовка не производитс€ - только расчЄт значений
+    static int DrawDetailedHint(const Choice *choice, int x, int y, int width, int start, int end, bool calculate = false);
+
+    // ¬озвращает число страниц в подсказке
+    static int NumPagesInHint(const Choice *choice, int x, int y, int width);
+
+    // –ассчитывает данные, необходимые дл€ разбивки подсказки на страницы
+    static void Calcualte(const Choice *choice, int x, int y, int width);
+
+    // –исует ”√ќ страниц в многостраничной подсказке
+    static void DrawPagesUGO(const int xRight, const int y);
+
+    // ≈сли true - нужно выводить подсказку на экран
+    static bool show = false;
+
+    //  онтрол, дл€ которого нужно выводить подсказку
+    static const Item *item = nullptr;
+
+    // ќрган управлени€, дл€ которого нужно выводить подсказку
+    static Key::E key = Key::None;
+
+    //  оличество страниц в подсказке
+    static int numPages = 0;
+
+    // “екуща€ отрисовываема€ страница
+    static int currentPage = 0;
+
+    // — какого пункта начинаетс€ втора€ страница
+    static int firstItemOnSecondPage = 0;
+
+    // ”становленное в true значение означает, что Item был только что назначен и требуетс€ разбивка на страницы
+    static bool needCalculate = false;
+}
 
 
 

@@ -2,7 +2,7 @@
 #pragma once
 
 
-struct PVCP
+namespace PVCP
 {
-    static void SendStringAsynch(pchar data);
+    void SendStringAsynch(pchar data);
 };

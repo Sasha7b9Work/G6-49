@@ -23,11 +23,11 @@ namespace Keyboard
     void AppendEvent(Key::E key, Action::E action);
 
     // —труктура предназначена единственно дл€ декодировани€ клавиатурных последовательностей
-    struct Decoder
+    namespace Decoder
     {
         // ¬озвращает true, если распознана последовательность, заданна€ массивом keys. ѕоследнй элемент элемент массива должен быть Key::Count.
         // ѕоследовательность распознана, если предыдущие поданные событи€ совпадали с элементами массива в пор€дке очереди, а предпоследний равен key.
         // –азмер массива не может превышать 20
-        static bool Decode(const Control controls[20], const Control &control);
+        bool Decode(const Control controls[20], const Control &control);
     };
 };

@@ -73,11 +73,11 @@ struct HAlternate
 };
 
 
-struct HAL_PIO
+namespace HAL_PIO
 {
-    static void Init(char port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, HAlternate::E alternate = HAlternate::AF0_MCO);
+    void Init(char port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, HAlternate::E alternate = HAlternate::AF0_MCO);
 
-    static void WritePin(char port, uint16 maskPin, bool state);
+    void WritePin(char port, uint16 maskPin, bool state);
 
-    static bool ReadPin(char port, uint16 maskPin);
+    bool ReadPin(char port, uint16 maskPin);
 };

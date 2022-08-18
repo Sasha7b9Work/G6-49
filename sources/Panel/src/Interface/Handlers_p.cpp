@@ -3,17 +3,20 @@
 #include "log.h"
 #include "common/Command.h"
 #include "common/Messages.h"
-#include "Handlers_p.h"
+#include "Interface/Handlers_p.h"
 #include "Display/Console.h"
 #include "FDrive/FDrive_p.h"
 #include "FreqMeter/FreqMeter_p.h"
 #include "SCPI/SCPI.h"
 
 
-static bool Request(SimpleMessage *);
-static bool FreqMeasure(SimpleMessage *);
-static bool Log(SimpleMessage *);
-static bool RequestPictureDDSfromStorage(SimpleMessage *);
+namespace PHandlers
+{
+    static bool Request(SimpleMessage *);
+    static bool FreqMeasure(SimpleMessage *);
+    static bool Log(SimpleMessage *);
+    static bool RequestPictureDDSfromStorage(SimpleMessage *);
+}
 
 
 static bool E(SimpleMessage *)
@@ -63,27 +66,27 @@ bool PHandlers::Processing(SimpleMessage *msg)
 }
 
 
-static bool Request(SimpleMessage *)
+static bool PHandlers::Request(SimpleMessage *)
 {
     return false;
 }
 
 
-static bool FreqMeasure(SimpleMessage *msg)
+static bool PHandlers::FreqMeasure(SimpleMessage *msg)
 {
     PFreqMeter::SetMeasure(msg->TakeUINT());
     return true;
 }
 
 
-static bool Log(SimpleMessage *msg)
+static bool PHandlers::Log(SimpleMessage *msg)
 {
     Console::AddString(msg->String(1));
     return true;
 }
 
 
-static bool RequestPictureDDSfromStorage(SimpleMessage *message)
+static bool PHandlers::RequestPictureDDSfromStorage(SimpleMessage *message)
 {
     Chan ch(message->TakeUINT8());
 

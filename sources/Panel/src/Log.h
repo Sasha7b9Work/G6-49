@@ -48,10 +48,9 @@ struct TypeTrace
     } value;
 };
 
-class Log
+namespace Log
 {
-public:
-    static void Trace(TypeTrace::E type, pchar module, pchar func, int numLine, char *format, ...);
-    static void Write(TypeTrace::E type, char *format, ...);
-    static void Finalize();
+    void Trace(TypeTrace::E type, pchar module, pchar func, int numLine, char *format, ...);
+    void Write(TypeTrace::E type, char *format, ...);
+    void Finalize();
 };
