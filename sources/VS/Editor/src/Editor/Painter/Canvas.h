@@ -8,40 +8,22 @@
 #pragma warning(pop)
 
 
-struct Grid
+namespace Grid
 {
-    static int X();
-    static int Y();
-    static int Width();
-    static int Height();
-    static int Bottom();
-    static int Right();
-    static void Draw();
-    static void ChangeTypeGrid();
-    
+    int X();
+    int Y();
+    int Width();
+    int Height();
+    int Bottom();
+    int Right();
+    void Draw();
+    void ChangeTypeGrid();
+
     // Возвращает true, если линии сетки выводятся в процентах
-    static bool TypeIsPercents() { return typeIsPercents; }
-    
+    bool TypeIsPercents();
+
     // Возвращает расстояние между вертикальными линиями в точках или процентах
-    static wxString GetScale();
-
-private:
-    static bool typeIsPercents;
-    static wxString sScale;
-    static int deltaPoints;
-    static int deltaPercents;
-    static void DrawTypePercents();
-    static void DrawTypePoints();
-    static void DrawHorizontalLines();
-
-    // Рассчитывает дельту сетки в точках
-    static void CalculateDeltaPoints();
-
-    // Рассчитывает дельту сетки в процентах. Каждая единица - одна тысячная процента. 1% == 1000
-    static void CalculateDeltaPercents();
-
-    // 
-    static void CalculateScale();
+    wxString GetScale();
 };
 
 
@@ -58,7 +40,7 @@ public:
     void Redraw();
 
 private:
-    
+
     bool mouseIsDown = false;       // true, если ЛКМ находится в нажатом положении
     int mouseX = 0;
     int mouseY = 0;

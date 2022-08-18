@@ -16,14 +16,36 @@
 #pragma warning(pop)
 
 
-bool Grid::typeIsPercents = true;
-int Grid::deltaPoints = 1024;
-int Grid::deltaPercents = 5000;
-wxString Grid::sScale;
-
-
 Canvas *TheCanvas = nullptr;
 static bool needRedraw = true;
+
+
+namespace Grid
+{
+    static bool typeIsPercents = true;
+    static wxString sScale;
+    static int deltaPoints = 1024;
+    static int deltaPercents = 5000;
+    static void DrawTypePercents();
+    static void DrawTypePoints();
+    static void DrawHorizontalLines();
+
+    // Рассчитывает дельту сетки в точках
+    static void CalculateDeltaPoints();
+
+    // Рассчитывает дельту сетки в процентах. Каждая единица - одна тысячная процента. 1% == 1000
+    static void CalculateDeltaPercents();
+
+    // 
+    static void CalculateScale();
+}
+
+
+// Возвращает true, если линии сетки выводятся в процентах
+bool Grid::TypeIsPercents()
+{
+    return typeIsPercents;
+}
 
 
 Canvas::Canvas(wxWindow *p) : wxPanel(p, wxID_ANY), parent(p)

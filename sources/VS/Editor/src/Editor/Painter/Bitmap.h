@@ -5,8 +5,7 @@
 #pragma warning(pop)
 
 
-struct Bitmap
+namespace Bitmap
 {
-public:
-	static wxBitmap* LoadFromResource(int name);
+    wxBitmap *LoadFromResource(int name);
 };
