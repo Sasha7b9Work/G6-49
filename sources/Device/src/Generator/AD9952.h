@@ -20,12 +20,14 @@ namespace AD9952
     void SetPhase(const Chan &, Value phase);
 
     // ћанипул€ци€
-    struct Manipulation
+    namespace Manipulation
     {
         // True означает, что манипул€ци€ включена
-        static bool enabled[Chan::Count];
+        extern bool enabled[Chan::Count];
+
         // ”становить/отменить модулирование синусоиды сигналом "пилы"
-        static void SetEnabled(const Chan &, bool enable);
-        static inline bool IsEnabled(const Chan &ch) { return enabled[ch]; };
+        void SetEnabled(const Chan &, bool enable);
+
+        inline bool IsEnabled(const Chan &ch) { return enabled[ch]; };
     };
 };
