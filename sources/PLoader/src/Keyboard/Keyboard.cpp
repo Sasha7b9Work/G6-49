@@ -11,6 +11,14 @@ static Key commands[10];
 static int pointer = 0;
 
 
+namespace Keyboard
+{
+    static void Update();
+
+    static void InitInputs(const uint16 *sl, const char *portSL, int numSL, const uint16 *rl, const char *portRL, int numRL);
+}
+
+
 static void DetectRegulator();
 
 #define SL0 (1 << 12)
