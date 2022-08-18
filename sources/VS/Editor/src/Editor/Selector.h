@@ -3,36 +3,28 @@
 
 
 /*
-
     "Выделитель" - всё, что связано с выделением
-
 */
 
 
-class Selector
+namespace Selector
 {
-public:
-    
-    static void BeginGrab(int mouseX);
-    
-    static void MoveBorder(int mouseX);
-    
-    static void EndGrab();
-    
-    static void DrawRegion();
+    void BeginGrab(int mouseX);
 
-    static void DrawCursors();
+    void MoveBorder(int mouseX);
+
+    void EndGrab();
+
+    void DrawRegion();
+
+    void DrawCursors();
 
     // Возвращает true, если курсор находится над границей выделенного участка
-    static bool CursorOverBorder(int mouseX);
+    bool CursorOverBorder(int mouseX);
 
-    static bool IsEnabled();
+    bool IsEnabled();
 
-    static void Enable();
+    void Enable();
 
-    static void Disable();
-
-private:
-
-    static bool isEnabled;
+    void Disable();
 };

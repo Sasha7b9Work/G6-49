@@ -23,13 +23,18 @@ struct Cursor
 
 int Cursor::delta = 5;
 Cursor *Cursor::grabbing = nullptr;
-bool Selector::isEnabled = false;
 
 
 static Cursor cursors[2];
 
 #define cursor1 cursors[0]
 #define cursor2 cursors[1]
+
+
+namespace Selector
+{
+    static bool isEnabled = false;
+}
 
 
 void Selector::BeginGrab(int mouseX)
