@@ -5,6 +5,12 @@
 #include "fontGOST28.inc"
 
 
+namespace AdvancedFont
+{
+    TypeFont::E currentType = TypeFont::Count;
+}
+
+
 struct NativeSymbol
 {
     uint8 width;        // Ширина символа в пикселях
@@ -33,8 +39,6 @@ struct HeaderFont
     static HeaderFont *Sefl();
 };
 
-
-TypeFont::E AdvancedFont::currentType = TypeFont::Count;
 
 namespace AFont
 {

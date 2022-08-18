@@ -30,21 +30,21 @@ namespace Display
     // Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
     extern uint8 backBuffer[BUFFER_WIDTH * BUFFER_HEIGHT];
 
-    struct Warnings
+    namespace Warnings
     {
-        static void Clear();
+        void Clear();
 
-        struct Top
+        namespace Top
         {
-            static void Show(const String &ru, const String &en);
-            static void Clear();
+            void Show(const String &ru, const String &en);
+            void Clear();
         };
 
-        struct Center
+        namespace Center
         {
-            static void _Show(const String &ru, const String &en);
-            static void _Show(pchar ru, pchar en);
-            static void _Show2Strings(const String &ru1, const String &ru2, const String &en1, const String &en2);
+            void _Show(const String &ru, const String &en);
+            void _Show(pchar ru, pchar en);
+            void _Show2Strings(const String &ru1, const String &ru2, const String &en1, const String &en2);
         };
     };
 };
