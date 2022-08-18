@@ -872,11 +872,14 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
         if (Tuner::Current()->InModeCorrection())
         {
             Tuner::Current()->SetModeEntering();
-            order = Tuner::Current()->GetParameter()->GetValue().GetOrder();
 
-            if (Tuner::Current()->GetParameter()->IsDouble())
+            Param *param = Tuner::Current()->GetParameter();
+
+            order = param->GetValue().GetOrder();
+
+            if (param->IsDouble())
             {
-                DParam *p = Tuner::Current()->GetParameter()->ToDouble();
+                DParam *p = param->ToDouble();
 
                 if (p->IsNotOrdered())
                 {
@@ -970,16 +973,18 @@ int DisplayEntering::DrawValue(int x, int y)
 
 void DisplayEntering::DrawUnits(int x, int y, int width)
 {
-    if (Tuner::Current()->GetParameter()->IsDouble())
+    Param *param = Tuner::Current()->GetParameter();
+
+    if (param->IsDouble())
     {
         char units[10];
 
         std::strcpy(units, Order::Suffix(order));
-        std::strcat(units, Tuner::Current()->GetParameter()->ToDouble()->GetMainUnits());
+        std::strcat(units, param->ToDouble()->GetMainUnits());
 
         Font::ForceUpperCase(false);
 
-        if (Tuner::Current()->GetParameter()->IsDouble() && Tuner::Current()->GetParameter()->ToDouble()->IsPhase())
+        if (param->IsDouble() && param->ToDouble()->IsPhase())
         {
             Font::StoreAndSet(TypeFont::_8);
             Char(Ideograph::_8::BigDegree).Draw4InRect(x + 130, y);
@@ -1182,9 +1187,6 @@ Tuner::Tuner(Param *_param) : param(_param), display(this)
 
 void Tuner::Init()
 {
-    Tuner *self = this;
-    self = self;
-
     current = this;
 
     display.Init();

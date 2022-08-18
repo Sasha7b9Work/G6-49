@@ -170,7 +170,7 @@ struct DParam : public Param
     // Возвращает единицы измерения, приведённые к порядку order. Если order == Order::Count, единциы будут рассчитываться исходя из текущего значения value
     cstr GetUnits(Order::E order = Order::Count) const;
 
-    virtual Value Min() const { return Value(0); };
+    virtual Value Min() const { return Value(-1); };
     virtual Value Max() const { return Value(0); };
     virtual Value GetValue() const { return value; };
 
