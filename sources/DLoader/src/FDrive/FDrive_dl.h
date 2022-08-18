@@ -5,27 +5,27 @@
 struct StructForReadDir;
 
 
-struct DLDrive
+namespace DLDrive
 {
-    static void Init();
+    void Init();
 
-    static void DeInit();
+    void DeInit();
 
-    static void Update();
+    void Update();
 
-    static bool IsConnected();
+    bool IsConnected();
 
-    static void *handleUSBH;
+    extern void *handleUSBH;
 
-    struct File
+    namespace File
     {
         // Открывает файл для чтения. Возвращает размер файла или -1, если файл не существует
-        static int Open(const char *name);
+        int Open(const char *name);
 
-        static void Seek(int pos);
+        void Seek(int pos);
 
-        static int Read(int size, uint8 *buffer);
+        int Read(int size, uint8 *buffer);
 
-        static void Close();
+        void Close();
     };
 };

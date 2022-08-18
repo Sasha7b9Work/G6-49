@@ -9,35 +9,29 @@ struct CalibrationSettings;
 #define ERROR_HANDLER() HAL::ErrorHandler()
 
 
-struct HAL
+namespace HAL
 {
-    static void Init();
+    void Init();
 
-    static void ErrorHandler();
-
-private:
-
-    static void SystemClockConfig();
-
-    static void EnablePeriphery();
+    void ErrorHandler();
 };
 
 
 
-struct HAL_CRC32
+namespace HAL_CRC32
 {
-    static void Init();
+    void Init();
 
-    static uint CalculateALIGN32(void *address, int size);
+    uint CalculateALIGN32(void *address, int size);
 };
 
 
-struct HAL_EEPROM
+namespace HAL_EEPROM
 {
     // Стирает count секторов, начиная со стартового адреса основной прошивки
-    static void EraseSectors(int count);
+    void EraseSectors(int count);
 
-    static void WriteBuffer(int address, const uint8 *data, int size);
+    void WriteBuffer(int address, const uint8 *data, int size);
 };
 
 
@@ -55,15 +49,15 @@ namespace HAL_HCD
 };
 
 
-struct HAL_SPI1
+namespace HAL_SPI1
 {
-    static void Init();
+    void Init();
 
-    static bool Receive(void *buffer, int size, int timeout);
+    bool Receive(void *buffer, int size, int timeout);
 
-    static bool Transmit(void *buffer, int size, int timeout);
+    bool Transmit(void *buffer, int size, int timeout);
 
-    static bool Transmit(int value, int timeout);
+    bool Transmit(int value, int timeout);
 };
 
 
@@ -75,23 +69,23 @@ namespace HAL_SPI3
 };
 
 
-struct HAL_TIM
+namespace HAL_TIM
 {
-    static uint TimeMS();
+    uint TimeMS();
 
-    static void Delay(uint timeMS);
+    void Delay(uint timeMS);
 };
 
 
-struct HAL_TIM2
+namespace HAL_TIM2
 {
-    static void Init();
+    void Init();
 
-    static uint GetTicks();
+    uint GetTicks();
 
-    static void StartMultiMeasurement();
+    void StartMultiMeasurement();
 
-    static uint TimeUS();
+    uint TimeUS();
 };
 
 

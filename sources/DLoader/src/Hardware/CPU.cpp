@@ -12,6 +12,12 @@
 static uint timeBusy = 0;
 
 
+namespace CPU
+{
+    static void InitGPIOS();
+}
+
+
 void CPU::Init()
 {
     HAL::Init();
