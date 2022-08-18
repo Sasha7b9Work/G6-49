@@ -19,24 +19,24 @@ struct HPort
     };
 };
 
-struct HPin
+namespace HPin
 {
-    static const uint16 _0;
-    static const uint16 _1;
-    static const uint16 _2;
-    static const uint16 _3;
-    static const uint16 _4;
-    static const uint16 _5;
-    static const uint16 _6;
-    static const uint16 _7;
-    static const uint16 _8;
-    static const uint16 _9;
-    static const uint16 _10;
-    static const uint16 _11;
-    static const uint16 _12;
-    static const uint16 _13;
-    static const uint16 _14;
-    static const uint16 _15;
+    extern const uint16 _0;
+    extern const uint16 _1;
+    extern const uint16 _2;
+    extern const uint16 _3;
+    extern const uint16 _4;
+    extern const uint16 _5;
+    extern const uint16 _6;
+    extern const uint16 _7;
+    extern const uint16 _8;
+    extern const uint16 _9;
+    extern const uint16 _10;
+    extern const uint16 _11;
+    extern const uint16 _12;
+    extern const uint16 _13;
+    extern const uint16 _14;
+    extern const uint16 _15;
 };
 
 
@@ -105,23 +105,23 @@ struct HAlternate
     };
 };
 
-struct HAL_PIO
+namespace HAL_PIO
 {
     // Начальная инициализация управляющих выводов
-    static void Init();
+    void Init();
 
-    static void Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, HAlternate::E alternate = HAlternate::AF0_MCO);
+    void Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, HAlternate::E alternate = HAlternate::AF0_MCO);
     // Установка в "1"
-    static void Set(HPort::E port, uint16 pin);
-    static void Set(const StructPIN &pin);
+    void Set(HPort::E port, uint16 pin);
+    void Set(const StructPIN &pin);
     // Установка в "0"
-    static void Reset(HPort::E port, uint16 pin);
-    static void Reset(const StructPIN &pin);
+    void Reset(HPort::E port, uint16 pin);
+    void Reset(const StructPIN &pin);
 
-    static void Write(HPort::E port, uint16 pin, HState::E state);
-    static void Write(HPort::E port, uint16 pin, bool state);
-    static uint8 Read(HPort::E port, uint16 pin);
+    void Write(HPort::E port, uint16 pin, HState::E state);
+    void Write(HPort::E port, uint16 pin, bool state);
+    uint8 Read(HPort::E port, uint16 pin);
 
     // Запись байта в ПЛИС
-    static void WriteFPGA(uint8 byte);
+    void WriteFPGA(uint8 byte);
 };
