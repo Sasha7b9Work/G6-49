@@ -12,200 +12,200 @@
 #pragma warning(pop)
 
 /*
-	Класс представления формы сигнала
+    Класс представления формы сигнала
 */
 
 
 struct Align
 {
-	enum E
-	{
-		Left,
-		Right,
-		LeftTop,
-		LeftDown,
-		RightTop,
-		RightDown
-	};
+    enum E
+    {
+        Left,
+        Right,
+        LeftTop,
+        LeftDown,
+        RightTop,
+        RightDown
+    };
 };
 
 
 struct Marker
 {
-	static const int SIZE = 5;
+    static const int SIZE = 5;
 };
 
 
 struct Point
 {
-	static const int SIZE = 3;
+    static const int SIZE = 3;
 
-	static const uint16 MIN = (uint16)0;
-	static const uint16 MAX = (uint16)((1 << 12) - 1);
-	static const uint16 AVE = (uint16)(MAX / 2);
+    static const uint16 MIN = (uint16)0;
+    static const uint16 MAX = (uint16)((1 << 12) - 1);
+    static const uint16 AVE = (uint16)(MAX / 2);
 
-	static const int AMOUNT = 8192;
+    static const int AMOUNT = 8192;
 
-	Point() : Point((uint16)0, (uint16)0) { };
+    Point() : Point((uint16)0, (uint16)0) { };
 
-	static Point FromData(uint16 p, uint16 d)
-	{
-		return Point(p, d);
-	}
+    static Point FromData(uint16 p, uint16 d)
+    {
+        return Point(p, d);
+    }
 
-	static Point FromCanvas(int canvasX, int canvasY)
-	{
-		return Point(canvasX, canvasY);
-	}
+    static Point FromCanvas(int canvasX, int canvasY)
+    {
+        return Point(canvasX, canvasY);
+    }
 
 private:
 
-	Point(int canvasX, int canvasY)
-	{
-		pos = Math::Round<uint16>((float)((float)canvasX + (float)Zoomer::IndexFirsPoint() * PixelsInPointX()) / PixelsInPointX());
-		SetCanvasY(canvasY);
-	}
+    Point(int canvasX, int canvasY)
+    {
+        pos = Math::Round<uint16>((float)((float)canvasX + (float)Zoomer::IndexFirsPoint() * PixelsInPointX()) / PixelsInPointX());
+        SetCanvasY(canvasY);
+    }
 
-	Point(uint16 p, uint16 d) : pos(p), data(d) {};
+    Point(uint16 p, uint16 d) : pos(p), data(d) {};
 
 public:
 
-	void SetData(uint16 p, uint16 d)
-	{
-		*this = Point(p, d);
-	};
+    void SetData(uint16 p, uint16 d)
+    {
+        *this = Point(p, d);
+    };
 
-	void SetCanvasY(int canvasY)
-	{
-		data = (uint16)(Point::MAX - Math::Round<uint16>((float)(canvasY - Grid::Y()) / PixelsInDiscretY()));
-	}
+    void SetCanvasY(int canvasY)
+    {
+        data = (uint16)(Point::MAX - Math::Round<uint16>((float)(canvasY - Grid::Y()) / PixelsInDiscretY()));
+    }
 
-	uint16 pos;
-	uint16 data;
-	bool operator < (const Point &point) const
-	{
-		return (pos < point.pos);
-	}
-	// Возвращает true, если курсор мыши находится над этой точкой
-	double DistanceFromCanvas(int canvasX, int canvasY)
-	{
-		int dX = canvasX - CanvasX();
+    uint16 pos;
+    uint16 data;
+    bool operator < (const Point &point) const
+    {
+        return (pos < point.pos);
+    }
+    // Возвращает true, если курсор мыши находится над этой точкой
+    double DistanceFromCanvas(int canvasX, int canvasY)
+    {
+        int dX = canvasX - CanvasX();
 
-		int dY = canvasY - CanvasY();
+        int dY = canvasY - CanvasY();
 
-		return std::sqrt(dX * dX + dY * dY);
-	}
-	// Масштаб по горизонтали - пикселей на точку
-	static float PixelsInPointX()
-	{
-		return (float)Grid::Width() / (float)Zoomer::NumberDrawingPoints();
-	}
-	// Масштаб по вертикали - пикселей на дискрет
-	static float PixelsInDiscretY()
-	{
-		return (float)Grid::Height() / (float)MAX;
-	}
+        return std::sqrt(dX * dX + dY * dY);
+    }
+    // Масштаб по горизонтали - пикселей на точку
+    static float PixelsInPointX()
+    {
+        return (float)Grid::Width() / (float)Zoomer::NumberDrawingPoints();
+    }
+    // Масштаб по вертикали - пикселей на дискрет
+    static float PixelsInDiscretY()
+    {
+        return (float)Grid::Height() / (float)MAX;
+    }
 
-	// Преобразует координату мыши в точку [0 ... (Point::AMOUNT - 1)]
-	static int CanvasToPointX(int mouseX)
-	{
-		return Math::Round<int>((float)mouseX / PixelsInPointX());
-	}
+    // Преобразует координату мыши в точку [0 ... (Point::AMOUNT - 1)]
+    static int CanvasToPointX(int mouseX)
+    {
+        return Math::Round<int>((float)mouseX / PixelsInPointX());
+    }
 
-	static int PointToCanvasX(int x)
-	{
-		return Math::Round<int>((float)x * PixelsInPointX());
-	}
+    static int PointToCanvasX(int x)
+    {
+        return Math::Round<int>((float)x * PixelsInPointX());
+    }
 
-	// Нарисовать параметры точки
-	void DrawParameters();
+    // Нарисовать параметры точки
+    void DrawParameters();
 
-	// Рассчитать координаты для вывода параметров
-	wxPoint CalculateCoordParameters();
+    // Рассчитать координаты для вывода параметров
+    wxPoint CalculateCoordParameters();
 
-	// Координата X точки на холсте
-	int CanvasX() const;
+    // Координата X точки на холсте
+    int CanvasX() const;
 
-	// Координата Y точки на холсте
-	int CanvasY() const;
+    // Координата Y точки на холсте
+    int CanvasY() const;
 };
 
 
 class Form
 {
 public:
-	Form();
-	~Form();
-	// Очистить сигнал
-	void Clear();
+    Form();
+    ~Form();
+    // Очистить сигнал
+    void Clear();
 
-	// Добавить маркер с координатами мыши
-	void SetMarkerInMouseCoord(int mouseX, int mouseY);
+    // Добавить маркер с координатами мыши
+    void SetMarkerInMouseCoord(int mouseX, int mouseY);
 
-	// Добавить точку с абсолютными значениями
-	void SetPointInRealCoord(uint16 pos, uint16 data);
+    // Добавить точку с абсолютными значениями
+    void SetPointInRealCoord(uint16 pos, uint16 data);
 
-	// Заносит точку куда следует
-	void SetPoint(Point point);
+    // Заносит точку куда следует
+    void SetPoint(Point point);
 
-	// Вставить точку в позицию pos
-	void SetPointInPosition(uint16 pos);
+    // Вставить точку в позицию pos
+    void SetPointInPosition(uint16 pos);
 
-	// Возвращает true, если курсор мыши находится над поставленной точкой. Pressed - нажата ли кнопка мыши
-	bool ExistMarker(int mouseX, int mouseY, bool pressed, uint16 *index = nullptr, uint16 *value = nullptr);
+    // Возвращает true, если курсор мыши находится над поставленной точкой. Pressed - нажата ли кнопка мыши
+    bool ExistMarker(int mouseX, int mouseY, bool pressed, uint16 *index = nullptr, uint16 *value = nullptr);
 
-	// Удалить точку в позиции мыши
-	void RemoveCurrentMarker();
+    // Удалить точку в позиции мыши
+    void RemoveCurrentMarker();
 
-	// Переместить маркер в новую позицию
-	void MoveMarker(int canvasX, int canvasY);
+    // Переместить маркер в новую позицию
+    void MoveMarker(int canvasX, int canvasY);
 
-	// Выровнять точку
-	void AlignPoint(Align::E align);
+    // Выровнять точку
+    void AlignPoint(Align::E align);
 
-	void Draw();
+    void Draw();
 
-	void UndoHistory();
+    void UndoHistory();
 
-	void RedoHistory();
+    void RedoHistory();
 
-	// Установить дополнительную форму, которая будет рисоваться поверх основной. 
-	void SetAdditionForm(const uint16 data[Point::AMOUNT]);
+    // Установить дополнительную форму, которая будет рисоваться поверх основной. 
+    void SetAdditionForm(const uint16 data[Point::AMOUNT]);
 
-	// Установить основную форму
-	void SetMainForm(const uint16 data[Point::AMOUNT], const std::vector<Point> *points);
+    // Установить основную форму
+    void SetMainForm(const uint16 data[Point::AMOUNT], const std::vector<Point> *points);
 
-	bool IsEquals(const Form *form) const;
+    bool IsEquals(const Form *form) const;
 
-	void SaveToFile(wxTextFile &file);
+    void SaveToFile(wxTextFile &file);
 
-	void LoadFromFile(wxTextFile &file);
+    void LoadFromFile(wxTextFile &file);
 
 private:
 
-	// Данные, готовые для передачи в прибор
-	uint16 data[Point::AMOUNT];
+    // Данные, готовые для передачи в прибор
+    uint16 data[Point::AMOUNT];
 
-	// Точки, поставленные мышью. Хранятся в системе координат прибора (pos = [0 ... Point::AMOUNT], data = [Point::MIN ... Point::MAX])
-	std::vector<Point> markers;
+    // Точки, поставленные мышью. Хранятся в системе координат прибора (pos = [0 ... Point::AMOUNT], data = [Point::MIN ... Point::MAX])
+    std::vector<Point> markers;
 
-	// Здесь хранится индекс точки, которой управляем в текущий момент
-	uint iCurMarker = 0;
+    // Здесь хранится индекс точки, которой управляем в текущий момент
+    uint iCurMarker = 0;
 
-	// Возвращает index точки в позиции pos. 0xFFFFFFFF, если точки в этой позиции нет
-	uint PointInPosition(uint16 pos);
+    // Возвращает index точки в позиции pos. 0xFFFFFFFF, если точки в этой позиции нет
+    uint PointInPosition(uint16 pos);
 
-	// Рассчитать соседние с point точки
-	void CalculateNeighboringPoints(const Point &point);
+    // Рассчитать соседние с point точки
+    void CalculateNeighboringPoints(const Point &point);
 
-	// Линейно интерполировать точки, расположенные между pos1 и pos2
-	void LinearInterpolation(uint16 pos1, uint16 pos2);
+    // Линейно интерполировать точки, расположенные между pos1 и pos2
+    void LinearInterpolation(uint16 pos1, uint16 pos2);
 
-	// Интерполировать точки слева от точки с индексом index из points
-	void LinearInterpolationLeft(uint index);
+    // Интерполировать точки слева от точки с индексом index из points
+    void LinearInterpolationLeft(uint index);
 
-	// Интерполировать точки справа от точки с индексом index из points
-	void LinearInterpolationRight(uint index);
+    // Интерполировать точки справа от точки с индексом index из points
+    void LinearInterpolationRight(uint index);
 };
 
 
