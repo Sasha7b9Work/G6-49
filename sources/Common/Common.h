@@ -20,7 +20,7 @@ struct TypeForm
 };
 
 
-struct Order
+namespace Order
 {
     enum E
     {
@@ -33,16 +33,16 @@ struct Order
         Count
     };
 
-    static cstr Suffix(Order::E order);
+    cstr Suffix(Order::E order);
 
     // Возвращает степень, соответсвующую порядку
-    static int GetPow10(Order::E order);
+    int GetPow10(Order::E order);
 
     // Сохранить order во внутренней памяти
-    static void Store(Order::E order);
+    void Store(Order::E order);
 
     // Восстановить значение, ранее сохранённое функцией Store()
-    static Order::E Restore();
+    Order::E Restore();
 };
 
 
