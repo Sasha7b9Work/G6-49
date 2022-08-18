@@ -32,8 +32,8 @@ namespace ListFiles
     // Возвращает номер текущего файла
     int NumberCurrentFile();
 
-    struct Handler
+    namespace Handler
     {
-        static bool Processing(SimpleMessage *msg);
+        bool Processing(SimpleMessage *msg);
     };
 };

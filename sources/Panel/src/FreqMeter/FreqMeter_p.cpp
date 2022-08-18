@@ -10,13 +10,14 @@
 #include <cstdio>
 
 
-static uint valueFreq = 0;
-static bool inactive = true;
+namespace PFreqMeter
+{
+    static bool sendToSCPI = false;
+    static uint valueFreq = 0;
+    static bool inactive = true;
 
-bool PFreqMeter::sendToSCPI = false;
-
-
-static String FormValue(uint8 lang);
+    static String FormValue(uint8 lang);
+}
 
 
 void PFreqMeter::Draw()
@@ -43,7 +44,7 @@ void PFreqMeter::Draw()
 }
 
 
-static String FormValue(uint8 lang)
+static String PFreqMeter::FormValue(uint8 lang)
 {
     char buffer[20];
     char text[50];
