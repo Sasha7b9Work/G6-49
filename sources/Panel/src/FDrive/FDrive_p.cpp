@@ -18,12 +18,9 @@
 
 using namespace Primitives;
 
-
 namespace FDrive
 {
     View view;
-
-    SimpleMessage *Handler::msg = nullptr;
 
     enum Mount
     {
@@ -40,6 +37,16 @@ namespace FDrive
 
     // Если true - идёт загрузка сигнала с флешки в память
     static bool inStateWaitCompleteLoad = false;
+
+    namespace Handler
+    {
+        static SimpleMessage *msg = nullptr;
+        static bool IsMount();
+        static bool GetNumDirsAndFiles();
+        static bool RequestFile();
+        static bool RequestFileSize();
+        static bool LoadDDSfromFile();
+    }
 }
 
 

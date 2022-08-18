@@ -33,15 +33,8 @@ namespace FDrive
 
     void SaveScreenToFlash();
 
-    struct Handler
+    namespace Handler
     {
-        static bool Processing(SimpleMessage *msg);
-    private:
-        static SimpleMessage *msg;
-        static bool IsMount();
-        static bool GetNumDirsAndFiles();
-        static bool RequestFile();
-        static bool RequestFileSize();
-        static bool LoadDDSfromFile();
+        bool Processing(SimpleMessage *msg);
     };
 };
