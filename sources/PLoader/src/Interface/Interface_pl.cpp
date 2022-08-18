@@ -14,6 +14,19 @@
 static List<Task> tasks;
 
 
+namespace PInterface
+{
+    // ќбрабатывает answer, если запрос на него есть в очереди заданий. ¬озвращает true, если это так
+    bool ProcessTask(SimpleMessage *answer);
+
+    // ќбрабатывает очередь заданий, засыла€ сообщени€ тех из них, которые необходимо заслать
+    void SendTasks();
+
+    // ќбработать ответ на задание
+    void RunAnswer(ListElement<Task> *element, SimpleMessage *answer);
+}
+
+
 void PInterface::AddMessageForTransmit(SimpleMessage *message)
 {
     Transceiver::Transmit(message);

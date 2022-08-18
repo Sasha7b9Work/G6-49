@@ -36,20 +36,13 @@ private:
 
 
 
-class PInterface
+namespace PInterface
 {
-public:
     // Для приёма сообщений от устройства
-    static void Update();
-    // Добавляеет задание. Если не получилось, возвращает false
-    static void AddTask(Task *task);
+    void Update();
 
-    static void AddMessageForTransmit(SimpleMessage *message);
-private:
-    // Обрабатывает answer, если запрос на него есть в очереди заданий. Возвращает true, если это так
-    static bool ProcessTask(SimpleMessage *answer);
-    // Обрабатывает очередь заданий, засылая сообщения тех из них, которые необходимо заслать
-    static void SendTasks();
-    // Обработать ответ на задание
-    static void RunAnswer(ListElement<Task> *element, SimpleMessage *answer);
+    // Добавляеет задание. Если не получилось, возвращает false
+    void AddTask(Task *);
+
+    void AddMessageForTransmit(SimpleMessage *);
 };
