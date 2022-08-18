@@ -5,8 +5,6 @@
 
 struct Keyboard
 {
-    friend class CPU;
-
 public:
 
     static void Init();

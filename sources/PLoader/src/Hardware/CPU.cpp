@@ -6,9 +6,16 @@
 #include <cstdlib>
 
 
-uint  CPU::timeStartMeasFPS = 0;
-int   CPU::numFrames = 0;
-float CPU::fps = 0.0F;
+namespace CPU
+{
+    // Время начала замера ФПС (время начала очередного 1-секундного отрезка времени)
+    static uint timeStartMeasFPS = 0;
+
+    // Сколько фреймов насчитано с начала очередного 1-секундного отрезка времени
+    static int numFrames = 0;
+
+    static float fps = 0.0f;
+}
 
 
 void CPU::Init()
