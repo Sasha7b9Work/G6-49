@@ -3,23 +3,25 @@
 #include "Settings/Settings.h"
 
 
-struct Beeper
+namespace Beeper
 {
-    static void Init();
+    void Init();
+
     // Звук нажатия на кнопку.
-    static void ButtonPress();
+    void ButtonPress();
+
     // Функция вызовет звук отпускаемой кнопки только если перед этим проигрывался звук нажатия кнопки.
-    static void ButtonRelease();
+    void ButtonRelease();
 
-    static void GovernorChangedValue();
-    
-    static void WarnBeepBad();
+    void GovernorChangedValue();
 
-    static void WarnBeepGood();
+    void WarnBeepBad();
 
-    static void Beep(Action::E action);
+    void WarnBeepGood();
 
-    static void Test();
+    void Beep(Action::E action);
 
-    static uint8 Volume();
+    void Test();
+
+    uint8 Volume();
 };

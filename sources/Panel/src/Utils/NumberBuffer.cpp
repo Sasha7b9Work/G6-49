@@ -7,11 +7,39 @@
 #include <cstdlib>
 
 
-char *NumberBuffer::buffer = 0;
-int NumberBuffer::size = 0;
-int NumberBuffer::position = 0;
-int NumberBuffer::max = 0;
+namespace NumberBuffer
+{
+    static char *buffer = nullptr;
+    static int size = 0;
+    static int position = 0;
 
+    // Максимальное значение, которое может быть представлено в буфере. 0 означает, что ограничений на велечину значения нету
+    static int max = 0;
+
+    // Возвращает количество символов в буфере (без учёта завершающего нуля).
+    static int NumSymbols();
+
+    // Обработка поворота ручки
+    static void ProcessRegulator(const Key::E key);
+
+    // Увеличить значение в заданном разряде. Возвращает true, если действие произошло
+    static bool IncreaseDigit(int pos);
+
+    // Уменьшить значение в заданном разряде. Возвращает true, если действие произошло
+    static bool DecreaseDigit(int pos);
+
+    // Возвращает позицию символа для изменения
+    static int PositionSymbolForChange();
+
+    // Является ли допустимым данный символ
+    static bool AllowableSymbol(const Key::E key);
+
+    // Возвращает числовое значение, представленное в буфере
+    static uint ToUINT();
+
+    // Возвращает true, если в числе все девятки
+    static bool All9();
+}
 
 
 void NumberBuffer::Set(char *buf, int s, int p, int maxValue)
