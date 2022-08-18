@@ -5,19 +5,17 @@
 struct SimpleMessage;
 
 
-class Updater
+namespace Updater
 {
-public:
-
     static const int MAIN_PROGRAM_START_ADDRESS = 0x8020000;
 
     // true, если нужно запускать процедуру обновления
-    static bool NeedUpgrade();
+    bool NeedUpgrade();
 
     // Запуск процедуры обновления
-    static void UpgradeDevice();
-    static void UpgradePanel();
+    void UpgradeDevice();
+    void UpgradePanel();
 
     // Обработчик поступающих команд
-    static void Handler(SimpleMessage *);
+    void Handler(SimpleMessage *);
 };

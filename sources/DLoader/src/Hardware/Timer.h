@@ -65,5 +65,5 @@ namespace Timer
     uint LogPointMS(char *name);
 
     // Вызывается при срабатывании таймера
-    static void ElapsedCallback();
+    void ElapsedCallback();
 };
