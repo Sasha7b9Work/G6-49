@@ -2,7 +2,7 @@
 #pragma once
 
 
-struct TestsHardware
+namespace TestsHardware
 {
-    static void Run();
+    void Run();
 };
