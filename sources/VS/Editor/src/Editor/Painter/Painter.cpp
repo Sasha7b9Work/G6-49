@@ -3,10 +3,19 @@
 #include "Editor/Painter/Painter.h"
 
 
-Color Painter::currentColor(Color::NUMBER.value);
-wxWindow *Painter::parent = nullptr;;
-wxBitmap *Painter::bitmap = nullptr;
-wxMemoryDC Painter::memDC;
+namespace Painter
+{
+    static void SetSolidBrush(const Color &color);
+
+    static void SetTransparentBrush();
+
+    static wxColour MakeColour(const Color &color);
+
+    static Color currentColor(Color::NUMBER.value);
+    static wxWindow *parent = nullptr;
+    static wxBitmap *bitmap = nullptr;      // Здесь рисуем
+    static wxMemoryDC memDC;                // Контекст рисования
+}
 
 
 void Painter::Init(wxWindow *_parent)
