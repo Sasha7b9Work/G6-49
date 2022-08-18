@@ -17,17 +17,17 @@ namespace HAL
 };
 
 
-struct HAL_CRC32
+namespace HAL_CRC32
 {
-    static uint Calculate(const uint8 *address, uint size);
+    uint Calculate(const uint8 *address, uint size);
 
-    static void Init();
+    void Init();
 };
 
 
-struct HAL_EEPROM
+namespace HAL_EEPROM
 {
-    static void Init();
+    void Init();
 
     struct Signal
     {
