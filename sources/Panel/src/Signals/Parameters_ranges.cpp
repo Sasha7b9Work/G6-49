@@ -63,13 +63,79 @@ Value PPeriod::Max() const
 
 Value PAmplitudePic::Min() const
 {
-    return Value(0);
+    if (form == A::Sine::form || form == B::Sine::form)
+    {
+
+    }
+    else if (form == A::RampPlus::form || form == B::RampPlus::form)
+    {
+
+    }
+    else if (form == A::RampMinus::form || form == B::RampMinus::form)
+    {
+
+    }
+    else if (form == A::Triangle::form || form == B::Triangle::form)
+    {
+
+    }
+    else if (form == A::Meander::form || form == B::Meander::form)
+    {
+
+    }
+    else if (form == A::Impulse::form || form == B::Impulse::form)
+    {
+
+    }
+    else if (form == A::Packet::form)
+    {
+
+    }
+    else if (form == A::Free::form || form == B::Free::form)
+    {
+
+    }
+
+    return Value(-1);
 }
 
 
 Value PAmplitudePic::Max() const
 {
-    return Value(0);
+    if (form == A::Sine::form || form == B::Sine::form)
+    {
+
+    }
+    else if (form == A::RampPlus::form || form == B::RampPlus::form)
+    {
+
+    }
+    else if (form == A::RampMinus::form || form == B::RampMinus::form)
+    {
+
+    }
+    else if (form == A::Triangle::form || form == B::Triangle::form)
+    {
+
+    }
+    else if (form == A::Meander::form || form == B::Meander::form)
+    {
+
+    }
+    else if (form == A::Impulse::form || form == B::Impulse::form)
+    {
+
+    }
+    else if (form == A::Packet::form)
+    {
+
+    }
+    else if (form == A::Free::form || form == B::Free::form)
+    {
+
+    }
+
+    return Value(1);
 }
 
 
