@@ -171,7 +171,7 @@ struct DParam : public Param
     cstr GetUnits(Order::E order = Order::Count) const;
 
     virtual Value Min() const { return Value(-1); };
-    virtual Value Max() const { return Value(0); };
+    virtual Value Max() const { return Value(1); };
     virtual Value GetValue() const { return value; };
 
     virtual Tuner *GetTuner() { return &tuner; };

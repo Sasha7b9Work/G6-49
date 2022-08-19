@@ -51,13 +51,31 @@ Value PFrequency::Max() const
 
 Value PPeriod::Min() const
 {
-    return Value(0);
+    if (form == A::Impulse::form || form == B::Impulse::form)
+    {
+
+    }
+    else if (form == A::Packet::form)
+    {
+
+    }
+
+    return Value(-1);
 }
 
 
 Value PPeriod::Max() const
 {
-    return Value(0);
+    if (form == A::Impulse::form || form == B::Impulse::form)
+    {
+
+    }
+    else if (form == A::Packet::form)
+    {
+
+    }
+
+    return Value(1);
 }
 
 
@@ -219,13 +237,31 @@ Value POffset::Max() const
 
 Value PDuration::Min() const
 {
-    return Value(0);
+    if (form == A::Impulse::form || form == B::Impulse::form)
+    {
+
+    }
+    else if (form == A::Packet::form)
+    {
+
+    }
+
+    return Value(-1);
 }
 
 
 Value PDuration::Max() const
 {
-    return Value(0);
+    if (form == A::Impulse::form || form == B::Impulse::form)
+    {
+
+    }
+    else if (form == A::Packet::form)
+    {
+
+    }
+
+    return Value(1);
 }
 
 
@@ -243,12 +279,22 @@ Value PPhase::Max() const
 
 Value PDelay::Min() const
 {
-    return Value(0);
+    if (form == A::Impulse::form)
+    {
+
+    }
+
+    return Value(-1);
 }
 
 
 Value PDelay::Max() const
 {
+    if (form == A::Impulse::form)
+    {
+
+    }
+
     return Value(0);
 }
 
@@ -299,56 +345,70 @@ Value PPeriodManipulation::Max() const
 
 Value PPeriodPacket::Min() const
 {
-    // «начение периода не может быть меньше (N - 1) * Tи + tи + 10нс
-
-    PPeriod &par_period = (PPeriod &)form->FindParameter(TypeDParam::Period);
-    IParam &par_number = form->FindParameter(TypeIParam::PacketNumber);
-    PDuration &par_duration = (PDuration &)form->FindParameter(TypeDParam::Duration);
-
-    if (par_period.Exist() && par_number.Exist() && par_duration.Exist())
+    if (form == A::Packet::form)
     {
-        Value min_value = par_period.GetValue();
+        // «начение периода не может быть меньше (N - 1) * Tи + tи + 10нс
 
-        min_value.Mul((uint)(par_number.GetValue().Integer() - 1));
+        PPeriod &par_period = (PPeriod &)form->FindParameter(TypeDParam::Period);
+        IParam &par_number = form->FindParameter(TypeIParam::PacketNumber);
+        PDuration &par_duration = (PDuration &)form->FindParameter(TypeDParam::Duration);
 
-        min_value.Add(par_duration.GetValue());
+        if (par_period.Exist() && par_number.Exist() && par_duration.Exist())
+        {
+            Value min_value = par_period.GetValue();
 
-        min_value.Add(Value("10", Order::Nano));
+            min_value.Mul((uint)(par_number.GetValue().Integer() - 1));
 
-        return min_value;
+            min_value.Add(par_duration.GetValue());
+
+            min_value.Add(Value("10", Order::Nano));
+
+            return min_value;
+        }
+
+        return Value("20", Order::Nano);
     }
 
-    return Value("20", Order::Nano);
+    return Value(-1);
 }
 
 
 Value PPeriodPacket::Max() const
 {
-    return Value(0);
+    if (form == A::Packet::form)
+    {
+
+    }
+
+    return Value(1);
 }
 
 
 Value IParam::Min() const
 {
-    switch (type)
+    if (type == TypeIParam::PacketNumber)
     {
-    case TypeIParam::PacketNumber:      break;
-    case TypeIParam::Count:             break;
+        if (form == A::Packet::form)
+        {
+
+        }
     }
 
-    return Value(0);
+    return Value(-1);
 }
 
 
 Value IParam::Max() const
 {
-    switch (type)
+    if (type == TypeIParam::PacketNumber)
     {
-    case TypeIParam::PacketNumber:      break;
-    case TypeIParam::Count:             break;
+        if (form == A::Packet::form)
+        {
+
+        }
     }
 
-    return Value(0);
+    return Value(1);
 }
 
 
