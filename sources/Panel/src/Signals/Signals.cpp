@@ -453,7 +453,10 @@ static POffset       impulseB_Offset;
 static PPolarity     impulseB_Polarity(namesPolarity);
 static PModeStart    impulseB_ModeStart(FuncActive_ModeStartImpulseB, namesModeStartImpulse);
 
+PPeriod    *B::Impulse::period = &impulseB_Period;
 PDuration  *B::Impulse::duration = &impulseB_Duration;
+PModeStart *B::Impulse::mode_start = &impulseB_ModeStart;
+
 
 static Param *params_ImpulseB[] =
 {
@@ -509,6 +512,4 @@ Form          *B::RampMinus::form = &formRampMinusB;
 Form          *B::Triangle::form = &formTriangleB;
 Form          *B::Meander::form = &formMeanderB;
 Form          *B::Impulse::form = &formImpulseB;
-PPeriod       *B::Impulse::period = &impulseB_Period;
-PModeStart    *B::Impulse::mode_start = &impulseB_ModeStart;
 Form          *B::Free::form = &formFreeB;

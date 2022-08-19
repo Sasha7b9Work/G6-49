@@ -13,30 +13,39 @@ SMinMax Param::ValueInRange() const
 
 Value PFrequency::Min() const
 {
-    if (form == A::Sine::form || form == B::Sine::form)
+    if (form == A::Sine::form      || form == B::Sine::form ||
+        form == A::RampPlus::form  || form == B::RampPlus::form ||
+        form == A::RampMinus::form || form == B::RampMinus::form ||
+        form == A::Triangle::form  || form == B::Triangle::form ||
+        form == A::Free::form      || form == B::Free::form)
     {
 
     }
-    else if (form == A::RampPlus::form || form == B::RampPlus::form)
-    {
-
-    }
-    else if (form == A::RampMinus::form || form == B::RampMinus::form)
-    {
-
-    }
-    else if (form == A::Triangle::form || form == B::Triangle::form)
+    else if (form == A::Meander::form || form == B::Meander::form)
     {
 
     }
 
-    return Value(0);
+    return Value(-1);
 }
 
 
 Value PFrequency::Max() const
 {
-    return Value(0);
+    if (form == A::Sine::form      || form == B::Sine::form ||
+        form == A::RampPlus::form  || form == B::RampPlus::form ||
+        form == A::RampMinus::form || form == B::RampMinus::form ||
+        form == A::Triangle::form  || form == B::Triangle::form ||
+        form == A::Free::form      || form == B::Free::form)
+    {
+
+    }
+    else if (form == A::Meander::form || form == B::Meander::form)
+    {
+
+    }
+
+    return Value(1);
 }
 
 
