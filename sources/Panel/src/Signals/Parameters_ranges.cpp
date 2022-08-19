@@ -328,7 +328,7 @@ Value PPeriodManipulation::Min() const
 
     }
 
-    return Value(0);
+    return Value(-1);
 }
 
 
@@ -339,7 +339,7 @@ Value PPeriodManipulation::Max() const
 
     }
 
-    return Value(0);
+    return Value(1);
 }
 
 
