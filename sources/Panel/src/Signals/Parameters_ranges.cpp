@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Signals/Parameters.h"
 #include "Signals/Wave.h" 
+#include "Signals/Signals.h"
 
 
 SMinMax Param::ValueInRange() const
@@ -12,6 +13,11 @@ SMinMax Param::ValueInRange() const
 
 Value PFrequency::Min() const
 {
+    if (form == A::Sine::form || form == B::Sine::form)
+    {
+
+    };
+
     return Value(0);
 }
 

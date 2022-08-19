@@ -55,7 +55,7 @@ struct Param
     virtual Tuner *GetTuner() { return nullptr; }
 
     void SetParent(Param *p);
-    
+
     // Возвращает адрес родительского параметра
     Param *GetParent();
 
@@ -70,7 +70,7 @@ struct Param
     bool IsOpened() const;
 
     Form *GetForm();
-    
+
     KindParam::E GetKind() { return kind; }
 
     Viewer viewer;
@@ -98,14 +98,14 @@ struct Param
     static bool EFuncActive() { return true; }
 
     DParam *ToDouble();
-    IParam *ToInteger();    
+    IParam *ToInteger();
 
     pFuncBV     funcOfActive;  // Активен ли данный параметр
 
 protected:
-    
-    Form         *form;         // Форма, для которой зада этот параметр
-    Param        *parent;       // Если параметр вложенный, то здесь адрес родителя
+
+    Form *form;         // Форма, для которой зада этот параметр
+    Param *parent;       // Если параметр вложенный, то здесь адрес родителя
     KindParam::E  kind;
     pchar         names[2];
 };
@@ -146,7 +146,7 @@ struct DParam : public Param
     // Установить значение параметра и загрузить его в прибор
     bool SetAndLoadValue(double val);
     bool SetAndLoadValue(Value val);
-    
+
     // Возвращает true, если параметр имеет знак
     bool IsSigned() const { return (type == TypeDParam::Offset); }
 
@@ -174,10 +174,10 @@ struct DParam : public Param
     virtual Value Max() const { return Value(0); };
     virtual Value GetValue() const { return value; };
 
-    virtual Tuner *GetTuner()   { return &tuner; };
+    virtual Tuner *GetTuner() { return &tuner; };
 
     void SetValue(Value val) { value = val; }
-     
+
     TypeDParam::E GetType() const { return type; }
 
     virtual void StoreState();
@@ -244,13 +244,13 @@ struct IParam : public Param
 
     virtual void OnPressButtonTune();
 
-    virtual Tuner *GetTuner()            { return &tuner; }
+    virtual Tuner *GetTuner() { return &tuner; }
 
     virtual Value Min() const;
     virtual Value Max() const;
     virtual Value GetValue() const { return value; }
 
-    TypeIParam::E GetType()   { return type; }
+    TypeIParam::E GetType() { return type; }
 
     bool SetAndLoadValue(Value val);
 
@@ -316,11 +316,11 @@ struct CParam : public Param
     bool Exist() const { return this != &empty; }
 
 private:
-	TypeCParam::E  type;
+    TypeCParam::E  type;
     int            choice;                  // Текущий выбор. И выбор для режима запуска импульсных сигналов
     static int     choiceModeStartFree;     // Выбор режима запуска произвольных сигналов
-    pchar         *choices;                 // Идут так - 0(рус), 0(англ), 1(рус), 1(англ)...
-    
+    pchar *choices;                 // Идут так - 0(рус), 0(англ), 1(рус), 1(англ)...
+
     // Количество вариантов выбора
     int NumChoices() const;
 };
@@ -363,7 +363,7 @@ struct CMSParam : public Param
     bool Exist() const { return this != &empty; }
 
 private:
-    
+
     Param **params; // Здесь находятся дополнительные параметры в случае, если они требуются
     TypeCMSParam::E type;
 };
@@ -522,7 +522,7 @@ struct PModeStartStop : public CParam
 
 struct PManipulationEnabled : public CParam
 {
-    PManipulationEnabled(pchar *names) : 
+    PManipulationEnabled(pchar *names) :
         CParam(TypeCParam::ManipulationEnabled, Param::EFuncActive, "Манип", "Manip", names) { }
 
 };

@@ -493,11 +493,12 @@ Wave waves[Chan::Count] =
 };
 
 
-Form           *A::Impulse::form = &formImpulseA;
+Form          *A::Sine::form = &formSineA;
+Form          *A::Impulse::form = &formImpulseA;
+Form          *A::Packet::form = &formPacketImpulseA;
+PPeriodPacket *A::Packet::period_packet = &packetA_PacketPeriod;
 
-Form           *A::Packet::form = &formPacketImpulseA;
-PPeriodPacket  *A::Packet::period_packet = &packetA_PacketPeriod;
-
-Form           *B::Impulse::form = &formImpulseB;
-PPeriod        *B::Impulse::period = &impulseB_Period;
-PModeStart     *B::Impulse::mode_start = &impulseB_ModeStart;
+Form          *B::Sine::form = &formSineB;
+Form          *B::Impulse::form = &formImpulseB;
+PPeriod       *B::Impulse::period = &impulseB_Period;
+PModeStart    *B::Impulse::mode_start = &impulseB_ModeStart;

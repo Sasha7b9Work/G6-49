@@ -22,9 +22,14 @@ extern Wave waves[Chan::Count];
 
 namespace A
 {
-    namespace Impulse
+    namespace Sine
     {
         extern Form *form;
+    }
+
+    namespace Impulse
+    {
+        extern Form           *form;
         extern PModeStartStop *start_stop;
         extern PDelay         *delay;
         extern PModeStart     *mode_start;
@@ -33,7 +38,7 @@ namespace A
 
     namespace Packet
     {
-        extern Form *form;
+        extern Form          *form;
         extern PPeriodPacket *period_packet;
         extern PPeriod       *period_impulse;
         extern PDuration     *duration;
@@ -44,9 +49,14 @@ namespace A
 
 namespace B
 {
-    namespace Impulse
+    namespace Sine
     {
         extern Form *form;
+    }
+
+    namespace Impulse
+    {
+        extern Form       *form;
         extern PPeriod    *period;
         extern PDuration  *duration;
         extern PModeStart *mode_start;
