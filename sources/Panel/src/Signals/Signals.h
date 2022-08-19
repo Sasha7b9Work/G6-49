@@ -27,6 +27,26 @@ namespace A
         extern Form *form;
     }
 
+    namespace RampPlus
+    {
+        extern Form *form;
+    }
+
+    namespace RampMinus
+    {
+        extern Form *form;
+    }
+
+    namespace Triangle
+    {
+        extern Form *form;
+    }
+
+    namespace Meander
+    {
+        extern Form *form;
+    }
+
     namespace Impulse
     {
         extern Form           *form;
@@ -44,6 +64,11 @@ namespace A
         extern PDuration     *duration;
         extern IParam        *number;
     }
+
+    namespace Free
+    {
+        extern Form *form;
+    }
 };
 
 
@@ -54,11 +79,36 @@ namespace B
         extern Form *form;
     }
 
+    namespace RampPlus
+    {
+        extern Form *form;
+    }
+
+    namespace RampMinus
+    {
+        extern Form *form;
+    }
+
+    namespace Triangle
+    {
+        extern Form *form;
+    }
+
+    namespace Meander
+    {
+        extern Form *form;
+    }
+
     namespace Impulse
     {
         extern Form       *form;
         extern PPeriod    *period;
         extern PDuration  *duration;
         extern PModeStart *mode_start;
+    }
+
+    namespace Free
+    {
+        extern Form *form;
     }
 };

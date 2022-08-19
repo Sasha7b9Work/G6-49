@@ -250,7 +250,7 @@ static PPeriod       packetA_Period(FuncActive_PeriodPacketA, Value("200", Order
 static PDuration     packetA_Duration(Value("10", Order::Micro),  "Длит имп",
     "Dur imp");
 static IParam        packetA_PacketNumber(TypeIParam::PacketNumber, "Кол-во имп", "Count imp", Value("3", Order::One));
-static PPeriodPacket packetA_PacketPeriod(Value("0.1", Order::One));
+static PPeriodPacket packetA_PeriodPacket(Value("0.1", Order::One));
 static PAmplitudePic packetA_Amplitude;
 static POffset       packetA_Offset;
 static PPolarity     packetA_Polarity(namesPolarity);
@@ -259,13 +259,14 @@ static PModeStart    packetA_ModeStart(Param::EFuncActive, namesModeStartImpulse
 PPeriod *A::Packet::period_impulse = &packetA_Period;
 PDuration *A::Packet::duration = &packetA_Duration;
 IParam *A::Packet::number = &packetA_PacketNumber;
+PPeriodPacket *A::Packet::period_packet = &packetA_PeriodPacket;
 
 static Param *params_PacketA[] =
 {
     &packetA_Period,
     &packetA_Duration,
     &packetA_PacketNumber,
-    &packetA_PacketPeriod,
+    &packetA_PeriodPacket,
     &packetA_Amplitude,
     &packetA_Offset,
     &packetA_Polarity,
@@ -494,11 +495,20 @@ Wave waves[Chan::Count] =
 
 
 Form          *A::Sine::form = &formSineA;
+Form          *A::RampPlus::form = &formRampPlusA;
+Form          *A::RampMinus::form = &formRampMinusA;
+Form          *A::Triangle::form = &formTriangleA;
+Form          *A::Meander::form = &formMeanderA;
 Form          *A::Impulse::form = &formImpulseA;
 Form          *A::Packet::form = &formPacketImpulseA;
-PPeriodPacket *A::Packet::period_packet = &packetA_PacketPeriod;
+Form          *A::Free::form = &formFreeA;
 
 Form          *B::Sine::form = &formSineB;
+Form          *B::RampPlus::form = &formRampPlusB;
+Form          *B::RampMinus::form = &formRampMinusB;
+Form          *B::Triangle::form = &formTriangleB;
+Form          *B::Meander::form = &formMeanderB;
 Form          *B::Impulse::form = &formImpulseB;
 PPeriod       *B::Impulse::period = &impulseB_Period;
 PModeStart    *B::Impulse::mode_start = &impulseB_ModeStart;
+Form          *B::Free::form = &formFreeB;

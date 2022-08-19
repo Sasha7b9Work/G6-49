@@ -16,7 +16,19 @@ Value PFrequency::Min() const
     if (form == A::Sine::form || form == B::Sine::form)
     {
 
-    };
+    }
+    else if (form == A::RampPlus::form || form == B::RampPlus::form)
+    {
+
+    }
+    else if (form == A::RampMinus::form || form == B::RampMinus::form)
+    {
+
+    }
+    else if (form == A::Triangle::form || form == B::Triangle::form)
+    {
+
+    }
 
     return Value(0);
 }
