@@ -11,6 +11,9 @@ struct Key;
 struct Param;
 
 
+typedef bool (*pFuncActive)();
+
+
 struct SMinMax
 {
     SMinMax(bool val) : min(1), max(1), valid(val) { }
@@ -41,7 +44,7 @@ struct KindParam
 
 struct Param
 {
-    Param(KindParam::E k, pFuncBV funcActive, pchar nRU, pchar nEN);
+    Param(KindParam::E k, pFuncActive, pchar nRU, pchar nEN);
 
     virtual ~Param() { }
 
@@ -100,12 +103,12 @@ struct Param
     DParam *ToDouble();
     IParam *ToInteger();
 
-    pFuncBV     funcOfActive;  // Активен ли данный параметр
+    pFuncActive   funcOfActive;  // Активен ли данный параметр
 
 protected:
 
-    Form *form;         // Форма, для которой зада этот параметр
-    Param *parent;       // Если параметр вложенный, то здесь адрес родителя
+    Form         *form;         // Форма, для которой зада этот параметр
+    Param        *parent;       // Если параметр вложенный, то здесь адрес родителя
     KindParam::E  kind;
     pchar         names[2];
 };
@@ -137,7 +140,7 @@ struct DParam : public Param
     friend class Tuner;
     friend class TunerDisplay;
 
-    DParam(TypeDParam::E t, pFuncBV funcActive, pchar const nameRU, pchar const nameEN, const Value &);
+    DParam(TypeDParam::E t, pFuncActive, pchar const nameRU, pchar const nameEN, const Value &);
 
     DParam(const DParam &);
 
@@ -293,7 +296,7 @@ struct TypeCParam
 // Choice
 struct CParam : public Param
 {
-    CParam(TypeCParam::E t, pFuncBV funcActive, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
+    CParam(TypeCParam::E t, pFuncActive funcActive, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
         Param(KindParam::Choice, funcActive, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
 
     TypeCParam::E GetType() { return type; }
@@ -432,7 +435,7 @@ struct PFrequency : public DParam
 
 struct PTime : public DParam
 {
-    PTime(TypeDParam::E t, pFuncBV funcActive, pchar nameRU, pchar  const nameEN, const Value &value) :
+    PTime(TypeDParam::E t, pFuncActive funcActive, pchar nameRU, pchar  const nameEN, const Value &value) :
         DParam(t, funcActive, nameRU, nameEN, value) { }
 };
 
@@ -448,7 +451,7 @@ struct PPhase : public DParam
 
 struct PPeriod : public PTime
 {
-    PPeriod(pFuncBV funcActive, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
+    PPeriod(pFuncActive funcActive, const Value &value, pchar nameRU = "Период", pchar  const nameEN = "Period") :
         PTime(TypeDParam::Period, funcActive, nameRU, nameEN, value) { }
 
     static const Value min_impulse;
@@ -482,7 +485,7 @@ struct PDuration : public PTime
 
 struct PDelay : public PTime
 {
-    PDelay(pFuncBV funcActive, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") : PTime(TypeDParam::Delay, funcActive, nameRU, nameEN, value) { }
+    PDelay(pFuncActive funcActive, const Value &value, pchar nameRU = "Задержка", pchar nameEN = "Delay") : PTime(TypeDParam::Delay, funcActive, nameRU, nameEN, value) { }
 
     virtual Value Min() const;
     virtual Value Max() const;
@@ -510,13 +513,13 @@ struct PPeriodManipulation : public PTime
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
 struct PModeStart : public CParam
 {
-    PModeStart(pFuncBV funcActive, pchar *names) : CParam(TypeCParam::ModeStart, funcActive, "Запуск", "Start", names) { }
+    PModeStart(pFuncActive funcActive, pchar *names) : CParam(TypeCParam::ModeStart, funcActive, "Запуск", "Start", names) { }
 };
 
 
 struct PModeStartStop : public CParam
 {
-    PModeStartStop(pFuncBV funcActive, pchar *names) : CParam(TypeCParam::ModeStartStop, funcActive, "А-Старт,В-Стоп", "A-Start,B-Stop", names) { }
+    PModeStartStop(pFuncActive funcActive, pchar *names) : CParam(TypeCParam::ModeStartStop, funcActive, "А-Старт,В-Стоп", "A-Start,B-Stop", names) { }
 };
 
 

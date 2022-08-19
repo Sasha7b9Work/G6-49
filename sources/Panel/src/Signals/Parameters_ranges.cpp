@@ -13,17 +13,17 @@ SMinMax Param::ValueInRange() const
 
 Value PFrequency::Min() const
 {
-    if (form == A::Sine::form      || form == B::Sine::form ||
-        form == A::RampPlus::form  || form == B::RampPlus::form ||
-        form == A::RampMinus::form || form == B::RampMinus::form ||
-        form == A::Triangle::form  || form == B::Triangle::form ||
-        form == A::Free::form      || form == B::Free::form)
+    if (form == A::Sine::form || form == B::Sine::form)
     {
-
+        return Value("300", Order::Micro);
     }
-    else if (form == A::Meander::form || form == B::Meander::form)
+    else if (form == A::RampPlus::form  || form == B::RampPlus::form ||
+             form == A::RampMinus::form || form == B::RampMinus::form ||
+             form == A::Triangle::form  || form == B::Triangle::form ||
+             form == A::Free::form      || form == B::Free::form ||
+             form == A::Meander::form   || form == B::Meander::form)
     {
-
+        return Value("100", Order::Micro);
     }
 
     return Value(-1);
@@ -32,17 +32,17 @@ Value PFrequency::Min() const
 
 Value PFrequency::Max() const
 {
-    if (form == A::Sine::form      || form == B::Sine::form ||
-        form == A::RampPlus::form  || form == B::RampPlus::form ||
-        form == A::RampMinus::form || form == B::RampMinus::form ||
-        form == A::Triangle::form  || form == B::Triangle::form ||
-        form == A::Free::form      || form == B::Free::form)
+    if (form == A::Sine::form || form == B::Sine::form)
     {
-
+        return Value("100", Order::Mega);
     }
-    else if (form == A::Meander::form || form == B::Meander::form)
+    else if (form == A::RampPlus::form  || form == B::RampPlus::form ||
+             form == A::RampMinus::form || form == B::RampMinus::form ||
+             form == A::Triangle::form  || form == B::Triangle::form ||
+             form == A::Free::form      || form == B::Free::form ||
+             form == A::Meander::form   || form == B::Meander::form)
     {
-
+        return Value("10", Order::Mega);
     }
 
     return Value(1);
@@ -81,169 +81,33 @@ Value PPeriod::Max() const
 
 Value PAmplitudePic::Min() const
 {
-    if (form == A::Sine::form || form == B::Sine::form)
-    {
-
-    }
-    else if (form == A::RampPlus::form || form == B::RampPlus::form)
-    {
-
-    }
-    else if (form == A::RampMinus::form || form == B::RampMinus::form)
-    {
-
-    }
-    else if (form == A::Triangle::form || form == B::Triangle::form)
-    {
-
-    }
-    else if (form == A::Meander::form || form == B::Meander::form)
-    {
-
-    }
-    else if (form == A::Impulse::form || form == B::Impulse::form)
-    {
-
-    }
-    else if (form == A::Packet::form)
-    {
-
-    }
-    else if (form == A::Free::form || form == B::Free::form)
-    {
-
-    }
-
-    return Value(-1);
+    return Value(0);
 }
 
 
 Value PAmplitudePic::Max() const
 {
-    if (form == A::Sine::form || form == B::Sine::form)
-    {
-
-    }
-    else if (form == A::RampPlus::form || form == B::RampPlus::form)
-    {
-
-    }
-    else if (form == A::RampMinus::form || form == B::RampMinus::form)
-    {
-
-    }
-    else if (form == A::Triangle::form || form == B::Triangle::form)
-    {
-
-    }
-    else if (form == A::Meander::form || form == B::Meander::form)
-    {
-
-    }
-    else if (form == A::Impulse::form || form == B::Impulse::form)
-    {
-
-    }
-    else if (form == A::Packet::form)
-    {
-
-    }
-    else if (form == A::Free::form || form == B::Free::form)
-    {
-
-    }
-
-    return Value(1);
+    return Value(10);
 }
 
 
 Value POffset::Min() const
 {
-    if (form == A::Sine::form || form == B::Sine::form)
-    {
-
-    }
-    else if (form == A::RampPlus::form || form == B::RampPlus::form)
-    {
-
-    }
-    else if (form == A::RampMinus::form || form == B::RampMinus::form)
-    {
-
-    }
-    else if (form == A::Triangle::form || form == B::Triangle::form)
-    {
-
-    }
-    else if (form == A::Meander::form || form == B::Meander::form)
-    {
-
-    }
-    else if (form == A::Impulse::form || form == B::Impulse::form)
-    {
-
-    }
-    else if (form == A::Packet::form)
-    {
-
-    }
-    else if (form == A::Free::form || form == B::Free::form)
-    {
-
-    }
-
-    return Value(-1);
+    return Value(-5);
 }
 
 
 Value POffset::Max() const
 {
-    if (form == A::Sine::form || form == B::Sine::form)
-    {
-
-    }
-    else if (form == A::RampPlus::form || form == B::RampPlus::form)
-    {
-
-    }
-    else if (form == A::RampMinus::form || form == B::RampMinus::form)
-    {
-
-    }
-    else if (form == A::Triangle::form || form == B::Triangle::form)
-    {
-
-    }
-    else if (form == A::Meander::form || form == B::Meander::form)
-    {
-
-    }
-    else if (form == A::Impulse::form || form == B::Impulse::form)
-    {
-
-    }
-    else if (form == A::Packet::form)
-    {
-
-    }
-    else if (form == A::Free::form || form == B::Free::form)
-    {
-
-    }
-
-    return Value(1);
+    return Value(5);
 }
 
 
 Value PDuration::Min() const
 {
-    if (form == A::Impulse::form || form == B::Impulse::form)
+    if (form == A::Impulse::form || form == B::Impulse::form || form == A::Packet::form)
     {
-
-    }
-    else if (form == A::Packet::form)
-    {
-
+        return (impulse_clock->GetChoice() == 0) ? Value("10", Order::Nano) : Value("1", Order::Micro);
     }
 
     return Value(-1);
@@ -252,13 +116,9 @@ Value PDuration::Min() const
 
 Value PDuration::Max() const
 {
-    if (form == A::Impulse::form || form == B::Impulse::form)
+    if (form == A::Impulse::form || form == B::Impulse::form || form == A::Packet::form)
     {
-
-    }
-    else if (form == A::Packet::form)
-    {
-
+        return (impulse_clock->GetChoice() == 0) ? Value("40", Order::One) : Value("4", Order::Kilo);
     }
 
     return Value(1);
@@ -303,7 +163,7 @@ Value PDurationManipulation::Min() const
 {
     if (form == A::Sine::form || form == B::Sine::form)
     {
-
+        return Value("10", Order::Nano);
     }
 
     return Value(-1);
@@ -314,7 +174,7 @@ Value PDurationManipulation::Max() const
 {
     if (form == A::Sine::form || form == B::Sine::form)
     {
-
+        return Value("10", Order::One);
     }
 
     return Value(1);
@@ -325,7 +185,7 @@ Value PPeriodManipulation::Min() const
 {
     if (form == A::Sine::form || form == B::Sine::form)
     {
-
+        return Value("20", Order::Nano);
     }
 
     return Value(-1);
@@ -336,7 +196,7 @@ Value PPeriodManipulation::Max() const
 {
     if (form == A::Sine::form || form == B::Sine::form)
     {
-
+        return Value("10000", Order::One);
     }
 
     return Value(1);

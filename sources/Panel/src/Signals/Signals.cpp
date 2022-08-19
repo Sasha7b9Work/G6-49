@@ -222,6 +222,7 @@ PPeriod        *A::Impulse::period     = &impulseA_Period;
 PDelay         *A::Impulse::delay      = &impulseA_Delay;
 PModeStartStop *A::Impulse::start_stop = &impulseA_StartStop;
 PModeStart     *A::Impulse::mode_start = &impulseA_ModeStart;
+PClockImpulse  *impulse_clock = &impulse_Clock;
 
 static Param *params_ImpulseA[] =
 {
