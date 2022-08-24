@@ -265,7 +265,6 @@ void Form::TuneGenerator()
     }
     else
     {
-        SendParameterToGenerator(TypeDParam::Frequency);
         SendParameterToGenerator(TypeDParam::AmplitudePic);
         SendParameterToGenerator(TypeDParam::Offset);
         SendParameterToGenerator(TypeDParam::Period);
@@ -273,6 +272,7 @@ void Form::TuneGenerator()
         SendParameterToGenerator(TypeIParam::PacketNumber);
         SendParameterToGenerator(TypeDParam::PeriodPacket);
         SendParameterToGenerator(TypeCParam::Polarity);
+        SendParameterToGenerator(TypeDParam::Frequency);
     }
 }
 

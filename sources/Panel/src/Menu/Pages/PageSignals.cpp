@@ -90,9 +90,9 @@ DEF_CHOICE_2( cChannel,                                                         
 
 static void ChangedForm()
 {
-    ChoiceBase *choice = (ChoiceBase *)pageSignals.items[1];      // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала
+    ChoiceBase *choice = (ChoiceBase *)pageSignals.items[1];        // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала
 
-    CURRENT_WAVE.SetIndexForm(choice->CurrentIndex());                              // Установить для текущего сигнала индекс формы из ChoiceBase
+    CURRENT_WAVE.SetIndexForm(choice->CurrentIndex());              // Установить для текущего сигнала индекс формы из ChoiceBase
 
     cParameters.form = CURRENT_FORM;
 
