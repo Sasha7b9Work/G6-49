@@ -414,6 +414,9 @@ struct POffset : public PVoltage
 {
     POffset(const Value &value = Value("0", Order::One)) : PVoltage(TypeDParam::Offset, "Смещение", "Offset", value) { }
 
+    // Возвращает возможный максимум без учёта знака
+    virtual Value AbsLimit() const;
+
     virtual Value Min() const;
     virtual Value Max() const;
 };

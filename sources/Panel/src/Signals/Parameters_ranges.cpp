@@ -87,19 +87,77 @@ Value PAmplitudePic::Min() const
 
 Value PAmplitudePic::Max() const
 {
-    return Value(10);
+    // Aмпл == 0В | offset[0 ... 5]
+    // Ампл <= 1В | offset[0 ... 2.5]; ampl / 2 + fabs(см) <= 2.5
+    // Ампл > 1В  | offset[0 ... 5];   ampl / 2 + fabs(см) <= 5
+
+    DParam &param_ampl = form->FindParameter(TypeDParam::AmplitudePic);
+    Value amplitude = param_ampl.GetValue();
+
+    if (amplitude.Abs() == 0)
+    {
+        return Value(10);
+    }
+
+    Value result(5);
+
+    if (amplitude.ToDouble() <= 1.0)
+    {
+        result.FromUnits(2, 500);
+    }
+
+    Value offset = form->FindParameter(TypeDParam::Offset).GetValue();
+    result.Sub(offset);
+    result.Mul(2);
+
+    return result;
+}
+
+
+Value POffset::AbsLimit() const
+{
+    // Ampl = 0В  | [0 ... 5]
+    // Ampl <= 1В | [0 ... 2.5], ampl / 2 + fabs(см) <= 2.5
+    // Ampl > 1В  | [0 ... 5],   ampl / 2 + fabs(см) <= 5
+
+    Value amplitude = form->FindParameter(TypeDParam::AmplitudePic).GetValue();
+
+    Value result(5);
+
+    if (amplitude.Abs() == 0)
+    {
+        result.FromUnits(5);
+    }
+    else if (amplitude.ToDouble() <= 1.0)
+    {
+        result.Div(2);
+    }
+
+    amplitude.Div(2);
+
+    result.Sub(amplitude);
+
+    return result;
 }
 
 
 Value POffset::Min() const
 {
-    return Value(-5);
+    Value result = AbsLimit();
+
+    result.SetSign(-1);
+
+    return result;
 }
 
 
 Value POffset::Max() const
 {
-    return Value(5);
+    Value result = AbsLimit();
+
+    result.SetSign(1);
+
+    return result;
 }
 
 
@@ -270,78 +328,3 @@ Value IParam::Max() const
 
     return Value(1);
 }
-
-
-/*
-SMinMax POffset::InRange(Form *form)
-{
-    // Ампл == 0  | [0 ... 5]
-    // Ампл <= 1В | [0 ... 2.5], ampl / 2 + fabs(см) <= 2.5
-    // Ампл > 1В  | [0 ... 5],   ампл / 2 + fabs(см) <= 5
-
-    Value amplitude = form->FindParameter(TypeDParam::AmplitudePic)->GetValue();
-    DParam *param_offset = form->FindParameter(TypeDParam::Offset);
-
-    SMinMax result(false);
-    result.max = param_offset->Max();
-
-    if (amplitude.Abs() == 0)
-    {
-        result.max = param_offset->Max();
-    }
-    else if (amplitude.ToDouble() <= 1.0F)
-    {
-        result.max.Div(2);
-    }
-
-    amplitude.Div(2);
-
-    result.max.Sub(amplitude);
-
-    result.min = result.max;
-    result.min.SetSign(-1);
-
-    Value offset = param_offset->GetValue();
-
-    result.valid = (offset <= result.max) && (offset >= result.min);
-
-    return result;
-}
-
-
-SMinMax PAmplitudePic::InRange(Form *form)
-{
-    // Ампл == 0  | offset[0 ... 5]
-    // Ампл <= 1В | offset[0 ... 2.5]; ampl / 2 + fabs(см) <= 2.5;
-    // Ампл > 1В  | offset[0 ... 5];   ампл / 2 + fabs(см) <= 5
-
-    SMinMax result(false);
-    result.min = Value(0);
-
-    DParam *param_ampl = form->FindParameter(TypeDParam::AmplitudePic);
-    Value amplitude = param_ampl->GetValue();
-
-    if (amplitude.Abs() == 0)
-    {
-        result.max = Value(10);
-        result.valid = true;
-    }
-    else
-    {
-        result.max.FromUnits(5);
-        if (amplitude.ToDouble() <= 1.0)
-        {
-            result.max.FromUnits(2, 500);
-        }
-
-        Value offset = form->FindParameter(TypeDParam::Offset)->GetValue();
-
-        result.max.Sub(offset);
-        result.max.Mul(2);
-
-        result.valid = (amplitude <= result.max);
-    }
-
-    return result;
-}
-*/
