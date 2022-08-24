@@ -6,7 +6,7 @@ if %1==panel   ( call :LOAD Panel   & call load.bat loaders & goto EXIT )
 if %1==dloader ( call :LOAD DLoader & goto EXIT )
 if %1==ploader ( call :LOAD PLoader & goto EXIT )
 if %1==loaders ( call load.bat ploader & call load.bat dloader & goto EXIT )
-if %1==all     ( call :LOAD Device & call :LOAD Panel & call :LOAD PLoader & call :LOAD DLoader & goto EXIT )
+if %1==all     ( call :LOAD Device & call :LOAD Panel & call :LOAD DLoader & call :LOAD PLoader & goto EXIT )
 
 goto HINT
 
