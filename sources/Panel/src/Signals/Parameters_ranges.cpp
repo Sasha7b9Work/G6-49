@@ -53,11 +53,11 @@ Value PPeriod::Min() const
 {
     if (form == A::Impulse::form || form == B::Impulse::form)
     {
-
+        return Value("20", Order::Nano);
     }
     else if (form == A::Packet::form)
     {
-
+        return Value("20", Order::Nano);
     }
 
     return Value(-1);
@@ -68,11 +68,11 @@ Value PPeriod::Max() const
 {
     if (form == A::Impulse::form || form == B::Impulse::form)
     {
-
+        return Value("100", Order::Kilo);
     }
     else if (form == A::Packet::form)
     {
-
+        return Value("100", Order::Kilo);
     }
 
     return Value(1);
@@ -295,7 +295,7 @@ Value PPeriodPacket::Max() const
 {
     if (form == A::Packet::form)
     {
-
+        return Value("100", Order::Kilo);
     }
 
     return Value(1);
@@ -308,7 +308,7 @@ Value IParam::Min() const
     {
         if (form == A::Packet::form)
         {
-
+            Value("1", Order::One);
         }
     }
 
@@ -322,7 +322,7 @@ Value IParam::Max() const
     {
         if (form == A::Packet::form)
         {
-
+            return Value("1000000000", Order::One);
         }
     }
 
