@@ -199,7 +199,14 @@ Value PDelay::Min() const
 {
     if (form == A::Impulse::form)
     {
-
+        if (impulse_clock->GetChoice() == 0)
+        {
+            return Value("10", Order::Nano);
+        }
+        else
+        {
+            return Value("1", Order::Micro);
+        }
     }
 
     return Value(-1);
@@ -210,7 +217,7 @@ Value PDelay::Max() const
 {
     if (form == A::Impulse::form)
     {
-
+        return A::Impulse::period->GetValue();
     }
 
     return Value(0);
