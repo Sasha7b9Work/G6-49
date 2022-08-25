@@ -90,7 +90,7 @@ namespace FPGA
     };
 
     // Тактовая частота формирователя импульсов
-    namespace ClockImpulse
+    struct ClockImpulse
     {
         enum E
         {
@@ -98,9 +98,12 @@ namespace FPGA
             _1MHz
         };
 
-        void Set(E);
+        static void Set(E);
 
-        E Get();
+        static E Get();
+
+    private:
+        static E value;
     };
 
 
