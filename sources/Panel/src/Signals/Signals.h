@@ -56,6 +56,7 @@ namespace A
         extern PModeStartStop *start_stop;
         extern PDelay         *delay;
         extern PModeStart     *mode_start;
+        extern PModeStartStop *mode_start_stop;
         extern PPeriod        *period;
     }
 

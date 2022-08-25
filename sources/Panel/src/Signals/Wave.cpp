@@ -265,14 +265,21 @@ void Form::TuneGenerator()
     }
     else
     {
-        SendParameterToGenerator(TypeDParam::AmplitudePic);
-        SendParameterToGenerator(TypeDParam::Offset);
-        SendParameterToGenerator(TypeDParam::Period);
-        SendParameterToGenerator(TypeDParam::Duration);
-        SendParameterToGenerator(TypeIParam::PacketNumber);
-        SendParameterToGenerator(TypeDParam::PeriodPacket);
-        SendParameterToGenerator(TypeCParam::Polarity);
-        SendParameterToGenerator(TypeDParam::Frequency);
+        if (CURRENT_CHANNEL.IsB() && FORM_A == A::Impulse::form && FORM_B == B::Impulse::form && A::Impulse::mode_start_stop->GetChoice() == 1)
+        {
+            // При включённом режиме старт/стоп при переключении на второй канал ничего делать не нужно
+        }
+        else
+        {
+            SendParameterToGenerator(TypeDParam::AmplitudePic);
+            SendParameterToGenerator(TypeDParam::Offset);
+            SendParameterToGenerator(TypeDParam::Period);
+            SendParameterToGenerator(TypeDParam::Duration);
+            SendParameterToGenerator(TypeIParam::PacketNumber);
+            SendParameterToGenerator(TypeDParam::PeriodPacket);
+            SendParameterToGenerator(TypeCParam::Polarity);
+            SendParameterToGenerator(TypeDParam::Frequency);
+        }
     }
 }
 
