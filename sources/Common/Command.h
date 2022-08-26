@@ -23,7 +23,7 @@ struct Command
              SetDuration,
              SetPhase,
              ModeDebug,                  // Установка отладочного режиме - когда идут непрерывные засылки в FPGA
-             SetDelay,                   // Задержка
+             SetDelayStartStop,          // Задержка
           // 0             1            2...9
           // WriteRegister NameRegister Value64
              WriteRegister,              // Занести значение в регистр

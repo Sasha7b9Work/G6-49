@@ -99,7 +99,7 @@ void DHandlers::Processing(SimpleMessage *msg)
     case Command::SetDuration:                  func = SetDuration;                  break;
     case Command::SetPhase:                     func = SetPhase;                     break;
     case Command::ModeDebug:                    func = ModeDebug;                    break;
-    case Command::SetDelay:                     func = SetDelayStartStop;            break;
+    case Command::SetDelayStartStop:            func = SetDelayStartStop;            break;
     case Command::WriteRegister:                func = WriteRegister;                break;
     case Command::SetManipulation:              func = SetManipulation;              break;
     case Command::SetManipulationDuration:      func = SetManipulationDuration;      break;

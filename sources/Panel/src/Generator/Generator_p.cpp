@@ -209,7 +209,7 @@ void PGenerator::SetParameterDouble(DParam &param)
         Command::SetOffset,
         Command::SetDuration,
         Command::SetPhase,
-        Command::SetDelay,
+        Command::SetDelayStartStop,
         Command::SetManipulationDuration,
         Command::SetManipulationPeriod,
         Command::SetPacketPeriod
