@@ -45,6 +45,10 @@ namespace FPGA
     // Возвращает указатель на точки произвольного сигнала (программно определёного)
     uint8 *DataDDS(const Chan &);
 
+    extern Value periodImpulse[Chan::Count];
+    extern Value durationImpulse[Chan::Count];
+    extern Value delayStartStop;                // Задержка междк каналами в режиме А-Старт/В-Стоп
+
     namespace PacketImpulse
     {
         // Устанавливает число импульсов в пачке
@@ -99,7 +103,7 @@ namespace FPGA
             _1MHz
         };
 
-        static void Set(E v) { value = v; };
+        static void Set(E v);
         static E Get() { return value; };
     private:
         static E value;

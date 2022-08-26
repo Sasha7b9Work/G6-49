@@ -106,6 +106,10 @@ namespace FPGA
     // Режим СтартА/СтопВ - вкл/откл
     static StartStopMode::E startStopMode = StartStopMode::Disable;
 
+    Value periodImpulse[Chan::Count] = { Value("100", Order::Micro), Value("100", Order::Micro) };
+    Value durationImpulse[Chan::Count] = { Value("1", Order::Micro), Value("1", Order::Micro) };
+    Value delayStartStop = Value("1", Order::Micro);
+
     namespace PacketImpulse
     {
         Value PacketImpulse::periodImpulse("0", Order::One);
@@ -334,7 +338,14 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
 
 void FPGA::RecalculateImpulseParameters()
 {
-    PacketImpulse::SetPeriodPacket(PacketImpulse::periodPacket);
+    if (startStopMode == StartStopMode::Enable)
+    {
+
+    }
+    else
+    {
+        PacketImpulse::SetPeriodPacket(PacketImpulse::periodPacket);
+    }
 }
 
 
@@ -362,6 +373,8 @@ void FPGA::SetPeriodImpulse(const Chan &ch, const Value &period)
 {
     // Для пакетного и одиночного импульсных режимов период задаётся здесь. Поэтому сохраняем значение периода импульсов, чтобы использовать его
     // в пакетном режиме при необходимости
+
+    periodImpulse[ch] = period;
 
     PacketImpulse::periodImpulse = period;
 
@@ -674,6 +687,25 @@ void FPGA::TransformCodeToData(const uint8 codeIn[FPGA::NUM_POINTS * 2], float d
 
         dataOut[i] = data * sign;
     }
+}
+
+
+void FPGA::ClockImpulse::Set(ClockImpulse::E clock)
+{
+    value = clock;
+
+    uint64 reg = Register::Read(Register::_0_Control);
+
+    if (value == _100MHz)
+    {
+        _CLEAR_BIT(reg, RG0::_4_ClockImpulse);
+    }
+    else
+    {
+        _SET_BIT(reg, RG0::_4_ClockImpulse);
+    }
+
+    Register::Write(Register::_0_Control, reg);
 }
 
 
