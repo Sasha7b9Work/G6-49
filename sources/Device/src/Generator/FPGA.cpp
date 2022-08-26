@@ -110,6 +110,7 @@ namespace FPGA
     {
         Value PacketImpulse::periodImpulse("0", Order::One);
         Value PacketImpulse::durationImpulse("0", Order::One);
+        Value PacketImpulse::periodPacket("10", Order::Micro);
     }
 
     namespace ModeWork
@@ -333,13 +334,17 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
 
 void FPGA::RecalculateImpulseParameters()
 {
-
+    PacketImpulse::SetPeriodPacket(PacketImpulse::periodPacket);
 }
 
 
-void FPGA::PacketImpulse::SetPeriodPacket(Value period)
+void FPGA::PacketImpulse::SetPeriodPacket(const Value &period)
 {
-    uint64 value = period.ToUINT64() / 10 - 2;
+    periodPacket = period;
+
+    uint64 value = (ClockImpulse::Get() == ClockImpulse::_100MHz) ?
+        (period.ToUINT64() / 10 - 2) :
+        (period.ToUINT64() / 1000);
 
     Register::Write(Register::_5_PeriodImpulseA, value);
 }

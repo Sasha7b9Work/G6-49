@@ -51,11 +51,11 @@ namespace FPGA
         void SetNumberImpules(uint n);
 
         // Устанавливает период следования пачки
-        void SetPeriodPacket(Value period);
+        void SetPeriodPacket(const Value &);
 
         extern Value periodImpulse;
-
         extern Value durationImpulse;
+        extern Value periodPacket;
     };
 
     namespace ModeWork
