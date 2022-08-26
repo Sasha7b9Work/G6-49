@@ -75,7 +75,7 @@ namespace FPGA
     };
 
     // Тактовая частота формирователя произвольных сигналов
-    namespace ClockAD992
+    struct ClockAD992
     {
         enum E
         {
@@ -83,9 +83,13 @@ namespace FPGA
             _1MHz
         };
 
-        void Set(E);
+        static void Set(E);
 
-        E Get();
+        static E Get();
+
+    private:
+
+        static E value;
     };
 
     // Опорная частота для формирования импульов и пакетов импульсов. Для длительности импульса [0 сек ... 40 сек]

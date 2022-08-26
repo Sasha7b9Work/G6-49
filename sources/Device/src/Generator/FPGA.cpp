@@ -118,10 +118,7 @@ namespace FPGA
         static E value[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
     }
 
-    namespace ClockAD992
-    {
-        static E value = _100MHz;
-    }
+    ClockAD992::E ClockAD992::value = ClockAD992::_100MHz;
 
     uint64 Register::values[Count] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
@@ -445,7 +442,7 @@ void FPGA::WriteControlRegister()
             break;
     }
 
-    if(ClockAD992::value == ClockAD992::_1MHz)
+    if(ClockAD992::Get() == ClockAD992::_1MHz)
     {
         Bit::Set(data, RG0::_7_ClockAD9952);
     }
