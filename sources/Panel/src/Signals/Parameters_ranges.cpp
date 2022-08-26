@@ -176,7 +176,7 @@ Value PDuration::Max() const
 {
     if (form == A::Impulse::form || form == B::Impulse::form || form == A::Packet::form)
     {
-        return Value("40", Order::One);
+        return Value("100", Order::Kilo);
     }
 
     return Value(1);

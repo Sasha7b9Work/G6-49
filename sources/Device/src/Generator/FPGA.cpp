@@ -96,6 +96,10 @@ namespace FPGA
     // ¬озвращает true, если по каналу ch работает DDS
     static bool InModeDDS(const Chan &);
 
+    // ≈сли при установке длительности импульса нужно измен€ть опорную частоту - пересчитать все остальные значени€:
+    // период импульса, период пакета, задержка между каналами
+    static void RecalculateImpulseParameters();
+
     // –ежим запуска дл€ произвольного сигнала (0) и дл€ импульсного сигнала (1)
     static StartMode::E startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
 
@@ -123,6 +127,8 @@ namespace FPGA
     {
         static uint64 values[Count] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     }
+
+    ClockImpulse::E ClockImpulse::value = ClockImpulse::_100MHz;
 }
 
 
@@ -304,9 +310,30 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
         reg = Register::_8_DurationImpulseB;
     }
 
-    uint64 value = duration.ToUINT64() / 10;
+    if (duration > Value(40) && ClockImpulse::Get() == ClockImpulse::_100MHz)
+    {
+        ClockImpulse::Set(ClockImpulse::_1MHz);
+
+        RecalculateImpulseParameters();
+    }
+    else if (duration <= Value(40) && ClockImpulse::Get() == ClockImpulse::_1MHz)
+    {
+        ClockImpulse::Set(ClockImpulse::_100MHz);
+
+        RecalculateImpulseParameters();
+    }
+
+    uint64 value = (ClockImpulse::Get() == ClockImpulse::_100MHz) ?
+        (duration.ToUINT64() / 10) :
+        (duration.ToUINT64() / 1000);
 
     Register::Write(reg, value);
+}
+
+
+void FPGA::RecalculateImpulseParameters()
+{
+
 }
 
 
