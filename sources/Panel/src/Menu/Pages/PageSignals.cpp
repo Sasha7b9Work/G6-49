@@ -155,29 +155,11 @@ void PageSignals::OnChanged_Form(bool active)
             }
         }
     }
-    else
-    {
-        if (FORM_A == A::Impulse::form && FORM_B == B::Impulse::form)
-        {
-            if (A::Impulse::start_stop->GetChoice() == 1)
-            {
-                Display::Warnings::Center::_Show("Îòêëþ÷èòå ðåæèì À-ÑÒÀÐÒ,Â-ÑÒÎÏ", "Disable the A-START,B-STOP mode");
-            }
-        }
-    }
 }
 
 
 static bool IsActive_Form()
 {
-    if (FORM_A->Is(TypeForm::Impulse) && FORM_B->Is(TypeForm::Impulse))
-    {
-        if (A::Impulse::start_stop->GetChoice() == 1)
-        {
-            return false;
-        }
-    }
-
     return true;
 }
 
