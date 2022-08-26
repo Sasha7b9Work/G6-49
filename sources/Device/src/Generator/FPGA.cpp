@@ -98,7 +98,7 @@ namespace FPGA
 
     // ≈сли при установке длительности импульса нужно измен€ть опорную частоту - пересчитать все остальные значени€:
     // период импульса, период пакета, задержка между каналами
-    static void RecalculateImpulseParameters();
+    static void RecalculateImpulseRegisters();
 
     // –ежим запуска дл€ произвольного сигнала (0) и дл€ импульсного сигнала (1)
     static StartMode::E startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
@@ -293,9 +293,12 @@ void FPGA::SetFrequency(const Chan &ch)
 }
 
 
-void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
+void FPGA::SetDurationImpulse(const Chan &ch, const Value &_duration)
 {
-    PacketImpulse::durationImpulse = duration;
+    static Value duration[Chan::Count] = { Value("1", Order::Micro), Value("1", Order::Micro) };
+    duration[ch] = _duration;
+
+    PacketImpulse::durationImpulse = _duration;
 
     Register::E reg = ch.IsA() ? Register::_6_DurationImpulseA : Register::_8_DurationImpulseB;
 
@@ -304,29 +307,32 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
         reg = Register::_8_DurationImpulseB;
     }
 
-    if (duration > Value(40) && ClockImpulse::Get() == ClockImpulse::_100MHz)
+    if ((duration[ChA] > Value(40) || duration[ChB] > Value(40)) &&
+        ClockImpulse::Get() == ClockImpulse::_100MHz)
     {
         ClockImpulse::Set(ClockImpulse::_1MHz);
 
-        RecalculateImpulseParameters();
+        RecalculateImpulseRegisters();
     }
-    else if (duration <= Value(40) && ClockImpulse::Get() == ClockImpulse::_1MHz)
+    else if ((duration[ChA] <= Value(40) && duration[ChB] <= Value(40)) &&
+        ClockImpulse::Get() == ClockImpulse::_1MHz)
     {
         ClockImpulse::Set(ClockImpulse::_100MHz);
 
-        RecalculateImpulseParameters();
+        RecalculateImpulseRegisters();
     }
 
     uint64 value = (ClockImpulse::Get() == ClockImpulse::_100MHz) ?
-        (duration.ToUINT64() / 10) :
-        (duration.ToUINT64() / 1000);
+        (_duration.ToUINT64() / 10) :
+        (_duration.ToUINT64() / 1000);
 
     Register::Write(reg, value);
 }
 
 
-void FPGA::RecalculateImpulseParameters()
+void FPGA::RecalculateImpulseRegisters()
 {
+
 }
 
 
