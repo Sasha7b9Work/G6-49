@@ -103,6 +103,8 @@ namespace FPGA
         };
 
         static void Set(E v);
+        static bool Is1MHz() { return value == _1MHz; }
+        static bool Is100MHz() { return value == _100MHz; }
         static E Get() { return value; };
     private:
         static E value;

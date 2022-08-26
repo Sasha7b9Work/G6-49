@@ -97,8 +97,9 @@ namespace FPGA
     static bool InModeDDS(const Chan &);
 
     // Если при установке длительности импульса нужно изменять опорную частоту - пересчитать все остальные значения:
-    // период импульса, период пакета, задержка между каналами
-    static void RecalculateImpulseRegisters();
+    // период импульса, период пакета, задержка между каналами.
+    // Пересчёт производится в пересчёте на то, что опорная частота раньше была не clock, а теперь стала clock
+    static void RecalculateImpulseRegistersTo(ClockImpulse::E clock);
 
     // Режим запуска для произвольного сигнала (0) и для импульсного сигнала (1)
     static StartMode::E startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
@@ -308,18 +309,18 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &_duration)
     }
 
     if ((duration[ChA] > Value(40) || duration[ChB] > Value(40)) &&
-        ClockImpulse::Get() == ClockImpulse::_100MHz)
+        ClockImpulse::Is100MHz())
     {
         ClockImpulse::Set(ClockImpulse::_1MHz);
 
-        RecalculateImpulseRegisters();
+        RecalculateImpulseRegistersTo(ClockImpulse::_1MHz);
     }
     else if ((duration[ChA] <= Value(40) && duration[ChB] <= Value(40)) &&
-        ClockImpulse::Get() == ClockImpulse::_1MHz)
+        ClockImpulse::Is1MHz())
     {
         ClockImpulse::Set(ClockImpulse::_100MHz);
 
-        RecalculateImpulseRegisters();
+        RecalculateImpulseRegistersTo(ClockImpulse::_100MHz);
     }
 
     uint64 value = (ClockImpulse::Get() == ClockImpulse::_100MHz) ?
@@ -330,9 +331,34 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &_duration)
 }
 
 
-void FPGA::RecalculateImpulseRegisters()
+void FPGA::RecalculateImpulseRegistersTo(ClockImpulse::E clock)
 {
+    static const Register::E registers[4] =
+    {
+        Register::_5_PeriodImpulseA,
+        Register::_6_DurationImpulseA,
+        Register::_7_PeriodImpulseB,
+        Register::_8_DurationImpulseB
+    };
 
+    if (clock == ClockImpulse::_1MHz)       // Было 100 МГц, нужно уменьшить все значения в 100 раз
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            uint64 value = Register::Read(registers[i]);
+            value /= 100;
+            Register::Write(registers[i], value);
+        }
+    }
+    else                                    // Был 1 МГц, нужно увеличить все значения в 100 раз
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            uint64 value = Register::Read(registers[i]);
+            value *= 100;
+            Register::Write(registers[i], value);
+        }
+    }
 }
 
 
