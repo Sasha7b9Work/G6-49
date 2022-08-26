@@ -481,15 +481,6 @@ void CParam::NextChoice()
         PGenerator::LoadStartMode(form->GetWave()->GetChannel(), form->IsDDS() ? 0 : 1, GetChoice());
         PGenerator::TuneChannel(form->GetWave()->GetChannel());
     }
-    else if (type == TypeCParam::ClockImpulse)
-    {
-        Math::CircleIncrease(&choice, 0, NumChoices() - 1);
-
-        Message::SetClockImpulse(GetChoice()).Transmit();
-
-        Display::Warnings::Center::_Show2Strings(String("100ћ√ц - длит./период 10нс...40сек"),     String("1ћ√ц - длит./период 1мкс...4000сек"),
-                                                String("100MHz - dur./period from 10ns...40sec"), String("1MHz - dur. / period 1us...4000sec"));
-    }
     else
     {
         Math::CircleIncrease(&choice, 0, NumChoices() - 1);

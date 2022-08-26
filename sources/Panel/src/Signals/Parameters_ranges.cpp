@@ -165,7 +165,7 @@ Value PDuration::Min() const
 {
     if (form == A::Impulse::form || form == B::Impulse::form || form == A::Packet::form)
     {
-        return (impulse_clock->GetChoice() == 0) ? Value("10", Order::Nano) : Value("1", Order::Micro);
+        return Value("10", Order::Nano);
     }
 
     return Value(-1);
@@ -176,7 +176,7 @@ Value PDuration::Max() const
 {
     if (form == A::Impulse::form || form == B::Impulse::form || form == A::Packet::form)
     {
-        return (impulse_clock->GetChoice() == 0) ? Value("40", Order::One) : Value("4", Order::Kilo);
+        return Value("40", Order::One);
     }
 
     return Value(1);
@@ -199,14 +199,7 @@ Value PDelay::Min() const
 {
     if (form == A::Impulse::form)
     {
-        if (impulse_clock->GetChoice() == 0)
-        {
-            return Value("10", Order::Nano);
-        }
-        else
-        {
-            return Value("1", Order::Micro);
-        }
+        return Value("10", Order::Nano);
     }
 
     return Value(-1);

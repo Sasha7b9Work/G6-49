@@ -89,14 +89,6 @@ static pchar namesModeStartStopImpulse[] =  // Включение режима "А-Старт,В-Стоп"
 };
 
 
-static pchar namesClockImpulse[] =
-{
-    "100 МГц", "100 MHz",
-    "1 МГц", "1 MHz",
-    nullptr
-};
-
-
 static PFrequency    rampPlusA_Frequency;
 static PAmplitudePic rampPlusA_Amplitude;
 static POffset       rampPlusA_Offset;
@@ -214,7 +206,6 @@ static PAmplitudePic  impulseA_Amplitude;
 static POffset        impulseA_Offset;
 static PPolarity      impulseA_Polarity(namesPolarity);
 static PModeStart     impulseA_ModeStart(Param::EFuncActive, namesModeStartImpulse);
-static PClockImpulse  impulse_Clock(namesClockImpulse);
 static PModeStartStop impulseA_StartStop(FuncActive_ModeStartStopAndDelayImpulseA, namesModeStartStopImpulse);
 static PDelay         impulseA_Delay(FuncActive_ModeStartStopAndDelayImpulseA, Value("100", Order::Micro));
 
@@ -223,7 +214,6 @@ PDelay         *A::Impulse::delay           = &impulseA_Delay;
 PModeStartStop *A::Impulse::start_stop      = &impulseA_StartStop;
 PModeStart     *A::Impulse::mode_start      = &impulseA_ModeStart;
 PModeStartStop *A::Impulse::mode_start_stop = &impulseA_StartStop;
-PClockImpulse  *impulse_clock               = &impulse_Clock;
 
 static Param *params_ImpulseA[] =
 {
@@ -233,7 +223,6 @@ static Param *params_ImpulseA[] =
     &impulseA_Offset,
     &impulseA_Polarity,
     &impulseA_ModeStart,
-    &impulse_Clock,
     &impulseA_StartStop,
     &impulseA_Delay,
     nullptr
@@ -273,7 +262,6 @@ static Param *params_PacketA[] =
     &packetA_Offset,
     &packetA_Polarity,
     &packetA_ModeStart,
-    &impulse_Clock,
     nullptr
 };
 
@@ -468,7 +456,6 @@ static Param *params_ImpulseB[] =
     &impulseB_Offset,
     &impulseB_Polarity,
     &impulseB_ModeStart,
-    &impulse_Clock,
     nullptr
 };
 

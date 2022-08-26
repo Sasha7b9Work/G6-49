@@ -89,24 +89,6 @@ namespace FPGA
         E Get();
     };
 
-    // Тактовая частота формирователя импульсов
-    struct ClockImpulse
-    {
-        enum E
-        {
-            _100MHz,
-            _1MHz
-        };
-
-        static void Set(E);
-
-        static E Get();
-
-    private:
-        static E value;
-    };
-
-
     namespace Register
     {
         // Регистры ПЛИС

@@ -456,12 +456,6 @@ Message::SetStartStopMode::SetStartStopMode(int mode) : SimpleMessage(2, Command
 }
 
 
-Message::SetClockImpulse::SetClockImpulse(int clock) : SimpleMessage(2, Command::SetClockImpulse)
-{
-    PutUINT8((uint8)clock);
-}
-
-
 Message::WriteRegister::WriteRegister(uint8 reg, uint64 data) : SimpleMessage(10, Command::WriteRegister)
 {
     PutUINT8(reg);

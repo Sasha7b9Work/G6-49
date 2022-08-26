@@ -20,9 +20,6 @@
 extern Wave waves[Chan::Count];
 
 
-extern PClockImpulse *impulse_clock;
-
-
 namespace A
 {
     namespace Sine

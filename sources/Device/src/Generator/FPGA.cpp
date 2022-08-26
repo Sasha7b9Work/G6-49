@@ -123,8 +123,6 @@ namespace FPGA
     {
         static uint64 values[Count] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     }
-
-    ClockImpulse::E ClockImpulse::value = _100MHz;
 }
 
 
@@ -306,9 +304,7 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
         reg = Register::_8_DurationImpulseB;
     }
 
-    uint64 value = (FPGA::ClockImpulse::Get() == FPGA::ClockImpulse::_100MHz) ?
-        (duration.ToUINT64() / 10) :
-        (duration.ToUINT64() / 1000);
+    uint64 value = duration.ToUINT64() / 10;
 
     Register::Write(reg, value);
 }
@@ -316,9 +312,7 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
 
 void FPGA::PacketImpulse::SetPeriodPacket(Value period)
 {
-    uint64 value = (FPGA::ClockImpulse::Get() == FPGA::ClockImpulse::_100MHz) ?
-        (period.ToUINT64() / 10 - 2) :
-        (period.ToUINT64() / 1000);
+    uint64 value = period.ToUINT64() / 10 - 2;
 
     Register::Write(Register::_5_PeriodImpulseA, value);
 }
@@ -346,9 +340,7 @@ void FPGA::SetPeriodImpulse(const Chan &ch, const Value &period)
         reg = Register::_7_PeriodImpulseB;
     }
 
-    uint64 value = (FPGA::ClockImpulse::Get() == FPGA::ClockImpulse::_100MHz) ?
-        (period.ToUINT64() / 10 - 2) :
-        (period.ToUINT64() / 1000);
+    uint64 value = period.ToUINT64() / 10 - 2;
 
     Register::Write(reg, value);
 }
@@ -358,9 +350,7 @@ void FPGA::SetDelayStartStop(const Value &delay)
 {
     Register::E reg = Register::_7_PeriodImpulseB;
 
-    uint64 value = (FPGA::ClockImpulse::Get() == FPGA::ClockImpulse::_100MHz) ?
-        (delay.ToUINT64() / 10 - 2) :
-        (delay.ToUINT64() / 1000);
+    uint64 value = delay.ToUINT64() / 10 - 2;
 
     Register::Write(reg, value);
 }
@@ -652,31 +642,6 @@ void FPGA::TransformCodeToData(const uint8 codeIn[FPGA::NUM_POINTS * 2], float d
 
         dataOut[i] = data * sign;
     }
-}
-
-
-void FPGA::ClockImpulse::Set(FPGA::ClockImpulse::E clock)
-{
-    value = clock;
-
-    uint64 reg = Register::Read(Register::_0_Control);
-
-    if (value == _100MHz)
-    {
-        _CLEAR_BIT(reg, RG0::_4_ClockImpulse);
-    }
-    else
-    {
-        _SET_BIT(reg, RG0::_4_ClockImpulse);
-    }
-
-    Register::Write(Register::_0_Control, reg);
-}
-
-
-FPGA::ClockImpulse::E FPGA::ClockImpulse::Get()
-{
-    return value;
 }
 
 

@@ -64,8 +64,7 @@ cstr Command::Name() const
         "FDrive_WriteToFile",
         "FDrive_CloseFile",
         "SingleStart",
-        "StartStopMode",
-        "SetClockImpulse"
+        "StartStopMode"
     };
 
     if((int)value >= 0 && value < Count)

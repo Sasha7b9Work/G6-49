@@ -44,7 +44,7 @@ struct KindParam
 
 struct Param
 {
-    Param(KindParam::E k, pFuncActive, pchar nRU, pchar nEN);
+    Param(KindParam::E, pFuncActive, pchar nRU, pchar nEN);
 
     virtual ~Param() { }
 
@@ -285,7 +285,6 @@ struct TypeCParam
         ModeStart,              // Режим запуска сигналов DDS и импульсных
         ManipulationEnabled,    // Включен или выключен режим манипуляции
         ModeStartStop,          // Режим А-Старт/В-Стоп
-        ClockImpulse,           // Тактовая частота в режиме импульсов и пакетов
         Count
     };
 
@@ -537,12 +536,6 @@ struct PManipulationEnabled : public CParam
 struct PPolarity : public CParam
 {
     PPolarity(pchar *names) : CParam(TypeCParam::Polarity, Param::EFuncActive, "Полярность", "Polarity", names) { }
-};
-
-
-struct PClockImpulse : public CParam
-{
-    PClockImpulse(pchar *names) : CParam(TypeCParam::ClockImpulse, Param::EFuncActive, "Оп. частота", "Clock", names) { }
 };
 
 
