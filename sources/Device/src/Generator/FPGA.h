@@ -132,12 +132,9 @@ namespace FPGA
         };
         // Записать значение в регистр
         static void Write(E, uint64 value);
-
         static uint64 Read(E);
-
     private:
-
         // Последние записанные значения
-        static uint64 values[Count];
+        static uint64 content[Count];
     };
 };

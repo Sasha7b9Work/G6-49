@@ -120,7 +120,7 @@ namespace FPGA
 
     ClockAD992::E ClockAD992::value = ClockAD992::_100MHz;
 
-    uint64 Register::values[Count] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    uint64 Register::content[Count] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     ClockImpulse::E ClockImpulse::value = ClockImpulse::_100MHz;
 }
@@ -580,7 +580,7 @@ void FPGA::Register::Write(E reg, uint64 _value)
         2   // _11_Start
     };
 
-    values[reg] = _value;
+    content[reg] = _value;
 
     WriteAddress(reg);
 
@@ -602,7 +602,7 @@ void FPGA::Register::Write(E reg, uint64 _value)
 
 uint64 FPGA::Register::Read(E reg)
 {
-    return values[reg];
+    return content[reg];
 }
 
 
