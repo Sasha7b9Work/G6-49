@@ -123,10 +123,7 @@ namespace FPGA
         static E value = _100MHz;
     }
 
-    namespace Register
-    {
-        static uint64 values[Count] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    }
+    uint64 Register::values[Count] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     ClockImpulse::E ClockImpulse::value = ClockImpulse::_100MHz;
 }
