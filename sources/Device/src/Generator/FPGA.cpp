@@ -463,6 +463,11 @@ void FPGA::WriteControlRegister()
         _SET_BIT(data, 12);
     }
 
+    if(ClockImpulse::Get() == ClockImpulse::_1MHz)
+    {
+        _SET_BIT(data, RG0::_4_ClockImpulse);
+    }
+
     Register::Write(Register::_0_Control, data);
 }
 
