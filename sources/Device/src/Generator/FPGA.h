@@ -40,14 +40,10 @@ namespace FPGA
     uint8 *DataFreeSignal(const Chan &);
 
     // Сохранить данные сигнала, загруженного с флешки
-    void SaveExtSignal(const Chan &, uint8 *data);
+    void SaveExtSignal(const Chan &, uint8 *data); 
 
     // Возвращает указатель на точки произвольного сигнала (программно определёного)
     uint8 *DataDDS(const Chan &);
-
-    extern Value periodImpulse[Chan::Count];
-    extern Value durationImpulse[Chan::Count];
-    extern Value delayStartStop;                // Задержка междк каналами в режиме А-Старт/В-Стоп
 
     namespace PacketImpulse
     {
@@ -59,7 +55,6 @@ namespace FPGA
 
         extern Value periodImpulse;
         extern Value durationImpulse;
-        extern Value periodPacket;
     };
 
     namespace ModeWork

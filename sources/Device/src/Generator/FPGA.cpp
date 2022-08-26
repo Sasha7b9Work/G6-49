@@ -106,15 +106,10 @@ namespace FPGA
     // Режим СтартА/СтопВ - вкл/откл
     static StartStopMode::E startStopMode = StartStopMode::Disable;
 
-    Value periodImpulse[Chan::Count] = { Value("100", Order::Micro), Value("100", Order::Micro) };
-    Value durationImpulse[Chan::Count] = { Value("1", Order::Micro), Value("1", Order::Micro) };
-    Value delayStartStop = Value("1", Order::Micro);
-
     namespace PacketImpulse
     {
         Value PacketImpulse::periodImpulse("0", Order::One);
         Value PacketImpulse::durationImpulse("0", Order::One);
-        Value PacketImpulse::periodPacket("10", Order::Micro);
     }
 
     namespace ModeWork
@@ -338,21 +333,11 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
 
 void FPGA::RecalculateImpulseParameters()
 {
-    if (startStopMode == StartStopMode::Enable)
-    {
-
-    }
-    else
-    {
-        PacketImpulse::SetPeriodPacket(PacketImpulse::periodPacket);
-    }
 }
 
 
 void FPGA::PacketImpulse::SetPeriodPacket(const Value &period)
 {
-    periodPacket = period;
-
     uint64 value = (ClockImpulse::Get() == ClockImpulse::_100MHz) ?
         (period.ToUINT64() / 10 - 2) :
         (period.ToUINT64() / 1000);
@@ -373,8 +358,6 @@ void FPGA::SetPeriodImpulse(const Chan &ch, const Value &period)
 {
     // Для пакетного и одиночного импульсных режимов период задаётся здесь. Поэтому сохраняем значение периода импульсов, чтобы использовать его
     // в пакетном режиме при необходимости
-
-    periodImpulse[ch] = period;
 
     PacketImpulse::periodImpulse = period;
 
