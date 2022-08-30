@@ -6,6 +6,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
+#include "Generator/FPGA/ClockImpulse.h"
 
 
 #ifdef WIN32
@@ -122,8 +123,6 @@ namespace FPGA
     ClockAD992::E ClockAD992::value = ClockAD992::_100MHz;
 
     uint64 Register::content[Count] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-    ClockImpulse::E ClockImpulse::value = ClockImpulse::_100MHz;
 }
 
 

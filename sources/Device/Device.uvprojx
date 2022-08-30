@@ -1531,6 +1531,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Generator\FPGA\FPGA.h</FilePath>
             </File>
+            <File>
+              <FileName>ClockImpulse.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\FPGA\ClockImpulse.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ClockImpulse.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\FPGA\ClockImpulse.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
