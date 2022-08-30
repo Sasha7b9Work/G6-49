@@ -74,7 +74,7 @@ bool FPGA::ClockImpulse::AtLeastOneValueGreater(const Value &value)
 
 bool FPGA::ClockImpulse::AllValuesLessOrEqual(const Value &value)
 {
-    static const Value *values[4]{ &duration[ChA], &duration[ChB], &period[ChA], &period[ChB] };
+    static const Value *values[4] = { &duration[ChA], &duration[ChB], &period[ChA], &period[ChB] };
 
     for (int i = 0; i < 4; i++)
     {
