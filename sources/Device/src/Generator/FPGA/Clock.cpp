@@ -42,7 +42,7 @@ namespace FPGA
 
         namespace AD992
         {
-            static E value = _100MHz;
+            static E clock = _100MHz;
         }
 
     }
@@ -178,12 +178,12 @@ void FPGA::Clock::Impulse::RecalculateImpulseRegistersTo(E _clock)
 
 void FPGA::Clock::AD992::Set(E _clock)
 {
-    value = _clock;
+    clock = _clock;
     WriteControlRegister();
 }
 
 
 bool FPGA::Clock::AD992::Is100MHz()
 {
-    return value == _100MHz;
+    return (clock == _100MHz);
 }
