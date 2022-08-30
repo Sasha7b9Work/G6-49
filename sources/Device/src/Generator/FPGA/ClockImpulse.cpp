@@ -16,7 +16,11 @@ namespace FPGA
 
         static E clock = ClockImpulse::_100MHz;
 
-        static void RecalculateImpulseRegistersIfNeed(const Value duration[Chan::Count]);
+        static Value duration[Chan::Count] = { Value(0), Value(0) };
+        static Value period[Chan::Count] = { Value(0), Value(0) };
+
+        // ѕересчитать значени€ импульсных регистров (длительность, период), если нужно
+        static void RecalculateImpulseRegistersIfNeed();
 
         // ≈сли при установке длительности импульса нужно измен€ть опорную частоту - пересчитать все остальные значени€:
         // период импульса, период пакета, задержка между каналами.
@@ -26,6 +30,77 @@ namespace FPGA
         static bool Is1MHz() { return clock == _1MHz; }
 
         static void Set(E);
+
+        // ¬озвращает true, если хот€ бы одно значение периода либо длительности меньше value
+        static bool AtLeastOneValueGreater(const Value &value);
+
+        // ¬озращает true, если все значени€ меньше либо равны value
+        static bool AllValuesLessOrEqual(const Value &value);
+    }
+}
+
+
+void FPGA::ClockImpulse::SetDuration(const Chan &ch, const Value &_duration)
+{
+    duration[ch] = _duration;
+
+    RecalculateImpulseRegistersIfNeed();
+}
+
+
+void FPGA::ClockImpulse::SetPeriod(const Chan &ch, const Value &_period)
+{
+    period[ch] = _period;
+
+    RecalculateImpulseRegistersIfNeed();
+}
+
+
+bool FPGA::ClockImpulse::AtLeastOneValueGreater(const Value &value)
+{
+    static const Value *values[4] = { &duration[ChA], &duration[ChB], &period[ChA], &period[ChB] };
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (*values[i] > value)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+bool FPGA::ClockImpulse::AllValuesLessOrEqual(const Value &value)
+{
+    static const Value *values[4]{ &duration[ChA], &duration[ChB], &period[ChA], &period[ChB] };
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (*values[i] <= value)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+void FPGA::ClockImpulse::RecalculateImpulseRegistersIfNeed()
+{
+    if (AtLeastOneValueGreater(Value(40)) && Is100MHz())
+    {
+        Set(ClockImpulse::_1MHz);
+
+        RecalculateImpulseRegistersTo(ClockImpulse::_1MHz);
+    }
+    else if (AllValuesLessOrEqual(Value(40)) && Is1MHz())
+    {
+        Set(ClockImpulse::_100MHz);
+
+        RecalculateImpulseRegistersTo(ClockImpulse::_100MHz);
     }
 }
 
@@ -91,21 +166,3 @@ void FPGA::ClockImpulse::RecalculateImpulseRegistersTo(ClockImpulse::E _clock)
     }
 }
 
-
-void FPGA::ClockImpulse::RecalculateImpulseRegistersIfNeed(const Value duration[Chan::Count])
-{
-    if ((duration[ChA] > Value(40) || duration[ChB] > Value(40)) &&
-        Is100MHz())
-    {
-        Set(ClockImpulse::_1MHz);
-
-        RecalculateImpulseRegistersTo(ClockImpulse::_1MHz);
-    }
-    else if ((duration[ChA] <= Value(40) && duration[ChB] <= Value(40)) &&
-        Is1MHz())
-    {
-        Set(ClockImpulse::_100MHz);
-
-        RecalculateImpulseRegistersTo(ClockImpulse::_100MHz);
-    }
-}
