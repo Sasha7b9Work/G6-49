@@ -6,7 +6,7 @@ namespace FPGA
 {
     // Опорная частота для формирования импульов и пакетов импульсов. Для длительности импульса [0 сек ... 40 сек]
     // опорная частота 100 МГц, для длительности более - 1 МГц
-    struct ClockImpulse
+    namespace ClockImpulse
     {
         enum E
         {
@@ -14,10 +14,10 @@ namespace FPGA
             _1MHz
         };
 
-        static void Set(E v);
-        static bool Is1MHz();
-        static bool Is100MHz();
-        static E Get();
+        void Set(E v);
+        bool Is1MHz();
+        bool Is100MHz();
+        E Get();
     };
 
     // Если при установке длительности импульса нужно изменять опорную частоту - пересчитать все остальные значения:
