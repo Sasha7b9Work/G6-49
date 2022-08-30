@@ -273,7 +273,7 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &_duration)
         reg = Register::_8_DurationImpulseB;
     }
 
-    RecalculateImpulseRegistersIfNeed(duration);
+    ClockImpulse::RecalculateImpulseRegistersIfNeed(duration);
 
     uint64 value = _duration.ToUINT64() / ClockImpulse::GetDivider();
 

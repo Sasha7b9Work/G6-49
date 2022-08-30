@@ -6,7 +6,15 @@
 
 namespace FPGA
 {
-    static ClockImpulse::E clock = ClockImpulse::_100MHz;
+    namespace ClockImpulse
+    {
+        static E clock = ClockImpulse::_100MHz;
+
+        // Если при установке длительности импульса нужно изменять опорную частоту - пересчитать все остальные значения:
+        // период импульса, период пакета, задержка между каналами.
+        // Пересчёт производится в пересчёте на то, что опорная частота раньше была не clock, а теперь стала clock
+        static void RecalculateImpulseRegistersTo(ClockImpulse::E clock);
+    }
 }
 
 
@@ -47,7 +55,7 @@ void FPGA::ClockImpulse::Set(ClockImpulse::E _clock)
 }
 
 
-void FPGA::RecalculateImpulseRegistersTo(ClockImpulse::E _clock)
+void FPGA::ClockImpulse::RecalculateImpulseRegistersTo(ClockImpulse::E _clock)
 {
     static const Register::E registers[4] =
     {
@@ -78,17 +86,17 @@ void FPGA::RecalculateImpulseRegistersTo(ClockImpulse::E _clock)
 }
 
 
-void FPGA::RecalculateImpulseRegistersIfNeed(const Value duration[Chan::Count])
+void FPGA::ClockImpulse::RecalculateImpulseRegistersIfNeed(const Value duration[Chan::Count])
 {
     if ((duration[ChA] > Value(40) || duration[ChB] > Value(40)) &&
-        ClockImpulse::Is100MHz())
+        Is100MHz())
     {
         ClockImpulse::Set(ClockImpulse::_1MHz);
 
         RecalculateImpulseRegistersTo(ClockImpulse::_1MHz);
     }
     else if ((duration[ChA] <= Value(40) && duration[ChB] <= Value(40)) &&
-        ClockImpulse::Is1MHz())
+        Is1MHz())
     {
         ClockImpulse::Set(ClockImpulse::_100MHz);
 

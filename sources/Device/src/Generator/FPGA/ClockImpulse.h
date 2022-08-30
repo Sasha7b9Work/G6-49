@@ -22,12 +22,7 @@ namespace FPGA
 
         // Делитель для расчёта счётчиков длительности и периода
         int GetDivider();
+
+        void RecalculateImpulseRegistersIfNeed(const Value duration[Chan::Count]);
     };
-
-    // Если при установке длительности импульса нужно изменять опорную частоту - пересчитать все остальные значения:
-    // период импульса, период пакета, задержка между каналами.
-    // Пересчёт производится в пересчёте на то, что опорная частота раньше была не clock, а теперь стала clock
-    void RecalculateImpulseRegistersTo(ClockImpulse::E clock);
-
-    void RecalculateImpulseRegistersIfNeed(const Value duration[Chan::Count]);
 }
