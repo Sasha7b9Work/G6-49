@@ -3,7 +3,7 @@
 #include "ffconf.h"
 #include "Hardware/FatFS/FatFS.h"
 #include "FDrive/FDrive_d.h"
-#include "Generator/FPGA.h"
+#include "Generator/FPGA/FPGA.h"
 #include "Generator/Generator_d.h"
 #include "Utils/Buffer.h"
 #include "Utils/Math.h"

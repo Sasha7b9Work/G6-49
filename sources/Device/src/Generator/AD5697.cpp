@@ -3,7 +3,7 @@
 #include "common/Command.h"
 #include "Generator/AD5697.h"
 #include "Generator/Calibrator.h"
-#include "Generator/FPGA.h"
+#include "Generator/FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Math.h"

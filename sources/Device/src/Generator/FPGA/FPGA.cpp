@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "Log.h"
 #include "Generator/Calibrator.h"
-#include "Generator/FPGA.h"
+#include "Generator/FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"

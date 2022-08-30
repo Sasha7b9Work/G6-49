@@ -1497,16 +1497,6 @@
               <FilePath>.\src\Generator\AD9952.cpp</FilePath>
             </File>
             <File>
-              <FileName>FPGA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\FPGA.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FPGA.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\FPGA.h</FilePath>
-            </File>
-            <File>
               <FileName>Generator_d.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Generator\Generator_d.h</FilePath>
@@ -1525,6 +1515,21 @@
               <FileName>Calibrator.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Generator\Calibrator.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Generator/FPGA</GroupName>
+          <Files>
+            <File>
+              <FileName>FPGA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\FPGA\FPGA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FPGA.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\FPGA\FPGA.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1637,5 +1642,14 @@
     <components/>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>Device</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>

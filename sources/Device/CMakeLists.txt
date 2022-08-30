@@ -116,6 +116,7 @@ file(GLOB COMMON         ../common/Command.*
 file(GLOB FDRIVE         src/FDrive/*)
 file(GLOB FREQMETER      src/FreqMeter/*)
 file(GLOB GENERATOR      src/Generator/*)
+file(GLOB GENERATOR_FPGA src/Generator/FPGA/*)
 file(GLOB INTERFACE      src/Interface/*)
 file(GLOB SETTINGS       src/Settings/*)
 file(GLOB UTILS          src/Utils/*)
@@ -137,6 +138,7 @@ source_group(common          FILES ${COMMON})
 source_group(FDrive          FILES ${FDRIVE})
 source_group(FreqMeter       FILES ${FREQMETER})
 source_group(Generator       FILES ${GENERATOR})
+source_group(Generator/FPGA  FILES ${GENERATOR_FPGA})
 source_group(Interface       FILES ${INTERFACE})
 source_group(Settings        FILES ${SETTINGS})
 source_group(Utils           FILES ${UTILS})
@@ -156,6 +158,7 @@ add_library(${PROJECT_NAME} ${LIBS_FATFS}
                             ${FDRIVE}
                             ${FREQMETER}
                             ${GENERATOR}
+                            ${GENERATOR_FPGA}
                             ${INTERFACE}
                             ${SETTINGS}
                             ${UTILS}

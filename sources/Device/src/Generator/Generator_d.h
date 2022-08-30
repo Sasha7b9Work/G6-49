@@ -1,8 +1,8 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "AD9952.h"
-#include "AD5697.h"
-#include "FPGA.h"
+#include "Generator/AD9952.h"
+#include "Generator/AD5697.h"
+#include "Generator/FPGA/FPGA.h"
 #include "common/Command.h"
 
 
