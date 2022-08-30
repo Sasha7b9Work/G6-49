@@ -16,6 +16,8 @@ namespace FPGA
         static void RecalculateImpulseRegistersTo(ClockImpulse::E clock);
 
         static bool Is100MHz() { return clock == _100MHz; }
+
+        static void Set(E);
     }
 }
 
@@ -87,14 +89,14 @@ void FPGA::ClockImpulse::RecalculateImpulseRegistersIfNeed(const Value duration[
     if ((duration[ChA] > Value(40) || duration[ChB] > Value(40)) &&
         Is100MHz())
     {
-        ClockImpulse::Set(ClockImpulse::_1MHz);
+        Set(ClockImpulse::_1MHz);
 
         RecalculateImpulseRegistersTo(ClockImpulse::_1MHz);
     }
     else if ((duration[ChA] <= Value(40) && duration[ChB] <= Value(40)) &&
         Is1MHz())
     {
-        ClockImpulse::Set(ClockImpulse::_100MHz);
+        Set(ClockImpulse::_100MHz);
 
         RecalculateImpulseRegistersTo(ClockImpulse::_100MHz);
     }

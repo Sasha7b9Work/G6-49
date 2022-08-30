@@ -16,7 +16,6 @@ namespace FPGA
             _1MHz
         };
 
-        void Set(E v);
         bool Is1MHz();
 
         // Делитель для расчёта счётчиков длительности и периода
