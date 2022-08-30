@@ -21,4 +21,18 @@ namespace FPGA
         // При установке периода импульса нужно вызывать эту функцию
         void SetPeriod(const Chan &, const Value &);
     };
+
+    // Тактовая частота формирователя произвольных сигналов
+    namespace ClockAD992
+    {
+        enum E
+        {
+            _100MHz,
+            _1MHz
+        };
+
+        void Set(E);
+
+        E Get();
+    };
 }

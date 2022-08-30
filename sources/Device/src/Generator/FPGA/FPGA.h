@@ -46,6 +46,9 @@ namespace FPGA
     // Возвращает указатель на точки произвольного сигнала (программно определёного)
     uint8 *DataDDS(const Chan &);
 
+    // Запись управляющего регистра
+    void WriteControlRegister();
+
     namespace PacketImpulse
     {
         // Устанавливает число импульсов в пачке
@@ -73,23 +76,5 @@ namespace FPGA
             Free,
             Count
         };
-    };
-
-    // Тактовая частота формирователя произвольных сигналов
-    struct ClockAD992
-    {
-        enum E
-        {
-            _100MHz,
-            _1MHz
-        };
-
-        static void Set(E);
-
-        static E Get();
-
-    private:
-
-        static E value;
     };
 };

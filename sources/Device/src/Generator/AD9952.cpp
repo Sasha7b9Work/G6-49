@@ -4,6 +4,7 @@
 #include "Generator/Calibrator.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Math.h"
+#include "Generator/FPGA/Clock.h"
 #include <cmath>
 
 

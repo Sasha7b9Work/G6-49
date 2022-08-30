@@ -52,9 +52,6 @@ namespace FPGA
     // Заслать рассчитанные точки одного канала в плис
     static void SendDataChannel(const Chan &);
 
-    // Запись управляющего регистра
-    static void WriteControlRegister();
-
     // Записывает коды, соответствующие максимальному и минимальному значению
     static void WriteMaxAmplitude(const Chan &);
 
@@ -82,8 +79,6 @@ namespace FPGA
         // Режим работы ПЛИС
         static E value[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
     }
-
-    ClockAD992::E ClockAD992::value = ClockAD992::_100MHz;
 }
 
 
@@ -344,19 +339,6 @@ void FPGA::EnableStartStopMode(StartStopMode::E mode)
 {
     startStopMode = mode;
     WriteControlRegister();
-}
-
-
-void FPGA::ClockAD992::Set(ClockAD992::E _clock)
-{
-    value = _clock;
-    WriteControlRegister();
-}
-
-
-FPGA::ClockAD992::E FPGA::ClockAD992::Get()
-{
-    return value;
 }
 
 
