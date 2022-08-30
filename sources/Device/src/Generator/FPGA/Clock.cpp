@@ -39,11 +39,12 @@ namespace FPGA
             // ¬озращает true, если все значени€ меньше либо равны value
             static bool AllValuesLessOrEqual(const Value &value);
         }
-    }
 
-    namespace ClockAD992
-    {
-        static E value = ClockAD992::_100MHz;
+        namespace AD992
+        {
+            static E value = _100MHz;
+        }
+
     }
 }
 
@@ -175,14 +176,14 @@ void FPGA::Clock::Impulse::RecalculateImpulseRegistersTo(E _clock)
 }
 
 
-void FPGA::ClockAD992::Set(ClockAD992::E _clock)
+void FPGA::Clock::AD992::Set(E _clock)
 {
     value = _clock;
     WriteControlRegister();
 }
 
 
-FPGA::ClockAD992::E FPGA::ClockAD992::Get()
+FPGA::Clock::AD992::E FPGA::Clock::AD992::Get()
 {
     return value;
 }

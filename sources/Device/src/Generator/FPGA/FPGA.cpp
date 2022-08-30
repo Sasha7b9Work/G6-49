@@ -380,7 +380,7 @@ void FPGA::WriteControlRegister()
             break;
     }
 
-    if(ClockAD992::Get() == ClockAD992::_1MHz)
+    if(Clock::AD992::Get() == Clock::AD992::_1MHz)
     {
         Bit::Set(data, RG0::_7_ClockAD9952);
     }
