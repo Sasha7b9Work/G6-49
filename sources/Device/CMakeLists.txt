@@ -113,13 +113,13 @@ file(GLOB COMMON         ../common/Command.*
                          ../common/Messages.*
                          ../common/Transceiver.h
                          ../common/Transceiver_d.cpp)
-file(GLOB FDRIVE         src/FDrive/*)
-file(GLOB FREQMETER      src/FreqMeter/*)
-file(GLOB GENERATOR      src/Generator/*)
-file(GLOB GENERATOR_FPGA src/Generator/FPGA/*)
-file(GLOB INTERFACE      src/Interface/*)
-file(GLOB SETTINGS       src/Settings/*)
-file(GLOB UTILS          src/Utils/*)
+file(GLOB FDRIVE         src/FDrive/*.*)
+file(GLOB FREQMETER      src/FreqMeter/*.*)
+file(GLOB GENERATOR      src/Generator/*.*)
+file(GLOB GENERATOR_FPGA src/Generator/FPGA/*.*)
+file(GLOB INTERFACE      src/Interface/*.*)
+file(GLOB SETTINGS       src/Settings/*.*)
+file(GLOB UTILS          src/Utils/*.*)
 
 set_source_files_properties(${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBD} ${LIBS_USBH} PROPERTIES HEADER_FILE_ONLY TRUE)
 
