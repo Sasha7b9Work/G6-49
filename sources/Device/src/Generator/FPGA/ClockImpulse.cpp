@@ -8,6 +8,12 @@ namespace FPGA
 {
     namespace ClockImpulse
     {
+        enum E
+        {
+            _100MHz,
+            _1MHz
+        };
+
         static E clock = ClockImpulse::_100MHz;
 
         // Если при установке длительности импульса нужно изменять опорную частоту - пересчитать все остальные значения:
