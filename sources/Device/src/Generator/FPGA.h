@@ -133,8 +133,8 @@ namespace FPGA
             Count
         };
         // Записать значение в регистр
-        static void Write(E, uint64 value);
-        static uint64 Read(E);
+        static void Write(const E, const uint64 value);
+        static uint64 Read(const E);
     private:
         // Последние записанные значения
         static uint64 content[Count];

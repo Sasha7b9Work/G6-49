@@ -439,7 +439,8 @@ FPGA::ClockAD992::E FPGA::ClockAD992::Get()
 
 void FPGA::WriteControlRegister()
 {
-    uint16 data = BIN_U16(00000000, 01111000);       // Ѕиты 3, 4, 5, 6 устанавливаем в единичное состо€ние. »х активное состо€ние - нулевое
+    //                               6543
+    uint16 data = BIN_U16(00000000, 01101000);       // Ѕиты 3, 4, 5, 6 устанавливаем в единичное состо€ние. »х активное состо€ние - нулевое
 
     Bit::Set(data, RG0::_0_WriteData);                    // ¬ нулевом бите 0 записываем только дл€ записи данных в пам€ть
 
@@ -495,6 +496,10 @@ void FPGA::WriteControlRegister()
     if(ClockImpulse::Get() == ClockImpulse::_1MHz)
     {
         _SET_BIT(data, RG0::_4_ClockImpulse);
+    }
+    else
+    {
+        _CLEAR_BIT(data, RG0::_4_ClockImpulse);
     }
 
     Register::Write(Register::_0_Control, data);
@@ -594,7 +599,7 @@ void FPGA::SendDataChannel(const Chan &ch)
 }
 
 
-void FPGA::Register::Write(E reg, uint64 _value)
+void FPGA::Register::Write(const E reg, const uint64 _value)
 {
     static const int numBits[Register::Count] =
     {
@@ -632,7 +637,7 @@ void FPGA::Register::Write(E reg, uint64 _value)
 }
 
 
-uint64 FPGA::Register::Read(E reg)
+uint64 FPGA::Register::Read(const E reg)
 {
     return content[reg];
 }

@@ -157,51 +157,78 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>331</LineNumber>
+          <LineNumber>603</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134403884</Address>
+          <Address>134409466</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Projects\G6-49\sources\Panel\src\FDrive\FDrive_d_Handler.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Generator\FPGA.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\G6_49_D\src/FDrive/FDrive_d_Handler.cpp\331</Expression>
+          <Expression>\\G6_49_D\src/Generator/FPGA.cpp\603</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>53</LineNumber>
+          <LineNumber>497</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134402360</Address>
+          <Address>134408914</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Projects\G6-49\sources\Panel\src\Generator\Calibrator.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Generator\FPGA.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\G6_49_D\src/Generator/Calibrator.cpp\53</Expression>
+          <Expression>\\G6_49_D\src/Generator/FPGA.cpp\497</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>498</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>&lt;1&gt;.\src\Generator\FPGA.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>604</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>&lt;1&gt;.\src\Generator\FPGA.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>waveIsSine</ItemText>
+          <ItemText>_value</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>currentCAL</ItemText>
-        </Ww>
-        <Ww>
-          <count>2</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>buffer[255]</ItemText>
+          <ItemText>_value</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
