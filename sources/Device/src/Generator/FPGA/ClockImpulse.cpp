@@ -22,9 +22,9 @@ bool FPGA::ClockImpulse::Is100MHz()
 }
 
 
-FPGA::ClockImpulse::E FPGA::ClockImpulse::Get()
+int FPGA::ClockImpulse::GetDivider()
 {
-    return clock;
+    return (clock == _100MHz) ? 10 : 1000;
 }
 
 

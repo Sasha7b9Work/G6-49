@@ -288,9 +288,7 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &_duration)
         RecalculateImpulseRegistersTo(ClockImpulse::_100MHz);
     }
 
-    uint64 value = (ClockImpulse::Get() == ClockImpulse::_100MHz) ?
-        (_duration.ToUINT64() / 10) :
-        (_duration.ToUINT64() / 1000);
+    uint64 value = _duration.ToUINT64() / ClockImpulse::GetDivider();
 
     Register::Write(reg, value);
 }
@@ -298,9 +296,7 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &_duration)
 
 void FPGA::PacketImpulse::SetPeriodPacket(const Value &period)
 {
-    uint64 value = (ClockImpulse::Get() == ClockImpulse::_100MHz) ?
-        (period.ToUINT64() / 10 - 2) :
-        (period.ToUINT64() / 1000);
+    uint64 value = period.ToUINT64() / ClockImpulse::GetDivider();
 
     Register::Write(Register::_5_PeriodImpulseA, value);
 }
@@ -427,7 +423,7 @@ void FPGA::WriteControlRegister()
         _SET_BIT(data, 12);
     }
 
-    if(ClockImpulse::Get() == ClockImpulse::_1MHz)
+    if(ClockImpulse::Is1MHz())
     {
         _SET_BIT(data, RG0::_4_ClockImpulse);
     }
