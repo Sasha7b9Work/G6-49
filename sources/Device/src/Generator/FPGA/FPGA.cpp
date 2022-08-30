@@ -84,8 +84,6 @@ namespace FPGA
     }
 
     ClockAD992::E ClockAD992::value = ClockAD992::_100MHz;
-
-    uint64 Register::content[Count] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 }
 
 
@@ -510,12 +508,6 @@ void FPGA::SendDataChannel(const Chan &ch)
         for (j = 0; j < 10; j++) { }
         HAL_PIO::Reset(WR_FPGA_WR_DATA);
     }
-}
-
-
-uint64 FPGA::Register::Read(const E reg)
-{
-    return content[reg];
 }
 
 

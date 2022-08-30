@@ -10,6 +10,8 @@ namespace FPGA
 {
     // Установить на A0_RG...A3_RG адрес, соответсвующй регистру
     static void WriteAddress(Register::E reg);
+
+    uint64 Register::content[Count] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 }
 
 
@@ -57,4 +59,10 @@ void FPGA::WriteAddress(Register::E reg)
     HAL_PIO::Write(WR_FPGA_A1_RG, Bit::Get(reg, 1));
     HAL_PIO::Write(WR_FPGA_A2_RG, Bit::Get(reg, 2));
     HAL_PIO::Write(WR_FPGA_A3_RG, Bit::Get(reg, 3));
+}
+
+
+uint64 FPGA::Register::Read(const E reg)
+{
+    return content[reg];
 }
