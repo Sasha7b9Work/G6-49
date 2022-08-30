@@ -273,20 +273,7 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &_duration)
         reg = Register::_8_DurationImpulseB;
     }
 
-    if ((duration[ChA] > Value(40) || duration[ChB] > Value(40)) &&
-        ClockImpulse::Is100MHz())
-    {
-        ClockImpulse::Set(ClockImpulse::_1MHz);
-
-        RecalculateImpulseRegistersTo(ClockImpulse::_1MHz);
-    }
-    else if ((duration[ChA] <= Value(40) && duration[ChB] <= Value(40)) &&
-        ClockImpulse::Is1MHz())
-    {
-        ClockImpulse::Set(ClockImpulse::_100MHz);
-
-        RecalculateImpulseRegistersTo(ClockImpulse::_100MHz);
-    }
+    RecalculateImpulseRegistersIfNeed(duration);
 
     uint64 value = _duration.ToUINT64() / ClockImpulse::GetDivider();
 

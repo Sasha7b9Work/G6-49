@@ -76,3 +76,22 @@ void FPGA::RecalculateImpulseRegistersTo(ClockImpulse::E _clock)
         }
     }
 }
+
+
+void FPGA::RecalculateImpulseRegistersIfNeed(const Value duration[Chan::Count])
+{
+    if ((duration[ChA] > Value(40) || duration[ChB] > Value(40)) &&
+        ClockImpulse::Is100MHz())
+    {
+        ClockImpulse::Set(ClockImpulse::_1MHz);
+
+        RecalculateImpulseRegistersTo(ClockImpulse::_1MHz);
+    }
+    else if ((duration[ChA] <= Value(40) && duration[ChB] <= Value(40)) &&
+        ClockImpulse::Is1MHz())
+    {
+        ClockImpulse::Set(ClockImpulse::_100MHz);
+
+        RecalculateImpulseRegistersTo(ClockImpulse::_100MHz);
+    }
+}
