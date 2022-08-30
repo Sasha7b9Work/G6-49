@@ -1532,16 +1532,6 @@
               <FilePath>.\src\Generator\FPGA\FPGA.h</FilePath>
             </File>
             <File>
-              <FileName>ClockImpulse.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Generator\FPGA\ClockImpulse.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ClockImpulse.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Generator\FPGA\ClockImpulse.h</FilePath>
-            </File>
-            <File>
               <FileName>RegistersFPGA.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Generator\FPGA\RegistersFPGA.cpp</FilePath>
@@ -1550,6 +1540,16 @@
               <FileName>RegistersFPGA.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Generator\FPGA\RegistersFPGA.h</FilePath>
+            </File>
+            <File>
+              <FileName>Clock.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\FPGA\Clock.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Clock.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\FPGA\Clock.h</FilePath>
             </File>
           </Files>
         </Group>

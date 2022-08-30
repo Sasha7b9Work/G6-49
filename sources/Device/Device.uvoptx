@@ -2036,8 +2036,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Generator\FPGA\ClockImpulse.cpp</PathWithFileName>
-      <FilenameWithoutPath>ClockImpulse.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Generator\FPGA\RegistersFPGA.cpp</PathWithFileName>
+      <FilenameWithoutPath>RegistersFPGA.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2048,8 +2048,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Generator\FPGA\ClockImpulse.h</PathWithFileName>
-      <FilenameWithoutPath>ClockImpulse.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Generator\FPGA\RegistersFPGA.h</PathWithFileName>
+      <FilenameWithoutPath>RegistersFPGA.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2060,8 +2060,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Generator\FPGA\RegistersFPGA.cpp</PathWithFileName>
-      <FilenameWithoutPath>RegistersFPGA.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Generator\FPGA\Clock.cpp</PathWithFileName>
+      <FilenameWithoutPath>Clock.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2072,8 +2072,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Generator\FPGA\RegistersFPGA.h</PathWithFileName>
-      <FilenameWithoutPath>RegistersFPGA.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Generator\FPGA\Clock.h</PathWithFileName>
+      <FilenameWithoutPath>Clock.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

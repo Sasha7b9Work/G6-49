@@ -1,6 +1,6 @@
 // 2022/08/30 11:42:11 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "Generator/FPGA/ClockImpulse.h"
+#include "Generator/FPGA/Clock.h"
 #include "Generator/FPGA/FPGA.h"
 
 

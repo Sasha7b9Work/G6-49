@@ -6,7 +6,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
-#include "Generator/FPGA/ClockImpulse.h"
+#include "Generator/FPGA/Clock.h"
 
 
 #ifdef WIN32
