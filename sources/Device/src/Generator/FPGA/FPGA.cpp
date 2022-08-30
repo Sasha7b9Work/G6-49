@@ -26,35 +26,6 @@ static uint8 dataDDS[Chan::Count][FPGA::NUM_POINTS * 2] __attribute__((section("
 
 namespace FPGA
 {
-    struct RG0
-    {
-        enum E
-        {
-            /*
-            *  RG0.10 | RG0.11 | RG0.12 |
-            * --------+--------+--------+-----------------------------------------
-            *    1    |   1    |   0    | Автоматический режим запуска Start/Stop
-            *    1    |   1    |   1    | Ручной режм запуска Start/Stop
-            * --------+--------+--------+----------------------------------------
-            */
-            _0_WriteData,               // В этот бит записываем 0, перед загрузкой данных сигнала в ПЛИС
-            _1_ImpulseA,                // 1, если в канале А ПЛИС формирует импульсы/прямоугольник
-            _2_ImpulseB,                // 1, если в канале B ПЛИС формирует импульсы/прямоугольник
-            _3_ManipulationOSK2,        // Здесь 0, если синус канала 1 должен манипулироваться сигналом OSK2 ("пилой" от AD9952 второго канала)
-            _4_ClockImpulse,            // Тактовая частота для импульсов : 0 - 100МГц (такты 10 нс), 1 - 1МГц (такты 1 мкс)
-            _5_ManipulationOSK1,        // Здесь 0, если синус канала 2 должен манипулироваться сигналом OSK1 ("пилой" от AD9952 первого канала)
-            _del_6_ManipulationFPGA2,   // Здесь 0, есил синус канала 2 должен манипулироваться формирователем импульсов канала 2
-            _7_ClockAD9952,             // 0 - тактовая частота 100 МГц, 1 - тактовая частота 1 МГц
-            _8_MeanderA,                // 1, если меандр по каналу A
-            _9_MeanderB,                // 1, если меандр по каналу B
-            _10_HandStartA,             // Если бит установлен в 1, то ручной запуск канала А
-            _11_HandStartB,             // Если бит установлен в 1, то ручной запуск канала В
-            _12_PacketImpulse,          // 1, если включён пакетный режим импульсов
-            _13_StartMode0,             // Младший бит управления режимом запуска
-            _14_StartMode1              // Старший бит управления режимом запуска
-        };
-    };
-
     static void SetFormSine(const Chan &);
 
     // Установить режим Пила+
@@ -669,25 +640,6 @@ void FPGA::TransformCodeToData(const uint8 codeIn[FPGA::NUM_POINTS * 2], float d
 
         dataOut[i] = data * sign;
     }
-}
-
-
-void FPGA::ClockImpulse::Set(ClockImpulse::E clock)
-{
-    value = clock;
-
-    uint64 reg = Register::Read(Register::_0_Control);
-
-    if (value == _100MHz)
-    {
-        _CLEAR_BIT(reg, RG0::_4_ClockImpulse);
-    }
-    else
-    {
-        _SET_BIT(reg, RG0::_4_ClockImpulse);
-    }
-
-    Register::Write(Register::_0_Control, reg);
 }
 
 
