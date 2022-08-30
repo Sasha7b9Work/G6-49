@@ -10,11 +10,15 @@ namespace FPGA
     // опорная частота 100 МГц, для длительности более - 1 МГц
     namespace ClockImpulse
     {
-        bool Is1MHz();
+        bool Is100MHz();
 
         // Делитель для расчёта счётчиков длительности и периода
         int GetDivider();
 
-        void RecalculateImpulseRegistersIfNeed(const Value duration[Chan::Count]);
+        // При установке длительности импульса нужно вызывать эту функцию
+        void SetDuration(const Chan &, const Value &);
+
+        // При установке периода импульса нужно вызывать эту функцию
+        void SetPeriod(const Chan &, const Value &);
     };
 }

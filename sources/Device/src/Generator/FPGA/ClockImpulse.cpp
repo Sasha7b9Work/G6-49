@@ -16,21 +16,23 @@ namespace FPGA
 
         static E clock = ClockImpulse::_100MHz;
 
+        static void RecalculateImpulseRegistersIfNeed(const Value duration[Chan::Count]);
+
         // Если при установке длительности импульса нужно изменять опорную частоту - пересчитать все остальные значения:
         // период импульса, период пакета, задержка между каналами.
         // Пересчёт производится в пересчёте на то, что опорная частота раньше была не clock, а теперь стала clock
         static void RecalculateImpulseRegistersTo(ClockImpulse::E clock);
 
-        static bool Is100MHz() { return clock == _100MHz; }
+        static bool Is1MHz() { return clock == _1MHz; }
 
         static void Set(E);
     }
 }
 
 
-bool FPGA::ClockImpulse::Is1MHz()
+bool FPGA::ClockImpulse::Is100MHz()
 {
-    return clock == _1MHz;
+    return clock == _100MHz;
 }
 
 
