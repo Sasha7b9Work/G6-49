@@ -142,7 +142,7 @@ void AD9952::WriteCFR1(const Chan &ch)
 void AD9952::WriteCFR2(const Chan &ch)
 {
     uint value = 0;
-    if (FPGA::Clock::AD992::Get() == FPGA::Clock::AD992::_100MHz)
+    if (FPGA::Clock::AD992::Is100MHz())
     {
         Bit::Set(value, 3);
         Bit::Set(value, 5);
@@ -185,7 +185,7 @@ void AD9952::SetAmplitudeForMeander(const Chan &ch)
 
 void AD9952::WriteFTW0(const Chan &ch)
 {
-    double FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::Clock::AD992::Get() == FPGA::Clock::AD992::_100MHz ? 1e8F : 1e6F)) * std::powf(2.0F, 32.0F);
+    double FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::Clock::AD992::Is100MHz() ? 1e8F : 1e6F)) * std::powf(2.0F, 32.0F);
 
     WriteToHardware(ch, Register::FTW0, (uint)(FTWf + 0.5F));
 }

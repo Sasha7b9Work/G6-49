@@ -380,7 +380,11 @@ void FPGA::WriteControlRegister()
             break;
     }
 
-    if(Clock::AD992::Get() == Clock::AD992::_1MHz)
+    if (Clock::AD992::Is100MHz())
+    {
+        Bit::Clear(data, RG0::_7_ClockAD9952);
+    }
+    else
     {
         Bit::Set(data, RG0::_7_ClockAD9952);
     }

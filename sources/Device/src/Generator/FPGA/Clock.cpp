@@ -183,7 +183,7 @@ void FPGA::Clock::AD992::Set(E _clock)
 }
 
 
-FPGA::Clock::AD992::E FPGA::Clock::AD992::Get()
+bool FPGA::Clock::AD992::Is100MHz()
 {
-    return value;
+    return value == _100MHz;
 }

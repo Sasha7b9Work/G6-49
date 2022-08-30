@@ -35,7 +35,7 @@ namespace FPGA
 
             void Set(E);
 
-            E Get();
+            bool Is100MHz();
         };
     }
 }
