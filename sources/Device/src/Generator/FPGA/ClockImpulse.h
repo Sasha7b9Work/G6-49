@@ -18,7 +18,6 @@ namespace FPGA
 
         void Set(E v);
         bool Is1MHz();
-        bool Is100MHz();
 
         // Делитель для расчёта счётчиков длительности и периода
         int GetDivider();

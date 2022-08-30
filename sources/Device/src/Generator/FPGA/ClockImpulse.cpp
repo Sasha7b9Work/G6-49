@@ -14,6 +14,8 @@ namespace FPGA
         // период импульса, период пакета, задержка между каналами.
         // Пересчёт производится в пересчёте на то, что опорная частота раньше была не clock, а теперь стала clock
         static void RecalculateImpulseRegistersTo(ClockImpulse::E clock);
+
+        static bool Is100MHz() { return clock == _100MHz; }
     }
 }
 
@@ -21,12 +23,6 @@ namespace FPGA
 bool FPGA::ClockImpulse::Is1MHz()
 {
     return clock == _1MHz;
-}
-
-
-bool FPGA::ClockImpulse::Is100MHz()
-{
-    return clock == _100MHz;
 }
 
 
