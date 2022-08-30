@@ -4,7 +4,7 @@
 
 namespace FPGA
 {
-    struct Register
+    namespace Register
     {
         // Регистры ПЛИС
         enum E
@@ -27,14 +27,12 @@ namespace FPGA
             Count
         };
         // Записать значение в регистр
-        static void Write(const E, const uint64 value);
-        static uint64 Read(const E);
-    private:
-        // Последние записанные значения
-        static uint64 content[Count];
+        void Write(const E, const uint64 value);
+
+        uint64 Read(const E);
     };
 
-    struct RG0
+    namespace RG0
     {
         enum E
         {
