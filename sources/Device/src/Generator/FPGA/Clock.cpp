@@ -6,36 +6,39 @@
 
 namespace FPGA
 {
-    namespace ClockImpulse
+    namespace Clock
     {
-        enum E
+        namespace Impulse
         {
-            _100MHz,
-            _1MHz
-        };
+            enum E
+            {
+                _100MHz,
+                _1MHz
+            };
 
-        static E clock = ClockImpulse::_100MHz;
+            static E clock = _100MHz;
 
-        static Value duration[Chan::Count] = { Value(0), Value(0) };
-        static Value period[Chan::Count] = { Value(0), Value(0) };
+            static Value duration[Chan::Count] = { Value(0), Value(0) };
+            static Value period[Chan::Count] = { Value(0), Value(0) };
 
-        // Пересчитать значения импульсных регистров (длительность, период), если нужно
-        static void RecalculateImpulseRegistersIfNeed();
+            // Пересчитать значения импульсных регистров (длительность, период), если нужно
+            static void RecalculateImpulseRegistersIfNeed();
 
-        // Если при установке длительности импульса нужно изменять опорную частоту - пересчитать все остальные значения:
-        // период импульса, период пакета, задержка между каналами.
-        // Пересчёт производится в пересчёте на то, что опорная частота раньше была не clock, а теперь стала clock
-        static void RecalculateImpulseRegistersTo(ClockImpulse::E clock);
+            // Если при установке длительности импульса нужно изменять опорную частоту - пересчитать все остальные значения:
+            // период импульса, период пакета, задержка между каналами.
+            // Пересчёт производится в пересчёте на то, что опорная частота раньше была не clock, а теперь стала clock
+            static void RecalculateImpulseRegistersTo(E clock);
 
-        static bool Is1MHz() { return clock == _1MHz; }
+            static bool Is1MHz() { return clock == _1MHz; }
 
-        static void Set(E);
+            static void Set(E);
 
-        // Возвращает true, если хотя бы одно значение периода либо длительности меньше value
-        static bool AtLeastOneValueGreater(const Value &value);
+            // Возвращает true, если хотя бы одно значение периода либо длительности меньше value
+            static bool AtLeastOneValueGreater(const Value &value);
 
-        // Возращает true, если все значения меньше либо равны value
-        static bool AllValuesLessOrEqual(const Value &value);
+            // Возращает true, если все значения меньше либо равны value
+            static bool AllValuesLessOrEqual(const Value &value);
+        }
     }
 
     namespace ClockAD992
@@ -45,7 +48,7 @@ namespace FPGA
 }
 
 
-void FPGA::ClockImpulse::SetDuration(const Chan &ch, const Value &_duration)
+void FPGA::Clock::Impulse::SetDuration(const Chan &ch, const Value &_duration)
 {
     duration[ch] = _duration;
 
@@ -53,7 +56,7 @@ void FPGA::ClockImpulse::SetDuration(const Chan &ch, const Value &_duration)
 }
 
 
-void FPGA::ClockImpulse::SetPeriod(const Chan &ch, const Value &_period)
+void FPGA::Clock::Impulse::SetPeriod(const Chan &ch, const Value &_period)
 {
     period[ch] = _period;
 
@@ -61,7 +64,7 @@ void FPGA::ClockImpulse::SetPeriod(const Chan &ch, const Value &_period)
 }
 
 
-bool FPGA::ClockImpulse::AtLeastOneValueGreater(const Value &value)
+bool FPGA::Clock::Impulse::AtLeastOneValueGreater(const Value &value)
 {
     static const Value *values[4] = { &duration[ChA], &duration[ChB], &period[ChA], &period[ChB] };
 
@@ -77,7 +80,7 @@ bool FPGA::ClockImpulse::AtLeastOneValueGreater(const Value &value)
 }
 
 
-bool FPGA::ClockImpulse::AllValuesLessOrEqual(const Value &value)
+bool FPGA::Clock::Impulse::AllValuesLessOrEqual(const Value &value)
 {
     static const Value *values[4] = { &duration[ChA], &duration[ChB], &period[ChA], &period[ChB] };
 
@@ -93,36 +96,36 @@ bool FPGA::ClockImpulse::AllValuesLessOrEqual(const Value &value)
 }
 
 
-void FPGA::ClockImpulse::RecalculateImpulseRegistersIfNeed()
+void FPGA::Clock::Impulse::RecalculateImpulseRegistersIfNeed()
 {
     if (AtLeastOneValueGreater(Value(40)) && Is100MHz())
     {
-        Set(ClockImpulse::_1MHz);
+        Set(_1MHz);
 
-        RecalculateImpulseRegistersTo(ClockImpulse::_1MHz);
+        RecalculateImpulseRegistersTo(_1MHz);
     }
     else if (AllValuesLessOrEqual(Value(40)) && Is1MHz())
     {
-        Set(ClockImpulse::_100MHz);
+        Set(_100MHz);
 
-        RecalculateImpulseRegistersTo(ClockImpulse::_100MHz);
+        RecalculateImpulseRegistersTo(_100MHz);
     }
 }
 
 
-bool FPGA::ClockImpulse::Is100MHz()
+bool FPGA::Clock::Impulse::Is100MHz()
 {
     return clock == _100MHz;
 }
 
 
-int FPGA::ClockImpulse::GetDivider()
+int FPGA::Clock::Impulse::GetDivider()
 {
     return (clock == _100MHz) ? 10 : 1000;
 }
 
 
-void FPGA::ClockImpulse::Set(ClockImpulse::E _clock)
+void FPGA::Clock::Impulse::Set(E _clock)
 {
     clock = _clock;
 
@@ -141,7 +144,7 @@ void FPGA::ClockImpulse::Set(ClockImpulse::E _clock)
 }
 
 
-void FPGA::ClockImpulse::RecalculateImpulseRegistersTo(ClockImpulse::E _clock)
+void FPGA::Clock::Impulse::RecalculateImpulseRegistersTo(E _clock)
 {
     static const Register::E registers[4] =
     {
@@ -151,7 +154,7 @@ void FPGA::ClockImpulse::RecalculateImpulseRegistersTo(ClockImpulse::E _clock)
         Register::_8_DurationImpulseB
     };
 
-    if (_clock == ClockImpulse::_1MHz)       // Было 100 МГц, нужно уменьшить все значения в 100 раз
+    if (_clock == _1MHz)       // Было 100 МГц, нужно уменьшить все значения в 100 раз
     {
         for (int i = 0; i < 4; i++)
         {

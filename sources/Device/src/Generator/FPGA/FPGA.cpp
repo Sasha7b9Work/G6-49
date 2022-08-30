@@ -260,9 +260,9 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
         reg = Register::_8_DurationImpulseB;
     }
 
-    ClockImpulse::SetDuration(ch, duration);
+    Clock::Impulse::SetDuration(ch, duration);
 
-    uint64 value = duration.ToUINT64() / ClockImpulse::GetDivider();
+    uint64 value = duration.ToUINT64() / Clock::Impulse::GetDivider();
 
     Register::Write(reg, value);
 }
@@ -270,9 +270,9 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
 
 void FPGA::PacketImpulse::SetPeriodPacket(const Value &period)
 {
-    ClockImpulse::SetPeriod(ChA, period);
+    Clock::Impulse::SetPeriod(ChA, period);
 
-    uint64 value = period.ToUINT64() / ClockImpulse::GetDivider();
+    uint64 value = period.ToUINT64() / Clock::Impulse::GetDivider();
 
     Register::Write(Register::_5_PeriodImpulseA, value);
 }
@@ -300,11 +300,11 @@ void FPGA::SetPeriodImpulse(const Chan &ch, const Value &period)
         reg = Register::_7_PeriodImpulseB;
     }
 
-    ClockImpulse::SetPeriod(ch, period);
+    Clock::Impulse::SetPeriod(ch, period);
 
-    uint64 value = period.ToUINT64() / ClockImpulse::GetDivider();
+    uint64 value = period.ToUINT64() / Clock::Impulse::GetDivider();
 
-    if (ClockImpulse::Is100MHz())
+    if (Clock::Impulse::Is100MHz())
     {
         value -= 2;
     }
@@ -317,9 +317,9 @@ void FPGA::SetDelayStartStop(const Value &delay)
 {
     Register::E reg = Register::_7_PeriodImpulseB;
 
-    uint64 value = delay.ToUINT64() / ClockImpulse::GetDivider();
+    uint64 value = delay.ToUINT64() / Clock::Impulse::GetDivider();
 
-    if (ClockImpulse::Is100MHz())
+    if (Clock::Impulse::Is100MHz())
     {
         value -= 2;
     }
@@ -398,7 +398,7 @@ void FPGA::WriteControlRegister()
         _SET_BIT(data, 12);
     }
 
-    if(ClockImpulse::Is100MHz())
+    if(Clock::Impulse::Is100MHz())
     {
         _CLEAR_BIT(data, RG0::_4_ClockImpulse);
     }
