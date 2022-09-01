@@ -463,11 +463,8 @@ void CParam::NextChoice()
         {
             PGenerator::SetParameterDouble(*A::Impulse::delay);
         }
-
-        return;
     }
-
-    if (type == TypeCParam::ModeStart)
+    else if (type == TypeCParam::ModeStart)
     {
         if (form->IsDDS())
         {
