@@ -194,9 +194,15 @@ static bool FuncActive_PeriodImpulseA()
 }
 
 
-static bool FuncActive_ModeStartStopAndDelayImpulseA()
+static bool FuncActive_ModeStartStopImpulseA()
 {
     return (WAVE_B.GetCurrentForm() == B::Impulse::form);
+}
+
+
+static bool FuncActive_ModeStartStopDelayImpulseA()
+{
+    return (WAVE_B.GetCurrentForm() == B::Impulse::form) && (A::Impulse::mode_start_stop->GetChoice() == 1);
 }
 
 
@@ -206,8 +212,8 @@ static PAmplitudePic  impulseA_Amplitude;
 static POffset        impulseA_Offset;
 static PPolarity      impulseA_Polarity(namesPolarity);
 static PModeStart     impulseA_ModeStart(Param::EFuncActive, namesModeStartImpulse);
-static PModeStartStop impulseA_StartStop(FuncActive_ModeStartStopAndDelayImpulseA, namesModeStartStopImpulse);
-static PDelay         impulseA_Delay(FuncActive_ModeStartStopAndDelayImpulseA, Value("100", Order::Micro));
+static PModeStartStop impulseA_StartStop(FuncActive_ModeStartStopImpulseA, namesModeStartStopImpulse);
+static PDelay         impulseA_Delay(FuncActive_ModeStartStopDelayImpulseA, Value("100", Order::Micro));
 
 PPeriod        *A::Impulse::period          = &impulseA_Period;
 PDelay         *A::Impulse::delay           = &impulseA_Delay;
