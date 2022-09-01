@@ -121,6 +121,11 @@ void PageSignals::OnChanged_Form(bool active)
 {
     if (active)
     {
+        if (A::Impulse::mode_start_stop->GetChoice() == 1)
+        {
+            A::Impulse::mode_start_stop->NextChoice();
+        }
+
         ChangedForm();
 
         if (CURRENT_CHANNEL.IsA())
