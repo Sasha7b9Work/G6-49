@@ -53,7 +53,7 @@ void HAL_SPI4::Init()
     // На этом пине будем читать занятость процессора генератора
     isGPIO.Pin = GPIO_PIN_4;
     isGPIO.Mode = GPIO_MODE_INPUT;
-    isGPIO.Pin = GPIO_PULLDOWN;
+    isGPIO.Pull = GPIO_PULLDOWN;
     isGPIO.Alternate = 0;
     HAL_GPIO_Init(GPIOE, &isGPIO);
 }
