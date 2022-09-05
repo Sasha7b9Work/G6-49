@@ -199,7 +199,7 @@ Value PDelay::Min() const
 {
     if (form == A::Impulse::form)
     {
-        return Value("10", Order::Nano);
+        return Value("20", Order::Nano);
     }
 
     return Value(-1);
