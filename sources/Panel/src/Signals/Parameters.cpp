@@ -306,11 +306,6 @@ bool DParam::SetAndLoadValue(double val)
 
 bool DParam::SetAndLoadValue(Value val)
 {
-    if (val < Min() || val > Max())
-    {
-        return false;
-    }
-
     value = val;
 
     PGenerator::SetParameterDouble(*this);
