@@ -7,12 +7,12 @@
 // Текущий сигнал
 #define WAVE(ch)            (waves[ch.value])
 #define CURRENT_WAVE        (WAVE(CURRENT_CHANNEL))
-#define WAVE_B              WAVE(ChB)
+#define WAVE_B              WAVE((int)ChB)
 
 #define FORM(ch)            (WAVE(ch).GetCurrentForm())
 #define CURRENT_FORM        (FORM(CURRENT_CHANNEL))
 #define FORM_A              FORM(ChA)
-#define FORM_B              FORM(ChB)
+#define FORM_B              FORM((int)ChB)
 
 #define PARAM(form)         ((form)->CurrentParameter())
 #define CURRENT_PARAM       (PARAM(CURRENT_FORM))

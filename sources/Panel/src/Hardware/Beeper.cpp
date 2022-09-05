@@ -64,7 +64,7 @@ void Beeper::Beep(Action::E action)
 
     if (action < Action::Count)
     {
-        func[action]();
+        func[(int)action]();
     }
 }
 

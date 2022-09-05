@@ -56,6 +56,6 @@ cstr Order::Suffix(Order::E order)
         {"í",  "n"}
     };
 
-    return suf[order][LANGUAGE];
+    return suf[(int)order][LANGUAGE];
 }
 

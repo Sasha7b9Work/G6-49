@@ -69,7 +69,7 @@ cstr Command::Name() const
 
     if((int)value >= 0 && value < Count)
     {
-        return names[value];
+        return names[(int)value];
     }
     
     // \todo Здесь страшный баг - при большинстве других значений SIZE процессор виснет, даже не заходя в функцию Command::Trace()

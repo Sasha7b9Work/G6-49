@@ -79,10 +79,10 @@ void HAL_PIO::Init(char port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E
     GPIO_InitTypeDef isGPIO =
     {
         pins,
-        MODE(mode),
-        PULL(pull),
-        SPEED(speed),
-        ALTERNATE(alternate)
+        MODE((int)mode),
+        PULL((int)pull),
+        SPEED((int)speed),
+        ALTERNATE((int)alternate)
     };
 
     HAL_GPIO_Init(PORT(port), &isGPIO);
