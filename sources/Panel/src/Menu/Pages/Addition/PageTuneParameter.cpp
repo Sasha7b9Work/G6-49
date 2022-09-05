@@ -144,7 +144,7 @@ static void OnOpenClose_TuneParameter(bool enter)
 }
 
 
-DEF_PAGE_SB(pTuneParameter,
+DEF_PAGE_SB(pTuneParameter, //-V1027
     "ÂÂÎÄ ÇÍÀ×ÅÍÈß", "ENTER VALUE",
     "", "",
     &Item::emptyDark,
@@ -165,8 +165,8 @@ void PageTuneParameter::SetModeEntering()
     }
     else
     {
-        pTuneParameter.items[0] = (Item *)&sbMore;
-        pTuneParameter.items[1] = (Item *)&sbLess;
+        pTuneParameter.items[0] = (Item *)&sbMore; //-V1027
+        pTuneParameter.items[1] = (Item *)&sbLess; //-V1027
     }
 }
 

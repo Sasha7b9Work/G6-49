@@ -63,7 +63,7 @@ void PageSignals::OnPress_Channel(bool active)
         cParameters.form = CURRENT_FORM;
         numForm = CURRENT_FORM->value;
 
-        pageSignals.items[1] = (Item *)(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB);
+        pageSignals.items[1] = (Item *)(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB); //-V1027
 
         PGenerator::TuneChannel(CURRENT_CHANNEL);
     }
@@ -90,7 +90,7 @@ DEF_CHOICE_2( cChannel,                                                         
 
 static void ChangedForm()
 {
-    ChoiceBase *choice = (ChoiceBase *)pageSignals.items[1];        // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала
+    ChoiceBase *choice = (ChoiceBase *)pageSignals.items[1];        // Указатель на ChoiceBase, хранящий индекс выбранной формы текущего канала //-V1027
 
     CURRENT_WAVE.SetIndexForm(choice->CurrentIndex());              // Установить для текущего сигнала индекс формы из ChoiceBase
 
@@ -266,7 +266,7 @@ static void OnDraw_TuneParameter(int x, int y)
 
         if (param->GetType() == TypeDParam::DurationManipulation || param->GetType() == TypeDParam::PeriodManipulation)
         {
-            const Item *item = (const Item *)&bTuneParameter;
+            const Item *item = (const Item *)&bTuneParameter; //-V1027
 
             bool isShade = item->IsShade();
 
@@ -290,7 +290,7 @@ DEF_CHOICE_PARAMETER( cParameters,                                              
 )
 
 
-DEF_PAGE_4( pageSignals,   //-V641
+DEF_PAGE_4( pageSignals,   //-V641 //-V1027
     "НАСТРОЙКИ СИГНАЛОВ", "SIGNAL SETTINGS",   //-V641 //-V1027
     "", "",
     &cChannel,                  // НАСТРОЙКИ СИГНАЛОВ - Канал
