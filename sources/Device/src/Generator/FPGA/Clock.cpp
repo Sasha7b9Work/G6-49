@@ -87,13 +87,13 @@ bool FPGA::Clock::Impulse::AllValuesLessOrEqual(const Value &value)
 
     for (int i = 0; i < 4; i++)
     {
-        if (*values[i] <= value)
+        if (*values[i] > value)
         {
-            return true;
+            return false;
         }
     }
 
-    return false;
+    return true;
 }
 
 
