@@ -41,7 +41,7 @@ namespace FPGA
             const Value &Current(const Chan &);
 
             // «аписывает ранее установленные значени€
-            void Write();
+            void Write(const Chan &);
         }
     }
 
