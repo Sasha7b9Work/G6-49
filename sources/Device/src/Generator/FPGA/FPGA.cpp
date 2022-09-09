@@ -244,7 +244,7 @@ void FPGA::SetFrequency(const Chan &ch)
             WriteControlRegister();
         }
         uint N = (uint)(1E8F / frequency + 0.5F);
-        Register::Write(ch.IsA() ? Register::_5_PerImp_Freq_A : Register::_7_PeriodImpulseB, N);
+        Register::Write(ch.IsA() ? Register::_5_PerImp_PerPack_Freq_A : Register::_7_PeriodImpulseB, N);
     }
 }
 
@@ -274,7 +274,7 @@ void FPGA::PacketImpulse::SetPeriodPacket(const Value &period)
 
     uint64 value = period.ToUINT64() / Clock::Impulse::GetDivider();
 
-    Register::Write(Register::_5_PerImp_Freq_A, value);
+    Register::Write(Register::_5_PerImp_PerPack_Freq_A, value);
 }
 
 
@@ -293,7 +293,7 @@ void FPGA::SetPeriodImpulse(const Chan &ch, const Value &period)
 
     PacketImpulse::periodImpulse = period;
 
-    Register::E reg = ch.IsA() ? Register::_5_PerImp_Freq_A : Register::_7_PeriodImpulseB;
+    Register::E reg = ch.IsA() ? Register::_5_PerImp_PerPack_Freq_A : Register::_7_PeriodImpulseB;
 
     if(ch.IsA() && (ModeWork::value[Chan::A] == ModeWork::PackedImpulse))
     {
