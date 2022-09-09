@@ -21,8 +21,8 @@ namespace FPGA
             static Value duration[Chan::Count] = { Value(0), Value(0) };
             static Value period[Chan::Count] = { Value(0), Value(0) };
 
-            // Пересчитать значения импульсных регистров (длительность, период), если нужно
-            static void RecalculateImpulseRegistersIfNeed();
+            // Переписать значения регистров, если необходимо
+            static void RewriteRegistersIfNeed();
 
             // Если при установке длительности импульса нужно изменять опорную частоту - пересчитать все остальные значения:
             // период импульса, период пакета, задержка между каналами.
@@ -53,7 +53,7 @@ void FPGA::Clock::Impulse::SetDuration(const Chan &ch, const Value &_duration)
 {
     duration[ch] = _duration;
 
-    RecalculateImpulseRegistersIfNeed();
+    RewriteRegistersIfNeed();
 }
 
 
@@ -61,7 +61,7 @@ void FPGA::Clock::Impulse::SetPeriod(const Chan &ch, const Value &_period)
 {
     period[ch] = _period;
 
-    RecalculateImpulseRegistersIfNeed();
+    RewriteRegistersIfNeed();
 }
 
 
@@ -97,7 +97,7 @@ bool FPGA::Clock::Impulse::AllValuesLessOrEqual(const Value &value)
 }
 
 
-void FPGA::Clock::Impulse::RecalculateImpulseRegistersIfNeed()
+void FPGA::Clock::Impulse::RewriteRegistersIfNeed()
 {
     if (AtLeastOneValueGreater(Value(40)) && Is100MHz())
     {
