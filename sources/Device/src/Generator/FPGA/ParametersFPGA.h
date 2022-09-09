@@ -7,9 +7,12 @@ namespace FPGA
 {
     namespace Param
     {
-        namespace PeriodPacket
+        namespace Packet
         {
-            void Set(const Value &);
+            namespace Period
+            {
+                void Set(const Value &);
+            }
         }
     }
 }
