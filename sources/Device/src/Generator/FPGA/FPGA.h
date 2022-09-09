@@ -3,6 +3,7 @@
 #include "Generator/Generator_d.h"
 #include "common/Command.h"
 #include "Generator/FPGA/RegistersFPGA.h"
+#include "Generator/FPGA/ParametersFPGA.h"
 
 
 namespace FPGA
@@ -53,9 +54,6 @@ namespace FPGA
     {
         // Устанавливает число импульсов в пачке
         void SetNumberImpulses(uint n);
-
-        // Устанавливает период следования пачки
-        void SetPeriodPacket(const Value &);
 
         extern Value periodImpulse;
         extern Value durationImpulse;

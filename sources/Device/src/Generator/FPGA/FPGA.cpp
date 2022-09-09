@@ -270,16 +270,6 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
 }
 
 
-void FPGA::PacketImpulse::SetPeriodPacket(const Value &period)
-{
-    Clock::Impulse::SetPeriod(ChA, period);
-
-    uint64 value = period.ToUINT64() / Clock::Impulse::GetDivider();
-
-    Register::Write(Register::_5_PerImp_Freq_A_PerPack, value);
-}
-
-
 void FPGA::PacketImpulse::SetNumberImpulses(uint value)
 {
     uint64 n = (uint64)(((value - 1) * periodImpulse.ToDouble() + durationImpulse.ToDouble()) / 10E-9);

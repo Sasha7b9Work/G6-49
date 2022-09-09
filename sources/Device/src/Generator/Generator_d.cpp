@@ -224,7 +224,7 @@ void DGenerator::SetPacketNumber(const Chan &, const Value &number)
 
 void DGenerator::SetPacketPeriod(const Chan &, const Value &period)
 {
-    FPGA::PacketImpulse::SetPeriodPacket(period);
+    FPGA::Parameter::PeriodPacket::Set(period);
 }
 
 
