@@ -35,4 +35,10 @@ namespace FPGA
             const Value &Current(const Chan &);
         }
     }
+
+    namespace StartStop
+    {
+        // Задержка между импульсами на выходах первого и второго каналов
+        void SetDelay(const Value &delay);
+    }
 }

@@ -245,21 +245,6 @@ void FPGA::SetFrequency(const Chan &ch)
 }
 
 
-void FPGA::SetDelayStartStop(const Value &delay)
-{
-    Register::E reg = Register::_7_PerImp_Freq_B_DelayStartStop;
-
-    uint64 value = delay.ToUINT64() / Clock::Impulse::GetDivider();
-
-    if (Clock::Impulse::Is100MHz())
-    {
-        value -= 2;
-    }
-
-    Register::Write(reg, value);
-}
-
-
 void FPGA::SetStartMode(const Chan &ch, uint8 signal, StartMode::E mode)
 {
     startMode[ch][signal] = mode;

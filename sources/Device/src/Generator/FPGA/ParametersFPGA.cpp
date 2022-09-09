@@ -101,3 +101,18 @@ void FPGA::Impulse::Period::Set(const Chan &ch, const Value &period)
 
     Register::Write(reg, value);
 }
+
+
+void FPGA::StartStop::SetDelay(const Value &delay)
+{
+    Register::E reg = Register::_7_PerImp_Freq_B_DelayStartStop;
+
+    uint64 value = delay.ToUINT64() / Clock::Impulse::GetDivider();
+
+    if (Clock::Impulse::Is100MHz())
+    {
+        value -= 2;
+    }
+
+    Register::Write(reg, value);
+}
