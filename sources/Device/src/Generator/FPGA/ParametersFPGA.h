@@ -1,6 +1,7 @@
 // 2022/09/09 09:22:26 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Common/Common.h"
+#include "Common/CommonTypes.h"
 
 
 namespace FPGA
@@ -10,6 +11,15 @@ namespace FPGA
         namespace Period
         {
             void Set(const Value &);
+        }
+    }
+
+    namespace Impulse
+    {
+        namespace Duration
+        {
+            void Set(const Chan &, const Value &);
+            const Value &Gurrent();
         }
     }
 }

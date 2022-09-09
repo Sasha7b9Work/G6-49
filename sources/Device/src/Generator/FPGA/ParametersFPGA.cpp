@@ -5,8 +5,30 @@
 #include "Generator/FPGA/RegistersFPGA.h"
 
 
+namespace FPGA
+{
+    namespace Packet
+    {
+        namespace Period
+        {
+            static Value current(1.0);
+        }
+    }
+
+    namespace Impulse
+    {
+        namespace Duration
+        {
+            static Value current[Chan::Count] = { Value(1e-3), Value(1e-3) };
+        }
+    }
+}
+
+
 void FPGA::Packet::Period::Set(const Value &period)
 {
+    current = period;
+
     Clock::Impulse::SetPeriod(ChA, period);
 
     uint64 value = period.ToUINT64() / Clock::Impulse::GetDivider();
