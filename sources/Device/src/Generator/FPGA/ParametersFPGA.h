@@ -11,6 +11,9 @@ namespace FPGA
         namespace Period
         {
             void Set(const Value &);
+
+            // Записывает ранее установленное значение
+            void Write();
         }
 
         // Число импульсов в пакете
@@ -27,12 +30,18 @@ namespace FPGA
         {
             void Set(const Chan &, const Value &);
             const Value &Gurrent(const Chan &);
+
+            // Записывает ранее установленное значение
+            void Write();
         }
 
         namespace Period
         {
             void Set(const Chan &, const Value &);
             const Value &Current(const Chan &);
+
+            // Записывает ранее установленные значения
+            void Write();
         }
     }
 
@@ -55,6 +64,9 @@ namespace FPGA
         {
             // Задержка между импульсами на выходах первого и второго каналов
             void Set(const Value &delay);
+
+            // Записывает ранее установленные значения
+            void Write();
         }
     }
 }

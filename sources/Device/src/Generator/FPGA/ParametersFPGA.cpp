@@ -59,9 +59,15 @@ void FPGA::Packet::Period::Set(const Value &period)
 {
     current = period;
 
-    Clock::Impulse::SetPeriod(ChA, period);
+    Write();
+}
 
-    uint64 value = period.ToUINT64() / Clock::Impulse::GetDivider();
+
+void FPGA::Packet::Period::Write()
+{
+    Clock::Impulse::SetPeriod(ChA, current);
+
+    uint64 value = current.ToUINT64() / Clock::Impulse::GetDivider();
 
     Register::Write(Register::_5_PerImp_Freq_A_PerPack, value);
 }
