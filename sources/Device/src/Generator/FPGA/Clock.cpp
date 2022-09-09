@@ -145,6 +145,33 @@ void FPGA::Clock::Impulse::Set(E _clock)
 
 void FPGA::Clock::Impulse::RewriteRegisters(const Chan &ch)
 {
+    /*
+    * --+--------------------+-----------+
+        | параметра          | коррекция |
+      --+--------------------+-----------+
+      5 | period packet      | -         | +
+        | period impulse A   | +         | +
+        | freq A             | -         |
+      --+--------------------+-----------+
+      6 | diration impulse A | -         | +
+        | number impulse     | -         | +
+      --+--------------------+-----------+
+      7 | period impulse B   | +         | +
+        | freq B             | -         |
+        | delay start stop   | +         |
+      --+--------------------+-----------+
+      8 | duration impulse B | -         | +
+      --+--------------------+-----------+
+    */
+
+    /*
+    *   В режиме импульсов переписываем:
+    *   - период
+    *   - длительность
+    * 
+    *   В режиме пакета:
+    *   
+    */
     ModeWork::E mode = ModeWork::Current(ch);
 
     switch (mode)
