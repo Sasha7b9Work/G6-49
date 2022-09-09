@@ -437,7 +437,7 @@ static void WriteRegister(SimpleMessage *msg)
         break;
 
     case Register::FPGA_RG7_PeriodImpulseB:
-        FPGA::Register::Write(FPGA::Register::_7_PeriodImpulseB, value.ToUINT64());
+        FPGA::Register::Write(FPGA::Register::_7_PerImp_Freq_B_DelayStartStop, value.ToUINT64());
         break;
 
     case Register::FPGA_RG8_DurationImpulseB:

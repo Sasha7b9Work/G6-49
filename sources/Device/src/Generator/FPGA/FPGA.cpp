@@ -244,7 +244,7 @@ void FPGA::SetFrequency(const Chan &ch)
             WriteControlRegister();
         }
         uint N = (uint)(1E8F / frequency + 0.5F);
-        Register::Write(ch.IsA() ? Register::_5_PerImp_PerPack_Freq_A : Register::_7_PeriodImpulseB, N);
+        Register::Write(ch.IsA() ? Register::_5_PerImp_PerPack_Freq_A : Register::_7_PerImp_Freq_B_DelayStartStop, N);
     }
 }
 
@@ -293,11 +293,11 @@ void FPGA::SetPeriodImpulse(const Chan &ch, const Value &period)
 
     PacketImpulse::periodImpulse = period;
 
-    Register::E reg = ch.IsA() ? Register::_5_PerImp_PerPack_Freq_A : Register::_7_PeriodImpulseB;
+    Register::E reg = ch.IsA() ? Register::_5_PerImp_PerPack_Freq_A : Register::_7_PerImp_Freq_B_DelayStartStop;
 
     if(ch.IsA() && (ModeWork::value[Chan::A] == ModeWork::PackedImpulse))
     {
-        reg = Register::_7_PeriodImpulseB;
+        reg = Register::_7_PerImp_Freq_B_DelayStartStop;
     }
 
     Clock::Impulse::SetPeriod(ch, period);
@@ -315,7 +315,7 @@ void FPGA::SetPeriodImpulse(const Chan &ch, const Value &period)
 
 void FPGA::SetDelayStartStop(const Value &delay)
 {
-    Register::E reg = Register::_7_PeriodImpulseB;
+    Register::E reg = Register::_7_PerImp_Freq_B_DelayStartStop;
 
     uint64 value = delay.ToUINT64() / Clock::Impulse::GetDivider();
 

@@ -151,7 +151,7 @@ void FPGA::Clock::Impulse::RecalculateImpulseRegistersTo(E _clock)
     {
         Register::_5_PerImp_PerPack_Freq_A,
         Register::_6_DurImp_NumbImp_A,
-        Register::_7_PeriodImpulseB,
+        Register::_7_PerImp_Freq_B_DelayStartStop,
         Register::_8_DurationImpulseB
     };
 
