@@ -76,5 +76,7 @@ namespace FPGA
             Free,
             Count
         };
+
+        E Current(const Chan &);
     };
 };

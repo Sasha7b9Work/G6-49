@@ -77,7 +77,9 @@ namespace FPGA
     namespace ModeWork
     {
         // Режим работы ПЛИС
-        static E value[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
+        static E current[Chan::Count] = { FPGA::ModeWork::None, FPGA::ModeWork::None };;
+
+        E Current(const Chan &ch) { return current[ch]; }
     }
 }
 
@@ -132,7 +134,7 @@ void FPGA::SetWaveForm(const Chan &ch, TypeForm::E form)
 
 void FPGA::SetFormMeander(const Chan &ch)
 {
-    ModeWork::value[ch] = ModeWork::Meander;
+    ModeWork::current[ch] = ModeWork::Meander;
     WriteControlRegister();
     AD9952::SetAmplitudeForMeander(ch);
 }
@@ -152,41 +154,41 @@ void FPGA::WriteMaxAmplitude(const Chan &ch)
 
 void FPGA::SetFormSine(const Chan &ch)
 {
-    ModeWork::value[ch] = ModeWork::Sine;
+    ModeWork::current[ch] = ModeWork::Sine;
 }
 
 
 void FPGA::SetFormFree(const Chan &ch)
 {
-    ModeWork::value[ch] = ModeWork::Free;
+    ModeWork::current[ch] = ModeWork::Free;
     SendData();
 }
 
 
 void FPGA::SetFormRampPlus(const Chan &ch)
 {
-    ModeWork::value[ch] = ModeWork::DDS;
+    ModeWork::current[ch] = ModeWork::DDS;
     SendData();
 }
 
 
 void FPGA::SetFormRampMinus(const Chan &ch)
 {
-    ModeWork::value[ch] = ModeWork::DDS;
+    ModeWork::current[ch] = ModeWork::DDS;
     SendData();
 }
 
 
 void FPGA::SetFormTriangle(const Chan &ch)
 {
-    ModeWork::value[ch] = ModeWork::DDS;
+    ModeWork::current[ch] = ModeWork::DDS;
     SendData();
 }
 
 
 void FPGA::SetFormPackedImpulse(const Chan &)
 {
-    ModeWork::value[Chan::A] = ModeWork::PackedImpulse;
+    ModeWork::current[Chan::A] = ModeWork::PackedImpulse;
     WriteControlRegister();
 
     uint64 data = (16383 << 14) + 8191;
@@ -214,7 +216,7 @@ void FPGA::SetPolarity(const Chan &ch, uint8 polarity)
 
 void FPGA::SetFormImpulse(const Chan &ch)
 {
-    ModeWork::value[ch] = ModeWork::Impulse;
+    ModeWork::current[ch] = ModeWork::Impulse;
     WriteControlRegister();
 
     SetPolarity(ch, 0);         // Устанавливаем положительную полярность
@@ -227,7 +229,7 @@ void FPGA::SetFrequency(const Chan &ch)
 
     double frequency = SettingsGenerator::Frequency(ch);
     
-    if(ModeWork::value[ch] == ModeWork::Meander)
+    if(ModeWork::current[ch] == ModeWork::Meander)
     {
         AD9952::SetFrequency(ch);
     }
@@ -236,11 +238,11 @@ void FPGA::SetFrequency(const Chan &ch)
         uint64 N = (uint64)((frequency * ((uint64)1 << 40)) / 1E8F);
         Register::Write(Register::_1_Freq, N);
     }
-    else if(ModeWork::value[ch] == ModeWork::Impulse || ModeWork::value[ch] == ModeWork::Impulse2)
+    else if(ModeWork::current[ch] == ModeWork::Impulse || ModeWork::current[ch] == ModeWork::Impulse2)
     {
-        if (ch.IsB() && (ModeWork::value[ch] == ModeWork::Impulse2))
+        if (ch.IsB() && (ModeWork::current[ch] == ModeWork::Impulse2))
         {
-            ModeWork::value[ch] = ModeWork::Impulse;
+            ModeWork::current[ch] = ModeWork::Impulse;
             WriteControlRegister();
         }
         uint N = (uint)(1E8F / frequency + 0.5F);
@@ -255,7 +257,7 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
 
     Register::E reg = ch.IsA() ? Register::_6_DurImp_NumbImp_A : Register::_8_DurImp_B;
 
-    if(ch.IsA() && (ModeWork::value[Chan::A] == ModeWork::PackedImpulse))
+    if(ch.IsA() && (ModeWork::current[Chan::A] == ModeWork::PackedImpulse))
     {
         reg = Register::_8_DurImp_B;
     }
@@ -295,7 +297,7 @@ void FPGA::SetPeriodImpulse(const Chan &ch, const Value &period)
 
     Register::E reg = ch.IsA() ? Register::_5_PerImp_Freq_A_PerPack : Register::_7_PerImp_Freq_B_DelayStartStop;
 
-    if(ch.IsA() && (ModeWork::value[Chan::A] == ModeWork::PackedImpulse))
+    if(ch.IsA() && (ModeWork::current[Chan::A] == ModeWork::PackedImpulse))
     {
         reg = Register::_7_PerImp_Freq_B_DelayStartStop;
     }
@@ -349,17 +351,17 @@ void FPGA::WriteControlRegister()
 
     Bit::Set(data, RG0::_0_WriteData);                    // В нулевом бите 0 записываем только для записи данных в память
 
-    if((ModeWork::value[Chan::A] == ModeWork::Sine) && AD9952::Manipulation::IsEnabled(ChA))
+    if((ModeWork::current[Chan::A] == ModeWork::Sine) && AD9952::Manipulation::IsEnabled(ChA))
     {
         Bit::Clear(data, RG0::_3_ManipulationOSK2);
     }
 
-    if ((ModeWork::value[Chan::B] == ModeWork::Sine) && AD9952::Manipulation::IsEnabled(ChB))
+    if ((ModeWork::current[Chan::B] == ModeWork::Sine) && AD9952::Manipulation::IsEnabled(ChB))
     {
         Bit::Clear(data, RG0::_5_ManipulationOSK1);
     }
 
-    switch((uint8)ModeWork::value[Chan::A]) //-V2520
+    switch((uint8)ModeWork::current[Chan::A]) //-V2520
     {
         case ModeWork::Meander:     
             Bit::Set(data, RG0::_8_MeanderA);
@@ -370,7 +372,7 @@ void FPGA::WriteControlRegister()
             break;
     }
 
-    switch((uint8)ModeWork::value[Chan::B]) //-V2520
+    switch((uint8)ModeWork::current[Chan::B]) //-V2520
     {
         case ModeWork::Meander:   
             Bit::Set(data, RG0::_9_MeanderB);
@@ -389,7 +391,7 @@ void FPGA::WriteControlRegister()
         Bit::Set(data, RG0::_7_ClockAD9952);
     }
 
-    if (ModeWork::value[Chan::A] == ModeWork::PackedImpulse)
+    if (ModeWork::current[Chan::A] == ModeWork::PackedImpulse)
     {
         Bit::Set(data, RG0::_12_PacketImpulse);
     }
@@ -417,13 +419,13 @@ void FPGA::WriteControlRegister()
 
 bool FPGA::InModeDDS(const Chan &ch)
 {
-    return (ModeWork::value[ch] == FPGA::ModeWork::DDS) || (ModeWork::value[ch] == FPGA::ModeWork::Free);
+    return (ModeWork::current[ch] == FPGA::ModeWork::DDS) || (ModeWork::current[ch] == FPGA::ModeWork::Free);
 }
 
 
 void FPGA::SetBitsStartMode(const Chan &ch, uint16 &data)
 {
-    ModeWork::E mode = ModeWork::value[ch];
+    ModeWork::E mode = ModeWork::current[ch];
 
     if (mode == ModeWork::Impulse || mode == ModeWork::PackedImpulse)
     {
@@ -493,7 +495,7 @@ void FPGA::SendDataChannel(const Chan &ch)
     volatile int j = 0;
     for(j = 0; j < 10; j++) { }
 
-    uint8 *pointer = (ModeWork::value[ch] == ModeWork::Free) ? DataFreeSignal(ch) : &dataDDS[ch][0];
+    uint8 *pointer = (ModeWork::current[ch] == ModeWork::Free) ? DataFreeSignal(ch) : &dataDDS[ch][0];
 
     for (int i = 0; i < FPGA::NUM_POINTS * 2; i++)
     {
