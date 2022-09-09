@@ -32,7 +32,7 @@ namespace FPGA
             const Value &Gurrent(const Chan &);
 
             // «аписывает ранее установленное значение
-            void Write();
+            void Write(const Chan &);
         }
 
         namespace Period

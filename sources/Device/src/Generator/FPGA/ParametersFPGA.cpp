@@ -77,6 +77,12 @@ void FPGA::Impulse::Duration::Set(const Chan &ch, const Value &duration)
 {
     current[ch] = duration;
 
+    Write(ch);
+}
+
+
+void FPGA::Impulse::Duration::Write(const Chan &ch)
+{
     Register::E reg = ch.IsA() ? Register::_6_DurImp_A_NumbImp : Register::_8_DurImp_B;
 
     if (ch.IsA() && (ModeWork::Current(ChA) == ModeWork::PackedImpulse))
@@ -84,9 +90,9 @@ void FPGA::Impulse::Duration::Set(const Chan &ch, const Value &duration)
         reg = Register::_8_DurImp_B;
     }
 
-    Clock::Impulse::SetDuration(ch, duration);
+    Clock::Impulse::SetDuration(ch, current[ch]);
 
-    uint64 value = duration.ToUINT64() / Clock::Impulse::GetDivider();
+    uint64 value = current[ch].ToUINT64() / Clock::Impulse::GetDivider();
 
     Register::Write(reg, value);
 }
