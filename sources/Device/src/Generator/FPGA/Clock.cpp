@@ -150,7 +150,7 @@ void FPGA::Clock::Impulse::RecalculateImpulseRegistersTo(E _clock)
     static const Register::E registers[4] =
     {
         Register::_5_PerImp_Freq_A_PerPack,
-        Register::_6_DurImp_NumbImp_A,
+        Register::_6_DurImp_A_NumbImp,
         Register::_7_PerImp_Freq_B_DelayStartStop,
         Register::_8_DurImp_B
     };

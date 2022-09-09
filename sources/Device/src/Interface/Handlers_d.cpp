@@ -433,7 +433,7 @@ static void WriteRegister(SimpleMessage *msg)
         break;
 
     case Register::FPGA_RG6_DurationImpulseA:
-        FPGA::Register::Write(FPGA::Register::_6_DurImp_NumbImp_A, value.ToUINT64());
+        FPGA::Register::Write(FPGA::Register::_6_DurImp_A_NumbImp, value.ToUINT64());
         break;
 
     case Register::FPGA_RG7_PeriodImpulseB:
