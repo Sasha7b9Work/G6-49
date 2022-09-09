@@ -1551,6 +1551,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Generator\FPGA\Clock.h</FilePath>
             </File>
+            <File>
+              <FileName>ParametersFPGA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\FPGA\ParametersFPGA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ParametersFPGA.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\FPGA\ParametersFPGA.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
