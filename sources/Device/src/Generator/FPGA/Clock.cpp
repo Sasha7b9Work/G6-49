@@ -22,10 +22,10 @@ namespace FPGA
             static Value period[Chan::Count] = { Value(0), Value(0) };
 
             // Переписать значения регистров, если необходимо
-            static void RewriteRegistersIfNeed();
+            static void RewriteRegistersIfNeed(const Chan &);
 
             // Если при установке длительности импульса нужно изменять опорную частоту - переписать все значения
-            static void RewriteRegisters();
+            static void RewriteRegisters(const Chan &);
 
             static bool Is1MHz() { return clock == _1MHz; }
 
@@ -51,7 +51,7 @@ void FPGA::Clock::Impulse::SetDuration(const Chan &ch, const Value &_duration)
 {
     duration[ch] = _duration;
 
-    RewriteRegistersIfNeed();
+    RewriteRegistersIfNeed(ch);
 }
 
 
@@ -59,7 +59,7 @@ void FPGA::Clock::Impulse::SetPeriod(const Chan &ch, const Value &_period)
 {
     period[ch] = _period;
 
-    RewriteRegistersIfNeed();
+    RewriteRegistersIfNeed(ch);
 }
 
 
@@ -95,19 +95,19 @@ bool FPGA::Clock::Impulse::AllValuesLessOrEqual(const Value &value)
 }
 
 
-void FPGA::Clock::Impulse::RewriteRegistersIfNeed()
+void FPGA::Clock::Impulse::RewriteRegistersIfNeed(const Chan &ch)
 {
     if (AtLeastOneValueGreater(Value(40)) && Is100MHz())
     {
         Set(_1MHz);
 
-        RewriteRegisters();
+        RewriteRegisters(ch);
     }
     else if (AllValuesLessOrEqual(Value(40)) && Is1MHz())
     {
         Set(_100MHz);
 
-        RewriteRegisters();
+        RewriteRegisters(ch);
     }
 }
 
@@ -143,34 +143,14 @@ void FPGA::Clock::Impulse::Set(E _clock)
 }
 
 
-void FPGA::Clock::Impulse::RewriteRegisters()
+void FPGA::Clock::Impulse::RewriteRegisters(const Chan &)
 {
-    static const Register::E registers[4] =
-    {
-        Register::_5_PerImp_Freq_A_PerPack,
-        Register::_6_DurImp_A_NumbImp,
-        Register::_7_PerImp_Freq_B_DelayStartStop,
-        Register::_8_DurImp_B
-    };
+//    FPGA::ModeWork::E mode = FPGA::ModeWork::Current(ch);
 
-    if (_clock == _1MHz)       // Было 100 МГц, нужно уменьшить все значения в 100 раз
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            uint64 value = Register::Read(registers[i]);
-            value /= 100;
-            Register::Write(registers[i], value);
-        }
-    }
-    else                                    // Был 1 МГц, нужно увеличить все значения в 100 раз
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            uint64 value = Register::Read(registers[i]);
-            value *= 100;
-            Register::Write(registers[i], value);
-        }
-    }
+//    switch (mode)
+//    {
+//        case 
+//    }
 }
 
 

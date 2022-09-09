@@ -229,13 +229,8 @@ void FPGA::SetFrequency(const Chan &ch)
         uint64 N = (uint64)((frequency * ((uint64)1 << 40)) / 1E8F);
         Register::Write(Register::_1_Freq, N);
     }
-    else if(ModeWork::current[ch] == ModeWork::Impulse || ModeWork::current[ch] == ModeWork::Impulse2)
+    else if(ModeWork::current[ch] == ModeWork::Impulse)
     {
-        if (ch.IsB() && (ModeWork::current[ch] == ModeWork::Impulse2))
-        {
-            ModeWork::current[ch] = ModeWork::Impulse;
-            WriteControlRegister();
-        }
         uint N = (uint)(1E8F / frequency + 0.5F);
         Register::Write(ch.IsA() ? Register::_5_PerImp_Freq_A_PerPack : Register::_7_PerImp_Freq_B_DelayStartStop, N);
     }
