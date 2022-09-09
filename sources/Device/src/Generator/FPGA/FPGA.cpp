@@ -253,7 +253,7 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
 {
     PacketImpulse::durationImpulse = duration;
 
-    Register::E reg = ch.IsA() ? Register::_6_DurationImpulseA : Register::_8_DurationImpulseB;
+    Register::E reg = ch.IsA() ? Register::_6_DurImp_NumbImp_A : Register::_8_DurationImpulseB;
 
     if(ch.IsA() && (ModeWork::value[Chan::A] == ModeWork::PackedImpulse))
     {
@@ -282,7 +282,7 @@ void FPGA::PacketImpulse::SetNumberImpulses(uint value)
 {
     uint64 n = (uint64)(((value - 1) * periodImpulse.ToDouble() + durationImpulse.ToDouble()) / 10E-9);
 
-    Register::Write(Register::_6_DurationImpulseA, n);
+    Register::Write(Register::_6_DurImp_NumbImp_A, n);
 }
 
 
