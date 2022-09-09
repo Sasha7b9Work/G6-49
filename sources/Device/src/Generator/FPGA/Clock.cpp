@@ -143,14 +143,18 @@ void FPGA::Clock::Impulse::Set(E _clock)
 }
 
 
-void FPGA::Clock::Impulse::RewriteRegisters(const Chan &)
+void FPGA::Clock::Impulse::RewriteRegisters(const Chan &ch)
 {
-//    FPGA::ModeWork::E mode = FPGA::ModeWork::Current(ch);
+    ModeWork::E mode = ModeWork::Current(ch);
 
-//    switch (mode)
-//    {
-//        case 
-//    }
+    switch (mode)
+    {
+    case ModeWork::Impulse:
+        break;
+
+    case ModeWork::PackedImpulse:
+        break;
+    }
 }
 
 
