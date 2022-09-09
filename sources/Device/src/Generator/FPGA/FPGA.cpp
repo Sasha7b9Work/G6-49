@@ -250,14 +250,6 @@ void FPGA::SetFrequency(const Chan &ch)
 }
 
 
-void FPGA::PacketImpulse::SetNumberImpulses(uint value)
-{
-    uint64 n = (uint64)(((value - 1) * periodImpulse.ToDouble() + Impulse::Duration::Gurrent(ChA).ToDouble()) / 10E-9);
-
-    Register::Write(Register::_6_DurImp_A_NumbImp, n);
-}
-
-
 void FPGA::SetPeriodImpulse(const Chan &ch, const Value &period)
 {
     // Для пакетного и одиночного импульсных режимов период задаётся здесь. Поэтому сохраняем значение периода импульсов, чтобы использовать его

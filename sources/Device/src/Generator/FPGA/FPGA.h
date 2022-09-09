@@ -50,9 +50,6 @@ namespace FPGA
 
     namespace PacketImpulse
     {
-        // Устанавливает число импульсов в пачке
-        void SetNumberImpulses(uint n);
-
         extern Value periodImpulse;
     };
 

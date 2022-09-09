@@ -14,6 +14,11 @@ namespace FPGA
         {
             static Value current(1.0);
         }
+
+        namespace Number
+        {
+            static uint current = 0;
+        }
     }
 
     namespace Impulse
@@ -56,4 +61,14 @@ void FPGA::Impulse::Duration::Set(const Chan &ch, const Value &duration)
     uint64 value = duration.ToUINT64() / Clock::Impulse::GetDivider();
 
     Register::Write(reg, value);
+}
+
+
+void FPGA::Packet::Number::Set(const uint value)
+{
+    current = value;
+
+    uint64 n = (uint64)(((value - 1) * FPGA::PacketImpulse::periodImpulse.ToDouble() + Impulse::Duration::Gurrent(ChA).ToDouble()) / 10E-9);
+
+    Register::Write(Register::_6_DurImp_A_NumbImp, n);
 }

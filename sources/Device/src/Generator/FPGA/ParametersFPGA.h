@@ -12,6 +12,13 @@ namespace FPGA
         {
             void Set(const Value &);
         }
+
+        // Число импульсов в пакете
+        namespace Number
+        {
+            // Устанавливает число импульсов в пачке
+            void Set(const uint n);
+        }
     }
 
     namespace Impulse
