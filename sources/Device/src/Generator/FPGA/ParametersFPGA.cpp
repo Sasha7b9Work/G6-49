@@ -5,7 +5,7 @@
 #include "Generator/FPGA/RegistersFPGA.h"
 
 
-void FPGA::Parameter::PeriodPacket::Set(const Value &period)
+void FPGA::Param::PeriodPacket::Set(const Value &period)
 {
     Clock::Impulse::SetPeriod(ChA, period);
 

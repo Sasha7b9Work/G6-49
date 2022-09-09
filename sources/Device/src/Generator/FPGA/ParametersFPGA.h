@@ -5,7 +5,7 @@
 
 namespace FPGA
 {
-    namespace Parameter
+    namespace Param
     {
         namespace PeriodPacket
         {
