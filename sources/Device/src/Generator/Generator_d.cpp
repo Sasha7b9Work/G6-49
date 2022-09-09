@@ -164,7 +164,7 @@ void DGenerator::SetFrequency(const Chan &ch, const Value &freq)
 void DGenerator::SetManipulationPeriod(const Chan &ch, const Value &period)
 {
     FPGA::SetPolarity(ch, 0);
-    FPGA::SetPeriodImpulse(ch, period);
+    FPGA::Impulse::Period::Set(ch, period);
 }
 
 
@@ -177,7 +177,7 @@ void DGenerator::SetManipulationDuration(const Chan &ch, const Value &duration)
 
 void DGenerator::SetPeriod(const Chan &ch, const Value &period)
 {
-    FPGA::SetPeriodImpulse(ch, period);
+    FPGA::Impulse::Period::Set(ch, period);
 }
 
 

@@ -29,6 +29,13 @@ namespace FPGA
 
             const Value &Gurrent(const Chan &ch) { return current[ch]; }
         }
+
+        namespace Period
+        {
+            static Value current[Chan::Count] = { Value(1e-2), Value(1e-2) };
+
+            const Value &Current(const Chan &ch) { return current[ch]; }
+        }
     }
 }
 
@@ -68,7 +75,29 @@ void FPGA::Packet::Number::Set(const uint value)
 {
     current = value;
 
-    uint64 n = (uint64)(((value - 1) * FPGA::PacketImpulse::periodImpulse.ToDouble() + Impulse::Duration::Gurrent(ChA).ToDouble()) / 10E-9);
+    uint64 n = (uint64)(((value - 1) * Impulse::Period::Current(ChA).ToDouble() + Impulse::Duration::Gurrent(ChA).ToDouble()) / 10E-9);
 
     Register::Write(Register::_6_DurImp_A_NumbImp, n);
+}
+
+
+void FPGA::Impulse::Period::Set(const Chan &ch, const Value &period)
+{
+    Register::E reg = ch.IsA() ? Register::_5_PerImp_Freq_A_PerPack : Register::_7_PerImp_Freq_B_DelayStartStop;
+
+    if (ch.IsA() && (ModeWork::Current(ChA) == ModeWork::PackedImpulse))
+    {
+        reg = Register::_7_PerImp_Freq_B_DelayStartStop;
+    }
+
+    Clock::Impulse::SetPeriod(ch, period);
+
+    uint64 value = period.ToUINT64() / Clock::Impulse::GetDivider();
+
+    if (Clock::Impulse::Is100MHz())
+    {
+        value -= 2;
+    }
+
+    Register::Write(reg, value);
 }

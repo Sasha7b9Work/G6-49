@@ -28,5 +28,11 @@ namespace FPGA
             void Set(const Chan &, const Value &);
             const Value &Gurrent(const Chan &);
         }
+
+        namespace Period
+        {
+            void Set(const Chan &, const Value &);
+            const Value &Current(const Chan &);
+        }
     }
 }

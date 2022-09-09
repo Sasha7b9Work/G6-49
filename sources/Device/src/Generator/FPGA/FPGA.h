@@ -17,9 +17,6 @@ namespace FPGA
     void SetFrequency(const Chan &);
 
     void SetAmplitude();
-
-    void SetPeriodImpulse(const Chan &, const Value &period);
-
     // Задержка между импульсами на выходах первого и второго каналов
     void SetDelayStartStop(const Value &delay);
 
@@ -47,11 +44,6 @@ namespace FPGA
 
     // Запись управляющего регистра
     void WriteControlRegister();
-
-    namespace PacketImpulse
-    {
-        extern Value periodImpulse;
-    };
 
     namespace ModeWork
     {

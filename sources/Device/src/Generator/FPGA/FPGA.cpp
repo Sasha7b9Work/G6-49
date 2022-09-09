@@ -68,11 +68,6 @@ namespace FPGA
     // Режим СтартА/СтопВ - вкл/откл
     static StartStopMode::E startStopMode = StartStopMode::Disable;
 
-    namespace PacketImpulse
-    {
-        Value PacketImpulse::periodImpulse("0", Order::One);
-    }
-
     namespace ModeWork
     {
         // Режим работы ПЛИС
@@ -247,33 +242,6 @@ void FPGA::SetFrequency(const Chan &ch)
         uint N = (uint)(1E8F / frequency + 0.5F);
         Register::Write(ch.IsA() ? Register::_5_PerImp_Freq_A_PerPack : Register::_7_PerImp_Freq_B_DelayStartStop, N);
     }
-}
-
-
-void FPGA::SetPeriodImpulse(const Chan &ch, const Value &period)
-{
-    // Для пакетного и одиночного импульсных режимов период задаётся здесь. Поэтому сохраняем значение периода импульсов, чтобы использовать его
-    // в пакетном режиме при необходимости
-
-    PacketImpulse::periodImpulse = period;
-
-    Register::E reg = ch.IsA() ? Register::_5_PerImp_Freq_A_PerPack : Register::_7_PerImp_Freq_B_DelayStartStop;
-
-    if(ch.IsA() && (ModeWork::current[Chan::A] == ModeWork::PackedImpulse))
-    {
-        reg = Register::_7_PerImp_Freq_B_DelayStartStop;
-    }
-
-    Clock::Impulse::SetPeriod(ch, period);
-
-    uint64 value = period.ToUINT64() / Clock::Impulse::GetDivider();
-
-    if (Clock::Impulse::Is100MHz())
-    {
-        value -= 2;
-    }
-
-    Register::Write(reg, value);
 }
 
 
