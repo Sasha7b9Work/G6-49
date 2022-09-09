@@ -250,23 +250,6 @@ void FPGA::SetFrequency(const Chan &ch)
 }
 
 
-void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
-{
-    Register::E reg = ch.IsA() ? Register::_6_DurImp_A_NumbImp : Register::_8_DurImp_B;
-
-    if(ch.IsA() && (ModeWork::current[Chan::A] == ModeWork::PackedImpulse))
-    {
-        reg = Register::_8_DurImp_B;
-    }
-
-    Clock::Impulse::SetDuration(ch, duration);
-
-    uint64 value = duration.ToUINT64() / Clock::Impulse::GetDivider();
-
-    Register::Write(reg, value);
-}
-
-
 void FPGA::PacketImpulse::SetNumberImpulses(uint value)
 {
     uint64 n = (uint64)(((value - 1) * periodImpulse.ToDouble() + Impulse::Duration::Gurrent(ChA).ToDouble()) / 10E-9);

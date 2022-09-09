@@ -18,8 +18,6 @@ namespace FPGA
 
     void SetAmplitude();
 
-    void SetDurationImpulse(const Chan &, const Value &duration);
-
     void SetPeriodImpulse(const Chan &, const Value &period);
 
     // Задержка между импульсами на выходах первого и второго каналов
