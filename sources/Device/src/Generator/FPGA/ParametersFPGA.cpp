@@ -37,6 +37,13 @@ namespace FPGA
             const Value &Current(const Chan &ch) { return current[ch]; }
         }
     }
+
+    namespace StartStop
+    {
+        static StartStopMode::E current = StartStopMode::Disable;
+
+        StartStopMode::E CurrentMode() { return current; }
+    }
 }
 
 
@@ -115,4 +122,11 @@ void FPGA::StartStop::SetDelay(const Value &delay)
     }
 
     Register::Write(reg, value);
+}
+
+
+void FPGA::StartStop::Switch(StartStopMode::E mode)
+{
+    current = mode;
+    WriteControlRegister();
 }

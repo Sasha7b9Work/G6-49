@@ -24,8 +24,6 @@ namespace FPGA
     // Установка режима запуска для произвольного (0) сигнала и импульсного (1) сигнала signal
     void SetStartMode(const Chan &, uint8 signal, StartMode::E);
 
-    void EnableStartStopMode(StartStopMode::E);
-
     // Делает однократный запуск
     void SingleStart();
 
