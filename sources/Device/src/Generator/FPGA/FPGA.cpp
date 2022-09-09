@@ -71,7 +71,6 @@ namespace FPGA
     namespace PacketImpulse
     {
         Value PacketImpulse::periodImpulse("0", Order::One);
-        Value PacketImpulse::_durationImpulse("0", Order::One);
     }
 
     namespace ModeWork
@@ -253,8 +252,6 @@ void FPGA::SetFrequency(const Chan &ch)
 
 void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
 {
-    PacketImpulse::_durationImpulse = duration;
-
     Register::E reg = ch.IsA() ? Register::_6_DurImp_A_NumbImp : Register::_8_DurImp_B;
 
     if(ch.IsA() && (ModeWork::current[Chan::A] == ModeWork::PackedImpulse))
@@ -272,7 +269,7 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
 
 void FPGA::PacketImpulse::SetNumberImpulses(uint value)
 {
-    uint64 n = (uint64)(((value - 1) * periodImpulse.ToDouble() + _durationImpulse.ToDouble()) / 10E-9);
+    uint64 n = (uint64)(((value - 1) * periodImpulse.ToDouble() + Impulse::Duration::Gurrent(ChA).ToDouble()) / 10E-9);
 
     Register::Write(Register::_6_DurImp_A_NumbImp, n);
 }

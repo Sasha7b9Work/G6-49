@@ -56,7 +56,6 @@ namespace FPGA
         void SetNumberImpulses(uint n);
 
         extern Value periodImpulse;
-        extern Value _durationImpulse;
     };
 
     namespace ModeWork

@@ -20,6 +20,8 @@ namespace FPGA
         namespace Duration
         {
             static Value current[Chan::Count] = { Value(1e-3), Value(1e-3) };
+
+            const Value &Gurrent(const Chan &ch) { return current[ch]; }
         }
     }
 }
