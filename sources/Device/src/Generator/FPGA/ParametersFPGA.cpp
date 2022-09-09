@@ -46,6 +46,11 @@ namespace FPGA
 
             E Current() { return current; }
         }
+
+        namespace Delay
+        {
+            static Value current(1e-3);
+        }
     }
 }
 
@@ -113,8 +118,10 @@ void FPGA::Impulse::Period::Set(const Chan &ch, const Value &period)
 }
 
 
-void FPGA::StartStop::SetDelay(const Value &delay)
+void FPGA::StartStop::Delay::Set(const Value &delay)
 {
+    current = delay;
+
     Register::E reg = Register::_7_PerImp_Freq_B_DelayStartStop;
 
     uint64 value = delay.ToUINT64() / Clock::Impulse::GetDivider();

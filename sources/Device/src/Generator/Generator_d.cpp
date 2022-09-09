@@ -236,7 +236,7 @@ void DGenerator::SetDuration(const Chan &ch, const Value &value)
 
 void DGenerator::SetDelayStartStop(const Chan &, const Value &delay)
 {
-    FPGA::StartStop::SetDelay(delay);
+    FPGA::StartStop::Delay::Set(delay);
 }
 
 

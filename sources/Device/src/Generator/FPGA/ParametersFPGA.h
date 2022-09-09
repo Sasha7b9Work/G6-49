@@ -51,7 +51,10 @@ namespace FPGA
         }
 
 
-        // Задержка между импульсами на выходах первого и второго каналов
-        void SetDelay(const Value &delay);
+        namespace Delay
+        {
+            // Задержка между импульсами на выходах первого и второго каналов
+            void Set(const Value &delay);
+        }
     }
 }
