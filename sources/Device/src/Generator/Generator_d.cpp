@@ -218,7 +218,7 @@ void DGenerator::SetPhase(const Chan &ch, const Value &phase)
 
 void DGenerator::SetPacketNumber(const Chan &, const Value &number)
 {
-    FPGA::PacketImpulse::SetNumberImpules((uint)(number.ToDouble() + 0.5));
+    FPGA::PacketImpulse::SetNumberImpulses((uint)(number.ToDouble() + 0.5));
 }
 
 

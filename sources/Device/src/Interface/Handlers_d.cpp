@@ -429,7 +429,7 @@ static void WriteRegister(SimpleMessage *msg)
         break;
 
     case Register::FPGA_RG5_PeriodImpulseA:
-        FPGA::Register::Write(FPGA::Register::_5_PeriodImpulseA, value.ToUINT64());
+        FPGA::Register::Write(FPGA::Register::_5_PerImp_Freq_A, value.ToUINT64());
         break;
 
     case Register::FPGA_RG6_DurationImpulseA:

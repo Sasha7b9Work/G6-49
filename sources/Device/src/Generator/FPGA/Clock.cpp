@@ -149,7 +149,7 @@ void FPGA::Clock::Impulse::RecalculateImpulseRegistersTo(E _clock)
 {
     static const Register::E registers[4] =
     {
-        Register::_5_PeriodImpulseA,
+        Register::_5_PerImp_Freq_A,
         Register::_6_DurationImpulseA,
         Register::_7_PeriodImpulseB,
         Register::_8_DurationImpulseB
