@@ -80,16 +80,6 @@ struct StartMode
 };
 
 
-struct StartStopMode
-{
-    enum E
-    {
-        Disable,
-        Enable
-    };
-};
-
-
 struct KoeffCal
 {
     enum E

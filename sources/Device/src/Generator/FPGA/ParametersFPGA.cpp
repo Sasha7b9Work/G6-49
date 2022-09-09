@@ -40,9 +40,12 @@ namespace FPGA
 
     namespace StartStop
     {
-        static StartStopMode::E current = StartStopMode::Disable;
+        namespace Mode
+        {
+            static E current = Disable;
 
-        StartStopMode::E CurrentMode() { return current; }
+            E Current() { return current; }
+        }
     }
 }
 
@@ -125,7 +128,7 @@ void FPGA::StartStop::SetDelay(const Value &delay)
 }
 
 
-void FPGA::StartStop::Switch(StartStopMode::E mode)
+void FPGA::StartStop::Mode::Set(E mode)
 {
     current = mode;
     WriteControlRegister();

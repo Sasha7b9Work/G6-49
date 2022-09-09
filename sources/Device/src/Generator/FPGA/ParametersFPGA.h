@@ -38,9 +38,18 @@ namespace FPGA
 
     namespace StartStop
     {
-        void Switch(StartStopMode::E);
+        namespace Mode
+        {
+            enum E
+            {
+                Disable,
+                Enable
+            };
 
-        StartStopMode::E CurrentMode();
+            void Set(E);
+            E Current();
+        }
+
 
         // Задержка между импульсами на выходах первого и второго каналов
         void SetDelay(const Value &delay);

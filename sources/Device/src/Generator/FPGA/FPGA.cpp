@@ -303,7 +303,7 @@ void FPGA::WriteControlRegister()
 
     SetBitsStartMode(data);
 
-    if (StartStop::CurrentMode() == StartStopMode::Enable)
+    if (StartStop::Mode::Current() == StartStop::Mode::Enable)
     {
         _SET_BIT(data, 11);
         _SET_BIT(data, 12);

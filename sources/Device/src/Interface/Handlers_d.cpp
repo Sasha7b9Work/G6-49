@@ -295,9 +295,7 @@ static void SetStartMode(SimpleMessage *msg)
 
 static void SetStartStopMode(SimpleMessage *msg)
 {
-    StartStopMode::E mode = (StartStopMode::E)msg->TakeUINT8();
-
-    FPGA::StartStop::Switch(mode);
+    FPGA::StartStop::Mode::Set((FPGA::StartStop::Mode::E)msg->TakeUINT8());
 }
 
 
