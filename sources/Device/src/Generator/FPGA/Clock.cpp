@@ -152,7 +152,7 @@ void FPGA::Clock::Impulse::RecalculateImpulseRegistersTo(E _clock)
         Register::_5_PerImp_PerPack_Freq_A,
         Register::_6_DurImp_NumbImp_A,
         Register::_7_PerImp_Freq_B_DelayStartStop,
-        Register::_8_DurationImpulseB
+        Register::_8_DurImp_B
     };
 
     if (_clock == _1MHz)       // Ѕыло 100 ћ√ц, нужно уменьшить все значени€ в 100 раз

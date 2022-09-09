@@ -253,11 +253,11 @@ void FPGA::SetDurationImpulse(const Chan &ch, const Value &duration)
 {
     PacketImpulse::durationImpulse = duration;
 
-    Register::E reg = ch.IsA() ? Register::_6_DurImp_NumbImp_A : Register::_8_DurationImpulseB;
+    Register::E reg = ch.IsA() ? Register::_6_DurImp_NumbImp_A : Register::_8_DurImp_B;
 
     if(ch.IsA() && (ModeWork::value[Chan::A] == ModeWork::PackedImpulse))
     {
-        reg = Register::_8_DurationImpulseB;
+        reg = Register::_8_DurImp_B;
     }
 
     Clock::Impulse::SetDuration(ch, duration);

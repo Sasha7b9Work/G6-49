@@ -441,7 +441,7 @@ static void WriteRegister(SimpleMessage *msg)
         break;
 
     case Register::FPGA_RG8_DurationImpulseB:
-        FPGA::Register::Write(FPGA::Register::_8_DurationImpulseB, value.ToUINT64());
+        FPGA::Register::Write(FPGA::Register::_8_DurImp_B, value.ToUINT64());
         break;
 
     case Register::FPGA_RG9_FreqMeter:
