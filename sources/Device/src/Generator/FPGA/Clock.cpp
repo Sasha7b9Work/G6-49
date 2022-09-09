@@ -24,10 +24,8 @@ namespace FPGA
             // Переписать значения регистров, если необходимо
             static void RewriteRegistersIfNeed();
 
-            // Если при установке длительности импульса нужно изменять опорную частоту - пересчитать все остальные значения:
-            // период импульса, период пакета, задержка между каналами.
-            // Пересчёт производится в пересчёте на то, что опорная частота раньше была не clock, а теперь стала clock
-            static void RecalculateImpulseRegistersTo(E clock);
+            // Если при установке длительности импульса нужно изменять опорную частоту - переписать все значения
+            static void RewriteRegisters();
 
             static bool Is1MHz() { return clock == _1MHz; }
 
@@ -103,13 +101,13 @@ void FPGA::Clock::Impulse::RewriteRegistersIfNeed()
     {
         Set(_1MHz);
 
-        RecalculateImpulseRegistersTo(_1MHz);
+        RewriteRegisters();
     }
     else if (AllValuesLessOrEqual(Value(40)) && Is1MHz())
     {
         Set(_100MHz);
 
-        RecalculateImpulseRegistersTo(_100MHz);
+        RewriteRegisters();
     }
 }
 
@@ -145,7 +143,7 @@ void FPGA::Clock::Impulse::Set(E _clock)
 }
 
 
-void FPGA::Clock::Impulse::RecalculateImpulseRegistersTo(E _clock)
+void FPGA::Clock::Impulse::RewriteRegisters()
 {
     static const Register::E registers[4] =
     {
