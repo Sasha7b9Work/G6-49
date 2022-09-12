@@ -23,10 +23,10 @@
 namespace PGenerator
 {
     // Загружает форму произвольного сигнала
-    void LoadFormDDS(Form *form);
+    void LoadFormDDS(const Form *form);
 
     // Преобразует данные, записанные в относительных единицах [-1.0f;1.0f] в данные, пригодные для отправки в ПЛИС
-    void TransformDataToCodeAndTransmit(const float data[DDS_NUM_POINTS], Form *form);
+    void TransformDataToCodeAndTransmit(const float data[DDS_NUM_POINTS], const Form *form);
 }
 
 
@@ -85,7 +85,7 @@ void PGenerator::SetFormWave(const Chan &ch, TypeForm::E form)
 }
 
 
-void PGenerator::LoadFormDDS(Form *form)
+void PGenerator::LoadFormDDS(const Form *form)
 {
     float data[DDS_NUM_POINTS];
 
@@ -143,7 +143,7 @@ void PGenerator::LoadFormDDS(Form *form)
 }
 
 
-void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], Form *form)
+void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], const Form *form)
 {
     uint16 buffer[DDS_NUM_POINTS];
 

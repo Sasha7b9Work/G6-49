@@ -181,6 +181,15 @@ void FPGA::Clock::Impulse::RewriteRegisters(const Chan &ch)
 
     case ModeWork::PackedImpulse:
         break;
+
+    case ModeWork::None:
+    case ModeWork::DDS:
+    case ModeWork::Rectangle:
+    case ModeWork::Meander:
+    case ModeWork::Sine:
+    case ModeWork::Free:
+    case ModeWork::Count:
+        break;
     }
 }
 
