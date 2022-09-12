@@ -839,7 +839,7 @@ bool DisplayCorrection::OnControlKey(const Control &control)
 }
 
 
-bool DisplayCorrection::ShowMessageOutRangIfNeed(Param *param)
+bool DisplayCorrection::ShowMessageOutRangIfNeed(const Param *param)
 {
     SMinMax min_max = param->ValueInRange();
 
@@ -1116,9 +1116,6 @@ Order::E DisplayCorrection::CalculateOrderForIndication()
 
 void DisplayCorrection::FillDigitsIntegerPartForDouble()
 {
-    DisplayCorrection *dc = this;
-    dc = dc;
-
     Order::E order = CalculateOrderForIndication();
 
     DParam *param = tuner->GetParameter()->ToDouble();

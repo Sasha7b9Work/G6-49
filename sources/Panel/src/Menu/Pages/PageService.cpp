@@ -73,7 +73,7 @@ DEF_CHOICE_4(cVolume,
 extern const PageBase pDebug;
 
 
-DEF_PAGE_4_VAR(pService,                                                                                                                                            //--- СЕРВИС --- //-V641
+DEF_PAGE_4_VAR(pService,                                                                                                                                            //--- СЕРВИС --- //-V641 //-V1027
     "СЕРВИС", "SERVICE",    //-V641
     "Сервисные функции", "Service functions",
     &cLanguage,

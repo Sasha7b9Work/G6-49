@@ -653,7 +653,7 @@ DEF_GOVERNOR(gFreqMeterK,                                                       
 )
 
 
-DEF_PAGE_10( pDebug,                                                                                                                                                 //--- Œ“À¿ƒ ¿ --- //-V641
+DEF_PAGE_10( pDebug,                                                                                                                                                 //--- Œ“À¿ƒ ¿ --- //-V641 //-V1027
     "Œ“À¿ƒ ¿", "DEBUG",   //-V641
     "", "",
     PageDebug::Calibartion::self,

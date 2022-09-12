@@ -181,7 +181,7 @@ public:
     void SetIndexForm(int num) { numberForm = num; };
     int GetIndexForm() const { return numberForm; }
     // Устанавливает текущую форму. Если форма не принадлежит этой волне, то ничего не происходит
-    void SetForm(Form *);
+    void SetForm(const Form *);
 
     int NumberOfForms() const;
 

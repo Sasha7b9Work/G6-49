@@ -213,7 +213,7 @@ public:
 
     // ¬ывод сообщени€ о выходе за пределы допустимого диапазона, если необходимо
     // ¬озвращает false, если выходит за границы диапазона допустимых значений
-    static bool ShowMessageOutRangIfNeed(Param *);
+    static bool ShowMessageOutRangIfNeed(const Param *);
 
     // –ассчитывает, к какому пор€дку нужно привести значение дл€ индикации (ƒл€ частоты и времени пор€док плавающий, а дл€ счЄтчиков и напр€жени€ - посто€нный, равный Order::One)
     static Order::E CalculateOrderForIndication();

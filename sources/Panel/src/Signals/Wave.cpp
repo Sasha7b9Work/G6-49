@@ -779,7 +779,7 @@ void Form::RestoreState()
 }
 
 
-void Wave::SetForm(Form *form)
+void Wave::SetForm(const Form *form)
 {
     for (int i = 0; i < NumberOfForms(); i++)
     {

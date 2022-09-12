@@ -129,33 +129,33 @@ void FPGA::Clock::Impulse::RewriteRegisters()
     *   В режиме пакета:
     *   
     */
-    ModeWork::E mode = ModeWork::Current(ch);
-
-    switch (mode)
-    {
-    case ModeWork::Impulse:
-        if (StartStop::Mode::Current() == StartStop::Mode::Disable)     // СтартА/СтопВ выключено
-        {
-
-        }
-        else                                                            // СтартА/СтопВ включено
-        {
-
-        }
-        break;
-
-    case ModeWork::PackedImpulse:
-        break;
-
-    case ModeWork::None:
-    case ModeWork::DDS:
-    case ModeWork::Rectangle:
-    case ModeWork::Meander:
-    case ModeWork::Sine:
-    case ModeWork::Free:
-    case ModeWork::Count:
-        break;
-    }
+//    ModeWork::E mode = ModeWork::Current(ch);
+//
+//    switch (mode)
+//    {
+//    case ModeWork::Impulse:
+//        if (StartStop::Mode::Current() == StartStop::Mode::Disable)     // СтартА/СтопВ выключено
+//        {
+//
+//        }
+//        else                                                            // СтартА/СтопВ включено
+//        {
+//
+//        }
+//        break;
+//
+//    case ModeWork::PackedImpulse:
+//        break;
+//
+//    case ModeWork::None:
+//    case ModeWork::DDS:
+//    case ModeWork::Rectangle:
+//    case ModeWork::Meander:
+//    case ModeWork::Sine:
+//    case ModeWork::Free:
+//    case ModeWork::Count:
+//        break;
+//    }
 }
 
 
