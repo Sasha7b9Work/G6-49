@@ -20,6 +20,7 @@ namespace FPGA
             };
 
             bool Is100MHz();
+            bool Is1MHz();
 
             // Делитель для расчёта счётчиков длительности и периода
             int GetDivider();

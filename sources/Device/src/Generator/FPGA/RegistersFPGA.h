@@ -31,6 +31,9 @@ namespace FPGA
         void Write(const E, const uint64 value, const uint64 value1MHz = 0);
 
         uint64 Read(const E);
+
+        // Переписать импульсные регистры для текущей опорной частоты
+        void RewriteImpulseRegisters();
     };
 
     namespace RG0

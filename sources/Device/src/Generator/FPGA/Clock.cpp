@@ -15,7 +15,7 @@ namespace FPGA
             // Если при установке длительности импульса нужно изменять опорную частоту - переписать все значения
             static void RewriteRegisters();
 
-            static bool Is1MHz() { return clock == _1MHz; }
+            bool Is1MHz() { return clock == _1MHz; }
 
             static void Set(E);
 

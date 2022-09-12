@@ -19,7 +19,9 @@ namespace FPGA
         };
 
         // Установить на A0_RG...A3_RG адрес, соответсвующй регистру
-        static void WriteAddress(Register::E reg);
+        static void WriteAddress(E);
+
+        static void RewriteRegister(E);
     }
 }
 
@@ -45,13 +47,20 @@ void FPGA::Register::Write(const E reg, const uint64 _value, const uint64 _value
     content[Clock::Impulse::_100MHz][reg] = _value;
     content[Clock::Impulse::_1MHz][reg] = _value1MHz;
 
+    uint64 value = _value;
+
+    if (Clock::Impulse::Is1MHz() && reg >= _5_PerImp_Freq_A_PerPack && reg <= _8_DurImp_B)
+    {
+        value = _value1MHz;
+    }
+
     WriteAddress(reg);
 
     for (int i = 0; i < 2; i++)
     {
         for (int bit = numBits[reg] - 1; bit >= 0; bit--)
         {
-            HAL_PIO::Write(WR_FPGA_DT_RG, Bit::Get(_value, bit));    // Устанавливаем или сбрасываем соответствующий бит
+            HAL_PIO::Write(WR_FPGA_DT_RG, Bit::Get(_value, bit));   // Устанавливаем или сбрасываем соответствующий бит
             HAL_PIO::Set(WR_FPGA_CLK_RG);                           // И записываем его в ПЛИС
             HAL_PIO::Reset(WR_FPGA_CLK_RG);
         }
@@ -59,7 +68,22 @@ void FPGA::Register::Write(const E reg, const uint64 _value, const uint64 _value
 
     HAL_PIO::Set(WR_FPGA_WR_RG);                                    // Теперь переписываем данные из сдвиговоого регистра в FPGA
     HAL_PIO::Reset(WR_FPGA_WR_RG);
-    HAL_TIM::Delay(10);                                         // Ждём 10 миллисекунд, пока данные перепишутся в FPGA
+    HAL_TIM::Delay(10);                                             // Ждём 10 миллисекунд, пока данные перепишутся в FPGA
+}
+
+
+void FPGA::Register::RewriteImpulseRegisters()
+{
+    RewriteRegister(_5_PerImp_Freq_A_PerPack);
+    RewriteRegister(_6_DurImp_A_NumbImp);
+    RewriteRegister(_7_PerImp_Freq_B_DelayStartStop);
+    RewriteRegister(_8_DurImp_B);
+}
+
+
+void FPGA::Register::RewriteRegister(E reg)
+{
+    Write(reg, content[Clock::Impulse::_100MHz][reg], content[Clock::Impulse::_1MHz][reg]);
 }
 
 
