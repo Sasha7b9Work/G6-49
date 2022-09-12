@@ -17,11 +17,8 @@ namespace FPGA
             // Делитель для расчёта счётчиков длительности и периода
             int GetDivider();
 
-            // При установке длительности импульса нужно вызывать эту функцию
-            void SetDuration(const Chan &, const Value &);
-
-            // При установке периода импульса нужно вызывать эту функцию
-            void SetPeriod(const Chan &, const Value &);
+            // Пересчитать значения регистров
+            void RecalculateRegistersIfNeed();
         }
 
         // Тактовая частота формирователя произвольных сигналов

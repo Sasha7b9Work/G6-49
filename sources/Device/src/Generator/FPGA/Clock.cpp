@@ -18,14 +18,8 @@ namespace FPGA
 
             static E clock = _100MHz;
 
-            static Value duration[Chan::Count] = { Value(0), Value(0) };
-            static Value period[Chan::Count] = { Value(0), Value(0) };
-
-            // Переписать значения регистров, если необходимо
-            static void RewriteRegistersIfNeed(const Chan &);
-
             // Если при установке длительности импульса нужно изменять опорную частоту - переписать все значения
-            static void RewriteRegisters(const Chan &);
+            static void RewriteRegisters();
 
             static bool Is1MHz() { return clock == _1MHz; }
 
@@ -47,67 +41,31 @@ namespace FPGA
 }
 
 
-void FPGA::Clock::Impulse::SetDuration(const Chan &ch, const Value &_duration)
+bool FPGA::Clock::Impulse::AtLeastOneValueGreater(const Value &)
 {
-    duration[ch] = _duration;
-
-    RewriteRegistersIfNeed(ch);
-}
-
-
-void FPGA::Clock::Impulse::SetPeriod(const Chan &ch, const Value &_period)
-{
-    period[ch] = _period;
-
-    RewriteRegistersIfNeed(ch);
-}
-
-
-bool FPGA::Clock::Impulse::AtLeastOneValueGreater(const Value &value)
-{
-    static const Value *values[4] = { &duration[ChA], &duration[ChB], &period[ChA], &period[ChB] };
-
-    for (int i = 0; i < 4; i++)
-    {
-        if (*values[i] > value)
-        {
-            return true;
-        }
-    }
-
     return false;
 }
 
 
-bool FPGA::Clock::Impulse::AllValuesLessOrEqual(const Value &value)
+bool FPGA::Clock::Impulse::AllValuesLessOrEqual(const Value &)
 {
-    static const Value *values[4] = { &duration[ChA], &duration[ChB], &period[ChA], &period[ChB] };
-
-    for (int i = 0; i < 4; i++)
-    {
-        if (*values[i] > value)
-        {
-            return false;
-        }
-    }
-
-    return true;
+    return false;
 }
 
 
-void FPGA::Clock::Impulse::RewriteRegistersIfNeed(const Chan &ch)
+void FPGA::Clock::Impulse::RecalculateRegistersIfNeed()
 {
     if (AtLeastOneValueGreater(Value(40)) && Is100MHz())
     {
         Set(_1MHz);
 
-        RewriteRegisters(ch);
+        RewriteRegisters();
     }
     else if (AllValuesLessOrEqual(Value(40)) && Is1MHz())
     {
         Set(_100MHz);
 
-        RewriteRegisters(ch);
+        RewriteRegisters();
     }
 }
 
@@ -143,7 +101,7 @@ void FPGA::Clock::Impulse::Set(E _clock)
 }
 
 
-void FPGA::Clock::Impulse::RewriteRegisters(const Chan &ch)
+void FPGA::Clock::Impulse::RewriteRegisters()
 {
     /*
     * --+--------------------+-----------+
@@ -151,13 +109,11 @@ void FPGA::Clock::Impulse::RewriteRegisters(const Chan &ch)
       --+--------------------+-----------+
       5 | period packet      | -         | +
         | period impulse A   | +         | +
-        | freq A             | -         |
       --+--------------------+-----------+
       6 | diration impulse A | -         | +
         | number impulse     | -         | +
       --+--------------------+-----------+
       7 | period impulse B   | +         | +
-        | freq B             | -         |
         | delay start stop   | +         |
       --+--------------------+-----------+
       8 | duration impulse B | -         | +
@@ -168,6 +124,7 @@ void FPGA::Clock::Impulse::RewriteRegisters(const Chan &ch)
     *   В режиме импульсов переписываем:
     *   - период
     *   - длительность
+    *       если включён режим стартА/стопВ - задержку
     * 
     *   В режиме пакета:
     *   
@@ -177,6 +134,14 @@ void FPGA::Clock::Impulse::RewriteRegisters(const Chan &ch)
     switch (mode)
     {
     case ModeWork::Impulse:
+        if (StartStop::Mode::Current() == StartStop::Mode::Disable)     // СтартА/СтопВ выключено
+        {
+
+        }
+        else                                                            // СтартА/СтопВ включено
+        {
+
+        }
         break;
 
     case ModeWork::PackedImpulse:

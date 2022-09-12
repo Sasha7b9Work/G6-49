@@ -65,7 +65,7 @@ void FPGA::Packet::Period::Set(const Value &period)
 
 void FPGA::Packet::Period::Write()
 {
-    Clock::Impulse::SetPeriod(ChA, current);
+    Clock::Impulse::RecalculateRegistersIfNeed();
 
     uint64 value = current.ToUINT64() / Clock::Impulse::GetDivider();
 
@@ -90,7 +90,7 @@ void FPGA::Impulse::Duration::Write(const Chan &ch)
         reg = Register::_8_DurImp_B;
     }
 
-    Clock::Impulse::SetDuration(ch, current[ch]);
+    Clock::Impulse::RecalculateRegistersIfNeed();
 
     uint64 value = current[ch].ToUINT64() / Clock::Impulse::GetDivider();
 
@@ -125,7 +125,7 @@ void FPGA::Impulse::Period::Write(const Chan &ch)
         reg = Register::_7_PerImp_Freq_B_DelayStartStop;
     }
 
-    Clock::Impulse::SetPeriod(ch, current[ch]);
+    Clock::Impulse::RecalculateRegistersIfNeed();
 
     uint64 value = current[ch].ToUINT64() / Clock::Impulse::GetDivider();
 
