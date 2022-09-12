@@ -1043,7 +1043,9 @@ void DisplayCorrection::Init()
 
 void DisplayCorrection::InitDouble()
 {
-    int before = tuner->GetParameter()->ToDouble()->GetNumberDigitsBeforeComma(CalculateOrderForIndication());
+    Order::E order = CalculateOrderForIndication();
+
+    int before = tuner->GetParameter()->ToDouble()->GetNumberDigitsBeforeComma(order);
 
     indicator.digits[before].Set(Digit::COMMA);
 
@@ -1072,7 +1074,21 @@ Order::E DisplayCorrection::CalculateOrderForIndication()
     {
         DParam *param = Tuner::Current()->GetParameter()->ToDouble();
 
-        return param->IsNotOrdered() ? Order::One : param->GetValue().GetOrder();
+        if (param->IsNotOrdered())
+        {
+            return Order::One;
+        }
+
+        if (param->GetValue().Abs() == 0)
+        {
+            return param->prev_order.Get();     // Если значение равно нулю, берём ранее рассчитанное значение
+        }
+        else
+        {
+            param->prev_order.Set(param->GetValue().GetOrder());
+
+            return param->prev_order.Get();
+        }
     }
 
     return Order::One;
@@ -1081,6 +1097,9 @@ Order::E DisplayCorrection::CalculateOrderForIndication()
 
 void DisplayCorrection::FillDigitsIntegerPartForDouble()
 {
+    DisplayCorrection *dc = this;
+    dc = dc;
+
     Order::E order = CalculateOrderForIndication();
 
     DParam *param = tuner->GetParameter()->ToDouble();

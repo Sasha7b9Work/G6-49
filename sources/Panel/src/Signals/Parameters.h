@@ -222,6 +222,18 @@ private:
         Stored(const Value &val) : value(val) { }
         Value value;
     } stored;
+
+public:
+
+    // Это значение используется при уменьшении значения до нуля на экране коррекции
+    struct PrevOrder
+    {
+        PrevOrder() : order(Order::One) {}
+        void Set(Order::E _order) { order = _order; }
+        Order::E Get()            { return order; };
+    private:
+        Order::E order;
+    } prev_order;
 };
 
 

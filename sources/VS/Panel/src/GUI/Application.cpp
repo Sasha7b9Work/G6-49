@@ -83,7 +83,7 @@ Frame::Frame(const wxString& title)
     Bind(wxEVT_MENU, &Frame::OnSCPI, this, TOOL_SCPI);
     Bind(wxEVT_CLOSE_WINDOW, &Frame::OnClose, this);
 
-    ConsoleSCPI::Self()->Show();
+//    ConsoleSCPI::Self()->Show();
 
     timer.Start(0);
 }
