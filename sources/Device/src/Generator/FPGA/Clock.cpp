@@ -10,12 +10,6 @@ namespace FPGA
     {
         namespace Impulse
         {
-            enum E
-            {
-                _100MHz,
-                _1MHz
-            };
-
             static E clock = _100MHz;
 
             // Если при установке длительности импульса нужно изменять опорную частоту - переписать все значения

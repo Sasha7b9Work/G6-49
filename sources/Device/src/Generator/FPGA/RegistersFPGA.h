@@ -26,8 +26,9 @@ namespace FPGA
             _11_Start,
             Count
         };
-        // Записать значение в регистр
-        void Write(const E, const uint64 value);
+        // Записать значение в регистр. Для значений импульсных регистров записываеются два значения :
+        // value - для тактовой частоты 100МГц и value1MHZ - для тактовой частоты 1МГц
+        void Write(const E, const uint64 value, const uint64 value1MHz = 0);
 
         uint64 Read(const E);
     };

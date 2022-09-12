@@ -232,6 +232,7 @@ void FPGA::SetFrequency(const Chan &ch)
     else if(ModeWork::current[ch] == ModeWork::Impulse)
     {
         uint N = (uint)(1E8F / frequency + 0.5F);
+
         Register::Write(ch.IsA() ? Register::_5_PerImp_Freq_A_PerPack : Register::_7_PerImp_Freq_B_DelayStartStop, N);
     }
 }

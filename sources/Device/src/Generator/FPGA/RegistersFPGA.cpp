@@ -4,6 +4,7 @@
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Utils/Math.h"
 #include "Hardware/HAL/HAL.h"
+#include "Generator/FPGA/Clock.h"
 
 
 namespace FPGA
@@ -11,7 +12,11 @@ namespace FPGA
     namespace Register
     {
         // Последние записанные значения
-        static uint64 content[Count] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        static uint64 content[Clock::Impulse::Count][Count] =
+        {
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+        };
 
         // Установить на A0_RG...A3_RG адрес, соответсвующй регистру
         static void WriteAddress(Register::E reg);
@@ -19,7 +24,7 @@ namespace FPGA
 }
 
 
-void FPGA::Register::Write(const E reg, const uint64 _value)
+void FPGA::Register::Write(const E reg, const uint64 _value, const uint64 _value1MHz)
 {
     static const int numBits[Register::Count] =
     {
@@ -37,7 +42,8 @@ void FPGA::Register::Write(const E reg, const uint64 _value)
         2   // _11_Start
     };
 
-    content[reg] = _value;
+    content[Clock::Impulse::_100MHz][reg] = _value;
+    content[Clock::Impulse::_1MHz][reg] = _value1MHz;
 
     WriteAddress(reg);
 
@@ -68,5 +74,5 @@ void FPGA::Register::WriteAddress(E reg)
 
 uint64 FPGA::Register::Read(const E reg)
 {
-    return content[reg];
+    return content[0][reg];
 }
