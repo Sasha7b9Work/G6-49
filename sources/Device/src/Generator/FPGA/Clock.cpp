@@ -100,11 +100,26 @@ int FPGA::Clock::Impulse::PrepareTestValues(Value **values_out)
 
     if (ModeWork::Current(ChA) == ModeWork::Impulse)
     {
-
+        values[count++] = FPGA::Impulse::Duration::Current(ChA);
+        values[count++] = FPGA::Impulse::Period::Current(ChA);
     }
 
     if (ModeWork::Current(ChB) == ModeWork::Impulse)
     {
+        values[count++] = FPGA::Impulse::Duration::Current(ChB);
+        values[count++] = FPGA::Impulse::Period::Current(ChB);
+    }
+
+    if (StartStop::Mode::Current() == StartStop::Mode::Enable)
+    {
+        values[count++] = FPGA::StartStop::Delay::Current();
+    }
+
+    if (ModeWork::Current(ChA) == ModeWork::PackedImpulse)
+    {
+        values[count++] = FPGA::Packet::Period::Current();
+        values[count++] = FPGA::Impulse::Period::Current(ChB);
+        values[count++] = FPGA::Impulse::Duration::Current(ChB);
     }
 
     *values_out = &values[0];

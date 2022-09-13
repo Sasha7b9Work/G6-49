@@ -27,7 +27,7 @@ namespace FPGA
         namespace Duration
         {
             void Set(const Chan &, const Value &);
-            const Value &Gurrent(const Chan &);
+            const Value &Current(const Chan &);
         }
 
         namespace Period
