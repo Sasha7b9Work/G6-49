@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Generator/FPGA/Clock.h"
 #include "Generator/FPGA/FPGA.h"
+#include <cstring>
 
 
 namespace FPGA
@@ -12,9 +13,6 @@ namespace FPGA
         {
             static E clock = _100MHz;
 
-            // Если при установке длительности импульса нужно изменять опорную частоту - переписать все значения
-            static void RewriteRegisters();
-
             bool Is1MHz() { return clock == _1MHz; }
 
             static void Set(E);
@@ -24,6 +22,9 @@ namespace FPGA
 
             // Возращает true, если все значения меньше либо равны value
             static bool AllValuesLessOrEqual(const Value &value);
+
+            // Подготовить массив проверяемых значений (для данного режима)
+            static Value **PrepareTestValues();
         }
 
         namespace AD992
@@ -35,15 +36,39 @@ namespace FPGA
 }
 
 
-bool FPGA::Clock::Impulse::AtLeastOneValueGreater(const Value &)
+bool FPGA::Clock::Impulse::AtLeastOneValueGreater(const Value &min)
 {
+    Value **values = PrepareTestValues();
+
+    while (values++)
+    {
+        Value *value = *values;
+
+        if (*value > min)
+        {
+            return true;
+        }
+    }
+
     return false;
 }
 
 
-bool FPGA::Clock::Impulse::AllValuesLessOrEqual(const Value &)
+bool FPGA::Clock::Impulse::AllValuesLessOrEqual(const Value &max)
 {
-    return false;
+    Value **values = PrepareTestValues();
+
+    while (values++)
+    {
+        Value *value = *values;
+
+        if (*value > max)
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 
@@ -53,14 +78,26 @@ void FPGA::Clock::Impulse::RecalculateRegistersIfNeed()
     {
         Set(_1MHz);
 
-        RewriteRegisters();
+        Register::RewriteImpulseRegisters();
     }
     else if (AllValuesLessOrEqual(Value(40)) && Is1MHz())
     {
         Set(_100MHz);
 
-        RewriteRegisters();
+        Register::RewriteImpulseRegisters();
     }
+}
+
+
+Value **FPGA::Clock::Impulse::PrepareTestValues()
+{
+    static const int SIZE_BUFFER = 10;
+
+    static Value *values[SIZE_BUFFER];
+
+    std::memset(values, 0, SIZE_BUFFER * sizeof(values[0]));
+
+    return values;
 }
 
 
@@ -86,64 +123,6 @@ void FPGA::Clock::Impulse::Set(E _clock)
     }
 
     Register::Write(Register::_0_Control, reg);
-}
-
-
-void FPGA::Clock::Impulse::RewriteRegisters()
-{
-    /*
-    * --+--------------------+-----------+
-        | параметра          | коррекция |
-      --+--------------------+-----------+
-      5 | period packet      | -         | +
-        | period impulse A   | +         | +
-      --+--------------------+-----------+
-      6 | diration impulse A | -         | +
-        | number impulse     | -         | +
-      --+--------------------+-----------+
-      7 | period impulse B   | +         | +
-        | delay start stop   | +         |
-      --+--------------------+-----------+
-      8 | duration impulse B | -         | +
-      --+--------------------+-----------+
-    */
-
-    /*
-    *   В режиме импульсов переписываем:
-    *   - период
-    *   - длительность
-    *       если включён режим стартА/стопВ - задержку
-    * 
-    *   В режиме пакета:
-    *   
-    */
-//    ModeWork::E mode = ModeWork::Current(ch);
-//
-//    switch (mode)
-//    {
-//    case ModeWork::Impulse:
-//        if (StartStop::Mode::Current() == StartStop::Mode::Disable)     // СтартА/СтопВ выключено
-//        {
-//
-//        }
-//        else                                                            // СтартА/СтопВ включено
-//        {
-//
-//        }
-//        break;
-//
-//    case ModeWork::PackedImpulse:
-//        break;
-//
-//    case ModeWork::None:
-//    case ModeWork::DDS:
-//    case ModeWork::Rectangle:
-//    case ModeWork::Meander:
-//    case ModeWork::Sine:
-//    case ModeWork::Free:
-//    case ModeWork::Count:
-//        break;
-//    }
 }
 
 
