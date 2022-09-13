@@ -100,14 +100,10 @@ Value **FPGA::Clock::Impulse::PrepareTestValues()
 
     if (ModeWork::Current(ChA) == ModeWork::Impulse)
     {
-        FPGA::Impulse::Duration::Write(ChA);
-        FPGA::Impulse::Period::Write(ChA);
     }
 
     if (ModeWork::Current(ChB) == ModeWork::Impulse)
     {
-        FPGA::Impulse::Duration::Write(ChB);
-        FPGA::Impulse::Period::Write(ChB);
     }
 
     return values;

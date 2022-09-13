@@ -59,18 +59,18 @@ void FPGA::Packet::Period::Set(const Value &period)
 {
     current = period;
 
-    Write();
+    Clock::Impulse::RecalculateRegistersIfNeed();
+
+    Register::Write(Register::_5_PerImp_Freq_A_PerPack,
+        current.ToUINT64() / Clock::Impulse::GetDivider100MHz(),
+        current.ToUINT64() / Clock::Impulse::GetDivider1MHz()
+    );
 }
 
 
-void FPGA::Packet::Period::Write()
+Value &FPGA::Packet::Period::Current()
 {
-    Clock::Impulse::RecalculateRegistersIfNeed();
-
-    Register::Write(Register::_5_PerImp_Freq_A_PerPack, 
-        current.ToUINT64() / Clock::Impulse::GetDivider100MHz(),
-        current.ToUINT64() / Clock::Impulse::GetDivider1MHz()
-        );
+    return current;
 }
 
 
@@ -78,12 +78,6 @@ void FPGA::Impulse::Duration::Set(const Chan &ch, const Value &duration)
 {
     current[ch] = duration;
 
-    Write(ch);
-}
-
-
-void FPGA::Impulse::Duration::Write(const Chan &ch)
-{
     Register::E reg = ch.IsA() ? Register::_6_DurImp_A_NumbImp : Register::_8_DurImp_B;
 
     if (ch.IsA() && (ModeWork::Current(ChA) == ModeWork::PackedImpulse))
@@ -96,7 +90,7 @@ void FPGA::Impulse::Duration::Write(const Chan &ch)
     Register::Write(reg,
         current[ch].ToUINT64() / Clock::Impulse::GetDivider100MHz(),
         current[ch].ToUINT64() / Clock::Impulse::GetDivider1MHz()
-        );
+    );
 }
 
 
@@ -106,7 +100,7 @@ void FPGA::Packet::Number::Set(const uint value)
 
     uint64 n = (uint64)(((value - 1) * Impulse::Period::Current(ChA).ToDouble() + Impulse::Duration::Gurrent(ChA).ToDouble()) / 10E-9);
 
-    Register::Write(Register::_6_DurImp_A_NumbImp, n);
+    Register::Write(Register::_6_DurImp_A_NumbImp, n, n);
 }
 
 
@@ -114,12 +108,6 @@ void FPGA::Impulse::Period::Set(const Chan &ch, const Value &period)
 {
     current[ch] = period;
 
-    Write(ch);
-}
-
-
-void FPGA::Impulse::Period::Write(const Chan &ch)
-{
     Register::E reg = ch.IsA() ? Register::_5_PerImp_Freq_A_PerPack : Register::_7_PerImp_Freq_B_DelayStartStop;
 
     if (ch.IsA() && (ModeWork::Current(ChA) == ModeWork::PackedImpulse))
@@ -132,7 +120,7 @@ void FPGA::Impulse::Period::Write(const Chan &ch)
     Register::Write(reg,
         current[ch].ToUINT64() / Clock::Impulse::GetDivider100MHz() - 2,
         current[ch].ToUINT64() / Clock::Impulse::GetDivider1MHz()
-        );
+    );
 }
 
 
@@ -140,16 +128,16 @@ void FPGA::StartStop::Delay::Set(const Value &delay)
 {
     current = delay;
 
-    Write();
-}
-
-
-void FPGA::StartStop::Delay::Write()
-{
     Register::Write(Register::_7_PerImp_Freq_B_DelayStartStop,
         current.ToUINT64() / Clock::Impulse::GetDivider100MHz() - 2,
         current.ToUINT64() / Clock::Impulse::GetDivider1MHz()
-        );
+    );
+}
+
+
+Value &FPGA::StartStop::Delay::Current()
+{
+    return current;
 }
 
 
