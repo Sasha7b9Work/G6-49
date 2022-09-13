@@ -2,6 +2,7 @@
 #include "defines.h"
 #include "Generator/FPGA/Clock.h"
 #include "Generator/FPGA/FPGA.h"
+#include "Generator/FPGA/ParametersFPGA.h"
 #include <cstring>
 
 
@@ -96,6 +97,18 @@ Value **FPGA::Clock::Impulse::PrepareTestValues()
     static Value *values[SIZE_BUFFER];
 
     std::memset(values, 0, SIZE_BUFFER * sizeof(values[0]));
+
+    if (ModeWork::Current(ChA) == ModeWork::Impulse)
+    {
+        FPGA::Impulse::Duration::Write(ChA);
+        FPGA::Impulse::Period::Write(ChA);
+    }
+
+    if (ModeWork::Current(ChB) == ModeWork::Impulse)
+    {
+        FPGA::Impulse::Duration::Write(ChB);
+        FPGA::Impulse::Period::Write(ChB);
+    }
 
     return values;
 }
