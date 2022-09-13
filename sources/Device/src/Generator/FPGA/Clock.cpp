@@ -24,8 +24,8 @@ namespace FPGA
             // Возращает true, если все значения меньше либо равны value
             static bool AllValuesLessOrEqual(const Value &value);
 
-            // Подготовить массив проверяемых значений (для данного режима)
-            static Value **PrepareTestValues();
+            // Подготовить массив проверяемых значений (для данного режима). Возвращает количество значений
+            static int PrepareTestValues(Value **);
         }
 
         namespace AD992
@@ -39,13 +39,13 @@ namespace FPGA
 
 bool FPGA::Clock::Impulse::AtLeastOneValueGreater(const Value &min)
 {
-    Value **values = PrepareTestValues();
+    Value *value = nullptr;
 
-    while (values++)
+    int num = PrepareTestValues(&value);
+
+    for(int i = 0; i < num; i++)
     {
-        Value *value = *values;
-
-        if (*value > min)
+        if (*value++ > min)
         {
             return true;
         }
@@ -57,13 +57,13 @@ bool FPGA::Clock::Impulse::AtLeastOneValueGreater(const Value &min)
 
 bool FPGA::Clock::Impulse::AllValuesLessOrEqual(const Value &max)
 {
-    Value **values = PrepareTestValues();
+    Value *value = nullptr;
 
-    while (values++)
+    int num = PrepareTestValues(&value);
+
+    for(int i = 0; i < num; i++)
     {
-        Value *value = *values;
-
-        if (*value > max)
+        if (*value++ > max)
         {
             return false;
         }
@@ -90,23 +90,26 @@ void FPGA::Clock::Impulse::RecalculateRegistersIfNeed()
 }
 
 
-Value **FPGA::Clock::Impulse::PrepareTestValues()
+int FPGA::Clock::Impulse::PrepareTestValues(Value **values_out)
 {
     static const int SIZE_BUFFER = 10;
 
-    static Value *values[SIZE_BUFFER];
+    static Value values[SIZE_BUFFER] = { Value(0), Value(0), Value(0), Value(0), Value(0), Value(0), Value(0), Value(0), Value(0), Value(0) };
 
-    std::memset(values, 0, SIZE_BUFFER * sizeof(values[0]));
+    int count = 0;
 
     if (ModeWork::Current(ChA) == ModeWork::Impulse)
     {
+
     }
 
     if (ModeWork::Current(ChB) == ModeWork::Impulse)
     {
     }
 
-    return values;
+    *values_out = &values[0];
+
+    return count;
 }
 
 
