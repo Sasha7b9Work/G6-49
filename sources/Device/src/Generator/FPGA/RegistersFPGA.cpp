@@ -60,7 +60,7 @@ void FPGA::Register::Write(const E reg, const uint64 _value, const uint64 _value
     {
         for (int bit = numBits[reg] - 1; bit >= 0; bit--)
         {
-            HAL_PIO::Write(WR_FPGA_DT_RG, Bit::Get(_value, bit));   // Устанавливаем или сбрасываем соответствующий бит
+            HAL_PIO::Write(WR_FPGA_DT_RG, Bit::Get(value, bit));    // Устанавливаем или сбрасываем соответствующий бит
             HAL_PIO::Set(WR_FPGA_CLK_RG);                           // И записываем его в ПЛИС
             HAL_PIO::Reset(WR_FPGA_CLK_RG);
         }

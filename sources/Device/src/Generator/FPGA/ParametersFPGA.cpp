@@ -67,9 +67,10 @@ void FPGA::Packet::Period::Write()
 {
     Clock::Impulse::RecalculateRegistersIfNeed();
 
-    uint64 value = current.ToUINT64() / Clock::Impulse::GetDivider();
-
-    Register::Write(Register::_5_PerImp_Freq_A_PerPack, value);
+    Register::Write(Register::_5_PerImp_Freq_A_PerPack, 
+        current.ToUINT64() / Clock::Impulse::GetDivider100MHz(),
+        current.ToUINT64() / Clock::Impulse::GetDivider1MHz()
+        );
 }
 
 
@@ -92,9 +93,10 @@ void FPGA::Impulse::Duration::Write(const Chan &ch)
 
     Clock::Impulse::RecalculateRegistersIfNeed();
 
-    uint64 value = current[ch].ToUINT64() / Clock::Impulse::GetDivider();
-
-    Register::Write(reg, value);
+    Register::Write(reg,
+        current[ch].ToUINT64() / Clock::Impulse::GetDivider100MHz(),
+        current[ch].ToUINT64() / Clock::Impulse::GetDivider1MHz()
+        );
 }
 
 
@@ -127,14 +129,10 @@ void FPGA::Impulse::Period::Write(const Chan &ch)
 
     Clock::Impulse::RecalculateRegistersIfNeed();
 
-    uint64 value = current[ch].ToUINT64() / Clock::Impulse::GetDivider();
-
-    if (Clock::Impulse::Is100MHz())
-    {
-        value -= 2;
-    }
-
-    Register::Write(reg, value);
+    Register::Write(reg,
+        current[ch].ToUINT64() / Clock::Impulse::GetDivider100MHz() - 2,
+        current[ch].ToUINT64() / Clock::Impulse::GetDivider1MHz()
+        );
 }
 
 
@@ -148,16 +146,10 @@ void FPGA::StartStop::Delay::Set(const Value &delay)
 
 void FPGA::StartStop::Delay::Write()
 {
-    Register::E reg = Register::_7_PerImp_Freq_B_DelayStartStop;
-
-    uint64 value = current.ToUINT64() / Clock::Impulse::GetDivider();
-
-    if (Clock::Impulse::Is100MHz())
-    {
-        value -= 2;
-    }
-
-    Register::Write(reg, value);
+    Register::Write(Register::_7_PerImp_Freq_B_DelayStartStop,
+        current.ToUINT64() / Clock::Impulse::GetDivider100MHz() - 2,
+        current.ToUINT64() / Clock::Impulse::GetDivider1MHz()
+        );
 }
 
 

@@ -70,12 +70,6 @@ bool FPGA::Clock::Impulse::Is100MHz()
 }
 
 
-int FPGA::Clock::Impulse::GetDivider()
-{
-    return (clock == _100MHz) ? 10 : 1000;
-}
-
-
 void FPGA::Clock::Impulse::Set(E _clock)
 {
     clock = _clock;

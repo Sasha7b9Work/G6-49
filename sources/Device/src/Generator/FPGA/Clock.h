@@ -23,7 +23,8 @@ namespace FPGA
             bool Is1MHz();
 
             // Делитель для расчёта счётчиков длительности и периода
-            int GetDivider();
+            inline int GetDivider1MHz()   { return 1000; };
+            inline int GetDivider100MHz() { return 10; };
 
             // Пересчитать значения регистров
             void RecalculateRegistersIfNeed();
