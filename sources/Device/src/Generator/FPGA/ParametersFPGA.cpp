@@ -94,6 +94,12 @@ void FPGA::Impulse::Duration::Set(const Chan &ch, const Value &duration)
 }
 
 
+const Value &FPGA::Impulse::Duration::Current(const Chan &ch)
+{
+    return current[ch];
+}
+
+
 void FPGA::Packet::Number::Set(const uint value)
 {
     current = value;
