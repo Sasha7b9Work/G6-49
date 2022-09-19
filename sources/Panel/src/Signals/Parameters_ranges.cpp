@@ -174,9 +174,25 @@ Value PDuration::Min() const
 
 Value PDuration::Max() const
 {
-    if (form == A::Impulse::form || form == B::Impulse::form || form == A::Packet::form)
+    if (form == A::Impulse::form)
     {
-        return Value("100", Order::Kilo);
+        Value max = A::Impulse::period->GetValue();
+        max.Sub(Min());
+        return max;
+    }
+
+    if (form == B::Impulse::form)
+    {
+        Value max = B::Impulse::period->GetValue();
+        max.Sub(Min());
+        return max;
+    }
+
+    if (form == A::Packet::form)
+    {
+        Value max = A::Packet::period_packet->GetValue();
+        max.Sub(Min());
+        return max;
     }
 
     return Value(1);
@@ -211,6 +227,11 @@ Value PDelay::Max() const
     if (form == A::Impulse::form)
     {
         return A::Impulse::period->GetValue();
+    }
+
+    if (form == A::Packet::form)
+    {
+        return A::Packet::period_packet->GetValue();
     }
 
     return Value(0);
