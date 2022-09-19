@@ -478,7 +478,7 @@ struct PPeriod : public PTime
 
 struct PPeriodPacket : public PTime
 {
-    PPeriodPacket(const Value &value) : PTime(TypeDParam::PeriodPacket, Param::EFuncActive, "Период пак", "Packet per", value) { }
+    PPeriodPacket(pFuncActive funcActive, const Value &value) : PTime(TypeDParam::PeriodPacket, funcActive, "Период пак", "Packet per", value) { }
 
     // Если установленное значение не позволяет поместить в себя все импульсы пакета, то его нужно пересчитать
     // Возвращает true, если значение изменилось

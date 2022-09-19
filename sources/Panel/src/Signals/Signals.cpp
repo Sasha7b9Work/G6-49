@@ -239,24 +239,25 @@ static Form formImpulseA(TypeForm::Impulse, params_ImpulseA, &waves[Chan::A]);
 
 static bool FuncActive_PeriodPacketA()
 {
-    return (packetA_ModeStart.GetChoice() == 0);
+    return (A::Packet::mode_start->GetChoice() == 0);
 }
 
-static PPeriod       packetA_Period(FuncActive_PeriodPacketA, Value("200", Order::Micro),
+static PPeriod       packetA_Period(Param::EFuncActive, Value("200", Order::Micro),
     "Период имп", "Period imp");
 static PDuration     packetA_Duration(Value("10", Order::Micro),  "Длит имп",
     "Dur imp");
 static IParam        packetA_PacketNumber(TypeIParam::PacketNumber, "Кол-во имп", "Count imp", Value("3", Order::One));
-static PPeriodPacket packetA_PeriodPacket(Value("0.1", Order::One));
+static PPeriodPacket packetA_PeriodPacket(FuncActive_PeriodPacketA, Value("0.1", Order::One));
 static PAmplitudePic packetA_Amplitude;
 static POffset       packetA_Offset;
 static PPolarity     packetA_Polarity(namesPolarity);
 static PModeStart    packetA_ModeStart(Param::EFuncActive, namesModeStartImpulse);
 
-PPeriod *A::Packet::period_impulse = &packetA_Period;
-PDuration *A::Packet::duration = &packetA_Duration;
-IParam *A::Packet::number = &packetA_PacketNumber;
+PPeriod       *A::Packet::period_impulse = &packetA_Period;
+PDuration     *A::Packet::duration = &packetA_Duration;
+IParam        *A::Packet::number = &packetA_PacketNumber;
 PPeriodPacket *A::Packet::period_packet = &packetA_PeriodPacket;
+PModeStart    *A::Packet::mode_start = &packetA_ModeStart;
 
 static Param *params_PacketA[] =
 {

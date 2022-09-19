@@ -59,11 +59,12 @@ namespace A
 
     namespace Packet
     {
-        extern Form          *form;
-        extern PPeriodPacket *period_packet;
-        extern PPeriod       *period_impulse;
-        extern PDuration     *duration;
-        extern IParam        *number;
+        extern Form           *form;
+        extern PPeriodPacket  *period_packet;
+        extern PPeriod        *period_impulse;
+        extern PDuration      *duration;
+        extern IParam         *number;
+        extern PModeStart     *mode_start;
     }
 
     namespace Free
