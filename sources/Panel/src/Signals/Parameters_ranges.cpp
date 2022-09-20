@@ -183,9 +183,16 @@ Value PDuration::Max() const
 
     if (form == B::Impulse::form)
     {
-        Value max = B::Impulse::period->GetValue();
-        max.Sub(Min());
-        return max;
+        if (A::Impulse::mode_start_stop->GetChoice() == 1)
+        {
+            return A::Impulse::period->GetValue();
+        }
+        else
+        {
+            Value max = B::Impulse::period->GetValue();
+            max.Sub(Min());
+            return max;
+        }
     }
 
     if (form == A::Packet::form)
