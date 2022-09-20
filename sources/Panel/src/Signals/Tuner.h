@@ -38,6 +38,32 @@ private:
 };
 
 
+class BufferDigit
+{
+public:
+    const Digit &operator[](int i) const
+    {
+        return (i >= 0 && i < MAX_NUM_DIGITS) ? digits[i] : null_digit;
+    }
+    Digit &operator[](int i)
+    {
+        return (i >= 0 && i < MAX_NUM_DIGITS) ? digits[i] : null_digit;
+    }
+    void Fill(char symbol)
+    {
+        for (int i = 0; i < MAX_NUM_DIGITS; i++)
+        {
+            digits[i].Set(symbol);
+        }
+    }
+    int Size() const { return MAX_NUM_DIGITS; }
+private:
+    static const int MAX_NUM_DIGITS = 25;
+    Digit digits[MAX_NUM_DIGITS];       // Здесь находятся все символы
+    static Digit null_digit;
+};
+
+
 // Отображает знакоместа, изображения в знакоместах, и стрелки для подсвечивания активного знакоместа
 class Indicator
 {
@@ -51,16 +77,11 @@ public:
 
     bool OnControlKey(const Control &);
 
-    // Возвращает строку символов
-    char *GetStringDigits() const;
-
     void InitHighlight();
-
-    static const int MAX_NUM_DIGITS = 25;
 
 private:
 
-    Digit digits[MAX_NUM_DIGITS];           // Здесь находятся все символы
+    BufferDigit digits;
 
     int indexHighlight;                     // Индекс подсвеченного знакоместа. Счёт ведётся только по цифровым и знаковым разрядам
 

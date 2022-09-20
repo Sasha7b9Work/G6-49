@@ -24,6 +24,8 @@ Tuner::ModeTuning::E Tuner::mode = ModeTuning::Correction;
 
 Tuner *Tuner::current = nullptr;
 
+Digit BufferDigit::null_digit;
+
 
 namespace DisplayEntering
 {
@@ -396,7 +398,7 @@ bool Indicator::AllNumbersOfLeftIsZero(int pos) const
 
 bool Indicator::RightDigitIzComma(int pos) const
 {
-    if (pos == Indicator::MAX_NUM_DIGITS - 1)
+    if (pos == digits.Size() - 1)
     {
         return false;
     }
@@ -407,7 +409,7 @@ bool Indicator::RightDigitIzComma(int pos) const
 
 bool Indicator::AllNumberOfRightIsZero(int pos) const
 {
-    for (int i = pos + 1; (i < MAX_NUM_DIGITS) && !digits[i].IsEmpty(); i++)
+    for (int i = pos + 1; (i < digits.Size()) && !digits[i].IsEmpty(); i++)
     {
         if (digits[i].IsNumber() && digits[i] != '0')
         {
@@ -671,7 +673,7 @@ int Indicator::PositionComma() const
 
     if (param->IsDouble())
     {
-        for (int i = 0; i < MAX_NUM_DIGITS; i++)
+        for (int i = 0; i < digits.Size(); i++)
         {
             if (digits[i] == Digit::COMMA)
             {
@@ -681,7 +683,7 @@ int Indicator::PositionComma() const
     }
     else if(param->IsInteger())
     {
-        for (int i = 0; i < MAX_NUM_DIGITS; i++)
+        for (int i = 0; i < digits.Size(); i++)
         {
             if (digits[i].IsEmpty())
             {
@@ -721,22 +723,6 @@ int Indicator::FindPositionLeftDigit(int pos) const
     } while (!digits[pos].IsNumber());
 
     return pos;
-}
-
-
-char *Indicator::GetStringDigits() const
-{
-    static char result[MAX_NUM_DIGITS];
-
-    int i = -1;
-
-    do 
-    {
-        i++;
-        result[i] = digits[i];
-    } while (result[i] != '\0');
-
-    return result;
 }
 
 
@@ -1051,10 +1037,7 @@ void DisplayEntering::OnButtonOrderLess()
 
 void DisplayCorrection::Init()
 {
-    for (int i = 0; i < Indicator::MAX_NUM_DIGITS; i++)
-    {
-        indicator.digits[i].Set('\0');
-    }
+    indicator.digits.Fill('\0');
 
     tuner->GetParameter()->IsDouble() ? InitDouble() : InitInteger();
 }
@@ -1065,8 +1048,6 @@ void DisplayCorrection::InitDouble()
     Order::E order = CalculateOrderForIndication();
 
     int before = tuner->GetParameter()->ToDouble()->GetNumberDigitsBeforeComma(order);
-
-    Math::Limitation(&before, 0, Indicator::MAX_NUM_DIGITS - 1);
 
     indicator.digits[before].Set(Digit::COMMA);
 
@@ -1079,8 +1060,6 @@ void DisplayCorrection::InitDouble()
 void DisplayCorrection::InitInteger()
 {
     int num_digits = tuner->GetParameter()->ToInteger()->GetMaxNumberDigits();
-
-    Math::Limitation(&num_digits, 0, Indicator::MAX_NUM_DIGITS - 1);
 
     for (int i = 0; i < num_digits; i++)
     {
@@ -1128,8 +1107,6 @@ void DisplayCorrection::FillDigitsIntegerPartForDouble()
 
     int before = param->GetNumberDigitsBeforeComma(order);
 
-    Math::Limitation(&before, 0, Indicator::MAX_NUM_DIGITS - 1);
-
     Value value = param->GetValue();
 
     int pos = before - 1;                               // –азр€д в этой позиции будем заполн€ть значени€ми целых
@@ -1160,8 +1137,6 @@ void DisplayCorrection::FillDigitsForInteger()
 
     int pos = param->GetMaxNumberDigits() - 1;
 
-    Math::Limitation(&pos, 0, Indicator::MAX_NUM_DIGITS - 1);
-
     for (int i = 0; pos >= 0; i++)
     {
         indicator.digits[pos].Set(value.GetChar(i, Order::One));
@@ -1182,8 +1157,6 @@ void DisplayCorrection::FillDigitsFractPartForDouble()
     Value value = param->GetValue();
 
     int pos = before + 1;                                   // “еперь в эту позицию будем записывать рразр€ды после зап€той
-
-    Math::Limitation(&pos, 0, Indicator::MAX_NUM_DIGITS - 1);
 
     for (int i = 0; i < after; i++)
     {
