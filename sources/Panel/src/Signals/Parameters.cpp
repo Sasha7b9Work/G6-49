@@ -304,7 +304,7 @@ bool DParam::SetAndLoadValue(double val)
 }
 
 
-bool DParam::SetAndLoadValue(Value val)
+bool DParam::SetAndLoadValue(const Value &val)
 {
     value = val;
 

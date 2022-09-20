@@ -1164,7 +1164,7 @@ void DisplayCorrection::FillDigitsFractPartForDouble()
 }
 
 
-void DisplayCorrection::Init(Value value)
+void DisplayCorrection::Init(const Value &value)
 {
     Param *param = Tuner::current->param;
 

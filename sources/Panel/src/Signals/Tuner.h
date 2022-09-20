@@ -218,7 +218,7 @@ public:
 
     void Init();
 
-    void Init(Value value);
+    void Init(const Value &value);
 
     void Draw();
 
