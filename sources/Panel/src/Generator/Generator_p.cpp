@@ -256,7 +256,7 @@ void PGenerator::LoadSettings()
     PGenerator::TuneChannel(ChB);
 }
 
-void PGenerator::SetParameter(Param &parameter)
+void PGenerator::SetParameter(const Param &parameter)
 {
     if(parameter.IsDouble())
     {

@@ -29,7 +29,7 @@ namespace PGenerator
 
     void SetParameterInteger(const IParam &param);
 
-    void SetParameter(Param &param);
+    void SetParameter(const Param &param);
 
     void SetOffset(const Chan &, float offset);
 
