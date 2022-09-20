@@ -63,7 +63,7 @@ struct Value
     bool FromString(pchar buffer, char **end, int numDigitsAfterComma);
 
     double ToDouble() const;
-    uint64 ToUINT64() const { return value; }
+    uint64 GetRawValue() const { return value; }
 
     void Div(uint div);
     void Mul(uint mul);

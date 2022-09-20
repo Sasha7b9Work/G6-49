@@ -810,7 +810,7 @@ bool Form::CheckerParameters::InvalidDurationImpulse() const
 
     if (form->Is(TypeForm::Packet))
     {
-        uint64 number = form->FindParameter(TypeIParam::PacketNumber).GetValue().ToUINT64();
+        uint64 number = form->FindParameter(TypeIParam::PacketNumber).GetValue().GetRawValue();
         double duration_impulse = form->FindParameter(TypeDParam::Duration).GetValue().ToDouble();
         double period_impulse = form->FindParameter(TypeDParam::Period).GetValue().ToDouble();
         double period_packet = form->FindParameter(TypeDParam::PeriodPacket).GetValue().ToDouble();

@@ -407,60 +407,60 @@ static void WriteRegister(SimpleMessage *msg)
         break;
 
     case Register::FPGA_RG0_Control:
-        FPGA::Register::Write(FPGA::Register::_0_Control, value.ToUINT64());
+        FPGA::Register::Write(FPGA::Register::_0_Control, value.GetRawValue());
         break;
 
     case Register::FPGA_RG1_Freq:
-        FPGA::Register::Write(FPGA::Register::_1_Freq, value.ToUINT64());
+        FPGA::Register::Write(FPGA::Register::_1_Freq, value.GetRawValue());
         break;
 
     case Register::FPGA_RG2_Amplitude:
-        FPGA::Register::Write(FPGA::Register::_2_Amplitude, value.ToUINT64());
+        FPGA::Register::Write(FPGA::Register::_2_Amplitude, value.GetRawValue());
         break;
 
     case Register::FPGA_RG3_RectA:
-        FPGA::Register::Write(FPGA::Register::_3_RectA, value.ToUINT64());
+        FPGA::Register::Write(FPGA::Register::_3_RectA, value.GetRawValue());
         break;
 
     case Register::FPGA_RG4_RectB:
-        FPGA::Register::Write(FPGA::Register::_4_RectB, value.ToUINT64());
+        FPGA::Register::Write(FPGA::Register::_4_RectB, value.GetRawValue());
         break;
 
     case Register::FPGA_RG5_PeriodImpulseA:
-        FPGA::Register::Write(FPGA::Register::_5_PerImp_Freq_A_PerPack, value.ToUINT64());
+        FPGA::Register::Write(FPGA::Register::_5_PerImp_Freq_A_PerPack, value.GetRawValue());
         break;
 
     case Register::FPGA_RG6_DurationImpulseA:
-        FPGA::Register::Write(FPGA::Register::_6_DurImp_A_NumbImp, value.ToUINT64());
+        FPGA::Register::Write(FPGA::Register::_6_DurImp_A_NumbImp, value.GetRawValue());
         break;
 
     case Register::FPGA_RG7_PeriodImpulseB:
-        FPGA::Register::Write(FPGA::Register::_7_PerImp_Freq_B_DelayStartStop, value.ToUINT64());
+        FPGA::Register::Write(FPGA::Register::_7_PerImp_Freq_B_DelayStartStop, value.GetRawValue());
         break;
 
     case Register::FPGA_RG8_DurationImpulseB:
-        FPGA::Register::Write(FPGA::Register::_8_DurImp_B, value.ToUINT64());
+        FPGA::Register::Write(FPGA::Register::_8_DurImp_B, value.GetRawValue());
         break;
 
     case Register::FPGA_RG9_FreqMeter:
-        FPGA::Register::Write(FPGA::Register::_9_FreqMeter, value.ToUINT64());
+        FPGA::Register::Write(FPGA::Register::_9_FreqMeter, value.GetRawValue());
         DInterface::ResetFreqForSend();
         break;
 
     case Register::FPGA_RG10_Offset:
-        FPGA::Register::Write(FPGA::Register::_10_Offset, value.ToUINT64());
+        FPGA::Register::Write(FPGA::Register::_10_Offset, value.GetRawValue());
         break;
 
     case Register::FreqMeter_Resist:
-        DFreqMeter::SetResist((FreqResist::E)value.ToUINT64());
+        DFreqMeter::SetResist((FreqResist::E)value.GetRawValue());
         break;
 
     case Register::FreqMeter_Couple:
-        DFreqMeter::SetCouple((FreqCouple::E)value.ToUINT64());
+        DFreqMeter::SetCouple((FreqCouple::E)value.GetRawValue());
         break;
 
     case Register::FreqMeter_Filtr:
-        DFreqMeter::SetFiltr((FreqFiltr::E)value.ToUINT64());
+        DFreqMeter::SetFiltr((FreqFiltr::E)value.GetRawValue());
         break;
 
     case Register::deleted_Multiplexor1:

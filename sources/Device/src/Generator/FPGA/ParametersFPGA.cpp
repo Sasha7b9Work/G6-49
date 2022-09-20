@@ -57,8 +57,8 @@ void FPGA::Packet::Period::Set(const Value &period)
     Clock::Impulse::RecalculateRegistersIfNeed();
 
     Register::Write(Register::_5_PerImp_Freq_A_PerPack,
-        current.ToUINT64() / Clock::Impulse::GetDivider100MHz(),
-        current.ToUINT64() / Clock::Impulse::GetDivider1MHz()
+        current.GetRawValue() / Clock::Impulse::GetDivider100MHz(),
+        current.GetRawValue() / Clock::Impulse::GetDivider1MHz()
     );
 }
 
@@ -83,8 +83,8 @@ void FPGA::Impulse::Duration::Set(const Chan &ch, const Value &duration)
     // При установке длительности импульса пересчитывать опорную частоту не нужно, потому что длительность всегда меньше периода
 
     Register::Write(reg,
-        current[ch].ToUINT64() / Clock::Impulse::GetDivider100MHz(),
-        current[ch].ToUINT64() / Clock::Impulse::GetDivider1MHz()
+        current[ch].GetRawValue() / Clock::Impulse::GetDivider100MHz(),
+        current[ch].GetRawValue() / Clock::Impulse::GetDivider1MHz()
     );
 }
 
@@ -117,8 +117,8 @@ void FPGA::Impulse::Period::Set(const Chan &ch, const Value &period)
     Clock::Impulse::RecalculateRegistersIfNeed();
 
     Register::Write(reg,
-        current[ch].ToUINT64() / Clock::Impulse::GetDivider100MHz() - 2,
-        current[ch].ToUINT64() / Clock::Impulse::GetDivider1MHz()
+        current[ch].GetRawValue() / Clock::Impulse::GetDivider100MHz() - 2,
+        current[ch].GetRawValue() / Clock::Impulse::GetDivider1MHz()
     );
 }
 
@@ -130,8 +130,8 @@ void FPGA::StartStop::Delay::Set(const Value &delay)
     // При изменении задержки пересчитывать опорную частоту не нужно, потому что задержка не может быть больше периода
 
     Register::Write(Register::_7_PerImp_Freq_B_DelayStartStop,
-        current.ToUINT64() / Clock::Impulse::GetDivider100MHz() - 2,
-        current.ToUINT64() / Clock::Impulse::GetDivider1MHz()
+        current.GetRawValue() / Clock::Impulse::GetDivider100MHz() - 2,
+        current.GetRawValue() / Clock::Impulse::GetDivider1MHz()
     );
 }
 

@@ -188,14 +188,14 @@ void PGenerator::SetParameterChoice(CParam &param)
 void PGenerator::SetOffset(const Chan &ch, float offset)
 {
     // \todo √овнокод - запись параметра из двух мест
-    Message::Set::Offset((uint8)ch, Value(offset).ToUINT64()).Transmit();
+    Message::Set::Offset((uint8)ch, Value(offset).GetRawValue()).Transmit();
 }
 
 
 void PGenerator::SetAmplitudePic(const Chan &ch, float amplitude)
 {
     // \todo √овнокод - запись параметра из двух мест
-    Message::Set::Amplitude((uint8)ch, Value(amplitude).ToUINT64()).Transmit();
+    Message::Set::Amplitude((uint8)ch, Value(amplitude).GetRawValue()).Transmit();
 }
 
 
@@ -221,7 +221,7 @@ void PGenerator::SetParameterDouble(DParam &param)
 
     Command com(commands[param.GetType()]);
 
-    Message::Set::Param(com, ch, value.ToUINT64()).Transmit();
+    Message::Set::Param(com, ch, value.GetRawValue()).Transmit();
 }
 
 
@@ -238,7 +238,7 @@ void PGenerator::SetParameterInteger(IParam &param)
 
     Command com(commands[param.GetType()]);
 
-    Message::Set::Param(com, ch, value.ToUINT64()).Transmit();
+    Message::Set::Param(com, ch, value.GetRawValue()).Transmit();
 }
 
 

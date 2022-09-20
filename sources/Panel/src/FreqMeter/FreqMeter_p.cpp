@@ -108,7 +108,7 @@ void PFreqMeter::LoadLevel()
     Value lValue("1.0", Order::One);
     lValue.FromUnits(value, 0, 0, 0, 1);
 
-    PGenerator::LoadRegister(Register::FreqMeterLevel, lValue.ToUINT64());
+    PGenerator::LoadRegister(Register::FreqMeterLevel, lValue.GetRawValue());
 }
 
 
@@ -125,7 +125,7 @@ void PFreqMeter::LoadHysteresis()
     Value lValue("0.0", Order::One);
     lValue.FromUnits(value, 0, 0, 0, 1);
 
-    PGenerator::LoadRegister(Register::FreqMeterHYS, lValue.ToUINT64());
+    PGenerator::LoadRegister(Register::FreqMeterHYS, lValue.GetRawValue());
 }
 
 
