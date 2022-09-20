@@ -80,7 +80,7 @@ void FPGA::Impulse::Duration::Set(const Chan &ch, const Value &duration)
         reg = Register::_8_DurImp_B;
     }
 
-    Clock::Impulse::RecalculateRegistersIfNeed();
+    // При установке длительности импульса пересчитывать опорную частоту не нужно, потому что длительность всегда меньше периода
 
     Register::Write(reg,
         current[ch].ToUINT64() / Clock::Impulse::GetDivider100MHz(),
@@ -126,6 +126,8 @@ void FPGA::Impulse::Period::Set(const Chan &ch, const Value &period)
 void FPGA::StartStop::Delay::Set(const Value &delay)
 {
     current = delay;
+
+    // При изменении задержки пересчитывать опорную частоту не нужно, потому что задержка не может быть больше периода
 
     Register::Write(Register::_7_PerImp_Freq_B_DelayStartStop,
         current.ToUINT64() / Clock::Impulse::GetDivider100MHz() - 2,
