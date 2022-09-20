@@ -82,3 +82,5 @@ typedef void (*pFuncVBB)(bool, bool);
 #define BINARY_U16(bits1, bits0) ((BINARY_U8(bits1) << 8) | (BINARY_U8(bits0)))
 
 #define BINARY_U32(bits3, bits2, bits1, bits0) ((BINARY_U16(bits3, bits2) << 16) | (BINARY_U16(bits1, bits0)))
+
+#include "Utils/Debug.h"
