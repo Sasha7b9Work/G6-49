@@ -7,9 +7,9 @@ class Buffer
 public:
     Buffer(uint size);
     ~Buffer();
-    uint8 *Data()    { return data; };
-    char *DataChar() { return (char *)data; }
-    uint Size()      { return size; };
+    uint8 *Data()    const { return data; };
+    char *DataChar() const { return (char *)data; }
+    uint Size()      const { return size; };
 private:
     uint8 *data;
     uint size;

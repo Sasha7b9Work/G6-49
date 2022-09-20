@@ -89,6 +89,7 @@ struct Param
     virtual Value GetValue() const { return Value("1", Order::One); } //-V524
 
     virtual String ToString(String &units) const { return units; };
+
     // delete_zeros - если true - удалять последние нули
     virtual String ToString(Value, bool /* delete_zeros */ = false) const { return String(""); };
 
