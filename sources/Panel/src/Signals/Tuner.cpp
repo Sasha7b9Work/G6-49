@@ -1319,3 +1319,24 @@ bool Tuner::IsNotOrdered()
 
     return voltage->Exist() ? voltage->IsNotOrdered() : false;
 }
+
+
+const Digit &BufferDigit::operator[](int i) const
+{
+    return (i >= 0 && i < MAX_NUM_DIGITS) ? digits[i] : null_digit;
+}
+
+
+Digit &BufferDigit::operator[](int i)
+{
+    return (i >= 0 && i < MAX_NUM_DIGITS) ? digits[i] : null_digit;
+}
+
+
+void BufferDigit::Fill(char symbol)
+{
+    for (int i = 0; i < MAX_NUM_DIGITS; i++)
+    {
+        digits[i].Set(symbol);
+    }
+}
