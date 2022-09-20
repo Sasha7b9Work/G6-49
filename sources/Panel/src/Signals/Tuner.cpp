@@ -1066,6 +1066,8 @@ void DisplayCorrection::InitDouble()
 
     int before = tuner->GetParameter()->ToDouble()->GetNumberDigitsBeforeComma(order);
 
+    Math::Limitation(&before, 0, Indicator::MAX_NUM_DIGITS - 1);
+
     indicator.digits[before].Set(Digit::COMMA);
 
     FillDigitsIntegerPartForDouble();
@@ -1076,9 +1078,11 @@ void DisplayCorrection::InitDouble()
 
 void DisplayCorrection::InitInteger()
 {
-    int numDigits = tuner->GetParameter()->ToInteger()->GetMaxNumberDigits();
+    int num_digits = tuner->GetParameter()->ToInteger()->GetMaxNumberDigits();
 
-    for (int i = 0; i < numDigits; i++)
+    Math::Limitation(&num_digits, 0, Indicator::MAX_NUM_DIGITS - 1);
+
+    for (int i = 0; i < num_digits; i++)
     {
         indicator.digits[i].Set('0');
     }
@@ -1118,9 +1122,13 @@ void DisplayCorrection::FillDigitsIntegerPartForDouble()
 {
     Order::E order = CalculateOrderForIndication();
 
-    DParam *param = tuner->GetParameter()->ToDouble();
+    Param *raw_param = tuner->GetParameter();
+
+    DParam *param = raw_param->ToDouble();
 
     int before = param->GetNumberDigitsBeforeComma(order);
+
+    Math::Limitation(&before, 0, Indicator::MAX_NUM_DIGITS - 1);
 
     Value value = param->GetValue();
 
@@ -1152,6 +1160,8 @@ void DisplayCorrection::FillDigitsForInteger()
 
     int pos = param->GetMaxNumberDigits() - 1;
 
+    Math::Limitation(&pos, 0, Indicator::MAX_NUM_DIGITS - 1);
+
     for (int i = 0; pos >= 0; i++)
     {
         indicator.digits[pos].Set(value.GetChar(i, Order::One));
@@ -1172,6 +1182,8 @@ void DisplayCorrection::FillDigitsFractPartForDouble()
     Value value = param->GetValue();
 
     int pos = before + 1;                                   // Теперь в эту позицию будем записывать рразряды после запятой
+
+    Math::Limitation(&pos, 0, Indicator::MAX_NUM_DIGITS - 1);
 
     for (int i = 0; i < after; i++)
     {
