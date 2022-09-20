@@ -775,9 +775,6 @@ cstr DParam::GetIndicatedValue() const
 
 DParam *Param::ToDouble()
 {
-    Param *_this_ = this;
-    _this_ = _this_;
-
     return (kind == KindParam::Double) ? (DParam *)this : &DParam::empty;
 }
 
