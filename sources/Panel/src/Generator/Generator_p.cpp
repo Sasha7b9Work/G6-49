@@ -199,7 +199,7 @@ void PGenerator::SetAmplitudePic(const Chan &ch, float amplitude)
 }
 
 
-void PGenerator::SetParameterDouble(DParam &param)
+void PGenerator::SetParameterDouble(const DParam &param)
 {
     static const Command::E commands[TypeDParam::Count] =
     {
