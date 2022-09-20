@@ -269,9 +269,9 @@ struct IParam : public Param
 
     TypeIParam::E GetType() { return type; }
 
-    bool SetAndLoadValue(Value val);
+    bool SetAndLoadValue(const Value &val);
 
-    bool SetAndLoadValue(int val);
+    bool SetAndLoadValue(const int val);
 
     void LoadValue();
 
