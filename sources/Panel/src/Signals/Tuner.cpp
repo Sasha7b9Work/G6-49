@@ -234,7 +234,7 @@ int Indicator::DrawDouble(int x, int y, const cstr units, bool test) const
 
         x += AdditionShiftForDigit(pos);
 
-        Char(digits[pos]).Draw(x, y, color);
+        Char(digits[pos].value).Draw(x, y, color);
 
         if (pos == IndexHighlightReal())
         {
@@ -280,7 +280,7 @@ int Indicator::DrawInteger(int x, int y, bool test) const
     {
         Color color = CalculateColorInteger(pos, test);
 
-        Char(digits[pos]).Draw(x, y, color);
+        Char(digits[pos].value).Draw(x, y, color);
 
         if (pos == IndexHighlightReal())
         {
@@ -1049,7 +1049,7 @@ void DisplayCorrection::InitDouble()
 
     int before = tuner->param->ToDouble()->GetNumberDigitsBeforeComma(order);
 
-    indicator.digits[before].Set(Digit::COMMA);
+    indicator.digits[before] = Digit::COMMA;
 
     FillDigitsIntegerPartForDouble();
 
@@ -1063,7 +1063,7 @@ void DisplayCorrection::InitInteger()
 
     for (int i = 0; i < num_digits; i++)
     {
-        indicator.digits[i].Set('0');
+        indicator.digits[i] = '0';
     }
 
     FillDigitsForInteger();
@@ -1111,12 +1111,12 @@ void DisplayCorrection::FillDigitsIntegerPartForDouble()
 
     if (param->IsSigned())
     {
-        indicator.digits[0].Set((value.Sign() < 0) ? '-' : '+');
+        indicator.digits[0] = (value.Sign() < 0) ? '-' : '+';
     }
 
     for (int i = 0; i < before; i++)
     {
-        indicator.digits[pos].Set(value.GetChar(i, order));
+        indicator.digits[pos] = value.GetChar(i, order);
         pos--;
 
         if (param->IsSigned() && (pos == 0))
@@ -1137,7 +1137,7 @@ void DisplayCorrection::FillDigitsForInteger()
 
     for (int i = 0; pos >= 0; i++)
     {
-        indicator.digits[pos].Set(value.GetChar(i, Order::One));
+        indicator.digits[pos] = value.GetChar(i, Order::One);
         pos--;
     }
 }
@@ -1158,7 +1158,7 @@ void DisplayCorrection::FillDigitsFractPartForDouble()
 
     for (int i = 0; i < after; i++)
     {
-        indicator.digits[pos].Set(value.GetChar(-i - 1, order));
+        indicator.digits[pos] = value.GetChar(-i - 1, order);
         pos++;
     }
 }
@@ -1331,6 +1331,6 @@ void BufferDigit::Fill(char symbol)
 {
     for (int i = 0; i < MAX_NUM_DIGITS; i++)
     {
-        digits[i].Set(symbol);
+        digits[i] = symbol;
     }
 }

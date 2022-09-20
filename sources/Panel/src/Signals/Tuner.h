@@ -21,20 +21,17 @@ public:
 
     Digit(char v = '0') : value(v) { }
 
-    operator char() const { return value; }
-
-    // Установить новое значение
-    void Set(char v) { value = v; }
-
     bool IsNumber() const  { return (value >= '0' && value <= '9'); }
 
     bool IsEmpty() const   { return (value == '\0'); }
 
     bool IsSigned() const  { return (value == '-') || (value == '+'); }
 
-private:
-
     char value;
+
+    bool operator !=(char symbol) const { return value != symbol; }
+
+    bool operator ==(char symbol) const { return value == symbol; }
 };
 
 
