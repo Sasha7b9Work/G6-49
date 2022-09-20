@@ -51,14 +51,14 @@ namespace DisplayEntering
 
 void DisplayEntering::EnterBuffer::Push(Key::E key)
 {
-    DParam *p = Tuner::Current()->GetParameter()->ToDouble();
+    DParam *p = Tuner::current->GetParameter()->ToDouble();
 
     if (p && p->IsNotOrdered() && (NumDigitsAfterComma() == 3))
     {
         return;
     }
 
-    if ((key == Key::Minus) && !Tuner::Current()->IsOffset()) { return; }
+    if ((key == Key::Minus) && !Tuner::current->IsOffset()) { return; }
 
     if (stack.Size() > 14)                                             { return; }
                                                                        
@@ -203,13 +203,13 @@ Indicator::Indicator(DisplayCorrection *_display) : indexHighlight(0), display(_
 
 int Indicator::Draw(int x, int y, int width, const cstr units) const
 {
-    return Tuner::Current()->GetParameter()->IsDouble() ? DrawDouble(x, y, width, units) : DrawInteger(x, y, width);
+    return Tuner::current->GetParameter()->IsDouble() ? DrawDouble(x, y, width, units) : DrawInteger(x, y, width);
 }
 
 
 int Indicator::DrawDouble(int x, int y, int width, const cstr units) const
 {
-    if (Tuner::Current()->IsNotOrdered())
+    if (Tuner::current->IsNotOrdered())
     {
         return DrawDouble(x + 90, y, units, false);
     }
@@ -499,7 +499,7 @@ bool Indicator::IsSigned() const
 
 void Indicator::IncreaseInPosition(int pos)
 {
-    if (Tuner::Current()->GetParameter()->IsDouble())
+    if (Tuner::current->GetParameter()->IsDouble())
     {
         IncreaseInPositionDouble(pos);
     }
@@ -512,7 +512,7 @@ void Indicator::IncreaseInPosition(int pos)
 
 void Indicator::IncreaseInPositionDouble(int pos)
 {
-    DParam *param = Tuner::Current()->GetParameter()->ToDouble();
+    DParam *param = Tuner::current->GetParameter()->ToDouble();
 
     Value value = param->GetValue();
 
@@ -534,7 +534,7 @@ void Indicator::IncreaseInPositionDouble(int pos)
 
 void Indicator::IncreaseInPositionInteger(int pos)
 {
-    IParam *param = Tuner::Current()->GetParameter()->ToInteger();
+    IParam *param = Tuner::current->GetParameter()->ToInteger();
 
     Value value = param->GetValue();
 
@@ -556,7 +556,7 @@ void Indicator::IncreaseInPositionInteger(int pos)
 
 void Indicator::DecreaseInPosition(int pos)
 {
-    Param *param = Tuner::Current()->GetParameter();
+    Param *param = Tuner::current->GetParameter();
 
     Value value = param->GetValue();
 
@@ -642,9 +642,9 @@ int Indicator::NumberHighligthingDigits() const
         }
     }
 
-    if (Tuner::Current()->GetParameter()->IsDouble())
+    if (Tuner::current->GetParameter()->IsDouble())
     {
-        DParam *param = Tuner::Current()->GetParameter()->ToDouble();
+        DParam *param = Tuner::current->GetParameter()->ToDouble();
 
         TypeDParam::E type = param->GetType();
 
@@ -669,7 +669,7 @@ bool Indicator::CommaInPosition(int pos) const
 
 int Indicator::PositionComma() const
 {
-    Param *param = Tuner::Current()->GetParameter();
+    Param *param = Tuner::current->GetParameter();
 
     if (param->IsDouble())
     {
@@ -866,7 +866,7 @@ bool DisplayCorrection::ShowMessageOutRangIfNeed(const Param *param)
 void DisplayEntering::Init()
 {
     noVerifiForValid = true;
-    buffer.Prepare(Tuner::Current()->GetParameter()->ToDouble());
+    buffer.Prepare(Tuner::current->GetParameter()->ToDouble());
 }
 
 
@@ -874,11 +874,11 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
 {
     if (control.IsEntering())
     {
-        if (Tuner::Current()->InModeCorrection())
+        if (Tuner::current->InModeCorrection())
         {
-            Tuner::Current()->SetModeEntering();
+            Tuner::current->SetModeEntering();
 
-            Param *param = Tuner::Current()->GetParameter();
+            Param *param = Tuner::current->GetParameter();
 
             order = param->GetValue().GetOrder();
 
@@ -906,7 +906,7 @@ bool DisplayEntering::OnEnteringKey(const Control &control)
 
 bool DisplayEntering::ValueInBoundaries()
 {
-    Param *param = Tuner::Current()->GetParameter();
+    Param *param = Tuner::current->GetParameter();
 
     Value min = param->Min();
     Value max = param->Max();
@@ -978,7 +978,7 @@ int DisplayEntering::DrawValue(int x, int y)
 
 void DisplayEntering::DrawUnits(int x, int y, int width)
 {
-    Param *param = Tuner::Current()->GetParameter();
+    Param *param = Tuner::current->GetParameter();
 
     if (param->IsDouble())
     {
@@ -1072,9 +1072,9 @@ void DisplayCorrection::InitInteger()
 
 Order::E DisplayCorrection::CalculateOrderForIndication()
 {
-    if (Tuner::Current()->GetParameter()->IsDouble())
+    if (Tuner::current->GetParameter()->IsDouble())
     {
-        DParam *param = Tuner::Current()->GetParameter()->ToDouble();
+        DParam *param = Tuner::current->GetParameter()->ToDouble();
 
         if (param->IsNotOrdered())
         {
@@ -1168,7 +1168,7 @@ void DisplayCorrection::FillDigitsFractPartForDouble()
 
 void DisplayCorrection::Init(Value value)
 {
-    Param *param = Tuner::Current()->GetParameter();
+    Param *param = Tuner::current->GetParameter();
 
     Form *form = param->GetForm();
 
@@ -1254,9 +1254,9 @@ void Tuner::OnButtonApply()
     }
     else
     {
-        if (Current()->GetParameter()->IsDouble())
+        if (current->GetParameter()->IsDouble())
         {
-            DParam *paramDouble = Current()->GetParameter()->ToDouble();
+            DParam *paramDouble = current->GetParameter()->ToDouble();
 
             TypeDParam::E type = paramDouble->GetType();
 

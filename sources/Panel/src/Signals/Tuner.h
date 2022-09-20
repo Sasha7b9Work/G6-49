@@ -299,7 +299,7 @@ public:
 
     static void SetModeEntering();
 
-    static Tuner *Current() { return current; };
+    static Tuner *current;
 
     // Возвращает true, если натсраиваемый параметр - смещение
     bool IsOffset();
@@ -312,8 +312,6 @@ private:
     Param *param;           // Настраиваемый параметр
 
     DisplayCorrection display;
-
-    static Tuner *current;
 
     static ModeTuning::E mode;                         // Текущий режим настройки
 };

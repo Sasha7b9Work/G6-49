@@ -66,7 +66,7 @@ DEF_GRAPH_BUTTON(sbLess,
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 static void OnPress_Cancel()
 {
-    Tuner::Current()->OnButtonCancel();
+    Tuner::current->OnButtonCancel();
 }
 
 static void Draw_Cancel(int x, int y)
@@ -91,7 +91,7 @@ static void Draw_Apply(int x, int y)
 
 void PageTuneParameter::OnPress_Apply()
 {
-    Tuner::Current()->OnButtonApply();
+    Tuner::current->OnButtonApply();
 }
 
 DEF_GRAPH_BUTTON(sbEnter,
@@ -118,7 +118,7 @@ static bool OnControl_TuneParameter(const Control &control)
         }
         else
         {
-            return Tuner::Current()->OnControlKey(control);
+            return Tuner::current->OnControlKey(control);
         }
     }
 
@@ -159,7 +159,7 @@ Page *PageTuneParameter::self = (Page *)&pTuneParameter;
 
 void PageTuneParameter::SetModeEntering()
 {
-    if (Tuner::Current()->IsNotOrdered() || Tuner::Current()->GetParameter()->IsInteger())
+    if (Tuner::current->IsNotOrdered() || Tuner::current->GetParameter()->IsInteger())
     {
 
     }
