@@ -159,7 +159,7 @@ Page *PageTuneParameter::self = (Page *)&pTuneParameter;
 
 void PageTuneParameter::SetModeEntering()
 {
-    if (Tuner::current->IsNotOrdered() || Tuner::current->GetParameter()->IsInteger())
+    if (Tuner::current->IsNotOrdered() || Tuner::current->param->IsInteger())
     {
 
     }

@@ -277,6 +277,10 @@ public:
         };
     };
 
+    Param *param;           // Настраиваемый параметр
+
+    static Tuner *current;
+
     Tuner(Param *param);
 
     void Init();
@@ -291,15 +295,11 @@ public:
     // Обработчик нажатия кнопки "Применить"
     void OnButtonApply();
 
-    Param *GetParameter() { return param; }
-
     static bool InModeCorrection() { return (mode == ModeTuning::Correction); }
 
     static bool InModeEntering()   { return (mode == ModeTuning::Entering);   }
 
     static void SetModeEntering();
-
-    static Tuner *current;
 
     // Возвращает true, если натсраиваемый параметр - смещение
     bool IsOffset();
@@ -308,8 +308,6 @@ public:
     bool IsNotOrdered();
 
 private:
-
-    Param *param;           // Настраиваемый параметр
 
     DisplayCorrection display;
 
