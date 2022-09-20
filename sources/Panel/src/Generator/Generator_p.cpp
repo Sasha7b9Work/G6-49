@@ -170,7 +170,7 @@ void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], c
 }
 
 
-void PGenerator::SetParameterChoice(CParam &param)
+void PGenerator::SetParameterChoice(const CParam &param)
 {
     static const Command::E commands[TypeCParam::Count] =
     {

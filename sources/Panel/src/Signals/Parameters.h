@@ -314,7 +314,7 @@ struct CParam : public Param
     CParam(TypeCParam::E t, pFuncActive funcActive, pchar nameRU, pchar nameEN, pchar *_choices = nullptr) :
         Param(KindParam::Choice, funcActive, nameRU, nameEN), type(t), choice(0), choices(_choices) { }
 
-    TypeCParam::E GetType() { return type; }
+    TypeCParam::E GetType() const { return type; }
 
     int GetChoice() const;
 
