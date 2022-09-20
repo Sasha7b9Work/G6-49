@@ -225,7 +225,7 @@ void PGenerator::SetParameterDouble(DParam &param)
 }
 
 
-void PGenerator::SetParameterInteger(IParam &param)
+void PGenerator::SetParameterInteger(const IParam &param)
 {
     static const Command::E commands[TypeIParam::Count] =
     {

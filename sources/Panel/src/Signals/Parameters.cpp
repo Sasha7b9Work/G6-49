@@ -281,7 +281,7 @@ void DParam::LoadNumberImpulsesIfNeed()
     {
         if (type == TypeDParam::Period || type == TypeDParam::Duration)
         {
-            parameter.LoadValue();
+            parameter.LoadToGenerator();
         }
     }
 }
@@ -357,7 +357,7 @@ bool IParam::SetAndLoadValue(const int val)
 }
 
 
-void IParam::LoadValue()
+void IParam::LoadToGenerator() const
 {
     PGenerator::SetParameterInteger(*this);
 }

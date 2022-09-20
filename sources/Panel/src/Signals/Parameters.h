@@ -74,6 +74,8 @@ struct Param
 
     Form *GetForm();
 
+    Form *GetForm() const { return form; };
+
     KindParam::E GetKind() const { return kind; }
 
     Viewer viewer;
@@ -267,13 +269,13 @@ struct IParam : public Param
     virtual Value Max() const;
     virtual Value GetValue() const { return value; }
 
-    TypeIParam::E GetType() { return type; }
+    TypeIParam::E GetType() const { return type; }
 
     bool SetAndLoadValue(const Value &val);
 
     bool SetAndLoadValue(const int val);
 
-    void LoadValue();
+    void LoadToGenerator() const;
 
     // Возвращает количество разрядов для параметра parameter (в них должно помещаться максимально возможное значение параметра parameter)
     int GetMaxNumberDigits() const;
