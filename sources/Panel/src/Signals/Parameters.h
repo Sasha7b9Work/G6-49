@@ -74,7 +74,7 @@ struct Param
 
     Form *GetForm();
 
-    KindParam::E GetKind() { return kind; }
+    KindParam::E GetKind() const { return kind; }
 
     Viewer viewer;
 
