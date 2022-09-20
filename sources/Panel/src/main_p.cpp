@@ -40,26 +40,14 @@ int main()
 
     while (1)
     {
-        DEBUG_POINT_0;
-
         CPU::Update();
-
-        DEBUG_POINT_0;
 
         Menu::Update();
 
-        DEBUG_POINT_0;
-
         Display::Update();
-
-        DEBUG_POINT_0;
 
         PInterface::Update();
 
-        DEBUG_POINT_0;
-
         SCPI::Update();
-
-        DEBUG_POINT_0;
     }
 }
