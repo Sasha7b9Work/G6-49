@@ -272,7 +272,7 @@ pchar SCPI::ProcessParameterDouble(pchar buffer, TypeDParam::E value)
 
     if (paramValue.FromString(buffer, &end_str, param.IsNotOrdered() ? 3 : 100))
     {
-        if (param.SetAndLoadValue(paramValue))
+        if (param.SetAndLoadToGenerator(paramValue))
         {
             return end_str + 1;
         }

@@ -287,7 +287,7 @@ void DParam::LoadNumberImpulsesIfNeed()
 }
 
 
-bool DParam::SetAndLoadValue(double val)
+bool DParam::SetAndLoadToGenerator(double val)
 {
     if(val < Min().ToDouble() || val > Max().ToDouble())
     {
@@ -304,7 +304,7 @@ bool DParam::SetAndLoadValue(double val)
 }
 
 
-bool DParam::SetAndLoadValue(const Value &val)
+bool DParam::SetAndLoadToGenerator(const Value &val)
 {
     value = val;
 
@@ -555,7 +555,7 @@ DParam &DParam::operator=(const DParam &rhs)
 
 void DParam::Reset()
 {
-    SetAndLoadValue(resetValue);
+    SetAndLoadToGenerator(resetValue);
 }
 
 

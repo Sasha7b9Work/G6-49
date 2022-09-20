@@ -148,8 +148,8 @@ struct DParam : public Param
     virtual void Reset();
 
     // ”становить значение параметра и загрузить его в прибор
-    bool SetAndLoadValue(double);
-    bool SetAndLoadValue(const Value &);
+    bool SetAndLoadToGenerator(double);
+    bool SetAndLoadToGenerator(const Value &);
 
     // ¬озвращает true, если параметр имеет знак
     bool IsSigned() const { return (type == TypeDParam::Offset); }

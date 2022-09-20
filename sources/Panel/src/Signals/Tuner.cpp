@@ -1172,7 +1172,7 @@ void DisplayCorrection::Init(const Value &value)
 
     if (param->IsDouble())
     {
-        tuner->param->ToDouble()->SetAndLoadValue(value);
+        tuner->param->ToDouble()->SetAndLoadToGenerator(value);
     }
     else if (param->IsInteger())
     {
@@ -1189,7 +1189,7 @@ void DisplayCorrection::Init(const Value &value)
 
             if (par_per.RecalcualateValue())
             {
-                par_per.SetAndLoadValue(par_per.GetValue());
+                par_per.SetAndLoadToGenerator(par_per.GetValue());
             }
         }
     }
