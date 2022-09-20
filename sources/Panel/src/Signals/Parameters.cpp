@@ -328,7 +328,7 @@ void DParam::RestoreState()
 }
 
 
-bool IParam::SetAndLoadValue(const Value &val)
+bool IParam::SetAndLoadToGenerator(const Value &val)
 {
     if (val < Min() || val > Max())
     {
@@ -342,7 +342,7 @@ bool IParam::SetAndLoadValue(const Value &val)
     return true;
 }
 
-bool IParam::SetAndLoadValue(const int val)
+bool IParam::SetAndLoadToGenerator(const int val)
 {
     if (Value(val) < Min() || Value(val) > Max())
     {

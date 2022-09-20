@@ -256,7 +256,7 @@ struct IParam : public Param
 {
     IParam(TypeIParam::E t, pchar  const nameRU, pchar const nameEN, const Value &);
 
-    virtual void Reset() { SetAndLoadValue(resetValue); }
+    virtual void Reset() { SetAndLoadToGenerator(resetValue); }
 
     virtual String ToString(String &units) const;
     virtual String ToString(Value value, bool delete_zeros = false) const;
@@ -271,9 +271,9 @@ struct IParam : public Param
 
     TypeIParam::E GetType() const { return type; }
 
-    bool SetAndLoadValue(const Value &val);
+    bool SetAndLoadToGenerator(const Value &val);
 
-    bool SetAndLoadValue(const int val);
+    bool SetAndLoadToGenerator(const int val);
 
     void LoadToGenerator() const;
 

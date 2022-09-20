@@ -1176,7 +1176,7 @@ void DisplayCorrection::Init(const Value &value)
     }
     else if (param->IsInteger())
     {
-        tuner->param->ToInteger()->SetAndLoadValue(value);
+        tuner->param->ToInteger()->SetAndLoadToGenerator(value);
     }
 
     if (form->value == TypeForm::Packet)

@@ -301,7 +301,7 @@ pchar SCPI::ProcessParameterInteger(pchar buffer, TypeIParam::E type)
 
     if (SU::String2Int(buffer, &paramValue, &end_str))
     {
-        if (param.SetAndLoadValue(paramValue))
+        if (param.SetAndLoadToGenerator(paramValue))
         {
             return end_str + 1;
         }
