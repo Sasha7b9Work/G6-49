@@ -7,7 +7,7 @@
 namespace FPGA
 {
     // Режим запуска
-    struct StartMode
+    namespace StartMode
     {
         enum E
         {
@@ -17,7 +17,7 @@ namespace FPGA
             ShaperB         ///< Формирователь импульсов канала B (режим "Импульсный сигнал")
         };
 
-        static StartMode::E Current(const Chan &, int type_signal);
+        StartMode::E Current(const Chan &, int type_signal);
     };
 
     // Установка режима запуска для произвольного (0) сигнала и импульсного (1) сигнала signal
