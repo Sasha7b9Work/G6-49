@@ -354,7 +354,7 @@ void Amplifier::Tune(const Chan &ch)
         return;
     }
 
-    if (SettingsGenerator::AmplitudeValue(ch).Abs() == 0)
+    if (SettingsGenerator::AmplitudeValue(ch).IsZero())
     {
         if (std::fabs(SettingsGenerator::Offset(ch)) <= 2.5)
         {

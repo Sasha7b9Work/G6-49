@@ -115,7 +115,7 @@ uint8 Calibrator::CalculateRange(const Chan &ch)
         return range[ch];
     }
 
-    if (SettingsGenerator::AmplitudeValue(ch).Abs() == 0)
+    if (SettingsGenerator::AmplitudeValue(ch).IsZero())
     {
         return std::fabs(SettingsGenerator::Offset(ch)) < 2.5 ? 0U : 3U;
     }
