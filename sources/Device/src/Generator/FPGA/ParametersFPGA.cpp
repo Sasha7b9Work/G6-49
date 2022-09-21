@@ -11,7 +11,7 @@ namespace FPGA
     // Режим запуска для произвольного сигнала (0) и для импульсного сигнала (1)
     static StartMode::E startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
 
-    StartMode::E Current(const Chan &ch, int type_signal)
+    StartMode::E StartMode::Current(const Chan &ch, int type_signal)
     {
         return startMode[ch][type_signal];
     }
@@ -157,7 +157,7 @@ void FPGA::StartStop::Mode::Set(E mode)
 }
 
 
-void FPGA::SetStartMode(const Chan &ch, uint8 signal, StartMode::E mode)
+void FPGA::StartMode::Set(const Chan &ch, uint8 signal, StartMode::E mode)
 {
     startMode[ch][signal] = mode;
     WriteControlRegister();

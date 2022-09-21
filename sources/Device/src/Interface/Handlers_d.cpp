@@ -290,7 +290,7 @@ static void SetStartMode(SimpleMessage *msg)
 
     FPGA::StartMode::E mode = (FPGA::StartMode::E)msg->TakeUINT8();
 
-    FPGA::SetStartMode(ch, (uint8)((firstByte & 2) >> 1), mode);
+    FPGA::StartMode::Set(ch, (uint8)((firstByte & 2) >> 1), mode);
 }
 
 

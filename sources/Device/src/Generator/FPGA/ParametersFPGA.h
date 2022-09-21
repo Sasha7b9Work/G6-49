@@ -17,12 +17,10 @@ namespace FPGA
             ShaperB         ///< Формирователь импульсов канала B (режим "Импульсный сигнал")
         };
 
+        // Установка режима запуска для произвольного (0) сигнала и импульсного (1) сигнала signal
+        void Set(const Chan &, uint8 signal, StartMode::E);
         StartMode::E Current(const Chan &, int type_signal);
     };
-
-    // Установка режима запуска для произвольного (0) сигнала и импульсного (1) сигнала signal
-    void SetStartMode(const Chan &, uint8 signal, StartMode::E);
-
 
     namespace Packet
     {
