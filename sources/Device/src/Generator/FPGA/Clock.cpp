@@ -100,17 +100,38 @@ int FPGA::Clock::Impulse::PrepareTestedValues(Value **values_out)
 
     if (ModeWork::Current(ChA) == ModeWork::Impulse)
     {
-        values[count++] = FPGA::Impulse::Period::Current(ChA);
+        if (StartMode::Current(ChA, 1) == StartMode::Auto)
+        {
+            values[count++] = FPGA::Impulse::Period::Current(ChA);
+        }
+        else
+        {
+            values[count++] = FPGA::Impulse::Duration::Current(ChA);
+        }
     }
 
     if (ModeWork::Current(ChB) == ModeWork::Impulse)
     {
-        values[count++] = FPGA::Impulse::Period::Current(ChB);
+        if (StartMode::Current(ChB, 1) == StartMode::Auto)
+        {
+            values[count++] = FPGA::Impulse::Period::Current(ChB);
+        }
+        else
+        {
+            values[count++] = FPGA::Impulse::Duration::Current(ChB);
+        }
     }
 
     if (ModeWork::Current(ChA) == ModeWork::PackedImpulse)
     {
-        values[count++] = FPGA::Packet::Period::Current();
+        if (StartMode::Current(ChA, 1) == StartMode::Auto)
+        {
+            values[count++] = FPGA::Packet::Period::Current();
+        }
+        else
+        {
+            values[count++] = FPGA::Impulse::Duration::Current(ChB);        // Если одиночный режим, то используем значение длительности импульса канала В
+        }
     }
 
     *values_out = &values[0];

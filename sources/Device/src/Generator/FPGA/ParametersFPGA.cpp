@@ -88,7 +88,7 @@ void FPGA::Impulse::Duration::Set(const Chan &ch, const Value &duration)
         reg = Register::_8_DurImp_B;
     }
 
-    // При установке длительности импульса пересчитывать опорную частоту не нужно, потому что длительность всегда меньше периода
+    Clock::Impulse::RecalculateRegistersIfNeed();       // Это на случай однократного запуска. В автоматическом режиме не нужно
 
     Register::Write(reg,
         current[ch].GetRawValue() / Clock::Impulse::GetDivider100MHz(),
@@ -160,5 +160,8 @@ void FPGA::StartStop::Mode::Set(E mode)
 void FPGA::StartMode::Set(const Chan &ch, uint8 signal, StartMode::E mode)
 {
     start_mode[ch][signal] = mode;
+
+    Clock::Impulse::RecalculateRegistersIfNeed();
+
     WriteControlRegister();
 }
