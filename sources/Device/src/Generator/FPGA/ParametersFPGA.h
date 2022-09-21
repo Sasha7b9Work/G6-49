@@ -35,6 +35,7 @@ namespace FPGA
         {
             // Устанавливает число импульсов в пачке
             void Set(const uint n);
+            uint Current();
         }
     }
 
