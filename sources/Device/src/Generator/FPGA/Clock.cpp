@@ -25,7 +25,7 @@ namespace FPGA
             static bool AllValuesLessOrEqual(const Value &value);
 
             // Подготовить массив проверяемых значений (для данного режима). Возвращает количество значений
-            static int PrepareTestValues(Value **);
+            static int PrepareTestedValues(Value **);
         }
 
         namespace AD992
@@ -41,7 +41,7 @@ bool FPGA::Clock::Impulse::AtLeastOneValueGreater(const Value &min)
 {
     Value *value = nullptr;
 
-    int num = PrepareTestValues(&value);
+    int num = PrepareTestedValues(&value);
 
     for(int i = 0; i < num; i++)
     {
@@ -59,7 +59,7 @@ bool FPGA::Clock::Impulse::AllValuesLessOrEqual(const Value &max)
 {
     Value *value = nullptr;
 
-    int num = PrepareTestValues(&value);
+    int num = PrepareTestedValues(&value);
 
     for(int i = 0; i < num; i++)
     {
@@ -90,7 +90,7 @@ void FPGA::Clock::Impulse::RecalculateRegistersIfNeed()
 }
 
 
-int FPGA::Clock::Impulse::PrepareTestValues(Value **values_out)
+int FPGA::Clock::Impulse::PrepareTestedValues(Value **values_out)
 {
     static const int SIZE_BUFFER = 10;
 
