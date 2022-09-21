@@ -130,7 +130,9 @@ int FPGA::Clock::Impulse::PrepareTestedValues(Value **values_out)
         }
         else
         {
-            values[count++] = FPGA::Impulse::Duration::Current(ChB);        // Если одиночный режим, то используем значение длительности импульса канала В
+            Value d_packet = FPGA::Impulse::Period::Current(ChB);
+            d_packet.Mul(FPGA::Packet::Number::Current());
+            values[count++] = d_packet;                             // В одиночном режиме проверяем длительность пакета импульсов
         }
     }
 
