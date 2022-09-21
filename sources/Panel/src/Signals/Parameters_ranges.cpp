@@ -94,7 +94,7 @@ Value PAmplitudePic::Max() const
     DParam &param_ampl = form->FindParameter(TypeDParam::AmplitudePic);
     Value amplitude = param_ampl.GetValue();
 
-    if (amplitude.Abs() == 0)
+    if (amplitude.AbsRawValue() == 0)
     {
         return Value(10);
     }
@@ -124,7 +124,7 @@ Value POffset::AbsLimit() const
 
     Value result(5);
 
-    if (amplitude.Abs() == 0)
+    if (amplitude.AbsRawValue() == 0)
     {
         result.FromUnits(5);
     }

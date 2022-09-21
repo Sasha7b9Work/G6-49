@@ -373,7 +373,7 @@ void Value::FromINT(int v)
 
 double Value::ToDouble() const
 {
-    return (double)(Abs()) / 1E9 * (double)Sign();
+    return (double)(AbsRawValue()) / 1E9 * (double)Sign();
 }
 
 
@@ -384,9 +384,15 @@ int Value::Sign() const
 }
 
 
-uint64 Value::Abs() const
+uint64 Value::AbsRawValue() const
 {   //                fedcba9876543210
     return (value & 0x7fffffffffffffff);
+}
+
+
+bool Value::IsZero() const
+{
+    return AbsRawValue() == 0;
 }
 
 
@@ -431,7 +437,7 @@ void Value::SetSign(int sign)
 
 int Value::Integer() const
 {
-    uint64 val = Abs();
+    uint64 val = AbsRawValue();
 
     return (int)(val / (1000 * 1000 * 1000)) * Sign();
 }
@@ -497,6 +503,18 @@ void Value::Sub(Value val)
     val.SetSign(-val.Sign());
 
     Add(val);
+}
+
+
+Value &Value::TestSub(Value val)
+{
+    static Value test(0);
+
+    test = *this;
+
+    test.Sub(val);
+
+    return test;
 }
 
 

@@ -69,6 +69,10 @@ struct Value
     void Mul(uint mul);
     void Add(Value value);
     void Sub(Value value);
+
+    // ¬озвращает разницу между собой и value но не мен€ет действующее значение
+    Value &TestSub(Value value);
+
     // ”множить на 10 в степени pow
     void MulPow10(int pow);
 
@@ -83,7 +87,9 @@ struct Value
     // ¬озвращает количество наночастиц в дробной части
     int FractNano() const;
 
-    uint64 Abs() const;
+    uint64 AbsRawValue() const;
+
+    bool IsZero() const;
 
     // ¬озвращает:
     // Order::Mega  - Value::Integer() >= 1e6

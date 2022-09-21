@@ -728,7 +728,7 @@ cstr DParam::GetIndicatedValue() const
     static char buffer[LENGTH_BUFFER + 1];                      // ƒополнительно завершающий ноль и точка
     buffer[LENGTH_BUFFER - 1] = '\0';
 
-    if (value.Abs() == 0)
+    if (value.AbsRawValue() == 0)
     {
         std::strcpy(buffer, MathSupport::ZeroValue(this));
     }

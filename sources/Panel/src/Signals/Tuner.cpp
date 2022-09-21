@@ -574,7 +574,7 @@ void Indicator::DecreaseInPosition(int pos)
             }
             else
             {
-                if (value.Abs() != 0)
+                if (value.AbsRawValue() != 0)
                 {
                     value.Sub(step);
                 }
@@ -582,7 +582,10 @@ void Indicator::DecreaseInPosition(int pos)
         }
         else
         {
-            value.Sub(step);
+            if (!value.TestSub(step).IsZero())
+            {
+                value.Sub(step);
+            }
         }
     }
 
@@ -599,7 +602,7 @@ bool Indicator::ChangeSign(Value *value, int pos)
 {
     if (IsSigned() && (pos == 0))
     {
-        if (value->Abs() != 0)
+        if (value->AbsRawValue() != 0)
         {
             value->SetSign(-value->Sign());
         }
@@ -1081,7 +1084,7 @@ Order::E DisplayCorrection::CalculateOrderForIndication()
             return Order::One;
         }
 
-        if (param->GetValue().Abs() == 0)
+        if (param->GetValue().AbsRawValue() == 0)
         {
             return param->prev_order.Get();     // Если значение равно нулю, берём ранее рассчитанное значение
         }
@@ -1168,8 +1171,6 @@ void DisplayCorrection::Init(const Value &value)
 {
     Param *param = Tuner::current->param;
 
-    Form *form = param->GetForm();
-
     if (param->IsDouble())
     {
         tuner->param->ToDouble()->SetAndLoadToGenerator(value);
@@ -1177,21 +1178,6 @@ void DisplayCorrection::Init(const Value &value)
     else if (param->IsInteger())
     {
         tuner->param->ToInteger()->SetAndLoadToGenerator(value);
-    }
-
-    if (form->value == TypeForm::Packet)
-    {
-        if (param == A::Packet::period_impulse ||
-            param == A::Packet::number ||
-            param == A::Packet::duration)
-        {
-            PPeriodPacket &par_per = (PPeriodPacket &)form->FindParameter(TypeDParam::PeriodPacket);
-
-            if (par_per.RecalcualateValue())
-            {
-                par_per.SetAndLoadToGenerator(par_per.GetValue());
-            }
-        }
     }
 
     Init();

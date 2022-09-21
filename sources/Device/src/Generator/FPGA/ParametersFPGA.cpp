@@ -118,7 +118,7 @@ void FPGA::Impulse::Period::Set(const Chan &ch, const Value &period)
 
     Register::Write(reg,
         current[ch].GetRawValue() / Clock::Impulse::GetDivider100MHz() - 2,
-        current[ch].GetRawValue() / Clock::Impulse::GetDivider1MHz()
+        current[ch].GetRawValue() / Clock::Impulse::GetDivider1MHz() - 2
     );
 }
 
@@ -131,7 +131,7 @@ void FPGA::StartStop::Delay::Set(const Value &delay)
 
     Register::Write(Register::_7_PerImp_Freq_B_DelayStartStop,
         current.GetRawValue() / Clock::Impulse::GetDivider100MHz() - 2,
-        current.GetRawValue() / Clock::Impulse::GetDivider1MHz()
+        current.GetRawValue() / Clock::Impulse::GetDivider1MHz() - 2
     );
 }
 
