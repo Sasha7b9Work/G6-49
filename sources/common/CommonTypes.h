@@ -67,18 +67,6 @@ struct FreqFiltr
     operator uint() const { return (uint)value; };
 };
 
-// Режим запуска
-struct StartMode
-{
-    enum E
-    {
-        Auto,           ///< Автоматический
-        Single,         ///< Однократный запуск по нажатию кнопки
-        ComparatorA,    ///< Компаратор канала A (в момент перехода из нуля в плюс выхода AD9952 канала A
-        ShaperB         ///< Формирователь импульсов канала B (режим "Импульсный сигнал")
-    };
-};
-
 
 struct KoeffCal
 {
