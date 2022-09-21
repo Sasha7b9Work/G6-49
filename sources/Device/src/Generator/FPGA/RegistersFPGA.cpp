@@ -75,7 +75,10 @@ void FPGA::Register::Write(const E reg, const uint64 _value, const uint64 _value
 void FPGA::Register::RewriteImpulseRegisters()
 {
     RewriteRegister(_5_PerImp_Freq_A_PerPack);
-    RewriteRegister(_6_DurImp_A_NumbImp);
+    if (ModeWork::Current(ChA) != ModeWork::PackedImpulse)
+    {
+        RewriteRegister(_6_DurImp_A_NumbImp);
+    }
     RewriteRegister(_7_PerImp_Freq_B_DelayStartStop);
     RewriteRegister(_8_DurImp_B);
 }
