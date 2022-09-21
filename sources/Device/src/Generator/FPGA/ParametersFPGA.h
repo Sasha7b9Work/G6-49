@@ -16,7 +16,13 @@ namespace FPGA
             ComparatorA,    ///< Компаратор канала A (в момент перехода из нуля в плюс выхода AD9952 канала A
             ShaperB         ///< Формирователь импульсов канала B (режим "Импульсный сигнал")
         };
+
+        static StartMode::E Current(const Chan &, int type_signal);
     };
+
+    // Установка режима запуска для произвольного (0) сигнала и импульсного (1) сигнала signal
+    void SetStartMode(const Chan &, uint8 signal, StartMode::E);
+
 
     namespace Packet
     {

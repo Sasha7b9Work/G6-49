@@ -14,6 +14,7 @@
 #include "Hardware/VCP_d.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/CalibrationSettings.h"
+#include "Generator/FPGA/ParametersFPGA.h"
 #include "Log.h"
 
 

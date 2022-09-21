@@ -55,15 +55,12 @@ namespace FPGA
     // «аписывает коды, соответствующие максимальному и минимальному значению
     static void WriteMaxAmplitude(const Chan &);
 
-    // ”становить биты, соответствующие режиму запуска
-    static void SetBitsStartMode(uint16 &data);
-    static void SetBitsStartMode(const Chan &, uint16 &data);
-
     // ¬озвращает true, если по каналу ch работает DDS
     static bool InModeDDS(const Chan &);
 
-    // –ежим запуска дл€ произвольного сигнала (0) и дл€ импульсного сигнала (1)
-    static StartMode::E startMode[Chan::Count][2] = { { StartMode::Auto, StartMode::Auto }, { StartMode::Auto, StartMode::Auto } };
+    // ”становить биты, соответствующие режиму запуска
+    static void SetBitsStartMode(uint16 &data);
+    static void SetBitsStartMode(const Chan &, uint16 &data);
 
     namespace ModeWork
     {
@@ -238,13 +235,6 @@ void FPGA::SetFrequency(const Chan &ch)
 }
 
 
-void FPGA::SetStartMode(const Chan &ch, uint8 signal, StartMode::E mode)
-{
-    startMode[ch][signal] = mode;
-    WriteControlRegister();
-}
-
-
 void FPGA::WriteControlRegister()
 {
     //                               6543
@@ -330,7 +320,7 @@ void FPGA::SetBitsStartMode(const Chan &ch, uint16 &data)
 
     if (mode == ModeWork::Impulse || mode == ModeWork::PackedImpulse)
     {
-        if (startMode[ch][1] == StartMode::Single)
+        if (StartMode::Current(ch, 1) == StartMode::Single)
         {
             Bit::Set(data, ch.IsA() ? RG0::_10_HandStartA : RG0::_11_HandStartB);
         }
@@ -338,7 +328,7 @@ void FPGA::SetBitsStartMode(const Chan &ch, uint16 &data)
 
     if (InModeDDS(ch))
     {
-        StartMode::E start = startMode[ch][0];
+        StartMode::E start = StartMode::Current(ch, 0);
 
         if (start == StartMode::ComparatorA)
         {

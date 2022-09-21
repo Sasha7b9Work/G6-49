@@ -21,9 +21,6 @@ namespace FPGA
     // 1 - положительная полярность, 0 - отрицательная полярность
     void SetPolarity(const Chan &, uint8 polarity);
 
-    // Установка режима запуска для произвольного (0) сигнала и импульсного (1) сигнала signal
-    void SetStartMode(const Chan &, uint8 signal, StartMode::E);
-
     // Делает однократный запуск
     void SingleStart();
 
