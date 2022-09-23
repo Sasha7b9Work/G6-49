@@ -26,6 +26,11 @@ namespace FPGA
         namespace Number
         {
             static uint current = 3;
+            
+            uint Current()
+            {
+                return current;
+            }
         }
     }
 
