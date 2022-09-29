@@ -5,6 +5,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include <limits>
+#include <stm32f407xx.h>
 
 
 struct TimerStruct

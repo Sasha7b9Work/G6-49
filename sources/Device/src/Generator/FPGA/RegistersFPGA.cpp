@@ -5,7 +5,7 @@
 #include "Utils/Math.h"
 #include "Hardware/HAL/HAL.h"
 #include "Generator/FPGA/Clock.h"
-
+#include "Hardware/HAL/HAL.h"
 
 namespace FPGA
 {
@@ -49,10 +49,16 @@ void FPGA::Register::Write(const E reg, const uint64 _value, const uint64 _value
 
     uint64 value = _value;
 
-    if (Clock::Impulse::Is1MHz() && reg >= _5_PerImp_Freq_A_PerPack && reg <= _8_DurImp_B)
+    if (reg >= _5_PerImp_Freq_A_PerPack && reg <= _8_DurImp_B)
     {
-        value = _value1MHz;
+        HAL_TIM::Delay(1);
+
+        if (Clock::Impulse::Is1MHz())
+        {
+            value = _value1MHz;
+        }
     }
+
 
     WriteAddress(reg);
 
