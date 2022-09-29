@@ -134,7 +134,7 @@ bool HAL_SPI4::WaitRelease()
 
 bool HAL_SPI4::IsConnected()
 {
-	return WaitRelease();
+	return !WaitRelease();
 }
 
 

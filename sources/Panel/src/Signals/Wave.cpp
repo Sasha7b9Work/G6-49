@@ -305,7 +305,7 @@ DParam *Form::FindParameter(TypeDParam::E p) const
         }
     }
 
-    return &DParam::empty;
+    return nullptr;
 }
 
 
@@ -338,7 +338,7 @@ CParam *Form::FindParameter(TypeCParam::E p) const
         }
     }
 
-    return &CParam::empty;
+    return nullptr;
 }
 
 
@@ -377,7 +377,7 @@ CMSParam *Form::FindParameter(TypeCMSParam::E t) const
         }
     }
 
-    return &CMSParam::empty;
+    return nullptr;
 }
 
 
@@ -398,7 +398,7 @@ IParam *Form::FindParameter(TypeIParam::E t) const
         }
     }
 
-    return &IParam::empty;
+    return nullptr;
 }
 
 

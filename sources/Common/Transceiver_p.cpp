@@ -18,10 +18,7 @@ void Transceiver::Transmit(SimpleMessage *message)
 
     while (!result)
     {
-        if(!HAL_SPI4::WaitRelease())                                                // Ожидаем перехода флага готовности прибора в состояние "свободен"
-        {
-            break;
-        }
+        HAL_SPI4::WaitRelease();                                                // Ожидаем перехода флага готовности прибора в состояние "свободен
 
         for (int i = 0; i < 2; i++)
         {
