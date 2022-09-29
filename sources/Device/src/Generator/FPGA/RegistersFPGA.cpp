@@ -75,6 +75,11 @@ void FPGA::Register::Write(const E reg, const uint64 _value, const uint64 _value
     HAL_PIO::Set(WR_FPGA_WR_RG);                                    // Теперь переписываем данные из сдвиговоого регистра в FPGA
     HAL_PIO::Reset(WR_FPGA_WR_RG);
     HAL_TIM::Delay(10);                                             // Ждём 10 миллисекунд, пока данные перепишутся в FPGA
+
+    if (reg >= _5_PerImp_Freq_A_PerPack && reg <= _8_DurImp_B)
+    {
+        HAL_TIM::Delay(1);
+    }
 }
 
 
