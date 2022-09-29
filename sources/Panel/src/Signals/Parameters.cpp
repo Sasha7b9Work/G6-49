@@ -15,11 +15,6 @@
 
 int CParam::choiceModeStartFree = 0;
 
-DParam DParam::empty(TypeDParam::Frequency, Param::EFuncActive, "Пустой", "Empty", Value(1));
-IParam IParam::empty(TypeIParam::PacketNumber, "Пустой", "Empty", Value(1.0));
-CParam CParam::empty(TypeCParam::Polarity, Param::EFuncActive, "Пустой", "Empty");
-CMSParam CMSParam::empty(TypeCMSParam::Manipulation, "Пустой", "Empty", nullptr);
-
 const Value PAmplitudePic::by_default("1", Order::One);
 const Value PPeriod::min_impulse("20", Order::Nano);
 const Value PFrequency::min_sin("300", Order::Micro);
@@ -275,13 +270,13 @@ cstr DParam::GetUnits(Order::E order) const
 
 void DParam::LoadNumberImpulsesIfNeed()
 {
-    IParam &parameter = CURRENT_FORM->FindParameter(TypeIParam::PacketNumber);
+    IParam *parameter = CURRENT_FORM->FindParameter(TypeIParam::PacketNumber);
 
-    if (parameter.Exist())
+    if (parameter)
     {
         if (type == TypeDParam::Period || type == TypeDParam::Duration)
         {
-            parameter.LoadToGenerator();
+            parameter->LoadToGenerator();
         }
     }
 }
@@ -296,7 +291,7 @@ bool DParam::SetAndLoadToGenerator(double val)
 
     value.FromDouble(val);
 
-    PGenerator::SetParameterDouble(*this);
+    PGenerator::SetParameterDouble(this);
 
     LoadNumberImpulsesIfNeed();
 
@@ -308,7 +303,7 @@ bool DParam::SetAndLoadToGenerator(const Value &val)
 {
     value = val;
 
-    PGenerator::SetParameterDouble(*this);
+    PGenerator::SetParameterDouble(this);
 
     LoadNumberImpulsesIfNeed();
 
@@ -337,7 +332,7 @@ bool IParam::SetAndLoadToGenerator(const Value &val)
 
     value = val;
 
-    PGenerator::SetParameterInteger(*this);
+    PGenerator::SetParameterInteger(this);
 
     return true;
 }
@@ -351,7 +346,7 @@ bool IParam::SetAndLoadToGenerator(const int val)
 
     value.FromINT(val);
 
-    PGenerator::SetParameterInteger(*this);
+    PGenerator::SetParameterInteger(this);
 
     return true;
 }
@@ -359,7 +354,7 @@ bool IParam::SetAndLoadToGenerator(const int val)
 
 void IParam::LoadToGenerator() const
 {
-    PGenerator::SetParameterInteger(*this);
+    PGenerator::SetParameterInteger(this);
 }
 
 
@@ -456,7 +451,7 @@ void CParam::NextChoice()
         }
         else
         {
-            PGenerator::SetParameterDouble(*A::Impulse::delay);
+            PGenerator::SetParameterDouble(A::Impulse::delay);
         }
     }
     else if (type == TypeCParam::ModeStart)
@@ -493,7 +488,7 @@ bool CParam::SetAndLoadChoice(int ch)
 
     choice = ch;
 
-    PGenerator::SetParameterChoice(*this);
+    PGenerator::SetParameterChoice(this);
 
     return true;
 }
@@ -775,11 +770,11 @@ cstr DParam::GetIndicatedValue() const
 
 DParam *Param::ToDouble()
 {
-    return (kind == KindParam::Double) ? (DParam *)this : &DParam::empty;
+    return (kind == KindParam::Double) ? (DParam *)this : nullptr;
 }
 
 
 IParam *Param::ToInteger()
 {
-    return (kind == KindParam::Integer) ? (IParam *)this : &IParam::empty;
+    return (kind == KindParam::Integer) ? (IParam *)this : nullptr;
 }

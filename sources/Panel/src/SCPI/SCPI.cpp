@@ -255,9 +255,9 @@ bool SCPI::Handler::Processing(SimpleMessage *message)
 
 pchar SCPI::ProcessParameterDouble(pchar buffer, TypeDParam::E value)
 {
-    DParam &param = CURRENT_FORM->FindParameter(value);
+    DParam *param = CURRENT_FORM->FindParameter(value);
 
-    if (!param.Exist())
+    if (!param)
     {
         return nullptr;
     }
@@ -270,9 +270,9 @@ pchar SCPI::ProcessParameterDouble(pchar buffer, TypeDParam::E value)
 
     Value paramValue(0);
 
-    if (paramValue.FromString(buffer, &end_str, param.IsNotOrdered() ? 3 : 100))
+    if (paramValue.FromString(buffer, &end_str, param->IsNotOrdered() ? 3 : 100))
     {
-        if (param.SetAndLoadToGenerator(paramValue))
+        if (param->SetAndLoadToGenerator(paramValue))
         {
             return end_str + 1;
         }
@@ -284,14 +284,14 @@ pchar SCPI::ProcessParameterDouble(pchar buffer, TypeDParam::E value)
 
 pchar SCPI::ProcessParameterInteger(pchar buffer, TypeIParam::E type)
 {
-    IParam &param = CURRENT_FORM->FindParameter(type);
+    IParam *param = CURRENT_FORM->FindParameter(type);
 
-    SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
-
-    if (!param.Exist())
+    if (!param)
     {
         return nullptr;
     }
+
+    SCPI_REQUEST(SCPI::ProcessRequestParameterValue(param));
 
     buffer++;
 
@@ -301,7 +301,7 @@ pchar SCPI::ProcessParameterInteger(pchar buffer, TypeIParam::E type)
 
     if (SU::String2Int(buffer, &paramValue, &end_str))
     {
-        if (param.SetAndLoadToGenerator(paramValue))
+        if (param->SetAndLoadToGenerator(paramValue))
         {
             return end_str + 1;
         }
@@ -313,23 +313,23 @@ pchar SCPI::ProcessParameterInteger(pchar buffer, TypeIParam::E type)
 
 pchar SCPI::ProcessParameterChoice(pchar buffer, TypeCParam::E choice, cstr *names)
 {
-    CParam &param = CURRENT_FORM->FindParameter(choice);
+    CParam *param = CURRENT_FORM->FindParameter(choice);
 
-    if(!param.Exist())
+    if(!param)
     {
         String answer("%s parameter not found for the current signal", TypeCParam::Name(choice));
         return nullptr;
     }
 
-    SCPI_REQUEST(SCPI::SendAnswer(names[param.GetChoice()]));
+    SCPI_REQUEST(SCPI::SendAnswer(names[param->GetChoice()]));
 
-    SCPI_PROCESS_ARRAY(names, param.SetAndLoadChoice(i));
+    SCPI_PROCESS_ARRAY(names, param->SetAndLoadChoice(i));
 }
 
 
-void SCPI::ProcessRequestParameterValue(const DParam &param)
+void SCPI::ProcessRequestParameterValue(const DParam *param)
 {
-    if(!param.Exist())
+    if(!param)
     {
         SCPI_SEND_PARAMETER_DOES_NOT_EXIST();
     }
@@ -339,7 +339,7 @@ void SCPI::ProcessRequestParameterValue(const DParam &param)
         LANGUAGE = 1; //-V519
 
         String units;
-        String answer = param.ToString(units);
+        String answer = param->ToString(units);
         answer.Append(" ");
         answer.Append((units[0] == Ideograph::_8::Degree) ? "degrees" : units.c_str());
 
@@ -350,9 +350,9 @@ void SCPI::ProcessRequestParameterValue(const DParam &param)
 }
 
 
-void SCPI::ProcessRequestParameterValue(const IParam &param)
+void SCPI::ProcessRequestParameterValue(const IParam *param)
 {
-    if (!param.Exist())
+    if (!param)
     {
         SCPI_SEND_PARAMETER_DOES_NOT_EXIST();
     }
@@ -362,7 +362,7 @@ void SCPI::ProcessRequestParameterValue(const IParam &param)
         LANGUAGE = 1;
 
         String units;
-        String answer = param.ToString(units);
+        String answer = param->ToString(units);
 
         SCPI::SendAnswer(answer.c_str());
 

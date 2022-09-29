@@ -91,10 +91,10 @@ public:
     operator TypeForm::E() const { return value; }
     
     // Находит требуемый параметр. Возвращает 0, если такого параметра нет
-    DParam &FindParameter(TypeDParam::E p) const;
-    CParam &FindParameter(TypeCParam::E p) const;
-    IParam &FindParameter(TypeIParam::E p) const;
-    CMSParam &FindParameter(TypeCMSParam::E p) const;
+    DParam *FindParameter(TypeDParam::E p) const;
+    CParam *FindParameter(TypeCParam::E p) const;
+    IParam *FindParameter(TypeIParam::E p) const;
+    CMSParam *FindParameter(TypeCMSParam::E p) const;
     
     // Засылает параметр в генератор
     void SendParameterToGenerator(TypeDParam::E p) const;

@@ -208,10 +208,6 @@ struct DParam : public Param
     // ¬озвращает позицию первого ненулевого символа "1" - дес€тки (1e1), "0" - единицы (1e0), "-1" - дес€тые (1e-1), "-2" - сотые (1e-2)
     int GetPositionFirstDigit(Order::E order = Order::Count) const;
 
-    static DParam empty;
-
-    bool Exist() const { return this != &empty; }
-
 private:
     Tuner               tuner;          // »спользуетс€ дл€ настройки 
     const TypeDParam::E type;
@@ -280,10 +276,6 @@ struct IParam : public Param
     // ¬озвращает количество разр€дов дл€ параметра parameter (в них должно помещатьс€ максимально возможное значение параметра parameter)
     int GetMaxNumberDigits() const;
 
-    static IParam empty;
-
-    bool Exist() const { return this != &empty; }
-
 private:
 
     Tuner         tuner;
@@ -329,10 +321,6 @@ struct CParam : public Param
 
     virtual void Reset() { SetAndLoadChoice(0); };
 
-    static CParam empty;
-
-    bool Exist() const { return this != &empty; }
-
 private:
     TypeCParam::E  type;
     int            choice;                  // “екущий выбор. » выбор дл€ режима запуска импульсных сигналов
@@ -375,10 +363,6 @@ struct CMSParam : public Param
     virtual void OnPressButtonTune();
 
     TypeCMSParam::E GetType() { return type; }
-
-    static CMSParam empty;
-
-    bool Exist() const { return this != &empty; }
 
 private:
 

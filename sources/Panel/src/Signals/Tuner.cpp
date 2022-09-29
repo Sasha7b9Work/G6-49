@@ -1288,7 +1288,7 @@ bool Tuner::IsOffset()
 {
     DParam *offset = param->ToDouble();
 
-    return offset->Exist() ? (offset->GetType() == TypeDParam::Offset) : false;
+    return offset ? (offset->GetType() == TypeDParam::Offset) : false;
 
 }
 
@@ -1297,7 +1297,7 @@ bool Tuner::IsNotOrdered()
 {
     DParam *voltage = param->ToDouble();
 
-    return voltage->Exist() ? voltage->IsNotOrdered() : false;
+    return voltage ? voltage->IsNotOrdered() : false;
 }
 
 

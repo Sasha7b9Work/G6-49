@@ -62,9 +62,9 @@ namespace SCPI
 
     void ProcessHint(String *message, cstr names[]); //-V2504
 
-    void ProcessRequestParameterValue(const DParam &param);
+    void ProcessRequestParameterValue(const DParam *param);
 
-    void ProcessRequestParameterValue(const IParam &param);
+    void ProcessRequestParameterValue(const IParam *param);
 
     pchar ProcessParameterDouble(pchar buffer, TypeDParam::E value);
 

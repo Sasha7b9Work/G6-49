@@ -91,8 +91,8 @@ Value PAmplitudePic::Max() const
     // Ампл <= 1В | offset[0 ... 2.5]; ampl / 2 + fabs(см) <= 2.5
     // Ампл > 1В  | offset[0 ... 5];   ampl / 2 + fabs(см) <= 5
 
-    DParam &param_ampl = form->FindParameter(TypeDParam::AmplitudePic);
-    Value amplitude = param_ampl.GetValue();
+    DParam *param_ampl = form->FindParameter(TypeDParam::AmplitudePic);
+    Value amplitude = param_ampl->GetValue();
 
     if (amplitude.AbsRawValue() == 0)
     {
@@ -106,7 +106,7 @@ Value PAmplitudePic::Max() const
         result.FromUnits(2, 500);
     }
 
-    Value offset = form->FindParameter(TypeDParam::Offset).GetValue();
+    Value offset = form->FindParameter(TypeDParam::Offset)->GetValue();
     result.Sub(offset);
     result.Mul(2);
 
@@ -120,7 +120,7 @@ Value POffset::AbsLimit() const
     // Ampl <= 1В | [0 ... 2.5], ampl / 2 + fabs(см) <= 2.5
     // Ampl > 1В  | [0 ... 5],   ampl / 2 + fabs(см) <= 5
 
-    Value amplitude = form->FindParameter(TypeDParam::AmplitudePic).GetValue();
+    Value amplitude = form->FindParameter(TypeDParam::AmplitudePic)->GetValue();
 
     Value result(5);
 
@@ -295,17 +295,17 @@ Value PPeriodPacket::Min() const
     {
         // Значение периода не может быть меньше (N - 1) * Tи + tи + 10нс
 
-        PPeriod &par_period = (PPeriod &)form->FindParameter(TypeDParam::Period);
-        IParam &par_number = form->FindParameter(TypeIParam::PacketNumber);
-        PDuration &par_duration = (PDuration &)form->FindParameter(TypeDParam::Duration);
+        PPeriod *par_period = (PPeriod *)form->FindParameter(TypeDParam::Period);
+        IParam *par_number = form->FindParameter(TypeIParam::PacketNumber);
+        PDuration *par_duration = (PDuration *)form->FindParameter(TypeDParam::Duration);
 
-        if (par_period.Exist() && par_number.Exist() && par_duration.Exist())
+        if (par_period && par_number && par_duration)
         {
-            Value min_value = par_period.GetValue();
+            Value min_value = par_period->GetValue();
 
-            min_value.Mul((uint)(par_number.GetValue().Integer() - 1));
+            min_value.Mul((uint)(par_number->GetValue().Integer() - 1));
 
-            min_value.Add(par_duration.GetValue());
+            min_value.Add(par_duration->GetValue());
 
             min_value.Add(Value("10", Order::Nano));
 
