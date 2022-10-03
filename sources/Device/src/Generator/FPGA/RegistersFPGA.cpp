@@ -6,6 +6,8 @@
 #include "Hardware/HAL/HAL.h"
 #include "Generator/FPGA/Clock.h"
 #include "Hardware/HAL/HAL.h"
+#include "structs.h"
+
 
 namespace FPGA
 {
@@ -47,7 +49,9 @@ void FPGA::Register::Write(const E reg, const uint64 _value, const uint64 _value
     content[Clock::Impulse::_100MHz][reg] = _value;
     content[Clock::Impulse::_1MHz][reg] = _value1MHz;
 
-    uint64 value = _value;
+    BitSet64 value;
+
+    value.dword = _value;
 
     if (reg >= _5_PerImp_Freq_A_PerPack && reg <= _8_DurImp_B)
     {
@@ -55,10 +59,9 @@ void FPGA::Register::Write(const E reg, const uint64 _value, const uint64 _value
 
         if (Clock::Impulse::Is1MHz())
         {
-            value = _value1MHz;
+            value.dword = _value1MHz;
         }
     }
-
 
     WriteAddress(reg);
 
@@ -66,7 +69,7 @@ void FPGA::Register::Write(const E reg, const uint64 _value, const uint64 _value
     {
         for (int bit = numBits[reg] - 1; bit >= 0; bit--)
         {
-            HAL_PIO::Write(WR_FPGA_DT_RG, Bit::Get(value, bit));    // Устанавливаем или сбрасываем соответствующий бит
+            HAL_PIO::Write(WR_FPGA_DT_RG, Bit::Get(value.dword, bit));    // Устанавливаем или сбрасываем соответствующий бит
             HAL_PIO::Set(WR_FPGA_CLK_RG);                           // И записываем его в ПЛИС
             HAL_PIO::Reset(WR_FPGA_CLK_RG);
         }
