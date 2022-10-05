@@ -121,7 +121,7 @@ void FPGA::Packet::Number::Set(const uint value)
 
     uint64 time100MHz = ((value - 1) * Impulse::Period::Current(ChA).ToAbsNS() + Impulse::Duration::Gurrent(ChA).ToAbsNS()) / 10;
 
-    uint64 time1MHz = ((value - 1) * Impulse::Period::Current(ChA).ToAbsNS() + Impulse::Duration::Gurrent(ChA).ToAbsNS()) * 10;
+    uint64 time1MHz = ((value - 1) * Impulse::Period::Current(ChA).ToAbsNS() + Impulse::Duration::Gurrent(ChA).ToAbsNS()) / 1000;
 
     Register::Write(Register::_6_DurImp_A_NumbImp, time100MHz, time1MHz);
 }
