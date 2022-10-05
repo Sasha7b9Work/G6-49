@@ -377,6 +377,12 @@ double Value::ToDouble() const
 }
 
 
+uint64 Value::ToAbsNS() const
+{
+    return AbsRawValue();
+}
+
+
 int Value::Sign() const
 {
     //                fedcba9876543210
