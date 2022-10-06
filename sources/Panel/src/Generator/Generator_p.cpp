@@ -172,16 +172,27 @@ void PGenerator::TransformDataToCodeAndTransmit(const float d[DDS_NUM_POINTS], c
 
 void PGenerator::SetParameterChoice(const CParam *param)
 {
-    static const Command::E commands[TypeCParam::Count] =
-    {
-        Command::SetPolarity,
-        Command::SetStartMode,
-        Command::SetManipulation
-    };
+    TypeCParam::E type = param->GetType();
 
-    Message::Set::Param(commands[param->GetType()],
-        (uint8)param->GetForm()->GetWave()->GetChannel(),
-        (uint8)param->GetChoice()).Transmit();
+    if (type == TypeCParam::Polarity || type == TypeCParam::ManipulationEnabled)
+    {
+        static const Command::E commands[TypeCParam::Count] =
+        {
+            Command::SetPolarity,
+            Command::SetStartMode,
+            Command::SetManipulation
+        };
+
+        Message::Set::Param(commands[type],
+            (uint8)param->GetForm()->GetWave()->GetChannel(),
+            (uint8)param->GetChoice()).Transmit();
+    }
+    else if (type == TypeCParam::ModeStart)
+    {
+        Form *form = param->GetForm();
+
+        LoadStartMode(form->GetWave()->GetChannel(), form->IsDDS() ? 0 : 1, param->GetChoice());
+    }
 }
 
 

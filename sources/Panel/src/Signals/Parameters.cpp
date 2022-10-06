@@ -465,7 +465,6 @@ void CParam::NextChoice()
             Math::CircleIncrease(&choice, 0, NumChoices() - 1);
         }
 
-        PGenerator::LoadStartMode(form->GetWave()->GetChannel(), form->IsDDS() ? 0 : 1, GetChoice());
         PGenerator::TuneChannel(form->GetWave()->GetChannel());
     }
     else

@@ -279,6 +279,7 @@ void Form::TuneGenerator()
             SendParameterToGenerator(TypeDParam::PeriodPacket);
             SendParameterToGenerator(TypeCParam::Polarity);
             SendParameterToGenerator(TypeDParam::Frequency);
+            SendParameterToGenerator(TypeCParam::ModeStart);
         }
     }
 }
