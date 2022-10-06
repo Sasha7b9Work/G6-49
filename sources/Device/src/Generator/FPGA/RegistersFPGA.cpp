@@ -23,7 +23,7 @@ namespace FPGA
         // Установить на A0_RG...A3_RG адрес, соответсвующй регистру
         static void WriteAddress(E);
 
-        static void RewriteRegister(E);
+        void RewriteRegister(E);
     }
 }
 

@@ -65,6 +65,11 @@ namespace FPGA
             static Value current(1e-3);
         }
     }
+
+    namespace Register
+    {
+        void RewriteRegister(E);
+    }
 }
 
 
@@ -180,4 +185,7 @@ void FPGA::StartMode::Set(const Chan &ch, uint8 signal, StartMode::E mode)
     Clock::Impulse::RecalculateRegistersIfNeed();
 
     WriteControlRegister();
+
+    Register::RewriteRegister(Register::_5_PerImp_Freq_A_PerPack);
+    Register::RewriteRegister(Register::_8_DurImp_B);
 }
