@@ -111,7 +111,7 @@ public:
     // Возвращает колечество слов, разделённых пробелами
     int NumberWords() const;
 
-    char &operator[](int i);
+    char &operator[](int i) const;
 
     String operator=(const String &);
 

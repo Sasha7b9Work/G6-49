@@ -1018,7 +1018,7 @@ int String::NumberWords() const
 }
 
 
-char &String::operator[](int i)
+char &String::operator[](int i) const
 {
     static char result = 0;
 

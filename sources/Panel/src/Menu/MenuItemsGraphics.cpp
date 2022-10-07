@@ -8,6 +8,7 @@
 #include "Display/WaveGraphics.h"
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
+#include "Display/Symbols.h"
 
 
 using namespace Primitives;
@@ -228,7 +229,18 @@ void Choice::Draw(bool opened, int x, int y) const
         DrawTitle(x, y);
         Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, shade_or_inactive ? Color::MENU_ITEM_SHADE : Color::GREEN_25);
 
+        const String &name_sub_item = NameCurrentSubItem();
+
+        int spacing = ((name_sub_item[0] == Ideograph::_8::PolarityPos) ||
+            (name_sub_item[0] == Ideograph::_8::PolarityNeg) ||
+            (name_sub_item[0] == Ideograph::_8::AC) ||
+            (name_sub_item[0] == Ideograph::_8::DC)) ? 0 : 1;
+
+        Font::Spacing::SetAndStore(spacing);
+
         NameCurrentSubItem().DrawInCenterRect(x, y + 30, Item::WIDTH, 10, Color::BACK);
+
+        Font::Spacing::Restore();
     }
 }
 
