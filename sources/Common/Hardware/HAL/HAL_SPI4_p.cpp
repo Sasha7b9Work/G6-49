@@ -132,12 +132,6 @@ bool HAL_SPI4::WaitRelease()
 }
 
 
-bool HAL_SPI4::IsConnected()
-{
-    return !WaitRelease();
-}
-
-
 bool HAL_SPI4::IsReady()
 {
     return HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_SET;
