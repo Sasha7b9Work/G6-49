@@ -4,6 +4,9 @@
 #define POLARITY_POS "\x84\x85\x86"
 #define POLARITY_NEG "\x94\x95\x96"
 
+#define COUPLE_DC    "\x89\x8a"
+#define COUPLE_AC    "\x8b\x8c"
+
 
 struct Ideograph
 {
@@ -38,6 +41,8 @@ struct Ideograph
             Up          = '\x7c',
             Down        = '\x7e',
             PolarityPos = '\x84',
+            DC          = '\x89',
+            AC          = '\x8b',
             BigDegree   = '\x8e',
             PolarityNeg = '\x94',
             BigPlus     = '\x9c',

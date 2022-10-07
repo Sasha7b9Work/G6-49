@@ -2,6 +2,7 @@
 #include "Menu/Menu.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
+#include "Display/Symbols.h"
 
 
 extern const PageBase pFrequencyCounter;
@@ -92,8 +93,8 @@ void PageFrequencyCounter::OnPress_Resist(bool active)
 DEF_CHOICE_2(cCouple,                                                                                                                                             //--- ЧАСТОТОМЕР - Вход ---
     "Вход", "Couple",
     "Пропускает/запрещает постоянную составляющую", "Skips / Disables DC",
-    "Перем", "Alternate", "Постоянная составляющая поступает на вход частотомера",    "The constant component is fed to the input of the frequency counter",
-    "Пост",  "Direct",    "Постоянная составляющая не поступает на вход частотомера", "The constant component does not go to the input of the frequency meter",
+    COUPLE_AC, COUPLE_AC, "Постоянная составляющая поступает на вход частотомера",    "The constant component is fed to the input of the frequency counter",
+    COUPLE_DC, COUPLE_DC,    "Постоянная составляющая не поступает на вход частотомера", "The constant component does not go to the input of the frequency meter",
     set.freq.couple, pFrequencyCounter, Item::EFuncActive, PageFrequencyCounter::OnPress_Couple, Item::EFuncDraw
 )
 

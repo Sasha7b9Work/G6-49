@@ -94,7 +94,10 @@ void Viewer::DrawChoice(int y, int xValue, int)
     String units;
     String value = param->ToString(units);
 
-    int spacing = ((value[0] == Ideograph::_8::PolarityPos) || (value[0] == Ideograph::_8::PolarityNeg)) ? 0 : 1;
+    int spacing = ((value[0] == Ideograph::_8::PolarityPos) ||
+        (value[0] == Ideograph::_8::PolarityNeg) ||
+        (value[0] == Ideograph::_8::AC) ||
+        (value[0] == Ideograph::_8::DC)) ? 0 : 1;
 
     Font::Spacing::SetAndStore(spacing);
 
