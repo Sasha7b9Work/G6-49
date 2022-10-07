@@ -80,7 +80,7 @@ static const Settings defSet =
         0,                                  // freq_hysteresis
         FreqInterval::_1,
         FreqResist::_1MOhm,
-        FreqCouple::AC,
+        FreqCouple::DC,
         FreqFiltr::Disable,
         FreqTest::Off
     }
