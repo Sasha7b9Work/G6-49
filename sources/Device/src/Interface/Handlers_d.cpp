@@ -369,6 +369,7 @@ static void CalibrationSet(SimpleMessage *msg)
     int16 k = msg->TakeINT16();
     
     Calibrator::SetK(channel, signal, range, param, k);
+    Calibrator::SetK(channel, signal, range, param, k);
 }
 
 
