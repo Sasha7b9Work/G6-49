@@ -5,7 +5,20 @@
 
 namespace Filtr
 {
+    struct Type
+    {
+        enum E
+        {
+            None,
+            Chebyshev,
+            Bessel,
+            Count
+        };
+    };
+
     void Init();
 
-    void Tune(const Chan &ch, TypeForm::E form);
+    void Tune(const Chan &, TypeForm::E);
+
+    void SetType(const Chan &, Type::E);
 }
