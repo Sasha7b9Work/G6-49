@@ -15,21 +15,6 @@ struct CalSignal
         Count
     };
 
-    static TypeForm::E ToForm(E e)
-    {
-        TypeForm::E result = TypeForm::Meander;
-
-        switch (e)
-        {
-        case Sine:      result = TypeForm::Sine;        break;
-        case DDS:       result = TypeForm::Triangle;    break;
-        case Impulse:   result = TypeForm::Meander;     break;
-        case Count:                                     break;
-        }
-
-        return result;
-    }
-
     static E FromForm(TypeForm::E form)
     {
         if (form == TypeForm::Sine)

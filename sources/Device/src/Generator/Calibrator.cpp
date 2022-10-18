@@ -32,9 +32,9 @@ namespace Calibrator
 
 void Calibrator::SetFormWave(const Chan &ch, CalSignal::E sig)
 {
-    DGenerator::SetFormWave(ch, CalSignal::ToForm(sig));
+    DGenerator::SetFormWave(ch, (sig == CalSignal::Sine) ? TypeForm::Sine : TypeForm::Meander);
 
-    DGenerator::SetFrequency(ch, (sig == CalSignal::Impulse) ? Value("0.1", Order::One) : Value(1e3F));
+    DGenerator::SetFrequency(ch, (sig == CalSignal::Sine) ? Value(1e3F) : Value("0.1", Order::One));
 }
 
 
