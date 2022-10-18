@@ -68,6 +68,22 @@ void Calibrator::SetOffset(const Chan &ch, uint8 param)
 
 void Calibrator::SetK(uint8 channel, CalSignal::E _signal, uint8 _range, uint8 param, int16 k)
 {
+    // Сохраняет текущую форму, чтобы потом её восстановить
+    struct StorageTypeForm
+    {
+        void Store(const Chan &ch)
+        {
+            type = TypeForm::Current(ch);
+        }
+        void Restore(const Chan &ch)
+        {
+            TypeForm::Set(ch, type);
+        }
+    private:
+        TypeForm::E type;
+    } storage;
+
+
     inModeCalibration = true;
 
     range[channel] = _range;
@@ -84,6 +100,13 @@ void Calibrator::SetK(uint8 channel, CalSignal::E _signal, uint8 _range, uint8 p
 
     Amplifier::Lock();
 
+    storage.Store(ch);
+
+    if (_signal == CalSignal::DDS)
+    {
+        TypeForm::Set(ch, TypeForm::Triangle);
+    }
+
     SetAmplitude(ch, (param != 0));       // Для калибровки смещения нужно установить нулевой уровень на выходе, но аттенюатор не трогать
 
     SetOffset(ch, param);
@@ -93,6 +116,8 @@ void Calibrator::SetK(uint8 channel, CalSignal::E _signal, uint8 _range, uint8 p
     AD5697::EnabledCalibrateMode(false);
 
     Amplifier::Unlock();
+
+    storage.Restore(ch);
 
     inModeCalibration = false;
 }
