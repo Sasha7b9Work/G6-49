@@ -3,6 +3,7 @@
 #include "Generator/Calibrator.h"
 #include "Generator/Generator_d.h"
 #include "Settings/CalibrationSettings.h"
+#include "Generator/Filtr.h"
 #include <cmath>
 
 
@@ -32,7 +33,19 @@ namespace Calibrator
 
 void Calibrator::SetFormWave(const Chan &ch, CalSignal::E sig)
 {
-    DGenerator::SetFormWave(ch, (sig == CalSignal::Sine) ? TypeForm::Sine : TypeForm::Meander);
+    if (sig == CalSignal::Sine)
+    {
+        DGenerator::SetFormWave(ch, TypeForm::Sine);
+    }
+    else if (sig == CalSignal::DDS)
+    {
+        DGenerator::SetFormWave(ch, TypeForm::Meander);
+        Filtr::SetType(ch, Filtr::Type::Bessel);
+    }
+    else if (sig == CalSignal::Impulse)
+    {
+        DGenerator::SetFormWave(ch, TypeForm::Meander);
+    }
 
     DGenerator::SetFrequency(ch, (sig == CalSignal::Sine) ? Value(1e3F) : Value("0.1", Order::One));
 }
