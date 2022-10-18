@@ -16,6 +16,9 @@ using namespace Primitives;
 extern const PageBase pCalibration;
 
 
+#include "PageCalibration_null.h"
+
+
 static uint8 channel = 0;
 static uint8 signal = 0;
 static uint8 range = 0;
@@ -114,7 +117,7 @@ DEF_CHOICE_3(cChannelCal,
     "", "",
     "A", "A", "", "",
     "B", "B", "", "",
-    "",  "",  "", "",
+    "", "", "", "",
     channel, pCalibration, Item::EFuncActive, OnChange_Source, Item::EFuncDraw
 )
 
@@ -132,9 +135,9 @@ DEF_CHOICE_5(cRange,
     "", "",
     "100 мВ", "100 mV", "", "",
     "300 мВ", "300 mv", "", "",
-    "1 В",    "1 V",    "", "",
-    "3 В",    "3 V",    "", "",
-    "10 В",   "10 V",   "", "",
+    "1 В", "1 V", "", "",
+    "3 В", "3 V", "", "",
+    "10 В", "10 V", "", "",
     range, pCalibration, Item::EFuncActive, OnChange_Parameters, Item::EFuncDraw
 )
 
@@ -148,6 +151,8 @@ DEF_CHOICE_4(cParameterFullVoltage,
     "-5В",     "-5V",       "", "",
     parameter, pCalibration, Item::EFuncActive, OnChange_Parameters, Item::EFuncDraw
 )
+
+
 
 
 // Для смещения +/- 2.5В

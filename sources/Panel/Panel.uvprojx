@@ -2177,6 +2177,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDebug\PageSubRange.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PageCalibration_null.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Menu\Pages\PageDebug\PageCalibration_null.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
