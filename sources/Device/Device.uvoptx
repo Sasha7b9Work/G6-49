@@ -157,18 +157,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>100</LineNumber>
+          <LineNumber>32</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134404024</Address>
+          <Address>134424460</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\common\Interface_d.cpp</Filename>
+          <Filename>.\src\main_d.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\G6_49_D\../common/Interface_d.cpp\100</Expression>
+          <Expression>\\G6_49_D\src/main_d.cpp\32</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>26</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>.\src\main_d.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -1560,7 +1576,7 @@
 
   <Group>
     <GroupName>src</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

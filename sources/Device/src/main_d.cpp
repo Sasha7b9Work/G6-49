@@ -6,6 +6,7 @@
 #include "Hardware/VCP_d.h"
 #include "Hardware/HAL/HAL.h"
 #include "FreqMeter/FreqMeter_d.h"
+#include "Hardware/Timer.h"
 
 
 int main()
@@ -21,16 +22,6 @@ int main()
     {
         DFreqMeter::Update();
         DDrive::Update();
-
-
-
         DInterface::Update();
-
-        CPU::SetBusy();
-
-        if (meter.ElapsedTime() > 1000)
-        {
-            int i = 0;
-        }
     }
 }
