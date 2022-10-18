@@ -34,7 +34,7 @@ void Calibrator::SetFormWave(const Chan &ch, CalSignal::E sig)
 {
     DGenerator::SetFormWave(ch, CalSignal::ToForm(sig));
 
-    DGenerator::SetFrequency(ch, (sig == CalSignal::Sine) ? Value(1e3F) : Value("0.1", Order::One));
+    DGenerator::SetFrequency(ch, (sig == CalSignal::Impulse) ? Value("0.1", Order::One) : Value(1e3F));
 }
 
 
