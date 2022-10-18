@@ -21,6 +21,16 @@ int main()
     {
         DFreqMeter::Update();
         DDrive::Update();
+
+
+
         DInterface::Update();
+
+        CPU::SetBusy();
+
+        if (meter.ElapsedTime() > 1000)
+        {
+            int i = 0;
+        }
     }
 }

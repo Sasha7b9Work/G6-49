@@ -223,4 +223,15 @@ uint Timer::LogPointMS(char * /*name*/) //-V524
 }
 
 
+void TimeMeterMS::Reset()
+{
+    time_reset = TIME_MS;
+}
+
+
+uint TimeMeterMS::ElapsedTime()
+{
+    return TIME_MS - time_reset;
+}
+
 #undef TIME_NEXT
