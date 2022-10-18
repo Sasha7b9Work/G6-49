@@ -1516,6 +1516,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Generator\Calibrator.h</FilePath>
             </File>
+            <File>
+              <FileName>Filtr.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Generator\Filtr.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Filtr.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Generator\Filtr.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
