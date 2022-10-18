@@ -20,9 +20,25 @@
 struct CalibrationSettings
 {
 #define NUM_CHAN       2
+
 #define NUM_SIGNALS    2
+
 #define NUM_RANGES     5
+    /*
+    * 0 : 100 mV
+    * 1 : 300 mV
+    * 2 : 1 V
+    * 3 : 3 V
+    * 4 : 10 V
+    */
+
 #define NUM_PARAMETERS 4
+    /*
+    * 0 : размах
+    * 1 : +5В
+    * 2 : 0В
+    * 3 : -5В
+    */
 
     union //-V2514
     {
