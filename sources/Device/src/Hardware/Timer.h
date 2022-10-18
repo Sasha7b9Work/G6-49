@@ -67,3 +67,13 @@ namespace Timer
     // Вызывается при срабатывании таймера
     void ElapsedCallback();
 };
+
+
+struct TimeMeterMS
+{
+    TimeMeterMS() { Reset(); }
+    void Reset();
+    uint ElapsedTime();
+private:
+    uint time_reset;
+};

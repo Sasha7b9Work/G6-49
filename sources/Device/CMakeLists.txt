@@ -2,6 +2,9 @@
 project (Device)
 
 
+set(CMAKE_UNITY_BUILD OFF)
+
+
 include_directories(../common/_VS_KEIL
                     ../common/_VS_KEIL/CMSIS
                     ../common/_VS_KEIL/std_includes
