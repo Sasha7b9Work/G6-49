@@ -196,13 +196,6 @@ static bool FuncOnControlKeyPage(const Control &control)
     {
         if(control.IsDown())
         {
-            static TimeMeterMS meter;
-
-            if (meter.ElapsedTime() < 100)
-            {
-                return true;
-            }
-
             int16 min = -1024;
             int16 max = 1024;
 
@@ -220,8 +213,6 @@ static bool FuncOnControlKeyPage(const Control &control)
                 setCal.IncreaseK(max);
                 SendMessage();
             }
-
-            meter.Reset();
         }
 
         return true;
