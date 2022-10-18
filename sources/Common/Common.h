@@ -1,6 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "defines.h"
+#include "CommonTypes.h"
 
 
 struct TypeForm
@@ -17,6 +18,14 @@ struct TypeForm
         Free,           // Произвольный сигнал
         Count
     };
+
+    static void Set(const Chan &, E);
+
+    static E Current(const Chan &);
+
+private:
+
+    static E current[2];
 };
 
 

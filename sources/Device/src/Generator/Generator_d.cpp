@@ -6,7 +6,6 @@
 #include <cmath>
 
 
-bool SettingsGenerator::waveIsSine[Chan::Count] = { true, true };
 Value SettingsGenerator::amplitude[Chan::Count] = { Value("10", Order::One), Value("10", Order::One) };
 Value SettingsGenerator::frequency[Chan::Count] = { Value("1000", Order::One), Value("1000", Order::One) };
 Value SettingsGenerator::offset[Chan::Count] = { Value("0", Order::One), Value("0", Order::One) };
@@ -137,10 +136,10 @@ void DGenerator::SetFormWave(const Chan &ch, TypeForm::E form)
 {
     Filtr::Tune(ch, form);
 
+    TypeForm::Set(ch, form);
+
     if(ch.value < Chan::Count && form < TypeForm::Count)
     {
-        SettingsGenerator::waveIsSine[ch] = (form == TypeForm::Sine);
-
         FPGA::SetWaveForm(ch, form);
     }
 }
@@ -150,7 +149,7 @@ void DGenerator::SetFrequency(const Chan &ch, const Value &freq)
 {
     SettingsGenerator::frequency[ch] = freq;
 
-    if (SettingsGenerator::waveIsSine[ch])
+    if (TypeForm::Current(ch) == TypeForm::Sine)
     {
         AD9952::SetFrequency(ch);
     }
@@ -187,7 +186,7 @@ void DGenerator::SetAmplitude(const Chan &ch, const Value &ampl)
 
     Amplifier::Tune(ch);
 
-    if (SettingsGenerator::waveIsSine[ch])
+    if (TypeForm::Current(ch) == TypeForm::Sine)
     {
         AD9952::SetAmplitude(ch);
     }

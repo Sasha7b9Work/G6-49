@@ -89,9 +89,6 @@ namespace Amplifier
 
 namespace SettingsGenerator
 {
-    // true, если на канале установлена форма сигнала "синусоида"
-    extern bool waveIsSine[Chan::Count];
-
     // Текущая частота на канале
     extern Value frequency[Chan::Count];
 
@@ -113,7 +110,4 @@ namespace SettingsGenerator
 
     // Возвращает установленную частоту на канале
     inline double Frequency(const Chan &ch) { return frequency[ch].ToDouble(); }
-
-    // Возвращает true, если на канале ch установлена синусоидальная форма сигнала
-    inline bool FormIsSine(const Chan &ch) { return waveIsSine[ch]; }
 };

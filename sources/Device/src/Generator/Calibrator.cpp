@@ -11,7 +11,7 @@ namespace Calibrator
     static uint8 CalculateRange(const Chan &);
 
     // ”станавливает форму сигнала дл€ соотвествующей формы сигнала
-    static void SetFormWave(const Chan &, uint8 signal);
+    static void SetFormWave(const Chan &, CalSignal::E);
 
     // ”становить амплитуду дл€ заданного диапазона
     static void SetAmplitude(const Chan &, bool zeroAmplitude);
@@ -26,17 +26,15 @@ namespace Calibrator
     static uint8 range[Chan::Count] = { 255, 255 };
 
     // ƒл€ этой формы сигнала происходит калибровка. 0 - синус, 1 - произвольный
-    uint8 signal[Chan::Count] = { 0 , 0 };
+    CalSignal::E signal[Chan::Count] = { CalSignal::Sine , CalSignal::Sine };
 }
 
 
-void Calibrator::SetFormWave(const Chan &ch, uint8 sig)
+void Calibrator::SetFormWave(const Chan &ch, CalSignal::E sig)
 {
-    bool isSine = (sig == 0);
+    DGenerator::SetFormWave(ch, CalSignal::ToForm(sig));
 
-    DGenerator::SetFormWave(ch, isSine ? TypeForm::Sine : TypeForm::Meander);
-
-    DGenerator::SetFrequency(ch, isSine ? Value(1e3F) : Value("0.1", Order::One));
+    DGenerator::SetFrequency(ch, (sig == CalSignal::Sine) ? Value(1e3F) : Value("0.1", Order::One));
 }
 
 
@@ -54,7 +52,7 @@ void Calibrator::SetOffset(const Chan &ch, uint8 param)
 }
 
 
-void Calibrator::SetK(uint8 channel, uint8 _signal, uint8 _range, uint8 param, int16 k)
+void Calibrator::SetK(uint8 channel, CalSignal::E _signal, uint8 _range, uint8 param, int16 k)
 {
     inModeCalibration = true;
 
@@ -149,7 +147,7 @@ float Calibrator::GetAmplitudeK(const Chan &ch)
 {
     uint8 r = CalculateRange(ch);
 
-    int16 k = *setCal.GetK((uint8)ch, SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 0U);
+    int16 k = *setCal.GetK((uint8)ch, CalSignal::FromForm(TypeForm::Current(ch)), r, 0U);
 
     return 1.0F + (float)k / 1e3F;
 }
@@ -159,7 +157,7 @@ float Calibrator::GetOffsetK_Zero(const Chan &ch)
 {
     uint8 r = CalculateRange(ch);
 
-    return 2048.0F + (float)(*setCal.GetK((uint8)ch, SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 2U));
+    return 2048.0F + (float)(*setCal.GetK((uint8)ch, CalSignal::FromForm(TypeForm::Current(ch)), r, 2U));
 }
 
 
@@ -167,7 +165,7 @@ double Calibrator::GetOffsetK_Negative(const Chan &ch)
 {
     uint8 r = CalculateRange(ch);
 
-    return 4095.0 - *setCal.GetK((uint8)ch, SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 3U);
+    return 4095.0 - *setCal.GetK((uint8)ch, CalSignal::FromForm(TypeForm::Current(ch)), r, 3U);
 }
 
 
@@ -175,7 +173,7 @@ double Calibrator::GetOffsetK_Positive(const Chan &ch)
 {
     uint8 r = CalculateRange(ch);
 
-    return 0.0 - *setCal.GetK((uint8)ch, SettingsGenerator::FormIsSine(ch) ? 0U : 1U, r, 1U);
+    return 0.0 - *setCal.GetK((uint8)ch, CalSignal::FromForm(TypeForm::Current(ch)), r, 1U);
 }
 
 

@@ -14,6 +14,9 @@ Chan ChA(Chan::A);
 Chan ChB(Chan::B);
 
 
+TypeForm::E TypeForm::current[2] = { TypeForm::Sine, TypeForm::Sine };
+
+
 // Находит знак, если первый элемент buffer - знак. В pos записывается позиция элемента за знаком в этом случае
 static void ProcessSign(pchar const buffer, int *pos, int *sign);
 
@@ -712,6 +715,18 @@ int Value::GetPositionFirstDigit(Order::E order) const
     }
 
     return result - Order::GetPow10(order == Order::Count ? _value.GetOrder() : order);
+}
+
+
+void TypeForm::Set(const Chan &ch, E form)
+{
+    current[ch] = form;
+}
+
+
+TypeForm::E TypeForm::Current(const Chan &ch)
+{
+    return current[ch];
 }
 
 

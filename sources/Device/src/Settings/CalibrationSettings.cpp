@@ -19,16 +19,21 @@ CalibrationSettings &CalibrationSettings::operator =(const CalibrationSettings &
 }
 
 
-int16 *CalibrationSettings::GetK(uint8 channel, uint8 signal, uint8 range, uint8 parameter)
+int16 *CalibrationSettings::GetK(uint8 channel, CalSignal::E signal, uint8 range, uint8 parameter)
 {
     if(channel > 1)
     {
         channel = 1;
     }
 
+    if (signal == CalSignal::Impulse && parameter == 0) // Для импульсного сигнала свой коэффициент амплитуды
+    {
+        return &setCal.cal_a_imp[channel];
+    }
+
     if(signal > 1)
     {
-        signal = 1;
+        signal = CalSignal::DDS;
     }
 
     return &setCal.cal[channel][signal][range][parameter];

@@ -100,6 +100,8 @@ void FPGA::Init()
 
 void FPGA::SetWaveForm(const Chan &ch, TypeForm::E form)
 {
+    TypeForm::Set(ch, form);
+
     typedef void(*pFuncFpgaVU8)(const Chan &);
 
     static const pFuncFpgaVU8 funcs[TypeForm::Count] =

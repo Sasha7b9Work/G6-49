@@ -355,7 +355,7 @@ static void CalibrationLoad(SimpleMessage *msg)
     
     int16 k = msg->TakeINT16();
     
-    *setCal.GetK(channel, signal, range, param) = k;
+    *setCal.GetK(channel, (CalSignal::E)signal, range, param) = k;
 }
 
 
@@ -368,8 +368,8 @@ static void CalibrationSet(SimpleMessage *msg)
     
     int16 k = msg->TakeINT16();
     
-    Calibrator::SetK(channel, signal, range, param, k);
-    Calibrator::SetK(channel, signal, range, param, k);
+    Calibrator::SetK(channel, (CalSignal::E)signal, range, param, k);
+    Calibrator::SetK(channel, (CalSignal::E)signal, range, param, k);
 }
 
 

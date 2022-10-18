@@ -4,6 +4,43 @@
 #include "common/CommonTypes.h"
 
 
+struct CalSignal
+{
+    // Калибруем прибор для трёх трактов - синусоидального, произвольного сигнала и импульсного
+    enum E
+    {
+        Sine,
+        DDS,
+        Impulse,
+        Count
+    };
+
+    static TypeForm::E ToForm(E e)
+    {
+        if (e == Sine)
+        {
+            return TypeForm::Sine;
+        }
+
+        return (e == DDS) ? TypeForm::Triangle : TypeForm::Meander;
+    }
+
+    static E FromForm(TypeForm::E form)
+    {
+        if (form == TypeForm::Sine)
+        {
+            return Sine;
+        }
+        else if (form == TypeForm::Meander || form == TypeForm::Impulse || form == TypeForm::Packet)
+        {
+            return Impulse;
+        }
+
+        return DDS;
+    }
+};
+
+
 namespace Calibrator
 {
     // Устанавливает коэффициент калибровки, одновременно устанавливая необоходимые для этого коэффициента настройки
@@ -11,7 +48,8 @@ namespace Calibrator
     //         1 - +2.5В / +5В
     //         2 - 0В
     //         3 - -2.5В / -5В
-    void SetK(uint8 channel, uint8 signal, uint8 range, uint8 param, int16 k);
+
+    void SetK(uint8 channel, CalSignal::E, uint8 range, uint8 param, int16 k);
     
     // Возвращает коэффициент калибровки амплитуды
     float GetAmplitudeK(const Chan &);
