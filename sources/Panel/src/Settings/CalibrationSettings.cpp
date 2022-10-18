@@ -67,12 +67,19 @@ int16 *CalibrationSettings::GetK(uint8 channel, uint8 signal, uint8 range, uint8
         channel = 1;
     }
 
-    if(signal > 1)
+    if (signal == 2)
     {
-        signal = 1;
+        currentCAL = &setCal.cal_amp_imp[channel];
     }
+    else
+    {
+        if (signal > 1)
+        {
+            signal = 1;
+        }
 
-    currentCAL = &setCal.cal[channel][signal][range][parameter];
+        currentCAL = &setCal.cal[channel][signal][range][parameter];
+    }
 
     return currentCAL;
 }
