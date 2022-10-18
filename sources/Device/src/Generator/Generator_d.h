@@ -16,7 +16,8 @@ namespace DGenerator
 
     void SingleStart();
 
-    void SetFormWave(const Chan &, TypeForm::E form);
+    // Третий параметр нужен для калибровки - в режиме калибровки нужно иметь возможность управлять фильтром вручную
+    void SetFormWave(const Chan &, TypeForm::E form, bool tuneFiltr);
 
     void SetOffset(const Chan &, const Value &offset);
 

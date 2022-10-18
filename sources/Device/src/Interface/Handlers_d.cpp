@@ -193,7 +193,7 @@ static void SetFormWave(SimpleMessage *msg)
 {
     Chan ch(msg->TakeUINT8());
 
-    DGenerator::SetFormWave(ch, (TypeForm::E)msg->TakeUINT8());
+    DGenerator::SetFormWave(ch, (TypeForm::E)msg->TakeUINT8(), true);
 }
 
 

@@ -35,16 +35,17 @@ void Calibrator::SetFormWave(const Chan &ch, CalSignal::E sig)
 {
     if (sig == CalSignal::Sine)
     {
-        DGenerator::SetFormWave(ch, TypeForm::Sine);
+        DGenerator::SetFormWave(ch, TypeForm::Sine, true);
     }
-    else
+    else if (sig == CalSignal::DDS)
     {
-        DGenerator::SetFormWave(ch, TypeForm::Meander);
+        DGenerator::SetFormWave(ch, TypeForm::Meander, false);
 
-        if (sig == CalSignal::DDS)
-        {
-            Filtr::SetType(ch, Filtr::Type::Bessel);
-        }
+        Filtr::SetType(ch, Filtr::Type::Bessel);
+    }
+    else if (sig == CalSignal::Impulse)
+    {
+        DGenerator::SetFormWave(ch, TypeForm::Meander, true);
     }
 
     DGenerator::SetFrequency(ch, (sig == CalSignal::Sine) ? Value(1e3F) : Value("0.1", Order::One));

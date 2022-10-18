@@ -59,9 +59,12 @@ void DGenerator::SingleStart()
 
 
 
-void DGenerator::SetFormWave(const Chan &ch, TypeForm::E form)
+void DGenerator::SetFormWave(const Chan &ch, TypeForm::E form, bool tuneFiltr)
 {
-    Filtr::Tune(ch, form);
+    if (tuneFiltr)
+    {
+        Filtr::Tune(ch, form);
+    }
 
     TypeForm::Set(ch, form);
 
