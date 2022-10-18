@@ -37,7 +37,6 @@ static int16 prevK = 0;
 // Настроить органы управления в соотвествии с текущими установами
 static void TuneControls();
 
-
 static bool ChannelIsValid()
 {
     return (channel == 0) || (channel == 1);
@@ -95,6 +94,7 @@ static void OnChange_Parameters(bool active)
     }
 }
 
+
 // Вызывается при изменении источника сигнал
 static void OnChange_Source(bool active)
 {
@@ -112,6 +112,7 @@ static void OnChange_Source(bool active)
     }
 }
 
+
 DEF_CHOICE_3(cChannelCal,
     "КАНАЛ", "CHANNEL",
     "", "",
@@ -124,9 +125,9 @@ DEF_CHOICE_3(cChannelCal,
 DEF_CHOICE_3(cSignal,
     "СИГНАЛ", "Signal",
     "", "",
-    "Синус", "Sinus", "", "",
-    "DDS", "DDS", "", "",
-    "", "", "", "",
+    "Синус",   "Sinus",   "", "",
+    "DDS",     "DDS",     "", "",
+    "Импульс", "Impulse", "", "",
     signal, pCalibration, Item::EFuncActive, OnChange_Source, Item::EFuncDraw
 )
 
@@ -151,8 +152,6 @@ DEF_CHOICE_4(cParameterFullVoltage,
     "-5В",     "-5V",       "", "",
     parameter, pCalibration, Item::EFuncActive, OnChange_Parameters, Item::EFuncDraw
 )
-
-
 
 
 // Для смещения +/- 2.5В
@@ -274,13 +273,23 @@ Page *PageDebug::Calibartion::self = (Page *)&pCalibration;
 
 static void TuneControls()
 {
-    if(range < 3)
+    if (signal == 2)
     {
-        pCalibration.items[3] = (Item *)&cParameterHalfVoltage;
+        pCalibration.items[2] = (Item *)&cRangeNull;
+        pCalibration.items[3] = (Item *)&cParameterNull;
     }
     else
     {
-        pCalibration.items[3] = (Item *)&cParameterFullVoltage;
+        pCalibration.items[2] = (Item *)&cRange;
+
+        if (range < 3)
+        {
+            pCalibration.items[3] = (Item *)&cParameterHalfVoltage;
+        }
+        else
+        {
+            pCalibration.items[3] = (Item *)&cParameterFullVoltage;
+        }
     }
 }
 

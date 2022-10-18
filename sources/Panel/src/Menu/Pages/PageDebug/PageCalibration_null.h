@@ -17,13 +17,13 @@ DEF_CHOICE_2(cRangeNull,
 )
 
 
-static uint8 range_null = 0;
+static uint8 parameter_null = 0;
 
-DEF_CHOICE_2(cRangeNull,
-    "Диапазон", "Range",
+DEF_CHOICE_2(cParameterNull,
+    "Параметр", "Param",
     "", "",
     "", "", "", "",
     "", "", "", "",
-    range_null, pCalibration, Item::EFuncActive, Choice::EFuncChanged, Item::EFuncDraw
+    parameter_null, pCalibration, Item::EFuncActive, Choice::EFuncChanged, Item::EFuncDraw
 )
 
