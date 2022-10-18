@@ -9,8 +9,8 @@
 #define WR_AD9952_IOSYNA        HPort::_F, HPin::_8
 #define WR_AD9952_IOSYNB        HPort::_F, HPin::_9
 #define WR_AD9952_RES_DDS       HPort::_C, HPin::_8
-#define WR_P1_AMPL_A            HPort::_E, HPin::_12
-#define WR_P2_AMPL_B            HPort::_E, HPin::_13
+#define WR_P1_AMPL_A            HPort::_E, HPin::_12    // Фильтр канала А для произвольного сигнала
+#define WR_P2_AMPL_B            HPort::_E, HPin::_13    // Фильтр канала B для произвольного сигнала
 #define WR_OUT_A                HPort::_F, HPin::_1
 #define WR_OUT_B                HPort::_C, HPin::_15
 #define WR_AD5697_OFFSET        HPort::_C, HPin::_2     // Управление смещением выхода AD9952

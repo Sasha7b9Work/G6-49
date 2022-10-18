@@ -35,8 +35,8 @@ struct Filtr
 {
     static void Init()
     {
-        HAL_PIO::Init(HPort::_E, HPin::_12, HMode::Output_PP, HPull::No); //-V525
-        HAL_PIO::Init(HPort::_E, HPin::_13, HMode::Output_PP, HPull::No);
+        HAL_PIO::Init(WR_P1_AMPL_A, HMode::Output_PP, HPull::No); //-V525
+        HAL_PIO::Init(WR_P2_AMPL_B, HMode::Output_PP, HPull::No);
         HAL_PIO::Init(HPort::_E, HPin::_14, HMode::Output_PP, HPull::No);
 
         HAL_PIO::Init(HPort::_F, HPin::_4, HMode::Output_PP, HPull::No);
