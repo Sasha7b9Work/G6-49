@@ -43,7 +43,7 @@ void CalibrationSettings::Load()
 
     for(int ch = 0; ch < NUM_CHAN; ch++)
     {
-        Message::CalibrateLoad((uint8)ch, (uint8)cal_amp_imp[ch], 0, 0).Transmit();
+        Message::CalibrateLoad((uint8)ch, 2, 0, 0).Transmit();
     }
 
     Message::SetFreqMeterTrigK(kFreqMeter).Transmit();
