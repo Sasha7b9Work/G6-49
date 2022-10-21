@@ -63,28 +63,13 @@ double AD5697::CalculateCodeOffset(const Chan &ch)
         max = SettingsGenerator::Amplitude(ch) > 1.0F ? 5.0 : 2.5;
     }
 
-    double result = zero;
-    
-    if (offset > 0.0F)
-    {
-        double pos = Calibrator::GetOffsetK_Positive(ch);    // 0
+    double pos = Calibrator::GetOffsetK_Positive(ch);    // 0
 
-        double scale = (zero - pos) / max;
+    double neg = Calibrator::GetOffsetK_Negative(ch);    // 4095
 
-        double before = pos + scale * (max - offset);
+    double scale = (pos - neg) / max;
 
-        result = 4095.0 - before;
-    }
-    else if(offset < 0.0F)
-    {
-        double neg = Calibrator::GetOffsetK_Negative(ch);    // 4095
-
-        double scale = (neg - zero) / max;
-
-        double before = neg - scale * (max + offset);
-
-        result = 4095.0F - before;
-    }
+    double result = 4095.0f - (zero + scale * offset);
 
     return Math::Limitation<double>(&result, 0.0, 4095.0);
 }
