@@ -67,9 +67,9 @@ double AD5697::CalculateCodeOffset(const Chan &ch)
 
     double neg = Calibrator::GetOffsetK_Negative(ch);    // 4095
 
-    double scale = (pos - neg) / max;
+    double scale = (neg - pos) / (max * 2.0f);
 
-    double result = 4095.0f - (zero + scale * offset);
+    double result = zero + scale * offset;
 
     return Math::Limitation<double>(&result, 0.0, 4095.0);
 }

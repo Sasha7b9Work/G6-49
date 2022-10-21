@@ -199,6 +199,9 @@ static bool FuncOnControlKeyPage(const Control &control)
             int16 min = -1024;
             int16 max = 1024;
 
+            if (parameter == 1 || parameter == 3) { min = 0; }    // для max и min будем ограничивать нулём сверху - можно сделать только меньше
+            if (parameter == 0)                   { max = 0; }    // амплитуду можно только уменьшать
+
             if(control.Is(Key::RotateLeft))
             {
                 setCal.ReduceK(min);
