@@ -233,7 +233,6 @@ static void OnEnter_Calibration(bool enter)
     {
         TuneControls();
         LoadK();
-        setCal.ReduceK(0);
         SendMessage();
     }
     else
