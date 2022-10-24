@@ -212,7 +212,7 @@ double Calibrator::GetOffsetK_Positive(const Chan &ch)
 {
     uint8 r = CalculateRange(ch);
 
-    return *setCal.GetK((uint8)ch, CalSignal::FromForm(TypeForm::Current(ch)), r, 1U);
+    return 0.0 - *setCal.GetK((uint8)ch, CalSignal::FromForm(TypeForm::Current(ch)), r, 1U);
 }
 
 
