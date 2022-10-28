@@ -13,8 +13,6 @@ void Transceiver::Transmit(SimpleMessage *message)
     int timeout = (message->Size() > 1000) ? 100 : 10;
 
     bool result = false;
-    
-    uint failed = 0;
 
     while (!result)
     {
@@ -32,16 +30,6 @@ void Transceiver::Transmit(SimpleMessage *message)
             uint trashedBytes = HAL_SPI4::ReceiveAndCompare(message->TakeData(), message->Size());
 
             result = (trashedBytes == 0);
-        }
-
-        if (!result)
-        {
-            // \todo Затычка на то, что при быстром нажатии кнопки ФОРМА происходит зависание. По хорошему надо бы разобраться в чем дело.
-            failed++;
-            if(failed > 15)
-            {
-                break;
-            }
         }
     };
 }
