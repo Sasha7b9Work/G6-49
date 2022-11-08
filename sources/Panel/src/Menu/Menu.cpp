@@ -52,7 +52,7 @@ void Menu::Update()
     {
         Control control = Keyboard::GetNextControl();
 
-        if (PageDebug::SaveScreenToFlashIsEnabled() && control.key == Key::RegButton)
+        if (control.key == Key::RegButton && PageDebug::SaveScreenToFlashIsEnabled())
         {
             if (control.IsDown())
             {
