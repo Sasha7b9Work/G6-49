@@ -6,10 +6,10 @@ goto HINT
 
 :COPY_WX_DLLS
     @echo %TIME%   Copying dll-files wxWidgtes
-    xcopy ..\..\ThirdParty\wxWidgets\generated\lib\vc_dll\wxbase314ud_vc_custom.dll ..\..\generated\Win32\Panel\Debug /Y
-    xcopy ..\..\ThirdParty\wxWidgets\generated\lib\vc_dll\wxmsw314ud_core_vc_custom.dll ..\..\generated\Win32\Panel\Debug /Y
-    xcopy ..\..\ThirdParty\wxWidgets\generated\lib\vc_dll\wxbase314ud_vc_custom.dll ..\..\generated\Win32\Editor\Debug /Y
-    xcopy ..\..\ThirdParty\wxWidgets\generated\lib\vc_dll\wxmsw314ud_core_vc_custom.dll ..\..\generated\Win32\Editor\Debug /Y
+    xcopy ..\..\ThirdParty\wxWidgets\generated\lib\vc_dll\wxbase32ud_vc_custom.dll ..\..\generated\Win32\Panel\Debug /Y
+    xcopy ..\..\ThirdParty\wxWidgets\generated\lib\vc_dll\wxmsw32ud_core_vc_custom.dll ..\..\generated\Win32\Panel\Debug /Y
+    xcopy ..\..\ThirdParty\wxWidgets\generated\lib\vc_dll\wxbase32ud_vc_custom.dll ..\..\generated\Win32\Editor\Debug /Y
+    xcopy ..\..\ThirdParty\wxWidgets\generated\lib\vc_dll\wxmsw32ud_core_vc_custom.dll ..\..\generated\Win32\Editor\Debug /Y
     goto EXIT
 
 :HINT

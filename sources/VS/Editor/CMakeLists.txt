@@ -89,8 +89,8 @@ add_executable(${PROJECT_NAME} ${DOC}
                                ${RESOURCES}
 )
 
-target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
-target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
+target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase32ud)
+target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw32ud_core)
 
 target_link_libraries(${PROJECT_NAME} WinMM.lib)
 target_link_libraries(${PROJECT_NAME} version.lib)
