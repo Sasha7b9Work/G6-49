@@ -1,5 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Common/defines_com.h"
 
 #ifdef WIN32
 
@@ -15,7 +16,6 @@
 #endif
 
 #define DEBUG
-
 
 #define VERSION       "v1.2.1"
 #define IDENTIFICATOR "G6-49"

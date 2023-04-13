@@ -144,8 +144,12 @@ void AD9952::WriteCFR2(const Chan &ch)
     uint value = 0;
     if (FPGA::Clock::AD992::Is100MHz())
     {
+        Bit::Set(value, 3);
+        Bit::Set(value, 5);
+#ifdef TYPE_HIGH_FREQ
         Bit::Set(value, 4);
         Bit::Set(value, 6);
+#endif
     }
     WriteToHardware(ch, Register::CFR2, value);
 }

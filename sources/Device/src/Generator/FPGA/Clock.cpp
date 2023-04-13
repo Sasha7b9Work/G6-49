@@ -92,7 +92,7 @@ void FPGA::Clock::Impulse::RecalculateRegistersIfNeed()
 
 int FPGA::Clock::Impulse::PrepareTestedValues(Value **values_out)
 {
-    static const int SIZE_BUFFER = 10;
+    const int SIZE_BUFFER = 10;
 
     static Value values[SIZE_BUFFER] = { Value(0), Value(0), Value(0), Value(0), Value(0), Value(0), Value(0), Value(0), Value(0), Value(0) };
 

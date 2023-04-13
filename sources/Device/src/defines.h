@@ -1,5 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
+#include "Common/defines_com.h"
 
 
 typedef unsigned int       uint;
