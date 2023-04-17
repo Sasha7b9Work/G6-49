@@ -189,7 +189,15 @@ void AD9952::SetAmplitudeForMeander(const Chan &ch)
 
 void AD9952::WriteFTW0(const Chan &ch)
 {
-    double FTWf = (SettingsGenerator::Frequency(ch) / (FPGA::Clock::AD992::Is100MHz() ? 1e8F : 1e6F)) * std::powf(2.0F, 32.0F);
+    double frequency = SettingsGenerator::Frequency(ch);
+
+#ifdef TYPE_HIGH_FREQ
+
+    frequency /= 3.0f;
+
+#endif
+
+    double FTWf = (frequency / (FPGA::Clock::AD992::Is100MHz() ? 1e8F : 1e6F)) * std::powf(2.0F, 32.0F);
 
     WriteToHardware(ch, Register::FTW0, (uint)(FTWf + 0.5F));
 }
