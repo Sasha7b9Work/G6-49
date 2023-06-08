@@ -1,4 +1,7 @@
 #MicroXplorer Configuration settings - do not modify
+CAD.formats=
+CAD.pinconfig=
+CAD.provider=
 File.Version=6
 KeepUserPlacement=false
 Mcu.CPN=STM32F429VIT6
@@ -65,8 +68,8 @@ Mcu.PinsNb=48
 Mcu.ThirdPartyNb=0
 Mcu.UserConstants=
 Mcu.UserName=STM32F429VITx
-MxCube.Version=6.6.1
-MxDb.Version=DB.6.0.60
+MxCube.Version=6.8.0
+MxDb.Version=DB.6.0.80
 NVIC.BusFault_IRQn=true\:0\:0\:false\:false\:true\:true\:false\:false
 NVIC.DebugMonitor_IRQn=true\:0\:0\:false\:false\:true\:true\:false\:false
 NVIC.ForceEnableDMAVector=true
@@ -222,6 +225,7 @@ ProjectManager.PreviousToolchain=
 ProjectManager.ProjectBuild=false
 ProjectManager.ProjectFileName=Display429_100_DDS.ioc
 ProjectManager.ProjectName=Display429_100_DDS
+ProjectManager.ProjectStructure=
 ProjectManager.RegisterCallBack=
 ProjectManager.StackSize=0x400
 ProjectManager.TargetToolchain=MDK-ARM V5.32
