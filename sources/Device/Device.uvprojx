@@ -1376,6 +1376,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Log.h</FilePath>
             </File>
+            <File>
+              <FileName>defines_com.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Common\defines_com.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
