@@ -1286,4 +1286,13 @@
     <files/>
   </RTE>
 
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>DLoader</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
+
 </Project>
