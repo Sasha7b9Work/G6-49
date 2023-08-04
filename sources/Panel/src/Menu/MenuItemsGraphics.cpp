@@ -52,7 +52,7 @@ void Item::DrawTitle(int x, int y) const
 
     String string = GetTitle();
 
-    Color((IsPressed() || IsOpened()) ? Color::BACK : ((IsShade() || !funcOfActive()) ? Color::GRAY_25 : Color::FILL)).SetAsCurrent();
+    Color((IsPressed() || IsOpened()) ? Color::BACK : Color::GRAY_50).SetAsCurrent();
 
     if (string.NumberWords() != 1 && type.IsPage())
     {
@@ -168,7 +168,7 @@ void ChoiceParameter::Draw(bool opened, int x, int y) const
         Rectangle(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (isShade ? Color::MENU_ITEM_SHADE : Color::GREEN_10));
         DrawTitle(x, y);
         Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::MENU_ITEM_SHADE : Color::GREEN_25);
-        NameCurrentSubItem().DrawInCenterRect(x, y + 30, Item::WIDTH, 10, Color::BACK);
+        NameCurrentSubItem().DrawInCenterRect(x, y + 30, Item::WIDTH, 10, Color::ItemSymbols());
     }
 }
 
@@ -210,11 +210,11 @@ void Choice::Draw(bool opened, int x, int y) const
                 VLine::Draw(x + 1, y - 1, y - 1 + 10);
                 HLine::Draw(y + 9, x + 1, x + Item::WIDTH - 1, Color::GREEN_25);
                 VLine::Draw(x - 1 + Item::WIDTH, y - 1, y + 9);
-                NameSubItem(i).DrawInCenterRect(x, y, Item::WIDTH, 10, Color::BACK);
+                NameSubItem(i).DrawInCenterRect(x, y, Item::WIDTH, 10, Color::ItemSymbols());
             }
             else
             {
-                NameSubItem(i).DrawInCenterRect(x, y, Item::WIDTH, 10, Color::FILL);
+                NameSubItem(i).DrawInCenterRect(x, y, Item::WIDTH, 10, Color::ItemSymbols());
             }
             y += 10;
         }
@@ -238,7 +238,7 @@ void Choice::Draw(bool opened, int x, int y) const
 
         Font::Spacing::SetAndStore(spacing);
 
-        NameCurrentSubItem().DrawInCenterRect(x, y + 30, Item::WIDTH, 10, Color::BACK);
+        NameCurrentSubItem().DrawInCenterRect(x, y + 30, Item::WIDTH, 10, Color::ItemSymbols());
 
         Font::Spacing::Restore();
     }

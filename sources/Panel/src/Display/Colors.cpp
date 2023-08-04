@@ -79,9 +79,9 @@ Color Color::LightShadingText()
 }
 
 
-Color Color::MenuItem(bool shade)
+Color Color::ItemSymbols()
 {
-    return shade ? Color(COLOR_MENU_ITEM_DARK) : Color(COLOR_MENU_ITEM);
+    return WHITE;
 }
 
 Color Color::Contrast(const Color &color)
