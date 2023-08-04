@@ -89,15 +89,6 @@ void Button::Draw(int x, int y) const
 
     Rectangle(Item::WIDTH - 5, Item::HEIGHT - 4).Fill(x + 2, y + 2, isShade ? Color::MENU_ITEM_SHADE : Color::GREEN_10);
 
-    if(isShade)
-    {
-        Color::GRAY_25.SetAsCurrent();
-    }
-    else
-    {
-        Color::FILL.SetAsCurrent();
-    }
-
     DrawTitle(x, y);
 
     funcForDraw(x, y);
@@ -117,15 +108,6 @@ void Page::DrawClosed(int x, int y) const
     }
 
     Rectangle(Item::WIDTH - 5, Item::HEIGHT - 4).Fill(x + 2, y + 2, color);
-
-    if(IsShade())
-    {
-        Color::GRAY_25.SetAsCurrent();
-    }
-    else
-    {
-        Color::FILL.SetAsCurrent();
-    }
 
     DrawTitle(x, y);
 }
@@ -262,7 +244,7 @@ void Governor::Draw(int x, int y) const
     DrawTitle(x, y);
     Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::MENU_ITEM_SHADE : Color::GREEN_25);
 
-    Color::BACK.SetAsCurrent();
+    Color::ItemSymbols().SetAsCurrent();
 
     DrawValue(x + 30, y + 30);
 }
