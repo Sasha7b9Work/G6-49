@@ -59,7 +59,7 @@ static const Settings defSet =
         MAKE_COLOR(0x80, 0x00, 0x00),   // RED_50
         MAKE_COLOR(0xc0, 0x00, 0x00),   // RED_75
         MAKE_COLOR(0x40, 0xFF, 0x40),   // CHAN_A
-        MAKE_COLOR(0x40, 0x40, 0xFF),   // CHAN_B
+        MAKE_COLOR(0x80, 0x80, 0xFF),   // CHAN_B
         MAKE_COLOR(15, 15, 15)          // MENU_ITEM_SHADE
 #endif
     },
