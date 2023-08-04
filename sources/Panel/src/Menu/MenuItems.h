@@ -95,6 +95,10 @@ public:
 
     Page *Keeper() const { return (Page *)keeper; }; //-V2567
 
+    bool IsPage() const { return type.value == TypeItem::Page; }
+
+    bool IsButton() const { return type.value == TypeItem::Button; }
+
     static const int WIDTH = 69;
 
     static const int HEIGHT = 55;

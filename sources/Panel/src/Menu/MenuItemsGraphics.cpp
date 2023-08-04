@@ -52,7 +52,14 @@ void Item::DrawTitle(int x, int y) const
 
     String string = GetTitle();
 
-    Color((IsPressed() || IsOpened()) ? Color::BACK : Color::GRAY_50).SetAsCurrent();
+    Color color(Color::GRAY_50);
+
+    if (IsButton() || IsPage())
+    {
+        color = Color::FILL;
+    }
+
+    Color((IsPressed() || IsOpened()) ? Color::BACK : color).SetAsCurrent();
 
     if (string.NumberWords() != 1 && type.IsPage())
     {
