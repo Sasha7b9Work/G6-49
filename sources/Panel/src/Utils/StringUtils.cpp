@@ -585,3 +585,21 @@ void Locale::FindSeparator()
 
     separator = (uint8)((end == (str + 1) ? ',' : '.'));
 }
+
+
+String SU::GetSubString(pchar string, int first, int last)
+{
+    String result;
+
+    for (int i = first; i < last; i++)
+    {
+        if (string[i] == '\0')
+        {
+            break;
+        }
+
+        result.Append(string[i]);
+    }
+
+    return result;
+}

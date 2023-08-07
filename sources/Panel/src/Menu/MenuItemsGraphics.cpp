@@ -9,6 +9,7 @@
 #include "Settings/Settings.h"
 #include "Utils/Debug.h"
 #include "Display/Symbols.h"
+#include "Utils/StringUtils.h"
 
 
 using namespace Primitives;
@@ -157,7 +158,23 @@ void ChoiceParameter::Draw(bool opened, int x, int y) const
         Rectangle(Item::WIDTH - 5, 15).Fill(x + 2, y + 2, (pressed || opened) ? Color::GRAY_50 : (isShade ? Color::MENU_ITEM_SHADE : Color::GREEN_10));
         DrawTitle(x, y);
         Rectangle(Item::WIDTH - 5, 34).Fill(x + 2, y + 19, isShade ? Color::MENU_ITEM_SHADE : Color::GREEN_25);
-        NameCurrentSubItem().DrawInCenterRect(x, y + 30, Item::WIDTH, 10, Color::ItemSymbols());
+
+        String name_item = NameCurrentSubItem();
+
+        int pos = SU::FindSymbol(name_item.c_str(), ',');
+
+        if (pos < 0)
+        {
+            name_item.DrawInCenterRect(x, y + 30, Item::WIDTH, 10, Color::ItemSymbols());
+        }
+        else
+        {
+            String first = SU::GetSubString(name_item.c_str(), 0, pos);
+            String second = SU::GetSubString(name_item.c_str(), pos + 1, NameCurrentSubItem().Size());
+
+            first.DrawInCenterRect(x, y + 25, Item::WIDTH, 10, Color::ItemSymbols());
+            second.DrawInCenterRect(x, y + 37, Item::WIDTH, 10);
+        }
     }
 }
 

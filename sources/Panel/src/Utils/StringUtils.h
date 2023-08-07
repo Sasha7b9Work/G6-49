@@ -70,6 +70,7 @@ namespace SU
 
     bool WordEqualZeroString(Word *word, char *string);
 
+    // Если символа нет, возвращает -1
     int FindSymbol(pchar string, char symbol);
 
     char ToUpper(char symbol);
@@ -88,4 +89,6 @@ namespace SU
 
     // Переводит числов в двоичный вид с заданный количеством разрядов
     char *Bin2StringN(uint value, char buffer[33], int n);
+
+    String GetSubString(pchar, int first, int last);
 };
