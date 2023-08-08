@@ -15,8 +15,21 @@ extern const ChoiceBase    cFormA;
 extern const ChoiceBase    cFormB;
 extern const ButtonBase    bTuneParameter;
 
+
 // Номер текущей формы сигнал
-static int numForm = 0;
+namespace NumberCurrentForm
+{
+    static int value = 0;
+
+    void Set(TypeForm::E form)
+    {
+        value = form;
+        if (form == TypeForm::Free && CURRENT_CHANNEL.IsB())
+        {
+            value--;
+        }
+    }
+}
 
 
 void PageSignals::Init()
@@ -33,7 +46,8 @@ void PageSignals::SCPI_SetForm(TypeForm::E form)
         return;
     }
 
-    numForm = (form == TypeForm::Free && CURRENT_CHANNEL.IsB()) ? (form - 1) : form;
+    NumberCurrentForm::Set(form);
+
     OnChanged_Form();
 }
 
@@ -61,11 +75,8 @@ void PageSignals::OnPress_Channel(bool active)
     if (active)
     {
         cParameters.form = CURRENT_FORM;
-        numForm = CURRENT_FORM->value;
-        if (numForm == TypeForm::Free && CURRENT_CHANNEL.IsB())
-        {
-            numForm--;
-        }
+
+        NumberCurrentForm::Set(CURRENT_FORM->value);
 
         pageSignals.items[1] = (Item *)(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB); //-V1027
 
@@ -172,7 +183,7 @@ DEF_CHOICE_8( cFormA,                                                           
     FORM_RU(TypeForm::Impulse),     FORM_EN(TypeForm::Impulse),     "Импульсы",         "Impulse",
     FORM_RU(TypeForm::Packet),      FORM_EN(TypeForm::Packet),      "Пакеты",           "Packets",
     FORM_RU(TypeForm::Free),        FORM_EN(TypeForm::Free),        "Произвольный",     "Free",
-    numForm, *PageSignals::self, Item::EFuncActive, PageSignals::OnChanged_Form, Item::EFuncDraw
+    NumberCurrentForm::value, *PageSignals::self, Item::EFuncActive, PageSignals::OnChanged_Form, Item::EFuncDraw
 )
 
 DEF_CHOICE_7( cFormB,                                                                                                                                    //--- НАСТРОЙКИ СИГНАЛОВ - Форма ---
@@ -185,7 +196,7 @@ DEF_CHOICE_7( cFormB,                                                           
     FORM_RU(TypeForm::Meander),   FORM_RU(TypeForm::Meander),   "Меандр",           "Meander",
     FORM_RU(TypeForm::Impulse),   FORM_RU(TypeForm::Impulse),   "Импульсы",         "Impulse",
     FORM_RU(TypeForm::Free),      FORM_RU(TypeForm::Free),      "Произвольный",     "Free",
-    numForm, *PageSignals::self, Item::EFuncActive, PageSignals::OnChanged_Form, Item::EFuncDraw
+    NumberCurrentForm::value, *PageSignals::self, Item::EFuncActive, PageSignals::OnChanged_Form, Item::EFuncDraw
 )
 
 
