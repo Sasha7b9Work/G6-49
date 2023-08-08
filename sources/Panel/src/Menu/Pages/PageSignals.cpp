@@ -62,6 +62,10 @@ void PageSignals::OnPress_Channel(bool active)
     {
         cParameters.form = CURRENT_FORM;
         numForm = CURRENT_FORM->value;
+        if (numForm == TypeForm::Free && CURRENT_CHANNEL.IsB())
+        {
+            numForm--;
+        }
 
         pageSignals.items[1] = (Item *)(Chan(CURRENT_CHANNEL).IsA() ? &cFormA : &cFormB); //-V1027
 
@@ -124,7 +128,7 @@ void PageSignals::OnChanged_Form(bool active)
 
         if (CURRENT_CHANNEL.IsA())
         {
-            if (CURRENT_FORM->Is(TypeForm::Packet))         // Вошли в пакетный режим
+            if (FORM(ChA)->Is(TypeForm::Packet))         // Вошли в пакетный режим
             {
                 B::Impulse::form->StoreState();             // Сохраняем параметры импульсов на втором канале
 
@@ -140,9 +144,9 @@ void PageSignals::OnChanged_Form(bool active)
 
                 SetCurrentChanenl(ChA);
             }
-            else if (CURRENT_FORM->Is(TypeForm::Free))      // Вышли из пакетного режима
+            else if (FORM(ChA)->Is(TypeForm::Free))      // Вышли из пакетного режима
             {
-                FORM_B->RestoreState();
+                B::Impulse::form->RestoreState();
 
                 WAVE_B.RestoreIndexCurrentForm();
 
