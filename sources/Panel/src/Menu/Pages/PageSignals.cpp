@@ -88,20 +88,6 @@ DEF_CHOICE_2( cChannel,                                                         
 )
 
 
-static void ChangedForm()
-{
-    ChoiceBase *choice = (ChoiceBase *)pageSignals.items[1];        // ”казатель на ChoiceBase, хран€щий индекс выбранной формы текущего канала //-V1027
-
-    CURRENT_WAVE.SetIndexForm(choice->CurrentIndex());              // ”становить дл€ текущего сигнала индекс формы из ChoiceBase
-
-    cParameters.form = CURRENT_FORM;
-
-    Display::Update();
-
-    PGenerator::TuneChannel(CURRENT_CHANNEL);
-}
-
-
 // «аписать параметры импульсного сигнала канала ¬ соответствии с параметрами пакета импульсов из канала ј
 static void WriteParametersImpulseBFromPacketA()
 {
@@ -126,7 +112,15 @@ void PageSignals::OnChanged_Form(bool active)
             A::Impulse::mode_start_stop->NextChoice();
         }
 
-        ChangedForm();
+        ChoiceBase *choice = (ChoiceBase *)pageSignals.items[1];        // ”казатель на ChoiceBase, хран€щий индекс выбранной формы текущего канала //-V1027
+
+        CURRENT_WAVE.SetIndexForm(choice->CurrentIndex());              // ”становить дл€ текущего сигнала индекс формы из ChoiceBase
+
+        cParameters.form = CURRENT_FORM;
+
+        Display::Update();
+
+        PGenerator::TuneChannel(CURRENT_CHANNEL);
 
         if (CURRENT_CHANNEL.IsA())
         {
