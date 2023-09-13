@@ -1,8 +1,10 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "common/Command.h"
+#include "Common/Common.h"
 #include "Display/Painter.h"
 #include "Generator/Generator_p.h"
+#include "Interface/Messages_p.h"
 #include "Signals/Signals.h"
 #include "Signals/Wave.h"
 #include <cmath>
@@ -220,8 +222,11 @@ void Form::TuneGenerator()
 
         if (FindParameter(TypeCParam::Manipulation)->GetChoice() == 1)
         {
-            SendParameterToGenerator(TypeDParam::DurationManipulation);
-            SendParameterToGenerator(TypeDParam::PeriodManipulation);
+//            SendParameterToGenerator(TypeDParam::DurationManipulation);
+            Message::Set::Param(Command::SetManipulationDuration, CURRENT_CHANNEL, Value(5e-3).GetRawValue()).Transmit();
+
+//            SendParameterToGenerator(TypeDParam::PeriodManipulation);
+            Message::Set::Param(Command::SetManipulationPeriod, CURRENT_CHANNEL, Value(25e-3).GetRawValue()).Transmit();
         }
 
         SendParameterToGenerator(TypeDParam::Frequency);

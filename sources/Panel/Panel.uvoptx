@@ -157,18 +157,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>145</LineNumber>
+          <LineNumber>219</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134387860</Address>
+          <Address>134398766</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Projects\G6-49\sources\Device\src\Menu\Pages\PageSignals.cpp</Filename>
+          <Filename>&lt;3&gt;.\src\Signals\Wave.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Panel2\src/Menu/Pages/PageSignals.cpp\145</Expression>
+          <Expression>\\Panel2\src/Signals/Wave.cpp\219</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -176,6 +176,11 @@
           <count>0</count>
           <WinNumber>1</WinNumber>
           <ItemText>elapsed_ms,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>param</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -1331,7 +1336,7 @@
 
   <Group>
     <GroupName>Display</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2031,7 +2036,7 @@
 
   <Group>
     <GroupName>Menu/Pages</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2419,7 +2424,7 @@
 
   <Group>
     <GroupName>Signals</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
