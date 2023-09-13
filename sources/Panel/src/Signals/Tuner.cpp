@@ -1272,6 +1272,8 @@ void Tuner::OnButtonApply()
         display.indicator.InitHighlight();
         mode = ModeTuning::Correction;
         PageTuneParameter::ResetModeEntering();
+
+        DisplayCorrection::ShowMessageOutRangIfNeed(current->param);
     }
 }
 
