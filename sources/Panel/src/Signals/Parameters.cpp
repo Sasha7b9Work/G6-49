@@ -125,12 +125,6 @@ bool Param::IsInteger() const
 }
 
 
-bool Param::IsComposite() const
-{
-    return (kind == KindParam::Composite);
-}
-
-
 bool Param::IsChoice() const
 {
     return (kind == KindParam::Choice);
@@ -163,72 +157,6 @@ bool Param::IsOpened() const
 Form *Param::GetForm()
 {
     return form;
-}
-
-
-void CMSParam::SetForm(Form *f)
-{
-    Param::SetForm(f);
-
-    for (int i = 0; i < NumParameters(); i++)
-    {
-        params[i]->SetForm(f);
-    }
-}
-
-
-int CMSParam::NumParameters() const
-{
-    int counter = 0;
-
-    while (params[counter] != nullptr)
-    {
-        counter++;
-    }
-
-    return counter;
-}
-
-
-CParam *CMSParam::FindParameter(TypeCParam::E p)
-{
-    for(int i = 0; i < NumParameters(); i++)
-    {
-        Param *param = params[i];
-
-        if(param->IsChoice())
-        {
-            CParam *choice = (CParam *)param;
-
-            if(choice->GetType() == p)
-            {
-                return choice;
-            }
-        }
-    }
-
-    return nullptr;
-}
-
-
-DParam *CMSParam::FindParameter(TypeDParam::E p)
-{
-    for(int i = 0; i < NumParameters(); i++)
-    {
-        Param *param = params[i];
-
-        if(param->IsDouble())
-        {
-            DParam *parameter = (DParam *)param;
-
-            if(parameter->GetType() == p)
-            {
-                return parameter;
-            }
-        }
-    }
-
-    return nullptr;
 }
 
 
@@ -390,31 +318,6 @@ bool DParam::IsTime() const
 }
 
 
-String CMSParam::ToString(String &units) const
-{
-    units.Free();
-
-    if(type == TypeCMSParam::Manipulation)
-    {
-        static pchar valuesRU[2] =
-        {
-            "Откл", "Вкл"
-        };
-
-        static pchar valuesEN[2] =
-        {
-            "Off", "On"
-        };
-
-        CParam *enabled = ((CMSParam *)this)->FindParameter(TypeCParam::ManipulationEnabled);
-
-        return String(LANG_RU ? valuesRU[enabled->GetChoice()] : valuesEN[enabled->GetChoice()]);
-    }
-
-    return String("");
-}
-
-
 String CParam::ToString(String &units) const
 {
     units.Free();
@@ -490,12 +393,6 @@ bool CParam::SetAndLoadChoice(int ch)
     PGenerator::SetParameterChoice(this);
 
     return true;
-}
-
-
-PManipulation::PManipulation(Param **parameters) : CMSParam(TypeCMSParam::Manipulation, "Манип", "Manip", parameters)
-{
-
 }
 
 
@@ -650,12 +547,6 @@ void DParam::OnPressButtonTune()
 {
     PageTuneParameter::SetParameter(this);
     Menu::SetAdditionPage(PageTuneParameter::self);
-}
-
-
-void CMSParam::OnPressButtonTune()
-{
-    form->OpenCompositeParameter();
 }
 
 

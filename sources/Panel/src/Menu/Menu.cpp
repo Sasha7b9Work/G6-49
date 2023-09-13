@@ -84,11 +84,7 @@ void Menu::Update()
 
 void Menu::ProcessKey(const Control control) //-V801
 {
-                                                    // Закрываем составной параметр, если таковой открыт
-    if (control.key == Key::Esc && control.IsRelease() && !PageTuneParameter::IsOpened() && CURRENT_FORM->CloseCompositeParameter())
-    {
-    }
-    else if(ProcessOutputs(control))                // Обработка включения/отключения каналов
+    if(ProcessOutputs(control))                // Обработка включения/отключения каналов
     {
     }
     else if (GetOpenedItem())                       // Если раскрыт какой-либо элемент меню - передаём управление уему

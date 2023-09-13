@@ -94,17 +94,11 @@ public:
     DParam *FindParameter(TypeDParam::E p) const;
     CParam *FindParameter(TypeCParam::E p) const;
     IParam *FindParameter(TypeIParam::E p) const;
-    CMSParam *FindParameter(TypeCMSParam::E p) const;
     
     // «асылает параметр в генератор
     void SendParameterToGenerator(TypeDParam::E p) const;
     void SendParameterToGenerator(TypeCParam::E p) const;
     void SendParameterToGenerator(TypeIParam::E p) const;
-
-    // –аскрывает составной параметр
-    void OpenCompositeParameter();
-    // «акрывает открытый параметр, если таковой имеетс€ и возвращает true в этом случае
-    bool CloseCompositeParameter();
 
     void Reset();
 

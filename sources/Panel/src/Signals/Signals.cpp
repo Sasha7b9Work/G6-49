@@ -20,45 +20,17 @@ static pchar namesManipulationEnabled[] =
 };
 
 
-static void FuncCloseManipulation()
-{
-    CURRENT_FORM->CloseCompositeParameter();
-}
-
-
-static PManipulationEnabled  sineManipulationA_Enabled(namesManipulationEnabled);
-static PDurationManipulation sineManipulationA_Duration(Value("5", Order::Milli));
-static PPeriodManipulation   sineManipulationA_Period(Value("25", Order::Milli));
-static BParam                sineManipulationA_Exit("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
-
-
-static Param *sineManipulationA[] =
-{
-    &sineManipulationA_Enabled,
-    &sineManipulationA_Duration,
-    &sineManipulationA_Period,
-    &sineManipulationA_Exit,
-    nullptr
-};
-
-
-//static SMinMax AmplitudeInRange(Form *)
-//{
-//    return SMinMax();
-//}
-
-
 static PFrequency    sineA_Frequency;
 static PAmplitudePic sineA_Amplitude;
 static POffset       sineA_Offset;
-static PManipulation sineA_Manipulation(sineManipulationA);
+static PManipulation sineA_Manip(namesManipulationEnabled);
 
 static Param *params_SineA[] =
 {
     &sineA_Frequency,
     &sineA_Amplitude,
     &sineA_Offset,
-    &sineA_Manipulation,
+    &sineA_Manip,
     nullptr
 };
 
@@ -293,25 +265,11 @@ static Form *formsA[] =
 
 
 
-static PManipulationEnabled  sineManipulationB_Enabled(namesManipulationEnabled);
-static PDurationManipulation sineManipulationB_Duration(Value("5", Order::Milli));
-static PPeriodManipulation   sineManipulationB_Period(Value("25", Order::Milli));
-static BParam                sineManipulationB_Exit("Закрыть ( ESC )", "Close ( ESC )", FuncCloseManipulation);
-
-static Param *sineManipulationB[] =
-{
-    &sineManipulationB_Enabled,
-    &sineManipulationB_Duration,
-    &sineManipulationB_Period,
-    &sineManipulationB_Exit,
-    nullptr
-};
-
 static PFrequency    sineB_Frequency;
 static PAmplitudePic sineB_Amplitude;
 static POffset       sineB_Offset;
 static PPhase        sineB_Phase;
-static PManipulation sineB_Manipulation(sineManipulationB);
+static PManipulation sineB_Manip(namesManipulationEnabled);
 
 static Param *params_SineB[] =
 {
@@ -319,7 +277,7 @@ static Param *params_SineB[] =
     &sineB_Amplitude,
     &sineB_Offset,
     &sineB_Phase,
-    &sineB_Manipulation,
+    &sineB_Manip,
     nullptr
 };
 

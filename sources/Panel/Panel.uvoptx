@@ -166,7 +166,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Menu\Pages\PageSignals.cpp</Filename>
+          <Filename>D:\Projects\G6-49\sources\Device\src\Menu\Pages\PageSignals.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\Panel2\src/Menu/Pages/PageSignals.cpp\145</Expression>
         </Bp>

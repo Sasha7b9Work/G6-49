@@ -34,7 +34,6 @@ struct KindParam
     {
         Double,     // Величина, выраженная числовым значением
         Choice,     // Выбор из нескольких значений
-        Composite,  // Составной параметр, состоящий из нескольких простых (манипуляция)
         Button,     // Кнопка - по её нажатию происходит какое-либо действие
         Integer,    // Целое число
         Count
@@ -64,7 +63,6 @@ struct Param
 
     bool IsDouble() const;
     bool IsInteger() const;
-    bool IsComposite() const;
     bool IsChoice() const;
 
     virtual void Reset() = 0;
@@ -332,45 +330,6 @@ private:
 };
 
 
-struct TypeCMSParam
-{
-    enum E
-    {
-        Manipulation,   // НАСТРОЙКИ СИГНАЛОВ / Параметр / МАНИПУЛЯЦИЯ на форме СИНУС
-        Count
-    };
-};
-
-// Composite
-struct CMSParam : public Param
-{
-    CMSParam(TypeCMSParam::E v, pchar nameRU, pchar nameEN, Param **parameters) :
-        Param(KindParam::Composite, Param::EFuncActive, nameRU, nameEN), params(parameters), type(v) { }
-
-    virtual void SetForm(Form *form);
-
-    virtual void Reset() { }
-
-    int NumParameters() const;
-    Param **Parameters() { return params; }
-
-    DParam *FindParameter(TypeDParam::E p);
-    CParam *FindParameter(TypeCParam::E p);
-
-    virtual String ToString(String &units) const;
-    virtual String ToString(Value, bool /*delete_zeros*/ = false) const { return String(""); };
-
-    virtual void OnPressButtonTune();
-
-    TypeCMSParam::E GetType() { return type; }
-
-private:
-
-    Param **params; // Здесь находятся дополнительные параметры в случае, если они требуются
-    TypeCMSParam::E type;
-};
-
-
 // Button
 struct BParam : public Param
 {
@@ -525,9 +484,9 @@ struct PModeStartStop : public CParam
 };
 
 
-struct PManipulationEnabled : public CParam
+struct PManipulation : public CParam
 {
-    PManipulationEnabled(pchar *names) :
+    PManipulation(pchar *names) :
         CParam(TypeCParam::ManipulationEnabled, Param::EFuncActive, "Манип", "Manip", names) { }
 
 };
@@ -537,11 +496,3 @@ struct PPolarity : public CParam
 {
     PPolarity(pchar *names) : CParam(TypeCParam::Polarity, Param::EFuncActive, "Полярность", "Polarity", names) { }
 };
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Complex ///
-struct PManipulation : public CMSParam
-{
-    PManipulation(Param **paramaters);
-};
-

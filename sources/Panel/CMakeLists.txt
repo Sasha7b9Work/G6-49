@@ -32,6 +32,7 @@ add_compile_options(/wd5027)    # 'xxx': move assignment operator was implicitly
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 add_compile_options(/wd5220)    # a non-static data member with a volatile qualified type no longer implies
 add_compile_options(/wd5246)
+add_compile_options(/wd5267)
 add_compile_options(/wd26812)   # The enum type 'xxx' in unscoped. Prefer 'enum class' over 'enum'
 
 

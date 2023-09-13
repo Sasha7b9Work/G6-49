@@ -46,7 +46,6 @@ void Viewer::Draw(int y, int xName, int xValue, int xUnits, const Chan &ch)
     {
         &Viewer::DrawValue,
         &Viewer::DrawChoice,
-        &Viewer::DrawComposite,
         &Viewer::DrawButton,
         &Viewer::DrawValue
     };

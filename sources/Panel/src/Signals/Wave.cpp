@@ -230,28 +230,20 @@ void Form::TuneGenerator()
 
             int opened = currentParam;
 
-            CloseCompositeParameter();
-
             SendParameterToGenerator(TypeDParam::Frequency);
             SendParameterToGenerator(TypeDParam::AmplitudePic);
             SendParameterToGenerator(TypeDParam::Offset);
-
-            OpenCompositeParameter();
 
             currentParam = opened;
         }
         else                                                                // Ïàðàìåòð ÌÀÍÈÏÓËßÖÈß çàêðûò
         {
-            OpenCompositeParameter();
-
             SendParameterToGenerator(TypeCParam::ManipulationEnabled); //-V525
             if(manipulationEnabled)
             {
                 SendParameterToGenerator(TypeDParam::DurationManipulation);
                 SendParameterToGenerator(TypeDParam::PeriodManipulation);
             }
-
-            CloseCompositeParameter();
 
             SendParameterToGenerator(TypeDParam::Frequency);
             SendParameterToGenerator(TypeDParam::AmplitudePic);
@@ -300,17 +292,6 @@ DParam *Form::FindParameter(TypeDParam::E p) const
                 return parameter;
             }
         }
-        else if(param->IsComposite())
-        {
-            CMSParam *parameter = (CMSParam *)param;
-
-            DParam *val = parameter->FindParameter(p);
-
-            if(val)
-            {
-                return val;
-            }
-        }
     }
 
     return nullptr;
@@ -330,57 +311,6 @@ CParam *Form::FindParameter(TypeCParam::E p) const
             if (choice->GetType() == p)
             {
                 return choice;
-            }
-        }
-        
-        if(param->IsComposite())
-        {
-            CMSParam *complex = (CMSParam *)param;
-
-            CParam *choice = complex->FindParameter(p);
-
-            if(choice)
-            {
-                return choice;
-            }
-        }
-    }
-
-    return nullptr;
-}
-
-
-CMSParam *Form::FindParameter(TypeCMSParam::E t) const
-{
-    for (int i = 0; i < numParams; i++)
-    {
-        Param *param = params[i];
-
-        if (param->IsComposite())
-        {
-            CMSParam *composite = (CMSParam *)param;
-
-            if (composite->GetType() == t)
-            {
-                return composite;
-            }
-        }
-    }
-
-    if (old.params)
-    {
-        for (int i = 0; i < numParams; i++)
-        {
-            Param *param = old.params[i];
-
-            if (param->IsComposite())
-            {
-                CMSParam *composite = (CMSParam *)param;
-
-                if (composite->GetType() == t)
-                {
-                    return composite;
-                }
             }
         }
     }
@@ -440,43 +370,6 @@ void Form::SendParameterToGenerator(TypeIParam::E p) const
     {
         PGenerator::SetParameter(param);
     }
-}
-
-
-void Form::OpenCompositeParameter()
-{
-    if(!CurrentParameter()->IsComposite())
-    {
-        return;
-    }
-
-    old.Init(params, numParams, currentParam);
-
-    CMSParam *parent = (CMSParam *)CurrentParameter();
-
-    numParams = parent->NumParameters();
-    params = parent->Parameters();
-    currentParam = 0;
-
-    for(int i = 0; i < numParams; i++)
-    {
-        params[i]->SetForm(this);
-        params[i]->SetParent(parent);
-    }
-}
-
-
-bool Form::CloseCompositeParameter()
-{
-    if (params[0]->IsOpened())
-    {
-        params = old.params;
-        numParams = old.numParams;
-        currentParam = old.currentParam;
-        return true;
-    }
-
-    return false;
 }
 
 
@@ -554,40 +447,35 @@ void Form::DrawUGO(const Chan &ch, int y0) const
 
 void Form::DrawSine(const Chan &ch, int x0, int y0, int width, int height)
 {
-    CMSParam *param = FORM(ch)->FindParameter(TypeCMSParam::Manipulation);
+    CParam *choice = FORM(ch)->FindParameter(TypeCParam::ManipulationEnabled);
 
-    if (param)
+    if (choice->GetChoice() == 1)
     {
-        CParam *choice = param->FindParameter(TypeCParam::ManipulationEnabled);
+        float speed = 0.6F;
 
-        if (choice->GetChoice() == 1)
+        int delta = 1;
+
+        y0 += height / 2;
+
+        for (int j = 0; j < 2; j++)
         {
-            float speed = 0.6F;
+            int dX = j * (width / 3) * 2;
 
-            int delta = 1;
-
-            y0 += height / 2;
-
-            for (int j = 0; j < 2; j++)
+            if (dX > 0)
             {
-                int dX = j * (width / 3) * 2;
-
-                if (dX > 0)
-                {
-                    dX -= width / 3 / 2;
-                }
-
-                for (int i = delta; i < width / 3; i++)
-                {
-                    int y1 = y0 - (int)(std::sinf((float)(i - delta) * speed) * (float)height / 2.0F);
-                    int y2 = y0 - (int)(std::sinf((float)i * speed) * (float)height / 2.0F);
-
-                    Line::Draw(dX + x0 + i - delta, y1, dX + x0 + i, y2);
-                }
+                dX -= width / 3 / 2;
             }
 
-            return;
+            for (int i = delta; i < width / 3; i++)
+            {
+                int y1 = y0 - (int)(std::sinf((float)(i - delta) * speed) * (float)height / 2.0F);
+                int y2 = y0 - (int)(std::sinf((float)i * speed) * (float)height / 2.0F);
+
+                Line::Draw(dX + x0 + i - delta, y1, dX + x0 + i, y2);
+            }
         }
+
+        return;
     }
 
     float speed = 0.2F;
