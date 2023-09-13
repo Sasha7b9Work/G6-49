@@ -188,6 +188,8 @@ void PageTuneParameter::CallbackOnButtonCancel()
 {
     Param *parameter = CURRENT_WAVE.GetCurrentForm()->CurrentParameter();
 
+    DisplayCorrection::ShowMessageOutRangIfNeed(parameter);
+
     if (parameter->IsDouble())
     {
         *((DParam *)parameter) = storedDouble;

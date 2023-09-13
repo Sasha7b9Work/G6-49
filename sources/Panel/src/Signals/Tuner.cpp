@@ -1226,6 +1226,8 @@ void Tuner::OnButtonCancel()
     {
         mode = ModeTuning::Correction;
         PageTuneParameter::ResetModeEntering();
+
+        DisplayCorrection::ShowMessageOutRangIfNeed(current->param);
     }
 }
 
