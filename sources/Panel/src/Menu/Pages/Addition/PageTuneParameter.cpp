@@ -188,8 +188,6 @@ void PageTuneParameter::CallbackOnButtonCancel()
 {
     Param *parameter = CURRENT_WAVE.GetCurrentForm()->CurrentParameter();
 
-    DisplayCorrection::ShowMessageOutRangIfNeed(parameter);
-
     if (parameter->IsDouble())
     {
         *((DParam *)parameter) = storedDouble;
@@ -202,6 +200,8 @@ void PageTuneParameter::CallbackOnButtonCancel()
     PGenerator::TuneChannel(CURRENT_CHANNEL);
 
     Menu::ResetAdditionPage();
+
+    DisplayCorrection::ShowMessageOutRangIfNeed(parameter);
 }
 
 
