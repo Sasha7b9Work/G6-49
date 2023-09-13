@@ -287,10 +287,10 @@ struct TypeCParam
 {
     enum E
     {
-        Polarity,               // Полярность импульсов
-        ModeStart,              // Режим запуска сигналов DDS и импульсных
-        ManipulationEnabled,    // Включен или выключен режим манипуляции
-        ModeStartStop,          // Режим А-Старт/В-Стоп
+        Polarity,       // Полярность импульсов
+        ModeStart,      // Режим запуска сигналов DDS и импульсных
+        Manipulation,   // Включен или выключен режим манипуляции
+        ModeStartStop,  // Режим А-Старт/В-Стоп
         Count
     };
 
@@ -487,7 +487,7 @@ struct PModeStartStop : public CParam
 struct PManipulation : public CParam
 {
     PManipulation(pchar *names) :
-        CParam(TypeCParam::ManipulationEnabled, Param::EFuncActive, "Манип", "Manip", names) { }
+        CParam(TypeCParam::Manipulation, Param::EFuncActive, "Манип", "Manip", names) { }
 
 };
 

@@ -216,39 +216,17 @@ void Form::TuneGenerator()
 
     if(value == TypeForm::Sine)
     {
-        CParam *manipulation = FindParameter(TypeCParam::ManipulationEnabled);
-        bool manipulationEnabled = manipulation->GetChoice() == 1;
+        SendParameterToGenerator(TypeCParam::Manipulation); //-V525
 
-        if(CurrentParameter()->GetParent())                                 // Ðàñêðûò ïàðàìåòð ÌÀÍÈÏÓËßÖÈß
+        if (FindParameter(TypeCParam::Manipulation)->GetChoice() == 1)
         {
-            SendParameterToGenerator(TypeCParam::ManipulationEnabled); //-V525
-            if(manipulationEnabled)
-            {
-                SendParameterToGenerator(TypeDParam::DurationManipulation);
-                SendParameterToGenerator(TypeDParam::PeriodManipulation);
-            }
-
-            int opened = currentParam;
-
-            SendParameterToGenerator(TypeDParam::Frequency);
-            SendParameterToGenerator(TypeDParam::AmplitudePic);
-            SendParameterToGenerator(TypeDParam::Offset);
-
-            currentParam = opened;
+            SendParameterToGenerator(TypeDParam::DurationManipulation);
+            SendParameterToGenerator(TypeDParam::PeriodManipulation);
         }
-        else                                                                // Ïàðàìåòð ÌÀÍÈÏÓËßÖÈß çàêðûò
-        {
-            SendParameterToGenerator(TypeCParam::ManipulationEnabled); //-V525
-            if(manipulationEnabled)
-            {
-                SendParameterToGenerator(TypeDParam::DurationManipulation);
-                SendParameterToGenerator(TypeDParam::PeriodManipulation);
-            }
 
-            SendParameterToGenerator(TypeDParam::Frequency);
-            SendParameterToGenerator(TypeDParam::AmplitudePic);
-            SendParameterToGenerator(TypeDParam::Offset);
-        }
+        SendParameterToGenerator(TypeDParam::Frequency);
+        SendParameterToGenerator(TypeDParam::AmplitudePic);
+        SendParameterToGenerator(TypeDParam::Offset);
 
         if(GetWave()->GetChannel().IsB())
         {
@@ -447,7 +425,7 @@ void Form::DrawUGO(const Chan &ch, int y0) const
 
 void Form::DrawSine(const Chan &ch, int x0, int y0, int width, int height)
 {
-    CParam *choice = FORM(ch)->FindParameter(TypeCParam::ManipulationEnabled);
+    CParam *choice = FORM(ch)->FindParameter(TypeCParam::Manipulation);
 
     if (choice->GetChoice() == 1)
     {

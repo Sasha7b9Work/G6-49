@@ -174,7 +174,7 @@ void PGenerator::SetParameterChoice(const CParam *param)
 {
     TypeCParam::E type = param->GetType();
 
-    if (type == TypeCParam::Polarity || type == TypeCParam::ManipulationEnabled)
+    if (type == TypeCParam::Polarity || type == TypeCParam::Manipulation)
     {
         static const Command::E commands[TypeCParam::Count] =
         {

@@ -36,7 +36,7 @@ static pchar const enabledNames[] =
 
 static pchar FuncEnabled(pchar buffer)
 {
-    return SCPI::ProcessParameterChoice(buffer, TypeCParam::ManipulationEnabled, enabledNames);
+    return SCPI::ProcessParameterChoice(buffer, TypeCParam::Manipulation, enabledNames);
 }
 
 static void HintEnabled(String *message)
