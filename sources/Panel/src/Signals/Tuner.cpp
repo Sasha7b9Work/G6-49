@@ -941,10 +941,7 @@ void DisplayEntering::TryToAddSymbol(Key::E key)
 {
     buffer.Push(key);
 
-    if (!ValueInBoundaries())
-    {
-        buffer.Pop();
-    }
+    ValueInBoundaries();
 }
 
 
@@ -1014,10 +1011,7 @@ void DisplayEntering::OnButtonOrderMore()
 
         order = (Order::E)(order - 1);
 
-        if (!ValueInBoundaries())
-        {
-            order = Order::Restore();
-        }
+        ValueInBoundaries();
     }
 }
 
@@ -1030,10 +1024,7 @@ void DisplayEntering::OnButtonOrderLess()
 
         order = (Order::E)(order + 1);
 
-        if (!ValueInBoundaries())
-        {
-            order = Order::Restore();
-        }
+        ValueInBoundaries();
     }
 }
 
