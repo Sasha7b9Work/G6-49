@@ -523,7 +523,12 @@ void Indicator::IncreaseInPositionDouble(int pos)
         value.Add(step);
     }
 
-    if (value != param->GetValue() && value <= param->Max())
+    if (value > param->Max())
+    {
+        value = param->Max();
+    }
+
+    if (value != param->GetValue())
     {
         display->Init(value);
     }
@@ -545,7 +550,12 @@ void Indicator::IncreaseInPositionInteger(int pos)
         value.Add(step);
     }
 
-    if (value != param->GetValue() && value <= param->Max())
+    if (value > param->Max())
+    {
+        value = param->Max();
+    }
+
+    if (value != param->GetValue())
     {
         display->Init(value);
     }
