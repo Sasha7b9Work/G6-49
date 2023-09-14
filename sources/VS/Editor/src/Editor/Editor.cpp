@@ -256,9 +256,9 @@ void Frame::CreateMenu()
     wxMenuBar *menuBar = new wxMenuBar();
     menuBar->Append(fileMenu, wxT("Файл"));
 
-    SetMenuBar(menuBar);
+    wxFrameBase::SetMenuBar(menuBar);
 
-    toolBar = CreateToolBar();
+    toolBar = wxFrameBase::CreateToolBar();
 
     AddTool(FILE_OPEN, wxT("Загрузить ранее созданный сигнал из файла"), "TOOL_OPEN");
     AddTool(FILE_SAVE, wxT("Сохранить сигнал в файл"), "TOOL_SAVE");
