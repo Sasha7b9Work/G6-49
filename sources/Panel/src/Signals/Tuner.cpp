@@ -1270,10 +1270,16 @@ void Tuner::OnButtonApply()
         }
 
         Value value = DisplayEntering::ToValue();
+
         display.Init(value);
         display.indicator.InitHighlight();
         mode = ModeTuning::Correction;
         PageTuneParameter::ResetModeEntering();
+
+        if (current->param->GetValue().ToDouble() > current->param->Max().ToDouble())
+        {
+            current->display.Init(current->param->Max());
+        }
 
         DisplayCorrection::ShowMessageOutRangIfNeed(current->param);
     }

@@ -1,5 +1,5 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-#define VERSION_FULL 6
+#define VERSION_FULL 7
 #pragma once
 #include "Common/defines_com.h"
 
