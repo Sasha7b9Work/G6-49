@@ -574,29 +574,38 @@ void Indicator::DecreaseInPosition(int pos)
     {
         Value step = StepPosition(pos);
 
-        if (param->IsDouble())
+        if (IsSigned() ||
+            (!IsSigned() && step <= param->GetValue()))
         {
-            DParam *dparam = (DParam *)param;
-
-            if (dparam->IsSigned())
+            if (param->IsDouble())
             {
-                value.Sub(step);
+                DParam *dparam = (DParam *)param;
+
+                if (dparam->IsSigned())
+                {
+                    value.Sub(step);
+                }
+                else
+                {
+                    if (value.AbsRawValue() != 0)
+                    {
+                        value.Sub(step);
+                    }
+                }
             }
             else
             {
-                if (value.AbsRawValue() != 0)
+                if (!value.TestSub(step).IsZero())
                 {
                     value.Sub(step);
                 }
             }
         }
-        else
-        {
-            if (!value.TestSub(step).IsZero())
-            {
-                value.Sub(step);
-            }
-        }
+    }
+
+    if (IsSigned() && value < param->Min())
+    {
+        value = param->Min();
     }
 
     if (value != param->GetValue())
