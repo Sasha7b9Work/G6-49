@@ -69,6 +69,7 @@ add_compile_options(/wd5027)    # move assignment operator was implicitly define
 add_compile_options(/wd5039)
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 add_compile_options(/wd5246)
+add_compile_options(/wd5267)
 add_compile_options(/wd26812)   # The enum type 'xxx' in unscoped. Prefer 'enum class' over 'enum'
 
 file(GLOB COMMON                 ../../common/Command.*
