@@ -7,6 +7,7 @@ JLink*.*
 archive.zip
 *out.txt
 *.aps
+*.uvgui*.*
 
 
 sources/generated/*
