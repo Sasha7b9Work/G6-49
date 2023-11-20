@@ -19,6 +19,7 @@ void DFreqMeter::Init()
         Инициализируются в CPU::InitPins()
     */
 
+    SetCouple(FreqCouple::DC);
 }
 
 
