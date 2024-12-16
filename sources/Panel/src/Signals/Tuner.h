@@ -136,7 +136,7 @@ private:
 
     // true, если справа от pos находится точка
     bool RightDigitIzComma(int pos) const;
-    
+
     // Возвращает true, если все цифровые разряды справа равны нулю
     bool AllNumberOfRightIsZero(int pos) const;
 

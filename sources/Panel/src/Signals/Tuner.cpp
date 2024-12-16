@@ -348,7 +348,7 @@ Color Indicator::CalculateColorDouble(int pos, bool test) const
             {
                 return Color::FILL;
             }
-            else if ((PositionComma() < pos) && !AllNumbersOfLeftIsZero(pos))
+            else if ((PositionComma() < pos) && (!AllNumbersOfLeftIsZero(pos) || !AllNumberOfRightIsZero(pos)))
             {
                 return Color::FILL;
             }
