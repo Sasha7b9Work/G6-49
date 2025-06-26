@@ -15,18 +15,22 @@ sources/generated/*
 sources/Device/DebugConfig/*
 sources/Device/Listings/*
 sources/Device/Objects/*
+sources/Device/RTE/*
 
 sources/DLoader/DebugConfig/*
 sources/DLoader/Listings/*
 sources/DLoader/Objects/*
+sources/DLoader/RTE/*
 
 sources/Panel/DebugConfig/*
 sources/Panel/Listings/*
 sources/Panel/Objects/*
+sources/Panel/RTE/*
 
 sources/PLoader/DebugConfig/*
 sources/PLoader/Listings/*
 sources/PLoader/Objects/*
+sources/PLoader/RTE/*
 
 sources/Device/*.bin
 sources/Panel/*.bin
