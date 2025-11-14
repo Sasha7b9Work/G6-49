@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.4)
+cmake_minimum_required(VERSION 3.15)
 
 # Set CMake policy required by UrhoCommon module
 if (COMMAND cmake_policy)
@@ -18,6 +18,8 @@ endif ()
 project (G6-49_GUI)
 
 set (TARGET_NAME G6-49_GUI)
+
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded")         # Установка флага линковки /MT
 
 add_subdirectory(Panel)
 add_subdirectory(Editor)
