@@ -306,7 +306,7 @@ public:
 
 private:
 
-    DisplayCorrection display;
+    DisplayCorrection display_correction;
 
     static ModeTuning::E mode;                         // Текущий режим настройки
 };

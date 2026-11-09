@@ -1194,7 +1194,7 @@ void DisplayCorrection::Init(const Value &value)
 }
 
 
-Tuner::Tuner(Param *_param) : param(_param), display(this)
+Tuner::Tuner(Param *_param) : param(_param), display_correction(this)
 {
 }
 
@@ -1203,15 +1203,15 @@ void Tuner::Init()
 {
     current = this;
 
-    display.Init();
+    display_correction.Init();
 
-    display.indicator.InitHighlight();
+    display_correction.indicator.InitHighlight();
 }
 
 
 void Tuner::Draw()
 {
-    display.Draw();
+    display_correction.Draw();
 }
 
 
@@ -1219,7 +1219,7 @@ bool Tuner::OnControlKey(const Control &control)
 {
     if (control.IsCursors() || control.IsRotate() || control.IsEntering())
     {
-        return display.OnControlKey(control);
+        return display_correction.OnControlKey(control);
     }
 
     return false;
@@ -1281,14 +1281,14 @@ void Tuner::OnButtonApply()
 
         Value value = DisplayEntering::ToValue();
 
-        display.Init(value);
-        display.indicator.InitHighlight();
+        display_correction.Init(value);
+        display_correction.indicator.InitHighlight();
         mode = ModeTuning::Correction;
         PageTuneParameter::ResetModeEntering();
 
         if (current->param->GetValue().ToDouble() > current->param->Max().ToDouble())
         {
-            current->display.Init(current->param->Max());
+            current->display_correction.Init(current->param->Max());
         }
 
         DisplayCorrection::ShowMessageOutRangIfNeed(current->param);
