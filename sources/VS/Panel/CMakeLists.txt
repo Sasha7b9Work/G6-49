@@ -3,16 +3,20 @@ project (G6-49)
 
 set(CMAKE_UNITY_BUILD ON)
 
-include_directories(src
-                    ../../Panel/src
-                    ../../Panel/src/Hardware
-                    ../..
-                    ../../common/_VS_GUI
-                    ../../common/_VS_GUI/CMSIS
-                    ../../common/_VS_GUI/HAL
-                    ../../Panel/src/Hardware/HAL
-                    ../../ThirdParty/wxWidgets/include
-                    ../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud)
+include_directories(
+    src
+    ../../Panel/src
+    ../../Panel/src/Hardware
+    ../..
+    ../../common/_VS_GUI
+    ../../common/_VS_GUI/CMSIS
+    ../../common/_VS_GUI/HAL
+    ../../Panel/src/Hardware/HAL
+    ../../ThirdParty/wxWidgets/include
+    ../../generated/ThirdParty/lib/vc_x64_lib/mswu
+)
+
+link_directories(../../generated/ThirdParty/lib/vc_x64_lib)
 
 add_definitions(-DSTM32F437xx -DUSE_SDL2 -DGUI -DPANEL)
 
@@ -100,60 +104,67 @@ file(GLOB TESTS                  ../../Panel/src/Tests/*)
 file(GLOB UTILS                  ../../Panel/src/Utils/*)
 
 source_group(common                 FILES ${COMMON})
-source_group(common\\_VS\\HAL       FILES ${COMMON_VS_HAL})
+source_group(common/_VS/HAL         FILES ${COMMON_VS_HAL})
 source_group(src                    FILES ${SRC})
 source_group(Display                FILES ${DISPLAY})
-source_group(Display\\Font          FILES ${DISPLAY_FONT})
+source_group(Display/Font           FILES ${DISPLAY_FONT})
 source_group(FDrive                 FILES ${FDRIVE})
 source_group(FreqMeter              FILES ${FREQMETER})
 source_group(Generator              FILES ${GENERATOR})
 source_group(GUI                    FILES ${GUI})
 source_group(Hardware               FILES ${HARDWARE})
-source_group(Hardware\\HAL          FILES ${HARDWARE_HAL})
+source_group(Hardware/HAL           FILES ${HARDWARE_HAL})
 source_group(Interface              FILES ${INTERFACE})
 source_group(Keyboard               FILES ${KEYBOARD})
-source_group(libs\\CMSIS            FILES ${LIBS_CMSIS})
-source_group(libs\\HAL              FILES ${LIBS_HAL})
+source_group(libs/CMSIS             FILES ${LIBS_CMSIS})
+source_group(libs/HAL               FILES ${LIBS_HAL})
 source_group(Menu                   FILES ${MENU})
-source_group(Menu\\Pages            FILES ${MENU_PAGES})
-source_group(Menu\\Pages\\Addition  FILES ${MENU_PAGES_ADDITION})
-source_group(Menu\\Pages\\PageDebug FILES ${MENU_PAGES_PAGEDEBUG})
+source_group(Menu/Pages             FILES ${MENU_PAGES})
+source_group(Menu/Pages/Addition    FILES ${MENU_PAGES_ADDITION})
+source_group(Menu/Pages/PageDebug   FILES ${MENU_PAGES_PAGEDEBUG})
 source_group(SCPI                   FILES ${SCPI})
 source_group(Settings               FILES ${SETTINGS})
 source_group(Signals                FILES ${SIGNALS})
 source_group(Tests                  FILES ${TESTS})
 source_group(Utils                  FILES ${UTILS})
 
-add_executable(${PROJECT_NAME} ${COMMON}
-                               ${COMMON_VS_HAL}
-                               ${SRC}
-                               ${DISPLAY}
-                               ${DISPLAY_FONT}
-                               ${FDRIVE}
-                               ${FREQMETER}
-                               ${GENERATOR}
-                               ${GUI}
-                               ${HARDWARE}
-                               ${HARDWARE_HAL}
-                               ${INTERFACE}
-                               ${KEYBOARD}
-                               ${LIBS_CMSIS}
-                               ${LIBS_HAL}
-                               ${MENU}
-                               ${MENU_PAGES}
-                               ${MENU_PAGES_ADDITION}
-                               ${MENU_PAGES_PAGEDEBUG}
-                               ${SCPI}
-                               ${TESTS}
-                               ${SETTINGS}
-                               ${SIGNALS}
-                               ${UTILS}
+add_executable(${PROJECT_NAME}
+    ${COMMON}
+    ${COMMON_VS_HAL}
+    ${SRC}
+    ${DISPLAY}
+    ${DISPLAY_FONT}
+    ${FDRIVE}
+    ${FREQMETER}
+    ${GENERATOR}
+    ${GUI}
+    ${HARDWARE}
+    ${HARDWARE_HAL}
+    ${INTERFACE}
+    ${KEYBOARD}
+    ${LIBS_CMSIS}
+    ${LIBS_HAL}
+    ${MENU}
+    ${MENU_PAGES}
+    ${MENU_PAGES_ADDITION}
+    ${MENU_PAGES_PAGEDEBUG}
+    ${SCPI}
+    ${TESTS}
+    ${SETTINGS}
+    ${SIGNALS}
+    ${UTILS}
 )
 
-target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase33ud)
-target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw33ud_core)
-
-target_link_libraries(${PROJECT_NAME} WinMM.lib)
-target_link_libraries(${PROJECT_NAME} version.lib)
-target_link_libraries(${PROJECT_NAME} Imm32.Lib)
-target_link_libraries(${PROJECT_NAME} Setupapi.lib)
+target_link_libraries(${PROJECT_NAME}
+    wxbase33u
+    wxmsw33u_core
+    wxbase33u_net
+    wxzlib
+    wxpng
+    WinMM.lib
+    version.lib
+    Imm32.Lib
+    Setupapi.lib
+    comctl32.lib
+    Rpcrt4.lib
+)

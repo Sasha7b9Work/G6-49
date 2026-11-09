@@ -57,7 +57,7 @@ union BitSet32 //-V2514
     {
         if (buffer)
         {
-            for (int i = 0; i < sizeof(uint); i++)
+            for (uint i = 0; i < sizeof(uint); i++)
             {
                 byte[i] = buffer[i];
             }
@@ -65,7 +65,7 @@ union BitSet32 //-V2514
     }
     void WriteToBuffer(uint8 buffer[4])
     {
-        for(int i = 0; i < sizeof(uint); i++)
+        for(uint i = 0; i < sizeof(uint); i++)
         {
             buffer[i] = byte[i];
         }
