@@ -150,8 +150,8 @@ add_executable(${PROJECT_NAME} ${COMMON}
                                ${UTILS}
 )
 
-target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase32ud)
-target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw32ud_core)
+target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase33ud)
+target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw33ud_core)
 
 target_link_libraries(${PROJECT_NAME} WinMM.lib)
 target_link_libraries(${PROJECT_NAME} version.lib)

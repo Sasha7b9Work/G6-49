@@ -26,11 +26,11 @@ goto HINT
     @echo.
     @echo %TIME%   Making Visual Studio Win Debug ...
     cd ../..
-    rmdir "generated/Win32" /s /q
-    cd scripts/vs_win
-    if %1==debug ( @echo on & cmake ../../VS/CMakeLists.txt -B../../generated/Win32 -G "Visual Studio 17 2022" -A Win32 )
+    rmdir "generated/G6-49" /s /q
+    cd scripts/win
+    if %1==debug ( @echo on & cmake ../../CMakeLists.txt -B../../generated/G6-49 -G "Visual Studio 18 2026" -A x64 -DCMAKE_BUILD_TYPE=Release)
     @echo off
-    if %1==release ( @echo on & cmake ../../VS/CMakeLists.txt -B../../generated/Win32 -G "Visual Studio 17 2022" -A Win32 -DBUILD_USE_STATIC_RUNTIME=ON )
+    if %1==release ( @echo on & cmake ../../CMakeLists.txt -B../../generated/G6-49 -G "Visual Studio 18 2026" -A x64 -DCMAKE_BUILD_TYPE=Release)
     @echo off
     @echo %TIME%   Complete
     exit /b
