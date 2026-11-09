@@ -22,7 +22,7 @@ namespace WaveGraphics
 
 void WaveGraphics::Draw(const Chan &ch)
 {
-    if((set.freq.measure != FreqMeasure::Disable) && !ch.Is(CURRENT_CHANNEL))
+    if ((set.freq.measure != FreqMeasure::Disable) && !ch.Is(CURRENT_CHANNEL))
     {
         return;
     }
@@ -99,7 +99,7 @@ void WaveGraphics::DrawParameters(const Chan &ch, int y)
     Font::ForceUpperCase(true);
 
     String(form->Name()).Draw(22, y + 3, Color::Channel(ch));
-    
+
     for (int i = 0; i < form->NumParameters(); i++)
     {
         GetParameterForDraw(ch, i)->viewer.Draw(y, x, x + 84, x + 125, ch);
@@ -115,7 +115,7 @@ Param *WaveGraphics::GetParameterForDraw(const Chan &ch, int i)
 
     if (FORM_A->IsDDS() && FORM_B->IsDDS())             // Если установлены произвольные сигналы на обоих каналах и выводим нетекущий канал,
     {                                                   // то значение частоты будем брать из текущего канала (особенность работы аппаратной части прибора)
-        if(FORM_A->IsDDS() && FORM_B->IsDDS())
+        if (FORM_A->IsDDS() && FORM_B->IsDDS())
         {
             if (parameter->IsDouble())
             {
