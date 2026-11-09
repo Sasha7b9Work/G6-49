@@ -9,8 +9,6 @@
 
   <project>
     <PathAndName>.\Device\Device.uvprojx</PathAndName>
-    <NodeIsActive>1</NodeIsActive>
-    <NodeIsExpanded>1</NodeIsExpanded>
   </project>
 
   <project>
@@ -19,11 +17,11 @@
 
   <project>
     <PathAndName>.\Panel\Panel.uvprojx</PathAndName>
+    <NodeIsActive>1</NodeIsActive>
   </project>
 
   <project>
     <PathAndName>.\PLoader\PLoader.uvprojx</PathAndName>
-    <NodeIsExpanded>1</NodeIsExpanded>
   </project>
 
 </ProjectWorkspace>

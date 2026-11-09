@@ -33,6 +33,10 @@ namespace FDrive
 
     void SaveScreenToFlash();
 
+    bool IsMounted();
+
+    bool ExistFile(pchar);
+
     namespace Handler
     {
         bool Processing(SimpleMessage *msg);
