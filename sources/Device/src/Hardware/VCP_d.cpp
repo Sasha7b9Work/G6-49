@@ -15,6 +15,8 @@ namespace DVCP
 {
     bool PrevSendingComplete();
 
+    void SendData(const void *data, uint size = 0);
+
     bool connectedToUSB = false;
 
     bool cableUSBisConnected = false;
