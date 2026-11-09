@@ -13,19 +13,21 @@ link_directories(../../generated/ThirdParty/lib/vc_x64_lib)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
-add_compile_options(/wd4355)    # 'this': used in base member initializer list
-add_compile_options(/wd4514)    # 'xxx': unreferenced inline function has been removed
-add_compile_options(/wd4625)    # copy constructor was implicitly defined as deleted
-add_compile_options(/wd4626)    # assignment operator was implicitly defined as deleted
-add_compile_options(/wd4668)
-add_compile_options(/wd4820)    # 'bytes' bytes padding added after construct 'member_name'
-add_compile_options(/wd5026)    # move constructor was implicitly defined as deleted
-add_compile_options(/wd5027)    # move assignment operator was implicitly defined as deleted
-add_compile_options(/wd5039)
-add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-add_compile_options(/wd5219)    # Лоджное срабатываение на 16.7.2
-add_compile_options(/wd5267)
-
+add_compile_options(
+    /wd4355    # 'this': used in base member initializer list
+    /wd4514    # 'xxx': unreferenced inline function has been removed
+    /wd4625    # copy constructor was implicitly defined as deleted
+    /wd4626    # assignment operator was implicitly defined as deleted
+    /wd4668
+    /wd4820    # 'bytes' bytes padding added after construct 'member_name'
+    /wd4865    # the underlying type of '<unnamed-enum-DISPLAYCONFIG_OUTPUT_TECHNOLOGY_OTHER>' will change when '/Zc:enumTypes' is specified on the command line
+    /wd5026    # move constructor was implicitly defined as deleted
+    /wd5027    # move assignment operator was implicitly defined as deleted
+    /wd5039
+    /wd5045    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+    /wd5219    # Лоджное срабатываение на 16.7.2
+    /wd5267
+)
 
 file(GLOB DOC            doc/*)
 file(GLOB SRC            src/*.h src/*.cpp)

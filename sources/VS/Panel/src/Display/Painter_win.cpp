@@ -22,7 +22,7 @@
 #include "Display/Text.h"
 
 #pragma warning(push, 0)
-#include <wx/display.h>
+    #include <wx/display.h>
 #pragma warning(pop)
 
 #include "Hardware/CPU.h"

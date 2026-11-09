@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Bitmap.h"
 #pragma warning(push, 0)
-#include <wx/mstream.h>
+	#include <wx/mstream.h>
 #pragma warning(pop)
 
 

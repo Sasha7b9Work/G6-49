@@ -1,10 +1,10 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #pragma warning(push, 0)
-#include <wx/dialog.h>
-#include <wx/spinctrl.h>
-#include <wx/wx.h>
-#include <wx/event.h>
+    #include <wx/dialog.h>
+    #include <wx/spinctrl.h>
+    #include <wx/wx.h>
+    #include <wx/event.h>
 #pragma warning(pop)
 
 

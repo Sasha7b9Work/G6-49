@@ -6,8 +6,8 @@
 #include "Editor/History.h"
 
 #pragma warning(push, 0)
-#include <wx/spinctrl.h>
-#include <wx/statline.h>
+    #include <wx/spinctrl.h>
+    #include <wx/statline.h>
 #pragma warning(pop)
 
 

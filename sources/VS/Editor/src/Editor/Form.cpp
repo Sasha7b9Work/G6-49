@@ -7,7 +7,7 @@
 #include "Editor/Painter/Painter.h"
 
 #pragma warning(push, 0)
-#include <wx/msgdlg.h>
+    #include <wx/msgdlg.h>
 #pragma warning(pop)
 
 
@@ -587,7 +587,7 @@ void Form::LoadFromFile(wxTextFile &file)
 
     if(file.GetNextLine().Cmp(wxT("points")) != 0)
     {
-        return ErrorMessage(file.GetCurrentLine());
+        return ErrorMessage((uint)file.GetCurrentLine());
     }
 
     while(true)
@@ -603,7 +603,7 @@ void Form::LoadFromFile(wxTextFile &file)
 
         if(!ConvertStringToTwoShort(line, &index, &d))
         {
-            return ErrorMessage(file.GetCurrentLine());
+            return ErrorMessage((uint)file.GetCurrentLine());
         }
 
         SetPointInRealCoord(index, d);
@@ -637,7 +637,7 @@ static bool ConvertStringToTwoShort(const wxString &line, uint16 *val1, uint16 *
         return false;
     }
 
-    if(!ConvertSubStringToShort(line, (uint)(pos + 1), line.size() - 1, val2, Point::MAX))
+    if(!ConvertSubStringToShort(line, (uint)(pos + 1), (uint)line.size() - 1, val2, Point::MAX))
     {
         return false;
     }

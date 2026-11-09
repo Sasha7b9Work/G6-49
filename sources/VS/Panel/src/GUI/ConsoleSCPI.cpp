@@ -8,8 +8,8 @@
 #undef CRC
 
 #pragma warning(push, 0)
-#include <wx/wx.h>
-#include <wx/fontdlg.h>
+    #include <wx/wx.h>
+    #include <wx/fontdlg.h>
 #pragma warning(pop)
 
 

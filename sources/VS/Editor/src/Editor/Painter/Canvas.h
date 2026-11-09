@@ -4,7 +4,7 @@
 #include "Editor/Painter/Colors.h"
 
 #pragma warning(push, 0)
-#include <wx/wx.h>
+    #include <wx/wx.h>
 #pragma warning(pop)
 
 

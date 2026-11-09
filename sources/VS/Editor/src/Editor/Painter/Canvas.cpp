@@ -12,7 +12,7 @@
 #include <ctime>
 #include <mutex>
 #pragma warning(push, 0)
-#include <wx/msw/private.h>
+    #include <wx/msw/private.h>
 #pragma warning(pop)
 
 

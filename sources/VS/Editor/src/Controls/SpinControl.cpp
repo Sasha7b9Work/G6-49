@@ -2,7 +2,9 @@
 #include "defines.h"
 #include "Controls/SpinControl.h"
 #include "Dialogs/Dialog.h"
-#include <wx/event.h>
+#pragma warning(push, 0)
+    #include <wx/event.h>
+#pragma warning(pop)
 
 
 SpinControl::SpinControl(wxWindow *window, wxWindowID id, const wxPoint &position, const wxSize &size, int min, int max, const int initial,

@@ -38,7 +38,7 @@ void TextControlInt::OnKeyDown(wxKeyEvent &event)
         else
         {
             std::strcpy(buffer, GetValue().c_str());
-            uint length = std::strlen(buffer);
+            size_t length = std::strlen(buffer);
             buffer[length] = (char)code;
             if (length > SIZE_BUFFER - 2) { length = SIZE_BUFFER - 2; }
             buffer[length + 1] = 0;
@@ -91,7 +91,7 @@ void TextControlFloat::OnKeyDown(wxKeyEvent &event)
         else
         {
             std::strcpy(buffer, GetValue().c_str());
-            uint length = std::strlen(buffer);
+            size_t length = std::strlen(buffer);
             buffer[length] = (char)code;
             if (length > SIZE_BUFFER - 2) { length = SIZE_BUFFER - 2; }
             buffer[length + 1] = 0;

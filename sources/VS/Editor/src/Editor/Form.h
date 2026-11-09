@@ -8,7 +8,7 @@
 #include <vector>
 
 #pragma warning(push, 0)
-#include <wx/textfile.h>
+    #include <wx/textfile.h>
 #pragma warning(pop)
 
 /*
