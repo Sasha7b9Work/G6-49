@@ -3,10 +3,14 @@ project (Editor)
 
 set(CMAKE_UNITY_BUILD OFF)
 
-include_directories(src
-                    ../../ThirdParty/wxWidgets/include
-                    ../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud)
-                    
+include_directories(
+    src
+    ../../ThirdParty/wxWidgets/include
+    ../../generated/ThirdParty/lib/vc_x64_lib/mswu
+)
+
+link_directories(../../generated/ThirdParty/lib/vc_x64_lib)
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
 add_compile_options(/wd4355)    # 'this': used in base member initializer list
@@ -45,21 +49,28 @@ source_group(Utils           FILES ${UTILS})
 source_group(Windows         FILES ${WINDOWS})
 source_group(Resources       FILES ${RESOURCES})
 
-add_executable(${PROJECT_NAME} ${DOC}
-                               ${SRC}
-                               ${CONTROLS}
-                               ${DIALOGS}
-                               ${EDITOR}
-                               ${EDITOR_PAINTER}
-                               ${UTILS}
-                               ${WINDOWS}
-                               ${RESOURCES}
+add_executable(${PROJECT_NAME}
+    ${DOC}
+    ${SRC}
+    ${CONTROLS}
+    ${DIALOGS}
+    ${EDITOR}
+    ${EDITOR_PAINTER}
+    ${UTILS}
+    ${WINDOWS}
+    ${RESOURCES}
 )
 
-target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase33ud)
-target_link_libraries(${PROJECT_NAME} ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw33ud_core)
+target_link_libraries(${PROJECT_NAME}
+    wxbase33u
+    wxmsw33u_core
+    wxzlib
+    wxpng
+    WinMM.lib
+    version.lib
+    Imm32.Lib
+    Setupapi.lib
+    comctl32.lib
+    Rpcrt4.lib
+)
 
-target_link_libraries(${PROJECT_NAME} WinMM.lib)
-target_link_libraries(${PROJECT_NAME} version.lib)
-target_link_libraries(${PROJECT_NAME} Imm32.Lib)
-target_link_libraries(${PROJECT_NAME} Setupapi.lib)

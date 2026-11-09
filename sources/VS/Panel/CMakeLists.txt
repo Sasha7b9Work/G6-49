@@ -158,7 +158,6 @@ add_executable(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
     wxbase33u
     wxmsw33u_core
-    wxbase33u_net
     wxzlib
     wxpng
     WinMM.lib
