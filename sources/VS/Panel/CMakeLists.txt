@@ -1,7 +1,7 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (G6-49)
 
-set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(
     src
@@ -35,6 +35,7 @@ add_compile_options(
     /wd4710    # function not inlined
     /wd4774    # format string expected in argument 3 is not a string literal
     /wd4820    # 'N' bytes padding added after data member
+    /wd4865    # warning C4865: the underlying type of '<unnamed-enum-DISPLAYCONFIG_OUTPUT_TECHNOLOGY_OTHER>' will change when '/Zc:enumTypes' is specified on the command line
     /wd4946    # reinterpret_cast used between related classes: 'Page' and 'Item'
     /wd4996    # function or variable may be unsafe
     /wd5026    # move constructor was implicitly defined as deleted

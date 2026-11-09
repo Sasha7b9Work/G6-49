@@ -40,9 +40,9 @@ cstr Form::Name(uint lang) const
 }
 
 
-cstr Register::Name() const
+pchar Register::Name() const
 {
-    static const cstr names[Register::Count] =
+    static const pchar names[Register::Count] =
     {
         "Мультиплексор 1",
         "Мультиплексор 2",

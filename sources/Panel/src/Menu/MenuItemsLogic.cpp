@@ -500,7 +500,7 @@ Item *Button::Press(Action::E action)
 }
 
 
-cstr ChoiceParameter::NameSubItem(int number) const
+pchar ChoiceParameter::NameSubItem(int number) const
 {
     return ((DParam *)form->GetParameter(number))->Name();
 }

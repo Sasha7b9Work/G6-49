@@ -107,11 +107,11 @@ struct Command
     Command(E v) : value(v) {};
     Command(const uint8 v) : value((E)v) {};
     operator uint8() const { return (uint8)value; };
-    cstr Name() const;
+    pchar Name() const;
     operator E() const { return value; };
     operator uint8() { return (uint8)value; }
 private:
-    cstr Value(uint8 *buffer) const;
+    pchar Value(uint8 *buffer) const;
 };
 
 
@@ -143,7 +143,7 @@ struct Register
     } value;
     explicit Register(E v) : value(v) {};
     explicit Register(uint8 v) : value((E)v) {};
-    cstr Name() const;
+    pchar Name() const;
     operator E() { return value; }
 };
 

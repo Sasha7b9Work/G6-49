@@ -40,7 +40,7 @@ struct Key
 
     bool IsDigit() const;
 
-    cstr Name() const;
+    pchar Name() const;
 
     E value;
 };

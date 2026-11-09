@@ -420,7 +420,7 @@ public:
     // ќбрабатывает нажатие кнопки. ¬озвращает указатель на себ€, если находитс€ в открытом состо€нии и 0 в противном.
     Item *Press(const Control &);
 
-    cstr NameSubItem(int num) const;
+    pchar NameSubItem(int num) const;
 
     String NameCurrentSubItem() const;
 
