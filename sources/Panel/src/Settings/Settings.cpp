@@ -1,4 +1,4 @@
-// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "Settings.h"
 #include "Display/Painter.h"
 #include "Hardware/CPU.h"

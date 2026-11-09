@@ -1,4 +1,4 @@
-// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "Menu/Menu.h"
 #include "Menu/Hint.h"
 #include "Menu/MenuItems.h"
@@ -62,7 +62,7 @@ void Menu::Update()
             continue;
         }
 
-        if(OpenDebugPage(control))                              // Открываем страницу отладки, если распознали соотвествующую клавиатурную последовательность
+        if(OpenDebugPage(control))                              // Открываем страницу отладки, если распознали соответствующую клавиатурную последовательность
         {
             continue;
         }

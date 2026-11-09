@@ -1,4 +1,4 @@
-// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "Display/Painter.h"
 #include "Signals/Signals.h"
 #include "Generator/Generator_p.h"
