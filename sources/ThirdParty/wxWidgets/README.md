@@ -29,17 +29,18 @@ Platforms
 
 This version of wxWidgets supports the following primary platforms:
 
-- Windows XP, Vista, 7, 8, 10 and 11 (32/64 bits).
+- Windows 7, 8, 10 and 11 (32/64 bit Intel and ARM64).
 - Most Unix variants using the GTK+ toolkit (version 2.6 or newer or 3.x).
 - macOS (10.10 or newer) using Cocoa under both amd64 and ARM platforms.
 
-Most popular C++ compilers are supported including but not limited to:
+All C++11 compilers are supported including but not limited to:
 
-- Microsoft Visual C++ 2005 or later (up to 2022).
-- g++ 4 or later (up to 12), including MinGW/MinGW-64/TDM under Windows.
-- Clang (up to 14).
-- Intel icc compiler.
-- Oracle (ex-Sun) CC.
+- Microsoft Visual C++ 2015 or later (up to 2026).
+- g++ 4.8 or later (up to 15), including MinGW/MinGW-64/TDM under Windows.
+- Clang (up to 19/Xcode 16).
+
+Please use [3.2 branch](https://github.com/wxWidgets/wxWidgets/tree/3.2) if
+you must use wxWidgets with a C++98 compiler or support Windows XP.
 
 
 Licence
@@ -60,6 +61,21 @@ For building the library, please see platform-specific documentation under
 
 If you're building the sources checked out from Git, and not from a released
 version, please see these additional [Git-specific notes](README-GIT.md).
+
+
+Contributing
+------------
+
+Contributions to wxWidgets are always welcome, please don't hesitate to submit
+your patches or pull requests! If you are not sure how to do this, please check
+[our guidelines](https://wxwidgets.org/develop/how-to-submit-patches/)
+explaining it.
+
+Not all contributions have to be code, you can also help by improving
+documentation or translations, for which we have a [separate
+page](https://wxwidgets.org/about/translations/#how-to-help) with more details.
+
+Thank you in advance for your help in making wxWidgets better!
 
 
 Further information

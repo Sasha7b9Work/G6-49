@@ -1,7 +1,7 @@
-wxWidgets 3.2.2.1 Release Notes
-===============================
+wxWidgets 3.3.3 Release Notes
+=============================
 
-Welcome to the new stable release of wxWidgets, a free and open source
+Welcome to the latest release of wxWidgets, a free and open source
 cross-platform C++ framework for writing advanced GUI applications using
 native controls.
 
@@ -16,7 +16,7 @@ more about wxWidgets at:
 
 Documentation is available online at:
 
-* https://docs.wxwidgets.org/3.2.2/
+* https://docs.wxwidgets.org/3.3.3/
 
 wxWidgets sources and binaries for the selected platforms are available for
 download from:
@@ -25,62 +25,60 @@ download from:
 
 or, for a more more permanent but less convenient to use link, from
 
-* https://github.com/wxWidgets/wxWidgets/releases/tag/v3.2.2.1/
+* https://github.com/wxWidgets/wxWidgets/releases/tag/v3.3.3/
 
-Please see https://docs.wxwidgets.org/3.2.2/overview_install.html for full
+Please see https://docs.wxwidgets.org/3.3.3/overview_install.html for full
 installation instructions.
 
 
 
-Changes since 3.2.1
+Changes since 3.3.2
 -------------------
 
-This release comes only a few months after the previous 3.2.1, but contains
-an important number of bug fixes and enhancements, further improving high DPI
-support, including:
+This release contains more than 600 commits from 55 contributors since 3.3.2,
+including a number of new features and improvements:
 
-- Better window resizing on DPI change in wxMSW.
-- Fix using native icons returned by wxArtProvider.
-- Fix menu items using custom font in high DPI.
-- High resolution icons support in wxGenericTreeCtrl and wxGenericListCtrl.
+- Add dark mode support to wxMessageBox and other dialogs in wxMSW (#26570).
+- Support switching between light/dark modes in wxMSW (#26516).
+- Add support for stylus events to wxMSW (#26223).
+- Add accessibility support to wxSVGFileDC (#26379).
+- Add wxWebView::Print() and PrintToPDF() (#26239, #26583).
+- Improve wxRibbon appearance in high DPI (#26117, #26409).
+- Improve wxStaticText label wrapping in wxGTK.
+- Add wxMoveToTrash() function (#26256).
+- Enable drawing color emoji using Direct2D in wxMSW (#26657).
+- Implement C++20 <=> operator for wxString (#26306).
+- Add support for private fonts to wxQt (#26403).
+- Support building wxOSX under macOS 27 (#26578).
 
-and also improving locale-related code under Mac and Unix systems:
+There were also a number of bug fixes, the most important ones being:
 
-- wxUILocale::UseDefault() works for locales using different language and
-  region under Mac and fails when used for unsupported locale under Unix.
-- New wxUILocale::GetSystemLocaleId() allows to retrieve such locales IDs.
-- wxUILocale::GetCurrent() works currently for "C" locale under Mac.
+- Improve wxTarInputStream robustness (#26607).
+- Treat truncated reads as errors in wxDataInputStream (#26600).
+- Fix regression when using wxImageList in high DPI in wxGTK (#26349).
+- Fix regression with wxCheckBox label in screen readers in wxMSW (#26270).
+- Fix regression with wxPD_CAN_SKIP in 3.3.2 in wxMSW (#26287).
+- Fix dataview icons rendering under macOS 26 (#26374).
+- Fix wxOSX wxOverlay leaving phantoms in Mission Control (#26380).
 
-Some other user-visible enhancements made in this release:
+Please see the change log for the more complete list:
 
-- Allow selecting and copying text in wxMessageDialog in wxGTK.
-- Improve size and behaviour of in-place editor in wxGenericTreeCtrl.
-- Fix sometimes missing overwrite prompt in "Save" file dialog in wxMSW.
-- Fix glitch in drawing wxStaticBox with a control as label in wxMSW.
+https://raw.githubusercontent.com/wxWidgets/wxWidgets/v3.3.3/docs/changes.txt
 
-There are also some important bug fixes:
+and also see
 
-- Fix regression in saving TIFF images that could end up truncated.
-- Fix long standing bug in parsing wxHTTP responses.
-- Fix data race when processing events generated in a worker thread.
-- Avoid appending extraneous NUL bytes to wxTextDataObject text in wxMSW.
-- Fix handling of fonts with fractional sizes in wxOSX.
-- Fix resizing wxGLCanvas with EGL and Wayland in wxGTK.
-- Fix display artefacts when using AUI without compositor under X11.
-- Work around crashes when using wxTextCtrl with MinGW TDM 64.
-- Fix for a possible crash when handling menu events under Mac.
-- Third-party libraries have been updated to the latest versions.
+https://raw.githubusercontent.com/wxWidgets/wxWidgets/v3.2.11/docs/changes.txt
 
-All in all, this release includes ~150 fixes from 27 unique contributors,
-please see the full change log for more details:
+as the changes in 3.2.11 release are also included in this one and notably
+include multiple buffer overflows in different image handlers and other
+components.
 
-https://raw.githubusercontent.com/wxWidgets/wxWidgets/v3.2.2.1/docs/changes.txt
 
-This release is API and ABI-compatible with the previous 3.2.x releases, so
-the existing applications don't even need to be rebuilt to profit from all the
-fixes above if they use shared/dynamic libraries. And if they do need to be
-recompiled, this can be done without any changes to the code.
-
+Note that in spite of all these changes, wxWidgets 3.3.3 is almost fully
+compatible with wxWidgets 3.2 and updating the existing applications to
+use it shouldn't require much effort. However please make sure to read the
+"INCOMPATIBLE CHANGES" section of the change log above when upgrading to be
+aware of the breaking changes in it.
 
 
 Supported Platforms
@@ -88,14 +86,13 @@ Supported Platforms
 
 This version of wxWidgets supports the following primary platforms:
 
-* Windows XP, Vista, 7, 8, 10 and 11 (32/64 bits).
+* Windows 7, 8, 10 and 11 (32/64 bits).
 * Most Unix variants using the GTK+ toolkit (version 2.6 or newer)
-* macOS (10.10 or newer) using Cocoa (x86-64 or ARM).
+* macOS (10.10 or newer, up to 27) using Cocoa (x86-64 or ARM).
 
 There is some support for the following platforms:
 
 * Most Unix variants with X11
-* Most Unix variants with Motif/Lesstif
 * Most Unix variants with GTK+ 1.2
 * Most Unix variants with Qt 5 or newer (experimental)
 
@@ -121,8 +118,8 @@ unrestricted distribution of application binaries. To answer a FAQ, you don't
 have to distribute any source if you wish to write commercial applications using
 wxWidgets.
 
-However, if you distribute wxGTK, wxQt or wxMotif (with Lesstif) version of your
-application, don't forget that it is linked against GTK+, Qt or Lesstif, which
+However, if you distribute wxGTK or wxQt version of your
+application, don't forget that it is linked against GTK or Qt, which
 are covered by LGPL *without* exception notice and so is bound by its
 requirements.
 
@@ -174,4 +171,4 @@ developed by its users and your contributions to it are always welcome!
 
 Have fun!
 
-The wxWidgets Team, February 2023
+The wxWidgets Team, July 2026

@@ -16,6 +16,7 @@ set(TEST_SRC
     arrays/arrays.cpp
     base64/base64.cpp
     cmdline/cmdlinetest.cpp
+    config/config.cpp
     config/fileconf.cpp
     config/regconf.cpp
     datetime/datetimetest.cpp
@@ -89,14 +90,13 @@ set(TEST_SRC
     uris/ftp.cpp
     uris/uris.cpp
     uris/url.cpp
-    vectors/vectors.cpp
     weakref/evtconnection.cpp
     weakref/weakref.cpp
     xlocale/xlocale.cpp
+    xml/xmltest.cpp
 
     testprec.h
     testableframe.h
-    testdate.h
     testfile.h
     archive/archivetest.h
     streams/bstream.h
@@ -107,10 +107,14 @@ if(wxUSE_XML)
 endif()
 
 set(TEST_DATA
+    intl/en_GB/internat.mo
+    intl/en_GB/internat.po
     intl/fr/internat.mo
     intl/fr/internat.po
     intl/ja/internat.mo
     intl/ja/internat.po
+    intl/xart-dothraki/internat.mo
+    intl/xart-dothraki/internat.po
     horse.bmp
     horse.png
     horse.xpm

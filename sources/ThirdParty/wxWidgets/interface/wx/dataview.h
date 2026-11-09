@@ -86,7 +86,7 @@
     @code
         wxDataViewCtrl *musicCtrl = new wxDataViewCtrl(this, wxID_ANY);
         wxObjectDataPtr<wxDataViewModel> musicModel(new MyMusicModel);
-        
+
         musicCtrl->AssociateModel(musicModel.get());
 
         // add columns now
@@ -816,7 +816,7 @@ public:
     ///@}
 
     /**
-        Returns the ID.
+        Returns the ID as an opaque void pointer.
     */
     void* GetID() const;
 
@@ -824,6 +824,11 @@ public:
         Returns @true if the ID is not @NULL.
     */
     bool IsOk() const;
+
+    /**
+        Sets the ID to @NULL and thus makes this item invalid.
+    */
+    void Unset();
 };
 
 
@@ -912,10 +917,10 @@ wxEventType wxEVT_DATAVIEW_ITEM_DROP;
     through wxVariant which can be extended to support more data formats as necessary.
     Accordingly, all type information uses the strings returned from wxVariant::GetType.
 
-    This control supports single column sorting and on some platforms
-    (currently only those using the generic version, i.e. not wxGTK nor wxOSX)
-    also sorting by multiple columns at once. The latter must be explicitly
-    enabled using AllowMultiColumnSort(), which will also indicate whether this
+    This control supports single column sorting. On platforms using the generic implementation,
+    sorting multiple columns at once is also available. (This currently excludes wxGTK and wxOSX,
+    which use native implementations.) Multi-column sorting must be explicitly
+    enabled using AllowMultiColumnSort(). Calling this will also indicate whether this
     feature is supported, as it changes the default behaviour of right clicking
     the column header to add or remove it to the set of columns used for
     sorting. If this behaviour is not appropriate, you may handle
@@ -1032,12 +1037,12 @@ public:
     /**
         Call to allow using multiple columns for sorting.
 
-        When using multiple column for sorting, GetSortingColumns() method
+        When using multiple columns for sorting, the GetSortingColumns() method
         should be used to retrieve all the columns which should be used to
         effectively sort the data when processing the sorted event.
 
-        Currently multiple column sort is only implemented in the generic
-        version, i.e. this functionality is not available when using the native
+        Currently, multiple column sort is only implemented in the generic
+        version; this functionality is not available when using the native
         wxDataViewCtrl implementation in wxGTK nor wxOSX.
 
         @return @true if sorting by multiple columns could be enabled, @false
@@ -1086,13 +1091,13 @@ public:
     wxDataViewColumn* AppendBitmapColumn(const wxString& label,
                                          unsigned int model_column,
                                          wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                                         int width = -1,
+                                         int width = wxCOL_WIDTH_DEFAULT,
                                          wxAlignment align = wxALIGN_CENTER,
                                          int flags = wxDATAVIEW_COL_RESIZABLE);
     wxDataViewColumn* AppendBitmapColumn(const wxBitmap& label,
                                          unsigned int model_column,
                                          wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                                         int width = -1,
+                                         int width = wxCOL_WIDTH_DEFAULT,
                                          wxAlignment align = wxALIGN_CENTER,
                                          int flags = wxDATAVIEW_COL_RESIZABLE);
     ///@}
@@ -1105,13 +1110,13 @@ public:
     wxDataViewColumn* PrependBitmapColumn(const wxString& label,
                                          unsigned int model_column,
                                          wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                                         int width = -1,
+                                         int width = wxCOL_WIDTH_DEFAULT,
                                          wxAlignment align = wxALIGN_CENTER,
                                          int flags = wxDATAVIEW_COL_RESIZABLE);
     wxDataViewColumn* PrependBitmapColumn(const wxBitmap& label,
                                          unsigned int model_column,
                                          wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                                         int width = -1,
+                                         int width = wxCOL_WIDTH_DEFAULT,
                                          wxAlignment align = wxALIGN_CENTER,
                                          int flags = wxDATAVIEW_COL_RESIZABLE);
     ///@}
@@ -1127,13 +1132,13 @@ public:
     wxDataViewColumn* AppendDateColumn(const wxString& label,
                                        unsigned int model_column,
                                        wxDataViewCellMode mode = wxDATAVIEW_CELL_ACTIVATABLE,
-                                       int width = -1,
+                                       int width = wxCOL_WIDTH_DEFAULT,
                                        wxAlignment align = wxALIGN_NOT,
                                        int flags = wxDATAVIEW_COL_RESIZABLE);
     wxDataViewColumn* AppendDateColumn(const wxBitmap& label,
                                        unsigned int model_column,
                                        wxDataViewCellMode mode = wxDATAVIEW_CELL_ACTIVATABLE,
-                                       int width = -1,
+                                       int width = wxCOL_WIDTH_DEFAULT,
                                        wxAlignment align = wxALIGN_NOT,
                                        int flags = wxDATAVIEW_COL_RESIZABLE);
     ///@}
@@ -1149,13 +1154,13 @@ public:
     wxDataViewColumn* PrependDateColumn(const wxString& label,
                                        unsigned int model_column,
                                        wxDataViewCellMode mode = wxDATAVIEW_CELL_ACTIVATABLE,
-                                       int width = -1,
+                                       int width = wxCOL_WIDTH_DEFAULT,
                                        wxAlignment align = wxALIGN_NOT,
                                        int flags = wxDATAVIEW_COL_RESIZABLE);
     wxDataViewColumn* PrependDateColumn(const wxBitmap& label,
                                        unsigned int model_column,
                                        wxDataViewCellMode mode = wxDATAVIEW_CELL_ACTIVATABLE,
-                                       int width = -1,
+                                       int width = wxCOL_WIDTH_DEFAULT,
                                        wxAlignment align = wxALIGN_NOT,
                                        int flags = wxDATAVIEW_COL_RESIZABLE);
     ///@}
@@ -1172,13 +1177,13 @@ public:
     wxDataViewColumn* AppendIconTextColumn(const wxString& label,
                                            unsigned int model_column,
                                            wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                                           int width = -1,
+                                           int width = wxCOL_WIDTH_DEFAULT,
                                            wxAlignment align = wxALIGN_NOT,
                                            int flags = wxDATAVIEW_COL_RESIZABLE);
     wxDataViewColumn* AppendIconTextColumn(const wxBitmap& label,
                                            unsigned int model_column,
                                            wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                                           int width = -1,
+                                           int width = wxCOL_WIDTH_DEFAULT,
                                            wxAlignment align = wxALIGN_NOT,
                                            int flags = wxDATAVIEW_COL_RESIZABLE);
     ///@}
@@ -1195,13 +1200,13 @@ public:
     wxDataViewColumn* PrependIconTextColumn(const wxString& label,
                                            unsigned int model_column,
                                            wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                                           int width = -1,
+                                           int width = wxCOL_WIDTH_DEFAULT,
                                            wxAlignment align = wxALIGN_NOT,
                                            int flags = wxDATAVIEW_COL_RESIZABLE);
     wxDataViewColumn* PrependIconTextColumn(const wxBitmap& label,
                                            unsigned int model_column,
                                            wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                                           int width = -1,
+                                           int width = wxCOL_WIDTH_DEFAULT,
                                            wxAlignment align = wxALIGN_NOT,
                                            int flags = wxDATAVIEW_COL_RESIZABLE);
     ///@}
@@ -1261,13 +1266,13 @@ public:
     wxDataViewColumn* AppendTextColumn(const wxString& label,
                                        unsigned int model_column,
                                        wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                                       int width = -1,
+                                       int width = wxCOL_WIDTH_DEFAULT,
                                        wxAlignment align = wxALIGN_NOT,
                                        int flags = wxDATAVIEW_COL_RESIZABLE);
     wxDataViewColumn* AppendTextColumn(const wxBitmap& label,
                                        unsigned int model_column,
                                        wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                                       int width = -1,
+                                       int width = wxCOL_WIDTH_DEFAULT,
                                        wxAlignment align = wxALIGN_NOT,
                                        int flags = wxDATAVIEW_COL_RESIZABLE);
     ///@}
@@ -1283,13 +1288,13 @@ public:
     wxDataViewColumn* PrependTextColumn(const wxString& label,
                                        unsigned int model_column,
                                        wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                                       int width = -1,
+                                       int width = wxCOL_WIDTH_DEFAULT,
                                        wxAlignment align = wxALIGN_NOT,
                                        int flags = wxDATAVIEW_COL_RESIZABLE);
     wxDataViewColumn* PrependTextColumn(const wxBitmap& label,
                                        unsigned int model_column,
                                        wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                                       int width = -1,
+                                       int width = wxCOL_WIDTH_DEFAULT,
                                        wxAlignment align = wxALIGN_NOT,
                                        int flags = wxDATAVIEW_COL_RESIZABLE);
     ///@}
@@ -1398,7 +1403,7 @@ public:
         Call this to ensure that the given item is visible.
     */
     virtual void EnsureVisible(const wxDataViewItem& item,
-                               const wxDataViewColumn* column = NULL);
+                               const wxDataViewColumn* column = nullptr);
 
     /**
         Expands the item.
@@ -1470,7 +1475,7 @@ public:
         item (as opposed to being on the item as a whole), then this is the
         column that the focus is on.
 
-        Returns NULL if no column currently has focus.
+        Returns @NULL if no column currently has focus.
 
         @see GetCurrentItem()
 
@@ -1496,12 +1501,12 @@ public:
         @param item
             A valid item.
         @param col
-            If non-@NULL, the rectangle returned corresponds to the
+            If non-null, the rectangle returned corresponds to the
             intersection of the item with the specified column. If @NULL, the
             rectangle spans all the columns.
     */
     virtual wxRect GetItemRect(const wxDataViewItem& item,
-                               const wxDataViewColumn* col = NULL) const;
+                               const wxDataViewColumn* col = nullptr) const;
 
     /**
         Returns the window corresponding to the main area of the control.
@@ -2438,6 +2443,9 @@ public:
 
     /**
         Returns the choice referred to by index.
+
+        @param index A valid index, i.e. a value between 0 and number of
+            choices minus one.
     */
     wxString GetChoice(size_t index) const;
 
@@ -2454,6 +2462,10 @@ public:
     Unlike its base wxDataViewChoiceRenderer class, this one stores the choice
     index, i.e. an @c int, in the variant used by its SetValue() and
     GetValue().
+
+    The index must be either a valid index, i.e. a value between 0 and the
+    number of choices minus one, or @c -1, in which case the renderer shows an
+    empty string.
 
     @library{wxcore}
     @category{dvc}
@@ -2807,6 +2819,7 @@ public:
         @param width
             The width of the column.
             The @c wxDVC_DEFAULT_WIDTH value is the fixed default value.
+            You can also use @c wxCOL_WIDTH_DEFAULT or @c wxCOL_WIDTH_AUTOSIZE.
         @param align
             The alignment of the column title.
         @param flags
@@ -2831,6 +2844,7 @@ public:
         @param width
             The width of the column.
             The @c wxDVC_DEFAULT_WIDTH value is the fixed default value.
+            You can also use @c wxCOL_WIDTH_DEFAULT or @c wxCOL_WIDTH_AUTOSIZE.
         @param align
             The alignment of the column title.
         @param flags
@@ -3023,7 +3037,7 @@ public:
     */
     wxDataViewColumn *AppendTextColumn( const wxString &label,
           wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-          int width = -1, wxAlignment align = wxALIGN_LEFT,
+          int width = wxCOL_WIDTH_DEFAULT, wxAlignment align = wxALIGN_LEFT,
           int flags = wxDATAVIEW_COL_RESIZABLE );
 
     /**
@@ -3034,7 +3048,7 @@ public:
     */
     wxDataViewColumn *AppendToggleColumn( const wxString &label,
           wxDataViewCellMode mode = wxDATAVIEW_CELL_ACTIVATABLE,
-          int width = -1, wxAlignment align = wxALIGN_LEFT,
+          int width = wxCOL_WIDTH_DEFAULT, wxAlignment align = wxALIGN_LEFT,
           int flags = wxDATAVIEW_COL_RESIZABLE );
 
     /**
@@ -3045,7 +3059,7 @@ public:
     */
     wxDataViewColumn *AppendProgressColumn( const wxString &label,
           wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-          int width = -1, wxAlignment align = wxALIGN_LEFT,
+          int width = wxCOL_WIDTH_DEFAULT, wxAlignment align = wxALIGN_LEFT,
           int flags = wxDATAVIEW_COL_RESIZABLE );
 
     /**
@@ -3056,7 +3070,7 @@ public:
     */
     wxDataViewColumn *AppendIconTextColumn( const wxString &label,
           wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-          int width = -1, wxAlignment align = wxALIGN_LEFT,
+          int width = wxCOL_WIDTH_DEFAULT, wxAlignment align = wxALIGN_LEFT,
           int flags = wxDATAVIEW_COL_RESIZABLE );
 
     /**
@@ -3100,14 +3114,14 @@ public:
         after adding any items to the control (or, conversely, items must not
         be added before the columns are set up).
     */
-    void AppendItem( const wxVector<wxVariant> &values, wxUIntPtr data = NULL );
+    void AppendItem( const wxVector<wxVariant> &values, wxUIntPtr data = 0 );
 
     /**
         Prepends an item (i.e.\ a row) to the control.
 
         See remarks for AppendItem() for preconditions of this method.
     */
-    void PrependItem( const wxVector<wxVariant> &values, wxUIntPtr data = NULL );
+    void PrependItem( const wxVector<wxVariant> &values, wxUIntPtr data = 0 );
 
     /**
         Inserts an item (i.e.\ a row) to the control.
@@ -3117,7 +3131,7 @@ public:
         Additionally, @a row must be less than or equal to the current number
         of items in the control (see GetItemCount()).
     */
-    void InsertItem( unsigned int row, const wxVector<wxVariant> &values, wxUIntPtr data = NULL );
+    void InsertItem( unsigned int row, const wxVector<wxVariant> &values, wxUIntPtr data = 0 );
 
     /**
         Delete the row at position @a row.
@@ -3260,7 +3274,7 @@ public:
                                    const wxString& text,
                                    int icon = -1,
                                    int expanded = -1,
-                                   wxClientData* data = NULL);
+                                   wxClientData* data = nullptr);
 
     /**
         Appends an item to the given @a parent.
@@ -3268,7 +3282,7 @@ public:
     wxDataViewItem AppendItem(const wxDataViewItem& parent,
                               const wxString& text,
                               int icon = -1,
-                              wxClientData* data = NULL);
+                              wxClientData* data = nullptr);
 
     /**
         Creates the control and a wxDataViewTreeStore as its internal model.
@@ -3357,7 +3371,7 @@ public:
                                    const wxString& text,
                                    int icon = -1,
                                    int expanded = -1,
-                                   wxClientData* data = NULL);
+                                   wxClientData* data = nullptr);
 
     /**
         Calls the same method from wxDataViewTreeStore but uses
@@ -3367,7 +3381,7 @@ public:
                               const wxDataViewItem& previous,
                               const wxString& text,
                               int icon = -1,
-                              wxClientData* data = NULL);
+                              wxClientData* data = nullptr);
 
     /**
         Returns true if item is a container.
@@ -3382,7 +3396,7 @@ public:
                                     const wxString& text,
                                     int icon = -1,
                                     int expanded = -1,
-                                    wxClientData* data = NULL);
+                                    wxClientData* data = nullptr);
 
     /**
         Calls the same method from wxDataViewTreeStore but uses
@@ -3391,7 +3405,7 @@ public:
     wxDataViewItem PrependItem(const wxDataViewItem& parent,
                                const wxString& text,
                                int icon = -1,
-                               wxClientData* data = NULL);
+                               wxClientData* data = nullptr);
 
     /**
         Sets the image list.
@@ -3489,7 +3503,7 @@ public:
         in number and type. No (default) values are filled in
         automatically.
     */
-    void AppendItem( const wxVector<wxVariant> &values, wxUIntPtr data = NULL );
+    void AppendItem( const wxVector<wxVariant> &values, wxUIntPtr data = 0 );
 
     /**
         Prepends an item (=row) and fills it with @a values.
@@ -3498,7 +3512,7 @@ public:
         in number and type. No (default) values are filled in
         automatically.
     */
-    void PrependItem( const wxVector<wxVariant> &values, wxUIntPtr data = NULL );
+    void PrependItem( const wxVector<wxVariant> &values, wxUIntPtr data = 0 );
 
     /**
         Inserts an item (=row) and fills it with @a values.
@@ -3507,7 +3521,7 @@ public:
         in number and type. No (default) values are filled in
         automatically.
     */
-    void InsertItem(  unsigned int row, const wxVector<wxVariant> &values, wxUIntPtr data = NULL );
+    void InsertItem(  unsigned int row, const wxVector<wxVariant> &values, wxUIntPtr data = 0 );
 
     /**
         Delete the item (=row) at position @a pos.
@@ -3602,7 +3616,7 @@ public:
                                    const wxString& text,
                                    const wxBitmapBundle& icon = wxBitmapBundle(),
                                    const wxBitmapBundle& expanded = wxBitmapBundle(),
-                                   wxClientData* data = NULL);
+                                   wxClientData* data = nullptr);
 
     /**
         Append an item.
@@ -3610,7 +3624,7 @@ public:
     wxDataViewItem AppendItem(const wxDataViewItem& parent,
                               const wxString& text,
                               const wxBitmapBundle& icon = wxBitmapBundle(),
-                              wxClientData* data = NULL);
+                              wxClientData* data = nullptr);
 
     /**
         Delete all item in the model.
@@ -3666,7 +3680,7 @@ public:
                                    const wxString& text,
                                    const wxBitmapBundle& icon = wxBitmapBundle(),
                                    const wxBitmapBundle& expanded = wxBitmapBundle(),
-                                   wxClientData* data = NULL);
+                                   wxClientData* data = nullptr);
 
     /**
         Inserts an item after @a previous.
@@ -3675,7 +3689,7 @@ public:
                               const wxDataViewItem& previous,
                               const wxString& text,
                               const wxBitmapBundle& icon = wxBitmapBundle(),
-                              wxClientData* data = NULL);
+                              wxClientData* data = nullptr);
 
     /**
         Inserts a container before the first child item or @a parent.
@@ -3684,7 +3698,7 @@ public:
                                     const wxString& text,
                                     const wxBitmapBundle& icon = wxBitmapBundle(),
                                     const wxBitmapBundle& expanded = wxBitmapBundle(),
-                                    wxClientData* data = NULL);
+                                    wxClientData* data = nullptr);
 
     /**
         Inserts an item before the first child item or @a parent.
@@ -3692,7 +3706,7 @@ public:
     wxDataViewItem PrependItem(const wxDataViewItem& parent,
                                const wxString& text,
                                const wxBitmapBundle& icon = wxBitmapBundle(),
-                               wxClientData* data = NULL);
+                               wxClientData* data = nullptr);
 
     /**
         Sets the client data associated with the item.
@@ -3777,6 +3791,44 @@ public:
         Set the text.
     */
     void SetText(const wxString& text);
+};
+
+
+/**
+    @class wxDataViewCheckIconText
+
+    wxDataViewCheckIconText is used by wxDataViewCheckIconTextRenderer for data
+    transfer.
+
+    This class can be converted to and from a wxVariant.
+
+    @library{wxcore}
+    @category{dvc}
+*/
+class wxDataViewCheckIconText : public wxDataViewIconText
+{
+public:
+    //@{
+    /**
+        Constructor.
+    */
+    wxDataViewCheckIconText(
+        const wxString& text = wxEmptyString,
+        const wxBitmapBundle& icon = wxBitmapBundle(),
+        wxCheckBoxState checkedState = wxCHK_UNDETERMINED
+        );
+    wxDataViewCheckIconText(const wxDataViewCheckIconText& other);
+    //@}
+
+    /**
+        Sets the checked state.
+    */
+    void SetCheckedState(wxCheckBoxState state);
+
+    /**
+        Gets the checked state.
+    */
+    wxCheckBoxState GetCheckedState() const;
 };
 
 
@@ -4007,11 +4059,10 @@ public:
         Returns the index of the child item at which an item currently being
         dragged would be dropped.
 
-        This function can be used from wxEVT_DATAVIEW_ITEM_DROP_POSSIBLE
-        handlers to determine the exact position of the item being dropped.
-
-        Note that it currently always returns wxNOT_FOUND when using native GTK
-        implementation of this control.
+        This function can be used from wxEVT_DATAVIEW_ITEM_DROP (in all ports)
+        and wxEVT_DATAVIEW_ITEM_DROP_POSSIBLE (except when using native GTK
+        implementation) handlers to determine the exact position of the item
+        being dropped.
 
         @since 3.1.2
      */

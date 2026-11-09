@@ -24,7 +24,7 @@
 class WXDLLIMPEXP_CORE wxMSWOwnerDrawnButtonBase
 {
 protected:
-    // Ctor takes the back pointer to the real window, must be non-NULL.
+    // Ctor takes the back pointer to the real window, must be non-null.
     wxMSWOwnerDrawnButtonBase(wxWindow* win) :
         m_win(win)
     {
@@ -37,7 +37,10 @@ protected:
     // has virtual functions, but no virtual destructor without making the dtor
     // virtual which is not needed here as objects are never deleted via
     // pointers to this class (and protected dtor enforces this).
-    ~wxMSWOwnerDrawnButtonBase() { }
+    ~wxMSWOwnerDrawnButtonBase() = default;
+
+    // Make the control owner drawn or reset it to normal style.
+    void MSWMakeOwnerDrawn(bool ownerDrawn);
 
     // Make the control owner drawn if necessary to implement support for the
     // given foreground colour.
@@ -73,9 +76,6 @@ protected:
 
 
 private:
-    // Make the control owner drawn or reset it to normal style.
-    void MSWMakeOwnerDrawn(bool ownerDrawn);
-
     // Event handlers used to update the appearance of owner drawn button.
     void OnMouseEnterOrLeave(wxMouseEvent& event);
     void OnMouseLeft(wxMouseEvent& event);
@@ -100,7 +100,7 @@ private:
 template <class T>
 class wxMSWOwnerDrawnButton
     : public T,
-      private wxMSWOwnerDrawnButtonBase
+      protected wxMSWOwnerDrawnButtonBase
 {
 private:
     typedef T Base;
@@ -110,7 +110,7 @@ public:
     {
     }
 
-    virtual bool SetForegroundColour(const wxColour& colour) wxOVERRIDE
+    virtual bool SetForegroundColour(const wxColour& colour) override
     {
         if ( !Base::SetForegroundColour(colour) )
             return false;
@@ -120,10 +120,12 @@ public:
         return true;
     }
 
-    virtual bool MSWOnDraw(WXDRAWITEMSTRUCT *item) wxOVERRIDE
+    virtual bool MSWOnDraw(WXDRAWITEMSTRUCT *item) override
     {
         return MSWDrawButton(item) || Base::MSWOnDraw(item);
     }
+
+    using wxMSWOwnerDrawnButtonBase::MSWIsOwnerDrawn;
 
 protected:
     bool IsOwnerDrawn() const { return MSWIsOwnerDrawn(); }
