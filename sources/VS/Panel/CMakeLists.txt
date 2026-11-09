@@ -12,11 +12,12 @@ include_directories(
     ../../common/_VS_GUI/CMSIS
     ../../common/_VS_GUI/HAL
     ../../Panel/src/Hardware/HAL
+    ../../generated/ThirdParty/lib/vc_lib
+    ../../generated/ThirdParty/lib/vc_lib/mswu
     ../../ThirdParty/wxWidgets/include
-    ../../generated/ThirdParty/lib/vc_x64_lib/mswu
 )
 
-link_directories(../../generated/ThirdParty/lib/vc_x64_lib)
+link_directories(../../generated/ThirdParty/lib/vc_lib)
 
 add_definitions(-DSTM32F437xx -DUSE_SDL2 -DGUI -DPANEL)
 

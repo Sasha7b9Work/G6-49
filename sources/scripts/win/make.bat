@@ -28,9 +28,9 @@ goto HINT
     cd ../..
     rmdir "generated/G6-49_GUI" /s /q
     cd scripts/win
-    if %1==debug ( @echo on & cmake ../../VS/CMakeLists.txt -B../../generated/G6-49_GUI -G "Visual Studio 18 2026" -A x64 -DCMAKE_BUILD_TYPE=Release)
+    if %1==debug ( @echo on & cmake ../../VS/CMakeLists.txt -B../../generated/G6-49_GUI -G "Visual Studio 18 2026" -A Win32 -DCMAKE_BUILD_TYPE=Release)
     @echo off
-    if %1==release ( @echo on & cmake ../../VS/CMakeLists.txt -B../../generated/G6-49_GUI -G "Visual Studio 18 2026" -A x64 -DCMAKE_BUILD_TYPE=Release)
+    if %1==release ( @echo on & cmake ../../VS/CMakeLists.txt -B../../generated/G6-49_GUI -G "Visual Studio 18 2026" -A Win32 -DCMAKE_BUILD_TYPE=Release)
     @echo off
     @echo %TIME%   Complete
     exit /b

@@ -5,11 +5,12 @@ set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(
     src
+    ../../generated/ThirdParty/lib/vc_lib
+    ../../generated/ThirdParty/lib/vc_lib/mswu
     ../../ThirdParty/wxWidgets/include
-    ../../generated/ThirdParty/lib/vc_x64_lib/mswu
 )
 
-link_directories(../../generated/ThirdParty/lib/vc_x64_lib)
+link_directories(../../generated/ThirdParty/lib/vc_lib)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
