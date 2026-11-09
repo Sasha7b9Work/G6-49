@@ -14,12 +14,14 @@ namespace Painter
     static Color currentColor(Color::NUMBER.value);
     static wxWindow *parent = nullptr;
     static wxBitmap *bitmap = nullptr;      // Здесь рисуем
-    static wxMemoryDC memDC;                // Контекст рисования
+    static wxMemoryDC *memDC = nullptr;     // Контекст рисования
 }
 
 
 void Painter::Init(wxWindow *_parent)
 {
+    memDC = new wxMemoryDC();
+
     parent = _parent;
 
     bitmap = new wxBitmap(parent->GetClientSize());
@@ -30,7 +32,7 @@ void Painter::Init(wxWindow *_parent)
 
 #pragma warning(pop)
 
-    memDC.SetFont(font);
+    memDC->SetFont(font);
 }
 
 
@@ -55,16 +57,16 @@ void Painter::OnResizeEvent(wxSizeEvent &event) //-V2009
 
 void Painter::BegineScene()
 {
-    memDC.SelectObject(*bitmap);
+    memDC->SelectObject(*bitmap);
     wxBrush brush(*wxBLACK, wxBRUSHSTYLE_SOLID);
-    memDC.SetBackground(brush);
-    memDC.Clear();
+    memDC->SetBackground(brush);
+    memDC->Clear();
 }
 
 
 void Painter::EndScene()
 {
-    memDC.SelectObject(wxNullBitmap);
+    memDC->SelectObject(wxNullBitmap);
 }
 
 
@@ -77,7 +79,7 @@ void Painter::DrawPoint(int x, int y, int size, const Color &color)
     x -= size / 2;
     y -= size / 2;
 
-    memDC.DrawRectangle({ x, y, size, size });
+    memDC->DrawRectangle({ x, y, size, size });
 }
 
 
@@ -87,7 +89,7 @@ void Painter::FillRegion(int x, int y, int width, int height, const Color &color
 
     SetColor(color);
 
-    memDC.DrawRectangle(x, y, width, height);
+    memDC->DrawRectangle(x, y, width, height);
 }
 
 
@@ -97,7 +99,7 @@ void Painter::DrawRectangle(int x, int y, int width, int height, const Color &co
 
     SetColor(color);
 
-    memDC.DrawRectangle(x, y, width, height);
+    memDC->DrawRectangle(x, y, width, height);
 }
 
 
@@ -117,7 +119,7 @@ void Painter::SetColor(const Color &color)
 
         wxColour colorDraw = MakeColour(color);
 
-        memDC.SetPen(wxPen(colorDraw));
+        memDC->SetPen(wxPen(colorDraw));
     }
 }
 
@@ -127,12 +129,12 @@ void Painter::SetSolidBrush(const Color &color)
     if (color != Color::NUMBER)
     {
         wxBrush brush(MakeColour(color), wxBRUSHSTYLE_SOLID);
-        memDC.SetBrush(brush);
+        memDC->SetBrush(brush);
     }
     else
     {
         wxBrush brush(MakeColour(currentColor), wxBRUSHSTYLE_SOLID);
-        memDC.SetBrush(brush);
+        memDC->SetBrush(brush);
     }
 }
 
@@ -140,7 +142,7 @@ void Painter::SetSolidBrush(const Color &color)
 void Painter::SetTransparentBrush()
 {
     wxBrush brush(*wxBLACK, wxBRUSHSTYLE_TRANSPARENT);
-    memDC.SetBrush(brush);
+    memDC->SetBrush(brush);
 }
 
 
@@ -160,7 +162,7 @@ void Painter::DrawLine(int x0, int y0, int x1, int y1, const Color &color)
 {
     SetColor(color);
 
-    memDC.DrawLine(x0, y0, x1, y1);
+    memDC->DrawLine(x0, y0, x1, y1);
 }
 
 
@@ -180,8 +182,8 @@ void Painter::DrawText(int x, int y, const wxString &text, const Color &color)
 {
     SetColor(color);
 
-    memDC.SetTextForeground(MakeColour(currentColor));
-    memDC.DrawText(text, x, y);
+    memDC->SetTextForeground(MakeColour(currentColor));
+    memDC->DrawText(text, x, y);
 }
 
 
@@ -189,15 +191,15 @@ void Painter::DrawTextInZone(int x, int y, int widht, const wxString &text, cons
 {
     SetColor(color);
 
-    memDC.SetTextForeground(MakeColour(currentColor));
+    memDC->SetTextForeground(MakeColour(currentColor));
 
     int size = GetLengthText(text);
 
-    memDC.DrawText(text, x + widht / 2 - size / 2, y);
+    memDC->DrawText(text, x + widht / 2 - size / 2, y);
 }
 
 
 int Painter::GetLengthText(const wxString &text)
 {
-    return memDC.GetTextExtent(text).x;
+    return memDC->GetTextExtent(text).x;
 }
