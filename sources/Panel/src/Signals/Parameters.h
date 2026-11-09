@@ -7,6 +7,7 @@
 
 
 class Form;
+struct PPeriod;
 struct Key;
 struct Param;
 
@@ -106,6 +107,8 @@ struct Param
 
     pFuncActive   funcOfActive;  // Активен ли данный параметр
 
+    PPeriod *ToPeriod();
+
 protected:
 
     Form         *form;         // Форма, для которой зада этот параметр
@@ -201,7 +204,7 @@ struct DParam : public Param
     int GetNumberDigitsAfterComma(Order::E order = Order::Count) const;
 
     // Возвращает числовое представление Value с numDigits значащими цифрами и запятой.
-    cstr GetIndicatedValue() const;
+    pchar GetIndicatedValue() const;
 
     // Возвращает позицию первого ненулевого символа "1" - десятки (1e1), "0" - единицы (1e0), "-1" - десятые (1e-1), "-2" - сотые (1e-2)
     int GetPositionFirstDigit(Order::E order = Order::Count) const;

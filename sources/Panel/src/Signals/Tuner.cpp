@@ -1269,7 +1269,7 @@ void Tuner::OnButtonApply()
             }
             else if (type == TypeDParam::Duration || type == TypeDParam::Period)
             {
-                int fractNano = DisplayEntering::ToValue().FractNano();
+                int64 fractNano = DisplayEntering::ToValue().FractNano();
 
                 if ((fractNano % 10) != 0)
                 {

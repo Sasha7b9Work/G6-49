@@ -39,7 +39,7 @@ static bool GetSign(int &sign, char *begin, char **end);
 static bool GetIntPart(Value &value, char *begin, char **end, int numDigitsAfterComma);
 
 // Возвращает степень (то, что после символа e)
-static bool GetPower(int &power, char *begin, char **end);
+static bool GetPower(int64 &power, char *begin, char **end);
 
 
 Value::Value(pchar const buffer, Order::E order) //-V730
@@ -80,8 +80,8 @@ bool Value::FromString(pchar buffer, char **end, int numDigitsAfterComma)
 
     begin = *end;
 
-    int pow = 0;
-    
+    int64 pow = 0;
+
     if (!GetPower(pow, begin, end))
     {
         return false;
@@ -168,7 +168,7 @@ static bool GetIntPart(Value &, char *, char **, int)
 
 
 #ifdef PANEL
-static bool GetPower(int &pow, char *begin, char **end)
+static bool GetPower(int64 &pow, char *begin, char **end)
 {
     if (*begin != 'e' && *begin != 'E')
     {
@@ -444,20 +444,20 @@ void Value::SetSign(int sign)
 }
 
 
-int Value::Integer() const
+int64 Value::Integer() const
 {
     uint64 val = AbsRawValue();
 
-    return (int)(val / (1000 * 1000 * 1000)) * Sign();
+    return (int64)(val / 1000 / 1000 / 1000 * Sign());
 }
 
 
-int Value::FractNano() const
+int64 Value::FractNano() const
 {
     Value val = *this;
     val.SetSign(1);
 
-    int whole = val.Integer();
+    int64 whole = val.Integer();
 
     return (int)(val.value - (int)(whole * 1000 * 1000 * 1000));
 }
@@ -527,7 +527,7 @@ Value &Value::TestSub(Value val)
 }
 
 
-void Value::MulPow10(int pow)
+void Value::MulPow10(int64 pow)
 {
     while (pow > 0)
     {
@@ -584,13 +584,13 @@ Order::E Value::GetOrder() const
     Value temp = *this;
     temp.SetSign(1);
 
-    int integer = temp.Integer();
+    int64 integer = temp.Integer();
 
     if      (integer >= 1000 * 1000) { return Order::Mega;  }
     else if (integer >= 1000)        { return Order::Kilo;  }
     else if (integer > 0)            { return Order::One;   }
 
-    int fract = temp.FractNano();
+    int64 fract = temp.FractNano();
 
     if      (fract >= 1000 * 1000)   { return Order::Milli; }
     else if (fract >= 1000)          { return Order::Micro; }
@@ -641,7 +641,7 @@ int Value::GetDigit(int position, Order::E order) const
     {
         int divider = 100 * 1000 * 1000;       // На это число будем делить количество наносекунд
 
-        int fract = _value.FractNano();
+        int64 fract = _value.FractNano();
 
         while (position < -1)
         {
@@ -655,11 +655,11 @@ int Value::GetDigit(int position, Order::E order) const
             position++;
         }
 
-        return (divider == 0) ? -1 : (fract / divider);
+        return (divider == 0) ? -1 : ((int)fract / divider);
     }
     else
     {
-        int whole = _value.Integer();
+        int64 whole = _value.Integer();
 
         while (position > 0)
         {
@@ -690,7 +690,7 @@ int Value::GetPositionFirstDigit(Order::E order) const
 
     if (_value.Integer() > 0)
     {
-        int whole = _value.Integer();
+        int64 whole = _value.Integer();
 
         while (whole > 9)
         {
@@ -700,7 +700,7 @@ int Value::GetPositionFirstDigit(Order::E order) const
     }
     else
     {
-        int fract = _value.FractNano();
+        int64 fract = _value.FractNano();
 
         if (fract == 0)
         {
@@ -714,7 +714,9 @@ int Value::GetPositionFirstDigit(Order::E order) const
         } while (fract < (100 * 1000 * 1000));
     }
 
-    return result - Order::GetPow10(order == Order::Count ? _value.GetOrder() : order);
+    result -= Order::GetPow10(order == Order::Count ? _value.GetOrder() : order);
+
+    return result;
 }
 
 

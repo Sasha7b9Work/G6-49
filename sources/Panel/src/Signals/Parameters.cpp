@@ -160,6 +160,22 @@ Form *Param::GetForm()
 }
 
 
+PPeriod *Param::ToPeriod()
+{
+    DParam *d = ToDouble();
+
+    if (d)
+    {
+        if (d->GetType() == TypeDParam::Period)
+        {
+            return (PPeriod *)d;
+        }
+    }
+
+    return nullptr;
+}
+
+
 cstr DParam::GetMainUnits() const
 {
     static const cstr units[TypeDParam::Count][2] =
@@ -605,7 +621,7 @@ int DParam::GetPositionFirstDigit(Order::E order) const
 }
 
 
-cstr DParam::GetIndicatedValue() const
+pchar DParam::GetIndicatedValue() const
 {
     static const int NUM_DIGITS = 6;
     static const int LENGTH_BUFFER = NUM_DIGITS + 2;

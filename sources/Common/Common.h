@@ -84,7 +84,7 @@ struct Value
     Value &TestSub(Value value);
 
     // Умножить на 10 в степени pow
-    void MulPow10(int pow);
+    void MulPow10(int64 pow);
 
     void SetSign(int sign);
 
@@ -92,10 +92,10 @@ struct Value
     int Sign() const;
 
     // Возвращает целую часть
-    int Integer() const;
+    int64 Integer() const;
       
     // Возвращает количество наночастиц в дробной части
-    int FractNano() const;
+    int64 FractNano() const;
 
     uint64 AbsRawValue() const;
 
