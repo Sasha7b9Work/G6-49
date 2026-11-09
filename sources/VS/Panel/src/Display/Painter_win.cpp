@@ -45,8 +45,6 @@
 
 // Здесь будем рисовать
 static wxBitmap bitmap(320, 240);
-// Контекст рисования
-static wxMemoryDC memDC;
 
 static wxButton *buttons[Key::Count];
 
@@ -57,14 +55,38 @@ static uint colors[256];
 
 // Создаёт окно приложения. Возвращает хэндл виджета для отрисовки
 static void CreateFrame();
+
 // Установить оптимальную позицию для окна приложения
 static void SetSizeAndPosition(Frame *frame);
+
 // Получить разрешение максимального имеющегося в системе монитора
 static wxRect GetMaxDisplay();
+
 // Создаёт все кнопки
 static void CreateButtons(Frame *frame);
+
 // Создаёт одну кнопку
 static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxSize &size);
+
+
+// Контекст рисования
+struct MemoryDC
+{
+    static wxMemoryDC *Get()
+    {
+        if (mem == nullptr)
+        {
+            mem = new wxMemoryDC();
+        }
+
+        return mem;
+    }
+
+private:
+
+    static wxMemoryDC *mem;
+};
+wxMemoryDC *MemoryDC::mem = nullptr;
 
 
 class Screen : public wxPanel
@@ -101,16 +123,16 @@ void Display::Init()
 
 void Painter::BeginScene(const Color &color)
 {
-    memDC.SelectObject(bitmap);
+    MemoryDC::Get()->SelectObject(bitmap);
     wxBrush brush({ 0, 0, 0 }, wxTRANSPARENT);
-    memDC.SetBrush(brush);
+    MemoryDC::Get()->SetBrush(brush);
     Primitives::Rectangle(320, 240).Fill(0, 0, color);
 }
 
 
 void Painter::EndScene()
 {
-    memDC.SelectObject(wxNullBitmap);
+    MemoryDC::Get()->SelectObject(wxNullBitmap);
     screen->Refresh();
 }
 
@@ -243,7 +265,7 @@ void Color::SetAsCurrent() const
 
         wxColour colorDraw = wxColour(r, g, b);
 
-        memDC.SetPen(wxPen(colorDraw));
+        MemoryDC::Get()->SetPen(wxPen(colorDraw));
     }
 }
 
@@ -251,21 +273,21 @@ void Color::SetAsCurrent() const
 void Primitives::VLine::Draw(int x, int y0, int y1, const Color &color)
 {
     color.SetAsCurrent();
-    memDC.DrawLine({ x, y0 }, { x, y1 });
+    MemoryDC::Get()->DrawLine({ x, y0 }, { x, y1 });
 }
 
 
 void Primitives::HLine::Draw(int y, int x0, int x1, const Color &color)
 {
     color.SetAsCurrent();
-    memDC.DrawLine({ x0, y }, { x1, y });
+    MemoryDC::Get()->DrawLine({ x0, y }, { x1, y });
 }
 
 
 void Primitives::Line::Draw(int x0, int y0, int x1, int y1, const Color &color)
 {
     color.SetAsCurrent();
-    memDC.DrawLine({ x0, y0 }, { x1, y1 });
+    MemoryDC::Get()->DrawLine({ x0, y0 }, { x1, y1 });
 }
 
 
@@ -279,11 +301,11 @@ void Primitives::Rectangle::Fill(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
-    wxBrush brush = memDC.GetBrush();
-    wxPen pen = memDC.GetPen();
-    memDC.SetBrush(wxBrush(pen.GetColour()));
-    memDC.DrawRectangle({ x, y, width + 1, height + 1 });
-    memDC.SetBrush(brush);
+    wxBrush brush = MemoryDC::Get()->GetBrush();
+    wxPen pen = MemoryDC::Get()->GetPen();
+    MemoryDC::Get()->SetBrush(wxBrush(pen.GetColour()));
+    MemoryDC::Get()->DrawRectangle({ x, y, width + 1, height + 1 });
+    MemoryDC::Get()->SetBrush(brush);
 }
 
 
@@ -291,7 +313,7 @@ void Primitives::Rectangle::Draw(int x, int y, const Color &color)
 {
     color.SetAsCurrent();
 
-    memDC.DrawRectangle({ x, y, width + 1, height + 1 });
+    MemoryDC::Get()->DrawRectangle({ x, y, width + 1, height + 1 });
 }
 
 
@@ -304,7 +326,7 @@ void Primitives::Rectangle::DrawFilled(int x, int y, Color colorFill, Color colo
 
 void Primitives::Point::Draw(int x, int y)
 {
-    memDC.DrawPoint({ x, y });
+    MemoryDC::Get()->DrawPoint({ x, y });
 }
 
 
