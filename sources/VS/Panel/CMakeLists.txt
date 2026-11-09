@@ -63,42 +63,45 @@ file(GLOB DISPLAY                ../../Panel/src/Display/Colors.*
                                  ../../Panel/src/Display/Display.*
                                  ../../Panel/src/Display/DisplayTypes.h
                                  ../../Panel/src/Display/Painter.*
-                                             src/Display/Painter_win.cpp
                                  ../../Panel/src/Display/Symbols.h
                                  ../../Panel/src/Display/Text.*
                                  ../../Panel/src/Display/Tuner.*
                                  ../../Panel/src/Display/Viewer.*
                                  ../../Panel/src/Display/WaveGraphics.*)
-file(GLOB HARDWARE                           src/Hardware/Beeper_win.cpp
-                                 ../../Panel/src/Hardware/CPU.h
+file(GLOB HARDWARE               ../../Panel/src/Hardware/CPU.h
                                  ../../Panel/src/Hardware/Timer.*
-                                 ../../Panel/src/Hardware/VCP_p.h
-                                             src/Hardware/CPU_win.cpp
-                                             src/Hardware/LTDC_win.cpp
-                                             src/Hardware/VCP_p_win.cpp)
-file(GLOB HARDWARE_HAL           ../../Panel/src/Hardware/HAL/HAL_TIM.cpp
+                                 ../../Panel/src/Hardware/VCP_p.h)
+file(GLOB HARDWARE_HAL           ../../Panel/src/Hardware/HAL/HAL_TIM.cpp)
+file(GLOB KEYBOARD               ../../Panel/src/Keyboard/Controls.*
+                                 ../../Panel/src/Keyboard/Keyboard.*)
+file(GLOB INTERFACE              ../../Panel/src/Interface/Handlers_p.*
+                                 ../../Panel/src/Interface/Interface_p.*
+                                 ../../Panel/src/Interface/Messages_p.*)
+file(GLOB DISPLAY_FONT           ../../Panel/src/Display/Font/*)
+file(GLOB FDRIVE                 ../../Panel/src/FDrive/*)
+file(GLOB FREQMETER              ../../Panel/src/FreqMeter/*)
+file(GLOB GENERATOR              ../../Panel/src/Generator/*)
+file(GLOB GUI                                src/GUI/*
+                                             src/Display/Painter_win.cpp
                                              src/Hardware/HAL/HAL_EEPROM_win.cpp
                                              src/Hardware/HAL/HAL_PIO_win.cpp
                                              src/Hardware/HAL/HAL_SPI4_win.cpp
                                              src/Hardware/HAL/HAL_TIM2_win.cpp
                                              src/Hardware/HAL/HAL_TIM3_win.cpp
-                                             src/Hardware/HAL/HAL_TIM4_win.cpp)
-file(GLOB KEYBOARD               ../../Panel/src/Keyboard/Controls.*
-                                 ../../Panel/src/Keyboard/Keyboard.*
-                                             src/Keyboard/Keyboard_win.h)
-file(GLOB INTERFACE              ../../Panel/src/Interface/Handlers_p.*
-                                 ../../Panel/src/Interface/Interface_p.*
-                                 ../../Panel/src/Interface/Messages_p.*
-                                             src/Interface/Transceiver_p_win.cpp)
-file(GLOB DISPLAY_FONT           ../../Panel/src/Display/Font/*)
-file(GLOB FDRIVE                 ../../Panel/src/FDrive/*)
-file(GLOB FREQMETER              ../../Panel/src/FreqMeter/*)
-file(GLOB GENERATOR              ../../Panel/src/Generator/*)
-file(GLOB GUI                                src/GUI/*)
+                                             src/Hardware/HAL/HAL_TIM4_win.cpp
+                                             src/Hardware/CPU_win.cpp
+                                             src/Hardware/LTDC_win.cpp
+                                             src/Hardware/VCP_p_win.cpp
+                                             src/Interface/Transceiver_p_win.cpp
+                                             src/Keyboard/Keyboard_win.h
+                                             src/Hardware/Beeper_win.cpp
+)
 file(GLOB LIBS_CMSIS             ../../Panel/src/libs/CMSIS/*)
 file(GLOB LIBS_HAL               ../../Panel/src/libs/HAL/*)
-file(GLOB MENU                   ../../Panel/src/Menu/*.h ../../Panel/src/Menu/*.cpp)
-file(GLOB MENU_PAGES             ../../Panel/src/Menu/Pages/*.h ../../Panel/src/Menu/Pages/*.cpp)
+file(GLOB MENU                   ../../Panel/src/Menu/*.h
+                                 ../../Panel/src/Menu/*.cpp)
+file(GLOB MENU_PAGES             ../../Panel/src/Menu/Pages/*.h
+                                 ../../Panel/src/Menu/Pages/*.cpp)
 file(GLOB MENU_PAGES_ADDITION    ../../Panel/src/Menu/Pages/Addition/*)
 file(GLOB MENU_PAGES_PAGEDEBUG   ../../Panel/src/Menu/Pages/PageDebug/*)
 file(GLOB SCPI                   ../../Panel/src/SCPI/*)
