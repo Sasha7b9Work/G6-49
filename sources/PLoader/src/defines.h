@@ -30,6 +30,7 @@ typedef const char *           pchar;
 typedef unsigned int           uint;
 typedef unsigned short int     uint16;
 typedef unsigned long long int uint64;
+typedef signed long long       int64;
 typedef signed short int       int16;
 typedef unsigned char          uint8;
 typedef unsigned char          uchar;

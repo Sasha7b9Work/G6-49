@@ -201,7 +201,7 @@ static bool GetPower(int64 &pow, char *begin, char **end)
     return true;
 }
 #else
-static bool GetPower(int &, char *, char **)
+static bool GetPower(int64 &, char *, char **)
 {
     return true;
 }
