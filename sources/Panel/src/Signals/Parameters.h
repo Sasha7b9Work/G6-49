@@ -141,7 +141,7 @@ struct DParam : public Param
     friend class Tuner;
     friend class TunerDisplay;
 
-    DParam(TypeDParam::E t, pFuncActive, pchar const nameRU, pchar const nameEN, const Value &);
+    DParam(TypeDParam::E, pFuncActive, pchar const nameRU, pchar const nameEN, const Value &);
 
     DParam(const DParam &);
 

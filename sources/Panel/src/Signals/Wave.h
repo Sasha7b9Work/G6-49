@@ -45,56 +45,65 @@ public:
 
     // Возвращает человеческое название формы сигнала
     cstr Name(uint lang = (uint)(-1)) const;
-    
+
     // Возвращает ссылку на текущий параметр
     Param *CurrentParameter() const;
-    
+
     // Возвращает количество доступных параметров
     int NumParameters() const;
-    
+
     // Возвращает ссылку на i-ый параметр из массива params
     Param *GetParameter(int i) const;
-    
+
     // Установить текущим следующй параметр
     void SetNextParameter();
 
     // Установить текущим предыдущий параметр
     void SetPrevParameter();
-    
+
     // Настраивает генератор в соответствии с установленными параметрами
     void TuneGenerator();
-    
+
     // Возвращает true, если тип формы сигнала соответствует e
-    bool Is(TypeForm::E e) const { return e == value; };
-    
+    bool Is(TypeForm::E e) const
+    {
+        return e == value;
+    };
+
     // Возвращает true, если форма сигнала реализуется с помощью ПЛИС
     bool IsDDS() const;
-    
+
     // Возвращает указатель на родительский Wave
-    Wave *GetWave() const { return wave; };
-  
+    Wave *GetWave() const
+    {
+        return wave;
+    };
+
     // Нарисовать изображение сигнала
     void DrawUGO(const Chan &, int y0) const;
-    
+
     // Установить данные произвольного сигнала для отрисовки
     static void SetFormFlash(const Chan &, const uint8 data[POINTS_IN_FORM]);
-    
+
     // Возвращает указатель на данные произвольного сигнала для отрисовки
     static uint8 *GetFormFlash(const Chan &);
-    
+
     // Получить смещение сигнала
     double GetOffset() const;
-    
+
     // Получить размах сигнала
     double GetAmplitude() const;
 
-    operator TypeForm::E() const { return value; }
-    
+    operator TypeForm::E() const
+    {
+        return value;
+    }
+
     // Находит требуемый параметр. Возвращает 0, если такого параметра нет
     DParam *FindParameter(TypeDParam::E p) const;
     CParam *FindParameter(TypeCParam::E p) const;
     IParam *FindParameter(TypeIParam::E p) const;
-    
+
     // Засылает параметр в генератор
     void SendParameterToGenerator(TypeDParam::E p) const;
     void SendParameterToGenerator(TypeCParam::E p) const;
@@ -109,16 +118,16 @@ public:
     void RestoreState();
 
 private:
-    
+
     // Wave, к которому относится данный Form
     Wave *wave;
-    
+
     // Здесь хранятся параметры
     Param **params;
-    
+
     // Сколько всего параметров
     int numParams;
-    
+
     // Номер текущего параметра в массиве params
     int currentParam;
 
@@ -145,8 +154,12 @@ private:
         Param **params;
         int     numParams;
         int     currentParam;
-        Old() : params(nullptr), numParams(0), currentParam(0) { }
-        void Init(Param **parameters, int num, int current) { params = parameters; numParams = num; currentParam = current; }
+        Old() : params(nullptr), numParams(0), currentParam(0)
+        {}
+        void Init(Param **parameters, int num, int current)
+        {
+            params = parameters; numParams = num; currentParam = current;
+        }
     } old;
 
     struct CheckerParameters
@@ -167,13 +180,19 @@ class Wave
 public:
 
     Wave(const Chan &, Form **forms);
-    
+
     // Возвращает установленную форму
     Form *GetCurrentForm();
-    
+
     // Установить индекс текущей формы сигнала.
-    void SetIndexForm(int num) { numberForm = num; };
-    int GetIndexForm() const { return numberForm; }
+    void SetIndexForm(int num)
+    {
+        numberForm = num;
+    };
+    int GetIndexForm() const
+    {
+        return numberForm;
+    }
     // Устанавливает текущую форму. Если форма не принадлежит этой волне, то ничего не происходит
     void SetForm(const Form *);
 
@@ -183,32 +202,42 @@ public:
 
     Form *GetForm(TypeForm::E form);
 
-    Chan GetChannel() const { return channel; };
-    
+    Chan GetChannel() const
+    {
+        return channel;
+    };
+
     // Возвращает true, если установлен ручной режим запуска
     bool StartModeIsSingle();
 
     void Reset();
 
     // Сохраняет нидекс текущей формы
-    void StoreIndexCurrentForm() { stored.index_form = numberForm; };
+    void StoreIndexCurrentForm()
+    {
+        stored.index_form = numberForm;
+    };
 
     // Восстанавливает индекс текущей формы
-    void RestoreIndexCurrentForm() { numberForm = stored.index_form; };
+    void RestoreIndexCurrentForm()
+    {
+        numberForm = stored.index_form;
+    };
 
 private:
-    
+
     Chan channel;           // Какому каналу принадлежит сигнал
-    
+
     int numberForm;         // Текущая форма сигнала - указывает на номер сигнала в массиве
-    
+
     Form **forms;           // Список форм, которые могут быть назначены
-    
+
     int numForms;           // Количество возможных форм
 
     struct Stored
     {
-        Stored() : index_form(0) { }
+        Stored() : index_form(0)
+        {}
         int index_form;
 
     } stored;
