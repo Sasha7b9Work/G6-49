@@ -201,12 +201,6 @@ namespace Message
         };
 
 
-        struct FileString : public SimpleMessage
-        {
-            FileString(uint numString, char *nameFile);
-        };
-
-
         // Число каталогов и файлов в текущем каталоге
         struct NumDirsAndFiles : public SimpleMessage
         {

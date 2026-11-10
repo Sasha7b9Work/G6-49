@@ -27,10 +27,3 @@ public:
     // —охранить данные как данные формы
     static void SetDataToWave();
 };
-
-
-struct FileRequests
-{
-    // —читать строку из файла
-    static void SendRequestForString(const String *name, int numString);
-};

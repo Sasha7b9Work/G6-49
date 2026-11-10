@@ -1934,11 +1934,6 @@
               <FilePath>.\src\FDrive\File.cpp</FilePath>
             </File>
             <File>
-              <FileName>File_requests.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FDrive\File_requests.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Items.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FDrive\Items.h</FilePath>

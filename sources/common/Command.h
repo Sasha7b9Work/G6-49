@@ -70,7 +70,7 @@ struct Command
         //  Test   size     crc32
 /* <-> */   Test,                               // Команда для тестирования SPI
 /* <-> */   FDrive_RequestFileSize,             // Запрос размера файла
-/* <-> */   FDrive_RequestFileString,           // Считать строку из файла
+/* <-> */   NOT_USED,
 /* <-> */   FDrive_LoadDDSfromFile,             // Загрузить сигнал с флешки. Получив это сообщение, устройство начинает загрузку сигнала, а по окончании возвращает это же сообщение
 /* <-> */   FDrive_RequestPictureDDSfromFile,   // Получить изображение формы сигнала
          // 0           1...5     6.....

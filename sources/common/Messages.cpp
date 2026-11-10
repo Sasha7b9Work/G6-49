@@ -413,17 +413,6 @@ Message::FDrive::CloseFile::CloseFile() : SimpleMessage(1, Command::FDrive_Close
 }
 
 
-Message::FDrive::FileString::FileString(uint numString, char *nameFile) : SimpleMessage()
-{
-    //          commmand  numString  nameFile                завершающий_ноль
-    int size = 1 +       1 +        (int)std::strlen(nameFile) + 1;
-    AllocateMemory(size);
-    PutUINT8(Command::FDrive_RequestFileString);
-    PutUINT8((uint8)numString);
-    std::strcpy((char *)(buffer + 2), nameFile);
-}
-
-
 Message::FDrive::FileSize::FileSize(uint8 numFile, uint size) : SimpleMessage(6, Command::FDrive_RequestFileSize)
 {
     PutUINT8(numFile);
