@@ -15,6 +15,10 @@ namespace PInterface
     void Transmit(SimpleMessage *);
 
     // Добавляеет задание. Если не получилось, возвращает false
+    // Используется для :
+    //      Message::FDrive::RequestPictureDDSfromFile      Command::FDrive_RequestPictureDDSfromFile
+    //      Message::FDrive::FileString                     Command::FDrive_RequestFileString
+    //      Message::FDrive::FileName                       Command::FDrive_RequestFile
     void AddTask(Task *);
 };
 

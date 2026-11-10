@@ -118,10 +118,10 @@ void PInterface::Transmit(SimpleMessage *)
 
 void PInterface::AddTask(Task *task)
 {
-    if (!tasks.IsMember(task))                   // Если задания ещё нет в очереди
+    if (!tasks.IsMember(task))              // Если задания ещё нет в очереди
     {
-        task->TransmitMessage();                // То посылаем его сообщение
-        tasks.Append(task);                     // и добавляем в очередь сообщений для повторной отправки
+        task->TransmitMessage();            // То посылаем его сообщение
+        tasks.Append(task);                 // и добавляем в очередь сообщений для повторной отправки
     }
 }
 
@@ -224,6 +224,3 @@ void SimpleMessage::Transmit()
 {
     PInterface::Transmit(this);
 }
-
-
-

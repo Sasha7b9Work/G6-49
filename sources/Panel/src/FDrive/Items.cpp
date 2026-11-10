@@ -32,8 +32,14 @@ namespace ListFiles
         char name[50];
         uint8 nutUsed[2];
         int size;
-        StructFile() : size(-1) { name[0] = 0; } //-V730
-        void Clear() { name[0] = 0; size = -1; }
+        StructFile() : size(-1)
+        {
+            name[0] = 0;
+        } //-V730
+        void Clear()
+        {
+            name[0] = 0; size = -1;
+        }
         void CopyFrom(const StructFile &file)
         {
             std::strcpy(name, file.name);
@@ -148,17 +154,17 @@ static bool EqualsRequestNameFile(Task *task1, Task *task2)
     uint8 com = Command::FDrive_RequestFile;
 
     return  (com == msg1->TakeUINT8()) &&
-            (com == msg2->TakeUINT8()) &&
-            (msg1->TakeUINT8() == msg2->TakeUINT8());
+        (com == msg2->TakeUINT8()) &&
+        (msg1->TakeUINT8() == msg2->TakeUINT8());
 }
 
 
 static void ListFiles::SendRequestForNameFile(int number)
 {
     Message::FDrive::FileName message((uint8)number, FDrive::CurrentDirectory());
-    
+
     Task *task = new Task(&message, ListFiles::Handler::Processing, EqualsRequestNameFile);
-    
+
     PInterface::AddTask(task);
 }
 
@@ -169,7 +175,7 @@ String ListFiles::GetNameItem(int i)
     {
         SendRequestForNameFile(i);
     }
-    
+
     return String(files[i - firstFile].name);
 }
 
