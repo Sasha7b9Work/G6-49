@@ -19,7 +19,7 @@ namespace PInterface
     // Обрабатывает answer, если запрос на него есть в очереди заданий. Возвращает true, если это так
     static bool ProcessTask(SimpleMessage *answer);
 
-    static void ReceiveMessage();
+    static bool ReceiveMessage();
 
     // Засылает все задания
     static void SendTasks();
@@ -44,7 +44,7 @@ void PInterface::Update()
 }
 
 
-void PInterface::ReceiveMessage()
+bool PInterface::ReceiveMessage()
 {
     uint8 flag = 0;
 
@@ -102,17 +102,33 @@ void PInterface::ReceiveMessage()
         }
     }
 
-    if (error_flag)
-    {
-        HAL_SPI4::Transmit(0xFF);   // Произошла ошибка во время приёма информации.
-                                    // По принятому значению 0xFF device поймёт это и повторит передачу
-    }
+    HAL_SPI4::Transmit(error_flag ? 0xFF : 0x00);
+
+    return !error_flag;
 }
 
 
-void PInterface::Transmit(SimpleMessage *)
+void PInterface::Transmit(SimpleMessage *message)
 {
+    while (!CPU::IsReady())
+    {
+        if (ReceiveMessage())
+        {
+            break;
+        }
+    }
 
+    static const uint SIZE_BUFFER = 1024;
+
+    uint8 buffer[SIZE_BUFFER] = { 0xFF, 0xFF, 0xFF, 0xFF };
+
+    int *size = (int *)buffer[4];
+    *size = message->Size();
+    std::memcpy(&buffer[8], message->TakeData(), (uint)*size);
+    uint *crc = (uint *)buffer[8 + *size];
+    *crc = HAL_CRC32::Calculate(&buffer[8], (uint)*size);
+
+    HAL_SPI4::Transmit(buffer, (uint16)(*size + 4 + 4 + 4), 500);
 }
 
 
