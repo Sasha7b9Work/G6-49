@@ -53,7 +53,7 @@ void PInterface::Update()
     Message::RequestData message;
 
     Transceiver::Transmit(&message);
-    
+
     if (Transceiver::Receive(&message))
     {
         if (ProcessTask(&message) ||            // Обрабатываем сообщение, если запрос на него есть в очереди заданий
@@ -70,7 +70,7 @@ void PInterface::Update()
 
 void PInterface::AddTask(Task *task)
 {
-    if(!tasks.IsMember(task))                   // Если задания ещё нет в очереди
+    if (!tasks.IsMember(task))                   // Если задания ещё нет в очереди
     {
         task->TransmitMessage();                // То посылаем его сообщение
         tasks.Append(task);                     // и добавляем в очередь сообщений для повторной отправки

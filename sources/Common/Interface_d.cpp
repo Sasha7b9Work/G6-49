@@ -4,9 +4,7 @@
 #include "common/Transceiver.h"
 #include "common/Handlers_d.h"
 #include "common/Interface_d.h"
-#ifdef LOADER
-#include "FDrive/FDrive_dl.h"
-#else
+#ifndef LOADER
 #include "FDrive/FDrive_d.h"
 #endif
 #include "Generator/Generator_d.h"
@@ -49,44 +47,91 @@ void DInterface::Update()
 
     int size = 0;
 
-    if (HAL_SPI1::Receive(&size, 4, 10))                                                           // Узнаём размер принимаемого сообщения
+    static uint prev_time = TIME_MS;
+
+    if (HAL_SPI1::Receive(&size, 4, 10))                                                                // Узнаём размер принимаемого сообщения
     {
-        SimpleMessage first;              // Сюда принимаем первое сообщение
-        SimpleMessage second;             // Сюда принимаем второе сообщение
-
-        int timeout = size > 100 ? 200 : 10;
-
-        if (first.AllocateMemory(size))
+        if (size != 0)
         {
-            if (HAL_SPI1::Receive(first.TakeData(), first.Size(), timeout))                            // Принимаем данные
-            {
-                if (HAL_SPI1::Transmit(&size, 4, timeout))                                         // Передаём его размер
-                {
-                    if (HAL_SPI1::Transmit(first.TakeData(), first.Size(), timeout))                   // И данные
-                    {
-                        if (HAL_SPI1::Receive(&size, 4, 10))
-                        {
-                            if (second.AllocateMemory(size))                                    // Второй раз сообщение будем принимать в этот буфер
-                            {
-                                if (HAL_SPI1::Receive(second.TakeData(), second.Size(), timeout))      // Что и делаем
-                                {
-                                    size = second.Size();
+            prev_time = TIME_MS;
 
-                                    if (HAL_SPI1::Transmit(&size, 4, timeout))
+            SimpleMessage first;              // Сюда принимаем первое сообщение
+            SimpleMessage second;             // Сюда принимаем второе сообщение
+
+            int timeout = size > 100 ? 200 : 10;
+
+            if (first.AllocateMemory(size))
+            {
+                if (HAL_SPI1::Receive(first.TakeData(), first.Size(), timeout))                             // Принимаем данные
+                {
+                    if (HAL_SPI1::Transmit(&size, 4, timeout))                                              // Передаём его размер
+                    {
+                        if (HAL_SPI1::Transmit(first.TakeData(), first.Size(), timeout))                    // И данные
+                        {
+                            if (HAL_SPI1::Receive(&size, 4, 10))
+                            {
+                                if (second.AllocateMemory(size))                                            // Второй раз сообщение будем принимать в этот буфер
+                                {
+                                    if (HAL_SPI1::Receive(second.TakeData(), second.Size(), timeout))       // Что и делаем
                                     {
-                                        if (HAL_SPI1::Transmit(second.TakeData(), second.Size(), timeout))
+                                        size = second.Size();
+
+                                        if (HAL_SPI1::Transmit(&size, 4, timeout))
                                         {
-                                            if (second.IsEquals(&first))                        // Проверяем, совпали ли оба принятых сообщения
+                                            if (HAL_SPI1::Transmit(second.TakeData(), second.Size(), timeout))
                                             {
-                                                DHandlers::Processing(&first);
+                                                if (second.IsEquals(&first))                        // Проверяем, совпали ли оба принятых сообщения
+                                                {
+                                                    DHandlers::Processing(&first);
+                                                }
+                                                else
+                                                {
+                                                    LOG_WRITE_TRACE("First and second messages not equals");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                LOG_WRITE_TRACE("Can not second tranmsit data");
                                             }
                                         }
+                                        else
+                                        {
+                                            LOG_WRITE_TRACE("Can not second trasnimt size");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        LOG_WRITE_TRACE("Can not second receive data");
                                     }
                                 }
+                                else
+                                {
+                                    LOG_WRITE_TRACE("Can not alocate %d bytes", size);
+                                }
+                            }
+                            else
+                            {
+                                LOG_WRITE_TRACE("Can not second receive size");
                             }
                         }
+                        else
+                        {
+                            LOG_WRITE_TRACE("Can not first transmit data");
+                        }
+                    }
+                    else
+                    {
+                        LOG_WRITE_TRACE("Can not first transmit size");
                     }
                 }
+                else
+                {
+                    LOG_WRITE_TRACE("Can not first receive data");
+                }
+            }
+            else
+            {
+                LOG_WRITE_TRACE("Can not allocate %d bytes", size);
             }
         }
     }

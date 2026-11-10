@@ -4,6 +4,7 @@
 #include "Utils/Math.h"
 #include "structs.h"
 #include <cstdio>
+#include <cstring>
 
 
 char *SU::Float2String(float value)
@@ -35,6 +36,34 @@ char *SU::Bin2StringN(uint value, char buffer[33], int n)
         buffer[i] = (value & 0x01) ? '1' : '0';
         value >>= 1;
     }
+
+    return buffer;
+}
+
+
+pchar SU::LeaveTheLastOnes(pchar in, int number)
+{
+    int size = (int)std::strlen(in);
+
+    if (size >= number)
+    {
+        return in + size - number;
+    }
+
+    static char buffer[1024];
+
+    char *pointer = buffer;
+
+    int num_spaces = number - size;
+
+    for (int i = 0; i < num_spaces; i++)
+    {
+        *pointer++ = ' ';
+    }
+
+    *pointer = '\0';
+
+    std::strcat(buffer, in);
 
     return buffer;
 }

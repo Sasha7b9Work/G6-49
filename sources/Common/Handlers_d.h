@@ -5,5 +5,5 @@
 
 namespace DHandlers
 {
-    void Processing(SimpleMessage *message);
+    void Processing(SimpleMessage *);
 };

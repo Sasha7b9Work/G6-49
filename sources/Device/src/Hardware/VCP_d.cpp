@@ -65,13 +65,6 @@ void DVCP::SendString(char *data)
 }
 
 
-void DVCP::SendStringEOF(char *data)
-{
-    SendString(data);
-    //SendByte(0x0d);
-}
-
-
 void DVCP::SendByte(uint8 byte)
 {
     SendData(&byte, 1);

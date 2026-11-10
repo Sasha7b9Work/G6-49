@@ -15,9 +15,6 @@ namespace DVCP
     // Передаётся строка без завершающего символа
     void SendString(char *data);
 
-    // Передача строки с символом конца строки
-    void SendStringEOF(char *data);
-
     void SendByte(uint8 data);
 
     extern void *handle;

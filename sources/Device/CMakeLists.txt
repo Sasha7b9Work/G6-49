@@ -5,24 +5,25 @@ project (Device)
 set(CMAKE_UNITY_BUILD OFF)
 
 
-include_directories(../common/_VS_KEIL
-                    ../common/_VS_KEIL/CMSIS
-                    ../common/_VS_KEIL/std_includes
-                    src
-                    ..
-                    ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
-                    ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include
-                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
-                    ../Device/src/Hardware/USBD
-                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
-                    ../Device/src/Hardware/HAL
-                    ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src
-                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc
-                    ../Device/src/Hardware/USBH
-                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc
-                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
-                    ../Device/src/Hardware/FatFS
-                    )
+include_directories(
+    ../common/_VS_KEIL
+    ../common/_VS_KEIL/CMSIS
+    ../common/_VS_KEIL/std_includes
+    src
+    ..
+    ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
+    ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include
+    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
+    ../Device/src/Hardware/USBD
+    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
+    ../Device/src/Hardware/HAL
+    ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src
+    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc
+    ../Device/src/Hardware/USBH
+    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc
+    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
+    ../Device/src/Hardware/FatFS
+)
 
 add_definitions(-DSTM32F407xx)
 
@@ -115,7 +116,8 @@ file(GLOB COMMON         ../common/Command.*
                          ../common/Interface_d.*
                          ../common/Messages.*
                          ../common/Transceiver.h
-                         ../common/Transceiver_d.cpp)
+                         ../common/Transceiver_d.cpp
+                         ../common/Log_d.*)
 file(GLOB FDRIVE         src/FDrive/*.*)
 file(GLOB FREQMETER      src/FreqMeter/*.*)
 file(GLOB GENERATOR      src/Generator/*.*)
@@ -146,23 +148,24 @@ source_group(Interface       FILES ${INTERFACE})
 source_group(Settings        FILES ${SETTINGS})
 source_group(Utils           FILES ${UTILS})
 
-add_library(${PROJECT_NAME} ${LIBS_FATFS}
-                            ${LIBS_HAL}
-                            ${LIBS_USBD}
-                            ${LIBS_USBH}
-                            ${HARDWARE}
-                            ${HARDWARE_CMSIS}
-                            ${HARDWARE_FATFS}
-                            ${HARDWARE_HAL}
-                            ${HARDWARE_USBD}
-                            ${HARDWARE_USBH}
-                            ${SRC}
-                            ${COMMON}
-                            ${FDRIVE}
-                            ${FREQMETER}
-                            ${GENERATOR}
-                            ${GENERATOR_FPGA}
-                            ${INTERFACE}
-                            ${SETTINGS}
-                            ${UTILS}
+add_library(${PROJECT_NAME}
+    ${LIBS_FATFS}
+    ${LIBS_HAL}
+    ${LIBS_USBD}
+    ${LIBS_USBH}
+    ${HARDWARE}
+    ${HARDWARE_CMSIS}
+    ${HARDWARE_FATFS}
+    ${HARDWARE_HAL}
+    ${HARDWARE_USBD}
+    ${HARDWARE_USBH}
+    ${SRC}
+    ${COMMON}
+    ${FDRIVE}
+    ${FREQMETER}
+    ${GENERATOR}
+    ${GENERATOR_FPGA}
+    ${INTERFACE}
+    ${SETTINGS}
+    ${UTILS}
 )
