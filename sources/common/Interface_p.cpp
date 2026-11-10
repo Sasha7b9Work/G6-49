@@ -31,12 +31,6 @@ namespace PInterface
 }
 
 
-void PInterface::AddMessageForTransmit(SimpleMessage *message)
-{
-    Transmit(message);
-}
-
-
 void PInterface::Update()
 {
     if (CPU::IsReady())     // У device нет данных для передачи
@@ -228,7 +222,7 @@ SimpleMessage *Task::GetMessage()
 
 void SimpleMessage::Transmit()
 {
-    PInterface::AddMessageForTransmit(this);
+    PInterface::Transmit(this);
 }
 
 

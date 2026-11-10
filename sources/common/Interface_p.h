@@ -16,8 +16,6 @@ namespace PInterface
 
     // Добавляеет задание. Если не получилось, возвращает false
     void AddTask(Task *);
-
-    void AddMessageForTransmit(SimpleMessage *);
 };
 
 
