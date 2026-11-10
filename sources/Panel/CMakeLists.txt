@@ -90,8 +90,7 @@ file(GLOB SRC                  src/*.h src/*.cpp)
 file(GLOB COMMON               ../common/Command.*
                                ../common/Common.*
                                ../common/CommonTypes.h
-                               ../common/Common_pan.cpp
-                               ../common/Messages.*)
+                               ../common/Common_pan.cpp)
 file(GLOB DISPLAY              src/Display/*.h src/Display/*.cpp)
 file(GLOB DISPLAY_FONT         src/Display/Font/*)
 file(GLOB FDRIVE               src/FDrive/*)
@@ -99,7 +98,9 @@ file(GLOB FREQMETER            src/FreqMeter/*)
 file(GLOB GENERATOR            src/Generator/*)
 file(GLOB KEYBOARD             src/Keyboard/*)
 file(GLOB INTERFACE            src/Interface/*
-                               ../common/Interface_p.*)
+                               ../common/Interface_p.*
+                               ../common/Messages.*
+                               ../common/Handlers_p.*)
 file(GLOB MENU                 src/Menu/*.h src/Menu/*.cpp)
 file(GLOB MENU_PAGES           src/Menu/Pages/*.h src/Menu/Pages/*.cpp)
 file(GLOB MENU_PAGES_ADDITION  src/Menu/Pages/Addition/*)

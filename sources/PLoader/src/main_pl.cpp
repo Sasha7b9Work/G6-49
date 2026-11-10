@@ -31,7 +31,7 @@ int main()
 
         if (meter.ElapsedTime() > 3000)
         {
-            PHandlers::OnStartMainApplication(nullptr);
+            StartToMainApplication();
         }
     }
 }

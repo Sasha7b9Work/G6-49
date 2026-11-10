@@ -3,7 +3,7 @@
 #include "log.h"
 #include "common/Command.h"
 #include "common/Messages.h"
-#include "Interface/Handlers_p.h"
+#include "common/Handlers_p.h"
 #include "Display/Console.h"
 #include "FDrive/FDrive_p.h"
 #include "FreqMeter/FreqMeter_p.h"

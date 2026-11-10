@@ -1778,26 +1778,6 @@
               <FileType>8</FileType>
               <FilePath>..\common\Common.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Interface_p.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Interface_p.h</FilePath>
-            </File>
-            <File>
-              <FileName>Messages.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Messages.h</FilePath>
-            </File>
-            <File>
-              <FileName>Messages.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Messages.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interface_p.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Common\Interface_p.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -2004,19 +1984,9 @@
           <GroupName>Interface</GroupName>
           <Files>
             <File>
-              <FileName>Handlers_p.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Interface\Handlers_p.h</FilePath>
-            </File>
-            <File>
               <FileName>Handlers_p.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Interface\Handlers_p.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interface_p.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Interface\Interface_p.cpp</FilePath>
             </File>
             <File>
               <FileName>Messages_p.h</FileName>
@@ -2027,6 +1997,26 @@
               <FileName>Messages_p.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Interface\Messages_p.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interface_p.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Interface_p.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interface_p.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Interface_p.h</FilePath>
+            </File>
+            <File>
+              <FileName>Messages.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Messages.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Messages.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Messages.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -8,7 +8,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Debug.h"
-#include "Common/Handlers_p.h"
+#include "common/Handlers_p.h"
 #include <cstdlib>
 
 
@@ -60,6 +60,18 @@ void PInterface::Update()
     }
 
     SendTasks();
+}
+
+
+bool PInterface::Receive(SimpleMessage *)
+{
+    return false;
+}
+
+
+void PInterface::Transmit(SimpleMessage *)
+{
+
 }
 
 
@@ -171,3 +183,6 @@ void SimpleMessage::Transmit()
 {
     PInterface::AddMessageForTransmit(this);
 }
+
+
+

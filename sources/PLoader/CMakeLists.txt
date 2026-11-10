@@ -83,12 +83,13 @@ file(GLOB HARDWARE_HAL    src/Hardware/HAL/*
                           ../common/Hardware/HAL/HAL_SPI4_p.cpp)
 file(GLOB SRC             src/*.h src/*.cpp)
 file(GLOB COMMON          ../common/Command.*
-                          ../common/Common.*
+                          ../common/Common.*)
+file(GLOB DISPLAY         src/Display/*)
+file(GLOB INTERFACE       src/Interface/*
+                          ../common/Handlers_p.*
                           ../common/Messages.*
                           ../common/Messages_l.*
                           ../common/Interface_p.*)
-file(GLOB DISPLAY         src/Display/*)
-file(GLOB INTERFACE       src/Interface/*)
 file(GLOB KEYBOARD        src/Keyboard/*)
 file(GLOB UTILS           src/Utils/*)
 
