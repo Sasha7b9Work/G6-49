@@ -28,7 +28,7 @@ namespace HAL_CRC32
 {
     void Init();
 
-    uint CalculateALIGN32(void *address, int size);
+    uint Calculate(uint8 *, uint size);
 };
 
 
@@ -62,11 +62,13 @@ namespace HAL_SPI4
     // Переслать массив данных
     bool Transmit(const void *buffer, int size, int timeout);
 
+    void Transmit(uint8);
+
     // Принять массив данных
     bool Receive(void *recv, int size, int timeout);
 
-    bool TransmitReceive(const uint8 *out, uint8 *in, int size);
-    bool TransmitRecevie(uint8, uint8 *);
+    void TransmitReceive(const uint8 *out, uint8 *in, uint16 size, uint timeout);
+    void TransmitReceive(uint8, uint8 *);
 };
 
 

@@ -77,8 +77,13 @@ namespace HAL_SPI4
     // Переслать массив данных
     bool Transmit(const void *buffer, int size, int timeout);
 
+    void Transmit(uint8);
+
     // Принять массив данных
     bool Receive(void *recv, int size, int timeout);
+
+    void TransmitReceive(const uint8 *out, uint8 *in, uint16 size, uint timeout);
+    void TransmitReceive(uint8 out, uint8 *in);
 };
 
 

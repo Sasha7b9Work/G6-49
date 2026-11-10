@@ -22,7 +22,7 @@ namespace HAL_CRC32
 {
     void Init();
 
-    uint CalculateALIGN32(void *address, int size);
+    uint Calculate(uint8 *address, int size);
 };
 
 

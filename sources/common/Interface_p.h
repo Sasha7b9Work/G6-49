@@ -11,7 +11,7 @@ namespace PInterface
 {
     // Для приёма сообщений от устройства
     void Update();
-    
+
     void Transmit(SimpleMessage *);
 
     bool Receive(SimpleMessage *);

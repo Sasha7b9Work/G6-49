@@ -78,6 +78,24 @@ bool HAL_SPI4::Receive(void *recv, int size, int timeout)
 }
 
 
+void HAL_SPI4::TransmitReceive(const uint8 *out, uint8 *in, uint16 size, uint timeout)
+{
+    HAL_SPI_TransmitReceive(&handleSPI4, (uint8 *)out, in, size, timeout);
+}
+
+
+void HAL_SPI4::TransmitReceive(uint8 out, uint8 *in)
+{
+    HAL_SPI_TransmitReceive(&handleSPI4, &out, in, 1, 3);
+}
+
+
+void HAL_SPI4::Transmit(uint8 value)
+{
+    HAL_SPI_Transmit(&handleSPI4, &value, 1, 3);
+}
+
+
 bool CPU::IsReady()
 {
     return HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_SET;

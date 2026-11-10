@@ -16,7 +16,12 @@ void HAL_CRC32::Init()
 }
 
 
-uint HAL_CRC32::CalculateALIGN32(void *data, int size)
+uint HAL_CRC32::Calculate(uint8 *data, int size)
 {
+    while ((size % 4) != 0)
+    {
+        data[size++] = 0;
+    }
+
     return HAL_CRC_Calculate(&handle, (uint *)data, (uint)(size / 4));
 }
