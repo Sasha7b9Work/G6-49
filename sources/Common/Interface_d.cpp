@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "common/Messages.h"
-#include "common/Transceiver.h"
+#include "common/Transceiver_d.h"
 #include "common/Handlers_d.h"
 #include "common/Interface_d.h"
 #ifndef LOADER

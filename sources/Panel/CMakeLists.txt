@@ -3,15 +3,16 @@ project (Panel)
 
 set(CMAKE_UNITY_BUILD ON)
 
-include_directories( src
-                     src/Hardware/HAL
-                     ..
-                     ../common/_VS_KEIL/CMSIS
-                     ../common/_VS/std_includes
-                     ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
-                     ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include
-                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
-                    )
+include_directories(
+    src
+    src/Hardware/HAL
+    ..
+    ../common/_VS_KEIL/CMSIS
+    ../common/_VS/std_includes
+    ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
+    ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include
+    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
+)
 
 add_definitions(-DSTM32F429xx -DPANEL)
 
@@ -90,10 +91,8 @@ file(GLOB COMMON               ../common/Command.*
                                ../common/Common.*
                                ../common/CommonTypes.h
                                ../common/Common_pan.cpp
-                               ../common/Interface_p.h
-                               ../common/Messages.*
-                               ../common/Transceiver.h
-                               ../common/Transceiver_p.cpp)
+#                               ../common/Interface_p.*
+                               ../common/Messages.*)
 file(GLOB DISPLAY              src/Display/*.h src/Display/*.cpp)
 file(GLOB DISPLAY_FONT         src/Display/Font/*)
 file(GLOB FDRIVE               src/FDrive/*)
@@ -113,49 +112,50 @@ file(GLOB UTILS                src/Utils/*)
 
 set_source_files_properties(${LIBS_HAL} PROPERTIES HEADER_FILE_ONLY TRUE)
 
-source_group(libs\\HAL              FILES ${LIBS_HAL})
+source_group(libs/HAL               FILES ${LIBS_HAL})
 source_group(Hardware               FILES ${HARDWARE})
-source_group(Hardware\\CMSIS        FILES ${HARDWARE_CMSIS})
-source_group(Hardware\\HAL          FILES ${HARDWARE_HAL})
+source_group(Hardware/CMSIS         FILES ${HARDWARE_CMSIS})
+source_group(Hardware/HAL           FILES ${HARDWARE_HAL})
 source_group(src                    FILES ${SRC})
 source_group(common                 FILES ${COMMON})
 source_group(Display                FILES ${DISPLAY})
-source_group(Display\\Font          FILES ${DISPLAY_FONT})
+source_group(Display/Font           FILES ${DISPLAY_FONT})
 source_group(FDrive                 FILES ${FDRIVE})
 source_group(FreqMeter              FILES ${FREQMETER})
 source_group(Generator              FILES ${GENERATOR})
 source_group(Interface              FILES ${INTERFACE})
 source_group(Keyboard               FILES ${KEYBOARD})
 source_group(Menu                   FILES ${MENU})
-source_group(Menu\\Pages            FILES ${MENU_PAGES})
-source_group(Menu\\Pages\\Addition  FILES ${MENU_PAGES_ADDITION})
-source_group(Menu\\Pages\\PageDebug FILES ${MENU_PAGES_PAGEDEBUG})
+source_group(Menu/Pages             FILES ${MENU_PAGES})
+source_group(Menu/Pages/Addition    FILES ${MENU_PAGES_ADDITION})
+source_group(Menu/Pages/PageDebug   FILES ${MENU_PAGES_PAGEDEBUG})
 source_group(SCPI                   FILES ${SCPI})
 source_group(Settings               FILES ${SETTINGS})
 source_group(Signals                FILES ${SIGNALS})
 source_group(Tests                  FILES ${TESTS})
 source_group(Utils                  FILES ${UTILS})
 
-add_library(${PROJECT_NAME} ${LIBS_HAL}
-                            ${HARDWARE}
-                            ${HARDWARE_CMSIS}
-                            ${HARDWARE_HAL}
-                            ${SRC}
-                            ${COMMON}
-                            ${DISPLAY}
-                            ${DISPLAY_FONT}
-                            ${FDRIVE}
-                            ${FREQMETER}
-                            ${GENERATOR}
-                            ${INTERFACE}
-                            ${KEYBOARD}
-                            ${MENU}
-                            ${MENU_PAGES}
-                            ${MENU_PAGES_ADDITION}
-                            ${MENU_PAGES_PAGEDEBUG}
-                            ${SCPI}
-                            ${SETTINGS}
-                            ${SIGNALS}
-                            ${TESTS}
-                            ${UTILS}
+add_library(${PROJECT_NAME}
+    ${LIBS_HAL}
+    ${HARDWARE}
+    ${HARDWARE_CMSIS}
+    ${HARDWARE_HAL}
+    ${SRC}
+    ${COMMON}
+    ${DISPLAY}
+    ${DISPLAY_FONT}
+    ${FDRIVE}
+    ${FREQMETER}
+    ${GENERATOR}
+    ${INTERFACE}
+    ${KEYBOARD}
+    ${MENU}
+    ${MENU_PAGES}
+    ${MENU_PAGES_ADDITION}
+    ${MENU_PAGES_PAGEDEBUG}
+    ${SCPI}
+    ${SETTINGS}
+    ${SIGNALS}
+    ${TESTS}
+    ${UTILS}
 )

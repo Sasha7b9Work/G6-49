@@ -4,7 +4,7 @@
 #include "common/Command.h"
 #include "common/Handlers_d.h"
 #include "common/Interface_d.h"
-#include "common/Transceiver.h"
+#include "common/Transceiver_d.h"
 #include "Updater_dl.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"

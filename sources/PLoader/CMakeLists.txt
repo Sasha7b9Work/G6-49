@@ -1,16 +1,17 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (PLoader)
 
-include_directories( src
-                     src/Hardware
-                     src/Hardware/HAL
-                     ..
-                     ../common/_VS_KEIL/CMSIS
-                     ../common/_VS_KEIL/std_includes
-                     ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
-                     ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include
-                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
-                    )
+include_directories(
+    src
+    src/Hardware
+    src/Hardware/HAL
+    ..
+    ../common/_VS_KEIL/CMSIS
+    ../common/_VS_KEIL/std_includes
+    ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
+    ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include
+    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
+)
 
 add_definitions(-DSTM32F429xx -DPLOADER)
 
@@ -85,9 +86,7 @@ file(GLOB COMMON          ../common/Command.*
                           ../common/Common.*
                           ../common/Messages.*
                           ../common/Messages_l.*
-                          ../common/Interface_p.h
-                          ../common/Transceiver.h
-                          ../common/Transceiver_p.cpp)
+                          ../common/Interface_p.*)
 file(GLOB DISPLAY         src/Display/*)
 file(GLOB INTERFACE       src/Interface/*)
 file(GLOB KEYBOARD        src/Keyboard/*)
@@ -106,13 +105,14 @@ source_group(Interface       FILES ${INTERFACE})
 source_group(Keyboard        FILES ${KEYBOARD})
 source_group(Utils           FILES ${UTILS})
 
-add_library(${PROJECT_NAME} ${LIBS_HAL}
-                            ${HARDWARE}
-                            ${HARDWARE_CMSIS}
-                            ${HARDWARE_HAL}
-                            ${SRC} ${COMMON}
-                            ${DISPLAY}
-                            ${INTERFACE}
-                            ${KEYBOARD}
-                            ${UTILS}
+add_library(${PROJECT_NAME}
+    ${LIBS_HAL}
+    ${HARDWARE}
+    ${HARDWARE_CMSIS}
+    ${HARDWARE_HAL}
+    ${SRC} ${COMMON}
+    ${DISPLAY}
+    ${INTERFACE}
+    ${KEYBOARD}
+    ${UTILS}
 )

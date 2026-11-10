@@ -2,7 +2,6 @@
 #include "defines.h"
 #include "log.h"
 #include "common/Interface_p.h"
-#include "common/Transceiver.h"
 #include "common/Command.h"
 #include "structs.h"
 #include "Display/Console.h"
@@ -35,7 +34,7 @@ namespace PInterface
 
 void PInterface::AddMessageForTransmit(SimpleMessage *message)
 {
-    Transceiver::Transmit(message);
+    Transmit(message);
 }
 
 
@@ -52,9 +51,9 @@ void PInterface::Update()
 
     Message::RequestData message;
 
-    Transceiver::Transmit(&message);
+    Transmit(&message);
 
-    if (Transceiver::Receive(&message))
+    if (Receive(&message))
     {
         if (ProcessTask(&message) ||            // Обрабатываем сообщение, если запрос на него есть в очереди заданий
             PHandlers::Processing(&message))    // или просто обрабатываем в обратном случае

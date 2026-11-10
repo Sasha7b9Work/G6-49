@@ -12,7 +12,7 @@
 
 namespace Transceiver
 {
-    void Transmit(SimpleMessage *message);
+    void Transmit(SimpleMessage *);
 
-    bool Receive(SimpleMessage *message);
+    bool Receive(SimpleMessage *);
 };

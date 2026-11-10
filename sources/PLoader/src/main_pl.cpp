@@ -10,10 +10,6 @@
 #include "Interface/Handlers_pl.h"
 
 
-// True будет означать, что запрос на обновление уже послан
-static bool alreadyRequest = false;
-
-
 int main()
 {
     CPU::Init();
@@ -26,12 +22,6 @@ int main()
     while(true)
     {
         Updater::Update();
-
-        if(!Keyboard::BufferIsEmpty() && !alreadyRequest)
-        {
-            alreadyRequest = true;
-            Message::RequestUpgrade().Transmit();
-        }
 
         PInterface::Update();
 
