@@ -14,8 +14,6 @@ namespace PInterface
 
     void Transmit(SimpleMessage *);
 
-    bool Receive(SimpleMessage *);
-
     // Добавляеет задание. Если не получилось, возвращает false
     void AddTask(Task *);
 

@@ -21,15 +21,13 @@ namespace PInterface
     // Обрабатывает answer, если запрос на него есть в очереди заданий. Возвращает true, если это так
     bool ProcessTask(SimpleMessage *answer);
 
-    // Обрабатывает очередь заданий, засылая сообщения тех из них, которые необходимо заслать
-    void SendTasks();
+    static void ReceiveMessage();
+
+    // Засылает одно сообщение
+    void SendMessage();
 
     // Обработать ответ на задание
     void RunAnswer(ListElement<Task> *element, SimpleMessage *answer);
-
-    static void TransceiveData();
-
-    static void ReceiveData();
 }
 
 
@@ -43,22 +41,16 @@ void PInterface::Update()
 {
     if (CPU::IsReady())     // У device нет данных для передачи
     {
-        TransceiveData();
+        SendMessage();
     }
     else                    // У device есть данные для передачи
     {
-        ReceiveData();
+        ReceiveMessage();
     }
 }
 
 
-void PInterface::TransceiveData()
-{
-
-}
-
-
-void PInterface::ReceiveData()
+void PInterface::ReceiveMessage()
 {
     uint8 flag = 0;
 
@@ -92,7 +84,7 @@ void PInterface::ReceiveData()
             }
             else
             {
-                HAL_SPI4::TransmitReceive(out, in, (uint16)*size, 200);
+                HAL_SPI4::TransmitReceive(out, in, (uint16)*size, 200);     // Принимаем собственно сообщение и 
 
                 uint *crc32_msg = (uint *)in[*size - 4];
 
@@ -124,12 +116,6 @@ void PInterface::ReceiveData()
 }
 
 
-bool PInterface::Receive(SimpleMessage *)
-{
-    return false;
-}
-
-
 void PInterface::Transmit(SimpleMessage *)
 {
 
@@ -153,11 +139,11 @@ void Task::TransmitMessage()
 }
 
 
-void PInterface::SendTasks()
+void PInterface::SendMessage()
 {
     ListElement<Task> *element = tasks.First();
 
-    while (element)
+    if (element)
     {
         Task *task = element->Get();
 
