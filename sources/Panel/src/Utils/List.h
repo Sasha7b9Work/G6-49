@@ -26,7 +26,7 @@ private:
     T* value;
 
     // Указатель на список - владелец
-    //List<T> *owningList;
+    // List<T> *owningList;
     // Указатель на следующий элемент. 0, если это это последний элемент в списке
     ListElement *next;
 
@@ -44,13 +44,13 @@ public:
     List();
 
     // Добавляем новый элемент в конец списка
-    void Append(T *element);
+    void Append(T *);
 
     // Удаляет элемент из списка
-    void Remove(T *element);
+    void Remove(T *);
 
     // Возвращает true, если список содержит element
-    bool IsMember(T *element);
+    bool IsMember(T *);
 
     // Возвращает указатель
     ListElement<T> *First();
