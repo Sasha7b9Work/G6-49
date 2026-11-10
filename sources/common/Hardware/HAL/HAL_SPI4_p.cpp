@@ -67,14 +67,9 @@ bool HAL_SPI4::Transmit(const void *buffer, int size, int timeout)
 }
 
 
-bool HAL_SPI4::Receive(void *recv, int size, int timeout)
+void HAL_SPI4::Receive(void *recv, int size, int timeout)
 {
-    if (HAL_SPI_Receive(&handleSPI4, (uint8 *)recv, (uint16)size, (uint)timeout) != HAL_OK)
-    {
-        return false;
-    }
-
-    return true;
+    HAL_SPI_Receive(&handleSPI4, (uint8 *)recv, (uint16)size, (uint)timeout);
 }
 
 
