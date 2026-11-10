@@ -79,9 +79,6 @@ namespace HAL_SPI4
 
     void Transmit(uint8);
 
-    // Принять массив данных
-    void Receive(void *recv, uint16 size, uint timeout);
-
     void TransmitReceive(const uint8 *out, uint8 *in, uint16 size, uint timeout);
     void TransmitReceive(uint8 out, uint8 *in);
 };

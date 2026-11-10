@@ -62,12 +62,6 @@ void HAL_SPI4::Transmit(const void *buffer, uint16 size, uint timeout)
 }
 
 
-void HAL_SPI4::Receive(void *recv, uint16 size, uint timeout)
-{
-    HAL_SPI_Receive(&handleSPI4, (uint8 *)recv, size, timeout);
-}
-
-
 void HAL_SPI4::TransmitReceive(const uint8 *out, uint8 *in, uint16 size, uint timeout)
 {
     HAL_SPI_TransmitReceive(&handleSPI4, (uint8 *)out, in, size, timeout);
