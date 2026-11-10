@@ -7,7 +7,11 @@
 #include "Hardware/Timer.h"
 #include "Keyboard/Keyboard.h"
 #include "Utils/Debug.h"
-#include "Interface/Handlers_pl.h"
+#include "common/Handlers_p.h"
+#include <stm32f429xx.h>
+
+
+static void StartToMainApplication();
 
 
 int main()
@@ -30,4 +34,22 @@ int main()
             PHandlers::OnStartMainApplication(nullptr);
         }
     }
+}
+
+
+void StartToMainApplication()
+{
+    typedef void(*pFunction)();
+
+    __disable_irq();
+
+    pFunction JumpToApplication;
+
+    JumpToApplication = (pFunction)(*(__IO uint *)(Updater::MAIN_PROGRAM_START_ADDRESS + 4));
+
+    __set_MSP(*(__IO uint *)Updater::MAIN_PROGRAM_START_ADDRESS);
+
+    __enable_irq();
+
+    JumpToApplication();
 }

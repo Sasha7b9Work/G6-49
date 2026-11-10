@@ -1,12 +1,14 @@
-// (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+// (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "common/Interface_p.h"
 #include "common/Command.h"
 #include "structs.h"
+#include "Display/Painter.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "Handlers_pl.h"
+#include "Utils/Debug.h"
+#include "Common/Handlers_p.h"
 #include <cstdlib>
 
 
@@ -34,6 +36,15 @@ void PInterface::AddMessageForTransmit(SimpleMessage *message)
 
 void PInterface::Update()
 {
+    static uint time = 0;
+
+    if (_TIME_MS - time < 100)
+    {
+        return;
+    }
+
+    time = _TIME_MS;
+
     Message::RequestData message;
 
     Transmit(&message);
@@ -43,6 +54,8 @@ void PInterface::Update()
         if (ProcessTask(&message) ||            // Обрабатываем сообщение, если запрос на него есть в очереди заданий
             PHandlers::Processing(&message))    // или просто обрабатываем в обратном случае
         {
+            time = 0;
+            Update();
         }
     }
 
@@ -52,7 +65,7 @@ void PInterface::Update()
 
 void PInterface::AddTask(Task *task)
 {
-    if(!tasks.IsMember(task))                   // Если задания ещё нет в очереди
+    if (!tasks.IsMember(task))                   // Если задания ещё нет в очереди
     {
         task->TransmitMessage();                // То посылаем его сообщение
         tasks.Append(task);                     // и добавляем в очередь сообщений для повторной отправки
