@@ -28,9 +28,6 @@ namespace HAL_SPI4
         },
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
     };
-
-    // Возвращает true, если прибор готов к обмену
-    static bool IsReady();
 }
 
 
@@ -81,52 +78,7 @@ bool HAL_SPI4::Receive(void *recv, int size, int timeout)
 }
 
 
-uint HAL_SPI4::ReceiveAndCompare(const void *compared, int size)
-{
-    uint result = 0;
-
-    uint8 byte = 0;
-
-    uint8 *data = (uint8 *)((void *)compared);
-
-    for (int i = 0; i < size; i++)
-    {
-        if (Receive(&byte, 1, 10) && data[i] != byte)
-        {
-            result++;
-        }
-    }
-
-    return result;
-}
-
-
-bool HAL_SPI4::WaitRelease()
-{
-    TimeMeterMS meter;
-
-    while (IsReady())
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            return false;
-        }
-
-    };   // Если попали в время сигнала готовности, пропустим его, чтобы транзакция гарантированно начиналась после разрешающего фронта
-
-    while (!IsReady())
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            return false;
-        }
-    };  // Теперь ожидаем, когда придёт сигнал готовности
-
-    return true;
-}
-
-
-bool HAL_SPI4::IsReady()
+bool CPU::IsReady()
 {
     return HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_SET;
 }

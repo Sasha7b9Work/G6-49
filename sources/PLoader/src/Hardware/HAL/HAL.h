@@ -17,6 +17,13 @@ namespace HAL
 };
 
 
+namespace CPU
+{
+    // Используется для коммуникации с Device
+    bool IsReady();
+}
+
+
 namespace HAL_CRC32
 {
     void Init();
@@ -58,14 +65,8 @@ namespace HAL_SPI4
     // Принять массив данных
     bool Receive(void *recv, int size, int timeout);
 
-    // Функция принимает size байт и сравнивает их с compared. Возвращает количество дефектных байт
-    uint ReceiveAndCompare(const void *compared, int size);
-
-    // Ожидание перехода сигнала готовности из состояния "занят" в состояние "свободен". Возвращает false,
-    // если дождаться не удалось
-    bool WaitRelease();
-
-    bool IsConnected();
+    bool TransmitReceive(const uint8 *out, uint8 *in, int size);
+    bool TransmitRecevie(uint8, uint8 *);
 };
 
 

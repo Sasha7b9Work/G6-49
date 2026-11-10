@@ -17,6 +17,12 @@ namespace HAL
 };
 
 
+namespace CPU
+{
+    bool IsReady();
+}
+
+
 namespace HAL_CRC32
 {
     uint Calculate(const void *address, uint size);
@@ -73,13 +79,6 @@ namespace HAL_SPI4
 
     // Принять массив данных
     bool Receive(void *recv, int size, int timeout);
-
-    // Функция принимает size байт и сравнивает их с compared. Возвращает количество дефектных байт
-    uint ReceiveAndCompare(const void *compared, int size);
-
-    // Ожидание перехода сигнала готовности из состояния "занят" в состояние "свободен". Возвращает false,
-    // если дождаться не удалось
-    bool WaitRelease();
 };
 
 
