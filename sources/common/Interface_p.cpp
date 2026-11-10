@@ -19,15 +19,15 @@ static List<Task> tasks;
 namespace PInterface
 {
     // Обрабатывает answer, если запрос на него есть в очереди заданий. Возвращает true, если это так
-    bool ProcessTask(SimpleMessage *answer);
+    static bool ProcessTask(SimpleMessage *answer);
 
     static void ReceiveMessage();
 
     // Засылает одно сообщение
-    void SendMessage();
+    static void SendMessage();
 
     // Обработать ответ на задание
-    void RunAnswer(ListElement<Task> *element, SimpleMessage *answer);
+    static void RunAnswer(ListElement<Task> *element, SimpleMessage *answer);
 }
 
 
