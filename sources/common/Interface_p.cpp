@@ -13,9 +13,6 @@
 #include <cstring>
 
 
-static List<Task> tasks;
-
-
 namespace PInterface
 {
     // ќбрабатывает answer, если запрос на него есть в очереди заданий. ¬озвращает true, если это так
@@ -27,7 +24,9 @@ namespace PInterface
     static void SendMessage();
 
     // ќбработать ответ на задание
-    static void RunAnswer(ListElement<Task> *element, SimpleMessage *answer);
+    static void RunAnswer(ListElement<Task> *, SimpleMessage *answer);
+
+    static List<Task> tasks;
 }
 
 
