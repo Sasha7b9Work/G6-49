@@ -43,7 +43,7 @@ namespace FDrive
         static SimpleMessage *msg = nullptr;
         static bool IsMount();
         static bool GetNumDirsAndFiles();
-        static bool RequestFile();
+        static bool RequestFileName();
         static bool RequestFileSize();
         static bool LoadDDSfromFile();
     }
@@ -127,11 +127,11 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
 
     switch(com)
     {
-    case Command::FDrive_NumDirsAndFiles: func = Handler::GetNumDirsAndFiles; break;
-    case Command::FDrive_Mount:           func = Handler::IsMount;            break;
-    case Command::FDrive_RequestFile:     func = Handler::RequestFile;        break;
-    case Command::FDrive_RequestFileSize: func = Handler::RequestFileSize;    break;
-    case Command::FDrive_LoadDDSfromFile: func = Handler::LoadDDSfromFile;    break;
+    case Command::FDrive_NumDirsAndFiles:   func = Handler::GetNumDirsAndFiles; break;
+    case Command::FDrive_Mount:             func = Handler::IsMount;            break;
+    case Command::FDrive_RequestFileName:   func = Handler::RequestFileName;    break;
+    case Command::FDrive_RequestFileSize:   func = Handler::RequestFileSize;    break;
+    case Command::FDrive_LoadDDSfromFile:   func = Handler::LoadDDSfromFile;    break;
     }
 
     return func();
@@ -152,7 +152,7 @@ bool FDrive::Handler::GetNumDirsAndFiles()
 }
 
 
-bool FDrive::Handler::RequestFile()
+bool FDrive::Handler::RequestFileName()
 {
     return ListFiles::Handler::Processing(msg);
 }

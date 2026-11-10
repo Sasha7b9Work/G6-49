@@ -1,7 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "common/Messages.h"
-#include "Utils/List.h"
 
 
 struct Task;
@@ -17,7 +16,6 @@ namespace PInterface
     // Добавляеет задание. Если не получилось, возвращает false
     // Используется для :
     //      Message::FDrive::RequestPictureDDSfromFile      Command::FDrive_RequestPictureDDSfromFile
-    //      Message::FDrive::FileString                     Command::FDrive_RequestFileString
     //      Message::FDrive::FileName                       Command::FDrive_RequestFile
     void AddTask(Task *);
 };

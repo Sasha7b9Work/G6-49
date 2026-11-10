@@ -1,7 +1,7 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Panel)
 
-set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(
     src
@@ -109,7 +109,8 @@ file(GLOB SCPI                 src/SCPI/*)
 file(GLOB SETTINGS             src/Settings/*)
 file(GLOB SIGNALS              src/Signals/*)
 file(GLOB TESTS                src/Tests/*)
-file(GLOB UTILS                src/Utils/*)
+file(GLOB UTILS                src/Utils/*
+                               ../common/List.*)
 
 set_source_files_properties(${LIBS_HAL} PROPERTIES HEADER_FILE_ONLY TRUE)
 

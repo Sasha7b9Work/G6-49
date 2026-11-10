@@ -12,7 +12,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/CalibrationSettings.h"
-#include "Utils/Queue.h"
+#include "common/Queue.h"
 #include "Utils/StringUtils.h"
 #include "common/Command.h"
 #include "structs.h"

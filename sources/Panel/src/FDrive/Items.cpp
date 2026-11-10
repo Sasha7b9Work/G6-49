@@ -118,19 +118,19 @@ bool ListFiles::Handler::Processing(SimpleMessage *msg)
 
     if (command == Command::FDrive_NumDirsAndFiles)
     {
-        msg->TakeINT();             // Количество каталогов нам не нужно
+        msg->TakeINT();                                                     // Количество каталогов нам не нужно
         numFiles = msg->TakeINT(); //-V656
         requestIsSend = false;
         return true;
     }
-    else if (command == Command::FDrive_RequestFile)
+    else if (command == Command::FDrive_RequestFileName)
     {
         int _num = msg->TakeUINT8();
-        std::strcpy(files[_num - firstFile].name, msg->String(2));
+        std::strcpy(files[_num - firstFile].name, msg->String(2));          // Получаем имя запрошенного файла
 
         if (_num == curFile)
         {
-            file.RequestFromPicture(_num);
+            file.RequestFromPicture(_num);                                  // И запрашиваем изображение файла
         }
 
         return true;
@@ -151,7 +151,7 @@ static bool EqualsRequestNameFile(Task *task1, Task *task2)
 
     SimpleMessage *msg2 = task2->GetMessage();
 
-    uint8 com = Command::FDrive_RequestFile;
+    uint8 com = Command::FDrive_RequestFileName;
 
     return  (com == msg1->TakeUINT8()) &&
         (com == msg2->TakeUINT8()) &&

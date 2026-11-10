@@ -91,7 +91,8 @@ file(GLOB INTERFACE       src/Interface/*
                           ../common/Messages_l.*
                           ../common/Interface_p.*)
 file(GLOB KEYBOARD        src/Keyboard/*)
-file(GLOB UTILS           src/Utils/*)
+file(GLOB UTILS           src/Utils/*
+                          ../common/List.*)
 
 set_source_files_properties(${LIBS_HAL} PROPERTIES HEADER_FILE_ONLY TRUE)
 

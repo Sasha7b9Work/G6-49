@@ -65,7 +65,7 @@ struct Command
 /* <-> */    FDrive_RequestDir,         // Запрос имени каталога
           // 0                  1
           //                    номер путь_к_родительскому_каталогу
-/* <-> */   FDrive_RequestFile,         // Запрос имени файла
+/* <-> */   FDrive_RequestFileName,             // Запрос имени файла
         //  0      1...5    6...9
         //  Test   size     crc32
 /* <-> */   Test,                               // Команда для тестирования SPI
@@ -75,7 +75,7 @@ struct Command
 /* <-> */   FDrive_RequestPictureDDSfromFile,   // Получить изображение формы сигнала
          // 0           1...5     6.....
          // SCPI_Data   sizeData  data 
-/* <-> */   SCPI_Data,                      // От VCP приняты данные либо в VCP нужно передать данные
+/* <-> */   SCPI_Data,                          // От VCP приняты данные либо в VCP нужно передать данные
             PortCPU,
             CalibrationLoad,
             CalibrationSet,

@@ -9,6 +9,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Debug.h"
 #include "common/Handlers_p.h"
+#include "common/List.h"
 #include <cstdlib>
 #include <cstring>
 
@@ -20,11 +21,11 @@ namespace PInterface
 
     static void ReceiveMessage();
 
-    // Засылает одно сообщение
-    static void SendMessage();
+    // Засылает все задания
+    static void SendTasks();
 
     // Обработать ответ на задание
-    static void RunAnswer(ListElement<Task> *, SimpleMessage *answer);
+    static void RunAnswer(Task *, SimpleMessage *answer);
 
     static List<Task> tasks;
 }
@@ -34,7 +35,7 @@ void PInterface::Update()
 {
     if (CPU::IsReady())     // У device нет данных для передачи
     {
-        SendMessage();
+        SendTasks();
     }
     else                    // У device есть данные для передачи
     {
@@ -132,20 +133,27 @@ void Task::TransmitMessage()
 }
 
 
-void PInterface::SendMessage()
+void PInterface::SendTasks()
 {
-    ListElement<Task> *element = tasks.First();
+    static uint time = 0;
 
-    if (element)
+    if (_TIME_MS - time < 100)
     {
-        Task *task = element->Get();
+        return;
+    }
 
+    time = _TIME_MS;
+
+    Task *task = tasks.First();
+
+    while (task)
+    {
         if (!task->PassedLittleTimeAfterSend())
         {
             task->TransmitMessage();
         }
 
-        element = element->Next();
+        task = tasks.Next();
     }
 }
 
@@ -158,21 +166,19 @@ bool Task::PassedLittleTimeAfterSend()
 
 bool PInterface::ProcessTask(SimpleMessage *answer)
 {
-    ListElement<Task> *element = tasks.First();
+    Task *task= tasks.First();
 
     Task taskAnswer(answer);
 
-    while (element)
+    while (task)
     {
-        Task *task = element->Get();
-
         if (task->Equals(task, &taskAnswer))
         {
-            RunAnswer(element, answer);
+            RunAnswer(task, answer);
             return true;
         }
 
-        element = element->Next();
+        task = tasks.Next();
     }
 
 
@@ -180,11 +186,11 @@ bool PInterface::ProcessTask(SimpleMessage *answer)
 }
 
 
-void PInterface::RunAnswer(ListElement<Task> *element, SimpleMessage *answer)
+void PInterface::RunAnswer(Task *task, SimpleMessage *answer)
 {
-    element->Get()->funcProcess(answer);
-    tasks.Remove(element->Get());
-    delete element;
+    task->funcProcess(answer);
+    tasks.Remove(task);
+    delete task;
 }
 
 

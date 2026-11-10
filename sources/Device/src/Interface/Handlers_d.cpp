@@ -125,7 +125,7 @@ void DHandlers::Processing(SimpleMessage *msg)
     case Command::FDrive_NumDirsAndFiles:
     case Command::FDrive_Mount:
     case Command::FDrive_RequestDir:
-    case Command::FDrive_RequestFile:
+    case Command::FDrive_RequestFileName:
     case Command::NOT_USED:
     case Command::FDrive_RequestFileSize:
     case Command::FDrive_LoadDDSfromFile:
