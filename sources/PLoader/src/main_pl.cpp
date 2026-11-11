@@ -12,6 +12,8 @@
 
 
 static void StartToMainApplication();
+void MainCycle();
+void TestCycle();
 
 
 int main()
@@ -21,19 +23,31 @@ int main()
     HAL_LTDC::Init();
     Keyboard::Init();
 
-    TimeMeterMS meter;
-
     while(true)
     {
-        Updater::Update();
-
-        PInterface::Update();
-
-        if (meter.ElapsedTime() > 3000)
-        {
-            StartToMainApplication();
-        }
+        MainCycle();
     }
+}
+
+
+void MainCycle()
+{
+    static TimeMeterMS meter;
+
+    Updater::Update();
+
+    PInterface::Update();
+
+    if (meter.ElapsedTime() > 3000)
+    {
+        StartToMainApplication();
+    }
+}
+
+
+void TestCycle()
+{
+    PInterface::Test();
 }
 
 

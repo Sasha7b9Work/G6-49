@@ -44,6 +44,19 @@ void PInterface::Update()
 }
 
 
+void PInterface::Test()
+{
+    uint8 in = 0;
+
+    HAL_SPI4::TransmitReceive(0x7e, &in);
+
+    if (in != 0x81)
+    {
+        in = in;
+    }
+}
+
+
 bool PInterface::ReceiveMessage()
 {
     uint8 flag = 0;

@@ -11,6 +11,9 @@ namespace PInterface
     // Для приёма сообщений от устройства
     void Update();
 
+    // Тестирование передающего устройства
+    void Test();
+
     void Transmit(SimpleMessage *);
 
     // Добавляеет задание. Если не получилось, возвращает false
