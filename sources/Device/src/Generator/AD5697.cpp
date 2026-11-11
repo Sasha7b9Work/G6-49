@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "common/Interface/Command.h"
+#include "common/Command.h"
 #include "Generator/AD5697.h"
 #include "Generator/Calibrator.h"
 #include "Generator/FPGA/FPGA.h"

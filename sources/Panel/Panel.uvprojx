@@ -1754,6 +1754,16 @@
           <GroupName>common</GroupName>
           <Files>
             <File>
+              <FileName>Command.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Common\Command.h</FilePath>
+            </File>
+            <File>
+              <FileName>Command.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Common\Command.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Common.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Common.h</FilePath>
@@ -1769,14 +1779,24 @@
               <FilePath>..\common\Common.cpp</FilePath>
             </File>
             <File>
-              <FileName>CommonTypes.h</FileName>
+              <FileName>Interface_p.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\common\CommonTypes.h</FilePath>
+              <FilePath>..\common\Interface_p.h</FilePath>
             </File>
             <File>
-              <FileName>defines_com.h</FileName>
+              <FileName>Messages.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\common\defines_com.h</FilePath>
+              <FilePath>..\common\Messages.h</FilePath>
+            </File>
+            <File>
+              <FileName>Messages.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Messages.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interface_p.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Common\Interface_p.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1934,6 +1954,11 @@
               <FilePath>.\src\FDrive\File.cpp</FilePath>
             </File>
             <File>
+              <FileName>File_requests.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FDrive\File_requests.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Items.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FDrive\Items.h</FilePath>
@@ -1979,9 +2004,19 @@
           <GroupName>Interface</GroupName>
           <Files>
             <File>
+              <FileName>Handlers_p.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Interface\Handlers_p.h</FilePath>
+            </File>
+            <File>
               <FileName>Handlers_p.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Interface\Handlers_p.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interface_p.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Interface\Interface_p.cpp</FilePath>
             </File>
             <File>
               <FileName>Messages_p.h</FileName>
@@ -1992,36 +2027,6 @@
               <FileName>Messages_p.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Interface\Messages_p.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Command.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Interface\Command.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Command.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Interface\Command.h</FilePath>
-            </File>
-            <File>
-              <FileName>Interface_p.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Interface\Interface_p.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interface_p.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Interface\Interface_p.h</FilePath>
-            </File>
-            <File>
-              <FileName>Messages.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Interface\Messages.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Messages.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Interface\Messages.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2359,6 +2364,16 @@
               <FilePath>.\src\Utils\Debug.h</FilePath>
             </File>
             <File>
+              <FileName>List.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\List.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>List.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\List.h</FilePath>
+            </File>
+            <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Math.cpp</FilePath>
@@ -2437,11 +2452,6 @@
               <FileName>Buffer.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Buffer.h</FilePath>
-            </File>
-            <File>
-              <FileName>List.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\List.h</FilePath>
             </File>
           </Files>
         </Group>

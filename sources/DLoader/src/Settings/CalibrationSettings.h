@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "common/Interface/Command.h"
+#include "common/Command.h"
 #include "common/CommonTypes.h"
 
 

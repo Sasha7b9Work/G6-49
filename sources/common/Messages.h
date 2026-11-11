@@ -20,12 +20,6 @@ struct SimpleMessage  // -V690
  
     ~SimpleMessage();
 
-    // Возвращает размер данных
-    int Size() const;
-
-    // Укзатель на данные сообщений с элемента номер pos
-    uint8 *TakeData(int pos = 0);
-
     void Create(int size, uint8);
 
     // Возвращает указатель на созданную копию
@@ -51,11 +45,14 @@ struct SimpleMessage  // -V690
     // Освободить память
     void FreeMemory();
 
+    // Возвращает размер данных
+    int Size() const;
+
     // Возвращает true, если это null-пакет (память не выделена)
     bool IsEmpty() const;
 
     // Возвращает true, если сообщения одинаковы
-    bool IsEquals(const SimpleMessage *) const;
+    bool IsEquals(const SimpleMessage *message) const;
 
     // Возвращает указатель на pos-й элемент. Удобно для копирования строк
     char *String(int pos);
@@ -76,6 +73,7 @@ struct SimpleMessage  // -V690
     uint   TakeUINT();
     uint64 TakeUINT64();
     float  TakeFLOAT();
+    uint8 *TakeData(int pos = 0);
 
     // Передать сообщение получателю
     void Transmit();
@@ -200,6 +198,12 @@ namespace Message
         struct FileName : public SimpleMessage
         {
             FileName(uint8 numFile, char *name);
+        };
+
+
+        struct FileString : public SimpleMessage
+        {
+            FileString(uint numString, char *nameFile);
         };
 
 

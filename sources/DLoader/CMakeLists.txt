@@ -1,8 +1,6 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (DLoader)
 
-set(CMAKE_UNITY_BUILD ON)
-
 include_directories(
     ../common/_VS_KEIL
     ../common/_VS_KEIL/CMSIS
@@ -26,18 +24,16 @@ add_definitions(-DSTM32F407xx -DLOADER)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
-add_compile_options(
-    /wd4201
-    /wd4514
-    /wd4623
-    /wd4626
-    /wd4820
-    /wd5027
-    /wd5039
-    /wd5045
-    /wd5220    # a non-static data member with a volatile qualified type no longer implies
-    /wd5246
-)
+add_compile_options(/wd4201)
+add_compile_options(/wd4514)
+add_compile_options(/wd4623)
+add_compile_options(/wd4626)
+add_compile_options(/wd4820)
+add_compile_options(/wd5027)
+add_compile_options(/wd5039)
+add_compile_options(/wd5045)
+add_compile_options(/wd5220)    # a non-static data member with a volatile qualified type no longer implies
+add_compile_options(/wd5246)
 
 file(GLOB LIBS_FATFS     ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src/ff_gen_drv.*
                          ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src/ff.*
@@ -87,27 +83,27 @@ file(GLOB LIBS_USBH      src/libs/USBH/*
                          ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.*
                          ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.*
                          ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.*)
-file(GLOB HARDWARE             src/Hardware/*.h src/Hardware/*.cpp)
-file(GLOB HARDWARE_CMSIS       src/Hardware/CMSIS/*)
-file(GLOB HARDWARE_FATFS       src/Hardware/FatFS/*)
-file(GLOB HARDWARE_HAL         src/Hardware/HAL/*
-                         ../common/Hardware/HAL/HAL_SPI1_d.*)
-file(GLOB HARDWARE_USBH        src/Hardware/USBH/*)
-file(GLOB SRC                  src/*.h
-                               src/*.cpp)
-file(GLOB COMMON         ../common/Common.*)
-file(GLOB FDRIVE               src/FDrive/*)
-file(GLOB GENERATOR            src/Generator/*)
-file(GLOB INTERFACE            src/Interface/*
-                         ../common/Interface/Command.*
-                         ../common/Interface/Messages.*
-                         ../common/Interface/Messages_l.*
-                         ../common/Interface/Transceiver_d.*
-                         ../common/Interface/Interface_d.*
-                         ../common/Interface/Transceiver_d.cpp)
-file(GLOB SETTINGS             src/Settings/*)
-file(GLOB UTILS                src/Utils/*
-                         ../common/Utils/Log_d.*)
+                         
+file(GLOB HARDWARE       src/Hardware/*.h src/Hardware/*.cpp)
+file(GLOB HARDWARE_CMSIS src/Hardware/CMSIS/*)
+file(GLOB HARDWARE_FATFS src/Hardware/FatFS/*)
+file(GLOB HARDWARE_HAL   src/Hardware/HAL/*)
+file(GLOB HARDWARE_USBH  src/Hardware/USBH/*)
+file(GLOB SRC            src/*.h src/*.cpp)
+file(GLOB COMMON         ../common/Command.*
+                         ../common/Common.*
+                         ../common/Handlers_d.h
+                         ../common/Interface_d.*
+                         ../common/Messages.*
+                         ../common/Messages_l.*
+                         ../common/Transceiver.h
+                         ../common/Transceiver_d.cpp
+                         ../common/Log_d.*)
+file(GLOB FDRIVE         src/FDrive/*)
+file(GLOB GENERATOR      src/Generator/*)
+file(GLOB INTERFACE      src/Interface/*)
+file(GLOB SETTINGS       src/Settings/*)
+file(GLOB UTILS          src/Utils/*)
 
 set_source_files_properties(${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBH} PROPERTIES HEADER_FILE_ONLY TRUE)
 

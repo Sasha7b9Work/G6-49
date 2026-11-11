@@ -1,8 +1,8 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "common/Interface/Command.h"
-#include "common/Interface/Interface_d.h"
-#include "common/Interface/Messages_l.h"
+#include "common/Command.h"
+#include "common/Interface_d.h"
+#include "common/Messages_l.h"
 #include "Updater_dl.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"

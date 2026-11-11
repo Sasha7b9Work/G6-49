@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "common/defines_com.h"
+#include "Common/defines_com.h"
 
 
 typedef unsigned int       uint;
@@ -65,4 +65,4 @@ inline void EmptyFuncVV() {};
 #define ERROR_STRING_VALUE  "--.--"
 
 
-#include "common/Utils/Log_d.h"
+#include "common/Log_d.h"

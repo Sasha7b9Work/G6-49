@@ -1,5 +1,5 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
-#include "common/Interface/Messages.h"
+#include "common/Messages.h"
 #include "log.h"
 #include <cstdarg>
 #include <cstdio>

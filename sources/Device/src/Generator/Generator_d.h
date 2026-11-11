@@ -3,7 +3,7 @@
 #include "Generator/AD9952.h"
 #include "Generator/AD5697.h"
 #include "Generator/FPGA/FPGA.h"
-#include "common/Interface/Command.h"
+#include "common/Command.h"
 
 
 namespace DGenerator

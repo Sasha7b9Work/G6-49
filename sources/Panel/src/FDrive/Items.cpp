@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "log.h"
-#include "common/Interface/Interface_p.h"
+#include "common/Interface_p.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "FDrive_p.h"
@@ -32,14 +32,8 @@ namespace ListFiles
         char name[50];
         uint8 nutUsed[2];
         int size;
-        StructFile() : size(-1)
-        {
-            name[0] = 0;
-        } //-V730
-        void Clear()
-        {
-            name[0] = 0; size = -1;
-        }
+        StructFile() : size(-1) { name[0] = 0; } //-V730
+        void Clear() { name[0] = 0; size = -1; }
         void CopyFrom(const StructFile &file)
         {
             std::strcpy(name, file.name);
@@ -118,19 +112,19 @@ bool ListFiles::Handler::Processing(SimpleMessage *msg)
 
     if (command == Command::FDrive_NumDirsAndFiles)
     {
-        msg->TakeINT();                                                     // Количество каталогов нам не нужно
+        msg->TakeINT();             // Количество каталогов нам не нужно
         numFiles = msg->TakeINT(); //-V656
         requestIsSend = false;
         return true;
     }
-    else if (command == Command::FDrive_RequestFileName)
+    else if (command == Command::FDrive_RequestFile)
     {
         int _num = msg->TakeUINT8();
-        std::strcpy(files[_num - firstFile].name, msg->String(2));          // Получаем имя запрошенного файла
+        std::strcpy(files[_num - firstFile].name, msg->String(2));
 
         if (_num == curFile)
         {
-            file.RequestFromPicture(_num);                                  // И запрашиваем изображение файла
+            file.RequestFromPicture(_num);
         }
 
         return true;
@@ -151,20 +145,20 @@ static bool EqualsRequestNameFile(Task *task1, Task *task2)
 
     SimpleMessage *msg2 = task2->GetMessage();
 
-    uint8 com = Command::FDrive_RequestFileName;
+    uint8 com = Command::FDrive_RequestFile;
 
     return  (com == msg1->TakeUINT8()) &&
-        (com == msg2->TakeUINT8()) &&
-        (msg1->TakeUINT8() == msg2->TakeUINT8());
+            (com == msg2->TakeUINT8()) &&
+            (msg1->TakeUINT8() == msg2->TakeUINT8());
 }
 
 
 static void ListFiles::SendRequestForNameFile(int number)
 {
     Message::FDrive::FileName message((uint8)number, FDrive::CurrentDirectory());
-
+    
     Task *task = new Task(&message, ListFiles::Handler::Processing, EqualsRequestNameFile);
-
+    
     PInterface::AddTask(task);
 }
 
@@ -175,7 +169,7 @@ String ListFiles::GetNameItem(int i)
     {
         SendRequestForNameFile(i);
     }
-
+    
     return String(files[i - firstFile].name);
 }
 

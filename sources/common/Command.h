@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
-#pragma once
-#include "common/CommonTypes.h"
+    #pragma once
+#include "CommonTypes.h"
 
 
 // Возможные команды для передачи в основной процессор
@@ -65,17 +65,17 @@ struct Command
 /* <-> */    FDrive_RequestDir,         // Запрос имени каталога
           // 0                  1
           //                    номер путь_к_родительскому_каталогу
-/* <-> */   FDrive_RequestFileName,             // Запрос имени файла
+/* <-> */   FDrive_RequestFile,         // Запрос имени файла
         //  0      1...5    6...9
         //  Test   size     crc32
 /* <-> */   Test,                               // Команда для тестирования SPI
 /* <-> */   FDrive_RequestFileSize,             // Запрос размера файла
-/* <-> */   NOT_USED,
+/* <-> */   FDrive_RequestFileString,           // Считать строку из файла
 /* <-> */   FDrive_LoadDDSfromFile,             // Загрузить сигнал с флешки. Получив это сообщение, устройство начинает загрузку сигнала, а по окончании возвращает это же сообщение
 /* <-> */   FDrive_RequestPictureDDSfromFile,   // Получить изображение формы сигнала
          // 0           1...5     6.....
          // SCPI_Data   sizeData  data 
-/* <-> */   SCPI_Data,                          // От VCP приняты данные либо в VCP нужно передать данные
+/* <-> */   SCPI_Data,                      // От VCP приняты данные либо в VCP нужно передать данные
             PortCPU,
             CalibrationLoad,
             CalibrationSet,

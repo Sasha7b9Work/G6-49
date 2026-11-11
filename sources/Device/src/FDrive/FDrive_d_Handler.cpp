@@ -24,7 +24,7 @@ struct StructForReadDir
 static SimpleMessage *msg = nullptr;
 
 static void GetNumDirsAndFiles();
-static void RequestFileName();
+static void RequestFile();
 static void RequestFileSize();
 
 // Загрузить сигнал с флешки
@@ -77,7 +77,7 @@ void DDrive::Handler::Processing(SimpleMessage *message)
     switch(com)
     {
     case Command::FDrive_NumDirsAndFiles:               func = GetNumDirsAndFiles;  break;
-    case Command::FDrive_RequestFileName:               func = RequestFileName;     break;
+    case Command::FDrive_RequestFile:                   func = RequestFile;         break;
     case Command::FDrive_RequestFileSize:               func = RequestFileSize;     break;
     case Command::FDrive_LoadDDSfromFile:               func = LoadDDSfromFile;     break;
     case Command::FDrive_RequestPictureDDSfromFile:     func = GetPictureDDS;       break;
@@ -101,7 +101,7 @@ static void GetNumDirsAndFiles()
 }
 
 
-static void RequestFileName()
+static void RequestFile()
 {
     char name[255];
 

@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
 #include "Signals/Wave.h"
-#include "common/Interface/Command.h"
+#include "common/Command.h"
 
 
 #define START_MODE(ch)          (set.fpga_startMode[ch])

@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "common/Interface/Interface_p.h"
+#include "common/Interface_p.h"
 #include "Display/Display.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"

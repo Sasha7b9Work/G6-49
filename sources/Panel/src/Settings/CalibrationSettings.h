@@ -1,9 +1,9 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
-#include "common/Interface/Command.h"
+#include "common/Command.h"
 #include "common/CommonTypes.h"
 #include "Menu/Pages/Pages.h"
-#include "common/Interface/Messages.h"
+#include "common/Messages.h"
 
 
 #ifndef WIN32

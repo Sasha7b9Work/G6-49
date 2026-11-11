@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "common/Common.h"
-#include "common/CommonTypes.h"
+#include "Common/CommonTypes.h"
 #ifdef PANEL
 #include "Display/Text.h"
 #include "Settings/Settings.h"

@@ -1,6 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
-#include "common/Interface/Messages.h"
+#include "common/Messages.h"
+#include "Utils/List.h"
 
 
 struct Task;
@@ -10,17 +11,15 @@ namespace PInterface
 {
     // Для приёма сообщений от устройства
     void Update();
-
-    // Тестирование передающего устройства
-    void Test();
-
+    
     void Transmit(SimpleMessage *);
 
+    bool Receive(SimpleMessage *);
+
     // Добавляеет задание. Если не получилось, возвращает false
-    // Используется для :
-    //      Message::FDrive::RequestPictureDDSfromFile      Command::FDrive_RequestPictureDDSfromFile
-    //      Message::FDrive::FileName                       Command::FDrive_RequestFile
     void AddTask(Task *);
+
+    void AddMessageForTransmit(SimpleMessage *);
 };
 
 

@@ -1,9 +1,9 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "common/Interface/Command.h"
-#include "common/Interface/Messages.h"
+#include "common/Command.h"
+#include "common/Messages.h"
 #include "Updater_pl.h"
-#include "common/Interface/Handlers_p.h"
+#include "Interface/Handlers_pl.h"
 #include <stm32f429xx.h>
 
 
@@ -14,8 +14,6 @@ namespace PHandlers
     {
         return false;
     }
-
-    bool OnStartMainApplication(SimpleMessage *);
 }
 
 
@@ -29,7 +27,7 @@ bool PHandlers::Processing(SimpleMessage *msg)
 
     switch(com)
     {
-//    case Command::StartApplication: func = OnStartMainApplication; break;
+    case Command::StartApplication: func = OnStartMainApplication; break;
 
     case Command::PortionUpgradeDevice:         // Этим сообщением DLoader оповещает о процентах произведённого обновления Device
     case Command::AnswerUpgradePanel:           // Этим сообщением DLoader сообщает размер прошивки Panel в байтах

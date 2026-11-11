@@ -896,6 +896,16 @@
               <FilePath>.\src\Hardware\HAL\HAL_PIO.cpp</FilePath>
             </File>
             <File>
+              <FileName>HAL_SPI1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_SPI3.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_SPI3.cpp</FilePath>
+            </File>
+            <File>
               <FileName>HAL_TIM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_TIM.cpp</FilePath>
@@ -914,11 +924,6 @@
               <FileName>stm32f4xx_hal_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\HAL\stm32f4xx_hal_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>HAL_SPI1_d.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Hardware\HAL\HAL_SPI1_d.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -956,6 +961,16 @@
           <GroupName>common</GroupName>
           <Files>
             <File>
+              <FileName>Command.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Common\Command.h</FilePath>
+            </File>
+            <File>
+              <FileName>Command.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Common\Command.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Common.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Common.h</FilePath>
@@ -964,6 +979,56 @@
               <FileName>Common.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\common\Common.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Handlers_d.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Handlers_d.h</FilePath>
+            </File>
+            <File>
+              <FileName>Interface_d.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Interface_d.h</FilePath>
+            </File>
+            <File>
+              <FileName>Interface_d.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Interface_d.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Messages.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Messages.h</FilePath>
+            </File>
+            <File>
+              <FileName>Messages.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Messages.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Messages_l.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Messages_l.h</FilePath>
+            </File>
+            <File>
+              <FileName>Messages_l.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Messages_l.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Transceiver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Transceiver.h</FilePath>
+            </File>
+            <File>
+              <FileName>Transceiver_d.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Transceiver_d.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Log_d.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Common\Log_d.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -984,56 +1049,6 @@
               <FileName>Handlers_dl.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Interface\Handlers_dl.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Command.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Interface\Command.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Command.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Interface\Command.h</FilePath>
-            </File>
-            <File>
-              <FileName>Messages.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Interface\Messages.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Messages.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Interface\Messages.h</FilePath>
-            </File>
-            <File>
-              <FileName>Interface_d.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Interface\Interface_d.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interface_d.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Interface\Interface_d.h</FilePath>
-            </File>
-            <File>
-              <FileName>Messages_l.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Interface\Messages_l.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Messages_l.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Interface\Messages_l.h</FilePath>
-            </File>
-            <File>
-              <FileName>Transceiver_d.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Interface\Transceiver_d.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Transceiver_d.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Interface\Transceiver_d.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1096,6 +1111,16 @@
               <FilePath>.\src\Utils\StringUtils.h</FilePath>
             </File>
             <File>
+              <FileName>Queue.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Queue.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Queue.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Queue.h</FilePath>
+            </File>
+            <File>
               <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Buffer.cpp</FilePath>
@@ -1109,16 +1134,6 @@
               <FileName>Log.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Log.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Queue.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Utils\Queue.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Queue.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Utils\Queue.h</FilePath>
             </File>
           </Files>
         </Group>

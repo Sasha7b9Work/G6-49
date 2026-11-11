@@ -1,25 +1,13 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "common/Interface/Interface_p.h"
-#include "common/Interface/Messages_l.h"
+#include "common/Interface_p.h"
+#include "common/Messages_l.h"
 #include "Updater_pl.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Keyboard/Keyboard.h"
 #include "Utils/Debug.h"
-#include "common/Interface/Handlers_p.h"
-#include <stm32f429xx.h>
-
-
-/*
-    Загрузчик.
-    При включении питания запускается он и передаёт упрвление основной прошивке
-*/
-
-
-static void StartToMainApplication();
-void MainCycle();
-void TestCycle();
+#include "Interface/Handlers_pl.h"
 
 
 int main()
@@ -29,47 +17,17 @@ int main()
     HAL_LTDC::Init();
     Keyboard::Init();
 
+    TimeMeterMS meter;
+
     while(true)
     {
-        MainCycle();
+        Updater::Update();
+
+        PInterface::Update();
+
+        if (meter.ElapsedTime() > 3000)
+        {
+            PHandlers::OnStartMainApplication(nullptr);
+        }
     }
-}
-
-
-void MainCycle()
-{
-    static TimeMeterMS meter;
-
-    Updater::Update();
-
-    PInterface::Update();
-
-    if (meter.ElapsedTime() > 3000)
-    {
-        StartToMainApplication();
-    }
-}
-
-
-void TestCycle()
-{
-    PInterface::Test();
-}
-
-
-void StartToMainApplication()
-{
-    typedef void(*pFunction)();
-
-    __disable_irq();
-
-    pFunction JumpToApplication;
-
-    JumpToApplication = (pFunction)(*(__IO uint *)(Updater::MAIN_PROGRAM_START_ADDRESS + 4));
-
-    __set_MSP(*(__IO uint *)Updater::MAIN_PROGRAM_START_ADDRESS);
-
-    __enable_irq();
-
-    JumpToApplication();
 }

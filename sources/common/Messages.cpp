@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "structs.h"
-#include "common/Interface/Messages.h"
+#include "common/Messages.h"
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Debug.h"
 #include <cstdlib>
@@ -385,7 +385,7 @@ Message::FDrive::FileName::FileName(uint8 numFile, char *name) : SimpleMessage()
     //        v0 | v1 | string |              завершающий_ноль
     int size = 1 +  1 +  (int)std::strlen(name) + 1;
     AllocateMemory(size);
-    PutUINT8(Command::FDrive_RequestFileName);
+    PutUINT8(Command::FDrive_RequestFile);
     PutUINT8(numFile);
     std::strcpy((char *)(buffer + 2), name);
 }
@@ -410,6 +410,17 @@ Message::FDrive::WriteToFile::WriteToFile(void *data, int size) : SimpleMessage(
 Message::FDrive::CloseFile::CloseFile() : SimpleMessage(1, Command::FDrive_CloseFile)
 {
 
+}
+
+
+Message::FDrive::FileString::FileString(uint numString, char *nameFile) : SimpleMessage()
+{
+    //          commmand  numString  nameFile                завершающий_ноль
+    int size = 1 +       1 +        (int)std::strlen(nameFile) + 1;
+    AllocateMemory(size);
+    PutUINT8(Command::FDrive_RequestFileString);
+    PutUINT8((uint8)numString);
+    std::strcpy((char *)(buffer + 2), nameFile);
 }
 
 

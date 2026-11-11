@@ -17,18 +17,11 @@ namespace HAL
 };
 
 
-namespace CPU
-{
-    // Используется для коммуникации с Device
-    bool IsReady();
-}
-
-
 namespace HAL_CRC32
 {
     void Init();
 
-    uint Calculate(uint8 *, uint size);
+    uint CalculateALIGN32(void *address, int size);
 };
 
 
@@ -60,12 +53,19 @@ namespace HAL_SPI4
     void Init();
 
     // Переслать массив данных
-    void Transmit(const void *buffer, uint16 size, uint timeout);
+    bool Transmit(const void *buffer, int size, int timeout);
 
-    void Transmit(uint8);
+    // Принять массив данных
+    bool Receive(void *recv, int size, int timeout);
 
-    void TransmitReceive(const uint8 *out, uint8 *in, uint16 size, uint timeout);
-    void TransmitReceive(uint8, uint8 *);
+    // Функция принимает size байт и сравнивает их с compared. Возвращает количество дефектных байт
+    uint ReceiveAndCompare(const void *compared, int size);
+
+    // Ожидание перехода сигнала готовности из состояния "занят" в состояние "свободен". Возвращает false,
+    // если дождаться не удалось
+    bool WaitRelease();
+
+    bool IsConnected();
 };
 
 

@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "common/Common.h"
-#include "common/Interface/Command.h"
+#include "common/Command.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL_PIO.h"
 

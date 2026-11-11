@@ -1,5 +1,5 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
-#include "common/Interface/Messages.h"
+#include "common/Messages.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 #include "Display/Painter.h"

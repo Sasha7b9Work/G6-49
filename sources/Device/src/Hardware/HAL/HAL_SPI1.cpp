@@ -16,8 +16,8 @@ namespace HAL_SPI1
             SPI_DATASIZE_8BIT,              // Init.DataSize
             SPI_POLARITY_HIGH,              // Init.CLKPolarity
             SPI_PHASE_2EDGE,                // Init.CLKPhase
-            SPI_NSS_HARD_INPUT,             // Init.NSS             !!! Внимание !!! Здесь всегда аппаратное управление у мастера
-            SPI_BAUDRATEPRESCALER_32,       // Init.BaudRatePrescaler
+            SPI_NSS_SOFT,                   // Init.NSS
+            SPI_BAUDRATEPRESCALER_32,      // Init.BaudRatePrescaler
             SPI_FIRSTBIT_MSB,               // Init.FirstBit
             SPI_TIMODE_DISABLED,            // Init.TIMode
             SPI_CRCCALCULATION_DISABLED,    // Init.CRCCalculation
@@ -28,6 +28,7 @@ namespace HAL_SPI1
         0,
         0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
     };
+
 }
 
 
@@ -47,9 +48,19 @@ void HAL_SPI1::Init()
 }
 
 
-void HAL_SPI1::TransmitReceive(uint8 out, uint8 *in)
+bool HAL_SPI1::Receive(void *buffer, int size, int timeout)
 {
-    while (HAL_SPI_TransmitReceive(&handle, &out, in, 1, 100) != HAL_OK)
-    {
-    }
+    return HAL_SPI_Receive(&handle, (uint8 *)buffer, (uint16)size, (uint)timeout) == HAL_OK;
+}
+
+
+bool HAL_SPI1::Transmit(void *buffer, int size, int timeout)
+{
+    return HAL_SPI_Transmit(&handle, (uint8 *)buffer, (uint16)size, (uint)timeout) == HAL_OK;
+}
+
+
+bool HAL_SPI1::Transmit(int value, int timeout)
+{
+    return Transmit(&value, 4, timeout);
 }

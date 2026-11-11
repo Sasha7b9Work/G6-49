@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "log.h"
 #include "structs.h"
-#include "common/Interface/Command.h"
+#include "common/Command.h"
 #include "Display/Painter.h"
 #include "Display/Text.h" 
 #include "Display/WaveGraphics.h"
@@ -43,7 +43,7 @@ namespace FDrive
         static SimpleMessage *msg = nullptr;
         static bool IsMount();
         static bool GetNumDirsAndFiles();
-        static bool RequestFileName();
+        static bool RequestFile();
         static bool RequestFileSize();
         static bool LoadDDSfromFile();
     }
@@ -127,11 +127,11 @@ bool FDrive::Handler::Processing(SimpleMessage *message)
 
     switch(com)
     {
-    case Command::FDrive_NumDirsAndFiles:   func = Handler::GetNumDirsAndFiles; break;
-    case Command::FDrive_Mount:             func = Handler::IsMount;            break;
-    case Command::FDrive_RequestFileName:   func = Handler::RequestFileName;    break;
-    case Command::FDrive_RequestFileSize:   func = Handler::RequestFileSize;    break;
-    case Command::FDrive_LoadDDSfromFile:   func = Handler::LoadDDSfromFile;    break;
+    case Command::FDrive_NumDirsAndFiles: func = Handler::GetNumDirsAndFiles; break;
+    case Command::FDrive_Mount:           func = Handler::IsMount;            break;
+    case Command::FDrive_RequestFile:     func = Handler::RequestFile;        break;
+    case Command::FDrive_RequestFileSize: func = Handler::RequestFileSize;    break;
+    case Command::FDrive_LoadDDSfromFile: func = Handler::LoadDDSfromFile;    break;
     }
 
     return func();
@@ -152,7 +152,7 @@ bool FDrive::Handler::GetNumDirsAndFiles()
 }
 
 
-bool FDrive::Handler::RequestFileName()
+bool FDrive::Handler::RequestFile()
 {
     return ListFiles::Handler::Processing(msg);
 }

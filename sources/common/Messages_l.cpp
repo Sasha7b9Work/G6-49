@@ -39,7 +39,7 @@ Message::AnswerPortionUpgradePanel::AnswerPortionUpgradePanel(int16 num, uint8 d
 {
     PutINT16(num);
 
-    uint crc = HAL_CRC32::Calculate(data, SIZE_CHUNK);
+    uint crc = HAL_CRC32::CalculateALIGN32(data, SIZE_CHUNK);
 
     PutUINT(crc);
 

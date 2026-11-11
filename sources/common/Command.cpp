@@ -43,7 +43,7 @@ pchar Command::Name() const
         "FDrive_RequestFile",
         "Test",
         "FDrive_RequestFileSize",
-        "NOT_USED",
+        "FDrive_RequestFileString",
         "FDrive_LoadDDSfromFile",
         "FDrive_RequestPictureDDSfromFile",
         "SCPI_Data",
