@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
-#include "common/command.h"
-#include "common/Messages.h"
+#include "common/Interface/Command.h"
+#include "common/Interface/Messages.h"
 
 
 class File;

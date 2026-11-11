@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "common/Messages.h"
-#include "common/Messages_l.h"
+#include "common/Interface/Messages.h"
+#include "common/Interface/Messages_l.h"
 #include "Updater_pl.h"
 #include "Display/Painter.h"
 #include "Hardware/HAL/HAL.h"

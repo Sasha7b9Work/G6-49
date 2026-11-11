@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "structs.h"
-#include "common/Messages.h"
+#include "common/Interface/Messages.h"
 #include "Settings/CalibrationSettings.h"
 #include "Utils/Debug.h"
 #include <cstdlib>

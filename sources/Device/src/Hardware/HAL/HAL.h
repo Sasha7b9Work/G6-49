@@ -70,15 +70,10 @@ namespace HAL_PCD
 };
 
 
+// Обмен с панелью
 namespace HAL_SPI1
 {
     void Init();
-
-    bool Receive(void *buffer, int size, int timeout);
-
-    bool Transmit(void *buffer, int size, int timeout);
-
-    bool Transmit(int value, int timeout);
 };
 
 

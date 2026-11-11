@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "common/Interface_d.h"
-#include "common/Messages_l.h"
+#include "common/Interface/Interface_d.h"
+#include "common/Interface/Messages_l.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
 #include "Updater_dl.h"
@@ -9,16 +9,32 @@
 
 
 static void JumpToMainApplication();
+void MainCycle();
+void TestCycle();
+
 
 int main()
 {
     CPU::Init();
 
+    while (true)
+    {
+        MainCycle();
+    }
+}
+
+
+void MainCycle()
+{
     Message::StartMainApplication().TransmitAndSend();      // ѕосылаем команду запуска основного приложени€
 
     JumpToMainApplication();                                // » стартуем сам на основную прошивку
+}
 
-    return 0;
+
+void TestCycle()
+{
+    DInterface::Test();
 }
 
 

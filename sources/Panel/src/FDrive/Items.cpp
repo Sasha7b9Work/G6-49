@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "log.h"
-#include "common/Interface_p.h"
+#include "common/Interface/Interface_p.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "FDrive_p.h"

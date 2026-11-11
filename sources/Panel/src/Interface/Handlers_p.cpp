@@ -1,9 +1,9 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "log.h"
-#include "common/Command.h"
-#include "common/Messages.h"
-#include "common/Handlers_p.h"
+#include "common/Interface/Command.h"
+#include "common/Interface/Messages.h"
+#include "common/Interface/Handlers_p.h"
 #include "Display/Console.h"
 #include "FDrive/FDrive_p.h"
 #include "FreqMeter/FreqMeter_p.h"

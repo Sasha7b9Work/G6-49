@@ -1,7 +1,7 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Panel)
 
-set(CMAKE_UNITY_BUILD OFF)
+set(CMAKE_UNITY_BUILD ON)
 
 include_directories(
     src
@@ -87,10 +87,10 @@ file(GLOB HARDWARE_CMSIS       src/Hardware/CMSIS/*)
 file(GLOB HARDWARE_HAL         src/Hardware/HAL/*
                                ../common/Hardware/HAL/HAL_SPI4_p.cpp)
 file(GLOB SRC                  src/*.h src/*.cpp)
-file(GLOB COMMON               ../common/Command.*
-                               ../common/Common.*
+file(GLOB COMMON               ../common/Common.*
+                               ../common/Common_pan.cpp
                                ../common/CommonTypes.h
-                               ../common/Common_pan.cpp)
+                               ../common/defines_com.h)
 file(GLOB DISPLAY              src/Display/*.h src/Display/*.cpp)
 file(GLOB DISPLAY_FONT         src/Display/Font/*)
 file(GLOB FDRIVE               src/FDrive/*)
@@ -98,7 +98,7 @@ file(GLOB FREQMETER            src/FreqMeter/*)
 file(GLOB GENERATOR            src/Generator/*)
 file(GLOB KEYBOARD             src/Keyboard/*)
 file(GLOB INTERFACE            src/Interface/*
-                               ../common/Interface_p.*
+                               ../common/Interface/Interface_p.*
                                ../common/Messages.*
                                ../common/Handlers_p.*)
 file(GLOB MENU                 src/Menu/*.h src/Menu/*.cpp)

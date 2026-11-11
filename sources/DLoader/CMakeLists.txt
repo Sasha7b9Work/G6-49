@@ -1,6 +1,8 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (DLoader)
 
+set(CMAKE_UNITY_BUILD ON)
+
 include_directories(
     ../common/_VS_KEIL
     ../common/_VS_KEIL/CMSIS

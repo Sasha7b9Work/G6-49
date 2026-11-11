@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "log.h"
 #include "structs.h"
-#include "common/Command.h"
+#include "common/Interface/Command.h"
 #include "Display/Painter.h"
 #include "Display/Text.h" 
 #include "Display/WaveGraphics.h"

@@ -1,14 +1,20 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "common/Interface_p.h"
-#include "common/Messages_l.h"
+#include "common/Interface/Interface_p.h"
+#include "common/Interface/Messages_l.h"
 #include "Updater_pl.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Keyboard/Keyboard.h"
 #include "Utils/Debug.h"
-#include "common/Handlers_p.h"
+#include "common/Interface/Handlers_p.h"
 #include <stm32f429xx.h>
+
+
+/*
+    Загрузчик.
+    При включении питания запускается он и передаёт упрвление основной прошивке
+*/
 
 
 static void StartToMainApplication();

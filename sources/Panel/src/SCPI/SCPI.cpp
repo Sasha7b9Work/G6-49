@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
-#include "common/Messages.h"
+#include "common/Interface/Messages.h"
 #include "Display/Symbols.h"
 #include "Hardware/VCP_p.h"
 #include "Signals/Signals.h"

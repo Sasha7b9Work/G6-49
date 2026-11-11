@@ -1,9 +1,9 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "common/Command.h"
-#include "common/Messages.h"
+#include "common/Interface/Command.h"
+#include "common/Interface/Messages.h"
 #include "Updater_pl.h"
-#include "common/Handlers_p.h"
+#include "common/Interface/Handlers_p.h"
 #include <stm32f429xx.h>
 
 

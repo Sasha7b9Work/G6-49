@@ -1,15 +1,15 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
-#include "common/Interface_p.h"
-#include "common/Command.h"
+#include "common/Interface/Interface_p.h"
+#include "common/Interface/Command.h"
 #include "structs.h"
 #include "Display/Painter.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Debug.h"
-#include "common/Handlers_p.h"
-#include "common/List.h"
+#include "common/Interface/Handlers_p.h"
+#include "common/Utils/List.h"
 #include <cstdlib>
 #include <cstring>
 

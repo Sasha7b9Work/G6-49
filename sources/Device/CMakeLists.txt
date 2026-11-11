@@ -1,9 +1,7 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Device)
 
-
 set(CMAKE_UNITY_BUILD OFF)
-
 
 include_directories(
     ../common/_VS_KEIL
@@ -110,21 +108,22 @@ file(GLOB HARDWARE_HAL   src/Hardware/HAL/*)
 file(GLOB HARDWARE_USBD  src/Hardware/USBD/*)
 file(GLOB HARDWARE_USBH  src/Hardware/USBH/*)
 file(GLOB SRC            src/*.h src/*.cpp)
-file(GLOB COMMON         ../common/Command.*
-                         ../common/Common.*
-                         ../common/Handlers_d.h
-                         ../common/Interface_d.*
-                         ../common/Messages.*
-                         ../common/Transceiver.h
-                         ../common/Transceiver_d.cpp
+file(GLOB COMMON         ../common/Common.*
                          ../common/Log_d.*)
 file(GLOB FDRIVE         src/FDrive/*.*)
 file(GLOB FREQMETER      src/FreqMeter/*.*)
 file(GLOB GENERATOR      src/Generator/*.*)
 file(GLOB GENERATOR_FPGA src/Generator/FPGA/*.*)
-file(GLOB INTERFACE      src/Interface/*.*)
+file(GLOB INTERFACE      src/Interface/*.*
+                         ../common/Interface/Command.*
+                         ../common/Interface/Handlers_d.h
+                         ../common/Interface/Interface_d.*
+                         ../common/Interface/Messages.*
+                         ../common/Interface/Transceiver.h
+                         ../common/Interface/Transceiver_d.cpp)
 file(GLOB SETTINGS       src/Settings/*.*)
-file(GLOB UTILS          src/Utils/*.*)
+file(GLOB UTILS          src/Utils/*.*
+                         ../common/Utils/Queue.*)
 
 set_source_files_properties(${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBD} ${LIBS_USBH} PROPERTIES HEADER_FILE_ONLY TRUE)
 

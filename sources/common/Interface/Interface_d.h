@@ -1,13 +1,15 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "common/Command.h"
-#include "common/Messages.h"
-#include "common/Queue.h"
+#include "common/Interface/Command.h"
+#include "common/Interface/Messages.h"
+#include "common/Utils/Queue.h"
 
 
 namespace DInterface
 {
     void Update();
+
+    void Test();
 
     // Возвращает ссылку на очередь сообщений, ожидающих отправки
     Queue &GetOutbox();

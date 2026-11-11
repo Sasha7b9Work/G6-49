@@ -44,21 +44,3 @@ void HAL_SPI1::Init()
 
     HAL_SPI_Init(&handle);
 }
-
-
-bool HAL_SPI1::Receive(void *buffer, int size, int timeout)
-{
-    return HAL_SPI_Receive(&handle, (uint8 *)buffer, (uint16)size, (uint)timeout) == HAL_OK;
-}
-
-
-bool HAL_SPI1::Transmit(void *buffer, int size, int timeout)
-{
-    return HAL_SPI_Transmit(&handle, (uint8 *)buffer, (uint16)size, (uint)timeout) == HAL_OK;
-}
-
-
-bool HAL_SPI1::Transmit(int value, int timeout)
-{
-    return Transmit(&value, 4, timeout);
-}

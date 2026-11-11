@@ -1,10 +1,10 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "structs.h"
-#include "common/Command.h"
-#include "common/Handlers_d.h"
-#include "common/Interface_d.h"
-#include "common/Transceiver_d.h"
+#include "common/Interface/Command.h"
+#include "common/Interface/Handlers_d.h"
+#include "common/Interface/Interface_d.h"
+#include "common/Interface/Transceiver_d.h"
 #include "Updater_dl.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
@@ -12,9 +12,14 @@
 #include "Settings/CalibrationSettings.h"
 
 
-static void E(SimpleMessage *);
+namespace DHandlers
+{
+    static void E(SimpleMessage *)
+    {
+    }
 
-static void SendData(SimpleMessage *);
+    static void SendData(SimpleMessage *);
+}
 
 
 
@@ -40,7 +45,7 @@ void DHandlers::Processing(SimpleMessage *msg)
 }
 
 
-static void SendData(SimpleMessage *)
+void DHandlers::SendData(SimpleMessage *)
 {
     CPU::SetBusy();
 
@@ -71,7 +76,4 @@ static void SendData(SimpleMessage *)
 }
 
 
-static void E(SimpleMessage *)
-{
 
-}

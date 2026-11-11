@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #pragma once
-#include "common/Messages.h"
+#include "common/Interface/Messages.h"
 
 
 #define SIZE_CHUNK        512            /* Размер элементарной порции данных */

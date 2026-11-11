@@ -1,6 +1,8 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (PLoader)
 
+set(CMAKE_UNITY_BUILD ON)
+
 include_directories(
     src
     src/Hardware
@@ -82,14 +84,14 @@ file(GLOB HARDWARE_CMSIS  src/Hardware/CMSIS/*)
 file(GLOB HARDWARE_HAL    src/Hardware/HAL/*
                           ../common/Hardware/HAL/HAL_SPI4_p.cpp)
 file(GLOB SRC             src/*.h src/*.cpp)
-file(GLOB COMMON          ../common/Command.*
-                          ../common/Common.*)
+file(GLOB COMMON          ../common/Common.*)
 file(GLOB DISPLAY         src/Display/*)
 file(GLOB INTERFACE       src/Interface/*
-                          ../common/Handlers_p.*
-                          ../common/Messages.*
-                          ../common/Messages_l.*
-                          ../common/Interface_p.*)
+                          ../common/Interface/Command.*
+                          ../common/Interface/Handlers_p.*
+                          ../common/Interface/Messages.*
+                          ../common/Interface/Messages_l.*
+                          ../common/Interface/Interface_p.*)
 file(GLOB KEYBOARD        src/Keyboard/*)
 file(GLOB UTILS           src/Utils/*
                           ../common/List.*)

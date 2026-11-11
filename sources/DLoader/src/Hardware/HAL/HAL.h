@@ -49,21 +49,17 @@ namespace HAL_HCD
 };
 
 
+// Обмен с панелью
 namespace HAL_SPI1
 {
     void Init();
-
-    bool Receive(void *buffer, int size, int timeout);
-
-    bool Transmit(void *buffer, int size, int timeout);
-
-    bool Transmit(int value, int timeout);
 };
 
 
 namespace HAL_SPI3
 {
     void Init();
+
     // Запускает счётчик для измерения малых отрезков времени
     void Transmit(uint8 *buffer, uint16 num);
 };
