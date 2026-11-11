@@ -18,24 +18,25 @@ add_definitions(-DSTM32F429xx -DPANEL)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
-add_compile_options(/wd4103)
-add_compile_options(/wd4211)    # nonstandard extension used: redefined extern to static
-add_compile_options(/wd4355)    # 'this': used in base member initializer list
-add_compile_options(/wd4514)    # unreferenced inline function has been removed
-add_compile_options(/wd4623)    # 'xxx': default constructor was implicitly defined as deleted
-add_compile_options(/wd4626)    # 'derived class' : assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
-add_compile_options(/wd4710)    # function not inlined
-add_compile_options(/wd4774)    # format string expected in argument N is not a string literal
-add_compile_options(/wd4820)    # 'N' bytes padding added after data member
-add_compile_options(/wd4946)    # reinterpret_cast used between related classes: 'Page' and 'Item'
-add_compile_options(/wd4996)    # This function or variable may be unsafe
-add_compile_options(/wd5027)    # 'xxx': move assignment operator was implicitly defined as deleted
-add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-add_compile_options(/wd5220)    # a non-static data member with a volatile qualified type no longer implies
-add_compile_options(/wd5246)
-add_compile_options(/wd5267)
-add_compile_options(/wd26812)   # The enum type 'xxx' in unscoped. Prefer 'enum class' over 'enum'
-
+add_compile_options(
+    /wd4103
+    /wd4211    # nonstandard extension used: redefined extern to static
+    /wd4355    # 'this': used in base member initializer list
+    /wd4514    # unreferenced inline function has been removed
+    /wd4623    # 'xxx': default constructor was implicitly defined as deleted
+    /wd4626    # 'derived class' : assignment operator was implicitly defined as deleted because a base class assignment operator is inaccessible or deleted
+    /wd4710    # function not inlined
+    /wd4774    # format string expected in argument N is not a string literal
+    /wd4820    # 'N' bytes padding added after data member
+    /wd4946    # reinterpret_cast used between related classes: 'Page' and 'Item'
+    /wd4996    # This function or variable may be unsafe
+    /wd5027    # 'xxx': move assignment operator was implicitly defined as deleted
+    /wd5045    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+    /wd5220    # a non-static data member with a volatile qualified type no longer implies
+    /wd5246
+    /wd5267
+    /wd26812    # The enum type 'xxx' in unscoped. Prefer 'enum class' over 'enum'
+)
 
 file(GLOB LIBS_HAL             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.*
                                ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.*

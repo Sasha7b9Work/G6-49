@@ -27,16 +27,18 @@ add_definitions(-DSTM32F407xx)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
-add_compile_options(/wd4201)
-add_compile_options(/wd4514)
-add_compile_options(/wd4623)
-add_compile_options(/wd4626)
-add_compile_options(/wd4820)
-add_compile_options(/wd5027)
-add_compile_options(/wd5039)
-add_compile_options(/wd5045)
-add_compile_options(/wd5220)    # a non-static data member with a volatile qualified type no longer implies
-add_compile_options(/wd5246)
+add_compile_options(
+    /wd4201
+    /wd4514
+    /wd4623
+    /wd4626
+    /wd4820
+    /wd5027
+    /wd5039
+    /wd5045
+    /wd5220    # a non-static data member with a volatile qualified type no longer implies
+    /wd5246
+)
 
 file(GLOB LIBS_FATFS     ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src/ff_gen_drv.*
                          ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src/ff.*
