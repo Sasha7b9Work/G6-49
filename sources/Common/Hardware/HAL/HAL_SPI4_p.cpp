@@ -28,9 +28,6 @@ namespace HAL_SPI4
         },
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
     };
-
-    // Возвращает true, если прибор готов к обмену
-    static bool IsReady();
 }
 
 
@@ -59,80 +56,31 @@ void HAL_SPI4::Init()
 }
 
 
-bool HAL_SPI4::Transmit(const void *buffer, int size, int timeout)
+void HAL_SPI4::Transmit(const void *buffer, uint16 size, uint timeout)
 {
-    if (HAL_SPI_Transmit(&handleSPI4, (uint8 *)((void *)buffer), (uint16)size, (uint)timeout) != HAL_OK)
-    {
-        return false;
-    }
-
-    return true;
+    HAL_SPI_Transmit(&handleSPI4, (uint8 *)((void *)buffer), size, timeout);
 }
 
 
-bool HAL_SPI4::Transmit(int value, int timeout)
+void HAL_SPI4::TransmitReceive(const uint8 *out, uint8 *in, uint16 size, uint timeout)
 {
-    return Transmit(&value, 4, timeout);
+    HAL_SPI_TransmitReceive(&handleSPI4, (uint8 *)out, in, size, timeout);
 }
 
 
-bool HAL_SPI4::Receive(void *recv, int size, int timeout)
+void HAL_SPI4::TransmitReceive(uint8 out, uint8 *in)
 {
-    if (HAL_SPI_Receive(&handleSPI4, (uint8 *)recv, (uint16)size, (uint)timeout) != HAL_OK)
-    {
-        return false;
-    }
-
-    return true;
+    HAL_SPI_TransmitReceive(&handleSPI4, &out, in, 1, 3);
 }
 
 
-uint HAL_SPI4::ReceiveAndCompare(const void *compared, int size)
+void HAL_SPI4::Transmit(uint8 value)
 {
-    uint result = 0;
-
-    uint8 byte = 0;
-
-    uint8 *data = (uint8 *)((void *)compared);
-
-    for (int i = 0; i < size; i++)
-    {
-        if (Receive(&byte, 1, 10) && data[i] != byte)
-        {
-            result++;
-        }
-    }
-
-    return result;
+    HAL_SPI_Transmit(&handleSPI4, &value, 1, 3);
 }
 
 
-bool HAL_SPI4::WaitRelease()
-{
-    TimeMeterMS meter;
-
-    while (IsReady())
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            return false;
-        }
-
-    };   // Если попали в время сигнала готовности, пропустим его, чтобы транзакция гарантированно начиналась после разрешающего фронта
-
-    while (!IsReady())
-    {
-        if (meter.ElapsedTime() > 100)
-        {
-            return false;
-        }
-    };  // Теперь ожидаем, когда придёт сигнал готовности
-
-    return true;
-}
-
-
-bool HAL_SPI4::IsReady()
+bool CPU::IsReady()
 {
     return HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_SET;
 }

@@ -1,7 +1,7 @@
 // 2022/08/30 11:42:16 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Common/Common.h"
-#include "Common/CommonTypes.h"
+#include "common/Common.h"
+#include "common/CommonTypes.h"
 
 
 namespace FPGA

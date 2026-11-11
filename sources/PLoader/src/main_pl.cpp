@@ -1,17 +1,25 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "common/Interface_p.h"
-#include "common/Messages_l.h"
+#include "common/Interface/Interface_p.h"
+#include "common/Interface/Messages_l.h"
 #include "Updater_pl.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Keyboard/Keyboard.h"
 #include "Utils/Debug.h"
-#include "Interface/Handlers_pl.h"
+#include "common/Interface/Handlers_p.h"
+#include <stm32f429xx.h>
 
 
-// True áóäåò îçíà÷àòü, ÷òî çàïðîñ íà îáíîâëåíèå óæå ïîñëàí
-static bool alreadyRequest = false;
+/*
+    Ð—Ð°Ð³Ñ€ÑƒÐ·Ñ‡Ð¸Ðº.
+    ÐŸÑ€Ð¸ Ð²ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ð¸ Ð¿Ð¸Ñ‚Ð°Ð½Ð¸Ñ Ð·Ð°Ð¿ÑƒÑÐºÐ°ÐµÑ‚ÑÑ Ð¾Ð½ Ð¸ Ð¿ÐµÑ€ÐµÐ´Ð°Ñ‘Ñ‚ ÑƒÐ¿Ñ€Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¾ÑÐ½Ð¾Ð²Ð½Ð¾Ð¹ Ð¿Ñ€Ð¾ÑˆÐ¸Ð²ÐºÐµ
+*/
+
+
+static void StartToMainApplication();
+void MainCycle();
+void TestCycle();
 
 
 int main()
@@ -21,23 +29,47 @@ int main()
     HAL_LTDC::Init();
     Keyboard::Init();
 
-    TimeMeterMS meter;
-
     while(true)
     {
-        Updater::Update();
-
-        if(!Keyboard::BufferIsEmpty() && !alreadyRequest)
-        {
-            alreadyRequest = true;
-            Message::RequestUpgrade().Transmit();
-        }
-
-        PInterface::Update();
-
-        if (meter.ElapsedTime() > 3000)
-        {
-            PHandlers::OnStartMainApplication(nullptr);
-        }
+        MainCycle();
     }
+}
+
+
+void MainCycle()
+{
+    static TimeMeterMS meter;
+
+    Updater::Update();
+
+    PInterface::Update();
+
+    if (meter.ElapsedTime() > 3000)
+    {
+        StartToMainApplication();
+    }
+}
+
+
+void TestCycle()
+{
+    PInterface::Test();
+}
+
+
+void StartToMainApplication()
+{
+    typedef void(*pFunction)();
+
+    __disable_irq();
+
+    pFunction JumpToApplication;
+
+    JumpToApplication = (pFunction)(*(__IO uint *)(Updater::MAIN_PROGRAM_START_ADDRESS + 4));
+
+    __set_MSP(*(__IO uint *)Updater::MAIN_PROGRAM_START_ADDRESS);
+
+    __enable_irq();
+
+    JumpToApplication();
 }

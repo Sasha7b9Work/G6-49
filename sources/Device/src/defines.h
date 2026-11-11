@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Common/defines_com.h"
+#include "common/defines_com.h"
 
 
 typedef unsigned int       uint;
@@ -63,3 +63,6 @@ inline void EmptyFuncVV() {};
 #define ERROR_VALUE_FLOAT   1.111e29f
 #define ERROR_VALUE_UINT8   255
 #define ERROR_STRING_VALUE  "--.--"
+
+
+#include "common/Utils/Log_d.h"

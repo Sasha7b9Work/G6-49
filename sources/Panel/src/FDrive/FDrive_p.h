@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #pragma once
-#include "common/Messages.h"
+#include "common/Interface/Messages.h"
 
 
 namespace FDrive
@@ -32,6 +32,10 @@ namespace FDrive
     char *CurrentDirectory();
 
     void SaveScreenToFlash();
+
+    bool IsMounted();
+
+    bool ExistFile(pchar);
 
     namespace Handler
     {

@@ -1,6 +1,6 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "common/Command.h"
+#include "common/Interface/Command.h"
 #include "common/CommonTypes.h"
 #include "Generator/Calibrator.h"
 
@@ -39,8 +39,6 @@ struct CalibrationSettings
 
         uint8 unused[256];
     };
-    
-    CalibrationSettings& operator =(const CalibrationSettings &);
 
     static int16 *GetK(uint8 channel, CalSignal::E, uint8 range, uint8 parameter);
 

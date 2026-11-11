@@ -1,9 +1,9 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #include "defines.h"
 #include "log.h"
-#include "common/Command.h"
-#include "common/Messages.h"
-#include "Interface/Handlers_p.h"
+#include "common/Interface/Command.h"
+#include "common/Interface/Messages.h"
+#include "common/Interface/Handlers_p.h"
 #include "Display/Console.h"
 #include "FDrive/FDrive_p.h"
 #include "FreqMeter/FreqMeter_p.h"
@@ -44,9 +44,9 @@ bool PHandlers::Processing(SimpleMessage *msg)
     case Command::FDrive_NumDirsAndFiles:
     case Command::FDrive_Mount:
     case Command::FDrive_RequestDir:
-    case Command::FDrive_RequestFile:
+    case Command::FDrive_RequestFileName:
     case Command::FDrive_RequestFileSize:
-    case Command::FDrive_RequestFileString:
+    case Command::NOT_USED:
     case Command::FDrive_LoadDDSfromFile:
     case Command::FDrive_RequestPictureDDSfromFile:
         func = FDrive::Handler::Processing;

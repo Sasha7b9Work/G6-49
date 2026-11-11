@@ -10,7 +10,7 @@
 #include "Settings/Settings.h"
 #include "Display/Console.h"
 #include "Signals/Signals.h"
-#include "common/Command.h"
+#include "common/Interface/Command.h"
 #include "structs.h"
 #include "Display/Console.h"
 #include "Settings/CalibrationSettings.h"

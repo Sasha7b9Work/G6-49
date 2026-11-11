@@ -5,7 +5,7 @@
 #include "Display/Text.h"
 #include "Keyboard/Controls.h"
 #include "MenuItemsDefs.h"
-#include "common/Command.h"
+#include "common/Interface/Command.h"
 
 
 typedef bool (*pFuncBKey)(const Control &);

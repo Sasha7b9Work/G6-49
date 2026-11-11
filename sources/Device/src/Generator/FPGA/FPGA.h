@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Generator/Generator_d.h"
-#include "common/Command.h"
+#include "common/Interface/Command.h"
 #include "Generator/FPGA/RegistersFPGA.h"
 #include "Generator/FPGA/ParametersFPGA.h"
 

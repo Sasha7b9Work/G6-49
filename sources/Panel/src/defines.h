@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
 #define VERSION_FULL 10
 #pragma once
-#include "Common/defines_com.h"
+#include "common/defines_com.h"
 
 #ifdef WIN32
 

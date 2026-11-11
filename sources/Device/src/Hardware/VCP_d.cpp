@@ -2,7 +2,7 @@
 #include "usbd_desc.h"
 #include "usbd_cdc_interface.h"
 #include "defines.h"
-#include "common/Messages.h"
+#include "common/Interface/Messages.h"
 #include "Hardware/VCP_d.h"
 #include "Hardware/HAL/HAL.h"
 #include "usbd_desc.h"
@@ -14,6 +14,8 @@
 namespace DVCP
 {
     bool PrevSendingComplete();
+
+    void SendData(const void *data, uint size = 0);
 
     bool connectedToUSB = false;
 
@@ -60,13 +62,6 @@ void DVCP::SendData(const void *_buffer, uint size)
 void DVCP::SendString(char *data)
 {
     SendData((uint8 *)data, std::strlen(data));
-}
-
-
-void DVCP::SendStringEOF(char *data)
-{
-    SendString(data);
-    //SendByte(0x0d);
 }
 
 

@@ -1,5 +1,5 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@gmail.com
-#include "common/Messages.h"
+#include "common/Interface/Messages.h"
 #include "Menu/Pages/Pages.h"
 #include "Settings/Settings.h"
 #include "Display/Painter.h"
@@ -10,6 +10,7 @@
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
 #include "Utils/NumberBuffer.h"
+#include "FDrive/FDrive_p.h"
 
 
 using namespace Primitives;
@@ -653,7 +654,49 @@ DEF_GOVERNOR(gFreqMeterK,                                                       
 )
 
 
-DEF_PAGE_10( pDebug,                                                                                                                                                 //--- ОТЛАДКА --- //-V641 //-V1027
+static void OnDraw_Upgrade(int x, int y)
+{
+    x += 5;
+    y += 3;
+
+    const int dy = 13;
+
+    String("ОБНОВЛЕНИЕ").Draw(x, y);
+
+    y += dy;
+
+    String flash = FDrive::IsMounted() ? String( "Флешка-ВКЛ" ) : String( "Флешка-ОТКЛ" );
+
+    flash.DrawRelativelyRight(Display::WIDTH - 5, y);
+
+    y += dy;
+
+    static const pchar names[2] =
+    {
+        "G6-49-D.bin",
+        "G6-49-P.bin"
+    };
+
+    for (int i = 0; i < 2; i++)
+    {
+        if (FDrive::ExistFile(names[i]))
+        {
+            String( names[i] ).Draw(x, y);
+        }
+
+        y += dy;
+    }
+}
+
+
+DEF_BUTTON(bUpgrade,
+    "", "",
+    "", "",
+    pDebug, Item::EFuncActive, Button::EFuncPress, OnDraw_Upgrade
+)
+
+
+DEF_PAGE_11( pDebug,                                                                                                                                                 //--- ОТЛАДКА --- //-V641 //-V1027
     "ОТЛАДКА", "DEBUG",   //-V641
     "", "",
     PageDebug::Calibartion::self,
@@ -666,6 +709,7 @@ DEF_PAGE_10( pDebug,                                                            
     &cStatistics,                               // ОТЛАДКА - Статистика
     &cShowSends,                                // ОТЛАДКА - Показывать параметры
     &bSaveSettings,                             // ОТЛАДКА - Сохранить настройки
+    &bUpgrade,                                  // ОТЛАДКА - Обновление
     Page::Debug, PageService::self, Item::EFuncActive, Page::EFuncEnter, Item::EFuncOnKey, Page::EFuncAfterDraw
 )
 

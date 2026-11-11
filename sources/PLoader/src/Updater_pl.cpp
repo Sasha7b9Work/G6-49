@@ -1,7 +1,7 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
-#include "common/Messages.h"
-#include "common/Messages_l.h"
+#include "common/Interface/Messages.h"
+#include "common/Interface/Messages_l.h"
 #include "Updater_pl.h"
 #include "Display/Painter.h"
 #include "Hardware/HAL/HAL.h"
@@ -130,7 +130,7 @@ bool StructUpgradePanel::LastChunk()
 
 static void WriteNewChunk(int16 num, uint crc, uint8 chunk[SIZE_CHUNK])
 {
-    if(num == sup.numChunk && HAL_CRC32::CalculateALIGN32(chunk, SIZE_CHUNK) == crc)
+    if(num == sup.numChunk && HAL_CRC32::Calculate(chunk, SIZE_CHUNK) == crc)
     {
         HAL_EEPROM::WriteBuffer(Updater::MAIN_PROGRAM_START_ADDRESS + num * SIZE_CHUNK, chunk, SIZE_CHUNK);
 

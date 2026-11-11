@@ -1,10 +1,10 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "structs.h"
-#include "common/Command.h"
-#include "common/Interface_d.h"
-#include "common/Handlers_d.h"
-#include "common/Transceiver.h"
+#include "common/Interface/Command.h"
+#include "common/Interface/Interface_d.h"
+#include "common/Interface/Handlers_d.h"
+#include "common/Interface/Transceiver_d.h"
 #include "FDrive/FDrive_d.h"
 #include "FreqMeter/FreqMeter_d.h"
 #include "Generator/Calibrator.h"
@@ -125,8 +125,8 @@ void DHandlers::Processing(SimpleMessage *msg)
     case Command::FDrive_NumDirsAndFiles:
     case Command::FDrive_Mount:
     case Command::FDrive_RequestDir:
-    case Command::FDrive_RequestFile:
-    case Command::FDrive_RequestFileString:
+    case Command::FDrive_RequestFileName:
+    case Command::NOT_USED:
     case Command::FDrive_RequestFileSize:
     case Command::FDrive_LoadDDSfromFile:
     case Command::FDrive_RequestPictureDDSfromFile:

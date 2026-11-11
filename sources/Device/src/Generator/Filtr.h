@@ -1,6 +1,6 @@
 // 2022/10/18 14:45:05 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-#include "Common/Common.h"
+#include "common/Common.h"
 
 
 namespace Filtr

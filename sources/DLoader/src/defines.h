@@ -58,3 +58,6 @@ inline void EmptyFuncVV() {};
 #define ERROR_VALUE_FLOAT   1.111e29f
 #define ERROR_VALUE_UINT8   255
 #define ERROR_STRING_VALUE  "--.--"
+
+
+#include "common/Utils/Log_d.h"
