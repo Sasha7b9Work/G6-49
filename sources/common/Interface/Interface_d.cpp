@@ -48,7 +48,14 @@ void DInterface::Update()
 
 void DInterface::Test()
 {
+    uint8 in = 0;
 
+    HAL_SPI1::TransmitReceive(0x81, &in);
+
+    if (in != 0x7e)
+    {
+        in = in;
+    }
 }
 
 

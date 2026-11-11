@@ -103,28 +103,29 @@ file(GLOB LIBS_USBH      ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Ho
                          ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.*
                          ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.*)
 
-file(GLOB HARDWARE       src/Hardware/*.h src/Hardware/*.cpp)
-file(GLOB HARDWARE_CMSIS src/Hardware/CMSIS/*)
-file(GLOB HARDWARE_FATFS src/Hardware/FatFS/*)
-file(GLOB HARDWARE_HAL   src/Hardware/HAL/*)
-file(GLOB HARDWARE_USBD  src/Hardware/USBD/*)
-file(GLOB HARDWARE_USBH  src/Hardware/USBH/*)
-file(GLOB SRC            src/*.h src/*.cpp)
+file(GLOB HARDWARE             src/Hardware/*.h src/Hardware/*.cpp)
+file(GLOB HARDWARE_CMSIS       src/Hardware/CMSIS/*)
+file(GLOB HARDWARE_FATFS       src/Hardware/FatFS/*)
+file(GLOB HARDWARE_HAL         src/Hardware/HAL/*
+                         ../common/Hardware/HAL_SPI1_d.cpp)
+file(GLOB HARDWARE_USBD        src/Hardware/USBD/*)
+file(GLOB HARDWARE_USBH        src/Hardware/USBH/*)
+file(GLOB SRC                  src/*.h src/*.cpp)
 file(GLOB COMMON         ../common/Common.*
                          ../common/Log_d.*)
-file(GLOB FDRIVE         src/FDrive/*.*)
-file(GLOB FREQMETER      src/FreqMeter/*.*)
-file(GLOB GENERATOR      src/Generator/*.*)
-file(GLOB GENERATOR_FPGA src/Generator/FPGA/*.*)
-file(GLOB INTERFACE      src/Interface/*.*
+file(GLOB FDRIVE               src/FDrive/*.*)
+file(GLOB FREQMETER            src/FreqMeter/*.*)
+file(GLOB GENERATOR            src/Generator/*.*)
+file(GLOB GENERATOR_FPGA       src/Generator/FPGA/*.*)
+file(GLOB INTERFACE            src/Interface/*.*
                          ../common/Interface/Command.*
                          ../common/Interface/Handlers_d.h
                          ../common/Interface/Interface_d.*
                          ../common/Interface/Messages.*
                          ../common/Interface/Transceiver.h
                          ../common/Interface/Transceiver_d.cpp)
-file(GLOB SETTINGS       src/Settings/*.*)
-file(GLOB UTILS          src/Utils/*.*
+file(GLOB SETTINGS             src/Settings/*.*)
+file(GLOB UTILS                src/Utils/*.*
                          ../common/Utils/Queue.*)
 
 set_source_files_properties(${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBD} ${LIBS_USBH} PROPERTIES HEADER_FILE_ONLY TRUE)

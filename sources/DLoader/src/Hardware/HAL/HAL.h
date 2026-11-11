@@ -53,15 +53,10 @@ namespace HAL_HCD
 namespace HAL_SPI1
 {
     void Init();
-};
 
-
-namespace HAL_SPI3
-{
-    void Init();
-
-    // Запускает счётчик для измерения малых отрезков времени
-    void Transmit(uint8 *buffer, uint16 num);
+    // Блокирующая передача.
+    // Когда от мастера придёт байт, мастер получит out, а функция вернёт принятое от мастера значение в in
+    void TransmitReceive(uint8 out, uint8 *in);
 };
 
 

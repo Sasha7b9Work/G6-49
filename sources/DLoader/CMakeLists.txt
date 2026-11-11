@@ -87,27 +87,27 @@ file(GLOB LIBS_USBH      src/libs/USBH/*
                          ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.*
                          ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.*
                          ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.*)
-                         
-file(GLOB HARDWARE       src/Hardware/*.h src/Hardware/*.cpp)
-file(GLOB HARDWARE_CMSIS src/Hardware/CMSIS/*)
-file(GLOB HARDWARE_FATFS src/Hardware/FatFS/*)
-file(GLOB HARDWARE_HAL   src/Hardware/HAL/*)
-file(GLOB HARDWARE_USBH  src/Hardware/USBH/*)
-file(GLOB SRC            src/*.h src/*.cpp)
-file(GLOB COMMON         ../common/Command.*
-                         ../common/Common.*
-                         ../common/Handlers_d.h
-                         ../common/Interface_d.*
-                         ../common/Messages.*
-                         ../common/Messages_l.*
-                         ../common/Transceiver.h
-                         ../common/Transceiver_d.cpp
-                         ../common/Log_d.*)
-file(GLOB FDRIVE         src/FDrive/*)
-file(GLOB GENERATOR      src/Generator/*)
-file(GLOB INTERFACE      src/Interface/*)
-file(GLOB SETTINGS       src/Settings/*)
-file(GLOB UTILS          src/Utils/*)
+file(GLOB HARDWARE             src/Hardware/*.h src/Hardware/*.cpp)
+file(GLOB HARDWARE_CMSIS       src/Hardware/CMSIS/*)
+file(GLOB HARDWARE_FATFS       src/Hardware/FatFS/*)
+file(GLOB HARDWARE_HAL         src/Hardware/HAL/*
+                         ../common/Hardware/HAL/HAL_SPI1_d.*)
+file(GLOB HARDWARE_USBH        src/Hardware/USBH/*)
+file(GLOB SRC                  src/*.h
+                               src/*.cpp)
+file(GLOB COMMON         ../common/Common.*)
+file(GLOB FDRIVE               src/FDrive/*)
+file(GLOB GENERATOR            src/Generator/*)
+file(GLOB INTERFACE            src/Interface/*
+                         ../common/Interface/Command.*
+                         ../common/Interface/Messages.*
+                         ../common/Interface/Messages_l.*
+                         ../common/Interface/Transceiver_d.*
+                         ../common/Interface/Interface_d.*
+                         ../common/Interface/Transceiver_d.cpp)
+file(GLOB SETTINGS             src/Settings/*)
+file(GLOB UTILS                src/Utils/*
+                         ../common/Utils/Log_d.*)
 
 set_source_files_properties(${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBH} PROPERTIES HEADER_FILE_ONLY TRUE)
 

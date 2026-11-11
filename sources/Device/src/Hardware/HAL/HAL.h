@@ -74,9 +74,14 @@ namespace HAL_PCD
 namespace HAL_SPI1
 {
     void Init();
+
+    // Блокирующая передача.
+    // Когда от мастера придёт байт, мастер получит out, а функция вернёт принятое от мастера значение в in
+    void TransmitReceive(uint8 out, uint8 *in);
 };
 
 
+// AD9952
 namespace HAL_SPI3
 {
     void Init();

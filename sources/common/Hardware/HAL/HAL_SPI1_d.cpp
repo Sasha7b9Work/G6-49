@@ -16,8 +16,8 @@ namespace HAL_SPI1
             SPI_DATASIZE_8BIT,              // Init.DataSize
             SPI_POLARITY_HIGH,              // Init.CLKPolarity
             SPI_PHASE_2EDGE,                // Init.CLKPhase
-            SPI_NSS_SOFT,                   // Init.NSS
-            SPI_BAUDRATEPRESCALER_32,      // Init.BaudRatePrescaler
+            SPI_NSS_HARD_INPUT,             // Init.NSS             !!! Внимание !!! Здесь всегда аппаратное управление у мастера
+            SPI_BAUDRATEPRESCALER_32,       // Init.BaudRatePrescaler
             SPI_FIRSTBIT_MSB,               // Init.FirstBit
             SPI_TIMODE_DISABLED,            // Init.TIMode
             SPI_CRCCALCULATION_DISABLED,    // Init.CRCCalculation
@@ -28,7 +28,6 @@ namespace HAL_SPI1
         0,
         0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
     };
-
 }
 
 
@@ -45,4 +44,12 @@ void HAL_SPI1::Init()
     HAL_GPIO_Init(GPIOA, &isGPIOA);
 
     HAL_SPI_Init(&handle);
+}
+
+
+void HAL_SPI1::TransmitReceive(uint8 out, uint8 *in)
+{
+    while (HAL_SPI_TransmitReceive(&handle, &out, in, 1, 100) != HAL_OK)
+    {
+    }
 }

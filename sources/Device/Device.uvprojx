@@ -1253,11 +1253,6 @@
               <FilePath>.\src\Hardware\HAL\HAL_PIO.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_SPI1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_SPI1.cpp</FilePath>
-            </File>
-            <File>
               <FileName>HAL_SPI3.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_SPI3.cpp</FilePath>
@@ -1281,6 +1276,11 @@
               <FileName>stm32f4xx_hal_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\HAL\stm32f4xx_hal_conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_SPI1_d.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Hardware\HAL\HAL_SPI1_d.cpp</FilePath>
             </File>
           </Files>
         </Group>
