@@ -24,8 +24,6 @@ struct CalibrationSettings
         };
         uint8 unused[256];
     };
-    
-    CalibrationSettings& operator =(const CalibrationSettings &);
 
     static int16 *GetK(uint8 channel, uint8 signal, uint8 range, uint8 parameter);
 };

@@ -11,14 +11,6 @@ static const CalibrationSettings defSet =
 CalibrationSettings setCal = defSet;
 
 
-CalibrationSettings &CalibrationSettings::operator =(const CalibrationSettings &rhs)
-{
-    std::memcpy(this, rhs.unused, sizeof(*this));
-
-    return *this;
-}
-
-
 int16 *CalibrationSettings::GetK(uint8 channel, CalSignal::E signal, uint8 range, uint8 parameter)
 {
     if(channel > 1)
