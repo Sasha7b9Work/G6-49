@@ -4,30 +4,28 @@
 #include <stm32f4xx_hal.h>
 
 
-namespace HAL_SPI1
+static SPI_HandleTypeDef handle =                                   // Для связи с панелью
 {
-    static SPI_HandleTypeDef handle =                                   // Для связи с панелью
+    SPI1,
     {
-        SPI1,
-        {
-            SPI_MODE_SLAVE,                 // Init.Mode
-            SPI_DIRECTION_2LINES,           // Init.Direction
-            SPI_DATASIZE_8BIT,              // Init.DataSize
-            SPI_POLARITY_HIGH,              // Init.CLKPolarity
-            SPI_PHASE_2EDGE,                // Init.CLKPhase
-            SPI_NSS_SOFT,                   // Init.NSS
-            SPI_BAUDRATEPRESCALER_32,      // Init.BaudRatePrescaler
-            SPI_FIRSTBIT_MSB,               // Init.FirstBit
-            SPI_TIMODE_DISABLED,            // Init.TIMode
-            SPI_CRCCALCULATION_DISABLED,    // Init.CRCCalculation
-            7                               // InitCRCPolynomial
-        },
-        0, 0, 0, 0, 0, 0,
-        0,
-        0,
-        0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
-    };
-}
+        SPI_MODE_SLAVE,                 // Init.Mode
+        SPI_DIRECTION_2LINES,           // Init.Direction
+        SPI_DATASIZE_8BIT,              // Init.DataSize
+        SPI_POLARITY_HIGH,              // Init.CLKPolarity
+        SPI_PHASE_2EDGE,                // Init.CLKPhase
+        SPI_NSS_SOFT,                   // Init.NSS
+        SPI_BAUDRATEPRESCALER_32,      // Init.BaudRatePrescaler
+        SPI_FIRSTBIT_MSB,               // Init.FirstBit
+        SPI_TIMODE_DISABLED,            // Init.TIMode
+        SPI_CRCCALCULATION_DISABLED,    // Init.CRCCalculation
+        7                               // InitCRCPolynomial
+    },
+    0, 0, 0, 0, 0, 0,
+    0,
+    0,
+    0, 0, HAL_UNLOCKED, HAL_SPI_STATE_RESET, 0
+};
+
 
 
 void HAL_SPI1::Init()
@@ -41,6 +39,16 @@ void HAL_SPI1::Init()
         GPIO_AF5_SPI1
     };
     HAL_GPIO_Init(GPIOA, &isGPIOA);
+
+    HAL_SPI_Init(&handle);
+}
+
+
+void HAL_SPI1::Reset()
+{
+    // Аппаратный сброс периферийного модуля SPI1 (очистка FIFO и внутреннего состояния)
+    __HAL_RCC_SPI1_FORCE_RESET();
+    __HAL_RCC_SPI1_RELEASE_RESET();
 
     HAL_SPI_Init(&handle);
 }

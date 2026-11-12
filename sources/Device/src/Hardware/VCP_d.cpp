@@ -15,8 +15,6 @@ namespace DVCP
 {
     bool PrevSendingComplete();
 
-    void SendData(const void *data, uint size = 0);
-
     bool connectedToUSB = false;
 
     bool cableUSBisConnected = false;
@@ -62,6 +60,13 @@ void DVCP::SendData(const void *_buffer, uint size)
 void DVCP::SendString(char *data)
 {
     SendData((uint8 *)data, std::strlen(data));
+}
+
+
+void DVCP::SendStringEOF(char *data)
+{
+    SendString(data);
+    //SendByte(0x0d);
 }
 
 

@@ -57,20 +57,6 @@ namespace ListFiles
 }
 
 
-bool FDrive::ExistFile(pchar file_name)
-{
-    for (int i = 0; i < ListFiles::numFiles; i++)
-    {
-        if (std::strcmp(file_name, ListFiles::files[i].name) == 0)
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-
 void ListFiles::Init()
 {
     firstFile = 0;

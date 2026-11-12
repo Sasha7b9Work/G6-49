@@ -31,6 +31,13 @@ extern "C" {
 
 
     
+    void OTG_FS_IRQHandler()
+    {
+        // Флешка
+        HAL_HCD::IRQHandler();
+    }
+  
+    
     void MemManage_Handler()
     {
         TRACE_HANDLER;

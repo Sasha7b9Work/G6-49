@@ -12,8 +12,11 @@ namespace DVCP
     // Инициализация
     void Init();
 
+    void SendData(const void *data, uint size = 0);
     // Передаётся строка без завершающего символа
     void SendString(char *data);
+    // Передача строки с символом конца строки
+    void SendStringEOF(char *data);
 
     void SendByte(uint8 data);
 

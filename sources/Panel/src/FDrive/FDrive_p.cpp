@@ -63,12 +63,6 @@ void FDrive::Init()
 }
 
 
-bool FDrive::IsMounted()
-{
-    return mounted == Mounted;
-}
-
-
 void FDrive::Draw()
 {
     int x = WaveGraphics::X();

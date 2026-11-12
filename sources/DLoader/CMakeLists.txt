@@ -1,24 +1,23 @@
 # (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (DLoader)
 
-include_directories(
-    ../common/_VS_KEIL
-    ../common/_VS_KEIL/CMSIS
-    ../common/_VS_KEIL/std_includes
-    src
-    src/Hardware/FatFS
-    src/Hardware/HAL
-    src/Hardware/USBH
-    ..
-    ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
-    ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include
-    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
-    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
-    ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src
-    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc
-    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc
-    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
-)
+include_directories(../common/_VS_KEIL
+                    ../common/_VS_KEIL/CMSIS
+                    ../common/_VS_KEIL/std_includes
+                    src
+                    src/Hardware/FatFS
+                    src/Hardware/HAL
+                    src/Hardware/USBH
+                    ..
+                    ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
+                    ../common/libs/STM32Cube_F4/Drivers/CMSIS/Include
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
+                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
+                    ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFS/src
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
+                    )
 
 add_definitions(-DSTM32F407xx -DLOADER)
 
@@ -97,8 +96,7 @@ file(GLOB COMMON         ../common/Command.*
                          ../common/Messages.*
                          ../common/Messages_l.*
                          ../common/Transceiver.h
-                         ../common/Transceiver_d.cpp
-                         ../common/Log_d.*)
+                         ../common/Transceiver_d.cpp)
 file(GLOB FDRIVE         src/FDrive/*)
 file(GLOB GENERATOR      src/Generator/*)
 file(GLOB INTERFACE      src/Interface/*)
@@ -124,20 +122,19 @@ source_group(Settings        FILES ${SETTINGS})
 source_group(Utils           FILES ${UTILS})
 
                    
-add_library(${PROJECT_NAME}
-    ${LIBS_FATFS}
-    ${LIBS_USBH}
-    ${LIBS_HAL}
-    ${HARDWARE}
-    ${HARDWARE_CMSIS}
-    ${HARDWARE_FATFS}
-    ${HARDWARE_HAL}
-    ${HARDWARE_USBH}
-    ${SRC}
-    ${COMMON}
-    ${FDRIVE}
-    ${GENERATOR}
-    ${INTERFACE}
-    ${SETTINGS}
-    ${UTILS}
+add_library(${PROJECT_NAME} ${LIBS_FATFS}
+                            ${LIBS_USBH}
+                            ${LIBS_HAL}
+                            ${HARDWARE}
+                            ${HARDWARE_CMSIS}
+                            ${HARDWARE_FATFS}
+                            ${HARDWARE_HAL}
+                            ${HARDWARE_USBH}
+                            ${SRC}
+                            ${COMMON}
+                            ${FDRIVE}
+                            ${GENERATOR}
+                            ${INTERFACE}
+                            ${SETTINGS}
+                            ${UTILS}
 )

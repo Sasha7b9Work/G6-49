@@ -4,6 +4,7 @@
 #include "common/Interface_d.h"
 #include "common/Messages_l.h"
 #include "Updater_dl.h"
+#include "FDrive/FDrive_dl.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include <cstring>
@@ -55,9 +56,9 @@ static void OnRequestUpgrade(SimpleMessage *);
 static void OnRequestPortionUpgradePanel(SimpleMessage *);
 
 // Послать сообщение о текущем состоянии обновления device
-//static void SendMessageAboutDevicePortion(int size, int fullSize);
+static void SendMessageAboutDevicePortion(int size, int fullSize);
 
-//static int CalculatePortion(int size, int fullSize);
+static int CalculatePortion(int size, int fullSize);
 
 
 void Updater::Handler(SimpleMessage *message)
@@ -94,104 +95,104 @@ static void OnRequestUpgrade(SimpleMessage *)
 
 void Updater::UpgradeDevice()
 {
-//    const int fullSize = DLDrive::File::Open(FILE_NAME_DEVICE);
-//
-//    if(fullSize != -1)
-//    {
-//        int numSectors = fullSize / (128 * 1024);
-//
-//        if(fullSize % (128 * 1024))
-//        {
-//            numSectors++;
-//        }
-//
-//        HAL_EEPROM::EraseSectors(numSectors);
-//
-//        int address = MAIN_PROGRAM_START_ADDRESS;
-//
-//        static uint8 buffer[SIZE_CHUNK];
-//
-//        int size = fullSize;
-//
-//        while(size > 0)
-//        {
-//            int readed = DLDrive::File::Read(SIZE_CHUNK, buffer);
-//
-//            HAL_EEPROM::WriteBuffer(address, buffer, readed);
-//
-//            SendMessageAboutDevicePortion(size, fullSize);
-//
-//            size -= readed;
-//            address += readed;
-//        }
-//
-//        DLDrive::File::Close();
-//    }
+    const int fullSize = DLDrive::File::Open(FILE_NAME_DEVICE);
+
+    if(fullSize != -1)
+    {
+        int numSectors = fullSize / (128 * 1024);
+
+        if(fullSize % (128 * 1024))
+        {
+            numSectors++;
+        }
+
+        HAL_EEPROM::EraseSectors(numSectors);
+
+        int address = MAIN_PROGRAM_START_ADDRESS;
+
+        static uint8 buffer[SIZE_CHUNK];
+
+        int size = fullSize;
+
+        while(size > 0)
+        {
+            int readed = DLDrive::File::Read(SIZE_CHUNK, buffer);
+
+            HAL_EEPROM::WriteBuffer(address, buffer, readed);
+
+            SendMessageAboutDevicePortion(size, fullSize);
+
+            size -= readed;
+            address += readed;
+        }
+
+        DLDrive::File::Close();
+    }
 }
 
 
 void Updater::UpgradePanel()
 {
-//    sup.sizeFirmware = DLDrive::File::Open(FILE_NAME_PANEL);
-//
-//    if(sup.sizeFirmware != -1)
-//    {
-//        Message::AnswerUpgradePanel(sup.sizeFirmware).TransmitAndSend();
-//
-//        sup.inProcess = true;       // Устанавливаем признак обновления панели
-//
-//        while(sup.inProcess)        // И ждём, пока он не выйдет из этого состояния.
-//        {
-//            DInterface::Update();
-//        }
-//
-//        DLDrive::File::Close();
-//    }
+    sup.sizeFirmware = DLDrive::File::Open(FILE_NAME_PANEL);
+
+    if(sup.sizeFirmware != -1)
+    {
+        Message::AnswerUpgradePanel(sup.sizeFirmware).TransmitAndSend();
+
+        sup.inProcess = true;       // Устанавливаем признак обновления панели
+
+        while(sup.inProcess)        // И ждём, пока он не выйдет из этого состояния.
+        {
+            DInterface::Update();
+        }
+
+        DLDrive::File::Close();
+    }
 }
 
 
-static void OnRequestPortionUpgradePanel(SimpleMessage * /*msg*/)
+static void OnRequestPortionUpgradePanel(SimpleMessage *msg)
 {
-//    int16 num = msg->TakeINT16();
-//
-//    if(num == -1)                               // Если запрос на порцию 65535, это признак того, что процесс обновления завершён
-//    {
-//        sup.inProcess = false;
-//    }
-//    else
-//    {
-//        int address = num * SIZE_CHUNK;         // Адрес относительно начала прошивки
-//
-//        DLDrive::File::Seek(address);
-//
-//        uint8 buffer[1024];
-//        std::memset(buffer, 0xFF, 1024);
-//
-//        DLDrive::File::Read(1024, buffer);
-//
-//        Message::AnswerPortionUpgradePanel(num, buffer).Transmit();
-//    }
+    int16 num = msg->TakeINT16();
+
+    if(num == -1)                               // Если запрос на порцию 65535, это признак того, что процесс обновления завершён
+    {
+        sup.inProcess = false;
+    }
+    else
+    {
+        int address = num * SIZE_CHUNK;         // Адрес относительно начала прошивки
+
+        DLDrive::File::Seek(address);
+
+        uint8 buffer[1024];
+        std::memset(buffer, 0xFF, 1024);
+
+        DLDrive::File::Read(1024, buffer);
+
+        Message::AnswerPortionUpgradePanel(num, buffer).Transmit();
+    }
 }
 
-//static void SendMessageAboutDevicePortion(int size, int fullSize)
-//{
-//    static int prevPortion = -1;        // Какая часть обновления уже случилась. Изменяется от 0 до 100. Засылается только когда изменилось
-//
-//    int portion = CalculatePortion(size, fullSize);
-//
-//    if(portion != prevPortion)
-//    {
-//        prevPortion = portion;
-//
-//        Message::PortionUpgradeDevice(portion).TransmitAndSend();
-//    }
-//}
+static void SendMessageAboutDevicePortion(int size, int fullSize)
+{
+    static int prevPortion = -1;        // Какая часть обновления уже случилась. Изменяется от 0 до 100. Засылается только когда изменилось
+
+    int portion = CalculatePortion(size, fullSize);
+
+    if(portion != prevPortion)
+    {
+        prevPortion = portion;
+
+        Message::PortionUpgradeDevice(portion).TransmitAndSend();
+    }
+}
 
 
-//static int CalculatePortion(int size, int fullSize)
-//{
-//    return (int)((1.0F - (float)size / (float)fullSize) * 100.0f);
-//}
+static int CalculatePortion(int size, int fullSize)
+{
+    return (int)((1.0F - (float)size / (float)fullSize) * 100.0f);
+}
 
 
 bool Updater::NeedUpgrade()

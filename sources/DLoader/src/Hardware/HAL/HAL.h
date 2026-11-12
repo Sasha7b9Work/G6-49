@@ -53,6 +53,8 @@ namespace HAL_SPI1
 {
     void Init();
 
+    void Reset();
+
     bool Receive(void *buffer, int size, int timeout);
 
     bool Transmit(void *buffer, int size, int timeout);
