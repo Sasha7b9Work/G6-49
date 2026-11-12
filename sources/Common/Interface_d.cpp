@@ -49,6 +49,8 @@ void DInterface::Update()
 
     int size = 0;
 
+    bool success = false;
+
     if (HAL_SPI1::Receive(&size, 4, 10))                                                           // Узнаём размер принимаемого сообщения
     {
         SimpleMessage first;              // Сюда принимаем первое сообщение
@@ -79,6 +81,8 @@ void DInterface::Update()
                                             if (second.IsEquals(&first))                        // Проверяем, совпали ли оба принятых сообщения
                                             {
                                                 DHandlers::Processing(&first);
+
+                                                success = true;
                                             }
                                         }
                                     }
@@ -92,6 +96,11 @@ void DInterface::Update()
     }
 
     CPU::SetBusy();
+
+    if (!success)
+    {
+        HAL_SPI1::Reset();
+    }
 }
 
 

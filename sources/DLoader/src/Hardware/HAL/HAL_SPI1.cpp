@@ -44,6 +44,16 @@ void HAL_SPI1::Init()
 }
 
 
+void HAL_SPI1::Reset()
+{
+    // Аппаратный сброс периферийного модуля SPI1 (очистка FIFO и внутреннего состояния)
+    __HAL_RCC_SPI1_FORCE_RESET();
+    __HAL_RCC_SPI1_RELEASE_RESET();
+
+    HAL_SPI_Init(&handle);
+}
+
+
 bool HAL_SPI1::Receive(void *buffer, int size, int timeout)
 {
     return HAL_SPI_Receive(&handle, (uint8 *)buffer, (uint16)size, (uint)timeout) == HAL_OK;

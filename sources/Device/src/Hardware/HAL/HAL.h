@@ -70,9 +70,12 @@ namespace HAL_PCD
 };
 
 
+// Для связи с панелью
 namespace HAL_SPI1
 {
     void Init();
+
+    void Reset();
 
     bool Receive(void *buffer, int size, int timeout);
 
