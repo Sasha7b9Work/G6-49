@@ -17,10 +17,11 @@ JTDO-SWO    89
 JTRST       90
 
 *** SPI4 *** - к основному процессору
-SCK     1
-NSS     3
-MISO    4
-MOSI    5
+XP3         429   407
+1    SCK     1     41
+5    NSS     3     36
+7    MISO    4     42
+3    MOSI    5     43
 
 *** LTDC *** - экран
 CLK     45
