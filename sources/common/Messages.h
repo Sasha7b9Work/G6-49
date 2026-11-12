@@ -21,39 +21,28 @@ struct SimpleMessage  // -V690
     ~SimpleMessage();
 
     void Create(int size, uint8);
-
     // Возвращает указатель на созданную копию
     SimpleMessage *Clone();
-
     // Сбрасывает указатель извлечённой информации.
     void ResetPointer() { taken = 0; };
 
     bool CreateFromMessage(const SimpleMessage *message);
-
     // Создать сообщение с выделением памяти
     bool CreateAllocate(const uint8 *buffer, int size);
-
     // Выделить необходимое количество памяти
     bool AllocateMemory(int size);
-
     // Взять оставшиеся данные. После вызова этой функции забирать из сообщения больше нечего
     void TakeRemainigData(uint8 *data);
-
     // Возвращает указатель на оставшиеся данные. Данные можно забрать потом
     uint8 *RemainingData() const;
-
     // Освободить память
     void FreeMemory();
-
     // Возвращает размер данных
     int Size() const;
-
     // Возвращает true, если это null-пакет (память не выделена)
     bool IsEmpty() const;
-
     // Возвращает true, если сообщения одинаковы
     bool IsEquals(const SimpleMessage *message) const;
-
     // Возвращает указатель на pos-й элемент. Удобно для копирования строк
     char *String(int pos);
 
@@ -77,7 +66,6 @@ struct SimpleMessage  // -V690
 
     // Передать сообщение получателю
     void Transmit();
-
     // Передать сообщение получателю и дождаться, пока оно покинет передаточный буфер
     void TransmitAndSend();
 
@@ -85,13 +73,10 @@ protected:
 
     // Размер выделенной памяти
     int allocated;
-
     // Адрес начала данных, либо 0, если память не выделена
     uint8 *buffer;
-
     // Сколько памяти занято реальными данными. Используется для Put
     int used;
-
     // На какой позиции указатель. Используется для Take
     int taken;
 

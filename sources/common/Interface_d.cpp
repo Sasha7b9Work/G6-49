@@ -1,10 +1,12 @@
 // (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "common/Messages.h"
-#include "common/Transceiver_d.h"
+#include "common/Transceiver.h"
 #include "common/Handlers_d.h"
 #include "common/Interface_d.h"
-#ifndef LOADER
+#ifdef LOADER
+#include "FDrive/FDrive_dl.h"
+#else
 #include "FDrive/FDrive_d.h"
 #endif
 #include "Generator/Generator_d.h"
@@ -47,96 +49,58 @@ void DInterface::Update()
 
     int size = 0;
 
-    static uint prev_time = TIME_MS;
+    bool success = false;
 
-    if (HAL_SPI1::Receive(&size, 4, 10))                                                                // Узнаём размер принимаемого сообщения
+    if (HAL_SPI1::Receive(&size, 4, 10))                                                           // Узнаём размер принимаемого сообщения
     {
-        if (size != 0)
+        SimpleMessage first;              // Сюда принимаем первое сообщение
+        SimpleMessage second;             // Сюда принимаем второе сообщение
+
+        int timeout = size > 100 ? 200 : 10;
+
+        if (first.AllocateMemory(size))
         {
-            prev_time = TIME_MS;
-
-            SimpleMessage first;              // Сюда принимаем первое сообщение
-            SimpleMessage second;             // Сюда принимаем второе сообщение
-
-            int timeout = size > 100 ? 200 : 10;
-
-            if (first.AllocateMemory(size))
+            if (HAL_SPI1::Receive(first.TakeData(), first.Size(), timeout))                            // Принимаем данные
             {
-                if (HAL_SPI1::Receive(first.TakeData(), first.Size(), timeout))                             // Принимаем данные
+                if (HAL_SPI1::Transmit(&size, 4, timeout))                                         // Передаём его размер
                 {
-                    if (HAL_SPI1::Transmit(&size, 4, timeout))                                              // Передаём его размер
+                    if (HAL_SPI1::Transmit(first.TakeData(), first.Size(), timeout))                   // И данные
                     {
-                        if (HAL_SPI1::Transmit(first.TakeData(), first.Size(), timeout))                    // И данные
+                        if (HAL_SPI1::Receive(&size, 4, 10))
                         {
-                            if (HAL_SPI1::Receive(&size, 4, 10))
+                            if (second.AllocateMemory(size))                                    // Второй раз сообщение будем принимать в этот буфер
                             {
-                                if (second.AllocateMemory(size))                                            // Второй раз сообщение будем принимать в этот буфер
+                                if (HAL_SPI1::Receive(second.TakeData(), second.Size(), timeout))      // Что и делаем
                                 {
-                                    if (HAL_SPI1::Receive(second.TakeData(), second.Size(), timeout))       // Что и делаем
-                                    {
-                                        size = second.Size();
+                                    size = second.Size();
 
-                                        if (HAL_SPI1::Transmit(&size, 4, timeout))
+                                    if (HAL_SPI1::Transmit(&size, 4, timeout))
+                                    {
+                                        if (HAL_SPI1::Transmit(second.TakeData(), second.Size(), timeout))
                                         {
-                                            if (HAL_SPI1::Transmit(second.TakeData(), second.Size(), timeout))
+                                            if (second.IsEquals(&first))                        // Проверяем, совпали ли оба принятых сообщения
                                             {
-                                                if (second.IsEquals(&first))                        // Проверяем, совпали ли оба принятых сообщения
-                                                {
-                                                    DHandlers::Processing(&first);
-                                                }
-                                                else
-                                                {
-                                                    LOG_WRITE_TRACE("First and second messages not equals");
-                                                }
-                                            }
-                                            else
-                                            {
-                                                LOG_WRITE_TRACE("Can not second tranmsit data");
+                                                DHandlers::Processing(&first);
+
+                                                success = true;
                                             }
                                         }
-                                        else
-                                        {
-                                            LOG_WRITE_TRACE("Can not second trasnimt size");
-                                        }
-                                    }
-                                    else
-                                    {
-                                        LOG_WRITE_TRACE("Can not second receive data");
                                     }
                                 }
-                                else
-                                {
-                                    LOG_WRITE_TRACE("Can not alocate %d bytes", size);
-                                }
-                            }
-                            else
-                            {
-                                LOG_WRITE_TRACE("Can not second receive size");
                             }
                         }
-                        else
-                        {
-                            LOG_WRITE_TRACE("Can not first transmit data");
-                        }
-                    }
-                    else
-                    {
-                        LOG_WRITE_TRACE("Can not first transmit size");
                     }
                 }
-                else
-                {
-                    LOG_WRITE_TRACE("Can not first receive data");
-                }
-            }
-            else
-            {
-                LOG_WRITE_TRACE("Can not allocate %d bytes", size);
             }
         }
     }
 
     CPU::SetBusy();
+
+    if (!success)
+    {
+        HAL_SPI1::Reset();
+    }
 }
 
 
